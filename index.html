@@ -134,7 +134,7 @@
         <i class="fas fa-cloud-upload-alt upload-icon"></i>
         <div class="upload-text" data-translate="upload.dropText">Drop images here or click to upload</div>
         <div class="upload-subtext" data-translate="upload.supportText">
-          Supports: PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 9 files
+          Supports: PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 25 files
         </div>
         <div class="mt-3">
           <span class="badge bg-primary px-3 py-2">
@@ -223,8 +223,8 @@
       </div>
 
       <!-- Enhanced Statistics Cards -->
-      <div class="stats-container mb-5">
-        <div class="row g-3">
+      <div class="stats-container mb-4">
+        <div class="row g-2">
           <div class="col-md-4">
             <div class="stat-card-enhanced">
               <div class="stat-icon">
@@ -1107,15 +1107,15 @@
         url: "https://fetch.maipdf.com/api/upload-image",
         method: "post",
         paramName: "file",
-        maxFiles: 9,
+        maxFiles: 25,
         maxFilesize: 50, // 50MB
         acceptedFiles: ".png,.jpg,.jpeg,.gif,.webp,image/*",
         addRemoveLinks: true,
         parallelUploads: 3,
         clickable: true, // 确保可以点击
         createImageThumbnails: true, // 启用缩略图
-        dictDefaultMessage: '<i class="fas fa-cloud-upload-alt upload-icon"></i><div class="upload-text">Drop images here or click to upload</div><div class="upload-subtext">Supports: PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 9 files</div>',
-        dictMaxFilesExceeded: "Maximum 9 files allowed!",
+        dictDefaultMessage: '<i class="fas fa-cloud-upload-alt upload-icon"></i><div class="upload-text">Drop images here or click to upload</div><div class="upload-subtext">Supports: PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 25 files</div>',
+        dictMaxFilesExceeded: "Maximum 25 files allowed!",
         dictResponseError: 'Upload failed!',
         dictInvalidFileType: "Only image files are allowed.",
         dictFallbackMessage: "Your browser does not support drag and drop uploads.",
