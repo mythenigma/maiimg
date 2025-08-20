@@ -232,9 +232,9 @@
       </div>
 
       <!-- Enhanced Statistics Cards -->
-      <div class="stats-container mb-4">
+      <div class="stats-container mb-3">
         <div class="row g-2">
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6">
             <div class="stat-card-enhanced">
               <div class="stat-icon">
                 <i class="fas fa-images"></i>
@@ -245,7 +245,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-6">
             <div class="stat-card-enhanced">
               <div class="stat-icon">
                 <i class="fas fa-eye"></i>
@@ -256,7 +256,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-12">
             <div class="stat-card-enhanced">
               <div class="stat-icon">
                 <i class="fas fa-clock"></i>
@@ -926,10 +926,13 @@
           // Update share link input
           document.getElementById("webinputpic").value = `https://maiimg.com/gallery/${generatedTypeA}`;
 
-          // Update stats display
+          // Update stats display with enhanced information
           document.getElementById("fileCount").textContent = result.fileCount;
-          document.getElementById("viewLimit").textContent = result.limit === 100000000 ? '∞' : result.limit;
-          document.getElementById("timeLimit").textContent = result.password === 1999999927 ? '∞' : result.password;
+          document.getElementById("viewLimit").textContent = result.limit === 100000000 ? '∞' : result.limit.toLocaleString();
+          document.getElementById("timeLimit").textContent = result.password === 1999999927 ? '∞' : 
+            (result.password >= 3600 ? Math.floor(result.password / 3600) + 'h' : 
+             result.password >= 60 ? Math.floor(result.password / 60) + 'm' : 
+             result.password + 's');
 
           // Update tracking code information in the new enhanced layout
           document.getElementById("btypesay").innerHTML = `
