@@ -47,18 +47,38 @@
             const url = window.location.href;
             console.log('Current URL:', url);
             
-            // 尝试多种匹配模式
+            // 首先尝试从 URL 参数中获取（如果有的话）
+            const urlParams = new URLSearchParams(window.location.search);
+            const idFromParams = urlParams.get('id');
+            if (idFromParams) {
+                console.log('Found ID in URL params:', idFromParams);
+                return idFromParams;
+            }
+            
+            // 尝试从原始 URL 路径中提取
             let match = url.match(/\/pic\/([^\/\?#]+)/);
             if (match) {
+                console.log('Found ID in URL path:', match[1]);
                 return match[1];
             }
             
             // 备用方案：从 referrer 中提取
             if (document.referrer) {
+                console.log('Checking referrer:', document.referrer);
                 match = document.referrer.match(/\/pic\/([^\/\?#]+)/);
                 if (match) {
+                    console.log('Found ID in referrer:', match[1]);
                     return match[1];
                 }
+            }
+            
+            // 最后尝试：从 document.location 的完整信息中提取
+            const fullPath = window.location.pathname + window.location.search + window.location.hash;
+            console.log('Full path to check:', fullPath);
+            match = fullPath.match(/pic[^\/]*\/([^\/\?#]+)/);
+            if (match) {
+                console.log('Found ID in full path:', match[1]);
+                return match[1];
             }
             
             return null;

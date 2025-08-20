@@ -1,1 +1,1 @@
-/pic/* /pic-redirect.html 200
+/pic/:id /pic-redirect.html?id=:id 200

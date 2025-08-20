@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+        .info { background: #e7f3ff; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .success { background: #d4edda; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .error { background: #f8d7da; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        code { background: #f8f9fa; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>🔧 重定向调试页面</h1>
+    
+    <div class="success">
+        <h3>✅ 问题已识别并修复</h3>
+        <p><strong>问题：</strong> Cloudflare Pages 重写 URL 时丢失了原始路径信息</p>
+        <p><strong>解决：</strong> 修改 _redirects 规则，将 ID 作为查询参数传递</p>
+    </div>
+
+    <div class="info">
+        <h3>🔄 新的重定向规则</h3>
+        <p><strong>之前：</strong> <code>/pic/* /pic-redirect.html 200</code></p>
+        <p><strong>现在：</strong> <code>/pic/:id /pic-redirect.html?id=:id 200</code></p>
+        <p><strong>效果：</strong> /pic/CF → /pic-redirect.html?id=CF</p>
+    </div>
+
+    <div class="info">
+        <h3>🧪 测试链接</h3>
+        <p><a href="/pic/CF" target="_blank" style="color: #007bff;">测试: /pic/CF (您的真实案例)</a></p>
+        <p><a href="/pic/TEST123" target="_blank" style="color: #007bff;">测试: /pic/TEST123</a></p>
+        <p><a href="/pic-redirect.html?id=DIRECT" target="_blank" style="color: #007bff;">直接测试: /pic-redirect.html?id=DIRECT</a></p>
+    </div>
+
+    <div class="info">
+        <h3>📊 当前页面信息</h3>
+        <p><strong>URL:</strong> <span id="current-url"></span></p>
+        <p><strong>路径:</strong> <span id="current-path"></span></p>
+        <p><strong>查询参数:</strong> <span id="query-params"></span></p>
+        <p><strong>时间:</strong> <span id="current-time"></span></p>
+    </div>
+
+    <div class="success">
+        <h3>🚀 部署后测试步骤</h3>
+        <ol>
+            <li>部署更新后的代码</li>
+            <li>访问 <code>https://maiimg.com/pic/CF</code></li>
+            <li>应该看到加载页面，然后自动重定向到 view.html</li>
+            <li>如果还有问题，打开浏览器控制台查看日志</li>
+        </ol>
+    </div>
+
+    <script>
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('current-path').textContent = window.location.pathname;
+        document.getElementById('query-params').textContent = window.location.search || '(无)';
+        document.getElementById('current-time').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
