@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaiIMG Blog - Image Sharing & QR Code Generation Tips</title>
+    <meta name="description" content="Learn about image sharing, QR code generation, and photo hosting with MaiIMG. Tutorials and tips in multiple languages.">
+    <meta name="keywords" content="image sharing, QR code, photo hosting, image upload, gallery, tutorials">
+    <link rel="canonical" href="https://maiimg.com/blog/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="MaiIMG Blog - Image Sharing & QR Code Tips">
+    <meta property="og:description" content="Learn about image sharing, QR code generation, and photo hosting with MaiIMG.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://maiimg.com/blog/">
+    <meta property="og:image" content="https://maiimg.com/assets/blog-banner.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MaiIMG Blog - Image Sharing & QR Code Tips">
+    <meta name="twitter:description" content="Learn about image sharing, QR code generation, and photo hosting with MaiIMG.">
+    
+    <!-- Language alternatives -->
+    <link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/">
+    <link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/">
+    <link rel="alternate" hreflang="ja" href="https://maiimg.com/blog/ja/">
+    <link rel="alternate" hreflang="fr" href="https://maiimg.com/blog/fr/">
+    <link rel="alternate" hreflang="de" href="https://maiimg.com/blog/de/">
+    <link rel="alternate" hreflang="es" href="https://maiimg.com/blog/es/">
+    <link rel="alternate" hreflang="it" href="https://maiimg.com/blog/it/">
+    <link rel="alternate" hreflang="ko" href="https://maiimg.com/blog/ko/">
+    <link rel="alternate" hreflang="pt" href="https://maiimg.com/blog/pt/">
+    <link rel="alternate" hreflang="ru" href="https://maiimg.com/blog/ru/">
+    <link rel="alternate" hreflang="ar" href="https://maiimg.com/blog/ar/">
+    <link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 60px 0;
+        }
+        
+        .language-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            border: 2px solid transparent;
+        }
+        
+        .language-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+        
+        .language-flag {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .language-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+        
+        .language-desc {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+        
+        .stats {
+            background: white;
+            padding: 40px 0;
+            margin: 40px 0;
+            border-radius: 12px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item p {
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .back-home {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .language-grid {
+                grid-template-columns: 1fr;
+                padding: 40px 0;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>📝 MaiIMG Blog</h1>
+            <p class="subtitle">
+                Discover tips, tutorials, and best practices for image sharing, QR code generation, and photo hosting. Available in multiple languages.
+            </p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>11</h3>
+                    <p>Languages</p>
+                </div>
+                <div class="stat-item">
+                    <h3>SEO</h3>
+                    <p>Optimized</p>
+                </div>
+                <div class="stat-item">
+                    <h3>∞</h3>
+                    <p>Articles</p>
+                </div>
+                <div class="stat-item">
+                    <h3>🌍</h3>
+                    <p>Global Reach</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="language-grid">
+            <a href="./en/" class="language-card">
+                <span class="language-flag">🇺🇸</span>
+                <h3 class="language-name">English</h3>
+                <p class="language-desc">Image sharing tutorials, QR code guides, and photo hosting tips in English.</p>
+            </a>
+            
+            <a href="./zh-cn/" class="language-card">
+                <span class="language-flag">🇨🇳</span>
+                <h3 class="language-name">中文简体</h3>
+                <p class="language-desc">图片分享教程、二维码生成指南和照片托管技巧。</p>
+            </a>
+            
+            <a href="./ja/" class="language-card">
+                <span class="language-flag">🇯🇵</span>
+                <h3 class="language-name">日本語</h3>
+                <p class="language-desc">画像共有のチュートリアル、QRコード生成ガイド、写真ホスティングのヒント。</p>
+            </a>
+            
+            <a href="./fr/" class="language-card">
+                <span class="language-flag">🇫🇷</span>
+                <h3 class="language-name">Français</h3>
+                <p class="language-desc">Tutoriels de partage d'images, guides de génération de codes QR et conseils d'hébergement de photos.</p>
+            </a>
+            
+            <a href="./de/" class="language-card">
+                <span class="language-flag">🇩🇪</span>
+                <h3 class="language-name">Deutsch</h3>
+                <p class="language-desc">Anleitungen zum Teilen von Bildern, QR-Code-Generierung und Foto-Hosting-Tipps.</p>
+            </a>
+            
+            <a href="./es/" class="language-card">
+                <span class="language-flag">🇪🇸</span>
+                <h3 class="language-name">Español</h3>
+                <p class="language-desc">Tutoriales para compartir imágenes, guías de códigos QR y consejos de alojamiento de fotos.</p>
+            </a>
+            
+            <a href="./it/" class="language-card">
+                <span class="language-flag">🇮🇹</span>
+                <h3 class="language-name">Italiano</h3>
+                <p class="language-desc">Tutorial per la condivisione di immagini, guide per codici QR e consigli per l'hosting di foto.</p>
+            </a>
+            
+            <a href="./ko/" class="language-card">
+                <span class="language-flag">🇰🇷</span>
+                <h3 class="language-name">한국어</h3>
+                <p class="language-desc">이미지 공유 튜토리얼, QR 코드 가이드 및 사진 호스팅 팁.</p>
+            </a>
+            
+            <a href="./pt/" class="language-card">
+                <span class="language-flag">🇵🇹</span>
+                <h3 class="language-name">Português</h3>
+                <p class="language-desc">Tutoriais de compartilhamento de imagens, guias de código QR e dicas de hospedagem de fotos.</p>
+            </a>
+            
+            <a href="./ru/" class="language-card">
+                <span class="language-flag">🇷🇺</span>
+                <h3 class="language-name">Русский</h3>
+                <p class="language-desc">Руководства по обмену изображениями, генерации QR-кодов и хостингу фотографий.</p>
+            </a>
+            
+            <a href="./ar/" class="language-card">
+                <span class="language-flag">🇸🇦</span>
+                <h3 class="language-name">العربية</h3>
+                <p class="language-desc">دروس مشاركة الصور وأدلة إنشاء رمز الاستجابة السريعة ونصائح استضافة الصور.</p>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 MaiIMG Blog. All rights reserved.</p>
+            <a href="../" class="back-home">← Back to MaiIMG</a>
+        </div>
+    </footer>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "MaiIMG Blog",
+        "description": "Image sharing tutorials, QR code guides, and photo hosting tips in multiple languages",
+        "url": "https://maiimg.com/blog/",
+        "publisher": {
+            "@type": "Organization",
+            "name": "MaiIMG",
+            "url": "https://maiimg.com"
+        },
+        "inLanguage": ["en", "zh-CN", "ja", "fr", "de", "es", "it", "ko", "pt", "ru", "ar"]
+    }
+    </script>
+</body>
+</html>
