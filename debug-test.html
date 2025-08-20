@@ -29,16 +29,24 @@
     </div>
     
     <div class="success">
-        <h3>✅ 最新修复:</h3>
-        <p><strong>简化方案:</strong> 删除了复杂的目录结构</p>
-        <p><strong>_redirects 内容:</strong> <code>/pic/:id /view.html?id=:id 200</code></p>
-        <p><strong>预期行为:</strong> /pic/CF → /view.html?id=CF</p>
+        <h3>✅ JavaScript 重定向方案:</h3>
+        <p><strong>新策略:</strong> 使用 JavaScript 处理重定向</p>
+        <p><strong>_redirects 内容:</strong> <code>/pic/* /pic-redirect.html 200</code></p>
+        <p><strong>工作流程:</strong> /pic/CF → pic-redirect.html → JavaScript 解析 → /view.html?id=CF</p>
+        <p><strong>优势:</strong> 不依赖 Cloudflare Pages 的参数传递，更可靠</p>
     </div>
     
     <div class="info">
-        <h3>文件访问测试:</h3>
+        <h3>重定向测试:</h3>
+        <p><a href="/pic-redirect.html" target="_blank">重定向页面: /pic-redirect.html</a></p>
+        <p><a href="/pic/ABC123" target="_blank">测试重定向: /pic/ABC123</a></p>
+        <p><a href="/pic/DEMO" target="_blank">测试重定向: /pic/DEMO</a></p>
+    </div>
+    
+    <div class="info">
+        <h3>直接访问测试:</h3>
         <p><a href="/view.html" target="_blank">原始文件: /view.html</a></p>
-        <p><a href="/view/index.html" target="_blank">新文件: /view/index.html</a></p>
+        <p><a href="/view.html?id=DIRECT" target="_blank">带参数: /view.html?id=DIRECT</a></p>
     </div>
 
     <script>
