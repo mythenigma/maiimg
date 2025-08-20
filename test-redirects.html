@@ -79,14 +79,23 @@
             <h3>🖼️ 图片展示重写测试</h3>
             <p>测试 <code>/pic/ID</code> 是否正确重写为 <code>/view.html?id=ID</code></p>
             
+            <a href="/pic/CF" class="test-link" target="_blank">测试链接: /pic/CF (您的实际案例)</a>
             <a href="/pic/A" class="test-link" target="_blank">测试链接: /pic/A</a>
             <a href="/pic/ABCD" class="test-link" target="_blank">测试链接: /pic/ABCD</a>
-            <a href="/pic/HELLO" class="test-link" target="_blank">测试链接: /pic/HELLO</a>
             
             <div class="code">
-                预期行为: /pic/A → /view.html?id=A<br>
-                预期行为: /pic/ABCD → /view.html?id=ABCD<br>
-                预期行为: /pic/HELLO → /view.html?id=HELLO
+                ✅ 修复后的预期行为:<br>
+                /pic/CF → /view.html?id=CF (应该能正常加载)<br>
+                /pic/A → /view.html?id=A<br>
+                /pic/ABCD → /view.html?id=ABCD
+            </div>
+            
+            <div class="status error">
+                <strong>⚠️ 之前的问题:</strong> /pic/CF 跳转到 /view 而不是 /view.html?id=CF
+            </div>
+            
+            <div class="status success">
+                <strong>✅ 修复说明:</strong> 简化了重写规则语法，移除了可能导致冲突的配置
             </div>
         </div>
 

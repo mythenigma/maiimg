@@ -1,40 +1,18 @@
-# Cloudflare Pages Redirects and Rewrites Configuration
-# 
-# 图片展示重写规则 - 将 /pic/* 路径重写为 view.html 并传递 ID 参数
-# Image gallery rewrite rule - rewrite /pic/* to view.html with ID parameter
-/pic/:id               /view.html?id=:id           200
+# Cloudflare Pages 重写规则
+# 核心功能：将友好URL重写为实际页面
 
-# 追踪页面重写规则 - 可选，如果您想简化追踪链接
-# Tracking page rewrite rule - optional, if you want to simplify tracking links  
-/track/:trackingCode   /tracking.html?id=:trackingCode   200
+# 图片展示重写 - 最重要的规则
+/pic/:id /view.html?id=:id 200
 
-# 主页重写规则 - 确保根路径指向 index.html
-# Homepage rewrite rule - ensure root path points to index.html
-/                      /index.html                 200
+# 追踪页面重写
+/track/:code /tracking.html?id=:code 200
 
-# 备用路由 - 处理其他可能的路径
-# Fallback routes - handle other possible paths
-/qr                    /index.html                 200
-/generate              /index.html                 200
-/gallery               /index.html                 200
+# 主页路由
+/ /index.html 200
+/qr /index.html 200
+/generate /index.html 200
+/gallery /index.html 200
 
-# 404 页面处理 - 如果需要自定义 404 页面
-# 404 page handling - if you need a custom 404 page
-# /404.html              /index.html                 404
-
-# 安全头设置 - 可选的安全增强
-# Security headers - optional security enhancements
-/*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  X-XSS-Protection: 1; mode=block
-  Referrer-Policy: strict-origin-when-cross-origin
-
-# HTTPS 重定向 - 强制使用 HTTPS
-# HTTPS redirect - force HTTPS usage
-http://maiimg.com/*    https://maiimg.com/:splat   301!
-http://www.maiimg.com/* https://maiimg.com/:splat  301!
-
-# www 重定向 - 可选，如果您想去掉 www
-# www redirect - optional, if you want to remove www
-https://www.maiimg.com/* https://maiimg.com/:splat  301!
+# 强制HTTPS
+http://maiimg.com/* https://maiimg.com/:splat 301!
+https://www.maiimg.com/* https://maiimg.com/:splat 301!
