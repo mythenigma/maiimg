@@ -1,0 +1,11 @@
+# 友好的图片画廊URL重写规则
+# 支持 /gallery/ID 格式
+
+# 主要的画廊重写规则
+/gallery/:id /gallery/ 200
+
+# 备用短链接支持 (可选)
+/g/:id /gallery/ 200
+
+# 主页重定向
+/ /index.html 200
