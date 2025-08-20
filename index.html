@@ -16,6 +16,9 @@
   <meta name="robots" content="index, follow">
   <title>Image QR Generator - Upload & Share Images with QR Codes</title>
 
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
+
   <!-- Cloudflare CDN Resources -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -271,7 +274,7 @@
       <div class="row g-4 mb-5">
         <!-- Share Link & QR Code -->
         <div class="col-lg-8">
-          <div class="result-card">
+          <div class="result-card" id="share-link-section">
             <div class="result-card-header">
               <h5><i class="fas fa-share-alt me-2"></i><span data-translate="results.shareLink">Share Your Gallery</span></h5>
             </div>
@@ -930,8 +933,7 @@
 
           // Update tracking code information in the new enhanced layout
           document.getElementById("btypesay").innerHTML = `
-            <div class="text-center mb-4">
-              <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Tracking & Analytics</h5>
+            <div class="text-center mb-3">
               <div class="tracking-code-display">
                 <div class="tracking-code-label">Your Tracking Code:</div>
                 <div class="tracking-code-value">${generatedTypeB}</div>
@@ -941,22 +943,20 @@
               </div>
             </div>
             
-            <div class="row g-3 mb-3">
-              <div class="col-12">
-                <div class="tracking-detail">
-                  <strong><i class="fas fa-images me-1"></i>Gallery Info:</strong>
-                  <span class="text-muted">${result.fileCount} images uploaded</span>
-                </div>
+            <div class="tracking-info-compact mb-3">
+              <div class="gallery-info">
+                <i class="fas fa-images me-2"></i>
+                <span class="info-text">${result.fileCount} images uploaded</span>
               </div>
             </div>
             
             <div class="text-center">
-              <a href="https://maiimg.com/maiimg/tracking.html?id=${generatedTypeB}" target="_blank" class="btn btn-primary">
+              <a href="https://maiimg.com/tracking.html?id=${generatedTypeB}" target="_blank" class="btn btn-primary btn-sm">
                 <i class="fas fa-external-link-alt me-1"></i>Open Tracking Page
               </a>
             </div>
             
-            <small class="text-muted d-block text-center mt-3">Use this code to track views and analytics</small>
+            <small class="text-muted d-block text-center mt-2">Use this code to track views and analytics</small>
           `;
 
           // Generate QR code for the share link
@@ -965,8 +965,8 @@
           // Show results section
           document.getElementById("results").style.display = 'block';
           
-          // Scroll to results section
-          document.getElementById("results").scrollIntoView({ behavior: 'smooth' });
+          // Scroll to share link section (more precise positioning)
+          document.getElementById("share-link-section").scrollIntoView({ behavior: 'smooth', block: 'center' });
           
           // *** 关键修改：生成链接成功后，重置上传会话 ***
           // 重置 dropzone 和上传状态，准备下一次上传

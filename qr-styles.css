@@ -1450,19 +1450,19 @@ footer {
 }
 
 .stat-number {
-  font-size: 1.75rem;
-  font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: #1f2937;
   line-height: 1;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
 }
 
 .stat-label {
   color: #6b7280;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
 }
 
 /* Enhanced Result Cards */
@@ -1660,11 +1660,11 @@ footer {
 
 /* Tracking Code Display Styles */
 .tracking-code-display {
-  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-  border: 2px solid var(--primary-color);
-  border-radius: 16px;
-  padding: 2rem 1.5rem;
-  margin: 1rem 0;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  margin: 0.75rem 0;
   position: relative;
   overflow: hidden;
 }
@@ -1680,18 +1680,39 @@ footer {
 }
 
 .tracking-code-label {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
+/* Tracking Info Compact Styles */
+.tracking-info-compact {
+  margin: 0.5rem 0;
+}
+
+.gallery-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.gallery-info .info-text {
+  font-size: 0.9rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
 .tracking-code-value {
   font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
-  font-size: 1.5rem;
-  font-weight: 800;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--primary-color);
   background: white;
   padding: 1rem 1.5rem;
