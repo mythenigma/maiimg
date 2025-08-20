@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Image Viewer - Local Test</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js"></script>
+    
+    <style>
+        html, body {
+            position: relative;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: purple;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+            background: #6c757d;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #6c757d;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .swiper-lazy {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            -ms-transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            pointer-events: none;
+        }
+
+        .swiper-button-next {
+            font-size: 22px;
+            top: 95%;
+            right: 53%;
+            left: 47%;
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+            animation: mymove infinite;
+            animation-duration: 2s;
+            -webkit-animation: mymove infinite;
+            -webkit-animation-duration: 5s;
+        }
+
+        .swiper-button-next:after {
+            font-size: 22px;
+            right: 50%;
+            left: 50%;
+        }
+
+        @keyframes mymove {
+            from { top: 65%; }
+            to { top: 95%; }
+        }
+
+        @-webkit-keyframes mymove {
+            from { top: 65%; }
+            to { top: 95%; }
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .error {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error h2 {
+            color: #dc3545;
+            margin-bottom: 10px;
+        }
+
+        .error p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .error a {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        @media print {
+            body { display: none; }
+        }
+
+        #bottomlogo {
+            text-align: center;
+            color: skyblue;
+            text-decoration: none;
+            font-weight: bold;
+            background: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 优化的广告容器样式 */
+        .ad-container {
+            width: 100%;
+            text-align: center;
+            margin: 10px 0;
+            position: relative;
+            min-height: 90px;
+            background: transparent;
+        }
+
+        .ad-loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90px;
+            opacity: 0.6;
+        }
+
+        .ad-loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e0e0e0;
+            border-top: 2px solid #007bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .ad-error {
+            display: none;
+            background: transparent;
+            border: none;
+            color: transparent;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .ad-placeholder {
+            display: none;
+            background: transparent;
+            border: none;
+            color: transparent;
+            height: 0;
+            overflow: hidden;
+        }
+
+        /* 确保广告内容区域的样式 */
+        #ad-content {
+            min-height: 90px;
+            width: 100%;
+        }
+
+        /* 当广告加载失败时的优雅降级 */
+        .ad-fallback {
+            height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        /* 测试模式样式 */
+        .test-debug {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 9999;
+            max-width: 300px;
+        }
+
+        .test-controls {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 9999;
+        }
+
+        .test-controls button {
+            margin: 2px;
+            padding: 5px 10px;
+            font-size: 11px;
+        }
+    </style>
+</head>
+
+<body id="bigboy">
+    <div class="test-debug" id="debug-info">
+        <div><strong>🧪 LOCAL TEST MODE</strong></div>
+        <div>URL: <span id="current-url"></span></div>
+        <div>Encoded ID: <span id="encoded-id"></span></div>
+        <div>Decoded ID: <span id="decoded-id"></span></div>
+        <div>Status: <span id="status">Loading...</span></div>
+    </div>
+
+    <div class="test-controls">
+        <div><strong>Test IDs:</strong></div>
+        <button onclick="testWithId('A')">Test A (→1)</button>
+        <button onclick="testWithId('B')">Test B (→2)</button>
+        <button onclick="testWithId('C')">Test C (→3)</button>
+        <button onclick="testWithId('J')">Test J (→0)</button>
+        <button onclick="testWithId('AB')">Test AB (→12)</button>
+    </div>
+    
+    <div class="loading" id="loading">
+        <div>Loading images...</div>
+    </div>
+
+    <div class="swiper-container" id="swiperContainer" style="display: none;">
+        <div class="swiper-wrapper" id="swiperWrapper">
+            <!-- Images will be loaded here -->
+        </div>
+        <div id="bluearrow" class="swiper-pagination swiper-pagination-blue"></div>
+        <div id="arw" class="swiper-button-next swiper-button-white"></div>
+    </div>
+
+    <h6 id="bottomlogo" style="display: none;">
+        <div id="ad-container-main" class="ad-container">
+            <div id="ad-loading" class="ad-loading">
+                <div class="ad-loading-spinner"></div>
+            </div>
+            <div id="ad-error" class="ad-error"></div>
+            <div id="ad-placeholder" class="ad-placeholder"></div>
+            <div id="ad-content"></div>
+        </div>
+    </h6>
+
+    <script>
+        // 模拟数据库，根据解码后的ID提供不同的图片集
+        const mockDatabase = {
+            1: {
+                success: true,
+                title: "测试图集 A (ID: 1)",
+                viewsRemaining: 100,
+                blacklisted: false,
+                adDisplay: 0,
+                images: [
+                    "https://picsum.photos/800/600?random=1",
+                    "https://picsum.photos/600/800?random=2",
+                    "https://picsum.photos/1200/800?random=3"
+                ]
+            },
+            2: {
+                success: true,
+                title: "测试图集 B (ID: 2)",
+                viewsRemaining: 50,
+                blacklisted: false,
+                adDisplay: 0,
+                images: [
+                    "https://picsum.photos/900/700?random=10",
+                    "https://picsum.photos/700/900?random=11"
+                ]
+            },
+            3: {
+                success: true,
+                title: "测试图集 C (ID: 3)",
+                viewsRemaining: 200,
+                blacklisted: false,
+                adDisplay: 0,
+                images: [
+                    "https://picsum.photos/1000/600?random=20",
+                    "https://picsum.photos/800/1000?random=21",
+                    "https://picsum.photos/1200/900?random=22",
+                    "https://picsum.photos/600/800?random=23",
+                    "https://picsum.photos/900/600?random=24"
+                ]
+            },
+            0: {
+                success: true,
+                title: "测试图集 J (ID: 0)",
+                viewsRemaining: 10,
+                blacklisted: false,
+                adDisplay: 0,
+                images: [
+                    "https://picsum.photos/800/800?random=30"
+                ]
+            },
+            12: {
+                success: true,
+                title: "测试图集 AB (ID: 12)",
+                viewsRemaining: 75,
+                blacklisted: false,
+                adDisplay: 0,
+                images: [
+                    "https://picsum.photos/1200/600?random=40",
+                    "https://picsum.photos/600/1200?random=41",
+                    "https://picsum.photos/1000/1000?random=42"
+                ]
+            }
+        };
+
+        // Get encoded ID from URL
+        function getEncodedIdFromUrl() {
+            const path = window.location.pathname;
+            const segments = path.split('/');
+            const lastSegment = segments[segments.length - 1];
+            
+            // 如果URL没有ID，从hash或query参数获取
+            if (!lastSegment || lastSegment.includes('.html')) {
+                const hash = window.location.hash.replace('#', '');
+                const urlParams = new URLSearchParams(window.location.search);
+                return hash || urlParams.get('id') || 'A';
+            }
+            
+            return lastSegment || 'A';
+        }
+
+        // Convert encoded character back to auto ID
+        function decodeId(encodedChar) {
+            if (!encodedChar || encodedChar.length === 0) {
+                return null;
+            }
+            
+            const arr = encodedChar.split('');
+            const numbers = [];
+            
+            for (let i = 0; i < arr.length; i++) {
+                const charCode = arr[i].charCodeAt(0) - 64;
+                const value = charCode === 10 ? 0 : charCode; // J -> 0
+                numbers.push(value);
+            }
+            
+            return parseInt(numbers.join(''));
+        }
+
+        // 测试用的数据获取函数
+        async function fetchImageData(autoId) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const data = mockDatabase[autoId];
+                    if (data) {
+                        resolve(data);
+                    } else {
+                        reject(new Error(`No test data found for ID: ${autoId}`));
+                    }
+                }, 1000); // 模拟网络延迟
+            });
+        }
+
+        // 更新调试信息
+        function updateDebugInfo(encodedId, decodedId, status) {
+            document.getElementById('current-url').textContent = window.location.href;
+            document.getElementById('encoded-id').textContent = encodedId;
+            document.getElementById('decoded-id').textContent = decodedId;
+            document.getElementById('status').textContent = status;
+        }
+
+        // 测试不同ID的函数
+        function testWithId(id) {
+            const newUrl = window.location.pathname + '?id=' + id;
+            window.location.href = newUrl;
+        }
+
+        // Show error page
+        function showError(message) {
+            document.body.innerHTML = `
+                <div class="error">
+                    <h2>Error Loading Images</h2>
+                    <p>${message}</p>
+                    <button onclick="location.reload()">Reload</button>
+                    <button onclick="testWithId('A')">Test with A</button>
+                </div>
+            `;
+        }
+
+        // Initialize Swiper
+        function initializeSwiper(imageCount) {
+            const swiper = new Swiper('.swiper-container', {
+                direction: 'vertical',
+                mousewheel: true,
+                lazy: true,
+                spaceBetween: 30,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                },
+            });
+
+            swiper.on('slideChange', function () {
+                console.log('Current slide:', swiper.activeIndex);
+                if (swiper.isEnd) {
+                    console.log('Reached the end');
+                }
+            });
+
+            swiper.on('reachEnd', function () {
+                console.log("transitionEnd");
+            });
+
+            // Hide navigation if only one image
+            if (imageCount < 2) {
+                document.getElementById('bluearrow').style.display = "none";
+                document.getElementById('arw').style.display = "none";
+            }
+
+            // Hide arrow after 5 seconds
+            setTimeout(function() {
+                const arrow = document.getElementById('arw');
+                if (arrow) arrow.style.display = "none";
+            }, 5000);
+
+            return swiper;
+        }
+
+        // 测试版广告管理器
+        class TestAdManager {
+            constructor() {
+                this.isLoaded = false;
+            }
+
+            hideLoadingGracefully() {
+                const loading = document.getElementById('ad-loading');
+                if (loading) {
+                    loading.style.opacity = '0';
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                    }, 300);
+                }
+            }
+
+            async displayAd(containerId = 'ad-content') {
+                console.log('Test mode: Simulating ad display');
+                
+                setTimeout(() => {
+                    this.hideLoadingGracefully();
+                    const container = document.getElementById(containerId);
+                    if (container) {
+                        container.innerHTML = '<div style="background: #f0f0f0; padding: 20px; text-align: center; color: #666; border: 1px dashed #ccc;">📺 广告位 (本地测试模式)</div>';
+                    }
+                }, 1000);
+            }
+        }
+
+        const adManager = new TestAdManager();
+
+        function showads() {
+            const bottomLogo = document.getElementById('bottomlogo');
+            if (bottomLogo) {
+                bottomLogo.style.display = 'block';
+            }
+
+            setTimeout(() => {
+                adManager.displayAd('ad-content');
+            }, 500);
+        }
+
+        // 主初始化函数
+        async function initializeViewer() {
+            try {
+                // Get and decode the ID from URL
+                const encodedId = getEncodedIdFromUrl();
+                const autoId = decodeId(encodedId);
+                
+                updateDebugInfo(encodedId, autoId, 'Decoding...');
+                console.log('Encoded ID:', encodedId);
+                console.log('Decoded auto ID:', autoId);
+                
+                if (autoId === null) {
+                    updateDebugInfo(encodedId, 'ERROR', 'Invalid format');
+                    showError('Invalid link format');
+                    return;
+                }
+                
+                updateDebugInfo(encodedId, autoId, 'Fetching data...');
+                
+                // Fetch image data
+                const imageData = await fetchImageData(autoId);
+                console.log('Image data:', imageData);
+                
+                updateDebugInfo(encodedId, autoId, `Loaded ${imageData.images.length} images`);
+                
+                // Check access limits
+                if (imageData.viewsRemaining <= 0) {
+                    updateDebugInfo(encodedId, autoId, 'Views exhausted');
+                    showError('Views remaining: 0');
+                    return;
+                }
+                
+                // Set document title
+                document.title = imageData.title || 'Test Image Viewer';
+                
+                // Create swiper slides
+                const swiperWrapper = document.getElementById('swiperWrapper');
+                swiperWrapper.innerHTML = '';
+                
+                imageData.images.forEach((imageUrl, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'swiper-slide';
+                    slide.innerHTML = `
+                        <img data-src="${imageUrl}" class="swiper-lazy" alt="Test Image ${index + 1}">
+                        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                    `;
+                    swiperWrapper.appendChild(slide);
+                });
+                
+                // Hide loading and show swiper
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('swiperContainer').style.display = 'block';
+                
+                // Configure ads
+                if (imageData.adDisplay > 0) {
+                    document.getElementById('bottomlogo').style.display = "none";
+                } else {
+                    setTimeout(() => {
+                        showads();
+                    }, 1000);
+                }
+                
+                // Initialize Swiper
+                initializeSwiper(imageData.images.length);
+                
+                updateDebugInfo(encodedId, autoId, 'Ready');
+                
+            } catch (error) {
+                console.error('Error initializing viewer:', error);
+                updateDebugInfo('ERROR', 'ERROR', error.message);
+                showError(error.message);
+            }
+        }
+
+        // 简化的键盘控制（测试模式）
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12') {
+                console.log('Developer tools allowed in test mode');
+            }
+        });
+
+        // Start the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, starting test viewer...');
+            initializeViewer();
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</body>
+</html>
