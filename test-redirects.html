@@ -84,18 +84,21 @@
             <a href="/pic/ABCD" class="test-link" target="_blank">测试链接: /pic/ABCD</a>
             
             <div class="code">
-                ✅ 修复后的预期行为:<br>
-                /pic/CF → /view.html?id=CF (应该能正常加载)<br>
-                /pic/A → /view.html?id=A<br>
-                /pic/ABCD → /view.html?id=ABCD
+                ✅ Cloudflare Pages 正确的重写规则:<br>
+                /pic/CF → /view?id=CF (Cloudflare Pages 会自动处理 .html)<br>
+                /pic/A → /view?id=A<br>
+                /pic/ABCD → /view?id=ABCD
             </div>
             
             <div class="status error">
-                <strong>⚠️ 之前的问题:</strong> /pic/CF 跳转到 /view 而不是 /view.html?id=CF
+                <strong>⚠️ 之前的问题:</strong> 错误的 _redirects 语法，不适配 Cloudflare Pages
             </div>
             
             <div class="status success">
-                <strong>✅ 修复说明:</strong> 简化了重写规则语法，移除了可能导致冲突的配置
+                <strong>✅ 修复说明:</strong><br>
+                1. 创建了 /view/ 目录，包含 index.html<br>
+                2. 使用正确的 Cloudflare Pages 重写语法<br>
+                3. 移除 .html 后缀（Cloudflare Pages 自动处理）
             </div>
         </div>
 
