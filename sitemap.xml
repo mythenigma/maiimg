@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Main Pages -->
+  <url>
+    <loc>https://maiimg.com/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://maiimg.com/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/" />
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/tracking.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/view.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Blog Main Pages -->
+  <url>
+    <loc>https://maiimg.com/blog/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://maiimg.com/blog/ja/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://maiimg.com/blog/fr/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://maiimg.com/blog/de/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://maiimg.com/blog/es/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://maiimg.com/blog/it/" />
+    <xhtml:link rel="alternate" hreflang="ko" href="https://maiimg.com/blog/ko/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://maiimg.com/blog/pt/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://maiimg.com/blog/ru/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://maiimg.com/blog/ar/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/" />
+  </url>
+
+  <!-- English Blog -->
+  <url>
+    <loc>https://maiimg.com/blog/en/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/how-to-generate-image-sharing-links.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/how-to-generate-image-sharing-links.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/how-to-generate-image-sharing-links.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/how-to-generate-image-sharing-links.html" />
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/how-to-create-qr-codes-for-images.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/how-to-create-qr-codes-for-images.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/how-to-create-qr-codes-for-images.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/how-to-create-qr-codes-for-images.html" />
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/image-sharing-best-practices.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/image-sharing-best-practices.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/image-sharing-best-practices.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/image-sharing-best-practices.html" />
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/photo-hosting-solutions-comparison.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/image-optimization-techniques.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/image-security-and-privacy-guide.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/image-security-and-privacy-guide.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/image-security-and-privacy-guide.html" />
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/image-analytics-and-tracking-guide.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Chinese Blog -->
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/how-to-generate-image-sharing-links.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/how-to-generate-image-sharing-links.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/how-to-generate-image-sharing-links.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/how-to-generate-image-sharing-links.html" />
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/how-to-create-qr-codes-for-images.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/how-to-create-qr-codes-for-images.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/how-to-create-qr-codes-for-images.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/how-to-create-qr-codes-for-images.html" />
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/image-sharing-best-practices.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/image-sharing-best-practices.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/image-sharing-best-practices.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/image-sharing-best-practices.html" />
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/image-security-and-privacy-guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/image-security-and-privacy-guide.html" />
+  </url>
+
+  <!-- Japanese Blog -->
+  <url>
+    <loc>https://maiimg.com/blog/ja/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- French Blog -->
+  <url>
+    <loc>https://maiimg.com/blog/fr/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- German Blog -->
+  <url>
+    <loc>https://maiimg.com/blog/de/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Spanish Blog -->
+  <url>
+    <loc>https://maiimg.com/blog/es/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Italian Blog -->
+  <url>
+    <loc>https://maiimg.com/blog/it/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Korean Blog -->
+  <url>
+    <loc>https://maiimg.com/blog/ko/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Portuguese Blog -->
+  <url>
+    <loc>https://maiimg.com/blog/pt/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Russian Blog -->
+  <url>
+    <loc>https://maiimg.com/blog/ru/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Arabic Blog -->
+  <url>
+    <loc>https://maiimg.com/blog/ar/</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Other Pages -->
+  <url>
+    <loc>https://maiimg.com/qrback.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/view-test.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

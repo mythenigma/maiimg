@@ -148,7 +148,7 @@ class I18n {
       zh: {
         // Navigation
         nav: {
-          title: "图片二维码生成器"
+          title: "麦瓜二维码"
         },
         
         // Language options
@@ -290,7 +290,7 @@ class I18n {
       tw: {
         // Navigation
         nav: {
-          title: "圖片二維碼生成器"
+          title: "麥瓜二維碼"
         },
         
         // Language options

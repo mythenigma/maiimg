@@ -1,0 +1,33 @@
+User-agent: *
+Allow: /
+
+# Allow all blog content
+Allow: /blog/
+Allow: /blog/*/
+
+# Allow main pages
+Allow: /index.html
+Allow: /tracking.html
+Allow: /gallery/
+
+# Disallow dynamic gallery pages (they're temporary)
+Disallow: /view.html
+Disallow: /gallery/*
+
+# Disallow test and development files
+Disallow: /view-test.html
+Disallow: /url-test.html
+Disallow: /blog-summary.html
+
+# Allow static assets
+Allow: /favicon.ico
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.webp
+
+# Sitemap location
+Sitemap: https://maiimg.com/sitemap.xml
