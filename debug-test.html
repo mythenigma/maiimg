@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+        .info { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .success { background: #d4edda; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Cloudflare Pages 调试测试</h1>
+    
+    <div class="info">
+        <h3>当前页面信息:</h3>
+        <p><strong>URL:</strong> <span id="current-url"></span></p>
+        <p><strong>路径:</strong> <span id="current-path"></span></p>
+        <p><strong>查询参数:</strong> <span id="query-params"></span></p>
+    </div>
+    
+    <div class="info">
+        <h3>测试链接:</h3>
+        <p><a href="/pic/CF" target="_blank">🎯 实际测试: /pic/CF</a> (您的真实案例)</p>
+        <p><a href="/pic/TEST123" target="_blank">测试: /pic/TEST123</a></p>
+        <p><a href="/view.html?id=TEST456" target="_blank">直接访问: /view.html?id=TEST456</a></p>
+    </div>
+    
+    <div class="success">
+        <h3>✅ 最新修复:</h3>
+        <p><strong>简化方案:</strong> 删除了复杂的目录结构</p>
+        <p><strong>_redirects 内容:</strong> <code>/pic/:id /view.html?id=:id 200</code></p>
+        <p><strong>预期行为:</strong> /pic/CF → /view.html?id=CF</p>
+    </div>
+    
+    <div class="info">
+        <h3>文件访问测试:</h3>
+        <p><a href="/view.html" target="_blank">原始文件: /view.html</a></p>
+        <p><a href="/view/index.html" target="_blank">新文件: /view/index.html</a></p>
+    </div>
+
+    <script>
+        document.getElementById('current-url').textContent = window.location.href;
+        document.getElementById('current-path').textContent = window.location.pathname;
+        document.getElementById('query-params').textContent = window.location.search || '(无)';
+        
+        // 检查是否从重定向来的
+        if (document.referrer) {
+            const refDiv = document.createElement('div');
+            refDiv.className = 'info';
+            refDiv.innerHTML = `<h3>来源页面:</h3><p>${document.referrer}</p>`;
+            document.body.appendChild(refDiv);
+        }
+    </script>
+</body>
+</html>

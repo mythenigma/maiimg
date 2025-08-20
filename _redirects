@@ -1,17 +1,1 @@
-# Cloudflare Pages 重写规则
-# 将友好URL重写为对应的页面路径
-
-# 图片展示重写：/pic/ID -> /view?id=ID
-/pic/:id /view?id=:id 200
-
-# 追踪页面重写：/track/CODE -> /tracking?id=CODE  
-/track/:code /tracking?id=:code 200
-
-# 主页备用路由
-/qr / 200
-/generate / 200
-/gallery / 200
-
-# HTTPS 强制重定向
-http://maiimg.com/* https://maiimg.com/:splat 301!
-https://www.maiimg.com/* https://maiimg.com/:splat 301!
+/pic/:id /view.html?id=:id 200
