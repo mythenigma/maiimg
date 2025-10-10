@@ -452,6 +452,53 @@ class ImageGallery {
     }
 
     /**
+     * Check if the user agent is a bot/crawler
+     */
+    isBot(userAgent) {
+        const botPatterns = [
+            /bot/i, /crawler/i, /spider/i, /scraper/i,
+            /googlebot/i, /bingbot/i, /slurp/i, /duckduckbot/i,
+            /baiduspider/i, /yandexbot/i, /facebookexternalhit/i,
+            /twitterbot/i, /linkedinbot/i, /whatsapp/i,
+            /telegrambot/i, /discordbot/i, /slackbot/i,
+            /curl/i, /wget/i, /python-requests/i,
+            /postman/i, /insomnia/i, /httpie/i
+        ];
+        
+        return botPatterns.some(pattern => pattern.test(userAgent));
+    }
+
+    /**
+     * Show professional message for bot access
+     */
+    showBotMessage() {
+        const loading = document.getElementById('loading');
+        const errorScreen = document.getElementById('error-screen');
+        
+        // 隐藏加载屏幕
+        loading.style.display = 'none';
+        
+        // 自定义错误屏幕内容
+        errorScreen.querySelector('.error-icon').textContent = '🤖';
+        errorScreen.querySelector('.error-title').textContent = 'Automated Access Detected';
+        errorScreen.querySelector('.error-message').innerHTML = `
+            This image gallery has limited view counts and is optimized for human visitors only.<br><br>
+            <strong>For automated access:</strong><br>
+            • Please use our API endpoints for programmatic access<br>
+            • Contact us for bulk access permissions<br>
+            • Respect our rate limits and terms of service<br><br>
+            <em>Thank you for understanding.</em>
+        `;
+        errorScreen.querySelector('.error-button').textContent = 'Learn More';
+        errorScreen.querySelector('.error-button').onclick = () => {
+            window.open('https://maiimg.com/api', '_blank');
+        };
+        
+        // 显示错误屏幕
+        errorScreen.style.display = 'flex';
+    }
+
+    /**
      * Parse User-Agent string to extract key information
      */
     parseUserAgent(ua) {
@@ -742,6 +789,13 @@ class ImageGallery {
     }
 
     async loadGalleryData() {
+        // 检查是否是 bot
+        const userAgent = navigator.userAgent;
+        if (this.isBot(userAgent)) {
+            this.showBotMessage();
+            return; // 不继续执行后续逻辑
+        }
+        
         // 从友好的URL路径中提取ID
         const encodedId = this.extractIdFromPath();
 
