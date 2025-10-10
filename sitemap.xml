@@ -216,6 +216,112 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- New Articles - January 2025 -->
+  <url>
+    <loc>https://maiimg.com/blog/en/professional-photo-sharing-for-businesses.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/secure-family-photo-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/event-photography-workflow-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/mobile-photo-sharing-trends-2025.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/photo-backup-strategies-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/h5-image-gallery-platforms-comparison.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/social-media-photo-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/photo-copyright-licensing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/wedding-photo-sharing-complete-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/ecommerce-product-photo-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/real-estate-photo-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/automotive-photo-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/photographer-portfolio-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/designer-portfolio-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/artist-portfolio-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Chinese Blog -->
   <url>
     <loc>https://maiimg.com/blog/zh-cn/</loc>
@@ -262,6 +368,63 @@
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/image-security-and-privacy-guide.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/image-security-and-privacy-guide.html" />
+  </url>
+
+  <!-- New Chinese Articles - January 2025 -->
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/wedding-photo-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/birthday-party-photo-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/ecommerce-product-photo-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/real-estate-photo-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/automotive-photo-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/photographer-portfolio-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/designer-portfolio-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/zh-cn/artist-portfolio-sharing-guide.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- Japanese Blog -->
