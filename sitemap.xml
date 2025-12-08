@@ -499,6 +499,71 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- New Articles - Image Hosting & URL Generation -->
+  <url>
+    <loc>https://maiimg.com/blog/en/best-free-image-hosting-sites-2025.html</loc>
+    <lastmod>2025-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/how-to-create-image-links-complete-guide.html</loc>
+    <lastmod>2025-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/upload-images-online-best-practices.html</loc>
+    <lastmod>2025-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/image-url-generator-tools-comparison.html</loc>
+    <lastmod>2025-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- New Articles - Photo Albums, Storage, and Sharing -->
+  <url>
+    <loc>https://maiimg.com/blog/en/how-to-create-online-photo-albums-complete-guide.html</loc>
+    <lastmod>2025-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/best-free-online-photo-storage-solutions-2025.html</loc>
+    <lastmod>2025-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/share-photos-without-social-media-complete-guide.html</loc>
+    <lastmod>2025-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/how-to-create-online-image-galleries-guide.html</loc>
+    <lastmod>2025-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/best-photo-hosting-for-forums-complete-guide.html</loc>
+    <lastmod>2025-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Other Pages -->
   <url>
     <loc>https://maiimg.com/qrback.html</loc>
