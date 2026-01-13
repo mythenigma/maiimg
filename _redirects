@@ -9,3 +9,17 @@
 
 # 主页重定向
 / /index.html 200
+
+# 博客文章URL规范化 - 重定向不带.html的URL到带.html的版本
+# 这可以解决Google Search Console中"已抓取但未索引"的问题
+/blog/en/* /blog/en/:splat.html 301
+/blog/zh-cn/* /blog/zh-cn/:splat.html 301
+/blog/ja/* /blog/ja/:splat.html 301
+/blog/fr/* /blog/fr/:splat.html 301
+/blog/de/* /blog/de/:splat.html 301
+/blog/es/* /blog/es/:splat.html 301
+/blog/it/* /blog/it/:splat.html 301
+/blog/ko/* /blog/ko/:splat.html 301
+/blog/pt/* /blog/pt/:splat.html 301
+/blog/ru/* /blog/ru/:splat.html 301
+/blog/ar/* /blog/ar/:splat.html 301
