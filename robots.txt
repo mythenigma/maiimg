@@ -8,9 +8,12 @@ Allow: /blog/*/
 # Allow main pages
 Allow: /index.html
 Allow: /tracking.html
-Allow: /gallery/
 
-# Disallow dynamic gallery pages (they're temporary)
+# Disallow dynamic/temporary pages (they expire after use)
+Disallow: /dec/
+Disallow: /pdf/
+Disallow: /free/
+Disallow: /file/
 Disallow: /view.html
 Disallow: /gallery/*
 

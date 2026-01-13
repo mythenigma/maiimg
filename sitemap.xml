@@ -21,13 +21,6 @@
     <priority>0.7</priority>
   </url>
 
-  <url>
-    <loc>https://maiimg.com/view.html</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
   <!-- Blog Main Pages -->
   <url>
     <loc>https://maiimg.com/blog/</loc>
@@ -216,51 +209,8 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- New Articles - January 2025 -->
-  <url>
-    <loc>https://maiimg.com/blog/en/professional-photo-sharing-for-businesses.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/secure-family-photo-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/event-photography-workflow-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
   <url>
     <loc>https://maiimg.com/blog/en/mobile-photo-sharing-trends-2025.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/photo-backup-strategies-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/h5-image-gallery-platforms-comparison.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/social-media-photo-sharing-guide.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -274,49 +224,7 @@
   </url>
 
   <url>
-    <loc>https://maiimg.com/blog/en/wedding-photo-sharing-complete-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/ecommerce-product-photo-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/real-estate-photo-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/automotive-photo-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/photographer-portfolio-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/designer-portfolio-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/artist-portfolio-sharing-guide.html</loc>
+    <loc>https://maiimg.com/blog/en/photo-backup-strategies-guide.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -368,63 +276,6 @@
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide.html" />
     <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/image-security-and-privacy-guide.html" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/image-security-and-privacy-guide.html" />
-  </url>
-
-  <!-- New Chinese Articles - January 2025 -->
-  <url>
-    <loc>https://maiimg.com/blog/zh-cn/wedding-photo-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/zh-cn/birthday-party-photo-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/zh-cn/ecommerce-product-photo-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/zh-cn/real-estate-photo-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/zh-cn/automotive-photo-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/zh-cn/photographer-portfolio-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/zh-cn/designer-portfolio-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/zh-cn/artist-portfolio-sharing-guide.html</loc>
-    <lastmod>2025-01-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
 
   <!-- Japanese Blog -->
@@ -499,156 +350,12 @@
     <priority>0.7</priority>
   </url>
 
-  <!-- New Articles - Image Hosting & URL Generation -->
-  <url>
-    <loc>https://maiimg.com/blog/en/best-free-image-hosting-sites-2025.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/how-to-create-image-links-complete-guide.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/upload-images-online-best-practices.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/image-url-generator-tools-comparison.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- New Articles - Photo Albums, Storage, and Sharing -->
-  <url>
-    <loc>https://maiimg.com/blog/en/how-to-create-online-photo-albums-complete-guide.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/best-free-online-photo-storage-solutions-2025.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/share-photos-without-social-media-complete-guide.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/how-to-create-online-image-galleries-guide.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/best-photo-hosting-for-forums-complete-guide.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- New Articles - ImgBB Competitive Keywords -->
-  <url>
-    <loc>https://maiimg.com/blog/en/free-image-uploader-best-alternatives-to-imgbb.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/image-hosting-free-complete-guide.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/direct-image-links-generator-imgbb-alternative.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/upload-images-online-free-best-platforms.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/image-url-generator-free-complete-comparison.html</loc>
-    <lastmod>2025-01-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Additional ImgBB Competitive Articles -->
-  <url>
-    <loc>https://maiimg.com/blog/en/image-hosting-no-registration-best-free-services.html</loc>
-    <lastmod>2025-01-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/free-image-host-complete-guide-2025.html</loc>
-    <lastmod>2025-01-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/image-upload-service-best-platforms-compared.html</loc>
-    <lastmod>2025-01-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/image-sharing-platform-complete-comparison.html</loc>
-    <lastmod>2025-01-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/blog/en/image-uploader-online-best-free-tools-2025.html</loc>
-    <lastmod>2025-01-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
   <!-- Other Pages -->
   <url>
     <loc>https://maiimg.com/qrback.html</loc>
     <lastmod>2025-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://maiimg.com/view-test.html</loc>
-    <lastmod>2025-01-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
 
 </urlset>
