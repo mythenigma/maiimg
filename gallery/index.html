@@ -765,6 +765,21 @@ class ImageGallery {
                     timerDisplay.style.background = 'rgba(239, 68, 68, 0.9)';
                     timerDisplay.style.animation = 'pulse 0.5s infinite';
                 }
+
+                // 标记当前画廊会话已过期，避免后退键重新进入
+                try {
+                    if (typeof this.galleryId !== 'undefined' && this.galleryId !== null) {
+                        const storageKey = `gallery_${this.galleryId}_expired`;
+                        if (window.sessionStorage) {
+                            sessionStorage.setItem(storageKey, '1');
+                        }
+                        if (window.localStorage) {
+                            localStorage.setItem(storageKey, '1');
+                        }
+                    }
+                } catch (e) {
+                    console.log('Storage set error:', e);
+                }
                 
                 // Redirect after 2 seconds
                 setTimeout(() => {
@@ -807,6 +822,27 @@ class ImageGallery {
         const numericId = this.decodeId(encodedId);
         if (numericId === null || isNaN(numericId)) {
             throw new Error(`Invalid ID "${encodedId}" provided`);
+        }
+
+        // 保留当前画廊ID，方便会话结束时标记
+        this.galleryId = numericId;
+
+        // 如果本地已标记为过期，则不再请求数据，直接提示并跳转
+        const storageKey = `gallery_${numericId}_expired`;
+        let isExpired = false;
+        try {
+            isExpired = (window.sessionStorage && sessionStorage.getItem(storageKey) === '1') ||
+                        (window.localStorage && localStorage.getItem(storageKey) === '1');
+        } catch (e) {
+            console.log('Storage access error:', e);
+        }
+
+        if (isExpired) {
+            this.showError("🚫 This gallery session has expired. Please request a new link from the sender.");
+            setTimeout(() => {
+                window.location.href = 'https://maiimg.com';
+            }, 2000);
+            return;
         }
 
         // Fetch the data from the D1 database via our API
@@ -1106,8 +1142,17 @@ document.addEventListener('keydown', e => {
 });
 
 // Initialize application
+let galleryApp = null;
 document.addEventListener('DOMContentLoaded', () => {
-    new ImageGallery();
+    galleryApp = new ImageGallery();
+    window.galleryApp = galleryApp;
+});
+
+// 处理浏览器后退时从 bfcache 恢复的情况，强制刷新以重新检查会话状态
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        window.location.reload();
+    }
 });
 </script>
 
