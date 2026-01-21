@@ -93,9 +93,11 @@ cp _article-template.html en/how-to-create-qr-codes.html
 ```
 https://maiimg.com/blog/                    # 博客主页
 https://maiimg.com/blog/en/                 # 英语博客首页
-https://maiimg.com/blog/en/article-name.html # 英语文章
+https://maiimg.com/blog/en/article-name     # 英语文章（推荐：无 .html）
+https://maiimg.com/blog/en/article-name.html # 英语文章（兼容：会 301 到无 .html）
 https://maiimg.com/blog/zh-cn/              # 中文博客首页
-https://maiimg.com/blog/zh-cn/article-name.html # 中文文章
+https://maiimg.com/blog/zh-cn/article-name  # 中文文章（推荐：无 .html）
+https://maiimg.com/blog/zh-cn/article-name.html # 中文文章（兼容：会 301 到无 .html）
 ```
 
 ## 🎯 SEO功能

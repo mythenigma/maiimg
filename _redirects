@@ -10,6 +10,15 @@
 # 主页重定向
 / /index.html 200
 
+# Blog clean URLs (Cloudflare Pages)
+# - Canonical: no .html
+# - Serve clean URLs by rewriting to the underlying .html file
+# - Consolidate .html versions via 301 redirects
+/blog/en/:slug.html /blog/en/:slug 301
+/blog/zh-cn/:slug.html /blog/zh-cn/:slug 301
+/blog/en/:slug /blog/en/:slug.html 200
+/blog/zh-cn/:slug /blog/zh-cn/:slug.html 200
+
 # 临时/过期的动态页面返回 410 Gone
 /dec/* 410
 /pdf/* 410
