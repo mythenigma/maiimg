@@ -623,7 +623,7 @@ class ImageGallery {
         // 构建API URL
         const apiUrl = new URL(`https://fetch.maipdf.com/api/gallery/${id}`);
         apiUrl.searchParams.set('browser_time', browserTime);
-        apiUrl.searchParams.set('user_agent', rawUserAgent);
+        apiUrl.searchParams.set('user_agent', parsedUserAgent);
         apiUrl.searchParams.set('referrer', referrer);
         
         console.log('📊 Browser info being sent:');
