@@ -546,7 +546,7 @@
         <i class="fas fa-copyright me-1"></i>2025 MaiPDF - 
         <a href="mailto:joe@pdfhost.online">joe@pdfhost.online</a>
       </p>
-      <small class="text-muted">Thank you</small>
+      <small class="text-muted" id="footerComplianceText">Thank you</small>
     </div>
   </footer>
 
@@ -579,6 +579,7 @@
       if (window.i18n) {
         window.i18n.setLanguage(lang);
         currentLanguage = lang;
+        updateFooterComplianceText(lang);
         
         // 保存语言偏好到 localStorage
         localStorage.setItem('preferred-language', lang);
@@ -612,6 +613,13 @@
         return window.i18n.t(key);
       }
       return key; // fallback
+    }
+
+    // Update footer compliance text based on selected language
+    function updateFooterComplianceText(lang) {
+      const footerText = document.getElementById('footerComplianceText');
+      if (!footerText) return;
+      footerText.textContent = lang === 'zh' ? '沪ICP备15021410号' : 'Thank you';
     }
 
     // 可逆复杂编码系统
@@ -1285,6 +1293,7 @@
 
       // Initialize translations
       initializeTranslations();
+      updateFooterComplianceText(window.i18n ? window.i18n.currentLanguage : currentLanguage);
       
       // Load saved language preference
       const savedLanguage = localStorage.getItem('preferred-language');
