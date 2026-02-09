@@ -619,7 +619,11 @@
     function updateFooterComplianceText(lang) {
       const footerText = document.getElementById('footerComplianceText');
       if (!footerText) return;
-      footerText.textContent = lang === 'zh' ? '沪ICP备15021410号' : 'Thank you';
+      if (lang === 'zh') {
+        footerText.innerHTML = '<a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">沪ICP备15021410号</a>';
+      } else {
+        footerText.textContent = 'Thank you';
+      }
     }
 
     // 可逆复杂编码系统
