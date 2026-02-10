@@ -1245,6 +1245,26 @@ footer {
   background: #c82333 !important;
 }
 
+/* Dropzone status icons: hide error mark, keep a tiny success check */
+.dropzone .dz-preview .dz-error-mark {
+  display: none !important;
+}
+
+.dropzone .dz-preview .dz-success-mark {
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  margin: 0 auto 2px !important;
+  opacity: 0.55 !important;
+  transform: scale(0.55) !important;
+}
+
+.dropzone .dz-preview .dz-success-mark svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
 /* Language Selector Styles - Enhanced */
 .language-selector {
   margin-left: 1rem;
@@ -1566,16 +1586,16 @@ footer {
   font-weight: 600;
 }
 
-.full-link-preview {
-  display: none;
-}
-
 /* Copy Feedback */
 .copy-feedback {
   min-height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.inline-qr-block {
+  margin-top: 0.7rem !important;
 }
 
 .copy-success {
@@ -1837,19 +1857,8 @@ footer {
     font-size: 0.85rem;
   }
 
-  .full-link-preview {
-    display: block;
-    margin: 0 0 0.9rem;
-    padding: 0.6rem 0.75rem;
-    border: 1px dashed #cbd5e1;
-    border-radius: 10px;
-    background: #f8fafc;
-    color: #334155;
-    font-family: 'Monaco', 'Menlo', monospace;
-    font-size: 0.78rem;
-    line-height: 1.35;
-    word-break: break-all;
-    text-decoration: none;
+  .inline-qr-block {
+    margin-top: 0.45rem !important;
   }
   
   .action-buttons {

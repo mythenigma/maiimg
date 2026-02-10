@@ -26,7 +26,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" rel="stylesheet">
   
   <!-- Custom Styles -->
-  <link href="qr-styles003.css" rel="stylesheet">
+  <link href="qr-styles05.css" rel="stylesheet">
   
   <!-- Internationalization -->
   <script src="i18n.js"></script>
@@ -265,22 +265,25 @@
       <!-- Main Content Cards -->
       <div class="row g-4 mb-5">
         <!-- Share Link & QR Code -->
-        <div class="col-lg-8">
+        <div class="col-12">
           <div class="result-card" id="share-link-section">
-            <div class="result-card-header">
-              <h5><i class="fas fa-share-alt me-2"></i><span data-translate="results.shareLink">Share Your Gallery</span></h5>
-            </div>
             <div class="result-card-body">
               <div class="share-link-container">
-                <label class="form-label"><i class="fas fa-link me-1"></i>Gallery Link</label>
+                <label class="form-label">Gallery Link</label>
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" id="webinputpic" readonly placeholder="Generated link will appear here">
                   <button class="btn btn-primary" type="button" onclick="myFunctionpic()">
                     <i class="fas fa-copy me-1"></i>Copy
                   </button>
                 </div>
-                <a id="webinputpicPreview" class="full-link-preview" target="_blank" rel="noopener noreferrer">Generated link will appear here</a>
                 <div id="Copied" class="copy-feedback"></div>
+              </div>
+
+              <div class="inline-qr-block text-center mt-3">
+                <div id="qrcodewebpic" class="qr-container-enhanced">
+                  <p class="text-muted">QR code will appear here</p>
+                </div>
+                <small class="text-muted mt-2 d-block">Scan to access gallery</small>
               </div>
               
               <div class="action-buttons mt-3">
@@ -291,21 +294,6 @@
                   <i class="fas fa-plus me-1"></i><span data-translate="results.createAnother">Create Another</span>
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- QR Code Display -->
-        <div class="col-lg-4">
-          <div class="result-card qr-card">
-            <div class="result-card-header">
-              <h5><i class="fas fa-qrcode me-2"></i><span data-translate="results.qrCode">QR Code</span></h5>
-            </div>
-            <div class="result-card-body text-center">
-              <div id="qrcodewebpic" class="qr-container-enhanced">
-                <p class="text-muted">QR code will appear here</p>
-              </div>
-              <small class="text-muted mt-2 d-block">Scan to access gallery</small>
             </div>
           </div>
         </div>
@@ -928,14 +916,9 @@
           // 生成 Type B (追踪代码) - 使用复杂编码
           generatedTypeB = trackingEncoder.encode(autoId);
           
-          // Update share link input and full preview
+          // Update share link input
           const shareLink = `https://maiimg.com/gallery/${generatedTypeA}`;
           document.getElementById("webinputpic").value = shareLink;
-          const shareLinkPreview = document.getElementById("webinputpicPreview");
-          if (shareLinkPreview) {
-            shareLinkPreview.textContent = shareLink;
-            shareLinkPreview.href = shareLink;
-          }
 
           // Update stats display with enhanced information
           document.getElementById("fileCount").textContent = result.fileCount;
