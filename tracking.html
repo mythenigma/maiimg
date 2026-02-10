@@ -473,18 +473,18 @@
                 <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title" id="deleteConfirmModalLabel">
                         <i class="fas fa-exclamation-triangle me-2"></i>
-                        Confirm Gallery Deletion
+                        <span data-translate="delete.title">Confirm Gallery Deletion</span>
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-warning">
                         <i class="fas fa-warning me-2"></i>
-                        <strong>Warning:</strong> This action will set the view count to 0, effectively "deleting" the gallery access.
+                        <span data-translate="delete.warning">This action will set the view count to 0, effectively "deleting" the gallery access.</span>
                     </div>
                     
                     <div class="mb-3">
-                        <h6>Gallery Details:</h6>
+                        <h6 data-translate="delete.details">Gallery Details:</h6>
                         <div id="deleteConfirmDetails">
                             <!-- Gallery details will be populated here -->
                         </div>
@@ -492,7 +492,7 @@
                     
                     <div class="mb-3">
                         <label for="confirmCodeInput" class="form-label">
-                            <strong>Type the confirmation code to proceed:</strong>
+                            <strong data-translate="delete.confirmLabel">Type the confirmation code to proceed:</strong>
                         </label>
                         <div class="input-group">
                             <span class="input-group-text bg-danger text-white">
@@ -501,31 +501,32 @@
                             <input type="text" 
                                    class="form-control" 
                                    id="confirmCodeInput" 
+                                   data-translate-placeholder="delete.confirmPlaceholder"
                                    placeholder="Enter confirmation code here"
                                    autocomplete="off">
                         </div>
                         <div class="form-text">
-                            Confirmation code: <code id="expectedConfirmCode">DELETE-XXX</code>
+                            <span data-translate="delete.confirmCode">Confirmation code:</span> <code id="expectedConfirmCode">DELETE-XXX</code>
                         </div>
                     </div>
                     
                     <div class="text-muted small">
                         <i class="fas fa-info-circle me-1"></i>
-                        This operation will:
+                        <span data-translate="delete.operationInfo">This operation will:</span>
                         <ul class="mt-2 mb-0">
-                            <li>Set the gallery view count to 0</li>
-                            <li>Prevent further access to the gallery</li>
-                            <li>Log this deletion operation</li>
-                            <li>Cannot be undone through this interface</li>
+                            <li data-translate="delete.setViewsZero">Set the gallery view count to 0</li>
+                            <li data-translate="delete.preventAccess">Prevent further access to the gallery</li>
+                            <li data-translate="delete.logOperation">Log this deletion operation</li>
+                            <li data-translate="delete.cannotUndo">Cannot be undone through this interface</li>
                         </ul>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times me-1"></i>Cancel
+                        <i class="fas fa-times me-1"></i><span data-translate="delete.cancel">Cancel</span>
                     </button>
                     <button type="button" class="btn btn-danger" onclick="executeDelete()" id="executeDeleteBtn">
-                        <i class="fas fa-trash me-1"></i>Delete Gallery
+                        <i class="fas fa-trash me-1"></i><span data-translate="delete.delete">Delete Gallery</span>
                     </button>
                 </div>
             </div>
@@ -665,6 +666,11 @@
         // Create global decoder instance
         const trackingDecoder = new ReversibleEncoder();
         
+        function t(key, fallback = '') {
+            const i18n = window.trackingI18n;
+            return i18n ? i18n.t(key) : fallback;
+        }
+        
         // Cooldown management
         const COOLDOWN_SECONDS = 30;
         const STORAGE_KEY = 'tracking_last_query_time';
@@ -693,7 +699,7 @@
             hideAllCards();
             
             if (!trackingCode) {
-                showError('Please enter tracking code');
+                showError(t('errors.enterCode', 'Please enter tracking code'));
                 return;
             }
             
@@ -704,7 +710,7 @@
             
             if (timeSinceLastQuery < COOLDOWN_SECONDS && lastQueryTime > 0) {
                 const remainingTime = Math.ceil(COOLDOWN_SECONDS - timeSinceLastQuery);
-                showError(`Please wait ${remainingTime} seconds before making another query. (Refreshing page won't reset this timer)`);
+                showError(`${t('errors.cooldown', 'Please wait')} ${remainingTime} ${t('errors.seconds', 'seconds before making another query')} ${t('errors.refreshWarning', '(Refreshing page won\'t reset this timer)')}`);
                 
                 // Start cooldown countdown
                 startCooldownCountdown(remainingTime);
@@ -713,7 +719,7 @@
             
             // Show loading state
             decodeBtn.disabled = true;
-            decodeBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Decoding...';
+            decodeBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>${t('decoder.decoding', 'Decoding...')}`;
             loadingSpinner.style.display = 'block';
             
             try {
@@ -722,7 +728,7 @@
                 const galleryId = trackingDecoder.decode(trackingCode);
                 
                 if (!galleryId || galleryId <= 0) {
-                    throw new Error('Invalid tracking code or decode failed');
+                    throw new Error(t('errors.invalidCode', 'Invalid tracking code or decode failed'));
                 }
                 
                 console.log('✅ Decode successful, Gallery ID:', galleryId);
@@ -755,7 +761,7 @@
                 if (!response.ok) {
                     const errorText = await response.text();
                     console.error('❌ API response error:', response.status, errorText);
-                    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+                    throw new Error(`${t('errors.apiError', 'API request failed')}: ${response.status} ${response.statusText}`);
                 }
                 
                 const result = await response.json();
@@ -766,7 +772,7 @@
                     setLastQueryTime(Date.now());
                     displayResults(result);
                 } else {
-                    throw new Error(result.error || 'Failed to query access logs');
+                    throw new Error(result.error || t('errors.queryFailed', 'Failed to query access logs'));
                 }
                 
             } catch (error) {
@@ -775,7 +781,7 @@
             } finally {
                 // Restore button state
                 decodeBtn.disabled = false;
-                decodeBtn.innerHTML = '<i class="fas fa-search me-2"></i>Decode & Query';
+                decodeBtn.innerHTML = `<i class="fas fa-search me-2"></i>${t('decoder.decodeButton', 'Decode & Query')}`;
                 loadingSpinner.style.display = 'none';
             }
         }
@@ -1066,7 +1072,7 @@
                 const remainingTime = Math.ceil(COOLDOWN_SECONDS - timeSinceLastQuery);
                 if (remainingTime > 0) {
                     console.log(`🕐 Still in cooldown period: ${remainingTime} seconds remaining`);
-                    showError(`Please wait ${remainingTime} seconds before making another query. (Refreshing page won't reset this timer)`);
+                    showError(`${t('errors.cooldown', 'Please wait')} ${remainingTime} ${t('errors.seconds', 'seconds before making another query')} ${t('errors.refreshWarning', '(Refreshing page won\'t reset this timer)')}`);
                     startCooldownCountdown(remainingTime);
                 }
             }
@@ -1100,19 +1106,24 @@
             const confirmCodeInput = document.getElementById('confirmCodeInput');
             
             const confirmCode = `DELETE-${currentGalleryInfo.auto}`;
+            const i18n = window.trackingI18n;
+            const descriptionText = i18n ? i18n.t('gallery.description') : 'Description';
+            const viewLimitText = i18n ? i18n.t('gallery.viewLimit') : 'View Limit';
+            const noDescriptionText = i18n ? i18n.t('gallery.noDescription') : 'No description';
+            const unlimitedText = i18n ? i18n.t('gallery.unlimited') : 'Unlimited';
             
             deleteConfirmDetails.innerHTML = `
                 <div class="row">
-                    <div class="col-sm-4"><strong>Gallery ID:</strong></div>
+                    <div class="col-sm-4"><strong>ID:</strong></div>
                     <div class="col-sm-8">${currentGalleryInfo.auto}</div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4"><strong>Description:</strong></div>
-                    <div class="col-sm-8">${currentGalleryInfo.caption || 'No description'}</div>
+                    <div class="col-sm-4"><strong>${descriptionText}:</strong></div>
+                    <div class="col-sm-8">${currentGalleryInfo.caption || noDescriptionText}</div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4"><strong>Current Views:</strong></div>
-                    <div class="col-sm-8">${currentGalleryInfo.email === 100000000 ? 'Unlimited' : currentGalleryInfo.email}</div>
+                    <div class="col-sm-4"><strong>${viewLimitText}:</strong></div>
+                    <div class="col-sm-8">${currentGalleryInfo.email === 100000000 ? unlimitedText : currentGalleryInfo.email}</div>
                 </div>
             `;
             
@@ -1136,14 +1147,14 @@
             const expectedCode = `DELETE-${currentGalleryInfo.auto}`;
             
             if (confirmCode !== expectedCode) {
-                alert(`Invalid confirmation code. Please enter: ${expectedCode}`);
+                alert(`${t('delete.confirmLabel', 'Type the confirmation code to proceed:')} ${expectedCode}`);
                 confirmCodeInput.focus();
                 return;
             }
             
             // Show loading state
             executeDeleteBtn.disabled = true;
-            executeDeleteBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Deleting...';
+            executeDeleteBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>${t('delete.deleting', 'Deleting...')}`;
             
             try {
                 console.log(`🗑️ Attempting to delete gallery ${currentGalleryInfo.auto}`);
@@ -1173,8 +1184,8 @@
                     successAlert.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
                     successAlert.innerHTML = `
                         <i class="fas fa-check-circle me-2"></i>
-                        <strong>Gallery Deleted Successfully!</strong><br>
-                        Gallery ID ${result.galleryId} has been deleted (view count set to 0).
+                        <strong>${t('delete.success', 'Gallery Deleted Successfully!')}</strong><br>
+                        ID ${result.galleryId} ${t('delete.successMessage', 'has been deleted (view count set to 0).')}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     `;
                     document.body.appendChild(successAlert);
@@ -1193,16 +1204,16 @@
                     }, 5000);
                     
                 } else {
-                    alert(`Delete failed: ${result.error}`);
+                    alert(`${t('delete.failed', 'Delete failed:')} ${result.error}`);
                 }
                 
             } catch (error) {
                 console.error('❌ Delete error:', error);
-                alert(`Delete failed: ${error.message}`);
+                alert(`${t('delete.failed', 'Delete failed:')} ${error.message}`);
             } finally {
                 // Restore button state
                 executeDeleteBtn.disabled = false;
-                executeDeleteBtn.innerHTML = '<i class="fas fa-trash me-1"></i>Delete Gallery';
+                executeDeleteBtn.innerHTML = `<i class="fas fa-trash me-1"></i>${t('delete.delete', 'Delete Gallery')}`;
             }
         }
     </script>
