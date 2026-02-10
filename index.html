@@ -26,7 +26,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" rel="stylesheet">
   
   <!-- Custom Styles -->
-  <link href="qr-styles.css" rel="stylesheet">
+  <link href="qr-styles001.css" rel="stylesheet">
   
   <!-- Internationalization -->
   <script src="i18n.js"></script>
@@ -279,6 +279,7 @@
                     <i class="fas fa-copy me-1"></i>Copy
                   </button>
                 </div>
+                <a id="webinputpicPreview" class="full-link-preview" target="_blank" rel="noopener noreferrer">Generated link will appear here</a>
                 <div id="Copied" class="copy-feedback"></div>
               </div>
               
@@ -927,8 +928,14 @@
           // 生成 Type B (追踪代码) - 使用复杂编码
           generatedTypeB = trackingEncoder.encode(autoId);
           
-          // Update share link input
-          document.getElementById("webinputpic").value = `https://maiimg.com/gallery/${generatedTypeA}`;
+          // Update share link input and full preview
+          const shareLink = `https://maiimg.com/gallery/${generatedTypeA}`;
+          document.getElementById("webinputpic").value = shareLink;
+          const shareLinkPreview = document.getElementById("webinputpicPreview");
+          if (shareLinkPreview) {
+            shareLinkPreview.textContent = shareLink;
+            shareLinkPreview.href = shareLink;
+          }
 
           // Update stats display with enhanced information
           document.getElementById("fileCount").textContent = result.fileCount;
