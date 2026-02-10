@@ -26,7 +26,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" rel="stylesheet">
   
   <!-- Custom Styles -->
-  <link href="qr-styles006.css" rel="stylesheet">
+  <link href="qr-styles007.css" rel="stylesheet">
   
   <!-- Internationalization -->
   <script src="i18n.js"></script>
@@ -967,12 +967,6 @@
           // Show results section
           document.getElementById("results").style.display = 'block';
           
-          // Scroll to Gallery Link title
-          const galleryLinkTitle = document.getElementById("gallery-link-title");
-          if (galleryLinkTitle) {
-            galleryLinkTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-          
           // *** 关键修改：生成链接成功后，重置上传会话 ***
           // 重置 dropzone 和上传状态，准备下一次上传
           if (myDropzone) {
@@ -989,6 +983,17 @@
           // 更新按钮状态
           updateGenerateButton();
           updateUploadStatus('Ready for new upload session');
+
+          // Scroll to Gallery Link title after layout settles
+          setTimeout(() => {
+            const galleryLinkTitle = document.getElementById("gallery-link-title");
+            const navbar = document.querySelector(".navbar");
+            if (galleryLinkTitle) {
+              const navHeight = navbar ? navbar.offsetHeight : 0;
+              const targetTop = galleryLinkTitle.getBoundingClientRect().top + window.pageYOffset - navHeight - 12;
+              window.scrollTo({ top: Math.max(targetTop, 0), behavior: "smooth" });
+            }
+          }, 80);
           
           showNotification(`✅ QR code generated successfully! Database ID: ${result.autoId}. Ready for next upload.`, 'success');
           
