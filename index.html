@@ -271,6 +271,9 @@
               <div class="share-link-container">
                 <div class="gallery-link-header">
                   <label class="form-label mb-0" id="gallery-link-title">Gallery Link</label>
+                  <span class="gallery-link-arrow" aria-hidden="true">
+                    <i class="fas fa-arrow-right"></i>
+                  </span>
                   <a href="#insights-section" class="gallery-link-jump" title="Go to Insights">
                     <i class="fas fa-chart-line"></i>
                   </a>
@@ -309,7 +312,7 @@
         <div class="col-12">
           <div class="result-card tracking-card" id="insights-section">
             <div class="result-card-header">
-              <h5><i class="fas fa-chart-line me-2"></i>Insights</h5>
+              <h5><i class="fas fa-list-check me-2"></i>Access Records</h5>
             </div>
             <div class="result-card-body">
               <div id="btypesay" class="tracking-info">
@@ -935,9 +938,12 @@
 
           // Update tracking code information in the new enhanced layout
           document.getElementById("btypesay").innerHTML = `
+            <div class="insights-intro text-center mb-2">
+              These records show when people open your Gallery Link.
+            </div>
             <div class="text-center mb-3">
               <div class="tracking-code-display">
-                <div class="tracking-code-label">Access Code:</div>
+                <div class="tracking-code-label">Records Access Code:</div>
                 <div class="tracking-code-value">${generatedTypeB}</div>
                 <button class="btn btn-outline-secondary btn-sm mt-2" onclick="copyTrackingCode('${generatedTypeB}')">
                   <i class="fas fa-copy me-1"></i>Copy Code
@@ -954,11 +960,11 @@
             
             <div class="text-center">
               <a href="https://maiimg.com/tracking.html?id=${generatedTypeB}" target="_blank" class="btn btn-primary btn-sm">
-                <i class="fas fa-external-link-alt me-1"></i>Open Insights
+                <i class="fas fa-external-link-alt me-1"></i>Open Access Records
               </a>
             </div>
             
-            <small class="text-muted d-block text-center mt-2">Use this code to view visit details</small>
+            <small class="text-muted d-block text-center mt-2">Use this code to view who opened the link and when.</small>
           `;
 
           // Generate QR code for the share link

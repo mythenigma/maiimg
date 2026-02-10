@@ -1588,9 +1588,9 @@ footer {
 .gallery-link-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-bottom: 0.35rem;
+  justify-content: flex-start;
+  gap: 0.45rem;
+  margin-bottom: 0.22rem;
 }
 
 #gallery-link-title {
@@ -1607,6 +1607,25 @@ footer {
   background: #eef2ff;
   color: var(--primary-color);
   text-decoration: none;
+  position: relative;
+  animation: jumpPulse 1.6s ease-in-out infinite;
+}
+
+.gallery-link-arrow {
+  color: #64748b;
+  font-size: 0.78rem;
+  opacity: 0.85;
+  animation: arrowNudge 1.3s ease-in-out infinite;
+}
+
+@keyframes arrowNudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+
+@keyframes jumpPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.28); }
+  50% { transform: scale(1.08); box-shadow: 0 0 0 5px rgba(99, 102, 241, 0); }
 }
 
 .share-link-container .input-group {
@@ -1630,14 +1649,22 @@ footer {
 
 /* Copy Feedback */
 .copy-feedback {
-  min-height: 30px;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.copy-feedback:empty {
+  display: none;
+}
+
+.copy-feedback:not(:empty) {
+  margin-top: 0.2rem;
+}
+
 .inline-qr-block {
-  margin-top: 0.2rem !important;
+  margin-top: 0.06rem !important;
 }
 
 .copy-success {
@@ -1679,7 +1706,13 @@ footer {
 .tracking-info {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1rem 0.95rem;
+}
+
+.insights-intro {
+  font-size: 0.86rem;
+  color: #4b5563;
+  line-height: 1.35;
 }
 
 .tracking-info .badge {
@@ -1827,64 +1860,69 @@ footer {
   }
 
   .tracking-card .result-card-header h5 {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
   }
 
   .tracking-card .result-card-body {
-    padding: 0.65rem 0.65rem 0.55rem;
+    padding: 0.55rem 0.55rem 0.5rem;
   }
 
   .tracking-info {
-    padding: 0.65rem;
+    padding: 0.5rem 0.5rem 0.45rem;
     border-radius: 10px;
   }
 
+  .insights-intro {
+    font-size: 0.74rem;
+    margin-bottom: 0.35rem !important;
+  }
+
   .tracking-code-display {
-    margin: 0.25rem 0 0.45rem;
-    padding: 0.75rem 0.65rem;
+    margin: 0.18rem 0 0.32rem;
+    padding: 0.58rem 0.5rem;
     border-radius: 10px;
   }
 
   .tracking-code-label {
-    font-size: 0.72rem;
-    margin-bottom: 0.4rem;
+    font-size: 0.67rem;
+    margin-bottom: 0.3rem;
     letter-spacing: 0.2px;
   }
 
   .tracking-code-value {
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    padding: 0.6rem 0.7rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.86rem;
+    letter-spacing: 0.7px;
+    padding: 0.48rem 0.5rem;
+    margin-bottom: 0.38rem;
     border-radius: 9px;
   }
 
   .tracking-info-compact {
-    margin: 0.35rem 0 !important;
+    margin: 0.25rem 0 !important;
   }
 
   .gallery-info {
-    padding: 0.5rem 0.65rem;
+    padding: 0.36rem 0.52rem;
     border-radius: 7px;
   }
 
   .gallery-info .info-text {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
   }
 
   .tracking-card .btn.btn-sm {
-    padding: 0.45rem 0.65rem;
-    font-size: 0.74rem;
+    padding: 0.36rem 0.52rem;
+    font-size: 0.68rem;
     letter-spacing: 0.15px;
   }
 
   .tracking-card .text-muted {
-    font-size: 0.74rem !important;
-    margin-top: 0.35rem !important;
+    font-size: 0.68rem !important;
+    margin-top: 0.22rem !important;
   }
 
   .share-link-container .input-group {
-    margin-bottom: 0.25rem !important;
+    margin-bottom: 0.14rem !important;
   }
 
   .share-link-container .form-control {
@@ -1900,7 +1938,7 @@ footer {
   }
 
   .inline-qr-block {
-    margin-top: 0.12rem !important;
+    margin-top: 0.02rem !important;
   }
   
   .action-buttons {
