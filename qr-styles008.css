@@ -1245,10 +1245,15 @@ footer {
   background: #c82333 !important;
 }
 
-/* Dropzone status icons: hard hide error mark, keep a tiny success check */
+/* Dropzone status icons: hide built-in marks and use a tiny custom success check */
+.dz-error-mark,
+.dz-success-mark,
 .dropzone .dz-preview .dz-error-mark,
+.dropzone .dz-preview .dz-success-mark,
 .dropzone .dz-preview.dz-error .dz-error-mark,
-.dropzone .dz-preview .dz-error-mark svg {
+.dropzone .dz-preview.dz-success .dz-success-mark,
+.dropzone .dz-preview .dz-error-mark svg,
+.dropzone .dz-preview .dz-success-mark svg {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -1258,25 +1263,24 @@ footer {
   pointer-events: none !important;
 }
 
-.dropzone .dz-preview .dz-success-mark,
-.dropzone .dz-preview.dz-success .dz-success-mark {
-  position: absolute !important;
-  top: 6px !important;
-  right: 6px !important;
-  left: auto !important;
-  margin: 0 !important;
-  width: 12px !important;
-  height: 12px !important;
-  min-width: 12px !important;
-  min-height: 12px !important;
-  transform: none !important;
-  opacity: 0.65 !important;
-  z-index: 6 !important;
+.dropzone .dz-preview .dz-image {
+  position: relative;
 }
 
-.dropzone .dz-preview .dz-success-mark svg {
-  width: 12px !important;
-  height: 12px !important;
+.dropzone .dz-preview.dz-success .dz-image::after {
+  content: "\2713";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.9);
+  color: #fff;
+  font-size: 9px;
+  line-height: 12px;
+  text-align: center;
+  z-index: 7;
 }
 
 /* Language Selector Styles - Enhanced */
