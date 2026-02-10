@@ -10,7 +10,6 @@
 # 主页重定向
 / /index.html 200
 
-# Blog clean URLs (handled by Cloudflare Pages Clean URLs)
 
 # 临时/过期的动态页面返回 410 Gone
 /dec/* 410
