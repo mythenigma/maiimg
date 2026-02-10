@@ -1629,22 +1629,43 @@ footer {
 /* Responsive Design for Enhanced Results */
 @media (max-width: 768px) {
   .success-header {
-    padding: 1rem 0 0.6rem;
+    padding: 0.45rem 0 0.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+
+  .success-header.mb-5 {
+    margin-bottom: 0.45rem !important;
+  }
+
+  .success-icon-container {
+    margin: 0;
+    display: flex;
+    align-items: center;
   }
 
   .success-title {
-    font-size: 1.65rem;
-    margin-bottom: 0.65rem;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin: 0;
   }
   
   .success-icon {
-    font-size: 2.35rem;
+    font-size: 1.35rem;
   }
 
   .success-subtitle {
-    font-size: 0.95rem;
-    line-height: 1.45;
-    margin-bottom: 1rem;
+    width: 100%;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    margin: 0.1rem 0 0.15rem;
+  }
+
+  .stats-container {
+    margin-top: -0.2rem;
   }
   
   .stats-container .row {
