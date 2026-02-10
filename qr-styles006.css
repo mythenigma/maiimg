@@ -1567,6 +1567,30 @@ footer {
   margin-bottom: 0.75rem;
 }
 
+.gallery-link-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+#gallery-link-title {
+  scroll-margin-top: 84px;
+}
+
+.gallery-link-jump {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef2ff;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
 .share-link-container .input-group {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
@@ -1595,7 +1619,7 @@ footer {
 }
 
 .inline-qr-block {
-  margin-top: 0.7rem !important;
+  margin-top: 0.2rem !important;
 }
 
 .copy-success {
@@ -1842,7 +1866,7 @@ footer {
   }
 
   .share-link-container .input-group {
-    margin-bottom: 0.6rem !important;
+    margin-bottom: 0.25rem !important;
   }
 
   .share-link-container .form-control {
@@ -1858,7 +1882,7 @@ footer {
   }
 
   .inline-qr-block {
-    margin-top: 0.45rem !important;
+    margin-top: 0.12rem !important;
   }
   
   .action-buttons {

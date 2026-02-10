@@ -26,7 +26,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" rel="stylesheet">
   
   <!-- Custom Styles -->
-  <link href="qr-styles05.css" rel="stylesheet">
+  <link href="qr-styles006.css" rel="stylesheet">
   
   <!-- Internationalization -->
   <script src="i18n.js"></script>
@@ -269,8 +269,13 @@
           <div class="result-card" id="share-link-section">
             <div class="result-card-body">
               <div class="share-link-container">
-                <label class="form-label">Gallery Link</label>
-                <div class="input-group mb-3">
+                <div class="gallery-link-header">
+                  <label class="form-label mb-0" id="gallery-link-title">Gallery Link</label>
+                  <a href="#insights-section" class="gallery-link-jump" title="Go to Insights">
+                    <i class="fas fa-chart-line"></i>
+                  </a>
+                </div>
+                <div class="input-group mb-2">
                   <input type="text" class="form-control" id="webinputpic" readonly placeholder="Generated link will appear here">
                   <button class="btn btn-primary" type="button" onclick="myFunctionpic()">
                     <i class="fas fa-copy me-1"></i>Copy
@@ -302,13 +307,13 @@
       <!-- Tracking Information -->
       <div class="row g-4">
         <div class="col-12">
-          <div class="result-card tracking-card">
+          <div class="result-card tracking-card" id="insights-section">
             <div class="result-card-header">
-              <h5><i class="fas fa-chart-line me-2"></i>Tracking & Analytics</h5>
+              <h5><i class="fas fa-chart-line me-2"></i>Insights</h5>
             </div>
             <div class="result-card-body">
               <div id="btypesay" class="tracking-info">
-                <!-- Tracking code info will be inserted here -->
+                <!-- Insight info will be inserted here -->
               </div>
             </div>
           </div>
@@ -932,7 +937,7 @@
           document.getElementById("btypesay").innerHTML = `
             <div class="text-center mb-3">
               <div class="tracking-code-display">
-                <div class="tracking-code-label">Your Tracking Code:</div>
+                <div class="tracking-code-label">Access Code:</div>
                 <div class="tracking-code-value">${generatedTypeB}</div>
                 <button class="btn btn-outline-secondary btn-sm mt-2" onclick="copyTrackingCode('${generatedTypeB}')">
                   <i class="fas fa-copy me-1"></i>Copy Code
@@ -949,11 +954,11 @@
             
             <div class="text-center">
               <a href="https://maiimg.com/tracking.html?id=${generatedTypeB}" target="_blank" class="btn btn-primary btn-sm">
-                <i class="fas fa-external-link-alt me-1"></i>Open Tracking Page
+                <i class="fas fa-external-link-alt me-1"></i>Open Insights
               </a>
             </div>
             
-            <small class="text-muted d-block text-center mt-2">Use this code to track views and analytics</small>
+            <small class="text-muted d-block text-center mt-2">Use this code to view visit details</small>
           `;
 
           // Generate QR code for the share link
@@ -962,8 +967,11 @@
           // Show results section
           document.getElementById("results").style.display = 'block';
           
-          // Scroll to share link section (more precise positioning)
-          document.getElementById("share-link-section").scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Scroll to Gallery Link title
+          const galleryLinkTitle = document.getElementById("gallery-link-title");
+          if (galleryLinkTitle) {
+            galleryLinkTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
           
           // *** 关键修改：生成链接成功后，重置上传会话 ***
           // 重置 dropzone 和上传状态，准备下一次上传
@@ -1000,7 +1008,7 @@
     async function copyTrackingCode(trackingCode) {
       try {
         await navigator.clipboard.writeText(trackingCode);
-        showNotification(`✅ Tracking code "${trackingCode}" copied to clipboard!`, 'success');
+        showNotification(`✅ Access code "${trackingCode}" copied to clipboard!`, 'success');
       } catch (err) {
         // Fallback for older browsers
         const textArea = document.createElement('textarea');
@@ -1009,7 +1017,7 @@
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        showNotification(`✅ Tracking code copied to clipboard!`, 'success');
+        showNotification(`✅ Access code copied to clipboard!`, 'success');
       }
     }
 
