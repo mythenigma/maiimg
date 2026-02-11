@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Image Sharing Workflow Diagram</title>
+  <desc id="desc">A four-step process from upload to analytics optimization.</desc>
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0%" stop-color="#eef2ff"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+    <style>
+      .box{fill:#fff;stroke:#3b82f6;stroke-width:2}
+      .t{font-family:Arial,Helvetica,sans-serif;fill:#1e3a8a;font-size:24px;font-weight:700}
+      .s{font-family:Arial,Helvetica,sans-serif;fill:#334155;font-size:17px}
+      .a{stroke:#3b82f6;stroke-width:5;fill:none}
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><polygon points="0,0 10,4 0,8" fill="#3b82f6"/></marker>
+  </defs>
+  <rect width="1200" height="420" fill="url(#g1)"/>
+  <rect class="box" x="40" y="120" width="250" height="170" rx="16"/>
+  <text class="t" x="165" y="180" text-anchor="middle">1. Upload Files</text>
+  <text class="s" x="165" y="215" text-anchor="middle">Drag, drop, and batch import</text>
+
+  <rect class="box" x="330" y="120" width="250" height="170" rx="16"/>
+  <text class="t" x="455" y="180" text-anchor="middle">2. Set Rules</text>
+  <text class="s" x="455" y="215" text-anchor="middle">Views, time, and expiry</text>
+
+  <rect class="box" x="620" y="120" width="250" height="170" rx="16"/>
+  <text class="t" x="745" y="180" text-anchor="middle">3. Share Assets</text>
+  <text class="s" x="745" y="215" text-anchor="middle">Link + QR distribution</text>
+
+  <rect class="box" x="910" y="120" width="250" height="170" rx="16"/>
+  <text class="t" x="1035" y="180" text-anchor="middle">4. Optimize</text>
+  <text class="s" x="1035" y="215" text-anchor="middle">Review analytics feedback</text>
+
+  <path class="a" d="M290,205 L330,205" marker-end="url(#arr)"/>
+  <path class="a" d="M580,205 L620,205" marker-end="url(#arr)"/>
+  <path class="a" d="M870,205 L910,205" marker-end="url(#arr)"/>
+</svg>

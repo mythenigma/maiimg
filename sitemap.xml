@@ -110,6 +110,27 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://maiimg.com/blog/en/image-sharing-workflow-diagrams-guide</loc>
+    <lastmod>2026-02-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/event-photo-sharing-runbook</loc>
+    <lastmod>2026-02-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/client-gallery-delivery-playbook</loc>
+    <lastmod>2026-02-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- New Articles - September 2025 -->
   <url>
     <loc>https://maiimg.com/blog/en/why-your-business-needs-qr-code-image-strategy</loc>
