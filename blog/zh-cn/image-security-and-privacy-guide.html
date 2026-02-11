@@ -47,6 +47,14 @@
         .checklist ul { list-style: none; padding: 0; }
         .checklist li { margin-bottom: 8px; }
         .checklist li:before { content: "🔒 "; margin-right: 8px; }
+        .workflow-callout { background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 10px; padding: 16px; margin: 24px 0 30px 0; }
+        .workflow-callout h4 { color: #1e3a8a; margin-bottom: 10px; }
+        .workflow-mini { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.95rem; }
+        .workflow-mini span { background: #fff; border: 1px solid #cbd5e1; border-radius: 999px; padding: 4px 10px; }
+        .workflow-mini i { width: 16px; height: 2px; background: #93c5fd; position: relative; display: inline-block; }
+        .workflow-mini i::after { content: ""; position: absolute; top: -2px; left: -8px; width: 8px; height: 6px; background: #2563eb; border-radius: 3px; animation: workflowDot 1.3s linear infinite; }
+        .workflow-progress { height: 7px; border-radius: 999px; background: #dbeafe; margin: 12px 0 10px 0; overflow: hidden; }
+        .workflow-progress-fill { height: 100%; width: 26%; background: linear-gradient(90deg, #2563eb, #38bdf8); border-radius: 999px; animation: workflowFill 2.8s ease-in-out infinite; }
         .threat-level { display: inline-block; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; margin-left: 10px; }
         .threat-low { background: #d1fae5; color: #065f46; }
         .threat-medium { background: #fef3c7; color: #92400e; }
@@ -57,6 +65,8 @@
         .cta-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 12px; text-align: center; margin: 40px 0; }
         .cta-button { display: inline-block; background: white; color: #667eea; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 20px; transition: all 0.3s ease; }
         footer { background: #1f2937; color: white; text-align: center; padding: 40px 0; margin-top: 60px; }
+        @keyframes workflowDot { 0% { left: -8px; } 100% { left: 16px; } }
+        @keyframes workflowFill { 0% { width: 20%; } 50% { width: 95%; } 100% { width: 20%; } }
         @media (max-width: 768px) { h1 { font-size: 2rem; } .container { padding: 0 15px; } }
     </style>
 </head>
@@ -125,6 +135,15 @@
             <div class="security-box">
                 <h4>🚨 安全警报</h4>
                 <p>每天有超过25亿张图片在线分享，其中67%包含某种形式的个人或敏感信息。只有23%的用户积极使用访问控制或水印保护他们分享的图片。</p>
+            </div>
+
+            <div class="workflow-callout">
+                <h4>🧭 先定流程，再加安全策略</h4>
+                <div class="workflow-mini">
+                    <span>上传检查</span><i></i><span>权限配置</span><i></i><span>限时分发</span><i></i><span>访问审计</span>
+                </div>
+                <div class="workflow-progress"><div class="workflow-progress-fill"></div></div>
+                <p>先看完整动态图，再对照本文安全项逐条落地：<a href="image-sharing-workflow-flowcharts" style="color: #1d4ed8;">图片分享使用流程（动态图）</a></p>
             </div>
 
             <h2 id="access-controls">实施访问控制</h2>
@@ -253,6 +272,13 @@
                 <li><strong>学校和活动照片：</strong>了解活动摄影的政策</li>
                 <li><strong>长期考虑：</strong>考虑分享图片的未来影响</li>
             </ul>
+
+            <h2 id="flow-diagram-gallery">安全流程图（SVG）</h2>
+            <p>建议把下面两张图作为团队固定检查项：发布前先走一遍权限策略，发布后做周期复盘。</p>
+            <div style="display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0 30px 0;">
+                <img src="diagram/permission-control-flow.svg" alt="权限控制流程图" style="width:100%;height:auto;border:1px solid #d1fae5;border-radius:10px;background:#fff;">
+                <img src="diagram/analytics-optimization-flow.svg" alt="访问审计和优化流程图" style="width:100%;height:auto;border:1px solid #ddd6fe;border-radius:10px;background:#fff;">
+            </div>
 
             <h2 id="conclusion">总结</h2>
             <p>图片安全和隐私需要持续关注和主动措施。通过实施本指南中概述的策略，您可以显著降低未经授权访问、数据盗窃和隐私侵犯的风险。</p>

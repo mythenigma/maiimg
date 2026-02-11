@@ -41,6 +41,14 @@
         .highlight-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 20px; margin: 30px 0; }
         .warning-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 20px; margin: 30px 0; }
         .success-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 20px; margin: 30px 0; }
+        .workflow-callout { background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 10px; padding: 16px; margin: 24px 0 30px 0; }
+        .workflow-callout h4 { color: #1e3a8a; margin-bottom: 10px; }
+        .workflow-mini { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.95rem; }
+        .workflow-mini span { background: #fff; border: 1px solid #cbd5e1; border-radius: 999px; padding: 4px 10px; }
+        .workflow-mini i { width: 16px; height: 2px; background: #93c5fd; position: relative; display: inline-block; }
+        .workflow-mini i::after { content: ""; position: absolute; top: -2px; left: -8px; width: 8px; height: 6px; background: #2563eb; border-radius: 3px; animation: workflowDot 1.3s linear infinite; }
+        .workflow-progress { height: 7px; border-radius: 999px; background: #dbeafe; margin: 12px 0 10px 0; overflow: hidden; }
+        .workflow-progress-fill { height: 100%; width: 26%; background: linear-gradient(90deg, #2563eb, #38bdf8); border-radius: 999px; animation: workflowFill 2.8s ease-in-out infinite; }
         .checklist { background: #f8fafc; border-radius: 8px; padding: 25px; margin: 25px 0; }
         .checklist h4 { color: #1f2937; margin-bottom: 15px; }
         .checklist ul { list-style: none; padding: 0; }
@@ -52,6 +60,8 @@
         .cta-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 12px; text-align: center; margin: 40px 0; }
         .cta-button { display: inline-block; background: white; color: #667eea; padding: 15px 30px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 20px; transition: all 0.3s ease; }
         footer { background: #1f2937; color: white; text-align: center; padding: 40px 0; margin-top: 60px; }
+        @keyframes workflowDot { 0% { left: -8px; } 100% { left: 16px; } }
+        @keyframes workflowFill { 0% { width: 20%; } 50% { width: 95%; } 100% { width: 20%; } }
         @media (max-width: 768px) { h1 { font-size: 2rem; } .container { padding: 0 15px; } }
     </style>
 </head>
@@ -102,6 +112,15 @@
             </ul>
 
             <p>遵循最佳实践确保您的图片到达正确的受众，保持质量，并提供有价值的用户行为洞察。</p>
+
+            <div class="workflow-callout">
+                <h4>🧭 建议先统一流程，再执行最佳实践</h4>
+                <div class="workflow-mini">
+                    <span>上传素材</span><i></i><span>权限配置</span><i></i><span>生成并分发</span><i></i><span>追踪优化</span>
+                </div>
+                <div class="workflow-progress"><div class="workflow-progress-fill"></div></div>
+                <p>先看流程动态图，再逐条落实本文清单：<a href="image-sharing-workflow-flowcharts" style="color: #1d4ed8;">图片分享使用流程（动态图）</a></p>
+            </div>
 
             <h2 id="security-best-practices">安全和隐私最佳实践</h2>
 
@@ -250,6 +269,13 @@
                     <li><a href="https://maiimg.com/blog/zh-cn/real-estate-photo-sharing-guide">房地产照片分享指南</a> - 提升房产展示效果</li>
                     <li><a href="https://maiimg.com/blog/zh-cn/designer-portfolio-sharing-guide">设计师作品集分享指南</a> - 展示您的设计才华</li>
                 </ul>
+            </div>
+
+            <h2 id="flow-diagram-gallery">实践流程图（SVG）</h2>
+            <p>把“方法论”变成“动作路径”：建议先执行流程，再回到本文对照优化项。</p>
+            <div style="display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0 30px 0;">
+                <img src="diagram/image-upload-flow.svg" alt="图片上传流程图" style="width:100%;height:auto;border:1px solid #dbeafe;border-radius:10px;background:#fff;">
+                <img src="diagram/analytics-optimization-flow.svg" alt="数据复盘优化流程图" style="width:100%;height:auto;border:1px solid #ddd6fe;border-radius:10px;background:#fff;">
             </div>
 
             <h2 id="conclusion">总结</h2>

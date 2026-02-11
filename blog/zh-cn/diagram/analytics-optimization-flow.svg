@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">数据复盘优化流程图</title>
+  <desc id="desc">从数据查看到二次分发的优化闭环</desc>
+  <defs>
+    <linearGradient id="bg4" x1="0" x2="1">
+      <stop offset="0%" stop-color="#faf5ff"/>
+      <stop offset="100%" stop-color="#ede9fe"/>
+    </linearGradient>
+    <style>
+      .box { fill: #fff; stroke: #8b5cf6; stroke-width: 2; rx: 16; }
+      .txt { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #4c1d95; font-size: 23px; font-weight: 600; }
+      .sub { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #5b21b6; font-size: 17px; }
+      .arrow { stroke: #8b5cf6; stroke-width: 5; fill: none; }
+    </style>
+    <marker id="arr4" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0,0 10,4 0,8" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="420" fill="url(#bg4)"/>
+
+  <rect class="box" x="60" y="120" width="250" height="160"/>
+  <text class="txt" x="185" y="180" text-anchor="middle">查看访问数据</text>
+  <text class="sub" x="185" y="215" text-anchor="middle">PV/UV/设备分布</text>
+
+  <rect class="box" x="350" y="120" width="250" height="160"/>
+  <text class="txt" x="475" y="180" text-anchor="middle">识别流量高峰</text>
+  <text class="sub" x="475" y="215" text-anchor="middle">时间段与渠道来源</text>
+
+  <rect class="box" x="640" y="120" width="250" height="160"/>
+  <text class="txt" x="765" y="180" text-anchor="middle">优化内容入口</text>
+  <text class="sub" x="765" y="215" text-anchor="middle">封面/标题/文案</text>
+
+  <rect class="box" x="930" y="120" width="210" height="160"/>
+  <text class="txt" x="1035" y="180" text-anchor="middle">二次分发</text>
+  <text class="sub" x="1035" y="215" text-anchor="middle">验证改动效果</text>
+
+  <path class="arrow" marker-end="url(#arr4)" d="M310,200 L350,200"/>
+  <path class="arrow" marker-end="url(#arr4)" d="M600,200 L640,200"/>
+  <path class="arrow" marker-end="url(#arr4)" d="M890,200 L930,200"/>
+</svg>

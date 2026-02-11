@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">房地产房源分享流程图</title>
+  <desc id="desc">房源照片从拍摄到客户转发的流程</desc>
+  <defs>
+    <linearGradient id="bg7" x1="0" x2="1">
+      <stop offset="0%" stop-color="#ecfdf5"/>
+      <stop offset="100%" stop-color="#d1fae5"/>
+    </linearGradient>
+    <style>
+      .box { fill: #fff; stroke: #10b981; stroke-width: 2; rx: 16; }
+      .txt { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #065f46; font-size: 22px; font-weight: 600; }
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="url(#bg7)"/>
+  <rect class="box" x="60" y="110" width="250" height="180"/>
+  <text class="txt" x="185" y="180" text-anchor="middle">标准化拍摄</text>
+  <text class="txt" x="185" y="215" text-anchor="middle">户型 / 朝向 / 采光</text>
+
+  <rect class="box" x="350" y="110" width="250" height="180"/>
+  <text class="txt" x="475" y="180" text-anchor="middle">生成看房相册</text>
+  <text class="txt" x="475" y="215" text-anchor="middle">附核心卖点说明</text>
+
+  <rect class="box" x="640" y="110" width="250" height="180"/>
+  <text class="txt" x="765" y="180" text-anchor="middle">客户转发分享</text>
+  <text class="txt" x="765" y="215" text-anchor="middle">家庭决策协同</text>
+
+  <rect class="box" x="930" y="110" width="210" height="180"/>
+  <text class="txt" x="1035" y="180" text-anchor="middle">收集线索</text>
+  <text class="txt" x="1035" y="215" text-anchor="middle">复看与预约</text>
+
+  <path d="M310,200 L350,200" stroke="#10b981" stroke-width="5" marker-end="url(#arrow7)"/>
+  <path d="M600,200 L640,200" stroke="#10b981" stroke-width="5" marker-end="url(#arrow7)"/>
+  <path d="M890,200 L930,200" stroke="#10b981" stroke-width="5" marker-end="url(#arrow7)"/>
+  <defs>
+    <marker id="arrow7" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0,0 10,4 0,8" fill="#10b981"/>
+    </marker>
+  </defs>
+</svg>

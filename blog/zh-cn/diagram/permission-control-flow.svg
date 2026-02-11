@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">权限控制流程图</title>
+  <desc id="desc">设置访问次数、时间和过期策略</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" x2="1">
+      <stop offset="0%" stop-color="#f0fdf4"/>
+      <stop offset="100%" stop-color="#dcfce7"/>
+    </linearGradient>
+    <style>
+      .box { fill: #fff; stroke: #22c55e; stroke-width: 2; rx: 18; }
+      .txt { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #14532d; font-size: 24px; font-weight: 600; }
+      .sub { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #166534; font-size: 18px; }
+      .arrow { stroke: #22c55e; stroke-width: 5; fill: none; }
+    </style>
+    <marker id="arr2" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0,0 10,4 0,8" fill="#22c55e"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="420" fill="url(#bg2)"/>
+  <rect class="box" x="60" y="120" width="250" height="160"/>
+  <text class="txt" x="185" y="180" text-anchor="middle">设置查看次数</text>
+  <text class="sub" x="185" y="215" text-anchor="middle">如 50 次后失效</text>
+
+  <rect class="box" x="350" y="120" width="250" height="160"/>
+  <text class="txt" x="475" y="180" text-anchor="middle">设置停留时长</text>
+  <text class="sub" x="475" y="215" text-anchor="middle">如 每人 120 秒</text>
+
+  <rect class="box" x="640" y="120" width="250" height="160"/>
+  <text class="txt" x="765" y="180" text-anchor="middle">设置过期时间</text>
+  <text class="sub" x="765" y="215" text-anchor="middle">如 7 天自动关闭</text>
+
+  <rect class="box" x="930" y="120" width="210" height="160"/>
+  <text class="txt" x="1035" y="180" text-anchor="middle">发布链接</text>
+  <text class="sub" x="1035" y="215" text-anchor="middle">安全可控分发</text>
+
+  <path class="arrow" d="M310,200 L350,200" marker-end="url(#arr2)"/>
+  <path class="arrow" d="M600,200 L640,200" marker-end="url(#arr2)"/>
+  <path class="arrow" d="M890,200 L930,200" marker-end="url(#arr2)"/>
+</svg>

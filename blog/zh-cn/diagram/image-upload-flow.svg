@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">图片上传流程图</title>
+  <desc id="desc">从整理图片到生成相册链接的流程</desc>
+  <defs>
+    <linearGradient id="bg1" x1="0" x2="1">
+      <stop offset="0%" stop-color="#eff6ff"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+    <style>
+      .box { fill: #ffffff; stroke: #60a5fa; stroke-width: 2; rx: 18; }
+      .txt { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #1e3a8a; font-size: 24px; font-weight: 600; }
+      .sub { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #334155; font-size: 18px; }
+      .arrow { stroke: #3b82f6; stroke-width: 5; fill: none; }
+      .dot { fill: #1d4ed8; }
+    </style>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0,0 10,4 0,8" fill="#3b82f6"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="420" fill="url(#bg1)"/>
+
+  <rect class="box" x="40" y="120" width="240" height="160"/>
+  <text class="txt" x="160" y="180" text-anchor="middle">1. 选择图片</text>
+  <text class="sub" x="160" y="215" text-anchor="middle">批量上传 JPG/PNG/WebP</text>
+
+  <rect class="box" x="330" y="120" width="240" height="160"/>
+  <text class="txt" x="450" y="180" text-anchor="middle">2. 自动优化</text>
+  <text class="sub" x="450" y="215" text-anchor="middle">压缩与格式适配</text>
+
+  <rect class="box" x="620" y="120" width="240" height="160"/>
+  <text class="txt" x="740" y="180" text-anchor="middle">3. 相册配置</text>
+  <text class="sub" x="740" y="215" text-anchor="middle">标题、说明、封面</text>
+
+  <rect class="box" x="910" y="120" width="240" height="160"/>
+  <text class="txt" x="1030" y="180" text-anchor="middle">4. 生成分享</text>
+  <text class="sub" x="1030" y="215" text-anchor="middle">链接 + 二维码</text>
+
+  <path class="arrow" marker-end="url(#arr)" d="M280,200 L330,200"/>
+  <path class="arrow" marker-end="url(#arr)" d="M570,200 L620,200"/>
+  <path class="arrow" marker-end="url(#arr)" d="M860,200 L910,200"/>
+
+  <circle class="dot" r="6">
+    <animateMotion dur="2.2s" repeatCount="indefinite" path="M280,200 L330,200"/>
+  </circle>
+  <circle class="dot" r="6">
+    <animateMotion dur="2.2s" begin="0.3s" repeatCount="indefinite" path="M570,200 L620,200"/>
+  </circle>
+  <circle class="dot" r="6">
+    <animateMotion dur="2.2s" begin="0.6s" repeatCount="indefinite" path="M860,200 L910,200"/>
+  </circle>
+</svg>

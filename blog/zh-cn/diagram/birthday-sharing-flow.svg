@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">生日会照片分享流程图</title>
+  <desc id="desc">生日会照片分享从整理到互动的流程</desc>
+  <defs>
+    <linearGradient id="bg6" x1="0" x2="1">
+      <stop offset="0%" stop-color="#fdf2f8"/>
+      <stop offset="100%" stop-color="#fce7f3"/>
+    </linearGradient>
+    <style>
+      .box { fill: #fff; stroke: #ec4899; stroke-width: 2; rx: 16; }
+      .txt { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #9d174d; font-size: 22px; font-weight: 600; }
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="url(#bg6)"/>
+  <rect class="box" x="70" y="110" width="240" height="180"/>
+  <text class="txt" x="190" y="180" text-anchor="middle">按环节分组</text>
+  <text class="txt" x="190" y="215" text-anchor="middle">开场/游戏/切蛋糕</text>
+
+  <rect class="box" x="350" y="110" width="240" height="180"/>
+  <text class="txt" x="470" y="180" text-anchor="middle">上传生成相册</text>
+  <text class="txt" x="470" y="215" text-anchor="middle">设置可看时长</text>
+
+  <rect class="box" x="630" y="110" width="240" height="180"/>
+  <text class="txt" x="750" y="180" text-anchor="middle">群里分享链接</text>
+  <text class="txt" x="750" y="215" text-anchor="middle">同时发二维码</text>
+
+  <rect class="box" x="910" y="110" width="220" height="180"/>
+  <text class="txt" x="1020" y="180" text-anchor="middle">二次互动</text>
+  <text class="txt" x="1020" y="215" text-anchor="middle">精选返场分享</text>
+
+  <path d="M310,200 L350,200" stroke="#ec4899" stroke-width="5" marker-end="url(#arrow6)"/>
+  <path d="M590,200 L630,200" stroke="#ec4899" stroke-width="5" marker-end="url(#arrow6)"/>
+  <path d="M870,200 L910,200" stroke="#ec4899" stroke-width="5" marker-end="url(#arrow6)"/>
+  <defs>
+    <marker id="arrow6" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0,0 10,4 0,8" fill="#ec4899"/>
+    </marker>
+  </defs>
+</svg>

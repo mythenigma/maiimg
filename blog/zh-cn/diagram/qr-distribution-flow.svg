@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">二维码分发流程图</title>
+  <desc id="desc">线上线下双渠道分发图片链接</desc>
+  <defs>
+    <linearGradient id="bg3" x1="0" x2="1">
+      <stop offset="0%" stop-color="#fff7ed"/>
+      <stop offset="100%" stop-color="#ffedd5"/>
+    </linearGradient>
+    <style>
+      .head { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #9a3412; font-size: 28px; font-weight: 700; }
+      .col { fill: #fff; stroke: #fb923c; stroke-width: 2; rx: 16; }
+      .t1 { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #7c2d12; font-size: 22px; font-weight: 600; }
+      .li { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #7c2d12; font-size: 17px; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1200" height="430" fill="url(#bg3)"/>
+  <text class="head" x="600" y="58" text-anchor="middle">二维码分发路径：线上 + 线下</text>
+
+  <rect class="col" x="80" y="95" width="500" height="280"/>
+  <text class="t1" x="330" y="140" text-anchor="middle">线上路径（链接优先）</text>
+  <text class="li" x="130" y="190">- 微信群 / 社群消息</text>
+  <text class="li" x="130" y="225">- 公众号文章</text>
+  <text class="li" x="130" y="260">- 邮件和私信触达</text>
+  <text class="li" x="130" y="295">- 复盘时回收点击数据</text>
+
+  <rect class="col" x="620" y="95" width="500" height="280"/>
+  <text class="t1" x="870" y="140" text-anchor="middle">线下路径（二维码优先）</text>
+  <text class="li" x="670" y="190">- 海报 / 易拉宝</text>
+  <text class="li" x="670" y="225">- 活动签到台</text>
+  <text class="li" x="670" y="260">- 名片 / 宣传页</text>
+  <text class="li" x="670" y="295">- 现场扫码后进入相册</text>
+
+  <path d="M580,235 L620,235" stroke="#f97316" stroke-width="6" stroke-dasharray="10 8"/>
+  <circle r="7" fill="#ea580c">
+    <animateMotion path="M580,235 L620,235" dur="1.2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">婚礼照片分享流程图</title>
+  <desc id="desc">婚礼照片从精选到分发的标准流程</desc>
+  <defs>
+    <linearGradient id="bg5" x1="0" x2="1">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="100%" stop-color="#fef3c7"/>
+    </linearGradient>
+    <style>
+      .box { fill: #fff; stroke: #f59e0b; stroke-width: 2; rx: 16; }
+      .txt { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; fill: #92400e; font-size: 22px; font-weight: 600; }
+    </style>
+  </defs>
+  <rect width="1200" height="430" fill="url(#bg5)"/>
+  <rect class="box" x="70" y="110" width="240" height="180"/>
+  <text class="txt" x="190" y="180" text-anchor="middle">婚礼精选</text>
+  <text class="txt" x="190" y="215" text-anchor="middle">仪式 / 合影</text>
+
+  <rect class="box" x="350" y="110" width="240" height="180"/>
+  <text class="txt" x="470" y="180" text-anchor="middle">生成相册链接</text>
+  <text class="txt" x="470" y="215" text-anchor="middle">附感谢文案</text>
+
+  <rect class="box" x="630" y="110" width="240" height="180"/>
+  <text class="txt" x="750" y="180" text-anchor="middle">制作二维码</text>
+  <text class="txt" x="750" y="215" text-anchor="middle">婚礼回执卡片</text>
+
+  <rect class="box" x="910" y="110" width="220" height="180"/>
+  <text class="txt" x="1020" y="180" text-anchor="middle">宾客访问复盘</text>
+  <text class="txt" x="1020" y="215" text-anchor="middle">补发遗漏人群</text>
+
+  <path d="M310,200 L350,200" stroke="#f59e0b" stroke-width="5" marker-end="url(#arrow)"/>
+  <path d="M590,200 L630,200" stroke="#f59e0b" stroke-width="5" marker-end="url(#arrow)"/>
+  <path d="M870,200 L910,200" stroke="#f59e0b" stroke-width="5" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0,0 10,4 0,8" fill="#f59e0b"/>
+    </marker>
+  </defs>
+</svg>
