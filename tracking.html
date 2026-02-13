@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tracking Code Decoder - Gallery Access Logs</title>
+    <title>Access Record Decoder - Gallery Access Logs</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -337,9 +337,6 @@
                     </div>
                 </div>
             </div>
-            <p class="lead text-muted mb-0" data-translate="header.subtitle">
-                Enter tracking code to view corresponding gallery access logs
-            </p>
         </div>
 
         <!-- Decoder Form -->
@@ -714,7 +711,7 @@
             hideAllCards();
             
             if (!trackingCode) {
-                showError(t('errors.enterCode', 'Please enter tracking code'));
+                showError(t('errors.enterCode', 'Please enter access record code'));
                 return;
             }
             
@@ -743,7 +740,7 @@
                 const galleryId = trackingDecoder.decode(trackingCode);
                 
                 if (!galleryId || galleryId <= 0) {
-                    throw new Error(t('errors.invalidCode', 'Invalid tracking code or decode failed'));
+                    throw new Error(t('errors.invalidCode', 'Invalid access record code or decode failed'));
                 }
                 
                 console.log('✅ Decode successful, Gallery ID:', galleryId);
