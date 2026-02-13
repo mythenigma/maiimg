@@ -1402,7 +1402,7 @@ footer {
 /* Enhanced Results Section Styles */
 .success-header {
   position: relative;
-  padding: 2rem 0;
+  padding: 1.2rem 0 0.9rem;
 }
 
 .success-icon-container {
@@ -1411,7 +1411,7 @@ footer {
 }
 
 .success-icon {
-  font-size: 4rem;
+  font-size: 3rem;
   color: var(--success-color);
   animation: successPulse 2s ease-in-out infinite;
 }
@@ -1422,19 +1422,23 @@ footer {
 }
 
 .success-title {
-  font-size: 2.5rem;
+  font-size: 2.05rem;
   font-weight: 800;
   background: linear-gradient(45deg, var(--success-color), var(--secondary-color));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .success-subtitle {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #6b7280;
   font-weight: 400;
+}
+
+.success-header.mb-5 {
+  margin-bottom: 1.25rem !important;
 }
 
 /* Enhanced Statistics Cards */
@@ -1879,7 +1883,7 @@ footer {
 
   .tracking-code-display {
     margin: 0.18rem 0 0.32rem;
-    padding: 0.58rem 0.5rem;
+    padding: 0.5rem 0.5rem;
     border-radius: 10px;
   }
 
@@ -1889,11 +1893,15 @@ footer {
     letter-spacing: 0.2px;
   }
 
+  .tracking-code-row {
+    gap: 0.45rem;
+  }
+
   .tracking-code-value {
     font-size: 0.86rem;
     letter-spacing: 0.7px;
     padding: 0.48rem 0.5rem;
-    margin-bottom: 0.38rem;
+    margin-bottom: 0;
     border-radius: 9px;
   }
 
@@ -1955,8 +1963,8 @@ footer {
   background: linear-gradient(135deg, #f8fafc, #f1f5f9);
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 1.25rem 1rem;
-  margin: 0.75rem 0;
+  padding: 0.85rem 0.9rem;
+  margin: 0.45rem 0;
   position: relative;
   overflow: hidden;
 }
@@ -1975,9 +1983,16 @@ footer {
   font-size: 0.85rem;
   font-weight: 500;
   color: #6b7280;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.4rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.tracking-code-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 /* Tracking Info Compact Styles */
@@ -2003,19 +2018,25 @@ footer {
 
 .tracking-code-value {
   font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
-  font-size: 1.25rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--primary-color);
   background: white;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
   border: 2px solid #e5e7eb;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   text-align: center;
-  letter-spacing: 2px;
+  letter-spacing: 1.2px;
   word-break: break-all;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   position: relative;
+  flex: 1 1 220px;
+}
+
+.tracking-copy-btn {
+  white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 .tracking-code-value::before {
