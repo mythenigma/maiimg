@@ -12,6 +12,8 @@ h1{font-size:34px;line-height:1.35;margin-bottom:10px} h2{font-size:24px;margin:
 .lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
 .tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
 .flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0} footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.shot img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff}.shot p{font-size:13px;color:var(--muted);margin:6px 0 0}
+@media (max-width:760px){.shots{grid-template-columns:1fr}}
 </style></head><body>
 <header class="top"><div class="wrap"><a href="./">中文博客</a> / 生日会照片分享实操</div></header>
 <article class="wrap">
@@ -24,6 +26,15 @@ h1{font-size:34px;line-height:1.35;margin-bottom:10px} h2{font-size:24px;margin:
 <h2>发出去之后怎么控</h2>
 <div class="flow"><img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
 <div class="tip">说明：本文只保留麦瓜图床真实能力，去掉“流量高峰、二次分发”等不贴合产品现状的表述。</div>
+<h2>真实界面截图（中文）</h2>
+<p>下面是麦瓜图床当前可见的中文界面截图，帮助你快速理解“生成链接、控制次数、失效回收”的实际操作位置。</p>
+<div class="shots">
+  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜二维码首页"/><p>首页入口：上传图片并开始生成</p></div>
+  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成结果"/><p>生成结果：得到链接与二维码</p></div>
+  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数"/><p>控制选项：设置链接/二维码打开次数</p></div>
+  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片"/><p>回收能力：一键失效，停止继续访问</p></div>
+</div>
+<div class="tip">补充：删除操作前会有确认步骤，避免误删（见“删除时候确认.png”）。</div>
 <h2>一句话总结</h2>
 <p>麦瓜图床比很多普通图床更好用的地方，在于它不仅“能发图”，还支持“发出去后继续控制”。</p>
 </article><footer>© 2025 麦瓜图床（MaiIMG）</footer></body></html>
