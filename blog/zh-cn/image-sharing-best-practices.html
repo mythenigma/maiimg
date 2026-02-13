@@ -1,101 +1,62 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>图片分发怎么做，才不会越做越乱</title>
-    <meta name="description" content="给团队可直接执行的图片分发最佳实践：命名、分组、权限、触达、复盘五个层面，一次讲清楚。" />
-    <meta name="keywords" content="麦瓜图床, 图片分发, 最佳实践, 图床管理, 图片权限, 团队协作" />
-    <link rel="canonical" href="https://maiimg.com/blog/zh-cn/image-sharing-best-practices" />
-    <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
-
-    <style>
-        :root{--bg:#f6f8fc;--card:#fff;--text:#1f2937;--muted:#5f6b7e;--line:#e4e9f3;--brand:#2563eb;--ok:#10b981;--warn:#f59e0b}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-        .wrap{width:min(860px,92vw);margin:0 auto}
-        .top{background:linear-gradient(120deg,#1e40af,#2563eb);color:#fff;padding:20px 0}
-        .top a{color:#fff;text-decoration:none}
-        article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-        h1{font-size:34px;line-height:1.35;margin-bottom:12px}
-        .meta{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:#6b7280;margin-bottom:12px}
-        .lead{background:#fff7ed;border-left:4px solid var(--warn);padding:14px;border-radius:8px;margin:14px 0 22px;color:#374151}
-        h2{font-size:24px;margin:28px 0 12px}
-        p{margin-bottom:14px}
-        ul{padding-left:20px;margin:8px 0 16px}
-        li{margin:6px 0}
-        .good,.warn{border-radius:12px;padding:14px 16px;margin:14px 0}
-        .good{background:#f0fdf4;border:1px solid #d1fae5}
-        .warn{background:#fef2f2;border:1px solid #fecaca}
-        .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-        .item{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fafcff}
-        .flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin-top:10px}
-        .cta{margin-top:24px;background:#eef4ff;border:1px solid #dbeafe;border-radius:12px;padding:18px}
-        .cta a{color:#1d4ed8;text-decoration:none;font-weight:700}
-        footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-        @media (max-width:760px){.grid{grid-template-columns:1fr} h1{font-size:28px}}
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>普通用户发图，怎么省心又不翻车</title>
+  <meta name="description" content="围绕麦瓜图床真实能力：一组图生成链接、转二维码、设置打开次数和一键失效，给普通用户的简明实践。" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/image-sharing-best-practices" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <style>
+    :root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
+    .wrap{width:min(860px,92vw);margin:0 auto}
+    .top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
+    article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
+    h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
+    h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
+    .tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:12px;padding:14px 16px;margin:14px 0}
+    .flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
+    footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
+  </style>
 </head>
 <body>
-    <header class="top">
-        <div class="wrap"><a href="./">中文博客</a> / 图片分发怎么做，才不会越做越乱</div>
-    </header>
+  <header class="top"><div class="wrap"><a href="./">中文博客</a> / 普通用户发图，怎么省心又不翻车</div></header>
+  <article class="wrap">
+    <h1>普通用户发图，怎么省心又不翻车</h1>
+    <div class="lead">这篇不讲“商业大词”，只讲麦瓜图床最实在的能力：一组图片生成一个链接，再转二维码发出去；需要时可限制打开次数，也可一键失效。</div>
 
-    <article class="wrap">
-        <div class="meta"><span>📅 2025-01-20</span><span>⏱️ 约 8 分钟</span><span>📂 最佳实践</span></div>
-        <h1>图片分发怎么做，才不会越做越乱</h1>
-        <div class="lead">如果你们团队也遇到“图发了很多，但沟通依旧低效”，问题往往不在工具，而在没有流程和规则。下面这份清单，目标是让你们从“能发图”升级到“能管理图片分发”。</div>
+    <h2>先记住工具边界</h2>
+    <ul>
+      <li>这是图片分享工具，不是复杂营销系统</li>
+      <li>一个链接最多 <strong>25 张图片</strong></li>
+      <li>核心动作：上传 → 生成链接 → 转二维码 → 分享</li>
+      <li>发出去后可继续控：设置打开次数、一键失效</li>
+    </ul>
 
-        <h2>第一层：命名和分组先标准化</h2>
-        <p>先别急着发。先统一两件小事：命名格式、分组逻辑。没有这一步，后面追踪和复盘都很痛苦。</p>
-        <div class="grid">
-            <div class="item"><strong>命名建议</strong><br/>日期_项目_场景_版本<br/>例：2025Q1_展会物料_海报_v2</div>
-            <div class="item"><strong>分组建议</strong><br/>同一目标受众一组，不同用途分开，避免“杂糅包”。</div>
-        </div>
+    <h2>三个最实用的习惯</h2>
+    <div class="tip"><strong>习惯1：</strong>按场景分组上传。婚礼一组、产品一组、活动一组，不要混在一起。</div>
+    <div class="tip"><strong>习惯2：</strong>先小范围测试。先发给1-2个人确认打开正常，再全量发。</div>
+    <div class="tip"><strong>习惯3：</strong>敏感内容设次数。比如只允许打开 5 次或 20 次，避免无限扩散。</div>
 
-        <h2>第二层：权限按敏感度，不要一刀切</h2>
-        <p>麦瓜图床支持访问规则配置，但真正好用的方式是“分级策略”：普通宣传图一套，高敏感资料另一套。</p>
-        <div class="good">
-            <strong>推荐做法：</strong>
-            <ul>
-                <li>普通传播：轻限制，重点看触达效率</li>
-                <li>商务资料：开启验证 + 次数/时效控制</li>
-                <li>高敏资料：严格限制并缩短有效期</li>
-            </ul>
-        </div>
+    <h2>什么时候用“一键失效”</h2>
+    <ul>
+      <li>发错对象了</li>
+      <li>内容过期了</li>
+      <li>版本更新了，不希望旧图继续传播</li>
+      <li>活动结束后希望及时收口</li>
+    </ul>
 
-        <h2>第三层：分发渠道和目标要对齐</h2>
-        <ul>
-            <li>线上沟通优先链接，便于点击和二次传播</li>
-            <li>线下物料优先二维码，降低输入门槛</li>
-            <li>同一素材可多入口，但必须统一落到同一管理逻辑</li>
-        </ul>
+    <h2>配合流程图看，会更直观</h2>
+    <div class="flow">
+      <img src="diagram/image-upload-flow.svg" alt="图片上传流程" />
+      <img src="diagram/qr-distribution-flow.svg" alt="二维码分发流程" />
+      <img src="diagram/permission-control-flow.svg" alt="权限控制流程" />
+    </div>
 
-        <h2>第四层：每周固定复盘一次</h2>
-        <p>最常见的问题是“发完就结束”。正确做法是固定节奏复盘，至少看这三件事：</p>
-        <ul>
-            <li>谁看了、何时看、看了多久</li>
-            <li>哪些场景打开率高，哪些几乎无人访问</li>
-            <li>是否需要调整权限、文案或分发入口</li>
-        </ul>
-        <div class="warn"><strong>避免误区：</strong>只追求“发出去”，不追踪“有没有被看见、看懂、触发动作”。</div>
-
-        <h2>第五层：把流程图变成团队共识</h2>
-        <p>把流程图贴在团队文档首页，比口头解释更有效。建议至少保留“上传流程”和“复盘流程”两张图。</p>
-        <div class="flow">
-            <img src="diagram/image-upload-flow.svg" alt="上传流程图" />
-            <img src="diagram/analytics-optimization-flow.svg" alt="复盘优化流程图" />
-        </div>
-
-        <h2>一段话总结</h2>
-        <p>麦瓜图床不是“另一个图床网站”那么简单。它真正有价值的地方，在于让图片分发可控、可追踪、可优化。你们只要把“命名分组 + 分级权限 + 周复盘”执行起来，效果会很快出来。</p>
-
-        <div class="cta">
-            <p><strong>建议你今天就做一次小试点：</strong>选一个真实项目，按上面五层跑一遍。</p>
-            <p><a href="../../">去麦瓜图床开始试跑 →</a></p>
-        </div>
-    </article>
-
-    <footer>© 2025 麦瓜图床（MaiIMG）</footer>
+    <p>如果你只想要一个结论：<strong>麦瓜图床比普通图床好用的地方，不是花哨，而是“发得出去，也收得回来”。</strong></p>
+  </article>
+  <footer>© 2025 麦瓜图床（MaiIMG）</footer>
 </body>
 </html>

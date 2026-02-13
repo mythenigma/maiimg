@@ -1,316 +1,46 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片分享使用流程动态图解 | MaiIMG博客</title>
-    <meta name="description" content="用动态图解快速理解 MaiIMG 的图片分享完整流程：上传、设置、生成链接、分发、追踪复盘。">
-    <meta name="keywords" content="图片分享流程, 动态流程图, 二维码分享, 图片上传流程, MaiIMG教程">
-    <link rel="canonical" href="https://maiimg.com/blog/zh-cn/image-sharing-workflow-flowcharts">
-
-    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-    <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg">
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            line-height: 1.8;
-            color: #1f2937;
-            background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
-        }
-        .container { max-width: 980px; margin: 0 auto; padding: 0 20px; }
-        header { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: #fff; padding: 22px 0; }
-        .header-nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.45rem; font-weight: 700; color: #fff; text-decoration: none; }
-        .breadcrumb { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 14px 0; }
-        .breadcrumb a { color: #2563eb; text-decoration: none; }
-        article { padding: 42px 0 56px; }
-
-        h1 { font-size: 2.2rem; line-height: 1.3; margin-bottom: 14px; }
-        .lead {
-            background: #fff;
-            border: 1px solid #dbeafe;
-            border-left: 5px solid #2563eb;
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 28px;
-            color: #374151;
-        }
-
-        .flow-section {
-            background: #fff;
-            border-radius: 14px;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 8px 22px rgba(37, 99, 235, 0.08);
-            padding: 22px;
-            margin-bottom: 26px;
-        }
-
-        .flow-section h2 { font-size: 1.35rem; margin-bottom: 8px; }
-        .flow-section p { color: #4b5563; margin-bottom: 16px; }
-
-        .flow-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .step {
-            min-width: 150px;
-            flex: 1;
-            background: #f9fafb;
-            border: 1px solid #d1d5db;
-            border-radius: 12px;
-            padding: 12px;
-            position: relative;
-            animation: stepPulse 2.8s ease-in-out infinite;
-        }
-
-        .step:nth-child(1) { animation-delay: 0s; }
-        .step:nth-child(3) { animation-delay: 0.4s; }
-        .step:nth-child(5) { animation-delay: 0.8s; }
-        .step:nth-child(7) { animation-delay: 1.2s; }
-
-        .step .num {
-            display: inline-flex;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            background: #2563eb;
-            color: #fff;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-right: 8px;
-        }
-
-        .arrow {
-            width: 24px;
-            height: 2px;
-            background: #93c5fd;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .arrow::after {
-            content: "";
-            position: absolute;
-            top: -2px;
-            left: -16px;
-            width: 10px;
-            height: 6px;
-            background: #2563eb;
-            border-radius: 3px;
-            animation: moveDot 1.6s linear infinite;
-        }
-
-        .arrow::before {
-            content: "";
-            position: absolute;
-            right: -1px;
-            top: -3px;
-            border-left: 7px solid #93c5fd;
-            border-top: 4px solid transparent;
-            border-bottom: 4px solid transparent;
-        }
-
-        .flow-note {
-            margin-top: 14px;
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-radius: 10px;
-            padding: 10px 12px;
-            font-size: 0.95rem;
-            color: #1e3a8a;
-        }
-
-        .branch-wrap {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-        }
-
-        .branch-col {
-            background: #f8fafc;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 12px;
-        }
-
-        .branch-col h3 { font-size: 1rem; margin-bottom: 8px; }
-        .branch-col ul { margin-left: 20px; }
-        .branch-col li { margin-bottom: 6px; }
-
-        .progress-track {
-            height: 10px;
-            border-radius: 999px;
-            background: #dbeafe;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .progress-fill {
-            width: 35%;
-            height: 100%;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #2563eb, #38bdf8);
-            animation: growLoop 3s ease-in-out infinite;
-        }
-
-        .cta {
-            background: linear-gradient(135deg, #2563eb, #1e40af);
-            color: #fff;
-            border-radius: 14px;
-            padding: 26px;
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .cta a {
-            display: inline-block;
-            margin-top: 12px;
-            text-decoration: none;
-            background: #fff;
-            color: #1d4ed8;
-            font-weight: 600;
-            border-radius: 999px;
-            padding: 11px 20px;
-        }
-
-        footer { background: #111827; color: #fff; text-align: center; padding: 34px 0; margin-top: 40px; }
-
-        @keyframes moveDot {
-            0% { left: -16px; }
-            100% { left: 30px; }
-        }
-
-        @keyframes stepPulse {
-            0%, 100% { transform: translateY(0); border-color: #d1d5db; }
-            50% { transform: translateY(-3px); border-color: #60a5fa; }
-        }
-
-        @keyframes growLoop {
-            0% { width: 18%; }
-            50% { width: 96%; }
-            100% { width: 18%; }
-        }
-
-        @media (max-width: 768px) {
-            .container { padding: 0 15px; }
-            h1 { font-size: 1.8rem; }
-            .flow-row { gap: 10px; }
-            .step { min-width: 100%; }
-            .arrow { width: 100%; }
-            .branch-wrap { grid-template-columns: 1fr; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>图片分享流程图（简版）</title>
+  <meta name="description" content="麦瓜图床的简明流程图：上传图片、生成链接与二维码、设置次数和一键失效。" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/image-sharing-workflow-flowcharts" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <style>
+    :root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
+    .wrap{width:min(920px,92vw);margin:0 auto}
+    .top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
+    article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
+    h1{font-size:32px;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
+    h2{font-size:22px;margin:26px 0 10px} p{margin-bottom:12px}
+    .flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
+    .note{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0;color:#334155}
+    footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-nav">
-                <a href="../../" class="logo">📸 MaiIMG</a>
-                <nav><a href="../" style="color: white; text-decoration: none;">博客</a></nav>
-            </div>
-        </div>
-    </header>
+  <header class="top"><div class="wrap"><a href="./">中文博客</a> / 图片分享流程图（简版）</div></header>
+  <article class="wrap">
+    <h1>图片分享流程图（简版）</h1>
+    <div class="lead">只保留麦瓜图床真实能力，不讲夸张功能：上传一组图（最多25张）→ 生成链接 → 转二维码 → 分享 → 需要时设置次数或一键失效。</div>
 
-    <div class="breadcrumb">
-        <div class="container">
-            <a href="../../">MaiIMG</a> / <a href="../">博客</a> / <a href="./">中文</a> / 图片分享流程动态图解
-        </div>
-    </div>
+    <h2>流程 1：基础分享</h2>
+    <p>最常用的一条：普通用户快速把一组图发出去。</p>
+    <div class="flow"><img src="diagram/image-upload-flow.svg" alt="图片上传流程图" /></div>
 
-    <article class="container">
-        <h1>图片分享使用流程：4 张动态流程图讲清楚</h1>
-        <div class="lead">
-            下面用 4 张动态图，帮用户快速理解从上传图片到数据复盘的完整路径。每个流程都可直接用于产品说明页、客户培训或内部 SOP。
-        </div>
+    <h2>流程 2：链接转二维码</h2>
+    <p>适合线下场景（海报、活动台、名片等）。</p>
+    <div class="flow"><img src="diagram/qr-distribution-flow.svg" alt="二维码分发流程图" /></div>
 
-        <section class="flow-section">
-            <h2>流程图 1：3 分钟完成分享（新手路径）</h2>
-            <p>适合第一次使用 MaiIMG 的用户，先跑通主流程，再补设置细节。</p>
-            <div class="flow-row">
-                <div class="step"><span class="num">1</span>上传图片</div>
-                <div class="arrow"></div>
-                <div class="step"><span class="num">2</span>填写标题说明</div>
-                <div class="arrow"></div>
-                <div class="step"><span class="num">3</span>生成链接和二维码</div>
-                <div class="arrow"></div>
-                <div class="step"><span class="num">4</span>发送给用户</div>
-            </div>
-            <div class="flow-note">建议：首批先发给 3-5 人做验证，确认打开速度和展示效果后再大规模分发。</div>
-        </section>
+    <h2>流程 3：分享后控制</h2>
+    <p>发出去后仍然可以控：设置打开次数，必要时直接一键失效。</p>
+    <div class="flow"><img src="diagram/permission-control-flow.svg" alt="权限控制流程图" /></div>
 
-        <section class="flow-section">
-            <h2>流程图 2：权限控制流程（安全路径）</h2>
-            <p>这条流程帮助你在公开传播前，先收紧访问范围与有效期。</p>
-            <div class="flow-row">
-                <div class="step"><span class="num">1</span>设置查看次数</div>
-                <div class="arrow"></div>
-                <div class="step"><span class="num">2</span>设置停留时长</div>
-                <div class="arrow"></div>
-                <div class="step"><span class="num">3</span>确认过期策略</div>
-                <div class="arrow"></div>
-                <div class="step"><span class="num">4</span>再发布链接</div>
-            </div>
-            <div class="flow-note">建议：活动类内容可设短期有效；作品集类内容可设较宽松策略并定期更换链接。</div>
-        </section>
-
-        <section class="flow-section">
-            <h2>流程图 3：按渠道分发（运营路径）</h2>
-            <p>根据分享场景，决定“链接”还是“二维码”优先，减少用户跳失。</p>
-            <div class="branch-wrap">
-                <div class="branch-col">
-                    <h3>线上渠道（链接优先）</h3>
-                    <ul>
-                        <li>微信群/社群消息</li>
-                        <li>公众号文章内嵌</li>
-                        <li>邮件与私信触达</li>
-                    </ul>
-                </div>
-                <div class="branch-col">
-                    <h3>线下渠道（二维码优先）</h3>
-                    <ul>
-                        <li>海报与易拉宝</li>
-                        <li>活动签到台</li>
-                        <li>名片、宣传单页</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="progress-track"><div class="progress-fill"></div></div>
-            <div class="flow-note">动作顺序：先小范围测试扫码与加载，再全量投放，避免活动现场拥堵。</div>
-        </section>
-
-        <section class="flow-section">
-            <h2>流程图 4：追踪与优化（复盘路径）</h2>
-            <p>不是“发完就结束”，而是基于数据做下一轮优化。</p>
-            <div class="flow-row">
-                <div class="step"><span class="num">1</span>查看访问量</div>
-                <div class="arrow"></div>
-                <div class="step"><span class="num">2</span>识别高峰时段</div>
-                <div class="arrow"></div>
-                <div class="step"><span class="num">3</span>优化文案与入口</div>
-                <div class="arrow"></div>
-                <div class="step"><span class="num">4</span>二次分发</div>
-            </div>
-            <div class="flow-note">如果首次打开率偏低，优先排查封面图、标题文案和分享时机。</div>
-        </section>
-
-        <div class="cta">
-            <h3>现在就把你的流程图落地到真实分享场景</h3>
-            <p>上传图片后，按以上 4 条流程逐步执行，就能兼顾体验、安全和传播效率。</p>
-            <a href="../../">立即开始使用</a>
-        </div>
-    </article>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 MaiIMG 中文博客。保留所有权利。</p>
-        </div>
-    </footer>
+    <div class="note">说明：你截图里那种“流量高峰、二次分发”等偏营销流程，已经按你的要求去掉，不再作为核心展示。</div>
+  </article>
+  <footer>© 2025 麦瓜图床（MaiIMG）</footer>
 </body>
 </html>
