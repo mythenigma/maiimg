@@ -1,383 +1,232 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中文博客 - MaiIMG | 图片分享与二维码教程</title>
-    <meta name="description" content="学习图片分享、二维码生成和照片托管的中文教程指南。MaiIMG提供完整的图片处理和分享解决方案。">
-    <meta name="keywords" content="图片分享, 二维码生成器, 照片托管, 图片上传, 相册创建, 教程, 中文">
-    <link rel="canonical" href="https://maiimg.com/blog/zh-cn/">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-    <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg">
-    
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="中文博客 - MaiIMG 图片分享教程">
-    <meta property="og:description" content="全面的中文图片分享、二维码生成和照片托管教程。">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://maiimg.com/blog/zh-cn/">
-    <meta property="og:image" content="https://maiimg.com/assets/zh-blog-banner.jpg">
-    
-    <!-- Language alternatives -->
-    <link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/">
-    <link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/">
-    <link rel="alternate" hreflang="ja" href="https://maiimg.com/blog/ja/">
-    <link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>中文博客｜麦瓜图床使用指南与案例</title>
+    <meta name="description" content="麦瓜图床（maiimg.com）中文博客：从图片上传、链接与二维码分发，到权限控制和数据复盘，提供可落地的图床实战内容。" />
+    <meta name="keywords" content="麦瓜图床, maiimg, 图片分享, 图床, 二维码, 权限控制, 图片安全, 图片工作流" />
+    <link rel="canonical" href="https://maiimg.com/blog/zh-cn/" />
+
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+    <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+
+    <meta property="og:title" content="中文博客｜麦瓜图床使用指南与案例" />
+    <meta property="og:description" content="不讲空话，专注图片分发的真实问题：如何分享更快、更稳、更可控。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://maiimg.com/blog/zh-cn/" />
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --text: #1f2937;
+            --muted: #5b6475;
+            --line: #e5eaf3;
+            --brand: #2563eb;
+            --brand-2: #0ea5e9;
+            --ok: #10b981;
+            --radius: 14px;
+            --shadow: 0 8px 24px rgba(15, 23, 42, .06);
         }
-        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.75;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .container { width: min(1120px, 92vw); margin: 0 auto; }
+
+        .hero {
+            background: radial-gradient(circle at 20% 10%, #3b82f6, #1d4ed8 45%, #1e3a8a 100%);
+            color: #fff;
+            padding: 52px 0 46px;
         }
-        
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 0;
+        .hero h1 { font-size: clamp(28px, 4vw, 42px); margin-bottom: 10px; }
+        .hero p { opacity: .92; max-width: 760px; }
+        .hero .chips { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .chip {
+            border: 1px solid rgba(255,255,255,.25);
+            background: rgba(255,255,255,.12);
+            border-radius: 999px;
+            padding: 5px 12px;
+            font-size: 13px;
         }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .language-switcher {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 8px 16px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .language-switcher select {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        
-        .language-switcher select option {
-            color: #333;
-        }
-        
-        .breadcrumb {
-            background: white;
-            padding: 15px 0;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        .breadcrumb a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-        
-        main {
-            padding: 40px 0;
-        }
-        
-        .intro {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            margin-bottom: 40px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        
-        .articles-grid {
+
+        .quick {
+            margin-top: -22px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 16px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
         }
-        
-        .article-card {
-            background: white;
-            border-radius: 12px;
+        .quick div {
+            background: #f8fbff;
+            border: 1px dashed #d8e5ff;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            color: #244c88;
+        }
+
+        main { padding: 28px 0 56px; }
+        .section-title { margin: 18px 0 14px; font-size: 24px; }
+        .section-desc { color: var(--muted); margin-bottom: 18px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            transition: .2s ease;
         }
-        
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .article-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .card:hover { transform: translateY(-2px); }
+        .thumb {
+            height: 92px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
-            color: white;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: .5px;
+            background: linear-gradient(120deg, #2563eb, #0ea5e9);
         }
-        
-        .article-content {
-            padding: 25px;
+        .card-body { padding: 16px; }
+        .card h3 { font-size: 18px; margin-bottom: 8px; line-height: 1.4; }
+        .card p { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+        .meta { font-size: 13px; color: #6b7280; }
+        .meta a { color: var(--brand); text-decoration: none; font-weight: 600; }
+
+        .callout {
+            margin-top: 24px;
+            border: 1px solid #d7f3e7;
+            background: #f1fcf7;
+            border-radius: var(--radius);
+            padding: 18px;
         }
-        
-        .article-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #1f2937;
-        }
-        
-        .article-desc {
-            color: #6b7280;
-            margin-bottom: 15px;
-        }
-        
-        .article-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.875rem;
-            color: #9ca3af;
-        }
-        
-        .read-more {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .read-more:hover {
-            text-decoration: underline;
-        }
-        
-        .categories {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        
-        .category-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .category-tag {
-            background: #f3f4f6;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            color: #4b5563;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .category-tag:hover {
-            background: #667eea;
-            color: white;
-        }
-        
+        .callout h4 { margin-bottom: 8px; color: #0f766e; }
+
         footer {
-            background: #1f2937;
-            color: white;
+            border-top: 1px solid var(--line);
+            color: #6b7280;
+            font-size: 14px;
+            padding: 20px 0 26px;
             text-align: center;
-            padding: 40px 0;
-            margin-top: 60px;
         }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-            }
-            
-            .articles-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .intro, .article-content, .categories {
-                padding: 25px;
-            }
+
+        @media (max-width: 980px) {
+            .grid { grid-template-columns: 1fr 1fr; }
+            .quick { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 700px) {
+            .grid { grid-template-columns: 1fr; }
+            .quick { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <header>
+    <header class="hero">
         <div class="container">
-            <div class="header-content">
-                <div>
-                    <h1>🇨🇳 中文博客</h1>
-                    <p>图片分享与二维码教程</p>
-                </div>
-                <div class="language-switcher">
-                    <select onchange="switchLanguage(this.value)">
-                        <option value="zh-cn">🇨🇳 中文</option>
-                        <option value="en">🇺🇸 English</option>
-                        <option value="ja">🇯🇵 日本語</option>
-                        <option value="fr">🇫🇷 Français</option>
-                        <option value="de">🇩🇪 Deutsch</option>
-                        <option value="es">🇪🇸 Español</option>
-                        <option value="it">🇮🇹 Italiano</option>
-                        <option value="ko">🇰🇷 한국어</option>
-                        <option value="pt">🇵🇹 Português</option>
-                        <option value="ru">🇷🇺 Русский</option>
-                        <option value="ar">🇸🇦 العربية</option>
-                    </select>
-                </div>
+            <h1>把图片发出去，不等于工作结束</h1>
+            <p>欢迎来到麦瓜图床中文博客。这里不堆概念，专注回答三个问题：怎么发得快、怎么管得住、怎么复盘得出结论。</p>
+            <div class="chips">
+                <span class="chip">上传与分发</span>
+                <span class="chip">权限与安全</span>
+                <span class="chip">链接 / 二维码</span>
+                <span class="chip">阅读数据复盘</span>
             </div>
         </div>
     </header>
 
-    <div class="breadcrumb">
-        <div class="container">
-            <a href="../../">MaiIMG</a> / <a href="../">博客</a> / 中文
-        </div>
+    <div class="container quick">
+        <div>📤 上传图片并生成访问页</div>
+        <div>🔒 设置访问次数 / 时效 /权限</div>
+        <div>🔗 链接与二维码多渠道分发</div>
+        <div>📈 查看访问数据并优化投放</div>
     </div>
 
     <main class="container">
-        <div class="intro">
-            <h2>欢迎来到 MaiIMG 中文博客</h2>
-            <p>发现关于图片分享、二维码生成、照片托管和数字相册创建的全面教程和指南。我们的中文博客提供详细的步骤说明、最佳实践和专家技巧，帮助您充分利用图片分享技术。</p>
-        </div>
+        <h2 class="section-title">先看这几篇（建议从这里开始）</h2>
+        <p class="section-desc">按“上手 → 安全 → 优化”的顺序，能最快理解麦瓜图床的实际用法。</p>
 
-        <div class="articles-grid">
-            <article class="article-card">
-                <div class="article-image">🧭</div>
-                <div class="article-content">
-                    <h3 class="article-title">图片分享使用流程动态图解</h3>
-                    <p class="article-desc">通过 4 张动态流程图，快速理解上传、权限设置、分发和数据复盘的完整使用流程。</p>
-                    <div class="article-meta">
-                        <span>流程指南</span>
-                        <a href="image-sharing-workflow-flowcharts" class="read-more">阅读更多 →</a>
-                    </div>
+        <section class="grid">
+            <article class="card">
+                <div class="thumb">入门</div>
+                <div class="card-body">
+                    <h3>如何生成图片分享链接</h3>
+                    <p>从上传到对外分发，讲清楚每一步怎么做，适合第一次使用。</p>
+                    <div class="meta">教程 · 5分钟 · <a href="how-to-generate-image-sharing-links">阅读文章 →</a></div>
                 </div>
             </article>
 
-            <article class="article-card">
-                <div class="article-image">🔗</div>
-                <div class="article-content">
-                    <h3 class="article-title">如何生成图片分享链接</h3>
-                    <p class="article-desc">学习如何为您的图片创建安全、可追踪的分享链接，包含访问控制和分析功能的完整指南。</p>
-                    <div class="article-meta">
-                        <span>教程</span>
-                        <a href="how-to-generate-image-sharing-links" class="read-more">阅读更多 →</a>
-                    </div>
+            <article class="card">
+                <div class="thumb" style="background:linear-gradient(120deg,#0f766e,#10b981)">安全</div>
+                <div class="card-body">
+                    <h3>图片安全与隐私指南</h3>
+                    <p>适合需要“发出去后仍可控”的团队：访问规则、限制策略与风险边界。</p>
+                    <div class="meta">安全 · 6分钟 · <a href="image-security-and-privacy-guide">阅读文章 →</a></div>
                 </div>
             </article>
 
-            <article class="article-card">
-                <div class="article-image">📸</div>
-                <div class="article-content">
-                    <h3 class="article-title">如何为图片创建二维码</h3>
-                    <p class="article-desc">学习为您的图片相册生成二维码的完整流程，包括自定义选项和最佳实践。</p>
-                    <div class="article-meta">
-                        <span>教程</span>
-                        <a href="how-to-create-qr-codes-for-images" class="read-more">阅读更多 →</a>
-                    </div>
+            <article class="card">
+                <div class="thumb" style="background:linear-gradient(120deg,#7c3aed,#a855f7)">流程</div>
+                <div class="card-body">
+                    <h3>图片分享工作流图解</h3>
+                    <p>通过流程图快速看懂“上传、设置、分发、复盘”的完整闭环。</p>
+                    <div class="meta">流程图 · 4分钟 · <a href="image-sharing-workflow-flowcharts">阅读文章 →</a></div>
                 </div>
             </article>
 
-            <article class="article-card">
-                <div class="article-image">🎯</div>
-                <div class="article-content">
-                    <h3 class="article-title">图片分享最佳实践</h3>
-                    <p class="article-desc">掌握专业图片分享的经验证策略，包含2025年的安全性、优化和用户参与方法。</p>
-                    <div class="article-meta">
-                        <span>最佳实践</span>
-                        <a href="image-sharing-best-practices" class="read-more">阅读更多 →</a>
-                    </div>
+            <article class="card">
+                <div class="thumb">实践</div>
+                <div class="card-body">
+                    <h3>图片分享最佳实践</h3>
+                    <p>不是功能清单，而是可直接执行的清单：避免无效分发与版本混乱。</p>
+                    <div class="meta">实战 · 8分钟 · <a href="image-sharing-best-practices">阅读文章 →</a></div>
                 </div>
             </article>
 
-            <article class="article-card">
-                <div class="article-image">🔒</div>
-                <div class="article-content">
-                    <h3 class="article-title">图片安全和隐私指南</h3>
-                    <p class="article-desc">完整的在线照片保护指南，包含访问控制、水印和安全分享实践。</p>
-                    <div class="article-meta">
-                        <span>安全</span>
-                        <a href="image-security-and-privacy-guide" class="read-more">阅读更多 →</a>
-                    </div>
+            <article class="card">
+                <div class="thumb" style="background:linear-gradient(120deg,#ea580c,#f59e0b)">场景</div>
+                <div class="card-body">
+                    <h3>婚礼照片分享指南</h3>
+                    <p>面向摄影师与婚庆团队，讲清楚如何高效交付、减少反复沟通。</p>
+                    <div class="meta">案例 · <a href="wedding-photo-sharing-guide">阅读文章 →</a></div>
                 </div>
             </article>
-        </div>
 
-        <div class="categories">
-            <h3>按分类浏览</h3>
-            <div class="category-list">
-                <a href="#" class="category-tag">教程</a>
-                <a href="#" class="category-tag">二维码</a>
-                <a href="#" class="category-tag">图片托管</a>
-                <a href="#" class="category-tag">照片分享</a>
-                <a href="#" class="category-tag">安全</a>
-                <a href="#" class="category-tag">分析</a>
-                <a href="#" class="category-tag">最佳实践</a>
-                <a href="#" class="category-tag">优化</a>
-            </div>
+            <article class="card">
+                <div class="thumb" style="background:linear-gradient(120deg,#334155,#475569)">案例</div>
+                <div class="card-body">
+                    <h3>房产照片分享指南</h3>
+                    <p>适合中介与营销团队：让图片触达快、信息全、后续跟进更精准。</p>
+                    <div class="meta">案例 · <a href="real-estate-photo-sharing-guide">阅读文章 →</a></div>
+                </div>
+            </article>
+        </section>
+
+        <div class="callout">
+            <h4>给第一次接触麦瓜图床的你</h4>
+            <p>你可以把它理解为“可控的图片分发工具”：不仅能发图，还能控制谁能看、能看多久、看完后留下哪些数据。先从一篇入门文章开始，10分钟就能跑通第一条流程。</p>
         </div>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2025 MaiIMG 中文博客。保留所有权利。</p>
-        </div>
+        © 2025 麦瓜图床（MaiIMG）中文博客 · https://maiimg.com
     </footer>
-
-    <script>
-        function switchLanguage(lang) {
-            window.location.href = `../${lang}/`;
-        }
-    </script>
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Blog",
-        "name": "MaiIMG 中文博客",
-        "description": "关于图片分享、二维码生成和照片托管的中文教程和指南",
-        "url": "https://maiimg.com/blog/zh-cn/",
-        "inLanguage": "zh-CN",
-        "publisher": {
-            "@type": "Organization",
-            "name": "MaiIMG",
-            "url": "https://maiimg.com"
-        }
-    }
-    </script>
 </body>
 </html>
