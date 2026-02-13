@@ -340,6 +340,24 @@
             <p class="lead text-muted mb-0" data-translate="header.subtitle">
                 Enter tracking code to view corresponding gallery access logs
             </p>
+            
+            <!-- Original Link Display (shown when gallery ID is available) -->
+            <div id="originalLinkSection" style="display: none;" class="mt-3 pt-3 border-top">
+                <div class="d-flex align-items-center justify-content-center flex-wrap gap-2">
+                    <span class="fw-semibold text-primary">
+                        <i class="fas fa-link me-1"></i>
+                        <span data-translate="gallery.originalLink">Original Link</span>:
+                    </span>
+                    <a href="#" 
+                       id="originalLinkUrl" 
+                       target="_blank" 
+                       class="btn btn-outline-primary btn-sm"
+                       style="word-break: break-all;">
+                        <i class="fas fa-external-link-alt me-1"></i>
+                        <span id="originalLinkText"></span>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- Decoder Form -->
@@ -666,6 +684,21 @@
         // Create global decoder instance
         const trackingDecoder = new ReversibleEncoder();
         
+        // Convert numeric ID to alphabetic ID for gallery URL
+        function encodeGalleryId(numericId) {
+            const identifier = numericId.toString();
+            const arr1 = identifier.split('');
+            const arrayA = [];
+            
+            arr1.forEach((digit, i) => {
+                let value = parseInt(digit);
+                if (value === 0) value = 10;
+                arrayA[i] = String.fromCharCode(64 + value); // A=1, B=2, ..., J=10
+            });
+            
+            return arrayA.join('');
+        }
+        
         function t(key, fallback = '') {
             const i18n = window.trackingI18n;
             return i18n ? i18n.t(key) : fallback;
@@ -826,10 +859,59 @@
         // Expose function to global scope for i18n system
         window.refreshDynamicTranslations = refreshDynamicTranslations;
         
+        // Update original link in header section
+        function updateOriginalLink(galleryId) {
+            if (!galleryId) return;
+            
+            const encodedId = encodeGalleryId(galleryId);
+            const galleryUrl = `https://maiimg.com/gallery/${encodedId}`;
+            const originalLinkSection = document.getElementById('originalLinkSection');
+            const originalLinkUrl = document.getElementById('originalLinkUrl');
+            const originalLinkText = document.getElementById('originalLinkText');
+            
+            if (originalLinkSection && originalLinkUrl && originalLinkText) {
+                originalLinkUrl.href = galleryUrl;
+                originalLinkText.textContent = galleryUrl;
+                originalLinkSection.style.display = 'block';
+            }
+        }
+        
+        // Try to update original link from URL if tracking code is provided
+        function updateOriginalLinkFromUrl() {
+            const trackingCode = document.getElementById('trackingCode').value.trim();
+            const originalLinkSection = document.getElementById('originalLinkSection');
+            
+            if (!trackingCode) {
+                if (originalLinkSection) {
+                    originalLinkSection.style.display = 'none';
+                }
+                return;
+            }
+            
+            try {
+                const galleryId = trackingDecoder.decode(trackingCode);
+                if (galleryId && galleryId > 0) {
+                    updateOriginalLink(galleryId);
+                } else {
+                    if (originalLinkSection) {
+                        originalLinkSection.style.display = 'none';
+                    }
+                }
+            } catch (e) {
+                // Hide original link if decode fails
+                if (originalLinkSection) {
+                    originalLinkSection.style.display = 'none';
+                }
+            }
+        }
+        
         // Display gallery information
         function displayGalleryInfo(info) {
             const galleryInfoCard = document.getElementById('galleryInfoCard');
             const galleryInfo = document.getElementById('galleryInfo');
+            
+            // Update original link in header
+            updateOriginalLink(info.auto);
             
             // Get translations
             const i18n = window.trackingI18n;
@@ -841,8 +923,28 @@
             const timesText = i18n ? i18n.t('gallery.times') : 'times';
             const secondsText = i18n ? i18n.t('gallery.seconds') : 'seconds';
             const noDescriptionText = i18n ? i18n.t('gallery.noDescription') : 'No description';
+            const originalLinkText = i18n ? i18n.t('gallery.originalLink') : 'Original Link';
+            const clickToViewText = i18n ? i18n.t('gallery.clickToView') : 'Click to view gallery';
+            
+            // Generate gallery URL
+            const encodedId = encodeGalleryId(info.auto);
+            const galleryUrl = `https://maiimg.com/gallery/${encodedId}`;
             
             galleryInfo.innerHTML = `
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <h6 class="fw-bold text-primary mb-2">
+                            <i class="fas fa-link me-1"></i>${originalLinkText}
+                        </h6>
+                        <a href="${galleryUrl}" 
+                           target="_blank" 
+                           class="btn btn-outline-primary btn-sm"
+                           title="${clickToViewText}">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            ${galleryUrl}
+                        </a>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <h6 class="fw-bold text-success">
@@ -1036,6 +1138,11 @@
                         decodeAndQuery();
                     }
                 });
+                
+                // Update original link when user types tracking code
+                trackingCodeInput.addEventListener('input', function() {
+                    updateOriginalLinkFromUrl();
+                });
             }
         }
         
@@ -1091,6 +1198,10 @@
                 document.getElementById('trackingCode').value = trackingId;
                 console.log('自动填入tracking code:', trackingId);
             }
+            
+            // Show original link if we have a decoded gallery ID from URL
+            // This will be updated after successful decode
+            updateOriginalLinkFromUrl();
         });
         
         // Gallery deletion functionality

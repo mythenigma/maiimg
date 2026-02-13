@@ -58,7 +58,9 @@ class TrackingI18n {
           unlimited: "Unlimited",
           times: "times",
           seconds: "seconds",
-          noDescription: "No description"
+          noDescription: "No description",
+          originalLink: "Original Link",
+          clickToView: "Click to view gallery"
         },
         
         // Statistics
@@ -179,7 +181,9 @@ class TrackingI18n {
           unlimited: "无限制",
           times: "次",
           seconds: "秒",
-          noDescription: "无描述"
+          noDescription: "无描述",
+          originalLink: "原链接",
+          clickToView: "点击查看图库"
         },
         
         // Statistics
@@ -300,7 +304,9 @@ class TrackingI18n {
           unlimited: "無限制",
           times: "次",
           seconds: "秒",
-          noDescription: "無描述"
+          noDescription: "無描述",
+          originalLink: "原連結",
+          clickToView: "點擊查看圖庫"
         },
         
         // Statistics
@@ -421,7 +427,9 @@ class TrackingI18n {
           unlimited: "無制限",
           times: "回",
           seconds: "秒",
-          noDescription: "説明なし"
+          noDescription: "説明なし",
+          originalLink: "元のリンク",
+          clickToView: "ギャラリーを表示するにはクリック"
         },
         
         // Statistics
@@ -517,7 +525,9 @@ class TrackingI18n {
           unlimited: "Unbegrenzt",
           times: "mal",
           seconds: "Sekunden",
-          noDescription: "Keine Beschreibung"
+          noDescription: "Keine Beschreibung",
+          originalLink: "Original-Link",
+          clickToView: "Klicken Sie, um die Galerie anzuzeigen"
         },
         
         // Statistics
@@ -613,7 +623,9 @@ class TrackingI18n {
           unlimited: "무제한",
           times: "회",
           seconds: "초",
-          noDescription: "설명 없음"
+          noDescription: "설명 없음",
+          originalLink: "원본 링크",
+          clickToView: "갤러리 보려면 클릭"
         },
         
         // Statistics
@@ -709,7 +721,9 @@ class TrackingI18n {
           unlimited: "Illimité",
           times: "fois",
           seconds: "secondes",
-          noDescription: "Aucune description"
+          noDescription: "Aucune description",
+          originalLink: "Lien Original",
+          clickToView: "Cliquez pour voir la galerie"
         },
         
         // Statistics
@@ -805,7 +819,9 @@ class TrackingI18n {
           unlimited: "Illimitato",
           times: "volte",
           seconds: "secondi",
-          noDescription: "Nessuna descrizione"
+          noDescription: "Nessuna descrizione",
+          originalLink: "Link Originale",
+          clickToView: "Clicca per visualizzare la galleria"
         },
         
         // Statistics
