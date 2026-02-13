@@ -1,11 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 180"><style>
-.box{fill:#fff;stroke:#34d399;stroke-width:2;rx:12}.t{font:16px 'Microsoft YaHei',sans-serif;fill:#1f2937}
-.arrow{stroke:#6ee7b7;stroke-width:3}.dot{fill:#059669}@keyframes mv{from{transform:translateX(0)}to{transform:translateX(210px)}}.d{animation:mv 1.6s linear infinite}
-</style>
-<rect x="20" y="40" width="180" height="90" class="box"/><text x="50" y="92" class="t">设置打开次数</text>
-<rect x="260" y="40" width="180" height="90" class="box"/><text x="298" y="92" class="t">设置有效期</text>
-<rect x="500" y="40" width="180" height="90" class="box"/><text x="542" y="92" class="t">继续分享</text>
-<rect x="740" y="40" width="180" height="90" class="box"/><text x="782" y="92" class="t">一键失效</text>
-<line x1="200" y1="85" x2="260" y2="85" class="arrow"/><line x1="440" y1="85" x2="500" y2="85" class="arrow"/><line x1="680" y1="85" x2="740" y2="85" class="arrow"/>
-<circle cx="210" cy="85" r="5" class="dot d"/><circle cx="450" cy="85" r="5" class="dot d" style="animation-delay:.4s"/><circle cx="690" cy="85" r="5" class="dot d" style="animation-delay:.8s"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid meet">
+  <style>
+    .box{fill:#fff;stroke:#86efac;stroke-width:2;rx:14}
+    .t1{font:700 22px 'Microsoft YaHei',sans-serif;fill:#14532d}
+    .t2{font:400 16px 'Microsoft YaHei',sans-serif;fill:#334155}
+    .arr{stroke:#6ee7b7;stroke-width:4;stroke-linecap:round}
+    .dot{fill:#059669}
+    @keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(165px)}}
+    .d1{animation:slide 1.9s linear infinite}
+    .d2{animation:slide 1.9s linear infinite .5s}
+    .d3{animation:slide 1.9s linear infinite 1s}
+  </style>
+  <rect width="1200" height="320" fill="#f0fdf4"/>
+  <g transform="translate(30,60)"><rect class="box" width="220" height="170"/><text class="t1" x="110" y="55" text-anchor="middle">① 设置次数</text><text class="t2" x="110" y="92" text-anchor="middle">限制打开上限</text><text class="t2" x="110" y="122" text-anchor="middle">防止无限扩散</text></g>
+  <g transform="translate(320,60)"><rect class="box" width="220" height="170"/><text class="t1" x="110" y="55" text-anchor="middle">② 设置有效期</text><text class="t2" x="110" y="92" text-anchor="middle">按活动时间控制</text><text class="t2" x="110" y="122" text-anchor="middle">过期自动失效</text></g>
+  <g transform="translate(610,60)"><rect class="box" width="220" height="170"/><text class="t1" x="110" y="55" text-anchor="middle">③ 持续分享</text><text class="t2" x="110" y="92" text-anchor="middle">链接/二维码并行</text><text class="t2" x="110" y="122" text-anchor="middle">保持统一入口</text></g>
+  <g transform="translate(900,60)"><rect class="box" width="220" height="170"/><text class="t1" x="110" y="55" text-anchor="middle">④ 一键失效</text><text class="t2" x="110" y="92" text-anchor="middle">内容过期即回收</text><text class="t2" x="110" y="122" text-anchor="middle">快速止损</text></g>
+  <line class="arr" x1="250" y1="255" x2="320" y2="255"/><line class="arr" x1="540" y1="255" x2="610" y2="255"/><line class="arr" x1="830" y1="255" x2="900" y2="255"/>
+  <circle class="dot d1" cx="255" cy="255" r="6"/><circle class="dot d2" cx="545" cy="255" r="6"/><circle class="dot d3" cx="835" cy="255" r="6"/>
 </svg>

@@ -40,30 +40,7 @@ footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
   <img src="diagram/channel-distribution-matrix.svg" alt="Distribution matrix for links and QR codes"/>
 </div>
 <h2>Animated security flow (SVG)</h2>
-<div class="svg-flow">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 170" width="100%" role="img" aria-label="Secure image sharing flow">
-  <style>
-    .box{fill:#f8fbff;stroke:#60a5fa;stroke-width:2;rx:12}
-    .t{font:15px Inter,Segoe UI,sans-serif;fill:#1f2937}
-    .a{stroke:#93c5fd;stroke-width:3}
-    .dot{fill:#2563eb}
-    @keyframes move{from{transform:translateX(0)}to{transform:translateX(205px)}}
-    .d1{animation:move 1.7s linear infinite}
-    .d2{animation:move 1.7s linear infinite .42s}
-    .d3{animation:move 1.7s linear infinite .84s}
-  </style>
-  <rect class="box" x="20" y="38" width="180" height="88"/><text class="t" x="62" y="89">Upload images</text>
-  <rect class="box" x="250" y="38" width="180" height="88"/><text class="t" x="284" y="89">Set view limits</text>
-  <rect class="box" x="480" y="38" width="180" height="88"/><text class="t" x="512" y="89">Generate link + QR</text>
-  <rect class="box" x="710" y="38" width="180" height="88"/><text class="t" x="758" y="89">Revoke anytime</text>
-  <line class="a" x1="200" y1="82" x2="250" y2="82"/>
-  <line class="a" x1="430" y1="82" x2="480" y2="82"/>
-  <line class="a" x1="660" y1="82" x2="710" y2="82"/>
-  <circle class="dot d1" cx="208" cy="82" r="5"/>
-  <circle class="dot d2" cx="438" cy="82" r="5"/>
-  <circle class="dot d3" cx="668" cy="82" r="5"/>
-</svg>
-</div>
+<div class="flow"><img src="diagram/security-control-flow.svg" alt="Secure image sharing control flow"/></div>
 <h2>How to use this in real scenarios</h2>
 <p>Use direct links for chat, email, and social posts. Use QR codes for events, posters, and printed assets. For sensitive content, set limits before distribution and revoke access when the campaign ends.</p>
 

@@ -1,14 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 180">
-<style>
-.box{fill:#fff;stroke:#60a5fa;stroke-width:2;rx:12}.t{font:16px 'Microsoft YaHei',sans-serif;fill:#1f2937}
-.arrow{stroke:#93c5fd;stroke-width:3}.dot{fill:#2563eb}
-@keyframes mv{from{transform:translateX(0)}to{transform:translateX(210px)}}
-.d1{animation:mv 1.8s linear infinite}.d2{animation:mv 1.8s linear infinite .45s}.d3{animation:mv 1.8s linear infinite .9s}
-</style>
-<rect x="20" y="40" width="180" height="90" class="box"/><text x="58" y="92" class="t">上传图片（≤25张）</text>
-<rect x="260" y="40" width="180" height="90" class="box"/><text x="308" y="92" class="t">生成分享链接</text>
-<rect x="500" y="40" width="180" height="90" class="box"/><text x="545" y="92" class="t">转为二维码</text>
-<rect x="740" y="40" width="180" height="90" class="box"/><text x="790" y="92" class="t">发给用户</text>
-<line x1="200" y1="85" x2="260" y2="85" class="arrow"/><line x1="440" y1="85" x2="500" y2="85" class="arrow"/><line x1="680" y1="85" x2="740" y2="85" class="arrow"/>
-<circle cx="210" cy="85" r="5" class="dot d1"/><circle cx="450" cy="85" r="5" class="dot d2"/><circle cx="690" cy="85" r="5" class="dot d3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid meet">
+  <style>
+    .box{fill:#fff;stroke:#94a3b8;stroke-width:2;rx:14}
+    .t1{font:700 22px 'Microsoft YaHei',sans-serif;fill:#0f172a}
+    .t2{font:400 16px 'Microsoft YaHei',sans-serif;fill:#334155}
+    .arr{stroke:#93c5fd;stroke-width:4;stroke-linecap:round}
+    .dot{fill:#2563eb}
+    @keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(165px)}}
+    .d1{animation:slide 1.9s linear infinite}
+    .d2{animation:slide 1.9s linear infinite .5s}
+    .d3{animation:slide 1.9s linear infinite 1s}
+  </style>
+  <rect width="1200" height="320" fill="#f8fafc"/>
+  <g transform="translate(30,60)">
+    <rect class="box" width="220" height="170"/>
+    <text class="t1" x="110" y="55" text-anchor="middle">① 上传图片</text>
+    <text class="t2" x="110" y="92" text-anchor="middle">单链接最多 25 张</text>
+    <text class="t2" x="110" y="122" text-anchor="middle">建议按场景分组</text>
+  </g>
+  <g transform="translate(320,60)">
+    <rect class="box" width="220" height="170"/>
+    <text class="t1" x="110" y="55" text-anchor="middle">② 生成链接</text>
+    <text class="t2" x="110" y="92" text-anchor="middle">得到可分享URL</text>
+    <text class="t2" x="110" y="122" text-anchor="middle">聊天/邮件可直接发</text>
+  </g>
+  <g transform="translate(610,60)">
+    <rect class="box" width="220" height="170"/>
+    <text class="t1" x="110" y="55" text-anchor="middle">③ 转二维码</text>
+    <text class="t2" x="110" y="92" text-anchor="middle">海报 / 名片 / 活动</text>
+    <text class="t2" x="110" y="122" text-anchor="middle">线下扫码更方便</text>
+  </g>
+  <g transform="translate(900,60)">
+    <rect class="box" width="220" height="170"/>
+    <text class="t1" x="110" y="55" text-anchor="middle">④ 发后可控</text>
+    <text class="t2" x="110" y="92" text-anchor="middle">设置打开次数/时效</text>
+    <text class="t2" x="110" y="122" text-anchor="middle">必要时一键失效</text>
+  </g>
+
+  <line class="arr" x1="250" y1="255" x2="320" y2="255"/>
+  <line class="arr" x1="540" y1="255" x2="610" y2="255"/>
+  <line class="arr" x1="830" y1="255" x2="900" y2="255"/>
+  <circle class="dot d1" cx="255" cy="255" r="6"/>
+  <circle class="dot d2" cx="545" cy="255" r="6"/>
+  <circle class="dot d3" cx="835" cy="255" r="6"/>
 </svg>
