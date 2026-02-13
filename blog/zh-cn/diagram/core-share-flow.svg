@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 180">
+<style>
+.box{fill:#fff;stroke:#60a5fa;stroke-width:2;rx:12}.t{font:16px 'Microsoft YaHei',sans-serif;fill:#1f2937}
+.arrow{stroke:#93c5fd;stroke-width:3}.dot{fill:#2563eb}
+@keyframes mv{from{transform:translateX(0)}to{transform:translateX(210px)}}
+.d1{animation:mv 1.8s linear infinite}.d2{animation:mv 1.8s linear infinite .45s}.d3{animation:mv 1.8s linear infinite .9s}
+</style>
+<rect x="20" y="40" width="180" height="90" class="box"/><text x="58" y="92" class="t">上传图片（≤25张）</text>
+<rect x="260" y="40" width="180" height="90" class="box"/><text x="308" y="92" class="t">生成分享链接</text>
+<rect x="500" y="40" width="180" height="90" class="box"/><text x="545" y="92" class="t">转为二维码</text>
+<rect x="740" y="40" width="180" height="90" class="box"/><text x="790" y="92" class="t">发给用户</text>
+<line x1="200" y1="85" x2="260" y2="85" class="arrow"/><line x1="440" y1="85" x2="500" y2="85" class="arrow"/><line x1="680" y1="85" x2="740" y2="85" class="arrow"/>
+<circle cx="210" cy="85" r="5" class="dot d1"/><circle cx="450" cy="85" r="5" class="dot d2"/><circle cx="690" cy="85" r="5" class="dot d3"/>
+</svg>

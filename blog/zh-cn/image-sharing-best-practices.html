@@ -1,62 +1,29 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>普通用户发图，怎么省心又不翻车</title>
-  <meta name="description" content="围绕麦瓜图床真实能力：一组图生成链接、转二维码、设置打开次数和一键失效，给普通用户的简明实践。" />
-  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/image-sharing-best-practices" />
-  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
-  <style>
-    :root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-    .wrap{width:min(860px,92vw);margin:0 auto}
-    .top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
-    article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-    h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
-    h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
-    .tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:12px;padding:14px 16px;margin:14px 0}
-    .flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
-    footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-  </style>
-</head>
-<body>
-  <header class="top"><div class="wrap"><a href="./">中文博客</a> / 普通用户发图，怎么省心又不翻车</div></header>
-  <article class="wrap">
-    <h1>普通用户发图，怎么省心又不翻车</h1>
-    <div class="lead">这篇不讲“商业大词”，只讲麦瓜图床最实在的能力：一组图片生成一个链接，再转二维码发出去；需要时可限制打开次数，也可一键失效。</div>
-
-    <h2>先记住工具边界</h2>
-    <ul>
-      <li>这是图片分享工具，不是复杂营销系统</li>
-      <li>一个链接最多 <strong>25 张图片</strong></li>
-      <li>核心动作：上传 → 生成链接 → 转二维码 → 分享</li>
-      <li>发出去后可继续控：设置打开次数、一键失效</li>
-    </ul>
-
-    <h2>三个最实用的习惯</h2>
-    <div class="tip"><strong>习惯1：</strong>按场景分组上传。婚礼一组、产品一组、活动一组，不要混在一起。</div>
-    <div class="tip"><strong>习惯2：</strong>先小范围测试。先发给1-2个人确认打开正常，再全量发。</div>
-    <div class="tip"><strong>习惯3：</strong>敏感内容设次数。比如只允许打开 5 次或 20 次，避免无限扩散。</div>
-
-    <h2>什么时候用“一键失效”</h2>
-    <ul>
-      <li>发错对象了</li>
-      <li>内容过期了</li>
-      <li>版本更新了，不希望旧图继续传播</li>
-      <li>活动结束后希望及时收口</li>
-    </ul>
-
-    <h2>配合流程图看，会更直观</h2>
-    <div class="flow">
-      <img src="diagram/image-upload-flow.svg" alt="图片上传流程" />
-      <img src="diagram/qr-distribution-flow.svg" alt="二维码分发流程" />
-      <img src="diagram/permission-control-flow.svg" alt="权限控制流程" />
-    </div>
-
-    <p>如果你只想要一个结论：<strong>麦瓜图床比普通图床好用的地方，不是花哨，而是“发得出去，也收得回来”。</strong></p>
-  </article>
-  <footer>© 2025 麦瓜图床（MaiIMG）</footer>
-</body>
-</html>
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>普通用户发图，怎么省心又不翻车</title><meta name="description" content="只讲麦瓜图床真实能力，不讲夸张功能。"/>
+<link rel="canonical" href="https://maiimg.com/blog/zh-cn/image-sharing-best-practices"/>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
+<style>
+:root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
+*{margin:0;padding:0;box-sizing:border-box} body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
+.wrap{width:min(900px,92vw);margin:0 auto} .top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0} .top a{color:#fff;text-decoration:none}
+article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
+h1{font-size:34px;line-height:1.35;margin-bottom:10px} h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
+.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
+.tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
+.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0} footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
+</style></head><body>
+<header class="top"><div class="wrap"><a href="./">中文博客</a> / 普通用户发图，怎么省心又不翻车</div></header>
+<article class="wrap">
+<h1>普通用户发图，怎么省心又不翻车</h1>
+<div class="lead">只讲麦瓜图床真实能力，不讲夸张功能。 麦瓜图床（maiimg.com）最核心的体验就是：<strong>一组图生成一个链接（最多25张），链接可转二维码，发出去后还能继续控制</strong>。</div>
+<h2>你真正会用到的功能</h2>
+<ul><li>上传一组图片，快速生成分享链接</li><li>把链接转成二维码，方便线下扫码</li><li>设置链接/二维码打开次数与有效期</li><li>需要时可一键失效，避免继续传播</li></ul>
+<h2>最简工作流</h2>
+<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/></div>
+<h2>发出去之后怎么控</h2>
+<div class="flow"><img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
+<div class="tip">说明：本文只保留麦瓜图床真实能力，去掉“流量高峰、二次分发”等不贴合产品现状的表述。</div>
+<h2>一句话总结</h2>
+<p>麦瓜图床比很多普通图床更好用的地方，在于它不仅“能发图”，还支持“发出去后继续控制”。</p>
+</article><footer>© 2025 麦瓜图床（MaiIMG）</footer></body></html>

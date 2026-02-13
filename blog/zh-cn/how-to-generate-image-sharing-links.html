@@ -1,99 +1,29 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>如何把一组图片分享得又快又稳（实操版）</title>
-    <meta name="description" content="从上传到分发，手把手讲清楚如何用麦瓜图床生成图片分享链接，并做好权限控制与后续追踪。" />
-    <meta name="keywords" content="麦瓜图床, 图片分享链接, 图床教程, 图片二维码, 权限控制, 分享追踪" />
-    <link rel="canonical" href="https://maiimg.com/blog/zh-cn/how-to-generate-image-sharing-links" />
-    <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
-
-    <style>
-        :root {
-            --bg:#f6f8fc; --card:#fff; --text:#1f2937; --muted:#5f6b7e; --line:#e4e9f3;
-            --brand:#2563eb; --brand2:#0ea5e9; --ok:#10b981; --warn:#f59e0b;
-        }
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-        .wrap{width:min(860px,92vw);margin:0 auto}
-        .top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}
-        .top a{color:#fff;text-decoration:none;opacity:.92}
-        .crumb{font-size:14px}
-
-        article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-        h1{font-size:34px;line-height:1.35;margin-bottom:10px}
-        .lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
-        .meta{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:#6b7280;margin-bottom:12px}
-
-        h2{font-size:24px;margin:28px 0 12px}
-        p{margin-bottom:14px}
-        ul{padding-left:20px;margin:8px 0 16px}
-        li{margin:6px 0}
-
-        .box{border:1px solid #dbeafe;background:#f8fbff;border-radius:12px;padding:14px 16px;margin:18px 0}
-        .step{border:1px solid #d1fae5;background:#f0fdf4;border-radius:12px;padding:14px 16px;margin:14px 0}
-        .step b{color:#065f46}
-
-        .flow{display:grid;gap:12px;margin:14px 0}
-        .flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff}
-
-        .cta{margin-top:24px;background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;border-radius:12px;padding:20px;text-align:center}
-        .cta a{display:inline-block;margin-top:10px;background:#fff;color:#1d4ed8;text-decoration:none;font-weight:700;padding:10px 18px;border-radius:999px}
-
-        footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-    </style>
-</head>
-<body>
-    <header class="top">
-        <div class="wrap crumb"><a href="./">中文博客</a> / 如何把一组图片分享得又快又稳</div>
-    </header>
-
-    <article class="wrap">
-        <div class="meta"><span>📅 2025-01-20</span><span>⏱️ 约 6 分钟</span><span>📂 上手指南</span></div>
-        <h1>如何把一组图片分享得又快又稳（实操版）</h1>
-        <div class="lead">很多人只是想把一组图片快速发出去：生成一个链接，再转成二维码给别人扫。麦瓜图床就是把这件事做得简单、直接，而且可控。</div>
-
-        <h2>先记住这 4 个核心点</h2>
-        <p>麦瓜图床（maiimg.com）主打的是“简单实用”：普通用户上传一组图片后，系统会生成分享链接，并可直接转成二维码。</p>
-        <ul>
-            <li>一个链接最多可放 <strong>25 张图片</strong></li>
-            <li>链接可转二维码，线上线下都能发</li>
-            <li>可设置链接/二维码的打开次数等规则</li>
-            <li>发出去后可<strong>一键失效</strong>，及时止损</li>
-        </ul>
-
-        <h2>四步跑通你的第一条分享流程</h2>
-        <div class="step"><b>步骤1：上传图片</b><br/>按主题分组上传，避免“一个链接里什么都有”。建议每组控制在同一场景，方便接收方快速理解。</div>
-        <div class="step"><b>步骤2：设置访问规则</b><br/>按敏感度设定查看次数、有效期、是否需要验证。先用“基础模板”，别一上来配太复杂。</div>
-        <div class="step"><b>步骤3：生成链接或二维码</b><br/>线上沟通用链接，线下物料/现场活动优先二维码。两者可以并行使用。</div>
-        <div class="step"><b>步骤4：发出去后做控制</b><br/>根据实际情况随时调整打开次数，必要时直接一键失效，避免继续扩散。</div>
-
-        <div class="box">
-            <strong>一个实用建议：</strong>先在你最常用的场景里跑两周（例如“客户方案图”），形成团队统一习惯后再推广到更多场景。
-        </div>
-
-        <h2>流程图（直接可给团队看）</h2>
-        <p>下面这三张图，适合直接放进内部培训文档：</p>
-        <div class="flow">
-            <img src="diagram/image-upload-flow.svg" alt="图片上传流程图" />
-            <img src="diagram/permission-control-flow.svg" alt="权限控制流程图" />
-            <img src="diagram/analytics-optimization-flow.svg" alt="数据复盘流程图" />
-        </div>
-
-        <h2>常见错误（提前避坑）</h2>
-        <ul>
-            <li>所有图片都塞进一个链接：接收方看不懂重点</li>
-            <li>权限一刀切：要么太松，要么影响正常浏览</li>
-            <li>发完不复盘：错过了优化触达节奏的机会</li>
-        </ul>
-
-        <div class="cta">
-            <div>你可以先从一个小场景开始：今天就用一组图片跑一次完整流程。</div>
-            <a href="../../">去麦瓜图床试一下</a>
-        </div>
-    </article>
-
-    <footer>© 2025 麦瓜图床（MaiIMG）</footer>
-</body>
-</html>
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>如何把一组图片快速分享出去</title><meta name="description" content="从上传到链接、二维码，再到后续控制，一次讲清楚。"/>
+<link rel="canonical" href="https://maiimg.com/blog/zh-cn/how-to-generate-image-sharing-links"/>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
+<style>
+:root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
+*{margin:0;padding:0;box-sizing:border-box} body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
+.wrap{width:min(900px,92vw);margin:0 auto} .top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0} .top a{color:#fff;text-decoration:none}
+article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
+h1{font-size:34px;line-height:1.35;margin-bottom:10px} h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
+.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
+.tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
+.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0} footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
+</style></head><body>
+<header class="top"><div class="wrap"><a href="./">中文博客</a> / 如何把一组图片快速分享出去</div></header>
+<article class="wrap">
+<h1>如何把一组图片快速分享出去</h1>
+<div class="lead">从上传到链接、二维码，再到后续控制，一次讲清楚。 麦瓜图床（maiimg.com）最核心的体验就是：<strong>一组图生成一个链接（最多25张），链接可转二维码，发出去后还能继续控制</strong>。</div>
+<h2>你真正会用到的功能</h2>
+<ul><li>上传一组图片，快速生成分享链接</li><li>把链接转成二维码，方便线下扫码</li><li>设置链接/二维码打开次数与有效期</li><li>需要时可一键失效，避免继续传播</li></ul>
+<h2>最简工作流</h2>
+<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/></div>
+<h2>发出去之后怎么控</h2>
+<div class="flow"><img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
+<div class="tip">说明：本文只保留麦瓜图床真实能力，去掉“流量高峰、二次分发”等不贴合产品现状的表述。</div>
+<h2>一句话总结</h2>
+<p>麦瓜图床比很多普通图床更好用的地方，在于它不仅“能发图”，还支持“发出去后继续控制”。</p>
+</article><footer>© 2025 麦瓜图床（MaiIMG）</footer></body></html>
