@@ -233,7 +233,24 @@
                 padding: 25px;
             }
         }
-    </style>
+    
+@media (max-width: 900px){
+  .wrap{width:min(96vw, 96vw)}
+  article{padding:20px}
+}
+@media (max-width: 640px){
+  body{line-height:1.65}
+  .top{padding:14px 0}
+  article{margin:14px auto 28px;padding:16px;border-radius:12px}
+  h1{font-size:28px;line-height:1.28}
+  h2{font-size:20px;margin:20px 0 10px}
+  p,li{font-size:16px}
+  ul{padding-left:18px}
+  .lead,.tip{padding:12px}
+  .flow img{margin:8px 0;border-radius:8px}
+}
+
+</style>
 </head>
 <body>
     <header>

@@ -17,8 +17,25 @@ article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line
 h1{font-size:36px;line-height:1.3;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
 h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
 .tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
-.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
+.flow img{max-width:100%;width:100%;height:auto;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
 footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
+
+@media (max-width: 900px){
+  .wrap{width:min(96vw, 96vw)}
+  article{padding:20px}
+}
+@media (max-width: 640px){
+  body{line-height:1.65}
+  .top{padding:14px 0}
+  article{margin:14px auto 28px;padding:16px;border-radius:12px}
+  h1{font-size:28px;line-height:1.28}
+  h2{font-size:20px;margin:20px 0 10px}
+  p,li{font-size:16px}
+  ul{padding-left:18px}
+  .lead,.tip{padding:12px}
+  .flow img{margin:8px 0;border-radius:8px}
+}
+
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How To Create Online Photo Albums Complete Guide","description":"A practical, no-hype guide for how to create online photo albums complete guide using MaiIMG's real workflow: one link for up to 25 images, QR sharing, view limits, and revoke access.","inLanguage":"en","mainEntityOfPage":"https://maiimg.com/blog/en/how-to-create-online-photo-albums-complete-guide"}</script>
 </head><body>
