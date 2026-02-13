@@ -1,19 +1,17 @@
 <!DOCTYPE html><html lang="zh-CN"><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>图片分享的隐私与安全设置｜麦瓜图床指南</title>
-<meta name="description" content="从打开次数、有效期到一键失效，整理麦瓜图床在图片分享时可用的安全控制方法与避坑建议。"/>
-<meta name="keywords" content="图片分享安全,图床隐私,麦瓜图床,链接失效,打开次数"/>
+<meta name="description" content="围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。"/>
+<meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效"/>
 <link rel="canonical" href="https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide"/>
-<meta property="og:type" content="article"/>
-<meta property="og:title" content="图片分享的隐私与安全设置｜麦瓜图床指南"/>
-<meta property="og:description" content="从打开次数、有效期到一键失效，整理麦瓜图床在图片分享时可用的安全控制方法与避坑建议。"/>
-<meta property="og:url" content="https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide"/>
+<meta property="og:type" content="article"/><meta property="og:title" content="图片分享的隐私与安全设置｜麦瓜图床指南"/>
+<meta property="og:description" content="围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。"/><meta property="og:url" content="https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide"/>
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
 <style>
 :root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-.wrap{width:min(920px,92vw);margin:0 auto}
+.wrap{width:min(940px,92vw);margin:0 auto}
 .top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
 article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
 h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
@@ -24,27 +22,30 @@ h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px
 footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
 @media (max-width:760px){.shots{grid-template-columns:1fr} h1{font-size:28px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"图片分享的隐私与安全设置：别让链接失控","description":"从打开次数、有效期到一键失效，整理麦瓜图床在图片分享时可用的安全控制方法与避坑建议。","inLanguage":"zh-CN","mainEntityOfPage":"https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"图片分享的隐私与安全设置：别让链接失控","description":"围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。","inLanguage":"zh-CN","mainEntityOfPage":"https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide"}</script>
 </head><body>
 <header class="top"><div class="wrap"><a href="./">中文博客</a> / 图片分享的隐私与安全设置：别让链接失控</div></header>
 <article class="wrap">
 <h1>图片分享的隐私与安全设置：别让链接失控</h1>
-<div class="lead">从打开次数、有效期到一键失效，整理麦瓜图床在图片分享时可用的安全控制方法与避坑建议。</div>
-
-<h2>核心能力（真实可用）</h2>
+<div class="lead">围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。</div>
+<h2>核心功能（真实可用）</h2>
 <ul>
 <li>一组图片生成一个分享链接（最多 25 张）</li>
-<li>链接可转二维码，便于线上线下分享</li>
-<li>可设置链接/二维码打开次数与有效期</li>
+<li>链接可转二维码，线上线下都能发</li>
+<li>可设置链接/二维码打开次数和有效期</li>
 <li>发出去后可一键失效，停止继续访问</li>
 </ul>
-<h2>真实界面截图（中文）</h2>
+<h2>操作流程图（SVG）</h2>
+<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/>
+<img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
+<h2>中文界面截图</h2>
 <div class="shots">
-  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页上传入口"/><p>首页入口：上传并开始生成</p></div>
-  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成链接和二维码结果页"/><p>生成结果：得到链接与二维码</p></div>
-  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数界面"/><p>控制设置：打开次数与有效期</p></div>
-  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片使链接失效"/><p>回收能力：一键失效</p></div>
+  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页"/><p>首页入口：开始上传</p></div>
+  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成结果页面"/><p>生成结果：链接 + 二维码</p></div>
+  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数"/><p>控制设置：打开次数与有效期</p></div>
+  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片"/><p>一键失效：停止继续访问</p></div>
 </div>
-<h2>安全建议</h2><p>敏感素材默认开启次数限制并设置有效期；项目结束后执行一键失效，避免旧内容长期暴露。</p><div class="tip">说明：本文已去除不贴合现状的夸张描述，仅保留麦瓜图床当前能力。</div>
-<h2>一句话总结</h2><p>麦瓜图床比很多普通图床更好用的地方，在于它不仅能发图，还能在发出去后继续做控制。</p>
+<div class="tip">提示：本文已去除夸张和不贴合现状的描述，全部围绕麦瓜图床当前能力编写。</div>
+<h2>一句话总结</h2>
+<p>麦瓜图床比普通图床更实用的地方在于：不只“能发图”，还能“发出去后继续控制”。</p>
 </article><footer>© 2025 麦瓜图床（MaiIMG）</footer></body></html>
