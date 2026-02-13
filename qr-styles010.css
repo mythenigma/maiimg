@@ -1967,10 +1967,11 @@ footer {
   margin: 0.45rem 0;
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 0.6rem;
+  row-gap: 0.5rem;
   align-items: center;
-  gap: 0.6rem;
 }
 
 .tracking-code-display::before {
@@ -1991,6 +1992,7 @@ footer {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   flex: 0 0 100%;
+  grid-column: 1 / -1;
 }
 
 .tracking-code-row {
@@ -1999,6 +2001,7 @@ footer {
   gap: 0.75rem;
   flex-wrap: wrap;
   flex: 0 0 100%;
+  grid-column: 1 / -1;
 }
 
 /* Tracking Info Compact Styles */
@@ -2038,6 +2041,7 @@ footer {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   position: relative;
   flex: 1 1 220px;
+  grid-column: 1;
 }
 
 .tracking-copy-btn {
@@ -2049,6 +2053,8 @@ footer {
   margin-top: 0 !important;
   white-space: nowrap;
   flex: 0 0 auto;
+  grid-column: 2;
+  justify-self: end;
 }
 
 .tracking-code-value::before {
