@@ -6,8 +6,8 @@ class TrackingI18n {
       en: {
         // Page title and meta
         page: {
-          title: "Tracking Code Decoder - Gallery Access Logs",
-          description: "Enter tracking code to view corresponding gallery access logs"
+          title: "Access Record Decoder - Gallery Access Logs",
+          description: "Decode access record code to view gallery access logs"
         },
         
         // Language options
@@ -24,20 +24,20 @@ class TrackingI18n {
         
         // Header section
         header: {
-          title: "Tracking Code Decoder",
-          subtitle: "Enter tracking code to view corresponding gallery access logs"
+          title: "Access Record Decoder",
+          subtitle: ""
         },
         
         // Decoder form
         decoder: {
-          title: "Decode Tracking Code",
-          trackingCodeLabel: "Tracking Code",
-          trackingCodePlaceholder: "Enter complex encoded tracking code (e.g., XgaLrs)",
+          title: "Decode Access Record",
+          trackingCodeLabel: "Access Record Code",
+          trackingCodePlaceholder: "Enter complex encoded access record code (e.g., XgaLrs)",
           trackingCodeHelp: "This is the complex encoded string obtained from QR generation results",
           decodeButton: "Decode & Query",
           decoding: "Decoding...",
           decodeResultTitle: "Decode Result",
-          originalCode: "Original Tracking Code:",
+          originalCode: "Original Access Record Code:",
           decodedId: "Decoded Gallery ID:"
         },
         
@@ -58,7 +58,9 @@ class TrackingI18n {
           unlimited: "Unlimited",
           times: "times",
           seconds: "seconds",
-          noDescription: "No description"
+          noDescription: "No description",
+          originalLink: "Original Link",
+          clickToView: "Click to view gallery"
         },
         
         // Statistics
@@ -84,8 +86,8 @@ class TrackingI18n {
         // Error messages
         errors: {
           title: "Query Failed",
-          enterCode: "Please enter tracking code",
-          invalidCode: "Invalid tracking code or decode failed",
+          enterCode: "Please enter access record code",
+          invalidCode: "Invalid access record code or decode failed",
           apiError: "API request failed",
           queryFailed: "Failed to query access logs",
           checksumFailed: "Checksum verification failed",
@@ -127,8 +129,8 @@ class TrackingI18n {
       zh: {
         // Page title and meta
         page: {
-          title: "追踪代码解码器 - 图库访问日志",
-          description: "输入追踪代码查看对应的图库访问日志"
+          title: "访问记录解码器 - 图库访问日志",
+          description: "解码访问记录码查看图库访问日志"
         },
         
         // Language options
@@ -145,20 +147,20 @@ class TrackingI18n {
         
         // Header section
         header: {
-          title: "追踪代码解码器",
-          subtitle: "输入追踪代码查看对应的图库访问日志"
+          title: "访问记录解码器",
+          subtitle: ""
         },
         
         // Decoder form
         decoder: {
-          title: "解码追踪代码",
-          trackingCodeLabel: "追踪代码",
-          trackingCodePlaceholder: "输入复杂编码的追踪代码（例如：XgaLrs）",
+          title: "解码访问记录",
+          trackingCodeLabel: "访问记录码",
+          trackingCodePlaceholder: "输入复杂编码的访问记录码（例如：XgaLrs）",
           trackingCodeHelp: "这是从二维码生成结果获得的复杂编码字符串",
           decodeButton: "解码并查询",
           decoding: "解码中...",
           decodeResultTitle: "解码结果",
-          originalCode: "原始追踪代码：",
+          originalCode: "原始访问记录码：",
           decodedId: "解码后的图库ID："
         },
         
@@ -179,7 +181,9 @@ class TrackingI18n {
           unlimited: "无限制",
           times: "次",
           seconds: "秒",
-          noDescription: "无描述"
+          noDescription: "无描述",
+          originalLink: "原链接",
+          clickToView: "点击查看图库"
         },
         
         // Statistics
@@ -205,8 +209,8 @@ class TrackingI18n {
         // Error messages
         errors: {
           title: "查询失败",
-          enterCode: "请输入追踪代码",
-          invalidCode: "无效的追踪代码或解码失败",
+          enterCode: "请输入访问记录码",
+          invalidCode: "无效的访问记录码或解码失败",
           apiError: "API请求失败",
           queryFailed: "查询访问日志失败",
           checksumFailed: "校验和验证失败",
@@ -248,8 +252,8 @@ class TrackingI18n {
       tw: {
         // Page title and meta
         page: {
-          title: "追蹤代碼解碼器 - 圖庫存取日誌",
-          description: "輸入追蹤代碼檢視對應的圖庫存取日誌"
+          title: "存取記錄解碼器 - 圖庫存取日誌",
+          description: "解碼存取記錄碼檢視圖庫存取日誌"
         },
         
         // Language options
@@ -266,20 +270,20 @@ class TrackingI18n {
         
         // Header section
         header: {
-          title: "追蹤代碼解碼器",
-          subtitle: "輸入追蹤代碼檢視對應的圖庫存取日誌"
+          title: "存取記錄解碼器",
+          subtitle: ""
         },
         
         // Decoder form
         decoder: {
-          title: "解碼追蹤代碼",
-          trackingCodeLabel: "追蹤代碼",
-          trackingCodePlaceholder: "輸入複雜編碼的追蹤代碼（例如：XgaLrs）",
+          title: "解碼存取記錄",
+          trackingCodeLabel: "存取記錄碼",
+          trackingCodePlaceholder: "輸入複雜編碼的存取記錄碼（例如：XgaLrs）",
           trackingCodeHelp: "這是從二維碼生成結果獲得的複雜編碼字串",
           decodeButton: "解碼並查詢",
           decoding: "解碼中...",
           decodeResultTitle: "解碼結果",
-          originalCode: "原始追蹤代碼：",
+          originalCode: "原始存取記錄碼：",
           decodedId: "解碼後的圖庫ID："
         },
         
@@ -300,7 +304,9 @@ class TrackingI18n {
           unlimited: "無限制",
           times: "次",
           seconds: "秒",
-          noDescription: "無描述"
+          noDescription: "無描述",
+          originalLink: "原連結",
+          clickToView: "點擊查看圖庫"
         },
         
         // Statistics
@@ -326,8 +332,8 @@ class TrackingI18n {
         // Error messages
         errors: {
           title: "查詢失敗",
-          enterCode: "請輸入追蹤代碼",
-          invalidCode: "無效的追蹤代碼或解碼失敗",
+          enterCode: "請輸入存取記錄碼",
+          invalidCode: "無效的存取記錄碼或解碼失敗",
           apiError: "API請求失敗",
           queryFailed: "查詢存取日誌失敗",
           checksumFailed: "校驗和驗證失敗",
@@ -421,7 +427,9 @@ class TrackingI18n {
           unlimited: "無制限",
           times: "回",
           seconds: "秒",
-          noDescription: "説明なし"
+          noDescription: "説明なし",
+          originalLink: "元のリンク",
+          clickToView: "ギャラリーを表示するにはクリック"
         },
         
         // Statistics
@@ -517,7 +525,9 @@ class TrackingI18n {
           unlimited: "Unbegrenzt",
           times: "mal",
           seconds: "Sekunden",
-          noDescription: "Keine Beschreibung"
+          noDescription: "Keine Beschreibung",
+          originalLink: "Original-Link",
+          clickToView: "Klicken Sie, um die Galerie anzuzeigen"
         },
         
         // Statistics
@@ -613,7 +623,9 @@ class TrackingI18n {
           unlimited: "무제한",
           times: "회",
           seconds: "초",
-          noDescription: "설명 없음"
+          noDescription: "설명 없음",
+          originalLink: "원본 링크",
+          clickToView: "갤러리 보려면 클릭"
         },
         
         // Statistics
@@ -709,7 +721,9 @@ class TrackingI18n {
           unlimited: "Illimité",
           times: "fois",
           seconds: "secondes",
-          noDescription: "Aucune description"
+          noDescription: "Aucune description",
+          originalLink: "Lien Original",
+          clickToView: "Cliquez pour voir la galerie"
         },
         
         // Statistics
@@ -805,7 +819,9 @@ class TrackingI18n {
           unlimited: "Illimitato",
           times: "volte",
           seconds: "secondi",
-          noDescription: "Nessuna descrizione"
+          noDescription: "Nessuna descrizione",
+          originalLink: "Link Originale",
+          clickToView: "Clicca per visualizzare la galleria"
         },
         
         // Statistics
