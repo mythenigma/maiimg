@@ -1967,6 +1967,10 @@ footer {
   margin: 0.45rem 0;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .tracking-code-display::before {
@@ -1986,6 +1990,7 @@ footer {
   margin-bottom: 0.4rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  flex: 0 0 100%;
 }
 
 .tracking-code-row {
@@ -1993,6 +1998,7 @@ footer {
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+  flex: 0 0 100%;
 }
 
 /* Tracking Info Compact Styles */
@@ -2035,6 +2041,12 @@ footer {
 }
 
 .tracking-copy-btn {
+  white-space: nowrap;
+  flex: 0 0 auto;
+}
+
+.tracking-code-display .btn {
+  margin-top: 0 !important;
   white-space: nowrap;
   flex: 0 0 auto;
 }
