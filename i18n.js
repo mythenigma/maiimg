@@ -1319,7 +1319,15 @@ class I18n {
 
   // Get stored language from localStorage
   getStoredLanguage() {
-    return localStorage.getItem('preferredLanguage');
+    const stored = localStorage.getItem('preferredLanguage') || localStorage.getItem('preferred-language');
+    if (!stored) return null;
+    const normalized = String(stored).toLowerCase();
+    if (normalized === 'zh-cn' || normalized === 'zh') return 'zh';
+    if (normalized === 'zh-tw' || normalized === 'tw') return 'tw';
+    if (normalized === 'ja' || normalized === 'de' || normalized === 'ko' || normalized === 'fr' || normalized === 'it' || normalized === 'en') {
+      return normalized;
+    }
+    return null;
   }
 
   // Store language preference
@@ -1336,17 +1344,25 @@ class I18n {
   // Get translation for a key
   t(key) {
     const keys = key.split('.');
-    let value = this.translations[this.currentLanguage];
-    
-    for (const k of keys) {
-      if (value && typeof value === 'object') {
-        value = value[k];
-      } else {
-        return key; // Return key if translation not found
+    const resolve = (source) => {
+      let value = source;
+      for (const k of keys) {
+        if (value && typeof value === 'object') {
+          value = value[k];
+        } else {
+          return null;
+        }
       }
-    }
-    
-    return value || key;
+      return typeof value === 'string' && value.length > 0 ? value : null;
+    };
+
+    const current = resolve(this.translations[this.currentLanguage]);
+    if (current) return current;
+
+    const fallback = resolve(this.translations.en);
+    if (fallback) return fallback;
+
+    return key;
   }
 
   // Change language
