@@ -32,7 +32,7 @@ class I18n {
           title: "Image Upload Center",
           subtitle: "Drag & drop your images or click to browse",
           dropText: "Drop images here or click to upload",
-          supportText: "Supports: PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 25 files",
+          supportText: "Supports: PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 9 files",
           ready: "Ready to upload images"
         },
         
@@ -54,6 +54,27 @@ class I18n {
             title: "Time Control",
             placeholder: "Seconds per view (required)",
             description: "Enter viewing duration in seconds"
+          },
+          accessControl: {
+            title: "Access Control",
+            description: "Set both view limit and per-view duration in one panel"
+          },
+          expiration: {
+            title: "Expiration",
+            select: "Select expiration",
+            option1h: "1 hour",
+            option3h: "3 hours",
+            option24h: "24 hours",
+            option5d: "5 days",
+            custom: "Custom days",
+            customPlaceholder: "Custom days",
+            unlimited: "Unlimited",
+            timezonePlaceholder: "Time zone",
+            utcUnlimited: "UTC expiry time: Unlimited",
+            utcNone: "UTC expiry time: -",
+            utcPrefix: "UTC expiry time",
+            localNone: "Local time: -",
+            localPrefix: "Local time"
           },
           description: {
             title: "Description",
@@ -84,7 +105,8 @@ class I18n {
           stats: {
             images: "Images",
             views: "Views",
-            seconds: "Seconds"
+            seconds: "Seconds",
+            expiration: "Expiration"
           },
           shareLink: "Share Link",
           qrCode: "QR Code",
@@ -148,7 +170,7 @@ class I18n {
       zh: {
         // Navigation
         nav: {
-          title: "麦瓜二维码"
+          title: "图片二维码生成器"
         },
         
         // Language options
@@ -174,7 +196,7 @@ class I18n {
           title: "图片上传中心",
           subtitle: "拖放您的图片或点击浏览",
           dropText: "将图片拖放到此处或点击上传",
-          supportText: "支持格式：PNG、JPG、JPEG、GIF、WebP • 每个文件最大50MB • 最多25个文件",
+          supportText: "支持格式：PNG、JPG、JPEG、GIF、WebP • 每个文件最大50MB • 最多9个文件",
           ready: "准备上传图片"
         },
         
@@ -196,6 +218,27 @@ class I18n {
             title: "时间控制",
             placeholder: "每次查看秒数（必填）",
             description: "输入查看持续时间（秒）"
+          },
+          accessControl: {
+            title: "访问控制",
+            description: "在同一面板中设置查看次数和每次查看时长"
+          },
+          expiration: {
+            title: "过期时间",
+            select: "选择过期时间",
+            option1h: "1小时",
+            option3h: "3小时",
+            option24h: "24小时",
+            option5d: "5天",
+            custom: "自定义天数",
+            customPlaceholder: "自定义天数",
+            unlimited: "不限",
+            timezonePlaceholder: "时区",
+            utcUnlimited: "UTC 过期时间：不限",
+            utcNone: "UTC 过期时间：-",
+            utcPrefix: "UTC 过期时间",
+            localNone: "本地时间：-",
+            localPrefix: "本地时间"
           },
           description: {
             title: "描述",
@@ -226,7 +269,8 @@ class I18n {
           stats: {
             images: "图片",
             views: "查看",
-            seconds: "秒"
+            seconds: "秒",
+            expiration: "过期"
           },
           shareLink: "分享链接",
           qrCode: "二维码",
@@ -290,7 +334,7 @@ class I18n {
       tw: {
         // Navigation
         nav: {
-          title: "麥瓜二維碼"
+          title: "圖片二維碼生成器"
         },
         
         // Language options
@@ -316,7 +360,7 @@ class I18n {
           title: "圖片上傳中心",
           subtitle: "拖放您的圖片或點擊瀏覽",
           dropText: "將圖片拖放到此處或點擊上傳",
-          supportText: "支援格式：PNG、JPG、JPEG、GIF、WebP • 每個檔案最大50MB • 最多25個檔案",
+          supportText: "支援格式：PNG、JPG、JPEG、GIF、WebP • 每個檔案最大50MB • 最多9個檔案",
           ready: "準備上傳圖片"
         },
         
@@ -338,6 +382,27 @@ class I18n {
             title: "時間控制",
             placeholder: "每次檢視秒數（必填）",
             description: "輸入檢視持續時間（秒）"
+          },
+          accessControl: {
+            title: "存取控制",
+            description: "在同一面板中設定檢視次數與每次檢視時長"
+          },
+          expiration: {
+            title: "到期時間",
+            select: "選擇到期時間",
+            option1h: "1小時",
+            option3h: "3小時",
+            option24h: "24小時",
+            option5d: "5天",
+            custom: "自訂天數",
+            customPlaceholder: "自訂天數",
+            unlimited: "不限",
+            timezonePlaceholder: "時區",
+            utcUnlimited: "UTC 到期時間：不限",
+            utcNone: "UTC 到期時間：-",
+            utcPrefix: "UTC 到期時間",
+            localNone: "本地時間：-",
+            localPrefix: "本地時間"
           },
           description: {
             title: "描述",
@@ -368,7 +433,8 @@ class I18n {
           stats: {
             images: "圖片",
             views: "檢視",
-            seconds: "秒"
+            seconds: "秒",
+            expiration: "到期"
           },
           shareLink: "分享連結",
           qrCode: "二維碼",
@@ -458,7 +524,7 @@ class I18n {
           title: "画像アップロードセンター",
           subtitle: "画像をドラッグ&ドロップするかクリックして参照",
           dropText: "ここに画像をドロップするかクリックしてアップロード",
-          supportText: "対応形式：PNG、JPG、JPEG、GIF、WebP • 最大50MB • 最大25ファイル",
+          supportText: "対応形式：PNG、JPG、JPEG、GIF、WebP • 最大50MB • 最大9ファイル",
           ready: "画像のアップロード準備完了"
         },
         
@@ -480,6 +546,27 @@ class I18n {
             title: "時間制御",
             placeholder: "表示時間（秒）（必須）",
             description: "表示継続時間（秒）を入力"
+          },
+          accessControl: {
+            title: "アクセス制御",
+            description: "同じパネルで表示回数と表示秒数を設定"
+          },
+          expiration: {
+            title: "有効期限",
+            select: "有効期限を選択",
+            option1h: "1時間",
+            option3h: "3時間",
+            option24h: "24時間",
+            option5d: "5日",
+            custom: "カスタム日数",
+            customPlaceholder: "カスタム日数",
+            unlimited: "無制限",
+            timezonePlaceholder: "タイムゾーン",
+            utcUnlimited: "UTC有効期限: 無制限",
+            utcNone: "UTC有効期限: -",
+            utcPrefix: "UTC有効期限",
+            localNone: "ローカル時間: -",
+            localPrefix: "ローカル時間"
           },
           description: {
             title: "説明",
@@ -510,7 +597,8 @@ class I18n {
           stats: {
             images: "画像",
             views: "表示",
-            seconds: "秒"
+            seconds: "秒",
+            expiration: "有効期限"
           },
           shareLink: "共有リンク",
           qrCode: "QRコード",
@@ -600,7 +688,7 @@ class I18n {
           title: "Bild-Upload-Center",
           subtitle: "Ziehen Sie Ihre Bilder hierher oder klicken Sie zum Durchsuchen",
           dropText: "Bilder hier ablegen oder zum Hochladen klicken",
-          supportText: "Unterstützt: PNG, JPG, JPEG, GIF, WebP • Max. 50MB je Datei • Bis zu 25 Dateien",
+          supportText: "Unterstützt: PNG, JPG, JPEG, GIF, WebP • Max. 50MB je Datei • Bis zu 9 Dateien",
           ready: "Bereit zum Hochladen von Bildern"
         },
         
@@ -622,6 +710,27 @@ class I18n {
             title: "Zeitsteuerung",
             placeholder: "Sekunden pro Aufruf (erforderlich)",
             description: "Anzeigedauer in Sekunden eingeben"
+          },
+          accessControl: {
+            title: "Zugriffskontrolle",
+            description: "Ansichtslimit und Anzeigedauer in einem Bereich festlegen"
+          },
+          expiration: {
+            title: "Ablaufzeit",
+            select: "Ablaufzeit wählen",
+            option1h: "1 Stunde",
+            option3h: "3 Stunden",
+            option24h: "24 Stunden",
+            option5d: "5 Tage",
+            custom: "Benutzerdefinierte Tage",
+            customPlaceholder: "Benutzerdefinierte Tage",
+            unlimited: "Unbegrenzt",
+            timezonePlaceholder: "Zeitzone",
+            utcUnlimited: "UTC-Ablaufzeit: Unbegrenzt",
+            utcNone: "UTC-Ablaufzeit: -",
+            utcPrefix: "UTC-Ablaufzeit",
+            localNone: "Lokale Zeit: -",
+            localPrefix: "Lokale Zeit"
           },
           description: {
             title: "Beschreibung",
@@ -652,7 +761,8 @@ class I18n {
           stats: {
             images: "Bilder",
             views: "Aufrufe",
-            seconds: "Sekunden"
+            seconds: "Sekunden",
+            expiration: "Ablauf"
           },
           shareLink: "Link teilen",
           qrCode: "QR-Code",
@@ -742,7 +852,7 @@ class I18n {
           title: "이미지 업로드 센터",
           subtitle: "이미지를 드래그 앤 드롭하거나 클릭하여 찾아보기",
           dropText: "여기에 이미지를 드롭하거나 클릭하여 업로드",
-          supportText: "지원 형식: PNG, JPG, JPEG, GIF, WebP • 파일당 최대 50MB • 최대 25개 파일",
+          supportText: "지원 형식: PNG, JPG, JPEG, GIF, WebP • 파일당 최대 50MB • 최대 9개 파일",
           ready: "이미지 업로드 준비 완료"
         },
         
@@ -764,6 +874,27 @@ class I18n {
             title: "시간 제어",
             placeholder: "조회당 초 (필수)",
             description: "조회 지속 시간(초)을 입력하세요"
+          },
+          accessControl: {
+            title: "접근 제어",
+            description: "한 패널에서 조회 수와 조회 시간을 함께 설정"
+          },
+          expiration: {
+            title: "만료 시간",
+            select: "만료 시간 선택",
+            option1h: "1시간",
+            option3h: "3시간",
+            option24h: "24시간",
+            option5d: "5일",
+            custom: "사용자 지정 일수",
+            customPlaceholder: "사용자 지정 일수",
+            unlimited: "무제한",
+            timezonePlaceholder: "시간대",
+            utcUnlimited: "UTC 만료 시간: 무제한",
+            utcNone: "UTC 만료 시간: -",
+            utcPrefix: "UTC 만료 시간",
+            localNone: "로컬 시간: -",
+            localPrefix: "로컬 시간"
           },
           description: {
             title: "설명",
@@ -794,7 +925,8 @@ class I18n {
           stats: {
             images: "이미지",
             views: "조회",
-            seconds: "초"
+            seconds: "초",
+            expiration: "만료"
           },
           shareLink: "링크 공유",
           qrCode: "QR 코드",
@@ -884,7 +1016,7 @@ class I18n {
           title: "Centre de Téléchargement d'Images",
           subtitle: "Glissez-déposez vos images ou cliquez pour parcourir",
           dropText: "Déposez les images ici ou cliquez pour télécharger",
-          supportText: "Formats supportés : PNG, JPG, JPEG, GIF, WebP • Max 50MB chacun • Jusqu'à 25 fichiers",
+          supportText: "Formats supportés : PNG, JPG, JPEG, GIF, WebP • Max 50MB chacun • Jusqu'à 9 fichiers",
           ready: "Prêt à télécharger des images"
         },
         
@@ -906,6 +1038,27 @@ class I18n {
             title: "Contrôle du Temps",
             placeholder: "Secondes par vue (requis)",
             description: "Entrez la durée de visualisation en secondes"
+          },
+          accessControl: {
+            title: "Contrôle d'accès",
+            description: "Définissez limite de vues et durée par vue dans le même panneau"
+          },
+          expiration: {
+            title: "Expiration",
+            select: "Choisir l'expiration",
+            option1h: "1 heure",
+            option3h: "3 heures",
+            option24h: "24 heures",
+            option5d: "5 jours",
+            custom: "Jours personnalisés",
+            customPlaceholder: "Jours personnalisés",
+            unlimited: "Illimité",
+            timezonePlaceholder: "Fuseau horaire",
+            utcUnlimited: "Heure d'expiration UTC : Illimitée",
+            utcNone: "Heure d'expiration UTC : -",
+            utcPrefix: "Heure d'expiration UTC",
+            localNone: "Heure locale : -",
+            localPrefix: "Heure locale"
           },
           description: {
             title: "Description",
@@ -936,7 +1089,8 @@ class I18n {
           stats: {
             images: "Images",
             views: "Vues",
-            seconds: "Secondes"
+            seconds: "Secondes",
+            expiration: "Expiration"
           },
           shareLink: "Lien de Partage",
           qrCode: "Code QR",
@@ -1026,7 +1180,7 @@ class I18n {
           title: "Centro di Caricamento Immagini",
           subtitle: "Trascina e rilascia le tue immagini o clicca per sfogliare",
           dropText: "Rilascia le immagini qui o clicca per caricare",
-          supportText: "Supporta: PNG, JPG, JPEG, GIF, WebP • Max 50MB ciascuno • Fino a 25 file",
+          supportText: "Supporta: PNG, JPG, JPEG, GIF, WebP • Max 50MB ciascuno • Fino a 9 file",
           ready: "Pronto per caricare immagini"
         },
         
@@ -1048,6 +1202,27 @@ class I18n {
             title: "Controllo del Tempo",
             placeholder: "Secondi per visualizzazione (richiesto)",
             description: "Inserisci la durata di visualizzazione in secondi"
+          },
+          accessControl: {
+            title: "Controllo accesso",
+            description: "Imposta limite visualizzazioni e durata per vista nello stesso pannello"
+          },
+          expiration: {
+            title: "Scadenza",
+            select: "Seleziona scadenza",
+            option1h: "1 ora",
+            option3h: "3 ore",
+            option24h: "24 ore",
+            option5d: "5 giorni",
+            custom: "Giorni personalizzati",
+            customPlaceholder: "Giorni personalizzati",
+            unlimited: "Illimitato",
+            timezonePlaceholder: "Fuso orario",
+            utcUnlimited: "Scadenza UTC: Illimitata",
+            utcNone: "Scadenza UTC: -",
+            utcPrefix: "Scadenza UTC",
+            localNone: "Ora locale: -",
+            localPrefix: "Ora locale"
           },
           description: {
             title: "Descrizione",
@@ -1078,7 +1253,8 @@ class I18n {
           stats: {
             images: "Immagini",
             views: "Visualizzazioni",
-            seconds: "Secondi"
+            seconds: "Secondi",
+            expiration: "Scadenza"
           },
           shareLink: "Link di Condivisione",
           qrCode: "Codice QR",

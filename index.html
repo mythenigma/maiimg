@@ -179,27 +179,40 @@
     <section class="config-section" id="config">
       <div class="feature-cards">
         <div class="feature-card">
-          <i class="fas fa-eye feature-icon"></i>
-          <h5 class="feature-title" data-translate="features.viewLimit.title">View Limit</h5>
-          <input class="form-control" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="Max views (required)" min="1" max="99999999" required>
-          <small class="text-muted" data-translate="features.viewLimit.description">Enter max number of views</small>
-        </div>
-        
-        <div class="feature-card">
-          <i class="fas fa-clock feature-icon"></i>
-          <h5 class="feature-title" data-translate="features.timeControl.title">Time Control</h5>
+          <i class="fas fa-shield-alt feature-icon"></i>
+          <h5 class="feature-title" data-translate="features.accessControl.title">Access Control</h5>
+          <input class="form-control mb-2" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="Max views (required)" min="1" max="99999999" required>
           <input class="form-control" type="number" id="password" data-translate-placeholder="features.timeControl.placeholder" placeholder="Seconds per view (required)" min="1" max="99999999" required>
-          <small class="text-muted" data-translate="features.timeControl.description">Enter viewing duration in seconds</small>
+          <small class="text-muted" data-translate="features.accessControl.description">Set both view limit and per-view duration in one panel</small>
+        </div>
+
+        <div class="feature-card">
+          <i class="fas fa-hourglass-half feature-icon"></i>
+          <h5 class="feature-title" data-translate="features.expiration.title">Expiration</h5>
+          <select class="form-select mb-2" id="expiration_preset" aria-label="Expiration preset">
+            <option value="" selected data-translate="features.expiration.select">Select expiration</option>
+            <option value="1h" data-translate="features.expiration.option1h">1 hour</option>
+            <option value="3h" data-translate="features.expiration.option3h">3 hours</option>
+            <option value="24h" data-translate="features.expiration.option24h">24 hours</option>
+            <option value="5d" data-translate="features.expiration.option5d">5 days</option>
+            <option value="custom" data-translate="features.expiration.custom">Custom days</option>
+            <option value="unlimited" data-translate="features.expiration.unlimited">Unlimited</option>
+          </select>
+          <input class="form-control mb-2" type="number" id="expiration_custom_days" min="1" step="1" data-translate-placeholder="features.expiration.customPlaceholder" placeholder="Custom days" style="display:none;">
+          <input type="hidden" id="expiration_day" value="">
+          <input type="hidden" id="expiration_ts" value="">
+          <small class="text-muted d-block mb-1" id="expiration_result" style="display:none;" data-translate="features.expiration.utcNone">UTC expiry time: -</small>
+          <div id="timezone_row" style="display:none;">
+            <select class="form-select form-select-sm mb-2" id="timezone_tz" aria-label="Time zone"></select>
+          </div>
+          <small class="text-muted d-block" id="expiration_local" style="display:none;" data-translate="features.expiration.localNone">Local time: -</small>
         </div>
         
         <div class="feature-card">
           <i class="fas fa-tag feature-icon"></i>
           <h5 class="feature-title" data-translate="features.description.title">Description</h5>
-          <input class="form-control" type="text" id="caption" data-translate-placeholder="features.description.placeholder" placeholder="Add a description (required)" maxlength="100" required>
-          <small class="text-muted" data-translate="features.description.description">Enter image description</small>
-        </div>
-        
-        <div class="feature-card">
+          <input class="form-control mb-2" type="text" id="caption" data-translate-placeholder="features.description.placeholder" placeholder="Add a description (required)" maxlength="100" required>
+          <small class="text-muted d-block mb-2" data-translate="features.description.description">Enter image description</small>
           <i class="fas fa-magic feature-icon"></i>
           <h5 class="feature-title" data-translate="features.generate.title">Generate Link & QR</h5>
           <button type="button" class="btn btn-primary w-100" onclick="generateImageQR()" disabled id="generateBtn">
@@ -251,11 +264,11 @@
           <div class="col-md-4 col-sm-12">
             <div class="stat-card-enhanced">
               <div class="stat-icon">
-                <i class="fas fa-clock"></i>
+                <i class="fas fa-hourglass-half"></i>
               </div>
               <div class="stat-content">
-                <div class="stat-number" id="timeLimit">∞</div>
-                <div class="stat-label" data-translate="results.stats.seconds">Seconds</div>
+                <div class="stat-number" id="expirationDisplay">Never</div>
+                <div class="stat-label" data-translate="results.stats.expiration">Expiration</div>
               </div>
             </div>
           </div>
@@ -566,6 +579,9 @@
         window.i18n.setLanguage(lang);
         currentLanguage = lang;
         updateFooterComplianceText(lang);
+        if (typeof window.__updateMaiimgExpiration === 'function') {
+          window.__updateMaiimgExpiration();
+        }
         
         // 保存语言偏好到 localStorage
         localStorage.setItem('preferred-language', lang);
@@ -878,6 +894,8 @@
       const limit = document.getElementById("limit").value || "100000000";
       const password = document.getElementById("password").value || "1999999927";
       const caption = document.getElementById("caption").value || "Image Gallery";
+      const expirationDay = document.getElementById("expiration_day").value || "";
+      const expirationTs = document.getElementById("expiration_ts").value || "";
 
       // Show loading state
       const button = event.target;
@@ -896,7 +914,10 @@
             files: uploadedFiles,
             limit: Math.min(parseInt(limit), 99999999),
             password: Math.min(parseInt(password), 99999999),
-            caption: caption
+            caption: caption,
+            expiration_day: expirationDay,
+            expiration_ts: expirationTs,
+            endtime: expirationTs
           })
         });
 
@@ -929,10 +950,7 @@
           // Update stats display with enhanced information
           document.getElementById("fileCount").textContent = result.fileCount;
           document.getElementById("viewLimit").textContent = result.limit === 100000000 ? '∞' : result.limit.toLocaleString();
-          document.getElementById("timeLimit").textContent = result.password === 1999999927 ? '∞' : 
-            (result.password >= 3600 ? Math.floor(result.password / 3600) + 'h' : 
-             result.password >= 60 ? Math.floor(result.password / 60) + 'm' : 
-             result.password + 's');
+          document.getElementById("expirationDisplay").textContent = formatEndtimeDisplay(result.endtime);
 
           // Update tracking code information in the new enhanced layout
           document.getElementById("btypesay").innerHTML = `
@@ -985,6 +1003,11 @@
           document.getElementById("limit").value = '';
           document.getElementById("password").value = '';
           document.getElementById("caption").value = '';
+          const expirationPresetEl = document.getElementById("expiration_preset");
+          if (expirationPresetEl) {
+            expirationPresetEl.value = '';
+          }
+          resetExpirationView();
           
           // 更新按钮状态
           updateGenerateButton();
@@ -1074,6 +1097,275 @@
       }, 5000);
     }
 
+    function formatEndtimeDisplay(endtime) {
+      const raw = (endtime ?? '').toString().trim();
+      if (!raw) return getTranslation('features.expiration.unlimited', currentLanguage);
+      const ts = Number.parseInt(raw, 10);
+      if (Number.isNaN(ts) || ts <= 0) return getTranslation('features.expiration.unlimited', currentLanguage);
+      return new Date(ts * 1000).toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+    }
+
+    function initExpirationControls() {
+      const preset = document.getElementById('expiration_preset');
+      const custom = document.getElementById('expiration_custom_days');
+      const hidden = document.getElementById('expiration_day');
+      const hiddenTs = document.getElementById('expiration_ts');
+      const result = document.getElementById('expiration_result');
+      const tzSelect = document.getElementById('timezone_tz');
+      const tzRow = document.getElementById('timezone_row');
+      const localResult = document.getElementById('expiration_local');
+      if (!preset || !custom || !hidden || !hiddenTs || !result || !tzSelect || !localResult) return;
+
+      const pad2 = (n) => String(n).padStart(2, '0');
+      let lastExpiry = null;
+      let userTouchedTz = false;
+
+      const tzData = [
+        { id: 'UTC', label: 'UTC' },
+        { id: 'Asia/Shanghai', label: 'China (Asia/Shanghai)' },
+        { id: 'Asia/Tokyo', label: 'Japan (Asia/Tokyo)' },
+        { id: 'Asia/Seoul', label: 'Korea (Asia/Seoul)' },
+        { id: 'Asia/Singapore', label: 'Singapore (Asia/Singapore)' },
+        { id: 'Asia/Kolkata', label: 'India (Asia/Kolkata)' },
+        { id: 'Europe/London', label: 'UK (Europe/London)' },
+        { id: 'Europe/Berlin', label: 'Germany (Europe/Berlin)' },
+        { id: 'Europe/Paris', label: 'France (Europe/Paris)' },
+        { id: 'Asia/Dubai', label: 'UAE (Asia/Dubai)' },
+        { id: 'Australia/Sydney', label: 'Australia (Sydney)' },
+        { id: 'America/Sao_Paulo', label: 'Brazil (Sao Paulo)' },
+        { id: 'Africa/Johannesburg', label: 'South Africa (Johannesburg)' },
+        { id: 'Europe/Moscow', label: 'Russia (Moscow)' },
+        { id: 'America/Toronto', label: 'Canada (Toronto)' },
+        { id: 'America/New_York', label: 'US Eastern (New York)' },
+        { id: 'America/Chicago', label: 'US Central (Chicago)' },
+        { id: 'America/Denver', label: 'US Mountain (Denver)' },
+        { id: 'America/Los_Angeles', label: 'US Pacific (Los Angeles)' },
+        { id: 'America/Anchorage', label: 'US Alaska (Anchorage)' },
+        { id: 'Pacific/Honolulu', label: 'US Hawaii (Honolulu)' }
+      ];
+
+      const buildZoneOptions = () => {
+        tzSelect.innerHTML = '';
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = getTranslation('features.expiration.timezonePlaceholder', currentLanguage);
+        tzSelect.appendChild(placeholder);
+        tzData.forEach((z) => {
+          const opt = document.createElement('option');
+          opt.value = z.id;
+          opt.textContent = z.label;
+          tzSelect.appendChild(opt);
+        });
+      };
+
+      const formatInTimeZone = (date, timeZone) => {
+        try {
+          return new Intl.DateTimeFormat('en-US', {
+            timeZone,
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+          }).format(date);
+        } catch (e) {
+          return null;
+        }
+      };
+
+      const updateLocalTime = () => {
+        if (!lastExpiry) {
+          localResult.textContent = getTranslation('features.expiration.localNone', currentLanguage);
+          return;
+        }
+        const tzId = tzSelect.value;
+        if (!tzId) {
+          localResult.textContent = getTranslation('features.expiration.localNone', currentLanguage);
+          return;
+        }
+        const formatted = formatInTimeZone(lastExpiry, tzId);
+        if (!formatted) {
+          localResult.textContent = getTranslation('features.expiration.localNone', currentLanguage);
+          return;
+        }
+        localResult.textContent = `${getTranslation('features.expiration.localPrefix', currentLanguage)}: ${formatted} (${tzId})`;
+      };
+
+      const getOffsetMinutes = (tzId, date) => {
+        const parts = new Intl.DateTimeFormat('en-US', {
+          timeZone: tzId,
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
+        }).formatToParts(date);
+        const map = {};
+        parts.forEach((p) => {
+          if (p.type !== 'literal') map[p.type] = p.value;
+        });
+        const asUTC = Date.UTC(
+          Number(map.year),
+          Number(map.month) - 1,
+          Number(map.day),
+          Number(map.hour),
+          Number(map.minute),
+          Number(map.second)
+        );
+        return Math.round((asUTC - date.getTime()) / 60000);
+      };
+
+      const autoSelectTimeZone = () => {
+        let browserTz = '';
+        try {
+          browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        } catch (e) {
+          browserTz = '';
+        }
+        if (browserTz === 'Etc/UTC' || browserTz === 'Etc/GMT' || browserTz === 'GMT' || browserTz.startsWith('UTC') || browserTz.startsWith('GMT')) {
+          browserTz = 'UTC';
+        }
+        const direct = tzData.find((z) => z.id === browserTz);
+        if (direct) {
+          tzSelect.value = direct.id;
+          updateLocalTime();
+          return;
+        }
+
+        const localOffset = -new Date().getTimezoneOffset();
+        let best = null;
+        let bestDiff = Infinity;
+        tzData.forEach((z) => {
+          try {
+            const off = getOffsetMinutes(z.id, new Date());
+            const diff = Math.abs(off - localOffset);
+            if (diff < bestDiff) {
+              bestDiff = diff;
+              best = z;
+            }
+          } catch (e) {
+            // ignore invalid timezone
+          }
+        });
+
+        if (best) {
+          tzSelect.value = best.id;
+          updateLocalTime();
+        }
+      };
+
+      const hideExpirationExtras = () => {
+        result.style.display = 'none';
+        tzRow.style.display = 'none';
+        localResult.style.display = 'none';
+      };
+
+      const updateExpiration = () => {
+        const v = preset.value;
+        let days = null;
+
+        if (v === '1h') {
+          days = 1 / 24;
+        } else if (v === '3h') {
+          days = 3 / 24;
+        } else if (v === '24h') {
+          days = 1;
+        } else if (v === '5d') {
+          days = 5;
+        } else if (v === 'custom') {
+          const n = parseFloat(custom.value);
+          if (!Number.isNaN(n) && n > 0) {
+            days = n;
+          }
+        }
+
+        if (v === 'custom') {
+          custom.style.display = 'block';
+        } else {
+          custom.style.display = 'none';
+          custom.value = '';
+        }
+
+        if (v === 'unlimited') {
+          hidden.value = '';
+          hiddenTs.value = '';
+          result.textContent = getTranslation('features.expiration.utcUnlimited', currentLanguage);
+          lastExpiry = null;
+          result.style.display = '';
+          tzRow.style.display = 'none';
+          localResult.style.display = 'none';
+          updateLocalTime();
+          return;
+        }
+
+        if (days === null) {
+          hidden.value = '';
+          hiddenTs.value = '';
+          result.textContent = getTranslation('features.expiration.utcNone', currentLanguage);
+          lastExpiry = null;
+          hideExpirationExtras();
+          updateLocalTime();
+          return;
+        }
+
+        hidden.value = String(days);
+        const now = new Date();
+        const expiry = new Date(now.getTime() + days * 24 * 60 * 60 * 1000);
+        lastExpiry = expiry;
+        hiddenTs.value = String(Math.floor(expiry.getTime() / 1000));
+        const utcText = `${expiry.getUTCFullYear()}-${pad2(expiry.getUTCMonth() + 1)}-${pad2(expiry.getUTCDate())} ${pad2(expiry.getUTCHours())}:${pad2(expiry.getUTCMinutes())}:${pad2(expiry.getUTCSeconds())} UTC`;
+        result.textContent = `${getTranslation('features.expiration.utcPrefix', currentLanguage)}: ${utcText}`;
+        result.style.display = '';
+        tzRow.style.display = 'block';
+        localResult.style.display = '';
+        if (!userTouchedTz) {
+          autoSelectTimeZone();
+        } else {
+          updateLocalTime();
+        }
+      };
+
+      preset.addEventListener('change', updateExpiration);
+      custom.addEventListener('input', updateExpiration);
+      tzSelect.addEventListener('change', () => {
+        userTouchedTz = true;
+        updateLocalTime();
+      });
+
+      buildZoneOptions();
+      hideExpirationExtras();
+      updateExpiration();
+      window.__updateMaiimgExpiration = updateExpiration;
+    }
+
+    function resetExpirationView() {
+      const customEl = document.getElementById('expiration_custom_days');
+      const dayEl = document.getElementById('expiration_day');
+      const tsEl = document.getElementById('expiration_ts');
+      const resultEl = document.getElementById('expiration_result');
+      const localEl = document.getElementById('expiration_local');
+      const tzRowEl = document.getElementById('timezone_row');
+      if (customEl) customEl.value = '';
+      if (dayEl) dayEl.value = '';
+      if (tsEl) tsEl.value = '';
+      if (resultEl) {
+        resultEl.textContent = getTranslation('features.expiration.utcNone', currentLanguage);
+        resultEl.style.display = 'none';
+      }
+      if (localEl) {
+        localEl.textContent = getTranslation('features.expiration.localNone', currentLanguage);
+        localEl.style.display = 'none';
+      }
+      if (tzRowEl) tzRowEl.style.display = 'none';
+      if (typeof window.__updateMaiimgExpiration === 'function') {
+        window.__updateMaiimgExpiration();
+      }
+    }
+
     // Update button state based on form validation and uploaded files
     function updateGenerateButton() {
       const generateBtn = document.getElementById('generateBtn');
@@ -1127,6 +1419,7 @@
       Dropzone.autoDiscover = false;
       
       // 不在页面加载时生成会话ID，改为在第一次上传时生成
+      initExpirationControls();
       
       myDropzone = new Dropzone("#dropz", {
         url: "https://fetch.maipdf.com/api/upload-image",
@@ -1244,11 +1537,12 @@
       });
 
       // Add real-time validation listeners
-      ['limit', 'password', 'caption'].forEach(fieldId => {
+      ['limit', 'password', 'caption', 'expiration_preset', 'expiration_custom_days'].forEach(fieldId => {
         const field = document.getElementById(fieldId);
         if (field) {
           field.addEventListener('input', updateGenerateButton);
           field.addEventListener('blur', updateGenerateButton);
+          field.addEventListener('change', updateGenerateButton);
         }
       });
 
