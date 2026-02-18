@@ -4,9 +4,16 @@ class I18n {
     this.currentLanguage = this.getStoredLanguage() || this.detectBrowserLanguage();
     this.translations = {
       en: {
+        // SEO
+        seo: {
+          title: "Maiimg Hosting - Free Image Upload, Hosting & QR Share",
+          description: "Upload images in seconds with Maiimg Hosting. Free image hosting with direct links, QR sharing, view limits, and expiration controls.",
+          keywords: "maiimg hosting,free image hosting,image upload,direct image link,qr image sharing,temporary image hosting"
+        },
+
         // Navigation
         nav: {
-          title: "Image QR Generator"
+          title: "Maiimg Hosting"
         },
         
         // Language options
@@ -168,9 +175,16 @@ class I18n {
       },
       
       zh: {
+        // SEO
+        seo: {
+          title: "麦瓜图床 - 免费图片上传与分享图床，支持二维码外链",
+          description: "麦瓜图床提供稳定、快速、免费的图片上传与分享服务，支持二维码生成、外链分享、访问控制与过期设置。",
+          keywords: "麦瓜图床,免费图床,图片上传,图片外链,二维码图床,图片分享,临时图床,图床"
+        },
+
         // Navigation
         nav: {
-          title: "图片二维码生成器"
+          title: "麦瓜图床"
         },
         
         // Language options
@@ -332,6 +346,13 @@ class I18n {
       },
 
       tw: {
+        // SEO
+        seo: {
+          title: "圖片二維碼生成器 - 上傳和分享圖片",
+          description: "即時上傳與分享圖片，提供安全、快速、免費的圖片服務與二維碼。",
+          keywords: "image hosting,image upload,photo sharing,image qr code,free image host,secure image sharing"
+        },
+
         // Navigation
         nav: {
           title: "圖片二維碼生成器"
@@ -496,6 +517,13 @@ class I18n {
       },
 
       ja: {
+        // SEO
+        seo: {
+          title: "画像QRコード生成器 - 画像をアップロードして共有",
+          description: "QRコード付きで画像をすぐにアップロード・共有。安全で高速な無料画像ホスティング。",
+          keywords: "image hosting,image upload,photo sharing,image qr code,free image host,secure image sharing"
+        },
+
         // Navigation
         nav: {
           title: "画像QRコード生成器"
@@ -660,6 +688,13 @@ class I18n {
       },
 
       de: {
+        // SEO
+        seo: {
+          title: "Bild-QR-Generator - Bilder hochladen und teilen",
+          description: "Bilder sofort mit QR-Codes hochladen und teilen. Sicheres, schnelles und kostenloses Bildhosting.",
+          keywords: "image hosting,image upload,photo sharing,image qr code,free image host,secure image sharing"
+        },
+
         // Navigation
         nav: {
           title: "Bild-QR-Generator"
@@ -824,6 +859,13 @@ class I18n {
       },
 
       ko: {
+        // SEO
+        seo: {
+          title: "이미지 QR 생성기 - 이미지 업로드 및 공유",
+          description: "QR 코드로 이미지를 빠르게 업로드하고 공유하세요. 안전하고 빠른 무료 이미지 호스팅.",
+          keywords: "image hosting,image upload,photo sharing,image qr code,free image host,secure image sharing"
+        },
+
         // Navigation
         nav: {
           title: "이미지 QR 생성기"
@@ -988,6 +1030,13 @@ class I18n {
       },
 
       fr: {
+        // SEO
+        seo: {
+          title: "Générateur QR d'Images - Télécharger et Partager des Images",
+          description: "Téléchargez et partagez instantanément des images avec des codes QR. Service d'hébergement d'images gratuit, rapide et sécurisé.",
+          keywords: "image hosting,image upload,photo sharing,image qr code,free image host,secure image sharing"
+        },
+
         // Navigation
         nav: {
           title: "Générateur QR d'Images"
@@ -1152,6 +1201,13 @@ class I18n {
       },
 
       it: {
+        // SEO
+        seo: {
+          title: "Generatore QR di Immagini - Carica e Condividi Immagini",
+          description: "Carica e condividi immagini all'istante con codici QR. Hosting immagini gratuito, veloce e sicuro.",
+          keywords: "image hosting,image upload,photo sharing,image qr code,free image host,secure image sharing"
+        },
+
         // Navigation
         nav: {
           title: "Generatore QR di Immagini"
@@ -1372,6 +1428,8 @@ class I18n {
       this.setStoredLanguage(lang);
       this.updatePageTranslations();
       this.updateLanguageSelector();
+      this.updateHtmlLang();
+      this.updateSEO();
     }
   }
 
@@ -1439,13 +1497,40 @@ class I18n {
     }
   }
 
+  updateHtmlLang() {
+    const langMap = {
+      zh: 'zh-CN',
+      tw: 'zh-TW'
+    };
+    document.documentElement.lang = langMap[this.currentLanguage] || this.currentLanguage;
+  }
+
+  updateSEO() {
+    const title = this.t('seo.title');
+    const description = this.t('seo.description');
+    const keywords = this.t('seo.keywords');
+
+    if (title) {
+      document.title = title;
+    }
+
+    const descriptionMeta = document.querySelector('meta[name="description"]');
+    if (descriptionMeta && description) {
+      descriptionMeta.setAttribute('content', description);
+    }
+
+    const keywordsMeta = document.querySelector('meta[name="keywords"]');
+    if (keywordsMeta && keywords) {
+      keywordsMeta.setAttribute('content', keywords);
+    }
+  }
+
   // Initialize i18n system
   init() {
     this.updatePageTranslations();
     this.updateLanguageSelector();
-    
-    // Set HTML lang attribute
-    document.documentElement.lang = this.currentLanguage;
+    this.updateHtmlLang();
+    this.updateSEO();
   }
 }
 
