@@ -32,7 +32,7 @@ class I18n {
           title: "Image Upload Center",
           subtitle: "Drag & drop your images or click to browse",
           dropText: "Drop images here or click to upload",
-          supportText: "Supports: PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 9 files",
+          supportText: "Supports: PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 25 files",
           ready: "Ready to upload images"
         },
         
@@ -196,7 +196,7 @@ class I18n {
           title: "图片上传中心",
           subtitle: "拖放您的图片或点击浏览",
           dropText: "将图片拖放到此处或点击上传",
-          supportText: "支持格式：PNG、JPG、JPEG、GIF、WebP • 每个文件最大50MB • 最多9个文件",
+          supportText: "支持格式：PNG、JPG、JPEG、GIF、WebP • 每个文件最大50MB • 最多25个文件",
           ready: "准备上传图片"
         },
         
@@ -360,7 +360,7 @@ class I18n {
           title: "圖片上傳中心",
           subtitle: "拖放您的圖片或點擊瀏覽",
           dropText: "將圖片拖放到此處或點擊上傳",
-          supportText: "支援格式：PNG、JPG、JPEG、GIF、WebP • 每個檔案最大50MB • 最多9個檔案",
+          supportText: "支援格式：PNG、JPG、JPEG、GIF、WebP • 每個檔案最大50MB • 最多25個檔案",
           ready: "準備上傳圖片"
         },
         
@@ -524,7 +524,7 @@ class I18n {
           title: "画像アップロードセンター",
           subtitle: "画像をドラッグ&ドロップするかクリックして参照",
           dropText: "ここに画像をドロップするかクリックしてアップロード",
-          supportText: "対応形式：PNG、JPG、JPEG、GIF、WebP • 最大50MB • 最大9ファイル",
+          supportText: "対応形式：PNG、JPG、JPEG、GIF、WebP • 最大50MB • 最大25ファイル",
           ready: "画像のアップロード準備完了"
         },
         
@@ -688,7 +688,7 @@ class I18n {
           title: "Bild-Upload-Center",
           subtitle: "Ziehen Sie Ihre Bilder hierher oder klicken Sie zum Durchsuchen",
           dropText: "Bilder hier ablegen oder zum Hochladen klicken",
-          supportText: "Unterstützt: PNG, JPG, JPEG, GIF, WebP • Max. 50MB je Datei • Bis zu 9 Dateien",
+          supportText: "Unterstützt: PNG, JPG, JPEG, GIF, WebP • Max. 50MB je Datei • Bis zu 25 Dateien",
           ready: "Bereit zum Hochladen von Bildern"
         },
         
@@ -852,7 +852,7 @@ class I18n {
           title: "이미지 업로드 센터",
           subtitle: "이미지를 드래그 앤 드롭하거나 클릭하여 찾아보기",
           dropText: "여기에 이미지를 드롭하거나 클릭하여 업로드",
-          supportText: "지원 형식: PNG, JPG, JPEG, GIF, WebP • 파일당 최대 50MB • 최대 9개 파일",
+          supportText: "지원 형식: PNG, JPG, JPEG, GIF, WebP • 파일당 최대 50MB • 최대 25개 파일",
           ready: "이미지 업로드 준비 완료"
         },
         
@@ -1016,7 +1016,7 @@ class I18n {
           title: "Centre de Téléchargement d'Images",
           subtitle: "Glissez-déposez vos images ou cliquez pour parcourir",
           dropText: "Déposez les images ici ou cliquez pour télécharger",
-          supportText: "Formats supportés : PNG, JPG, JPEG, GIF, WebP • Max 50MB chacun • Jusqu'à 9 fichiers",
+          supportText: "Formats supportés : PNG, JPG, JPEG, GIF, WebP • Max 50MB chacun • Jusqu'à 25 fichiers",
           ready: "Prêt à télécharger des images"
         },
         
@@ -1180,7 +1180,7 @@ class I18n {
           title: "Centro di Caricamento Immagini",
           subtitle: "Trascina e rilascia le tue immagini o clicca per sfogliare",
           dropText: "Rilascia le immagini qui o clicca per caricare",
-          supportText: "Supporta: PNG, JPG, JPEG, GIF, WebP • Max 50MB ciascuno • Fino a 9 file",
+          supportText: "Supporta: PNG, JPG, JPEG, GIF, WebP • Max 50MB ciascuno • Fino a 25 file",
           ready: "Pronto per caricare immagini"
         },
         
