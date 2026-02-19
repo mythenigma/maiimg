@@ -355,7 +355,7 @@ class I18n {
 
         // Navigation
         nav: {
-          title: "圖片二維碼生成器"
+          title: "麥瓜圖床"
         },
         
         // Language options
@@ -526,7 +526,7 @@ class I18n {
 
         // Navigation
         nav: {
-          title: "画像QRコード生成器"
+          title: "麦瓜图床"
         },
         
         // Language options
@@ -697,7 +697,7 @@ class I18n {
 
         // Navigation
         nav: {
-          title: "Bild-QR-Generator"
+          title: "Maiimg"
         },
         
         // Language options
@@ -868,7 +868,7 @@ class I18n {
 
         // Navigation
         nav: {
-          title: "이미지 QR 생성기"
+          title: "Maiimg"
         },
         
         // Language options
@@ -1039,7 +1039,7 @@ class I18n {
 
         // Navigation
         nav: {
-          title: "Générateur QR d'Images"
+          title: "Maiimg"
         },
         
         // Language options
@@ -1210,7 +1210,7 @@ class I18n {
 
         // Navigation
         nav: {
-          title: "Generatore QR di Immagini"
+          title: "Maiimg"
         },
         
         // Language options
