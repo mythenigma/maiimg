@@ -80,21 +80,59 @@
       color: var(--text);
     }
     .swap-bar {
-      background: #eef2ff;
+      background: linear-gradient(135deg, #eef2ff 0%, #e8e0ff 100%);
       border: 1px solid #c7d2fe;
-      border-radius: 10px;
-      padding: 12px 16px;
+      border-radius: 12px;
+      padding: 14px 20px;
       margin-bottom: 16px;
       display: none;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
     }
     .swap-bar.active { display: flex; }
     .swap-bar .swap-info {
       font-size: 0.9rem;
       color: var(--primary-dark);
+      font-weight: 500;
+    }
+
+    .toolbar-btn {
+      border-radius: 8px;
+      font-weight: 500;
+      padding: 6px 14px;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .replace-mode-btn {
+      background: #fff;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+    }
+    .replace-mode-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(99, 102, 241, 0.25);
+    }
+    .replace-mode-btn.active-mode {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 3px 10px rgba(99, 102, 241, 0.3);
+    }
+    .refresh-btn {
+      background: #fff;
+      color: var(--text-muted);
+      border: 1.5px solid var(--border);
+    }
+    .refresh-btn:hover {
+      background: #f1f5f9;
+      color: var(--text);
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
     }
 
     /* Table view (desktop) */
@@ -144,6 +182,7 @@
     .action-btn:hover { background: #f1f5f9; }
     .action-btn.text-danger:hover { background: #fef2f2; }
     .action-btn.text-success:hover { background: #f0fdf4; }
+    .action-btn.text-warning:hover { background: #fffbeb; }
 
     .gallery-link {
       color: var(--primary);
@@ -152,6 +191,18 @@
       font-size: 0.85rem;
     }
     .gallery-link:hover { text-decoration: underline; }
+
+    .gallery-table-wrap {
+      max-height: 70vh;
+      overflow-y: auto;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .gallery-table-wrap::-webkit-scrollbar { width: 6px; }
+    .gallery-table-wrap::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 3px; }
+    .gallery-table-wrap::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    .gallery-table-wrap::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .gallery-table thead th { position: sticky; top: 0; z-index: 1; }
 
     /* Card view (mobile) */
     .gallery-cards { display: none; }
@@ -300,10 +351,10 @@
 
   <!-- Toolbar -->
   <div class="mb-3 d-flex justify-content-end gap-2">
-    <button class="btn btn-sm btn-outline-primary" id="replaceModeBtn" onclick="toggleReplaceMode()">
+    <button class="btn btn-sm toolbar-btn replace-mode-btn" id="replaceModeBtn" onclick="toggleReplaceMode()">
       <i class="fas fa-copy me-1"></i><span data-translate="dash.replaceMode">Replace Mode</span>
     </button>
-    <button class="btn btn-sm btn-outline-secondary" onclick="loadGalleries()">
+    <button class="btn btn-sm toolbar-btn refresh-btn" onclick="loadGalleries()">
       <i class="fas fa-sync-alt me-1"></i><span data-translate="dash.refresh">Refresh</span>
     </button>
   </div>
@@ -436,7 +487,7 @@ function statusBadge(status) {
 
 function galleryLink(id) {
   const alphaId = encodeGalleryId(id);
-  return `https://maiimg.com/gallery/${alphaId}/`;
+  return `https://maiimg.com/gallery/${alphaId}`;
 }
 
 function trackingLink(id) {
@@ -537,8 +588,9 @@ function renderTable() {
       <td><a class="gallery-link" href="${link}" target="_blank">${link.replace('https://','')}</a></td>
       <td>${statusBadge(status)}</td>
       <td class="text-nowrap">
-        <a href="${trackingLink(g.id)}" class="action-btn text-primary" title="Tracking"><i class="fas fa-chart-line"></i></a>
-        ${status === 'active' ? `<button class="action-btn text-danger" onclick="deleteGallery(${g.id})" title="Delete"><i class="fas fa-trash-alt"></i></button>` : ''}
+        <a href="${trackingLink(g.id)}" class="action-btn text-primary" title="${i('dash.accessRecord','Access Record')}"><i class="fas fa-chart-line"></i></a>
+        ${status === 'active' ? `<button class="action-btn text-danger" onclick="deleteGallery(${g.id})" title="${i('dash.delete','Delete')}"><i class="fas fa-trash-alt"></i></button>` : ''}
+        ${status === 'deleted' ? `<button class="action-btn text-success" onclick="startRestoreFor(${g.id})" title="${i('dash.restore','Restore')}"><i class="fas fa-undo-alt"></i></button>` : ''}
       </td>
     </tr>`;
   }).join('');
@@ -563,8 +615,9 @@ function renderCards() {
           <label class="action-btn text-primary" style="cursor:pointer"><input type="radio" name="mTarget" class="me-1" ${replaceTarget === g.id ? 'checked' : ''} onchange="onPickTarget(${g.id})">A</label>
           <label class="action-btn text-warning" style="cursor:pointer"><input type="radio" name="mSource" class="me-1" ${replaceSource === g.id ? 'checked' : ''} onchange="onPickSource(${g.id})">B</label>
         ` : ''}
-        <a href="${trackingLink(g.id)}" class="action-btn text-primary"><i class="fas fa-chart-line me-1"></i>Tracking</a>
-        ${status === 'active' ? `<button class="action-btn text-danger" onclick="deleteGallery(${g.id})"><i class="fas fa-trash-alt me-1"></i>Delete</button>` : ''}
+        <a href="${trackingLink(g.id)}" class="action-btn text-primary"><i class="fas fa-chart-line me-1"></i>${i('dash.accessRecord','Access Record')}</a>
+        ${status === 'active' ? `<button class="action-btn text-danger" onclick="deleteGallery(${g.id})"><i class="fas fa-trash-alt me-1"></i>${i('dash.delete','Delete')}</button>` : ''}
+        ${status === 'deleted' ? `<button class="action-btn text-success" onclick="startRestoreFor(${g.id})"><i class="fas fa-undo-alt me-1"></i>${i('dash.restore','Restore')}</button>` : ''}
       </div>
     </div>`;
   }).join('');
@@ -602,12 +655,12 @@ function toggleReplaceMode() {
   const thSource = document.getElementById('thSource');
   if (replaceMode) {
     bar.classList.add('active');
-    btn.classList.replace('btn-outline-primary', 'btn-primary');
+    btn.classList.add('active-mode');
     thTarget.classList.remove('d-none');
     thSource.classList.remove('d-none');
   } else {
     bar.classList.remove('active');
-    btn.classList.replace('btn-primary', 'btn-outline-primary');
+    btn.classList.remove('active-mode');
     thTarget.classList.add('d-none');
     thSource.classList.add('d-none');
   }
@@ -621,7 +674,7 @@ function cancelReplace() {
   replaceTarget = null;
   replaceSource = null;
   document.getElementById('replaceBar').classList.remove('active');
-  document.getElementById('replaceModeBtn').classList.replace('btn-primary', 'btn-outline-primary');
+  document.getElementById('replaceModeBtn').classList.remove('active-mode');
   document.getElementById('thTarget').classList.add('d-none');
   document.getElementById('thSource').classList.add('d-none');
   renderTable();
@@ -682,6 +735,25 @@ async function executeReplace() {
   } catch (err) {
     showToast('Replace failed: ' + err.message, 'danger');
   }
+}
+
+// ---- Restore (activates replace mode with target pre-selected) ----
+function startRestoreFor(id) {
+  replaceMode = true;
+  replaceTarget = id;
+  replaceSource = null;
+  const bar = document.getElementById('replaceBar');
+  const btn = document.getElementById('replaceModeBtn');
+  const thTarget = document.getElementById('thTarget');
+  const thSource = document.getElementById('thSource');
+  bar.classList.add('active');
+  btn.classList.add('active-mode');
+  thTarget.classList.remove('d-none');
+  thSource.classList.remove('d-none');
+  renderTable();
+  renderCards();
+  updateReplaceUI();
+  showToast(i('dash.restoreHint', `Gallery #${id} selected as target (A). Now pick a source (B) to copy from.`), 'info');
 }
 
 // ---- Utils ----
