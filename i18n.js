@@ -38,9 +38,15 @@ class I18n {
         upload: {
           title: "Image Upload Center",
           subtitle: "Drag & drop your images or click to browse",
-          dropText: "Drop images here or click to upload",
-          supportText: "Supports: PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 25 files",
+          dropText: "Drop or tap to upload",
+          supportText: "PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 25 files",
           ready: "Ready to upload images"
+        },
+
+        flow: {
+          step1: "Upload Images",
+          step2: "Set Access",
+          step3: "Generate Link & QR"
         },
         
         // Badges
@@ -302,9 +308,15 @@ class I18n {
         upload: {
           title: "图片上传中心",
           subtitle: "拖放您的图片或点击浏览",
-          dropText: "将图片拖放到此处或点击上传",
-          supportText: "支持格式：PNG、JPG、JPEG、GIF、WebP • 每个文件最大50MB • 最多25个文件",
+          dropText: "拖放或点击上传",
+          supportText: "PNG、JPG、JPEG、GIF、WebP • 单个文件最大50MB • 最多25个文件",
           ready: "准备上传图片"
+        },
+
+        flow: {
+          step1: "上传图片",
+          step2: "设置访问",
+          step3: "生成链接和二维码"
         },
         
         // Badges
@@ -565,9 +577,15 @@ class I18n {
         upload: {
           title: "圖片上傳中心",
           subtitle: "拖放您的圖片或點擊瀏覽",
-          dropText: "將圖片拖放到此處或點擊上傳",
-          supportText: "支援格式：PNG、JPG、JPEG、GIF、WebP • 每個檔案最大50MB • 最多25個檔案",
+          dropText: "拖放或點擊上傳",
+          supportText: "PNG、JPG、JPEG、GIF、WebP • 單個檔案最大50MB • 最多25個檔案",
           ready: "準備上傳圖片"
+        },
+
+        flow: {
+          step1: "上傳圖片",
+          step2: "設定存取",
+          step3: "生成連結與二維碼"
         },
         
         // Badges
@@ -832,6 +850,12 @@ class I18n {
           supportText: "対応形式：PNG、JPG、JPEG、GIF、WebP • 最大50MB • 最大25ファイル",
           ready: "画像のアップロード準備完了"
         },
+
+        flow: {
+          step1: "画像をアップロード",
+          step2: "アクセス設定",
+          step3: "リンクとQRを作成"
+        },
         
         // Badges
         badges: {
@@ -1094,6 +1118,12 @@ class I18n {
           dropText: "Bilder hier ablegen oder zum Hochladen klicken",
           supportText: "Unterstützt: PNG, JPG, JPEG, GIF, WebP • Max. 50MB je Datei • Bis zu 25 Dateien",
           ready: "Bereit zum Hochladen von Bildern"
+        },
+
+        flow: {
+          step1: "Bilder hochladen",
+          step2: "Zugriff festlegen",
+          step3: "Link & QR erstellen"
         },
         
         // Badges
@@ -1358,6 +1388,12 @@ class I18n {
           supportText: "지원 형식: PNG, JPG, JPEG, GIF, WebP • 파일당 최대 50MB • 최대 25개 파일",
           ready: "이미지 업로드 준비 완료"
         },
+
+        flow: {
+          step1: "이미지 업로드",
+          step2: "접근 설정",
+          step3: "링크와 QR 생성"
+        },
         
         // Badges
         badges: {
@@ -1621,6 +1657,12 @@ class I18n {
           supportText: "Formats supportés : PNG, JPG, JPEG, GIF, WebP • Max 50MB chacun • Jusqu'à 25 fichiers",
           ready: "Prêt à télécharger des images"
         },
+
+        flow: {
+          step1: "Téléverser des images",
+          step2: "Régler l'accès",
+          step3: "Générer lien & QR"
+        },
         
         // Badges
         badges: {
@@ -1883,6 +1925,12 @@ class I18n {
           dropText: "Rilascia le immagini qui o clicca per caricare",
           supportText: "Supporta: PNG, JPG, JPEG, GIF, WebP • Max 50MB ciascuno • Fino a 25 file",
           ready: "Pronto per caricare immagini"
+        },
+
+        flow: {
+          step1: "Carica immagini",
+          step2: "Imposta accesso",
+          step3: "Genera link e QR"
         },
         
         // Badges
