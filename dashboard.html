@@ -266,31 +266,39 @@
     .tz-picker {
       display: flex;
       align-items: center;
-      gap: 4px;
-      margin-top: 4px;
+      gap: 3px;
+      margin-top: 3px;
       font-weight: 400;
       text-transform: none;
       letter-spacing: 0;
     }
     .tz-picker select {
       border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1px 4px;
-      font-size: 0.7rem;
-      color: var(--text);
+      border-radius: 3px;
+      padding: 0 2px;
+      font-size: 0.62rem;
+      color: var(--text-muted);
       background: #fff;
       cursor: pointer;
-      max-width: 170px;
+      width: 50px;
+      height: 18px;
+      -webkit-appearance: none;
+      appearance: none;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
     .tz-picker select:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
     }
     .tz-picker .tz-icon {
-      color: var(--primary);
-      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-size: 0.58rem;
+      cursor: pointer;
     }
+    .tz-picker:hover .tz-icon { color: var(--primary); }
+    .tz-picker:hover select { color: var(--text); border-color: var(--primary); }
 
     .help-btn {
       width: 28px;
@@ -930,24 +938,24 @@ function startRestoreFor(id) {
 let currentTz = 'UTC';
 
 const tzData = [
-  { id: 'UTC', label: 'UTC' },
-  { id: 'Asia/Shanghai', label: 'China (UTC+8)' },
-  { id: 'Asia/Tokyo', label: 'Japan (UTC+9)' },
-  { id: 'Asia/Seoul', label: 'Korea (UTC+9)' },
-  { id: 'Asia/Singapore', label: 'Singapore (UTC+8)' },
-  { id: 'Asia/Kolkata', label: 'India (UTC+5:30)' },
-  { id: 'Europe/London', label: 'UK (UTC+0/+1)' },
-  { id: 'Europe/Berlin', label: 'Germany (UTC+1/+2)' },
-  { id: 'Europe/Paris', label: 'France (UTC+1/+2)' },
-  { id: 'Asia/Dubai', label: 'UAE (UTC+4)' },
-  { id: 'Australia/Sydney', label: 'Australia (UTC+10/+11)' },
-  { id: 'America/New_York', label: 'US Eastern (UTC-5/-4)' },
-  { id: 'America/Chicago', label: 'US Central (UTC-6/-5)' },
-  { id: 'America/Denver', label: 'US Mountain (UTC-7/-6)' },
-  { id: 'America/Los_Angeles', label: 'US Pacific (UTC-8/-7)' },
-  { id: 'America/Sao_Paulo', label: 'Brazil (UTC-3)' },
-  { id: 'Europe/Moscow', label: 'Russia (UTC+3)' },
-  { id: 'America/Toronto', label: 'Canada (UTC-5/-4)' }
+  { id: 'UTC', label: 'UTC', short: 'UTC' },
+  { id: 'Asia/Shanghai', label: 'China (UTC+8)', short: '+8' },
+  { id: 'Asia/Tokyo', label: 'Japan (UTC+9)', short: '+9' },
+  { id: 'Asia/Seoul', label: 'Korea (UTC+9)', short: '+9' },
+  { id: 'Asia/Singapore', label: 'Singapore (UTC+8)', short: '+8' },
+  { id: 'Asia/Kolkata', label: 'India (UTC+5:30)', short: '+5:30' },
+  { id: 'Europe/London', label: 'UK (UTC+0/+1)', short: '+0' },
+  { id: 'Europe/Berlin', label: 'Germany (UTC+1)', short: '+1' },
+  { id: 'Europe/Paris', label: 'France (UTC+1)', short: '+1' },
+  { id: 'Asia/Dubai', label: 'UAE (UTC+4)', short: '+4' },
+  { id: 'Australia/Sydney', label: 'Australia (UTC+10)', short: '+10' },
+  { id: 'America/New_York', label: 'US Eastern (UTC-5)', short: '-5' },
+  { id: 'America/Chicago', label: 'US Central (UTC-6)', short: '-6' },
+  { id: 'America/Denver', label: 'US Mountain (UTC-7)', short: '-7' },
+  { id: 'America/Los_Angeles', label: 'US Pacific (UTC-8)', short: '-8' },
+  { id: 'America/Sao_Paulo', label: 'Brazil (UTC-3)', short: '-3' },
+  { id: 'Europe/Moscow', label: 'Russia (UTC+3)', short: '+3' },
+  { id: 'America/Toronto', label: 'Canada (UTC-5)', short: '-5' }
 ];
 
 function initTzSelect() {
