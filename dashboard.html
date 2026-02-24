@@ -247,6 +247,22 @@
       <button class="btn btn-sm btn-outline-light" id="logoutBtn" onclick="logout()">
         <i class="fas fa-sign-out-alt me-1"></i><span data-translate="auth.logout">Logout</span>
       </button>
+      <div class="dropdown">
+        <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <span id="currentLanguageFlag">🇺🇸</span>
+          <span id="currentLanguageName">English</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">🇺🇸 English</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('zh')">🇨🇳 中文</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('tw')">🇹🇼 中華民國</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('ja')">🇯🇵 日本語</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('de')">🇩🇪 Deutsch</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('ko')">🇰🇷 한국어</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr')">🇫🇷 Français</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('it')">🇮🇹 Italiano</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
@@ -698,6 +714,13 @@ if (checkAuth()) {
   loadGalleries();
 }
 
+function changeLanguage(lang) {
+  if (window.i18n) {
+    window.i18n.setLanguage(lang);
+    localStorage.setItem('preferred-language', lang);
+  }
+}
+
 if (window.i18n) {
   window.i18n.onReady(() => {
     document.querySelectorAll('[data-translate]').forEach(el => {
@@ -705,6 +728,7 @@ if (window.i18n) {
       const translated = window.i18n.t(key);
       if (translated) el.textContent = translated;
     });
+    window.i18n.updateLanguageSelector();
   });
 }
 </script>
