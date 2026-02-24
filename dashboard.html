@@ -398,10 +398,41 @@
       z-index: 9999;
     }
 
+    .tz-bar-mobile {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .tz-bar-mobile-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 0;
+      white-space: nowrap;
+    }
+    .tz-bar-mobile select {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      color: var(--text);
+      background: #fff;
+      cursor: pointer;
+    }
+    .tz-bar-mobile select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
     @media (max-width: 768px) {
       .gallery-table-wrap { display: none; }
       .gallery-cards { display: block; }
       .dash-header h1 { font-size: 1.25rem; }
+      .tz-bar-mobile { display: flex; }
     }
     @media (min-width: 769px) {
       .gallery-table-wrap { display: block; }
@@ -477,6 +508,12 @@
     </div>
   </div>
 
+  <!-- Timezone bar (mobile only: shown above cards when table is hidden) -->
+  <div class="tz-bar-mobile mb-2" id="tzBarMobile">
+    <label class="tz-bar-mobile-label"><i class="fas fa-globe-americas me-1"></i><span data-translate="dash.expirationTz">Expiration timezone</span></label>
+    <select id="tzSelectMobile" onchange="onTzChange(this)"></select>
+  </div>
+
   <!-- Toolbar -->
   <div class="mb-3 d-flex justify-content-end gap-2 align-items-center">
     <button class="help-btn" onclick="showHelp()" title="Help">?</button>
@@ -532,7 +569,7 @@
               <span data-translate="dash.colExpiration">Expiration</span>
               <div class="tz-picker">
                 <i class="fas fa-globe-americas tz-icon"></i>
-                <select id="tzSelect" onchange="onTzChange()" title="Timezone for expiration display"></select>
+                <select id="tzSelect" onchange="onTzChange(this)" title="Timezone for expiration display"></select>
               </div>
             </div>
           </th>
@@ -975,24 +1012,28 @@ const tzData = [
 
 function initTzSelect() {
   const sel = document.getElementById('tzSelect');
-  sel.innerHTML = '';
-  tzData.forEach(z => {
-    const opt = document.createElement('option');
-    opt.value = z.id;
-    opt.textContent = z.label;
-    sel.appendChild(opt);
-  });
+  const selMobile = document.getElementById('tzSelectMobile');
+  const fill = (target) => {
+    if (!target) return;
+    target.innerHTML = '';
+    tzData.forEach(z => {
+      const opt = document.createElement('option');
+      opt.value = z.id;
+      opt.textContent = z.label;
+      target.appendChild(opt);
+    });
+  };
+  fill(sel);
+  fill(selMobile);
 
   const saved = localStorage.getItem('dash_tz');
   if (saved && tzData.find(z => z.id === saved)) {
-    sel.value = saved;
     currentTz = saved;
   } else {
     try {
       const browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
       const match = tzData.find(z => z.id === browserTz);
       if (match) {
-        sel.value = match.id;
         currentTz = match.id;
       } else {
         const localOffset = new Date().getTimezoneOffset();
@@ -1012,18 +1053,22 @@ function initTzSelect() {
             if (diff < bestDiff) { bestDiff = diff; best = z; }
           } catch(e) {}
         });
-        if (best && bestDiff <= 30) {
-          sel.value = best.id;
-          currentTz = best.id;
-        }
+        if (best && bestDiff <= 30) currentTz = best.id;
       }
     } catch(e) {}
   }
+  if (sel) sel.value = currentTz;
+  if (selMobile) selMobile.value = currentTz;
 }
 
-function onTzChange() {
+function onTzChange(fromEl) {
+  const val = (fromEl && fromEl.value !== undefined) ? fromEl.value : (document.getElementById('tzSelect') || {}).value;
+  if (!val) return;
+  currentTz = val;
   const sel = document.getElementById('tzSelect');
-  currentTz = sel.value;
+  const selMobile = document.getElementById('tzSelectMobile');
+  if (sel) sel.value = currentTz;
+  if (selMobile) selMobile.value = currentTz;
   localStorage.setItem('dash_tz', currentTz);
   if (galleries.length > 0) {
     renderTable();
