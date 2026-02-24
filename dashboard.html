@@ -263,6 +263,84 @@
       color: var(--text-muted);
     }
 
+    .help-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      padding: 0;
+    }
+    .help-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: #eef2ff;
+      transform: scale(1.1);
+    }
+
+    .help-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(2px);
+    }
+    .help-overlay.show { display: flex; }
+    .help-modal {
+      background: #fff;
+      border-radius: 16px;
+      max-width: 720px;
+      width: 92%;
+      padding: 24px;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      animation: helpIn 0.25s ease;
+    }
+    @keyframes helpIn {
+      from { opacity: 0; transform: scale(0.92) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .help-modal .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+    }
+    .help-modal .close-btn:hover { color: var(--text); }
+    .help-modal h5 {
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+    .help-modal img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .help-modal .help-desc {
+      margin-top: 14px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
     .toast-container {
       position: fixed;
       bottom: 20px;
@@ -350,13 +428,26 @@
   </div>
 
   <!-- Toolbar -->
-  <div class="mb-3 d-flex justify-content-end gap-2">
+  <div class="mb-3 d-flex justify-content-end gap-2 align-items-center">
+    <button class="help-btn" onclick="showHelp()" title="Help">?</button>
     <button class="btn btn-sm toolbar-btn replace-mode-btn" id="replaceModeBtn" onclick="toggleReplaceMode()">
       <i class="fas fa-copy me-1"></i><span data-translate="dash.replaceMode">Replace Mode</span>
     </button>
     <button class="btn btn-sm toolbar-btn refresh-btn" onclick="loadGalleries()">
       <i class="fas fa-sync-alt me-1"></i><span data-translate="dash.refresh">Refresh</span>
     </button>
+  </div>
+
+  <!-- Help Modal -->
+  <div class="help-overlay" id="helpOverlay" onclick="if(event.target===this)closeHelp()">
+    <div class="help-modal">
+      <button class="close-btn" onclick="closeHelp()">&times;</button>
+      <h5><i class="fas fa-info-circle me-2 text-primary"></i><span data-translate="dash.helpTitle">How Replace Mode Works</span></h5>
+      <img src="replace-help.png" alt="Replace Mode Explanation">
+      <div class="help-desc" data-translate="dash.helpDesc">
+        Select a deleted gallery as target (A), then pick an active gallery as source (B). B's content and settings will be copied to A, while A's original link stays the same. This lets you reuse an existing link with new content.
+      </div>
+    </div>
   </div>
 
   <!-- Loading -->
@@ -385,6 +476,8 @@
           <th>ID</th>
           <th data-translate="dash.colCaption">Caption</th>
           <th data-translate="dash.colViews">Views</th>
+          <th data-translate="dash.colDuration">Duration</th>
+          <th data-translate="dash.colExpiration">Expiration</th>
           <th data-translate="dash.colLink">Link</th>
           <th data-translate="dash.colStatus">Status</th>
           <th data-translate="dash.colActions">Actions</th>
@@ -465,9 +558,14 @@ function encodeGalleryId(numericId) {
 
 function getToken() { return sessionStorage.getItem('maiimg_jwt'); }
 
-function i(key, fallback) {
-  if (window.i18n && window.i18n.t) return window.i18n.t(key) || fallback;
-  return fallback;
+function i(key, fallback, vars) {
+  let text = (window.i18n && window.i18n.t) ? (window.i18n.t(key) || fallback) : fallback;
+  if (vars) {
+    Object.keys(vars).forEach(k => {
+      text = text.replace(new RegExp(`#\\{${k}\\}|\\{${k}\\}`, 'g'), vars[k]);
+    });
+  }
+  return text;
 }
 
 function getGalleryStatus(g) {
@@ -480,9 +578,32 @@ function getGalleryStatus(g) {
 }
 
 function statusBadge(status) {
-  const labels = { active: 'Active', deleted: 'Deleted', expired: 'Expired' };
+  const labels = {
+    active: i('dash.statusActive', 'Active'),
+    deleted: i('dash.statusDeleted', 'Deleted'),
+    expired: i('dash.statusExpired', 'Expired')
+  };
   const cls = { active: 'badge-active', deleted: 'badge-deleted', expired: 'badge-expired' };
   return `<span class="badge ${cls[status]}">${labels[status]}</span>`;
+}
+
+function formatDuration(seconds) {
+  const s = parseInt(seconds);
+  if (!s || s <= 0 || s >= 1999999927) return i('dash.unlimited', 'Unlimited');
+  if (s < 60) return `${s}s`;
+  if (s < 3600) return `${Math.floor(s / 60)}m ${s % 60 ? (s % 60) + 's' : ''}`.trim();
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  return `${h}h ${m ? m + 'm' : ''}`.trim();
+}
+
+function formatEndtime(ts) {
+  if (!ts) return i('dash.never', 'Never');
+  const ms = parseInt(ts) * 1000;
+  if (isNaN(ms) || ms <= 0) return i('dash.never', 'Never');
+  const d = new Date(ms);
+  if (d < new Date()) return `<span class="text-danger">${d.toLocaleDateString()} ${d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</span>`;
+  return `${d.toLocaleDateString()} ${d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}`;
 }
 
 function galleryLink(id) {
@@ -585,6 +706,8 @@ function renderTable() {
       <td><strong>#${g.id}</strong></td>
       <td>${escHtml(g.caption || '-')}</td>
       <td>${g.viewLimit}</td>
+      <td>${formatDuration(g.viewDuration)}</td>
+      <td>${formatEndtime(g.endtime)}</td>
       <td><a class="gallery-link" href="${link}" target="_blank">${link.replace('https://','')}</a></td>
       <td>${statusBadge(status)}</td>
       <td class="text-nowrap">
@@ -607,9 +730,11 @@ function renderCards() {
         <span class="card-id">#${g.id}</span>
         ${statusBadge(status)}
       </div>
-      <div class="card-row"><span class="label">Caption</span><span>${escHtml(g.caption || '-')}</span></div>
-      <div class="card-row"><span class="label">Views</span><span>${g.viewLimit}</span></div>
-      <div class="card-row"><span class="label">Link</span><a class="gallery-link" href="${link}" target="_blank">${link.replace('https://','').substring(0,28)}...</a></div>
+      <div class="card-row"><span class="label">${i('dash.colCaption','Caption')}</span><span>${escHtml(g.caption || '-')}</span></div>
+      <div class="card-row"><span class="label">${i('dash.colViews','Views')}</span><span>${g.viewLimit}</span></div>
+      <div class="card-row"><span class="label">${i('dash.colDuration','Duration')}</span><span>${formatDuration(g.viewDuration)}</span></div>
+      <div class="card-row"><span class="label">${i('dash.colExpiration','Expiration')}</span><span>${formatEndtime(g.endtime)}</span></div>
+      <div class="card-row"><span class="label">${i('dash.colLink','Link')}</span><a class="gallery-link" href="${link}" target="_blank">${link.replace('https://','').substring(0,28)}...</a></div>
       <div class="card-actions">
         ${replaceMode ? `
           <label class="action-btn text-primary" style="cursor:pointer"><input type="radio" name="mTarget" class="me-1" ${replaceTarget === g.id ? 'checked' : ''} onchange="onPickTarget(${g.id})">A</label>
@@ -625,16 +750,19 @@ function renderCards() {
 
 // ---- Delete Gallery ----
 async function deleteGallery(id) {
-  if (!confirm(`Delete gallery #${id}? This will set views to 0.`)) return;
+  if (!confirm(i('dash.confirmDelete', `Delete gallery #${id}? This will set views to 0.`, { id }))) return;
   try {
     const res = await fetch(`${API_BASE}/api/delete-gallery`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
+      },
       body: JSON.stringify({ galleryId: id, confirmCode: `DELETE-${id}` })
     });
     const data = await res.json();
     if (data.success) {
-      showToast(`Gallery #${id} deleted`, 'success');
+      showToast(i('dash.deletedToast', `Gallery #${id} deleted`, { id }), 'success');
       loadGalleries();
     } else {
       showToast(data.error || 'Delete failed', 'danger');
@@ -713,7 +841,9 @@ function updateReplaceUI() {
 async function executeReplace() {
   if (!replaceTarget || !replaceSource) return;
   const srcG = galleries.find(g => g.id === replaceSource);
-  const msg = `Replace #${replaceTarget} (A) with all settings from #${replaceSource} (B)?\n\nA will get B's: images, views (${srcG?.viewLimit || '?'}), caption, password, expiration.\nA's link stays the same.`;
+  const msg = i('dash.confirmReplace',
+    `Replace #${replaceTarget} (A) with all settings from #${replaceSource} (B)?\n\nA will get B's: images, views (${srcG?.viewLimit || '?'}), caption, password, expiration.\nA's link stays the same.`,
+    { target: replaceTarget, source: replaceSource, views: srcG?.viewLimit || '?' });
   if (!confirm(msg)) return;
   try {
     const res = await fetch(`${API_BASE}/api/user/replace-gallery`, {
@@ -726,7 +856,7 @@ async function executeReplace() {
     });
     const data = await res.json();
     if (data.status === 'ok') {
-      showToast(`#${replaceTarget} replaced with #${replaceSource}'s settings`, 'success');
+      showToast(i('dash.replacedToast', `#${replaceTarget} replaced with #${replaceSource}'s settings`, { target: replaceTarget, source: replaceSource }), 'success');
       cancelReplace();
       loadGalleries();
     } else {
@@ -753,8 +883,12 @@ function startRestoreFor(id) {
   renderTable();
   renderCards();
   updateReplaceUI();
-  showToast(i('dash.restoreHint', `Gallery #${id} selected as target (A). Now pick a source (B) to copy from.`), 'info');
+  showToast(i('dash.restoreHint', `Gallery #${id} selected as target (A). Now pick a source (B) to copy from.`, { id }), 'info');
 }
+
+// ---- Help Modal ----
+function showHelp() { document.getElementById('helpOverlay').classList.add('show'); }
+function closeHelp() { document.getElementById('helpOverlay').classList.remove('show'); }
 
 // ---- Utils ----
 function escHtml(s) {
@@ -790,6 +924,12 @@ function changeLanguage(lang) {
   if (window.i18n) {
     window.i18n.setLanguage(lang);
     localStorage.setItem('preferred-language', lang);
+    const pageTitle = window.i18n.t('dash.pageTitle');
+    if (pageTitle) document.title = pageTitle;
+    if (galleries.length > 0) {
+      renderTable();
+      renderCards();
+    }
   }
 }
 
@@ -800,6 +940,8 @@ if (window.i18n) {
       const translated = window.i18n.t(key);
       if (translated) el.textContent = translated;
     });
+    const pageTitle = window.i18n.t('dash.pageTitle');
+    if (pageTitle) document.title = pageTitle;
     window.i18n.updateLanguageSelector();
   });
 }
