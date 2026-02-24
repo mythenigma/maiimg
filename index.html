@@ -77,6 +77,8 @@
       <div class="nav-actions-mobile dropdown d-md-none">
         <button class="btn btn-light mobile-user-trigger" type="button" id="mobileUserMenuBtn" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open user menu">
           <i class="fas fa-user-circle"></i>
+          <span class="mobile-user-sep">/</span>
+          <span id="mobileCurrentLanguageFlag" class="mobile-lang-flag" aria-hidden="true">🇺🇸</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end mobile-user-menu" aria-labelledby="mobileUserMenuBtn">
           <li><h6 class="dropdown-header" id="mobileUserEmail">Guest</h6></li>
@@ -683,6 +685,7 @@
       if (window.i18n) {
         window.i18n.setLanguage(lang);
         currentLanguage = lang;
+        syncMobileLanguageFlag(lang);
         updateFooterComplianceText(lang);
         if (typeof window.__updateMaiimgExpiration === 'function') {
           window.__updateMaiimgExpiration();
@@ -695,6 +698,26 @@
       } else {
         console.error('i18n instance not found');
       }
+    }
+
+    function getLanguageFlag(lang) {
+      const map = {
+        en: '🇺🇸',
+        zh: '🇨🇳',
+        tw: '🇹🇼',
+        ja: '🇯🇵',
+        de: '🇩🇪',
+        ko: '🇰🇷',
+        fr: '🇫🇷',
+        it: '🇮🇹'
+      };
+      return map[lang] || map.en;
+    }
+
+    function syncMobileLanguageFlag(lang) {
+      const flagEl = document.getElementById('mobileCurrentLanguageFlag');
+      if (!flagEl) return;
+      flagEl.textContent = getLanguageFlag(lang || currentLanguage || 'en');
     }
 
     // Update all translations on the page
@@ -1698,6 +1721,7 @@
       // Initialize translations
       initializeTranslations();
       updateFooterComplianceText(window.i18n ? window.i18n.currentLanguage : currentLanguage);
+      syncMobileLanguageFlag(window.i18n ? window.i18n.currentLanguage : currentLanguage);
       
       // Load saved language preference
       const savedLanguage = localStorage.getItem('preferred-language');
