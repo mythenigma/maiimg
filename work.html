@@ -67,6 +67,21 @@
       <p><strong>文件：</strong><code>dashboard.html</code>、<code>i18n.js</code></p>
     </section>
 
+    <section class="card">
+      <div class="row"><h2>5) 项目看法与改善建议（Roadmap）</h2><span class="tag info">建议</span></div>
+      <p><strong>当前判断：</strong>MaiIMG 已具备“上传-分享-追踪-管理”的完整闭环，功能已经不弱；下一步重点应从“能用”转向“稳定转化 + 性能体验 + 内容增长”。</p>
+      <ul>
+        <li><strong>P0（优先）：登录转化与新功能可见性</strong>：未登录上传提醒继续保留；在生成成功区增加“登录后可管理历史链接/替换/访问记录”的固定提示；把“到期时间设置”放入首页与 blog 的首屏文案。</li>
+        <li><strong>P0（优先）：移动端体验一致性</strong>：统一 index / maiimg / dashboard 的头部、按钮高度、卡片间距；减少手机版操作跳转层级，关键动作保持单屏可见。</li>
+        <li><strong>P1：Gallery 加载策略</strong>：保持逐张懒加载，增加“缩略图 + 原图”两级资源与下一张预加载，优先提升弱网首屏速度，不建议先做复杂 chunk。</li>
+        <li><strong>P1：数据与埋点</strong>：补齐关键漏斗事件（打开上传、开始上传、生成成功、点击登录、完成登录、进入 dashboard），每周看转化率再迭代文案和交互。</li>
+        <li><strong>P1：SEO/知识库体系</strong>：围绕真实功能写主题（过期时间、访问记录、A/B 替换、登录管理）；每篇固定结构：问题场景 → 操作步骤 → 常见问题 → 相关功能入口。</li>
+        <li><strong>P2：可信度建设</strong>：补“隐私与存储时长说明”“游客与登录用户能力对比”“常见错误码说明”，降低新用户不确定感。</li>
+      </ul>
+      <p><strong>建议执行方式：</strong>先做 P0 两周冲刺（转化+移动端），再做 P1（性能+内容+埋点），每周复盘一次核心指标。</p>
+      <p><strong>相关页面：</strong><code>index.html</code>、<code>maiimg.html</code>、<code>gallery/index.html</code>、<code>dashboard.html</code>、<code>work.html</code></p>
+    </section>
+
     <p class="foot">备注：本页为最新执行记录，按你的确认状态更新。</p>
   </main>
 </body>
