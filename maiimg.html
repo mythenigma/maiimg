@@ -537,39 +537,111 @@
     </div>
   </div>
 
-  <!-- Login Modal -->
+  <!-- Auth Modal -->
   <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
       <div class="modal-content" style="border-radius: 16px; border: none;">
         <div class="modal-header border-0 pb-0">
-          <h5 class="modal-title w-100 text-center fw-bold">Sign in to MaiIMG</h5>
+          <h5 class="modal-title w-100 text-center fw-bold" id="authModalTitle">Sign in to MaiIMG</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body px-4 pb-4">
-          <div class="d-grid gap-2 mb-3">
-            <button type="button" class="btn btn-outline-dark d-flex align-items-center justify-content-center gap-2 py-2" id="googleLoginBtn" style="border-radius: 10px;">
-              <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-              Continue with Google
-            </button>
-            <!-- Facebook and Apple login can be added later when configured -->
-          </div>
-          <div class="position-relative my-3">
+
+          <!-- ===== Sign In View ===== -->
+          <div id="authSignIn">
+            <div class="d-grid gap-2 mb-3">
+              <button type="button" class="btn btn-outline-dark d-flex align-items-center justify-content-center gap-2 py-2" id="googleLoginBtn" style="border-radius: 10px;">
+                <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                Continue with Google
+              </button>
+            </div>
+            <div class="position-relative my-3">
+              <hr>
+              <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small">or sign in with email</span>
+            </div>
+            <form id="emailLoginForm">
+              <div class="mb-2">
+                <input type="email" class="form-control" id="loginEmail" placeholder="Email address" required style="border-radius: 10px;">
+              </div>
+              <div class="mb-3">
+                <input type="password" class="form-control" id="loginPassword" placeholder="Password" required style="border-radius: 10px;">
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary py-2" style="border-radius: 10px;">Sign In</button>
+              </div>
+            </form>
+            <div class="text-center mt-3">
+              <a href="#" id="showForgotPassword" class="text-muted small">Forgot password?</a>
+            </div>
             <hr>
-            <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small">or</span>
+            <div class="text-center">
+              <span class="text-muted small">Don't have an account?</span>
+              <a href="#" id="showSignUp" class="small fw-bold ms-1">Create Account</a>
+            </div>
           </div>
-          <form id="emailLoginForm">
-            <div class="mb-2">
-              <input type="email" class="form-control" id="emailInput" placeholder="Email address" required style="border-radius: 10px;">
+
+          <!-- ===== Sign Up View ===== -->
+          <div id="authSignUp" class="d-none">
+            <form id="emailSignUpForm">
+              <div class="mb-2">
+                <input type="email" class="form-control" id="signUpEmail" placeholder="Email address" required style="border-radius: 10px;">
+              </div>
+              <div class="mb-2">
+                <input type="password" class="form-control" id="signUpPassword" placeholder="Password (min 6 characters)" required minlength="6" style="border-radius: 10px;">
+              </div>
+              <div class="mb-3">
+                <input type="password" class="form-control" id="signUpPasswordConfirm" placeholder="Confirm password" required minlength="6" style="border-radius: 10px;">
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-success py-2" style="border-radius: 10px;">Create Account</button>
+              </div>
+            </form>
+            <hr>
+            <div class="text-center">
+              <span class="text-muted small">Already have an account?</span>
+              <a href="#" id="showSignIn" class="small fw-bold ms-1">Sign In</a>
             </div>
+          </div>
+
+          <!-- ===== Forgot Password View ===== -->
+          <div id="authForgotPassword" class="d-none">
+            <p class="text-muted small text-center mb-3">Enter your email and we'll send you a link to reset your password.</p>
+            <form id="forgotPasswordForm">
+              <div class="mb-3">
+                <input type="email" class="form-control" id="resetEmail" placeholder="Email address" required style="border-radius: 10px;">
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-warning py-2" style="border-radius: 10px;">Send Reset Email</button>
+              </div>
+            </form>
+            <hr>
+            <div class="text-center">
+              <a href="#" id="backToSignIn" class="small fw-bold">Back to Sign In</a>
+            </div>
+          </div>
+
+          <!-- ===== Email Verification Notice ===== -->
+          <div id="authVerifyEmail" class="d-none text-center">
             <div class="mb-3">
-              <input type="password" class="form-control" id="passwordInput" placeholder="Password" required style="border-radius: 10px;">
+              <i class="fas fa-envelope-open-text fa-3x text-primary"></i>
             </div>
+            <h6 class="fw-bold">Verify your email</h6>
+            <p class="text-muted small">We've sent a verification email to <strong id="verifyEmailAddr"></strong>. Please check your inbox and click the link to verify.</p>
             <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-primary py-2" id="emailSignInBtn" style="border-radius: 10px;">Sign In</button>
-              <button type="button" class="btn btn-outline-secondary py-2" id="emailSignUpBtn" style="border-radius: 10px;">Create Account</button>
+              <button type="button" class="btn btn-outline-primary py-2" id="resendVerification" style="border-radius: 10px;">Resend Verification Email</button>
+              <button type="button" class="btn btn-primary py-2" id="verificationDone" style="border-radius: 10px;">I've Verified</button>
             </div>
-          </form>
-          <div id="loginError" class="text-danger small mt-2 text-center d-none"></div>
+          </div>
+
+          <!-- ===== Success Message ===== -->
+          <div id="authSuccess" class="d-none text-center">
+            <div class="mb-3">
+              <i class="fas fa-check-circle fa-3x text-success"></i>
+            </div>
+            <p class="fw-bold mb-0" id="authSuccessMsg"></p>
+          </div>
+
+          <div id="authError" class="text-danger small mt-2 text-center d-none"></div>
         </div>
       </div>
     </div>
@@ -1671,7 +1743,8 @@
     import {
       getAuth, signInWithPopup, signOut, onAuthStateChanged,
       GoogleAuthProvider,
-      signInWithEmailAndPassword, createUserWithEmailAndPassword
+      signInWithEmailAndPassword, createUserWithEmailAndPassword,
+      sendPasswordResetEmail, sendEmailVerification
     } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
 
     const firebaseConfig = {
@@ -1686,7 +1759,6 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-
     const googleProvider = new GoogleAuthProvider();
     googleProvider.setCustomParameters({ prompt: "select_account" });
 
@@ -1694,19 +1766,53 @@
     const loginBtn = document.getElementById("loginBtn");
     const logoutBtn = document.getElementById("logoutBtn");
     const userInfoEl = document.getElementById("userInfo");
-    const loginError = document.getElementById("loginError");
 
-    function showLoginError(msg) {
-      loginError.textContent = msg;
-      loginError.classList.remove("d-none");
-      setTimeout(() => loginError.classList.add("d-none"), 5000);
+    // View elements
+    const views = {
+      signIn: document.getElementById("authSignIn"),
+      signUp: document.getElementById("authSignUp"),
+      forgot: document.getElementById("authForgotPassword"),
+      verify: document.getElementById("authVerifyEmail"),
+      success: document.getElementById("authSuccess")
+    };
+    const modalTitle = document.getElementById("authModalTitle");
+    const authError = document.getElementById("authError");
+
+    function showView(name) {
+      Object.values(views).forEach(v => v.classList.add("d-none"));
+      authError.classList.add("d-none");
+      views[name].classList.remove("d-none");
+      const titles = { signIn: "Sign in to MaiIMG", signUp: "Create Account", forgot: "Reset Password", verify: "Verify Email", success: "" };
+      modalTitle.textContent = titles[name] || "";
     }
 
-    function dismissLoginModal() {
-      const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-      if (modal) modal.hide();
+    function showError(msg) {
+      authError.textContent = msg;
+      authError.classList.remove("d-none");
+      setTimeout(() => authError.classList.add("d-none"), 6000);
     }
 
+    function dismissModal() {
+      const m = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+      if (m) m.hide();
+    }
+
+    function showSuccess(msg) {
+      document.getElementById("authSuccessMsg").textContent = msg;
+      showView("success");
+      setTimeout(dismissModal, 2000);
+    }
+
+    // Reset to sign-in view when modal opens
+    document.getElementById('loginModal').addEventListener('show.bs.modal', () => showView("signIn"));
+
+    // View switching
+    document.getElementById("showSignUp").addEventListener("click", (e) => { e.preventDefault(); showView("signUp"); });
+    document.getElementById("showSignIn").addEventListener("click", (e) => { e.preventDefault(); showView("signIn"); });
+    document.getElementById("showForgotPassword").addEventListener("click", (e) => { e.preventDefault(); showView("forgot"); });
+    document.getElementById("backToSignIn").addEventListener("click", (e) => { e.preventDefault(); showView("signIn"); });
+
+    // Worker D1 auth
     async function workerAuth(email, uid) {
       try {
         await fetch(`${WORKER_API}/api/user/register`, {
@@ -1714,12 +1820,12 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, uid })
         });
-        const loginRes = await fetch(`${WORKER_API}/api/user/login`, {
+        const res = await fetch(`${WORKER_API}/api/user/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, uid })
         });
-        const data = await loginRes.json();
+        const data = await res.json();
         if (data.token) {
           sessionStorage.setItem("maiimg_jwt", data.token);
           sessionStorage.setItem("maiimg_user", JSON.stringify({
@@ -1733,45 +1839,103 @@
       }
     }
 
-    async function popupLogin(provider) {
+    // --- Google Login ---
+    document.getElementById("googleLoginBtn").addEventListener("click", async () => {
       try {
-        await signInWithPopup(auth, provider);
-        dismissLoginModal();
+        await signInWithPopup(auth, googleProvider);
+        dismissModal();
       } catch (error) {
-        console.error("Login failed:", error);
-        showLoginError(error.message);
+        showError(error.message);
       }
-    }
+    });
 
-    document.getElementById("googleLoginBtn").addEventListener("click", () => popupLogin(googleProvider));
-
+    // --- Email Sign In ---
     document.getElementById("emailLoginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = document.getElementById("emailInput").value;
-      const password = document.getElementById("passwordInput").value;
+      const email = document.getElementById("loginEmail").value;
+      const pw = document.getElementById("loginPassword").value;
       try {
-        await signInWithEmailAndPassword(auth, email, password);
-        dismissLoginModal();
+        const cred = await signInWithEmailAndPassword(auth, email, pw);
+        if (!cred.user.emailVerified) {
+          showView("verify");
+          document.getElementById("verifyEmailAddr").textContent = email;
+          return;
+        }
+        dismissModal();
       } catch (error) {
-        console.error("Email login failed:", error);
-        showLoginError(error.code === 'auth/invalid-credential' ? 'Invalid email or password' : error.message);
+        const msg = {
+          'auth/invalid-credential': 'Invalid email or password',
+          'auth/user-not-found': 'No account with this email',
+          'auth/wrong-password': 'Incorrect password',
+          'auth/too-many-requests': 'Too many attempts. Try again later.'
+        }[error.code] || error.message;
+        showError(msg);
       }
     });
 
-    document.getElementById("emailSignUpBtn").addEventListener("click", async () => {
-      const email = document.getElementById("emailInput").value;
-      const password = document.getElementById("passwordInput").value;
-      if (!email || !password) { showLoginError("Please enter email and password"); return; }
-      if (password.length < 6) { showLoginError("Password must be at least 6 characters"); return; }
+    // --- Email Sign Up ---
+    document.getElementById("emailSignUpForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("signUpEmail").value;
+      const pw = document.getElementById("signUpPassword").value;
+      const pw2 = document.getElementById("signUpPasswordConfirm").value;
+      if (pw !== pw2) { showError("Passwords do not match"); return; }
+      if (pw.length < 6) { showError("Password must be at least 6 characters"); return; }
       try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        dismissLoginModal();
+        const cred = await createUserWithEmailAndPassword(auth, email, pw);
+        await sendEmailVerification(cred.user);
+        showView("verify");
+        document.getElementById("verifyEmailAddr").textContent = email;
       } catch (error) {
-        console.error("Sign up failed:", error);
-        showLoginError(error.code === 'auth/email-already-in-use' ? 'Email already in use' : error.message);
+        const msg = {
+          'auth/email-already-in-use': 'This email is already registered. Try signing in.',
+          'auth/weak-password': 'Password is too weak (min 6 characters)',
+          'auth/invalid-email': 'Invalid email address'
+        }[error.code] || error.message;
+        showError(msg);
       }
     });
 
+    // --- Forgot Password ---
+    document.getElementById("forgotPasswordForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("resetEmail").value;
+      try {
+        await sendPasswordResetEmail(auth, email);
+        showSuccess("Reset email sent! Check your inbox.");
+      } catch (error) {
+        const msg = error.code === 'auth/user-not-found' ? 'No account with this email' : error.message;
+        showError(msg);
+      }
+    });
+
+    // --- Resend Verification ---
+    document.getElementById("resendVerification").addEventListener("click", async () => {
+      if (auth.currentUser) {
+        try {
+          await sendEmailVerification(auth.currentUser);
+          showError(""); // clear
+          document.getElementById("resendVerification").textContent = "Email Sent!";
+          setTimeout(() => { document.getElementById("resendVerification").textContent = "Resend Verification Email"; }, 3000);
+        } catch (error) {
+          showError(error.code === 'auth/too-many-requests' ? 'Please wait before requesting again' : error.message);
+        }
+      }
+    });
+
+    // --- "I've Verified" button ---
+    document.getElementById("verificationDone").addEventListener("click", async () => {
+      if (auth.currentUser) {
+        await auth.currentUser.reload();
+        if (auth.currentUser.emailVerified) {
+          dismissModal();
+        } else {
+          showError("Email not yet verified. Please check your inbox.");
+        }
+      }
+    });
+
+    // --- Logout ---
     logoutBtn.addEventListener("click", async () => {
       try {
         await signOut(auth);
@@ -1783,8 +1947,16 @@
       }
     });
 
+    // --- Auth State ---
     onAuthStateChanged(auth, async (user) => {
       if (user) {
+        // Google users are auto-verified; email users must verify
+        if (!user.emailVerified && user.providerData[0]?.providerId === 'password') {
+          loginBtn.classList.remove("d-none");
+          logoutBtn.classList.add("d-none");
+          userInfoEl.classList.add("d-none");
+          return;
+        }
         loginBtn.classList.add("d-none");
         logoutBtn.classList.remove("d-none");
         userInfoEl.classList.remove("d-none");
