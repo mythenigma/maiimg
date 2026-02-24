@@ -646,7 +646,7 @@
           <p class="text-muted mb-3" data-translate="auth.loginNudgeBody">Sign in to manage galleries, restore links, and view access records from your dashboard.</p>
           <div class="d-grid gap-2">
             <button type="button" class="btn btn-primary py-2" id="loginNudgeSignInBtn" style="border-radius: 10px;" data-translate="auth.loginNudgeSignIn">Sign In</button>
-            <button type="button" class="btn btn-outline-secondary py-2" data-bs-dismiss="modal" style="border-radius: 10px;" data-translate="auth.loginNudgeLater">Maybe Later</button>
+            <button type="button" class="btn btn-outline-secondary py-2" id="loginNudgeLaterBtn" data-bs-dismiss="modal" style="border-radius: 10px;" data-translate="auth.loginNudgeLater">Maybe Later</button>
           </div>
         </div>
       </div>
@@ -689,6 +689,8 @@
     let myDropzone; // 添加全局变量来存储 dropzone 实例
     const LOGIN_NUDGE_KEY = 'maiimg_login_nudge_last_ts';
     const LOGIN_NUDGE_COOLDOWN_MS = 60 * 60 * 1000;
+    const LOGIN_NUDGE_AUTO_CLOSE_SECONDS = 7;
+    let loginNudgeTimer = null;
 
     // Language functionality
     let currentLanguage = 'en';
@@ -1288,6 +1290,41 @@
       modal.show();
     }
 
+    function updateLoginNudgeLaterButton(secondsLeft) {
+      const btn = document.getElementById('loginNudgeLaterBtn');
+      if (!btn) return;
+      const base = getTranslation('auth.loginNudgeLater', currentLanguage) || 'Maybe Later';
+      btn.innerHTML = `<i class="far fa-clock me-1"></i>${base} (${secondsLeft}s)`;
+    }
+
+    function stopLoginNudgeCountdown() {
+      if (loginNudgeTimer) {
+        clearInterval(loginNudgeTimer);
+        loginNudgeTimer = null;
+      }
+      const btn = document.getElementById('loginNudgeLaterBtn');
+      if (!btn) return;
+      const base = getTranslation('auth.loginNudgeLater', currentLanguage) || 'Maybe Later';
+      btn.innerHTML = `<i class="far fa-clock me-1"></i>${base}`;
+    }
+
+    function startLoginNudgeCountdown() {
+      stopLoginNudgeCountdown();
+      let secondsLeft = LOGIN_NUDGE_AUTO_CLOSE_SECONDS;
+      updateLoginNudgeLaterButton(secondsLeft);
+      loginNudgeTimer = setInterval(() => {
+        secondsLeft -= 1;
+        if (secondsLeft <= 0) {
+          stopLoginNudgeCountdown();
+          const modalEl = document.getElementById('loginNudgeModal');
+          const modal = modalEl ? bootstrap.Modal.getInstance(modalEl) : null;
+          if (modal) modal.hide();
+          return;
+        }
+        updateLoginNudgeLaterButton(secondsLeft);
+      }, 1000);
+    }
+
     function formatEndtimeDisplay(endtime) {
       const raw = (endtime ?? '').toString().trim();
       if (!raw) return getTranslation('features.expiration.unlimited', currentLanguage);
@@ -1830,6 +1867,12 @@
             loginModal.show();
           }
         });
+      }
+
+      const loginNudgeModalEl = document.getElementById('loginNudgeModal');
+      if (loginNudgeModalEl) {
+        loginNudgeModalEl.addEventListener('shown.bs.modal', startLoginNudgeCountdown);
+        loginNudgeModalEl.addEventListener('hidden.bs.modal', stopLoginNudgeCountdown);
       }
     });
   </script>
