@@ -42,7 +42,7 @@
       
       <!-- User Auth Area -->
       <div class="d-flex align-items-center gap-2">
-        <div id="userInfo" class="text-white small d-none"></div>
+        <div id="userInfo" class="small d-none" style="background: rgba(255,255,255,0.9); color: #333; padding: 4px 12px; border-radius: 20px; font-weight: 500;"></div>
         <button type="button" class="btn btn-light btn-sm" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal">
           <i class="fas fa-sign-in-alt me-1"></i><span data-translate="auth.login">Login</span>
         </button>
@@ -552,31 +552,31 @@
             <div class="d-grid gap-2 mb-3">
               <button type="button" class="btn btn-outline-dark d-flex align-items-center justify-content-center gap-2 py-2" id="googleLoginBtn" style="border-radius: 10px;">
                 <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-                Continue with Google
+                <span data-translate="auth.continueGoogle">Continue with Google</span>
               </button>
             </div>
             <div class="position-relative my-3">
               <hr>
-              <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small">or sign in with email</span>
+              <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small" data-translate="auth.orEmail">or sign in with email</span>
             </div>
             <form id="emailLoginForm">
               <div class="mb-2">
-                <input type="email" class="form-control" id="loginEmail" placeholder="Email address" required style="border-radius: 10px;">
+                <input type="email" class="form-control" id="loginEmail" data-translate-placeholder="auth.emailPlaceholder" placeholder="Email address" required style="border-radius: 10px;">
               </div>
               <div class="mb-3">
-                <input type="password" class="form-control" id="loginPassword" placeholder="Password" required style="border-radius: 10px;">
+                <input type="password" class="form-control" id="loginPassword" data-translate-placeholder="auth.passwordPlaceholder" placeholder="Password" required style="border-radius: 10px;">
               </div>
               <div class="d-grid">
-                <button type="submit" class="btn btn-primary py-2" style="border-radius: 10px;">Sign In</button>
+                <button type="submit" class="btn btn-primary py-2" style="border-radius: 10px;" data-translate="auth.signIn">Sign In</button>
               </div>
             </form>
             <div class="text-center mt-3">
-              <a href="#" id="showForgotPassword" class="text-muted small">Forgot password?</a>
+              <a href="#" id="showForgotPassword" class="text-muted small" data-translate="auth.forgotPassword">Forgot password?</a>
             </div>
             <hr>
             <div class="text-center">
-              <span class="text-muted small">Don't have an account?</span>
-              <a href="#" id="showSignUp" class="small fw-bold ms-1">Create Account</a>
+              <span class="text-muted small" data-translate="auth.noAccount">Don't have an account?</span>
+              <a href="#" id="showSignUp" class="small fw-bold ms-1" data-translate="auth.createAccount">Create Account</a>
             </div>
           </div>
 
@@ -584,39 +584,39 @@
           <div id="authSignUp" class="d-none">
             <form id="emailSignUpForm">
               <div class="mb-2">
-                <input type="email" class="form-control" id="signUpEmail" placeholder="Email address" required style="border-radius: 10px;">
+                <input type="email" class="form-control" id="signUpEmail" data-translate-placeholder="auth.emailPlaceholder" placeholder="Email address" required style="border-radius: 10px;">
               </div>
               <div class="mb-2">
-                <input type="password" class="form-control" id="signUpPassword" placeholder="Password (min 6 characters)" required minlength="6" style="border-radius: 10px;">
+                <input type="password" class="form-control" id="signUpPassword" data-translate-placeholder="auth.passwordMin" placeholder="Password (min 6 characters)" required minlength="6" style="border-radius: 10px;">
               </div>
               <div class="mb-3">
-                <input type="password" class="form-control" id="signUpPasswordConfirm" placeholder="Confirm password" required minlength="6" style="border-radius: 10px;">
+                <input type="password" class="form-control" id="signUpPasswordConfirm" data-translate-placeholder="auth.confirmPassword" placeholder="Confirm password" required minlength="6" style="border-radius: 10px;">
               </div>
               <div class="d-grid">
-                <button type="submit" class="btn btn-success py-2" style="border-radius: 10px;">Create Account</button>
+                <button type="submit" class="btn btn-success py-2" style="border-radius: 10px;" data-translate="auth.createAccount">Create Account</button>
               </div>
             </form>
             <hr>
             <div class="text-center">
-              <span class="text-muted small">Already have an account?</span>
-              <a href="#" id="showSignIn" class="small fw-bold ms-1">Sign In</a>
+              <span class="text-muted small" data-translate="auth.hasAccount">Already have an account?</span>
+              <a href="#" id="showSignIn" class="small fw-bold ms-1" data-translate="auth.signIn">Sign In</a>
             </div>
           </div>
 
           <!-- ===== Forgot Password View ===== -->
           <div id="authForgotPassword" class="d-none">
-            <p class="text-muted small text-center mb-3">Enter your email and we'll send you a link to reset your password.</p>
+            <p class="text-muted small text-center mb-3" data-translate="auth.resetDesc">Enter your email and we'll send you a link to reset your password.</p>
             <form id="forgotPasswordForm">
               <div class="mb-3">
-                <input type="email" class="form-control" id="resetEmail" placeholder="Email address" required style="border-radius: 10px;">
+                <input type="email" class="form-control" id="resetEmail" data-translate-placeholder="auth.emailPlaceholder" placeholder="Email address" required style="border-radius: 10px;">
               </div>
               <div class="d-grid">
-                <button type="submit" class="btn btn-warning py-2" style="border-radius: 10px;">Send Reset Email</button>
+                <button type="submit" class="btn btn-warning py-2" style="border-radius: 10px;" data-translate="auth.sendReset">Send Reset Email</button>
               </div>
             </form>
             <hr>
             <div class="text-center">
-              <a href="#" id="backToSignIn" class="small fw-bold">Back to Sign In</a>
+              <a href="#" id="backToSignIn" class="small fw-bold" data-translate="auth.backToSignIn">Back to Sign In</a>
             </div>
           </div>
 
@@ -625,11 +625,11 @@
             <div class="mb-3">
               <i class="fas fa-envelope-open-text fa-3x text-primary"></i>
             </div>
-            <h6 class="fw-bold">Verify your email</h6>
-            <p class="text-muted small">We've sent a verification email to <strong id="verifyEmailAddr"></strong>. Please check your inbox and click the link to verify.</p>
+            <h6 class="fw-bold" data-translate="auth.verifyHeading">Verify your email</h6>
+            <p class="text-muted small" id="verifyDescText">We've sent a verification email to <strong id="verifyEmailAddr"></strong>. Please check your inbox and click the link to verify.</p>
             <div class="d-grid gap-2">
-              <button type="button" class="btn btn-outline-primary py-2" id="resendVerification" style="border-radius: 10px;">Resend Verification Email</button>
-              <button type="button" class="btn btn-primary py-2" id="verificationDone" style="border-radius: 10px;">I've Verified</button>
+              <button type="button" class="btn btn-outline-primary py-2" id="resendVerification" style="border-radius: 10px;" data-translate="auth.resendVerification">Resend Verification Email</button>
+              <button type="button" class="btn btn-primary py-2" id="verificationDone" style="border-radius: 10px;" data-translate="auth.iveVerified">I've Verified</button>
             </div>
           </div>
 
@@ -1778,12 +1778,18 @@
     const modalTitle = document.getElementById("authModalTitle");
     const authError = document.getElementById("authError");
 
+    function t(key) {
+      if (window.i18n) return window.i18n.t(key);
+      const fallbacks = { 'auth.signInTitle': 'Sign in to MaiIMG', 'auth.createAccount': 'Create Account', 'auth.resetTitle': 'Reset Password', 'auth.verifyTitle': 'Verify Email' };
+      return fallbacks[key] || key;
+    }
+
     function showView(name) {
       Object.values(views).forEach(v => v.classList.add("d-none"));
       authError.classList.add("d-none");
       views[name].classList.remove("d-none");
-      const titles = { signIn: "Sign in to MaiIMG", signUp: "Create Account", forgot: "Reset Password", verify: "Verify Email", success: "" };
-      modalTitle.textContent = titles[name] || "";
+      const titleKeys = { signIn: "auth.signInTitle", signUp: "auth.createAccount", forgot: "auth.resetTitle", verify: "auth.verifyTitle", success: "" };
+      modalTitle.textContent = titleKeys[name] ? t(titleKeys[name]) : "";
     }
 
     function showError(msg) {
@@ -1864,10 +1870,10 @@
         dismissModal();
       } catch (error) {
         const msg = {
-          'auth/invalid-credential': 'Invalid email or password',
-          'auth/user-not-found': 'No account with this email',
-          'auth/wrong-password': 'Incorrect password',
-          'auth/too-many-requests': 'Too many attempts. Try again later.'
+          'auth/invalid-credential': t('auth.invalidCredential'),
+          'auth/user-not-found': t('auth.userNotFound'),
+          'auth/wrong-password': t('auth.wrongPassword'),
+          'auth/too-many-requests': t('auth.tooManyRequests')
         }[error.code] || error.message;
         showError(msg);
       }
@@ -1879,8 +1885,8 @@
       const email = document.getElementById("signUpEmail").value;
       const pw = document.getElementById("signUpPassword").value;
       const pw2 = document.getElementById("signUpPasswordConfirm").value;
-      if (pw !== pw2) { showError("Passwords do not match"); return; }
-      if (pw.length < 6) { showError("Password must be at least 6 characters"); return; }
+      if (pw !== pw2) { showError(t('auth.passwordsNoMatch')); return; }
+      if (pw.length < 6) { showError(t('auth.passwordTooShort')); return; }
       try {
         const cred = await createUserWithEmailAndPassword(auth, email, pw);
         await sendEmailVerification(cred.user);
@@ -1888,9 +1894,9 @@
         document.getElementById("verifyEmailAddr").textContent = email;
       } catch (error) {
         const msg = {
-          'auth/email-already-in-use': 'This email is already registered. Try signing in.',
-          'auth/weak-password': 'Password is too weak (min 6 characters)',
-          'auth/invalid-email': 'Invalid email address'
+          'auth/email-already-in-use': t('auth.emailInUse'),
+          'auth/weak-password': t('auth.weakPassword'),
+          'auth/invalid-email': t('auth.invalidEmail')
         }[error.code] || error.message;
         showError(msg);
       }
@@ -1902,9 +1908,9 @@
       const email = document.getElementById("resetEmail").value;
       try {
         await sendPasswordResetEmail(auth, email);
-        showSuccess("Reset email sent! Check your inbox.");
+        showSuccess(t('auth.resetSent'));
       } catch (error) {
-        const msg = error.code === 'auth/user-not-found' ? 'No account with this email' : error.message;
+        const msg = error.code === 'auth/user-not-found' ? t('auth.userNotFound') : error.message;
         showError(msg);
       }
     });
@@ -1915,10 +1921,10 @@
         try {
           await sendEmailVerification(auth.currentUser);
           showError(""); // clear
-          document.getElementById("resendVerification").textContent = "Email Sent!";
-          setTimeout(() => { document.getElementById("resendVerification").textContent = "Resend Verification Email"; }, 3000);
+          document.getElementById("resendVerification").textContent = t('auth.emailSent');
+          setTimeout(() => { document.getElementById("resendVerification").textContent = t('auth.resendVerification'); }, 3000);
         } catch (error) {
-          showError(error.code === 'auth/too-many-requests' ? 'Please wait before requesting again' : error.message);
+          showError(error.code === 'auth/too-many-requests' ? t('auth.waitBeforeResend') : error.message);
         }
       }
     });
@@ -1930,7 +1936,7 @@
         if (auth.currentUser.emailVerified) {
           dismissModal();
         } else {
-          showError("Email not yet verified. Please check your inbox.");
+          showError(t('auth.emailNotVerified'));
         }
       }
     });
@@ -1962,10 +1968,7 @@
         userInfoEl.classList.remove("d-none");
         userInfoEl.textContent = user.email || user.displayName || "User";
 
-        const data = await workerAuth(user.email || user.providerData[0]?.email || user.uid, user.uid);
-        if (data && data.balance !== undefined) {
-          userInfoEl.innerHTML = `<span class="me-1">${user.email || user.displayName}</span><span class="badge bg-light text-dark">${data.plan || 'free'}</span>`;
-        }
+        await workerAuth(user.email || user.providerData[0]?.email || user.uid, user.uid);
       } else {
         loginBtn.classList.remove("d-none");
         logoutBtn.classList.add("d-none");
