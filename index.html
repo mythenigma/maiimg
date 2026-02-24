@@ -40,9 +40,9 @@
         <i class="fas fa-images me-2"></i><span data-translate="nav.title">Image QR Generator</span>
       </a>
       
-      <!-- User Auth Area -->
-      <div class="d-flex align-items-center gap-2">
-        <div id="userInfo" class="small d-none" style="background: rgba(255,255,255,0.9); color: #333; padding: 4px 12px; border-radius: 20px; font-weight: 500;"></div>
+      <!-- Desktop User/Auth + Language -->
+      <div class="nav-actions-desktop d-none d-md-flex align-items-center gap-2">
+        <div id="userInfo" class="small d-none user-pill"></div>
         <a href="dashboard.html" class="btn btn-light btn-sm d-none" id="dashboardBtn">
           <i class="fas fa-th-large me-1"></i><span data-translate="dash.title">My Galleries</span>
         </a>
@@ -53,65 +53,47 @@
           <i class="fas fa-sign-out-alt me-1"></i><span data-translate="auth.logout">Logout</span>
         </button>
 
-      <!-- Language Selector -->
-      <div class="language-selector">
-        <div class="dropdown">
-          <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <span id="currentLanguageFlag">🇺🇸</span>
-            <span id="currentLanguageName" data-translate="language.english">English</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('en')">
-                <span class="flag-icon">🇺🇸</span>
-                <span data-translate="language.english">English</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('zh')">
-                <span class="flag-icon">🇨🇳</span>
-                <span data-translate="language.chinese">中文</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('tw')">
-                <span class="flag-icon">🇹🇼</span>
-                <span data-translate="language.taiwan">中華民國</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('ja')">
-                <span class="flag-icon">🇯🇵</span>
-                <span data-translate="language.japanese">日本語</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('de')">
-                <span class="flag-icon">🇩🇪</span>
-                <span data-translate="language.german">Deutsch</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('ko')">
-                <span class="flag-icon">🇰🇷</span>
-                <span data-translate="language.korean">한국어</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('fr')">
-                <span class="flag-icon">🇫🇷</span>
-                <span data-translate="language.french">Français</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('it')">
-                <span class="flag-icon">🇮🇹</span>
-                <span data-translate="language.italian">Italiano</span>
-              </a>
-            </li>
-          </ul>
+        <div class="language-selector">
+          <div class="dropdown">
+            <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="currentLanguageFlag">🇺🇸</span>
+              <span id="currentLanguageName" data-translate="language.english">English</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('en'); return false;"><span class="flag-icon">🇺🇸</span><span data-translate="language.english">English</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('zh'); return false;"><span class="flag-icon">🇨🇳</span><span data-translate="language.chinese">中文</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('tw'); return false;"><span class="flag-icon">🇹🇼</span><span data-translate="language.taiwan">中華民國</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('ja'); return false;"><span class="flag-icon">🇯🇵</span><span data-translate="language.japanese">日本語</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('de'); return false;"><span class="flag-icon">🇩🇪</span><span data-translate="language.german">Deutsch</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('ko'); return false;"><span class="flag-icon">🇰🇷</span><span data-translate="language.korean">한국어</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr'); return false;"><span class="flag-icon">🇫🇷</span><span data-translate="language.french">Français</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('it'); return false;"><span class="flag-icon">🇮🇹</span><span data-translate="language.italian">Italiano</span></a></li>
+            </ul>
+          </div>
         </div>
       </div>
+
+      <!-- Mobile User Menu -->
+      <div class="nav-actions-mobile dropdown d-md-none">
+        <button class="btn btn-light mobile-user-trigger" type="button" id="mobileUserMenuBtn" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open user menu">
+          <i class="fas fa-user-circle"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end mobile-user-menu" aria-labelledby="mobileUserMenuBtn">
+          <li><h6 class="dropdown-header" id="mobileUserEmail">Guest</h6></li>
+          <li><a href="dashboard.html" class="dropdown-item d-none" id="mobileDashboardBtn"><i class="fas fa-th-large me-2"></i><span data-translate="dash.title">My Galleries</span></a></li>
+          <li><button type="button" class="dropdown-item" id="mobileLoginBtn" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt me-2"></i><span data-translate="auth.login">Login</span></button></li>
+          <li><button type="button" class="dropdown-item d-none" id="mobileLogoutBtn"><i class="fas fa-sign-out-alt me-2"></i><span data-translate="auth.logout">Logout</span></button></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><span class="dropdown-item-text mobile-lang-title">Language</span></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('en'); return false;">🇺🇸 English</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('zh'); return false;">🇨🇳 中文</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('tw'); return false;">🇹🇼 中華民國</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('ja'); return false;">🇯🇵 日本語</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('de'); return false;">🇩🇪 Deutsch</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('ko'); return false;">🇰🇷 한국어</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr'); return false;">🇫🇷 Français</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('it'); return false;">🇮🇹 Italiano</a></li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -1770,6 +1752,37 @@
     const logoutBtn = document.getElementById("logoutBtn");
     const userInfoEl = document.getElementById("userInfo");
     const dashboardBtn = document.getElementById("dashboardBtn");
+    const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+    const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
+    const mobileDashboardBtn = document.getElementById("mobileDashboardBtn");
+    const mobileUserEmail = document.getElementById("mobileUserEmail");
+
+    function syncAuthUI(user, allowAccess) {
+      if (allowAccess) {
+        const name = user?.email || user?.displayName || "User";
+        loginBtn.classList.add("d-none");
+        logoutBtn.classList.remove("d-none");
+        userInfoEl.classList.remove("d-none");
+        dashboardBtn.classList.remove("d-none");
+        userInfoEl.textContent = name;
+
+        mobileLoginBtn.classList.add("d-none");
+        mobileLogoutBtn.classList.remove("d-none");
+        mobileDashboardBtn.classList.remove("d-none");
+        mobileUserEmail.textContent = name;
+      } else {
+        loginBtn.classList.remove("d-none");
+        logoutBtn.classList.add("d-none");
+        userInfoEl.classList.add("d-none");
+        dashboardBtn.classList.add("d-none");
+        userInfoEl.textContent = "";
+
+        mobileLoginBtn.classList.remove("d-none");
+        mobileLogoutBtn.classList.add("d-none");
+        mobileDashboardBtn.classList.add("d-none");
+        mobileUserEmail.textContent = "Guest";
+      }
+    }
 
     // View elements
     const views = {
@@ -1946,7 +1959,7 @@
     });
 
     // --- Logout ---
-    logoutBtn.addEventListener("click", async () => {
+    async function doLogout() {
       try {
         await signOut(auth);
         sessionStorage.removeItem("maiimg_jwt");
@@ -1955,32 +1968,24 @@
       } catch (error) {
         console.error("Logout failed:", error);
       }
-    });
+    }
+
+    logoutBtn.addEventListener("click", doLogout);
+    mobileLogoutBtn.addEventListener("click", doLogout);
 
     // --- Auth State ---
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         // Google users are auto-verified; email users must verify
         if (!user.emailVerified && user.providerData[0]?.providerId === 'password') {
-          loginBtn.classList.remove("d-none");
-          logoutBtn.classList.add("d-none");
-          userInfoEl.classList.add("d-none");
-          dashboardBtn.classList.add("d-none");
+          syncAuthUI(null, false);
           return;
         }
-        loginBtn.classList.add("d-none");
-        logoutBtn.classList.remove("d-none");
-        userInfoEl.classList.remove("d-none");
-        dashboardBtn.classList.remove("d-none");
-        userInfoEl.textContent = user.email || user.displayName || "User";
+        syncAuthUI(user, true);
 
         await workerAuth(user.email || user.providerData[0]?.email || user.uid, user.uid);
       } else {
-        loginBtn.classList.remove("d-none");
-        logoutBtn.classList.add("d-none");
-        userInfoEl.classList.add("d-none");
-        dashboardBtn.classList.add("d-none");
-        userInfoEl.textContent = "";
+        syncAuthUI(null, false);
       }
     });
   </script>

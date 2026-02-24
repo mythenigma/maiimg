@@ -38,6 +38,53 @@ body {
   background-clip: text;
 }
 
+.user-pill {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.nav-actions-mobile .mobile-user-trigger {
+  width: 42px;
+  height: 42px;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  border: 1px solid #e5e7eb !important;
+  color: #374151 !important;
+}
+
+.nav-actions-mobile .mobile-user-menu {
+  min-width: 220px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  padding: 6px 0;
+}
+
+.mobile-user-menu .dropdown-item {
+  font-size: 14px;
+}
+
+.mobile-user-menu .dropdown-header {
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-user-menu .mobile-lang-title {
+  font-size: 12px;
+  color: #6b7280;
+}
+
 .hero-section {
   background: transparent;
   color: white;
@@ -1411,7 +1458,7 @@ footer {
 
   .navbar-brand {
     margin-right: 0.25rem;
-    font-size: clamp(1.25rem, 6vw, 1.9rem);
+    font-size: clamp(1.2rem, 6vw, 1.7rem);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1419,15 +1466,13 @@ footer {
     min-width: 0;
   }
 
-  .navbar .language-selector {
-    margin-left: 0 !important;
-    margin-top: 0 !important;
+  .nav-actions-mobile {
     flex: 0 0 auto;
   }
 
-  .navbar .language-selector .dropdown-toggle {
-    min-width: 88px !important;
-    padding: 6px 10px !important;
+  .nav-actions-mobile .mobile-user-menu {
+    max-height: 70vh;
+    overflow-y: auto;
   }
 }
 
