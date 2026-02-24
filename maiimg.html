@@ -655,14 +655,14 @@
     <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
       <div class="modal-content" style="border-radius: 16px; border: none;">
         <div class="modal-header border-0 pb-0">
-          <h5 class="modal-title w-100 text-center fw-bold">Get Better Control with an Account</h5>
+          <h5 class="modal-title w-100 text-center fw-bold" data-translate="auth.loginNudgeTitle">Get Better Control with an Account</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body px-4 pb-4 text-center">
-          <p class="text-muted mb-3">Sign in to manage galleries, restore links, and view access records from your dashboard.</p>
+          <p class="text-muted mb-3" data-translate="auth.loginNudgeBody">Sign in to manage galleries, restore links, and view access records from your dashboard.</p>
           <div class="d-grid gap-2">
-            <button type="button" class="btn btn-primary py-2" id="loginNudgeSignInBtn" style="border-radius: 10px;">Sign In</button>
-            <button type="button" class="btn btn-outline-secondary py-2" data-bs-dismiss="modal" style="border-radius: 10px;">Maybe Later</button>
+            <button type="button" class="btn btn-primary py-2" id="loginNudgeSignInBtn" style="border-radius: 10px;" data-translate="auth.loginNudgeSignIn">Sign In</button>
+            <button type="button" class="btn btn-outline-secondary py-2" data-bs-dismiss="modal" style="border-radius: 10px;" data-translate="auth.loginNudgeLater">Maybe Later</button>
           </div>
         </div>
       </div>
@@ -1242,8 +1242,30 @@
       }, 5000);
     }
 
+    function hasValidLoginJwt() {
+      const jwt = sessionStorage.getItem('maiimg_jwt');
+      if (!jwt) return false;
+      const parts = jwt.split('.');
+      if (parts.length !== 3) return true;
+      try {
+        const base64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+        const payload = JSON.parse(atob(base64));
+        if (typeof payload.exp === 'number') {
+          const active = Date.now() < payload.exp * 1000;
+          if (!active) {
+            sessionStorage.removeItem('maiimg_jwt');
+            sessionStorage.removeItem('maiimg_user');
+          }
+          return active;
+        }
+      } catch (error) {
+        console.warn('Failed to parse login token for nudge check:', error);
+      }
+      return true;
+    }
+
     function shouldShowLoginNudge() {
-      if (sessionStorage.getItem('maiimg_jwt')) return false;
+      if (hasValidLoginJwt()) return false;
       const lastShown = Number(localStorage.getItem(LOGIN_NUDGE_KEY) || 0);
       return Date.now() - lastShown >= LOGIN_NUDGE_COOLDOWN_MS;
     }
@@ -1584,6 +1606,13 @@
       
       // 不在页面加载时生成会话ID，改为在第一次上传时生成
       initExpirationControls();
+
+      const dropzEl = document.getElementById('dropz');
+      if (dropzEl) {
+        dropzEl.addEventListener('click', () => {
+          setTimeout(showLoginNudgeIfNeeded, 120);
+        }, true);
+      }
       
       myDropzone = new Dropzone("#dropz", {
         url: "https://fetch.maipdf.com/api/upload-image",
@@ -1608,6 +1637,11 @@
         
         init: function() {
           const dropzone = this;
+          if (this.hiddenFileInput) {
+            this.hiddenFileInput.addEventListener('click', () => {
+              setTimeout(showLoginNudgeIfNeeded, 120);
+            }, true);
+          }
           
           this.on("addedfile", function(file) {
             setTimeout(showLoginNudgeIfNeeded, 250);

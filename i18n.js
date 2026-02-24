@@ -210,7 +210,11 @@ class I18n {
           weakPassword: "Password is too weak (min 6 characters)",
           invalidEmail: "Invalid email address",
           emailNotVerified: "Email not yet verified. Please check your inbox.",
-          waitBeforeResend: "Please wait before requesting again"
+          waitBeforeResend: "Please wait before requesting again",
+          loginNudgeTitle: "Get Better Control with an Account",
+          loginNudgeBody: "Sign in to manage galleries, restore links, and view access records from your dashboard.",
+          loginNudgeSignIn: "Sign In",
+          loginNudgeLater: "Maybe Later"
         },
         dash: {
           title: "My Galleries",
@@ -469,7 +473,11 @@ class I18n {
           weakPassword: "密码强度不够（至少6位）",
           invalidEmail: "邮箱格式不正确",
           emailNotVerified: "邮箱尚未验证，请查收验证邮件。",
-          waitBeforeResend: "请稍后再发送"
+          waitBeforeResend: "请稍后再发送",
+          loginNudgeTitle: "登录后可获得更完整的管理能力",
+          loginNudgeBody: "登录后可在 Dashboard 管理图集、恢复链接并查看访问记录。",
+          loginNudgeSignIn: "去登录",
+          loginNudgeLater: "稍后再说"
         },
         dash: {
           title: "我的图集",
@@ -728,7 +736,11 @@ class I18n {
           weakPassword: "密碼強度不夠（至少6位）",
           invalidEmail: "信箱格式不正確",
           emailNotVerified: "信箱尚未驗證，請查收驗證郵件。",
-          waitBeforeResend: "請稍後再發送"
+          waitBeforeResend: "請稍後再發送",
+          loginNudgeTitle: "登入可獲得更完整的管理能力",
+          loginNudgeBody: "登入後可在 Dashboard 管理圖集、恢復連結並查看存取記錄。",
+          loginNudgeSignIn: "去登入",
+          loginNudgeLater: "稍後再說"
         },
         dash: {
           title: "我的圖集",
@@ -987,7 +999,11 @@ class I18n {
           weakPassword: "パスワードが弱すぎます（6文字以上）",
           invalidEmail: "メールアドレスの形式が正しくありません",
           emailNotVerified: "メールがまだ確認されていません。受信トレイを確認してください。",
-          waitBeforeResend: "しばらくお待ちください"
+          waitBeforeResend: "しばらくお待ちください",
+          loginNudgeTitle: "アカウントでより便利に管理できます",
+          loginNudgeBody: "ログインすると、ダッシュボードでギャラリー管理・リンク復元・アクセス記録確認が可能です。",
+          loginNudgeSignIn: "ログイン",
+          loginNudgeLater: "後で"
         },
         dash: {
           title: "マイギャラリー",
@@ -1246,7 +1262,11 @@ class I18n {
           weakPassword: "Passwort zu schwach (mind. 6 Zeichen)",
           invalidEmail: "Ungültige E-Mail-Adresse",
           emailNotVerified: "E-Mail noch nicht bestätigt. Bitte überprüfen Sie Ihren Posteingang.",
-          waitBeforeResend: "Bitte warten Sie vor dem erneuten Senden"
+          waitBeforeResend: "Bitte warten Sie vor dem erneuten Senden",
+          loginNudgeTitle: "Mit Konto haben Sie mehr Kontrolle",
+          loginNudgeBody: "Melden Sie sich an, um Galerien zu verwalten, Links wiederherzustellen und Zugriffsprotokolle im Dashboard zu sehen.",
+          loginNudgeSignIn: "Anmelden",
+          loginNudgeLater: "Vielleicht später"
         },
         dash: {
           title: "Meine Galerien",
@@ -1505,7 +1525,11 @@ class I18n {
           weakPassword: "비밀번호가 너무 약합니다 (최소 6자)",
           invalidEmail: "잘못된 이메일 주소입니다",
           emailNotVerified: "이메일이 아직 인증되지 않았습니다. 받은 편지함을 확인해주세요.",
-          waitBeforeResend: "잠시 후에 다시 시도해주세요"
+          waitBeforeResend: "잠시 후에 다시 시도해주세요",
+          loginNudgeTitle: "계정으로 더 편하게 관리하세요",
+          loginNudgeBody: "로그인하면 대시보드에서 갤러리 관리, 링크 복원, 접근 기록 확인이 가능합니다.",
+          loginNudgeSignIn: "로그인",
+          loginNudgeLater: "나중에"
         },
         dash: {
           title: "내 갤러리",
@@ -1764,7 +1788,11 @@ class I18n {
           weakPassword: "Mot de passe trop faible (min 6 caractères)",
           invalidEmail: "Adresse e-mail invalide",
           emailNotVerified: "E-mail non encore vérifié. Veuillez vérifier votre boîte de réception.",
-          waitBeforeResend: "Veuillez patienter avant de renvoyer"
+          waitBeforeResend: "Veuillez patienter avant de renvoyer",
+          loginNudgeTitle: "Avec un compte, vous avez plus de contrôle",
+          loginNudgeBody: "Connectez-vous pour gérer vos galeries, restaurer des liens et consulter les journaux d'accès dans le tableau de bord.",
+          loginNudgeSignIn: "Se connecter",
+          loginNudgeLater: "Plus tard"
         },
         dash: {
           title: "Mes galeries",
@@ -2023,7 +2051,11 @@ class I18n {
           weakPassword: "Password troppo debole (min 6 caratteri)",
           invalidEmail: "Indirizzo e-mail non valido",
           emailNotVerified: "E-mail non ancora verificata. Controlla la tua casella di posta.",
-          waitBeforeResend: "Attendi prima di rinviare"
+          waitBeforeResend: "Attendi prima di rinviare",
+          loginNudgeTitle: "Con un account hai più controllo",
+          loginNudgeBody: "Accedi per gestire le gallerie, ripristinare link e vedere i registri di accesso dalla dashboard.",
+          loginNudgeSignIn: "Accedi",
+          loginNudgeLater: "Più tardi"
         },
         dash: {
           title: "Le mie gallerie",

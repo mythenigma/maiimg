@@ -3,243 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MaiIMG SEO / 知识库写作 Guideline</title>
+  <title>work - 最新工作记录</title>
   <style>
-    :root {
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --line: #e5e7eb;
-      --accent: #1d4ed8;
-      --ok: #065f46;
-      --warn: #9a3412;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-      line-height: 1.65;
-    }
-    .wrap { max-width: 1100px; margin: 24px auto; padding: 0 16px 40px; }
-    .head {
-      background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
-      border: 1px solid #bfdbfe;
-      border-radius: 14px;
-      padding: 18px 20px;
-      margin-bottom: 14px;
-    }
-    h1 { margin: 0 0 6px; font-size: 24px; }
-    .sub { margin: 0; color: var(--muted); font-size: 14px; }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 14px 16px;
-      margin-bottom: 12px;
-    }
-    .row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    h2 { margin: 0; font-size: 18px; }
-    h3 { margin: 10px 0 6px; font-size: 15px; }
-    p { margin: 8px 0; font-size: 14px; }
-    ul { margin: 6px 0 0 18px; padding: 0; }
-    ol { margin: 6px 0 0 18px; padding: 0; }
-    code {
-      background: #f3f4f6;
-      border-radius: 6px;
-      padding: 1px 6px;
-      font-size: 13px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    }
-    pre {
-      margin: 8px 0 0;
-      background: #0f172a;
-      color: #e2e8f0;
-      border-radius: 10px;
-      padding: 10px 12px;
-      overflow-x: auto;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-    .tag {
-      font-size: 12px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .tag.info { color: var(--accent); border-color: #bfdbfe; background: #eff6ff; }
-    .tag.ok { color: var(--ok); border-color: #a7f3d0; background: #ecfdf5; }
-    .tag.warn { color: var(--warn); border-color: #fed7aa; background: #fff7ed; }
-    .foot { color: var(--muted); font-size: 12px; margin-top: 8px; }
+    :root { --bg:#f6f8fb; --card:#fff; --text:#111827; --muted:#6b7280; --line:#e5e7eb; --ok:#065f46; --info:#1d4ed8; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.6; }
+    .wrap { max-width:1000px; margin:24px auto; padding:0 16px 30px; }
+    .head { background:linear-gradient(135deg,#dbeafe,#e0e7ff); border:1px solid #bfdbfe; border-radius:12px; padding:16px 18px; margin-bottom:12px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
+    h1 { margin:0 0 6px; font-size:22px; }
+    h2 { margin:0; font-size:17px; }
+    p { margin:8px 0; font-size:14px; }
+    ul { margin:8px 0 0 18px; padding:0; }
+    code { background:#f3f4f6; border-radius:6px; padding:1px 6px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; }
+    .row { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
+    .tag { font-size:12px; font-weight:600; border-radius:999px; padding:2px 8px; border:1px solid; white-space:nowrap; }
+    .ok { color:var(--ok); border-color:#a7f3d0; background:#ecfdf5; }
+    .info { color:var(--info); border-color:#bfdbfe; background:#eff6ff; }
+    .sub, .foot { color:var(--muted); font-size:12px; }
   </style>
 </head>
 <body>
   <main class="wrap">
     <section class="head">
-      <h1>MaiIMG SEO Blog / 知识库写作 Guideline</h1>
-      <p class="sub">更新时间：2026-02-24 ｜ 目的：统一新功能对外表达，避免旧博客遗漏功能</p>
+      <h1>最新工作记录</h1>
+      <p class="sub">更新时间：2026-02-24</p>
     </section>
 
     <section class="card">
-      <div class="row">
-        <h2>1) 这份文档解决什么问题</h2>
-        <span class="tag info">写作基准</span>
-      </div>
+      <div class="row"><h2>1) 首页底部链接（手机端）排版优化</h2><span class="tag ok">已完成</span></div>
       <ul>
-        <li>旧文章没有覆盖：到期时间设置、时区显示、用户登录/注册、个人 Dashboard、Replace 模式。</li>
-        <li>新文章需要统一叙事：从“匿名上传”升级到“可登录 + 可管理 + 可追踪”。</li>
-        <li>所有文章必须基于当前产品能力，不再使用旧文案。</li>
+        <li>修复 footer 链接在小屏挤压换行问题。</li>
+        <li>手机端改为稳定网格：前两项同排，第三项独占一行居中。</li>
       </ul>
+      <p><strong>文件：</strong><code>qr-styles010.css</code></p>
     </section>
 
     <section class="card">
-      <div class="row">
-        <h2>2) 必写功能清单（特别是 maiimg.html）</h2>
-        <span class="tag ok">必须覆盖</span>
-      </div>
-
-      <h3>2.1 上传与生成（maiimg.html）</h3>
+      <div class="row"><h2>2) 登录提醒逻辑统一（index/maiimg）</h2><span class="tag ok">已完成</span></div>
       <ul>
-        <li>图片上传：支持 PNG/JPG/JPEG/GIF/WebP，单文件最大 50MB，最多 25 个文件。</li>
-        <li>生成分享链接 + QR 码：上传后可生成 Gallery Link 与二维码。</li>
-        <li>追踪码：生成访问记录 Code，并可跳转 tracking 页面查看访问记录。</li>
-      </ul>
-
-      <h3>2.2 访问控制（maiimg.html）</h3>
-      <ul>
-        <li>View limit（查看次数）+ per-view duration（每次查看时长）。</li>
-        <li>Expiration（到期时间）支持预设：1h / 3h / 24h / 5d / 自定义天数 / Unlimited。</li>
-        <li>同时显示 UTC 到期时间和本地时区时间（用户可选时区）。</li>
-      </ul>
-
-      <h3>2.3 用户系统（maiimg.html）</h3>
-      <ul>
-        <li>支持 Google 登录与邮箱登录/注册。</li>
-        <li>邮箱验证、忘记密码、重发验证邮件。</li>
-        <li>登录后可进入 <code>dashboard.html</code> 管理图集。</li>
-      </ul>
-
-      <h3>2.4 Dashboard 管理（dashboard.html）</h3>
-      <ul>
-        <li>查看图集状态（Active / Deleted / Expired）、删除、恢复、追踪记录。</li>
-        <li>Replace 模式：选 A（目标）和 B（来源），复制 B 的内容/设置到 A，A 链接不变。</li>
-        <li>手机版交互优化：A/B 大按钮、底部固定操作栏、顶部 A ← B 动态预览。</li>
+        <li>新增未登录提醒弹窗（Sign In / Maybe Later）。</li>
+        <li>频控：<code>1 小时内不重复提醒</code>（localStorage 时间戳）。</li>
+        <li>两页逻辑完全同步：<code>index.html</code> 与 <code>maiimg.html</code>。</li>
       </ul>
     </section>
 
     <section class="card">
-      <div class="row">
-        <h2>3) SEO 博文写作模板（推荐）</h2>
-        <span class="tag info">可直接套用</span>
-      </div>
-      <ol>
-        <li>问题开场：用户在“图片分享/时效控制/访问追踪”上的痛点。</li>
-        <li>功能总览：MaiIMG 现在能做什么（上传、到期、登录、管理、追踪）。</li>
-        <li>3 步教程：上传图片 → 设置到期/访问规则 → 分享并追踪。</li>
-        <li>登录与不登录差异：匿名可用，登录后获得 Dashboard 管理能力。</li>
-        <li>FAQ：到期后会怎样、如何恢复链接、如何看访问记录。</li>
-        <li>CTA：去 <code>maiimg.html</code> 立即体验，或登录管理旧链接。</li>
-      </ol>
-
-      <h3>标题关键词建议</h3>
+      <div class="row"><h2>3) 触发时机已按你要求收敛</h2><span class="tag info">已确认</span></div>
       <ul>
-        <li>主词：image hosting / temporary image link / QR image sharing / expiring image link</li>
-        <li>长尾：how to share images with QR code and expiration / track image link access</li>
+        <li>当前只在用户开始上传（Dropzone <code>addedfile</code>）时触发提醒。</li>
+        <li>已删除“生成成功后再提醒”的旧触发，避免无效/重复打扰。</li>
       </ul>
-
-      <h3>文章里建议出现的功能词（按真实功能）</h3>
-      <ul>
-        <li><code>view limit</code></li>
-        <li><code>per-view duration</code></li>
-        <li><code>expiration presets</code></li>
-        <li><code>timezone-aware expiry</code></li>
-        <li><code>Google / email login</code></li>
-        <li><code>dashboard replace mode</code></li>
-      </ul>
+      <p><strong>文件：</strong><code>index.html</code>、<code>maiimg.html</code></p>
     </section>
 
     <section class="card">
-      <div class="row">
-        <h2>4) 知识库（KB）建议目录</h2>
-        <span class="tag info">信息架构</span>
-      </div>
+      <div class="row"><h2>4) Dashboard 替换交互（前面已完成）</h2><span class="tag ok">已完成</span></div>
       <ul>
-        <li>Getting Started: 上传图片并生成 QR。</li>
-        <li>Access Control: View limit、时长、到期时间设置说明。</li>
-        <li>Account & Auth: Google 登录、邮箱注册、验证与重置密码。</li>
-        <li>Dashboard: 查看状态、删除/恢复、Replace 模式。</li>
-        <li>Tracking: 如何使用访问记录 code 查看谁何时访问。</li>
-        <li>Troubleshooting: 上传失败、链接失效、看不到记录等。</li>
+        <li>手机版 A/B 选择按钮化 + 底部固定替换栏。</li>
+        <li>顶部替换关系可视化为 <code>A ← B</code>，并带轻动效。</li>
+        <li>新增文案已补齐多语言键，英文为基础默认。</li>
       </ul>
+      <p><strong>文件：</strong><code>dashboard.html</code>、<code>i18n.js</code></p>
     </section>
 
-    <section class="card">
-      <div class="row">
-        <h2>5) 未登录用户提醒登录（Modal）规范</h2>
-        <span class="tag warn">产品建议</span>
-      </div>
-      <p><strong>目标：</strong>提醒匿名用户“登录可获得更好管理能力”，但不能频繁打扰。</p>
-      <ul>
-        <li>触发条件：用户未登录，且完成关键动作（例如成功生成链接）后触发。</li>
-        <li>频控规则：<strong>1 小时内不重复提醒</strong>。</li>
-        <li>关闭策略：用户点关闭后记录时间戳。</li>
-        <li>登录后：不再弹。</li>
-      </ul>
-
-      <h3>推荐文案（英文基础）</h3>
-      <ul>
-        <li>Title: <code>Get Better Control with an Account</code></li>
-        <li>Body: <code>Sign in to manage galleries, restore links, and view access records from your dashboard.</code></li>
-        <li>Primary CTA: <code>Sign In</code></li>
-        <li>Secondary CTA: <code>Maybe Later</code></li>
-      </ul>
-
-      <h3>前端实现参考（localStorage 版）</h3>
-      <pre><code>const LOGIN_NUDGE_KEY = 'maiimg_login_nudge_last_ts';
-const LOGIN_NUDGE_COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
-
-function shouldShowLoginNudge(isLoggedIn) {
-  if (isLoggedIn) return false;
-  const last = Number(localStorage.getItem(LOGIN_NUDGE_KEY) || 0);
-  return Date.now() - last &gt;= LOGIN_NUDGE_COOLDOWN_MS;
-}
-
-function markLoginNudgeShown() {
-  localStorage.setItem(LOGIN_NUDGE_KEY, String(Date.now()));
-}
-
-// Example: after successful link generation
-if (shouldShowLoginNudge(Boolean(sessionStorage.getItem('maiimg_jwt')))) {
-  // show bootstrap modal
-  markLoginNudgeShown();
-}</code></pre>
-    </section>
-
-    <section class="card">
-      <div class="row">
-        <h2>6) 发布前检查清单（Blog/KB）</h2>
-        <span class="tag ok">发布检查</span>
-      </div>
-      <ul>
-        <li>是否明确提到“到期时间设置 + 时区显示”？</li>
-        <li>是否明确提到“用户登录体系 + dashboard 管理”？</li>
-        <li>是否包含 Replace 模式的正确描述（A 保持链接，B 提供内容）？</li>
-        <li>是否避免使用已经过时的“仅匿名上传”表述？</li>
-        <li>是否有明确 CTA，指向 <code>maiimg.html</code> 或 <code>dashboard.html</code>？</li>
-      </ul>
-    </section>
-
-    <p class="foot">备注：本文件是写作与产品说明基准。后续每次功能更新后都应同步更新本页。</p>
+    <p class="foot">备注：本页为最新执行记录，按你的确认状态更新。</p>
   </main>
 </body>
 </html>
