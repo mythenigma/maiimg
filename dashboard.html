@@ -264,21 +264,23 @@
     }
 
     .tz-picker {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
+      gap: 4px;
+      margin-top: 4px;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
     }
     .tz-picker select {
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 2px 6px;
-      font-size: 0.75rem;
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-size: 0.7rem;
       color: var(--text);
       background: #fff;
       cursor: pointer;
-      max-width: 200px;
+      max-width: 170px;
     }
     .tz-picker select:focus {
       outline: none;
@@ -287,7 +289,7 @@
     }
     .tz-picker .tz-icon {
       color: var(--primary);
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     }
 
     .help-btn {
@@ -427,16 +429,10 @@
 <div class="dash-header">
   <div class="container">
     <h1><i class="fas fa-th-large me-2"></i><span data-translate="dash.title">My Galleries</span></h1>
-    <div class="d-flex justify-content-between align-items-end flex-wrap gap-2">
-      <div class="stats" id="statsBar">
-        <div class="stat-item"><span data-translate="dash.total">Total</span>: <strong id="statTotal">0</strong></div>
-        <div class="stat-item"><span data-translate="dash.active">Active</span>: <strong id="statActive">0</strong></div>
-        <div class="stat-item"><span data-translate="dash.deleted">Deleted</span>: <strong id="statDeleted">0</strong></div>
-      </div>
-      <div class="tz-picker">
-        <i class="fas fa-globe-americas tz-icon"></i>
-        <select id="tzSelect" onchange="onTzChange()"></select>
-      </div>
+    <div class="stats" id="statsBar">
+      <div class="stat-item"><span data-translate="dash.total">Total</span>: <strong id="statTotal">0</strong></div>
+      <div class="stat-item"><span data-translate="dash.active">Active</span>: <strong id="statActive">0</strong></div>
+      <div class="stat-item"><span data-translate="dash.deleted">Deleted</span>: <strong id="statDeleted">0</strong></div>
     </div>
   </div>
 </div>
@@ -510,7 +506,13 @@
           <th data-translate="dash.colCaption">Caption</th>
           <th data-translate="dash.colViews">Views</th>
           <th data-translate="dash.colDuration">Duration</th>
-          <th data-translate="dash.colExpiration">Expiration</th>
+          <th>
+            <span data-translate="dash.colExpiration">Expiration</span>
+            <div class="tz-picker">
+              <i class="fas fa-globe-americas tz-icon"></i>
+              <select id="tzSelect" onchange="onTzChange()"></select>
+            </div>
+          </th>
           <th data-translate="dash.colLink">Link</th>
           <th data-translate="dash.colStatus">Status</th>
           <th data-translate="dash.colActions">Actions</th>
