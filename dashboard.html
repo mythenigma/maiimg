@@ -266,34 +266,33 @@
     .gallery-table thead th .tz-header-cell {
       display: flex;
       flex-direction: column;
-      align-items: stretch;
+      align-items: center;
       gap: 0;
     }
     .tz-picker {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 8px;
-      padding: 8px 10px;
+      gap: 6px;
+      margin-top: 6px;
+      padding: 5px 8px;
       background: #f1f5f9;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: 400;
       text-transform: none;
       letter-spacing: 0;
     }
     .tz-picker .tz-icon {
       color: var(--primary);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       flex-shrink: 0;
     }
     .tz-picker select {
-      flex: 1;
-      min-width: 0;
+      width: 130px;
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 6px 10px;
-      font-size: 0.8rem;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.75rem;
       color: var(--text);
       background: #fff;
       cursor: pointer;
@@ -309,8 +308,9 @@
       box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.15);
     }
     .gallery-table thead th.th-expiration {
-      min-width: 200px;
+      min-width: 160px;
       white-space: normal;
+      text-align: center;
     }
 
     .help-btn {
