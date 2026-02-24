@@ -266,26 +266,26 @@
 <!-- Main Content -->
 <div class="container py-3">
 
-  <!-- Swap Bar -->
-  <div class="swap-bar" id="swapBar">
+  <!-- Replace Bar -->
+  <div class="swap-bar" id="replaceBar">
     <div class="swap-info">
-      <i class="fas fa-exchange-alt me-1"></i>
-      <span id="swapStatus" data-translate="dash.selectTwo">Select 2 galleries to swap</span>
+      <i class="fas fa-copy me-1"></i>
+      <span id="replaceStatus" data-translate="dash.replaceHint">Select target (A), then source (B). B's settings will be copied to A.</span>
     </div>
     <div>
-      <button class="btn btn-sm btn-outline-secondary me-1" onclick="cancelSwap()">
+      <button class="btn btn-sm btn-outline-secondary me-1" onclick="cancelReplace()">
         <span data-translate="dash.cancel">Cancel</span>
       </button>
-      <button class="btn btn-sm btn-primary" id="swapBtn" onclick="executeSwap()" disabled>
-        <i class="fas fa-exchange-alt me-1"></i><span data-translate="dash.swap">Swap</span>
+      <button class="btn btn-sm btn-primary" id="replaceBtn" onclick="executeReplace()" disabled>
+        <i class="fas fa-copy me-1"></i><span data-translate="dash.replaceConfirm">Replace</span>
       </button>
     </div>
   </div>
 
-  <!-- Swap Toggle -->
+  <!-- Toolbar -->
   <div class="mb-3 d-flex justify-content-end gap-2">
-    <button class="btn btn-sm btn-outline-primary" id="swapModeBtn" onclick="toggleSwapMode()">
-      <i class="fas fa-exchange-alt me-1"></i><span data-translate="dash.swapMode">Swap Mode</span>
+    <button class="btn btn-sm btn-outline-primary" id="replaceModeBtn" onclick="toggleReplaceMode()">
+      <i class="fas fa-copy me-1"></i><span data-translate="dash.replaceMode">Replace Mode</span>
     </button>
     <button class="btn btn-sm btn-outline-secondary" onclick="loadGalleries()">
       <i class="fas fa-sync-alt me-1"></i><span data-translate="dash.refresh">Refresh</span>
@@ -313,7 +313,8 @@
     <table class="gallery-table">
       <thead>
         <tr>
-          <th class="swap-check d-none" id="thSwap"></th>
+          <th class="replace-col d-none" id="thTarget" style="width:50px">A</th>
+          <th class="replace-col d-none" id="thSource" style="width:50px">B</th>
           <th>ID</th>
           <th data-translate="dash.colCaption">Caption</th>
           <th data-translate="dash.colViews">Views</th>
@@ -334,33 +335,13 @@
 <!-- Toast -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- Restore Modal -->
-<div class="modal fade" id="restoreModal" tabindex="-1">
-  <div class="modal-dialog modal-sm modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h6 class="modal-title" data-translate="dash.restoreTitle">Restore Gallery</h6>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <label class="form-label" data-translate="dash.newViewCount">New view count</label>
-        <input type="number" class="form-control" id="restoreViewCount" value="100" min="1">
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal" data-translate="dash.cancel">Cancel</button>
-        <button class="btn btn-success btn-sm" id="confirmRestoreBtn" data-translate="dash.restore">Restore</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 <script>
 const API_BASE = 'https://fetch.maipdf.com';
 let galleries = [];
-let swapMode = false;
-let swapSelection = [];
-let restoreTargetId = null;
+let replaceMode = false;
+let replaceTarget = null; // A: the gallery link to keep
+let replaceSource = null; // B: the gallery whose settings to copy
 
 class ReversibleEncoder {
   constructor() {
@@ -439,7 +420,7 @@ function statusBadge(status) {
 
 function galleryLink(id) {
   const alphaId = encodeGalleryId(id);
-  return `https://maiimg.com/file/${alphaId}/`;
+  return `https://maiimg.com/gallery/${alphaId}/`;
 }
 
 function trackingLink(id) {
@@ -459,9 +440,9 @@ function checkAuth() {
     const payload = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
     document.getElementById('navEmail').textContent = payload.sub || '';
     if (payload.exp && payload.exp * 1000 < Date.now()) {
-    sessionStorage.removeItem('maiimg_jwt');
-    window.location.href = 'maiimg.html';
-    return false;
+      sessionStorage.removeItem('maiimg_jwt');
+      window.location.href = 'maiimg.html';
+      return false;
     }
   } catch (e) {
     window.location.href = 'maiimg.html';
@@ -472,6 +453,7 @@ function checkAuth() {
 
 function logout() {
   sessionStorage.removeItem('maiimg_jwt');
+  sessionStorage.removeItem('maiimg_user');
   window.location.href = 'maiimg.html';
 }
 
@@ -527,9 +509,12 @@ function renderTable() {
   tbody.innerHTML = galleries.map(g => {
     const status = getGalleryStatus(g);
     const link = galleryLink(g.id);
-    const swap = swapMode ? `<td class="swap-check"><input type="checkbox" class="form-check-input swap-cb" data-id="${g.id}" onchange="onSwapCheck(this)" ${swapSelection.includes(g.id) ? 'checked' : ''}></td>` : '';
-    return `<tr>
-      ${swap}
+    const replaceCols = replaceMode ? `
+      <td class="replace-col"><input type="radio" name="replaceTarget" class="form-check-input" value="${g.id}" ${replaceTarget === g.id ? 'checked' : ''} onchange="onPickTarget(${g.id})"></td>
+      <td class="replace-col"><input type="radio" name="replaceSource" class="form-check-input" value="${g.id}" ${replaceSource === g.id ? 'checked' : ''} onchange="onPickSource(${g.id})"></td>
+    ` : '';
+    return `<tr ${replaceTarget === g.id ? 'style="background:#dbeafe"' : ''} ${replaceSource === g.id ? 'style="background:#fef3c7"' : ''}>
+      ${replaceCols}
       <td><strong>#${g.id}</strong></td>
       <td>${escHtml(g.caption || '-')}</td>
       <td>${g.viewLimit}</td>
@@ -538,7 +523,6 @@ function renderTable() {
       <td class="text-nowrap">
         <a href="${trackingLink(g.id)}" class="action-btn text-primary" title="Tracking"><i class="fas fa-chart-line"></i></a>
         ${status === 'active' ? `<button class="action-btn text-danger" onclick="deleteGallery(${g.id})" title="Delete"><i class="fas fa-trash-alt"></i></button>` : ''}
-        ${status === 'deleted' ? `<button class="action-btn text-success" onclick="showRestore(${g.id})" title="Restore"><i class="fas fa-undo"></i></button>` : ''}
       </td>
     </tr>`;
   }).join('');
@@ -550,7 +534,7 @@ function renderCards() {
   wrap.innerHTML = galleries.map(g => {
     const status = getGalleryStatus(g);
     const link = galleryLink(g.id);
-    return `<div class="gallery-card">
+    return `<div class="gallery-card" ${replaceTarget === g.id ? 'style="border-color:#3b82f6;background:#eff6ff"' : ''} ${replaceSource === g.id ? 'style="border-color:#f59e0b;background:#fffbeb"' : ''}>
       <div class="card-top">
         <span class="card-id">#${g.id}</span>
         ${statusBadge(status)}
@@ -559,10 +543,12 @@ function renderCards() {
       <div class="card-row"><span class="label">Views</span><span>${g.viewLimit}</span></div>
       <div class="card-row"><span class="label">Link</span><a class="gallery-link" href="${link}" target="_blank">${link.replace('https://','').substring(0,28)}...</a></div>
       <div class="card-actions">
-        ${swapMode ? `<div class="swap-checkbox-wrap"><input type="checkbox" class="form-check-input swap-cb" data-id="${g.id}" onchange="onSwapCheck(this)" ${swapSelection.includes(g.id) ? 'checked' : ''}> Swap</div>` : ''}
+        ${replaceMode ? `
+          <label class="action-btn text-primary" style="cursor:pointer"><input type="radio" name="mTarget" class="me-1" ${replaceTarget === g.id ? 'checked' : ''} onchange="onPickTarget(${g.id})">A</label>
+          <label class="action-btn text-warning" style="cursor:pointer"><input type="radio" name="mSource" class="me-1" ${replaceSource === g.id ? 'checked' : ''} onchange="onPickSource(${g.id})">B</label>
+        ` : ''}
         <a href="${trackingLink(g.id)}" class="action-btn text-primary"><i class="fas fa-chart-line me-1"></i>Tracking</a>
         ${status === 'active' ? `<button class="action-btn text-danger" onclick="deleteGallery(${g.id})"><i class="fas fa-trash-alt me-1"></i>Delete</button>` : ''}
-        ${status === 'deleted' ? `<button class="action-btn text-success" onclick="showRestore(${g.id})"><i class="fas fa-undo me-1"></i>Restore</button>` : ''}
       </div>
     </div>`;
   }).join('');
@@ -589,119 +575,96 @@ async function deleteGallery(id) {
   }
 }
 
-// ---- Restore Gallery ----
-function showRestore(id) {
-  restoreTargetId = id;
-  const modal = new bootstrap.Modal(document.getElementById('restoreModal'));
-  modal.show();
-}
-
-document.getElementById('confirmRestoreBtn').addEventListener('click', async () => {
-  const viewCount = parseInt(document.getElementById('restoreViewCount').value, 10);
-  if (!restoreTargetId || isNaN(viewCount) || viewCount < 1) return;
-  try {
-    const res = await fetch(`${API_BASE}/api/restore-gallery`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ galleryId: restoreTargetId, newViewCount: viewCount })
-    });
-    const data = await res.json();
-    if (data.success) {
-      showToast(`Gallery #${restoreTargetId} restored with ${viewCount} views`, 'success');
-      bootstrap.Modal.getInstance(document.getElementById('restoreModal')).hide();
-      loadGalleries();
-    } else {
-      showToast(data.error || 'Restore failed', 'danger');
-    }
-  } catch (err) {
-    showToast('Restore failed: ' + err.message, 'danger');
-  }
-});
-
-// ---- Swap Mode ----
-function toggleSwapMode() {
-  swapMode = !swapMode;
-  swapSelection = [];
-  const bar = document.getElementById('swapBar');
-  const btn = document.getElementById('swapModeBtn');
-  const thSwap = document.getElementById('thSwap');
-  if (swapMode) {
+// ---- Replace Mode ----
+function toggleReplaceMode() {
+  replaceMode = !replaceMode;
+  replaceTarget = null;
+  replaceSource = null;
+  const bar = document.getElementById('replaceBar');
+  const btn = document.getElementById('replaceModeBtn');
+  const thTarget = document.getElementById('thTarget');
+  const thSource = document.getElementById('thSource');
+  if (replaceMode) {
     bar.classList.add('active');
     btn.classList.replace('btn-outline-primary', 'btn-primary');
-    thSwap.classList.remove('d-none');
+    thTarget.classList.remove('d-none');
+    thSource.classList.remove('d-none');
   } else {
     bar.classList.remove('active');
     btn.classList.replace('btn-primary', 'btn-outline-primary');
-    thSwap.classList.add('d-none');
+    thTarget.classList.add('d-none');
+    thSource.classList.add('d-none');
   }
   renderTable();
   renderCards();
-  updateSwapUI();
+  updateReplaceUI();
 }
 
-function cancelSwap() {
-  swapMode = false;
-  swapSelection = [];
-  document.getElementById('swapBar').classList.remove('active');
-  document.getElementById('swapModeBtn').classList.replace('btn-primary', 'btn-outline-primary');
-  document.getElementById('thSwap').classList.add('d-none');
+function cancelReplace() {
+  replaceMode = false;
+  replaceTarget = null;
+  replaceSource = null;
+  document.getElementById('replaceBar').classList.remove('active');
+  document.getElementById('replaceModeBtn').classList.replace('btn-primary', 'btn-outline-primary');
+  document.getElementById('thTarget').classList.add('d-none');
+  document.getElementById('thSource').classList.add('d-none');
   renderTable();
   renderCards();
 }
 
-function onSwapCheck(el) {
-  const id = parseInt(el.dataset.id, 10);
-  if (el.checked) {
-    if (swapSelection.length >= 2) {
-      el.checked = false;
-      return;
-    }
-    swapSelection.push(id);
-  } else {
-    swapSelection = swapSelection.filter(x => x !== id);
-  }
-  document.querySelectorAll('.swap-cb').forEach(cb => {
-    const cbId = parseInt(cb.dataset.id, 10);
-    cb.checked = swapSelection.includes(cbId);
-  });
-  updateSwapUI();
+function onPickTarget(id) {
+  replaceTarget = id;
+  if (replaceSource === id) replaceSource = null;
+  renderTable();
+  renderCards();
+  updateReplaceUI();
 }
 
-function updateSwapUI() {
-  const btn = document.getElementById('swapBtn');
-  const status = document.getElementById('swapStatus');
-  if (swapSelection.length === 2) {
+function onPickSource(id) {
+  replaceSource = id;
+  if (replaceTarget === id) replaceTarget = null;
+  renderTable();
+  renderCards();
+  updateReplaceUI();
+}
+
+function updateReplaceUI() {
+  const btn = document.getElementById('replaceBtn');
+  const status = document.getElementById('replaceStatus');
+  if (replaceTarget && replaceSource) {
     btn.disabled = false;
-    status.textContent = `Swap #${swapSelection[0]} ↔ #${swapSelection[1]}`;
+    status.innerHTML = `<strong>#${replaceTarget}</strong> (A) ← <strong>#${replaceSource}</strong> (B)`;
   } else {
     btn.disabled = true;
-    status.textContent = i('dash.selectTwo', `Select 2 galleries to swap (${swapSelection.length}/2)`);
+    const hint = i('dash.replaceHint', 'Select target A, then source B. All of B\'s settings will be copied to A.');
+    status.textContent = hint;
   }
 }
 
-async function executeSwap() {
-  if (swapSelection.length !== 2) return;
-  const [a, b] = swapSelection;
-  if (!confirm(`Swap content of gallery #${a} and #${b}?`)) return;
+async function executeReplace() {
+  if (!replaceTarget || !replaceSource) return;
+  const srcG = galleries.find(g => g.id === replaceSource);
+  const msg = `Replace #${replaceTarget} (A) with all settings from #${replaceSource} (B)?\n\nA will get B's: images, views (${srcG?.viewLimit || '?'}), caption, password, expiration.\nA's link stays the same.`;
+  if (!confirm(msg)) return;
   try {
-    const res = await fetch(`${API_BASE}/api/user/swap-galleries`, {
+    const res = await fetch(`${API_BASE}/api/user/replace-gallery`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${getToken()}`
       },
-      body: JSON.stringify({ galleryIdA: a, galleryIdB: b })
+      body: JSON.stringify({ targetId: replaceTarget, sourceId: replaceSource })
     });
     const data = await res.json();
     if (data.status === 'ok') {
-      showToast(`Swapped #${a} ↔ #${b} successfully`, 'success');
-      cancelSwap();
+      showToast(`#${replaceTarget} replaced with #${replaceSource}'s settings`, 'success');
+      cancelReplace();
       loadGalleries();
     } else {
-      showToast(data.error || 'Swap failed', 'danger');
+      showToast(data.error || 'Replace failed', 'danger');
     }
   } catch (err) {
-    showToast('Swap failed: ' + err.message, 'danger');
+    showToast('Replace failed: ' + err.message, 'danger');
   }
 }
 

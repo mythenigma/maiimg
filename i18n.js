@@ -218,10 +218,7 @@ class I18n {
           total: "Total",
           active: "Active",
           deleted: "Deleted",
-          selectTwo: "Select 2 galleries to swap",
           cancel: "Cancel",
-          swap: "Swap",
-          swapMode: "Swap Mode",
           refresh: "Refresh",
           loading: "Loading galleries...",
           noGalleries: "No galleries yet",
@@ -231,9 +228,9 @@ class I18n {
           colLink: "Link",
           colStatus: "Status",
           colActions: "Actions",
-          restoreTitle: "Restore Gallery",
-          newViewCount: "New view count",
-          restore: "Restore"
+          replaceMode: "Replace Mode",
+          replaceHint: "Select target A, then source B. All of B's settings will be copied to A.",
+          replaceConfirm: "Replace"
         }
       },
       
@@ -451,10 +448,7 @@ class I18n {
           total: "总计",
           active: "有效",
           deleted: "已删除",
-          selectTwo: "选择2个图集进行互换",
           cancel: "取消",
-          swap: "互换",
-          swapMode: "互换模式",
           refresh: "刷新",
           loading: "加载图集中...",
           noGalleries: "暂无图集",
@@ -464,9 +458,9 @@ class I18n {
           colLink: "链接",
           colStatus: "状态",
           colActions: "操作",
-          restoreTitle: "恢复图集",
-          newViewCount: "新的查看次数",
-          restore: "恢复"
+          replaceMode: "替换模式",
+          replaceHint: "选择目标A，再选来源B。B的所有设置将复制到A。",
+          replaceConfirm: "替换"
         }
       },
 
@@ -684,10 +678,7 @@ class I18n {
           total: "總計",
           active: "有效",
           deleted: "已刪除",
-          selectTwo: "選擇2個圖集進行互換",
           cancel: "取消",
-          swap: "互換",
-          swapMode: "互換模式",
           refresh: "重新整理",
           loading: "載入圖集中...",
           noGalleries: "暫無圖集",
@@ -697,9 +688,9 @@ class I18n {
           colLink: "連結",
           colStatus: "狀態",
           colActions: "操作",
-          restoreTitle: "恢復圖集",
-          newViewCount: "新的查看次數",
-          restore: "恢復"
+          replaceMode: "替換模式",
+          replaceHint: "選擇目標A，再選來源B。B的所有設定將複製到A。",
+          replaceConfirm: "替換"
         }
       },
 
@@ -917,10 +908,7 @@ class I18n {
           total: "合計",
           active: "有効",
           deleted: "削除済み",
-          selectTwo: "入れ替えるギャラリーを2つ選択",
           cancel: "キャンセル",
-          swap: "入れ替え",
-          swapMode: "入れ替えモード",
           refresh: "更新",
           loading: "ギャラリーを読み込み中...",
           noGalleries: "ギャラリーがありません",
@@ -930,9 +918,9 @@ class I18n {
           colLink: "リンク",
           colStatus: "ステータス",
           colActions: "操作",
-          restoreTitle: "ギャラリーを復元",
-          newViewCount: "新しい閲覧数",
-          restore: "復元"
+          replaceMode: "置換モード",
+          replaceHint: "ターゲットAを選び、次にソースBを選択。Bの全設定がAにコピーされます。",
+          replaceConfirm: "置換"
         }
       },
 
@@ -1150,10 +1138,7 @@ class I18n {
           total: "Gesamt",
           active: "Aktiv",
           deleted: "Gelöscht",
-          selectTwo: "2 Galerien zum Tauschen auswählen",
           cancel: "Abbrechen",
-          swap: "Tauschen",
-          swapMode: "Tauschmodus",
           refresh: "Aktualisieren",
           loading: "Galerien werden geladen...",
           noGalleries: "Noch keine Galerien",
@@ -1163,9 +1148,9 @@ class I18n {
           colLink: "Link",
           colStatus: "Status",
           colActions: "Aktionen",
-          restoreTitle: "Galerie wiederherstellen",
-          newViewCount: "Neue Aufrufanzahl",
-          restore: "Wiederherstellen"
+          replaceMode: "Ersetzen-Modus",
+          replaceHint: "Wählen Sie Ziel A, dann Quelle B. Alle Einstellungen von B werden auf A kopiert.",
+          replaceConfirm: "Ersetzen"
         }
       },
 
@@ -1383,10 +1368,7 @@ class I18n {
           total: "전체",
           active: "활성",
           deleted: "삭제됨",
-          selectTwo: "교환할 갤러리 2개 선택",
           cancel: "취소",
-          swap: "교환",
-          swapMode: "교환 모드",
           refresh: "새로고침",
           loading: "갤러리 로딩 중...",
           noGalleries: "갤러리가 없습니다",
@@ -1396,9 +1378,9 @@ class I18n {
           colLink: "링크",
           colStatus: "상태",
           colActions: "작업",
-          restoreTitle: "갤러리 복원",
-          newViewCount: "새 조회수",
-          restore: "복원"
+          replaceMode: "대체 모드",
+          replaceHint: "대상 A를 선택한 후 소스 B를 선택하세요. B의 모든 설정이 A에 복사됩니다.",
+          replaceConfirm: "대체"
         }
       },
 
@@ -1616,10 +1598,7 @@ class I18n {
           total: "Total",
           active: "Actif",
           deleted: "Supprimé",
-          selectTwo: "Sélectionnez 2 galeries à échanger",
           cancel: "Annuler",
-          swap: "Échanger",
-          swapMode: "Mode échange",
           refresh: "Actualiser",
           loading: "Chargement des galeries...",
           noGalleries: "Aucune galerie",
@@ -1629,9 +1608,9 @@ class I18n {
           colLink: "Lien",
           colStatus: "Statut",
           colActions: "Actions",
-          restoreTitle: "Restaurer la galerie",
-          newViewCount: "Nouveau nombre de vues",
-          restore: "Restaurer"
+          replaceMode: "Mode remplacement",
+          replaceHint: "Sélectionnez la cible A, puis la source B. Tous les paramètres de B seront copiés vers A.",
+          replaceConfirm: "Remplacer"
         }
       },
 
@@ -1849,10 +1828,7 @@ class I18n {
           total: "Totale",
           active: "Attivo",
           deleted: "Eliminato",
-          selectTwo: "Seleziona 2 gallerie da scambiare",
           cancel: "Annulla",
-          swap: "Scambia",
-          swapMode: "Modalità scambio",
           refresh: "Aggiorna",
           loading: "Caricamento gallerie...",
           noGalleries: "Nessuna galleria",
@@ -1862,9 +1838,9 @@ class I18n {
           colLink: "Link",
           colStatus: "Stato",
           colActions: "Azioni",
-          restoreTitle: "Ripristina galleria",
-          newViewCount: "Nuovo conteggio visualizzazioni",
-          restore: "Ripristina"
+          replaceMode: "Modalità sostituzione",
+          replaceHint: "Seleziona il target A, poi la sorgente B. Tutte le impostazioni di B verranno copiate su A.",
+          replaceConfirm: "Sostituisci"
         }
       }
     };
