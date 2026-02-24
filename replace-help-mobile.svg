@@ -20,45 +20,45 @@
   <rect width="1080" height="1920" fill="url(#bg)"/>
 
   <text x="540" y="108" text-anchor="middle" font-size="58" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="800" fill="url(#titleGrad)">Replace Mode Guide</text>
-  <text x="540" y="162" text-anchor="middle" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#475569">Mobile layout: top-to-bottom selection flow</text>
+  <text x="540" y="162" text-anchor="middle" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#475569">Mobile layout: bottom-to-top copy flow</text>
 
   <rect x="84" y="220" width="912" height="560" rx="28" fill="#ffffff" stroke="#dbeafe" stroke-width="3" filter="url(#softShadow)"/>
   <rect x="126" y="262" width="828" height="72" rx="16" fill="#f8fafc"/>
-  <circle cx="164" cy="298" r="10" fill="#f59e0b"/>
-  <text x="192" y="307" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#111827">Source B (Active Gallery)</text>
-  <rect x="730" y="274" width="194" height="44" rx="12" fill="#fef3c7"/>
-  <text x="827" y="304" text-anchor="middle" font-size="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#92400e">STATUS: ACTIVE</text>
+  <circle cx="164" cy="298" r="10" fill="#3b82f6"/>
+  <text x="192" y="307" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#111827">Target A (Deleted/Old Link)</text>
+  <rect x="716" y="274" width="208" height="44" rx="12" fill="#dbeafe"/>
+  <text x="820" y="304" text-anchor="middle" font-size="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#1d4ed8">LINK: KEPT</text>
 
-  <rect x="126" y="366" width="828" height="126" rx="16" fill="#f8fafc" stroke="#e2e8f0"/>
-  <text x="154" y="414" font-size="28" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#334155">Images: copied from B</text>
-  <text x="154" y="452" font-size="28" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#334155">Settings: views / caption / password / expiration</text>
+  <rect x="126" y="366" width="828" height="126" rx="16" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="154" y="414" font-size="28" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#1e3a8a">After replace, A receives all content/settings from B.</text>
+  <text x="154" y="452" font-size="28" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#1e3a8a">A's original URL remains unchanged.</text>
 
-  <text x="126" y="548" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#1f2937">Step 2</text>
-  <text x="236" y="548" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#1f2937">Pick B as the source to copy FROM</text>
+  <text x="126" y="548" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#1f2937">Step 1</text>
+  <text x="236" y="548" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#1f2937">Pick A as the target to copy INTO</text>
 
-  <rect x="126" y="590" width="828" height="144" rx="16" fill="#fff7ed" stroke="#fed7aa"/>
-  <text x="156" y="646" font-size="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#9a3412">B remains unchanged. Its content is used as template data.</text>
-  <text x="156" y="688" font-size="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#9a3412">Then it is copied into target A.</text>
+  <rect x="126" y="590" width="828" height="144" rx="16" fill="#eef2ff" stroke="#c7d2fe"/>
+  <text x="156" y="646" font-size="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#4338ca">Choose the old link gallery as A first.</text>
+  <text x="156" y="688" font-size="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#4338ca">Then choose B to push content up into A.</text>
 
-  <rect x="492" y="820" width="96" height="250" rx="48" fill="url(#arrowGrad)"/>
-  <polygon points="540,1168 660,1028 420,1028" fill="url(#arrowGrad)"/>
-  <text x="540" y="1244" text-anchor="middle" font-size="38" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#4f46e5">Copy B down to A</text>
+  <rect x="492" y="920" width="96" height="250" rx="48" fill="url(#arrowGrad)"/>
+  <polygon points="540,820 660,960 420,960" fill="url(#arrowGrad)"/>
+  <text x="540" y="1244" text-anchor="middle" font-size="38" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#4f46e5">Copy B up to A</text>
 
   <rect x="84" y="1288" width="912" height="560" rx="28" fill="#ffffff" stroke="#bfdbfe" stroke-width="3" filter="url(#softShadow)"/>
   <rect x="126" y="1330" width="828" height="72" rx="16" fill="#f8fafc"/>
-  <circle cx="164" cy="1366" r="10" fill="#3b82f6"/>
-  <text x="192" y="1375" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#111827">Target A (Deleted/Old Link)</text>
-  <rect x="716" y="1342" width="208" height="44" rx="12" fill="#dbeafe"/>
-  <text x="820" y="1372" text-anchor="middle" font-size="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#1d4ed8">LINK: KEPT</text>
+  <circle cx="164" cy="1366" r="10" fill="#f59e0b"/>
+  <text x="192" y="1375" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#111827">Source B (Active Gallery)</text>
+  <rect x="730" y="1342" width="194" height="44" rx="12" fill="#fef3c7"/>
+  <text x="827" y="1372" text-anchor="middle" font-size="24" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#92400e">STATUS: ACTIVE</text>
 
-  <rect x="126" y="1434" width="828" height="126" rx="16" fill="#eff6ff" stroke="#bfdbfe"/>
-  <text x="154" y="1482" font-size="28" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#1e3a8a">After replace, A gets all content/settings from B.</text>
-  <text x="154" y="1520" font-size="28" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#1e3a8a">A's original URL stays exactly the same.</text>
+  <rect x="126" y="1434" width="828" height="126" rx="16" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="154" y="1482" font-size="28" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#334155">Images and settings are copied from B.</text>
+  <text x="154" y="1520" font-size="28" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#334155">B itself stays unchanged.</text>
 
-  <text x="126" y="1616" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#1f2937">Step 1</text>
-  <text x="236" y="1616" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#1f2937">Pick A as the target to copy INTO</text>
+  <text x="126" y="1616" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" font-weight="700" fill="#1f2937">Step 2</text>
+  <text x="236" y="1616" font-size="30" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#1f2937">Pick B as the source to copy FROM</text>
 
-  <rect x="126" y="1658" width="828" height="144" rx="16" fill="#eef2ff" stroke="#c7d2fe"/>
-  <text x="156" y="1714" font-size="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#4338ca">Use this when you want to restore an old share link</text>
-  <text x="156" y="1756" font-size="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#4338ca">with new images and settings from another gallery.</text>
+  <rect x="126" y="1658" width="828" height="144" rx="16" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="156" y="1714" font-size="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#9a3412">B provides template content and access settings.</text>
+  <text x="156" y="1756" font-size="27" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#9a3412">That data is copied upward into A.</text>
 </svg>

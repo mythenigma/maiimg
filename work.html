@@ -3,152 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>work - dashboard/index 检查清单</title>
+  <title>work - 移动端改动记录与计划</title>
   <style>
     :root {
       --bg: #f6f8fb;
       --card: #ffffff;
-      --text: #1f2937;
+      --text: #111827;
       --muted: #6b7280;
-      --danger: #b91c1c;
-      --warn: #b45309;
-      --ok: #065f46;
       --line: #e5e7eb;
+      --ok: #065f46;
+      --warn: #b45309;
+      --info: #1d4ed8;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
       background: var(--bg);
       color: var(--text);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
       line-height: 1.6;
     }
-    .wrap {
-      max-width: 980px;
-      margin: 28px auto;
-      padding: 0 16px;
-    }
+    .wrap { max-width: 980px; margin: 24px auto; padding: 0 16px; }
     .head {
-      background: linear-gradient(135deg, #e0e7ff 0%, #fdf2f8 100%);
+      background: linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 100%);
       border: 1px solid var(--line);
       border-radius: 12px;
-      padding: 18px 20px;
-      margin-bottom: 16px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
     }
-    h1 {
-      margin: 0 0 6px;
-      font-size: 22px;
-    }
-    .sub {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .item {
+    h1 { margin: 0 0 6px; font-size: 22px; }
+    .sub { margin: 0; color: var(--muted); font-size: 14px; }
+    .card {
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 12px;
-      padding: 16px;
+      padding: 14px 16px;
       margin-bottom: 12px;
     }
-    .row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
+    .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+    h2 { margin: 0; font-size: 17px; }
+    p { margin: 8px 0; font-size: 14px; }
+    code {
+      background: #f3f4f6;
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-size: 13px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
     .tag {
       font-size: 12px;
-      padding: 2px 8px;
-      border-radius: 999px;
       font-weight: 600;
+      border-radius: 999px;
+      padding: 2px 8px;
       border: 1px solid;
       white-space: nowrap;
     }
-    .high { color: var(--danger); border-color: #fecaca; background: #fef2f2; }
-    .mid { color: var(--warn); border-color: #fde68a; background: #fffbeb; }
-    .low { color: var(--ok); border-color: #a7f3d0; background: #ecfdf5; }
-    h2 {
-      font-size: 17px;
-      margin: 0;
-    }
-    p {
-      margin: 8px 0;
-      font-size: 14px;
-    }
-    code {
-      background: #f3f4f6;
-      padding: 1px 6px;
-      border-radius: 6px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 13px;
-    }
-    .fix {
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px dashed var(--line);
-      color: #111827;
-    }
-    ul {
-      margin: 6px 0 0 18px;
-      padding: 0;
-    }
-    .foot {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 10px;
-    }
+    .ok { color: var(--ok); border-color: #a7f3d0; background: #ecfdf5; }
+    .warn { color: var(--warn); border-color: #fde68a; background: #fffbeb; }
+    .info { color: var(--info); border-color: #bfdbfe; background: #eff6ff; }
+    ul { margin: 8px 0 0 18px; padding: 0; }
+    .foot { font-size: 12px; color: var(--muted); margin-top: 8px; }
   </style>
 </head>
 <body>
   <main class="wrap">
     <section class="head">
-      <h1>dashboard.html / index.html 检查结果</h1>
-      <p class="sub">日期：2026-02-24 ｜ 范围：关键逻辑、状态判断、前端安全、上传流程</p>
+      <h1>移动端改动记录（index / dashboard）</h1>
+      <p class="sub">更新日期：2026-02-24 ｜ 说明：本页只做记录，不会触发代码执行</p>
     </section>
 
-    <section class="item">
+    <section class="card">
       <div class="row">
-        <h2>1) dashboard 过期判断与展示不一致</h2>
-        <span class="tag high">高优先级</span>
+        <h2>已完成 1) index 手机导航改造</h2>
+        <span class="tag ok">已完成</span>
       </div>
-      <p><strong>位置：</strong><code>dashboard.html:666</code> + <code>dashboard.html:695</code></p>
-      <p><strong>问题：</strong><code>getGalleryStatus()</code> 用 <code>new Date(g.endtime)</code>，而 <code>formatEndtime()</code> 把 <code>endtime</code> 当秒级时间戳再乘 <code>1000</code>。同一字段被两种格式解析，状态可能误判。</p>
-      <p class="fix"><strong>修复建议：</strong>统一把 <code>endtime</code> 按秒级时间戳处理，状态判断也改成 <code>new Date(parseInt(g.endtime) * 1000)</code>。</p>
+      <ul>
+        <li>右上角改为用户菜单触发按钮（移动端）。</li>
+        <li>按钮显示为：<code>用户图标 / 语言旗帜</code>，并会随语言切换实时更新。</li>
+        <li>下拉菜单包含：登录、我的图集、退出、语言切换。</li>
+        <li>桌面端原布局保留，不受影响。</li>
+      </ul>
+      <p><strong>相关文件：</strong><code>index.html</code>、<code>qr-styles010.css</code></p>
     </section>
 
-    <section class="item">
+    <section class="card">
       <div class="row">
-        <h2>2) 通知组件存在潜在 XSS</h2>
-        <span class="tag high">高优先级</span>
+        <h2>已完成 2) dashboard 替换帮助图移动端版本</h2>
+        <span class="tag ok">已完成</span>
       </div>
-      <p><strong>位置：</strong><code>index.html:1205</code></p>
-      <p><strong>问题：</strong><code>showNotification(message)</code> 直接把 <code>message</code> 插入 <code>innerHTML</code>。若 message 来自后端返回值，可能被注入恶意 HTML/JS。</p>
-      <p class="fix"><strong>修复建议：</strong>改成 <code>textContent</code> 渲染文字，或先做 HTML 转义再插入模板。</p>
+      <ul>
+        <li>移动端帮助图改为独立资源：<code>replace-help-mobile.svg</code>。</li>
+        <li>当前结构按你最新要求：<code>A 在上方</code>、<code>B 在下方</code>、<code>箭头向上</code>（B → A）。</li>
+        <li>通过 <code>&lt;picture&gt;</code> 响应式切换：手机用竖图、桌面用原横图。</li>
+      </ul>
+      <p><strong>相关文件：</strong><code>dashboard.html</code>、<code>replace-help-mobile.svg</code></p>
     </section>
 
-    <section class="item">
+    <section class="card">
       <div class="row">
-        <h2>3) 删除文件时同名误删</h2>
-        <span class="tag mid">中优先级</span>
+        <h2>当前问题</h2>
+        <span class="tag warn">待优化</span>
       </div>
-      <p><strong>位置：</strong><code>index.html:1630</code></p>
-      <p><strong>问题：</strong>当前按 <code>originalName !== file.name</code> 过滤。上传两个同名图片时，删除一个会把同名项全部删掉。</p>
-      <p class="fix"><strong>修复建议：</strong>给每个文件加唯一 ID（如 <code>uploadId</code>），删除时按唯一 ID 精确移除。</p>
+      <p>你反馈“手机版替换说明界面有点小”。这说明当前帮助图的信息密度偏高，在小屏阅读压力较大。</p>
     </section>
 
-    <section class="item">
+    <section class="card">
       <div class="row">
-        <h2>4) generateImageQR 依赖全局 event</h2>
-        <span class="tag mid">中优先级</span>
+        <h2>下一步计划（先写计划，不改 dashboard 代码）</h2>
+        <span class="tag info">计划中</span>
       </div>
-      <p><strong>位置：</strong><code>index.html:1011</code> + <code>index.html:1024</code></p>
-      <p><strong>问题：</strong><code>const button = event.target;</code> 依赖浏览器全局 <code>event</code>，在非内联调用或部分环境下不稳定。</p>
-      <p class="fix"><strong>修复建议：</strong>显式传参：<code>onclick="generateImageQR(event)"</code>，函数签名改为 <code>generateImageQR(event)</code>；或直接传 <code>this</code>。</p>
+      <ul>
+        <li>方案 A（推荐）：把移动端帮助图拆成 2-3 张“步骤图”（Step 1 / Arrow / Step 2），每张内容更大更清晰。</li>
+        <li>方案 B：保留单张图，但大幅减少文字，只保留核心 4 行，并放大标题与箭头。</li>
+        <li>方案 C：不再用静态图，改成 dashboard 内可缩放的原生 HTML 步骤卡片（可翻译、可响应式）。</li>
+        <li>确认方案后，再进入 dashboard 实际改造。</li>
+      </ul>
     </section>
 
-    <p class="foot">备注：这是审查记录页，不会改变现有业务逻辑。若需要可继续按这份清单直接修代码。</p>
+    <p class="foot">备注：按你的要求，本次仅更新 work.html 记录与计划，没有继续改 dashboard 逻辑。</p>
   </main>
 </body>
 </html>
