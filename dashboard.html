@@ -379,8 +379,12 @@
       margin-bottom: 14px;
       color: var(--text);
     }
+    .help-modal picture {
+      display: block;
+    }
     .help-modal img {
       width: 100%;
+      height: auto;
       border-radius: 10px;
       border: 1px solid var(--border);
     }
@@ -389,6 +393,15 @@
       font-size: 0.88rem;
       color: var(--text-muted);
       line-height: 1.6;
+    }
+    @media (max-width: 768px) {
+      .help-modal {
+        max-width: 440px;
+        padding: 16px;
+      }
+      .help-modal img {
+        border-radius: 12px;
+      }
     }
 
     .toast-container {
@@ -530,7 +543,10 @@
     <div class="help-modal">
       <button class="close-btn" onclick="closeHelp()">&times;</button>
       <h5><i class="fas fa-info-circle me-2 text-primary"></i><span data-translate="dash.helpTitle">How Replace Mode Works</span></h5>
-      <img src="replace-help.png" alt="Replace Mode Explanation">
+      <picture>
+        <source media="(max-width: 768px)" srcset="replace-help-mobile.svg">
+        <img src="replace-help.png" alt="Replace Mode Explanation">
+      </picture>
       <div class="help-desc" data-translate="dash.helpDesc">
         Select a deleted gallery as target (A), then pick an active gallery as source (B). B's content and settings will be copied to A, while A's original link stays the same. This lets you reuse an existing link with new content.
       </div>
