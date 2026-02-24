@@ -634,6 +634,25 @@
     </div>
   </div>
 
+  <!-- Login Nudge Modal -->
+  <div class="modal fade" id="loginNudgeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
+      <div class="modal-content" style="border-radius: 16px; border: none;">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title w-100 text-center fw-bold">Get Better Control with an Account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4 pb-4 text-center">
+          <p class="text-muted mb-3">Sign in to manage galleries, restore links, and view access records from your dashboard.</p>
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-primary py-2" id="loginNudgeSignInBtn" style="border-radius: 10px;">Sign In</button>
+            <button type="button" class="btn btn-outline-secondary py-2" data-bs-dismiss="modal" style="border-radius: 10px;">Maybe Later</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer>
     <div class="container">
@@ -668,6 +687,8 @@
     let uploadedFiles = [];
     let currentUploadSessionId = null; // 保持为 null，在第一次上传时生成
     let myDropzone; // 添加全局变量来存储 dropzone 实例
+    const LOGIN_NUDGE_KEY = 'maiimg_login_nudge_last_ts';
+    const LOGIN_NUDGE_COOLDOWN_MS = 60 * 60 * 1000;
 
     // Language functionality
     let currentLanguage = 'en';
@@ -1226,6 +1247,25 @@
       }, 5000);
     }
 
+    function shouldShowLoginNudge() {
+      if (sessionStorage.getItem('maiimg_jwt')) return false;
+      const lastShown = Number(localStorage.getItem(LOGIN_NUDGE_KEY) || 0);
+      return Date.now() - lastShown >= LOGIN_NUDGE_COOLDOWN_MS;
+    }
+
+    function markLoginNudgeShown() {
+      localStorage.setItem(LOGIN_NUDGE_KEY, String(Date.now()));
+    }
+
+    function showLoginNudgeIfNeeded() {
+      if (!shouldShowLoginNudge()) return;
+      const nudgeEl = document.getElementById('loginNudgeModal');
+      if (!nudgeEl) return;
+      markLoginNudgeShown();
+      const modal = bootstrap.Modal.getOrCreateInstance(nudgeEl);
+      modal.show();
+    }
+
     function formatEndtimeDisplay(endtime) {
       const raw = (endtime ?? '').toString().trim();
       if (!raw) return getTranslation('features.expiration.unlimited', currentLanguage);
@@ -1575,6 +1615,7 @@
           const dropzone = this;
           
           this.on("addedfile", function(file) {
+            setTimeout(showLoginNudgeIfNeeded, 250);
             // 在添加第一个文件时生成会话ID（如果还没有的话）
             if (!currentUploadSessionId) {
               currentUploadSessionId = generateUploadSessionId();
@@ -1743,6 +1784,19 @@
           }
         });
       });
+
+      const nudgeSignInBtn = document.getElementById('loginNudgeSignInBtn');
+      if (nudgeSignInBtn) {
+        nudgeSignInBtn.addEventListener('click', () => {
+          const nudge = bootstrap.Modal.getInstance(document.getElementById('loginNudgeModal'));
+          if (nudge) nudge.hide();
+          const loginModalEl = document.getElementById('loginModal');
+          if (loginModalEl) {
+            const loginModal = bootstrap.Modal.getOrCreateInstance(loginModalEl);
+            loginModal.show();
+          }
+        });
+      }
     });
   </script>
 
