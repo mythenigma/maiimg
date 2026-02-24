@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>work - 移动端改动记录与计划</title>
+  <title>work - 本次已修改内容</title>
   <style>
     :root {
       --bg: #f6f8fb;
-      --card: #ffffff;
+      --card: #fff;
       --text: #111827;
       --muted: #6b7280;
       --line: #e5e7eb;
       --ok: #065f46;
-      --warn: #b45309;
       --info: #1d4ed8;
     }
     * { box-sizing: border-box; }
@@ -29,7 +28,7 @@
       border: 1px solid var(--line);
       border-radius: 12px;
       padding: 16px 18px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     h1 { margin: 0 0 6px; font-size: 22px; }
     .sub { margin: 0; color: var(--muted); font-size: 14px; }
@@ -40,9 +39,16 @@
       padding: 14px 16px;
       margin-bottom: 12px;
     }
-    .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
     h2 { margin: 0; font-size: 17px; }
     p { margin: 8px 0; font-size: 14px; }
+    ul { margin: 8px 0 0 18px; padding: 0; }
     code {
       background: #f3f4f6;
       border-radius: 6px;
@@ -57,70 +63,91 @@
       padding: 2px 8px;
       border: 1px solid;
       white-space: nowrap;
+      color: var(--ok);
+      border-color: #a7f3d0;
+      background: #ecfdf5;
     }
-    .ok { color: var(--ok); border-color: #a7f3d0; background: #ecfdf5; }
-    .warn { color: var(--warn); border-color: #fde68a; background: #fffbeb; }
-    .info { color: var(--info); border-color: #bfdbfe; background: #eff6ff; }
-    ul { margin: 8px 0 0 18px; padding: 0; }
+    .tag.info {
+      color: var(--info);
+      border-color: #bfdbfe;
+      background: #eff6ff;
+    }
     .foot { font-size: 12px; color: var(--muted); margin-top: 8px; }
   </style>
 </head>
 <body>
   <main class="wrap">
     <section class="head">
-      <h1>移动端改动记录（index / dashboard）</h1>
-      <p class="sub">更新日期：2026-02-24 ｜ 说明：本页只做记录，不会触发代码执行</p>
+      <h1>本次改了什么（Dashboard / Mobile Replace）</h1>
+      <p class="sub">更新日期：2026-02-24</p>
     </section>
 
     <section class="card">
       <div class="row">
-        <h2>已完成 1) index 手机导航改造</h2>
-        <span class="tag ok">已完成</span>
+        <h2>1) 手机版替换交互重做</h2>
+        <span class="tag">已修改</span>
       </div>
       <ul>
-        <li>右上角改为用户菜单触发按钮（移动端）。</li>
-        <li>按钮显示为：<code>用户图标 / 语言旗帜</code>，并会随语言切换实时更新。</li>
-        <li>下拉菜单包含：登录、我的图集、退出、语言切换。</li>
-        <li>桌面端原布局保留，不受影响。</li>
+        <li>把卡片里的小圆点 A/B 改成大按钮：<code>Set as A</code>、<code>Set as B</code>（更容易点击）。</li>
+        <li>选中后整卡高亮，并显示角标：<code>Target A</code> / <code>Source B</code>。</li>
+        <li>同一条卡片不会同时作为 A 和 B（互斥逻辑保持）。</li>
       </ul>
-      <p><strong>相关文件：</strong><code>index.html</code>、<code>qr-styles010.css</code></p>
+      <p><strong>文件：</strong><code>dashboard.html</code></p>
     </section>
 
     <section class="card">
       <div class="row">
-        <h2>已完成 2) dashboard 替换帮助图移动端版本</h2>
-        <span class="tag ok">已完成</span>
+        <h2>2) 新增手机底部固定操作栏</h2>
+        <span class="tag">已修改</span>
       </div>
       <ul>
-        <li>移动端帮助图改为独立资源：<code>replace-help-mobile.svg</code>。</li>
-        <li>当前结构按你最新要求：<code>A 在上方</code>、<code>B 在下方</code>、<code>箭头向上</code>（B → A）。</li>
-        <li>通过 <code>&lt;picture&gt;</code> 响应式切换：手机用竖图、桌面用原横图。</li>
+        <li>Replace 模式下，手机底部出现固定栏：步骤提示 + <code>Cancel</code> + <code>Replace</code>。</li>
+        <li>步骤文案会动态变化：
+          <code>Step 1: Select target A</code> → <code>Step 2: Select source B</code> → <code>Ready to replace</code>。</li>
+        <li>只有 A 和 B 都选好，Replace 按钮才可点击。</li>
       </ul>
-      <p><strong>相关文件：</strong><code>dashboard.html</code>、<code>replace-help-mobile.svg</code></p>
+      <p><strong>文件：</strong><code>dashboard.html</code></p>
     </section>
 
     <section class="card">
       <div class="row">
-        <h2>当前问题</h2>
-        <span class="tag warn">待优化</span>
-      </div>
-      <p>你反馈“手机版替换说明界面有点小”。这说明当前帮助图的信息密度偏高，在小屏阅读压力较大。</p>
-    </section>
-
-    <section class="card">
-      <div class="row">
-        <h2>下一步计划（先写计划，不改 dashboard 代码）</h2>
-        <span class="tag info">计划中</span>
+        <h2>3) 顶部 A ← B 替换预览增强（含动画）</h2>
+        <span class="tag">已修改</span>
       </div>
       <ul>
-        <li>方案 A（推荐）：把移动端帮助图拆成 2-3 张“步骤图”（Step 1 / Arrow / Step 2），每张内容更大更清晰。</li>
-        <li>方案 B：保留单张图，但大幅减少文字，只保留核心 4 行，并放大标题与箭头。</li>
-        <li>方案 C：不再用静态图，改成 dashboard 内可缩放的原生 HTML 步骤卡片（可翻译、可响应式）。</li>
-        <li>确认方案后，再进入 dashboard 实际改造。</li>
+        <li>替换条改为更明确的流程显示：<code>A #xxxx ← B #xxxx</code>。</li>
+        <li>箭头增加轻微脉冲动画，数字切换有 pop 动效。</li>
+        <li>当 A/B 组合变化时，状态条会有短暂高亮动画，提醒用户关系已更新。</li>
       </ul>
+      <p><strong>文件：</strong><code>dashboard.html</code></p>
     </section>
 
-    <p class="foot">备注：按你的要求，本次仅更新 work.html 记录与计划，没有继续改 dashboard 逻辑。</p>
+    <section class="card">
+      <div class="row">
+        <h2>4) 英文基础文案 + i18n 键补充（全语言）</h2>
+        <span class="tag">已修改</span>
+      </div>
+      <ul>
+        <li>新增文案统一以英文为默认基础。</li>
+        <li>已为所有支持语言补齐移动替换相关键，包含：
+          <code>mobileRoleTarget</code>、<code>mobileRoleSource</code>、<code>mobileSetTarget</code>、<code>mobileSetSource</code>、<code>mobileStep1</code>、<code>mobileStep2</code>、<code>mobileHint</code>、<code>mobilePickedTarget</code>、<code>mobilePickedSource</code>、<code>mobileReady</code>、<code>mobileReadySummary</code>。</li>
+      </ul>
+      <p><strong>文件：</strong><code>i18n.js</code></p>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <h2>5) 帮助图资源现状</h2>
+        <span class="tag info">现状</span>
+      </div>
+      <ul>
+        <li>移动端帮助图资源：<code>replace-help-mobile.svg</code>。</li>
+        <li>当前版本结构为：<code>A 在上、B 在下、箭头向上</code>。</li>
+      </ul>
+      <p><strong>文件：</strong><code>replace-help-mobile.svg</code>、<code>dashboard.html</code></p>
+    </section>
+
+    <p class="foot">备注：本页仅记录“已经改了什么”。</p>
   </main>
 </body>
 </html>

@@ -97,6 +97,68 @@
       font-size: 0.9rem;
       color: var(--primary-dark);
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .swap-bar .swap-info .replace-flow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .swap-bar .swap-info .flow-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 0.86rem;
+      border: 1px solid transparent;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .swap-bar .swap-info .flow-chip.chip-a {
+      background: #dbeafe;
+      color: #1d4ed8;
+      border-color: #bfdbfe;
+    }
+    .swap-bar .swap-info .flow-chip.chip-b {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+    .swap-bar .swap-info .flow-arrow {
+      color: #4f46e5;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      animation: flowArrowPulse 1.2s ease-in-out infinite;
+    }
+    .swap-bar .swap-info .flow-help {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .swap-bar .swap-info .flow-num {
+      animation: flowNumPop 0.35s ease;
+    }
+    .swap-bar .swap-info.status-animate {
+      animation: flowStatusGlow 0.45s ease;
+    }
+    @keyframes flowArrowPulse {
+      0%, 100% { transform: translateX(0); opacity: 1; }
+      50% { transform: translateX(-2px); opacity: 0.75; }
+    }
+    @keyframes flowNumPop {
+      0% { transform: scale(0.9); opacity: 0.6; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes flowStatusGlow {
+      0% { box-shadow: inset 0 0 0 rgba(99,102,241,0); }
+      50% { box-shadow: inset 0 0 0 999px rgba(99,102,241,0.06); }
+      100% { box-shadow: inset 0 0 0 rgba(99,102,241,0); }
     }
 
     .toolbar-btn {
@@ -783,7 +845,11 @@ function encodeGalleryId(numericId) {
 function getToken() { return sessionStorage.getItem('maiimg_jwt'); }
 
 function i(key, fallback, vars) {
-  let text = (window.i18n && window.i18n.t) ? (window.i18n.t(key) || fallback) : fallback;
+  let text = fallback;
+  if (window.i18n && window.i18n.t) {
+    const translated = window.i18n.t(key);
+    text = (translated && translated !== key) ? translated : fallback;
+  }
   if (vars) {
     Object.keys(vars).forEach(k => {
       text = text.replace(new RegExp(`#\\{${k}\\}|\\{${k}\\}`, 'g'), vars[k]);
@@ -1066,15 +1132,35 @@ function updateReplaceUI() {
   const btn = document.getElementById('replaceBtn');
   const btnMobile = document.getElementById('mobileReplaceBtn');
   const status = document.getElementById('replaceStatus');
+  const animateStatus = () => {
+    const wrap = status.closest('.swap-info');
+    if (!wrap) return;
+    wrap.classList.remove('status-animate');
+    void wrap.offsetWidth;
+    wrap.classList.add('status-animate');
+  };
   if (replaceTarget && replaceSource) {
     btn.disabled = false;
     if (btnMobile) btnMobile.disabled = false;
-    status.innerHTML = `<strong>#${replaceTarget}</strong> (A) ← <strong>#${replaceSource}</strong> (B)`;
+    status.innerHTML = `
+      <span class="replace-flow">
+        <span class="flow-chip chip-a">A <span class="flow-num">#${replaceTarget}</span></span>
+        <span class="flow-arrow" aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
+        <span class="flow-chip chip-b">B <span class="flow-num">#${replaceSource}</span></span>
+      </span>
+      <span class="flow-help">${i('dash.mobileReadySummary', "B's settings will be copied to A.", { target: replaceTarget, source: replaceSource })}</span>
+    `;
+    animateStatus();
   } else {
     btn.disabled = true;
     if (btnMobile) btnMobile.disabled = true;
-    const hint = i('dash.replaceHint', 'Select target A, then source B. All of B\'s settings will be copied to A.');
-    status.textContent = hint;
+    if (replaceTarget && !replaceSource) {
+      status.textContent = i('dash.mobilePickedTarget', 'Selected A: #{target}. Now pick B.', { target: replaceTarget });
+    } else if (!replaceTarget && replaceSource) {
+      status.textContent = i('dash.mobilePickedSource', 'Selected B: #{source}. Now pick A.', { source: replaceSource });
+    } else {
+      status.textContent = i('dash.replaceHint', 'Select target A, then source B. All of B\'s settings will be copied to A.');
+    }
   }
   updateMobileReplacePanel();
 }

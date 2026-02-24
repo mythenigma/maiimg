@@ -257,6 +257,7 @@ class I18n {
           mobileStep2: "Step 2: Select source B",
           mobileHint: "Choose A and B from cards below.",
           mobilePickedTarget: "Selected A: #{target}. Now pick B.",
+          mobilePickedSource: "Selected B: #{source}. Now pick A.",
           mobileReady: "Ready to replace",
           mobileReadySummary: "A #{target} will be replaced by B #{source}."
         }
@@ -506,7 +507,18 @@ class I18n {
           pageTitle: "控制面板 - Maiimg图床",
           helpTitle: "替换模式说明",
           helpDesc: "选择一个已删除的图集作为目标(A)，再选一个有效图集作为来源(B)。B的内容和设置将复制到A，而A的原始链接保持不变。这样你可以用新内容复用已有链接。",
-          expirationTz: "到期时间时区"
+          expirationTz: "到期时间时区",
+          mobileRoleTarget: "目标A",
+          mobileRoleSource: "来源B",
+          mobileSetTarget: "设为A",
+          mobileSetSource: "设为B",
+          mobileStep1: "步骤1：选择目标A",
+          mobileStep2: "步骤2：选择来源B",
+          mobileHint: "请在下方卡片中选择A和B。",
+          mobilePickedTarget: "已选择A：#{target}，现在请选择B。",
+          mobilePickedSource: "已选择B：#{source}，现在请选择A。",
+          mobileReady: "可以替换",
+          mobileReadySummary: "A #{target} 将被 B #{source} 替换。"
         }
       },
 
@@ -754,7 +766,18 @@ class I18n {
           pageTitle: "控制面板 - Maiimg圖床",
           helpTitle: "替換模式說明",
           helpDesc: "選擇一個已刪除的圖集作為目標(A)，再選一個有效圖集作為來源(B)。B的內容和設定將複製到A，而A的原始連結保持不變。這樣您可以用新內容複用已有連結。",
-          expirationTz: "到期時間時區"
+          expirationTz: "到期時間時區",
+          mobileRoleTarget: "目標A",
+          mobileRoleSource: "來源B",
+          mobileSetTarget: "設為A",
+          mobileSetSource: "設為B",
+          mobileStep1: "步驟1：選擇目標A",
+          mobileStep2: "步驟2：選擇來源B",
+          mobileHint: "請在下方卡片中選擇A和B。",
+          mobilePickedTarget: "已選擇A：#{target}，現在請選B。",
+          mobilePickedSource: "已選擇B：#{source}，現在請選A。",
+          mobileReady: "可進行替換",
+          mobileReadySummary: "A #{target} 將被 B #{source} 替換。"
         }
       },
 
@@ -1002,7 +1025,18 @@ class I18n {
           pageTitle: "ダッシュボード - Maiimgホスティング",
           helpTitle: "置換モードの使い方",
           helpDesc: "削除済みのギャラリーをターゲット(A)に選び、有効なギャラリーをソース(B)に選択します。Bの内容と設定がAにコピーされ、Aの元のリンクはそのまま維持されます。既存のリンクを新しい内容で再利用できます。",
-          expirationTz: "有効期限のタイムゾーン"
+          expirationTz: "有効期限のタイムゾーン",
+          mobileRoleTarget: "ターゲットA",
+          mobileRoleSource: "ソースB",
+          mobileSetTarget: "Aに設定",
+          mobileSetSource: "Bに設定",
+          mobileStep1: "ステップ1：ターゲットAを選択",
+          mobileStep2: "ステップ2：ソースBを選択",
+          mobileHint: "下のカードからAとBを選択してください。",
+          mobilePickedTarget: "Aを選択済み：#{target}。次にBを選択。",
+          mobilePickedSource: "Bを選択済み：#{source}。次にAを選択。",
+          mobileReady: "置換の準備完了",
+          mobileReadySummary: "A #{target} は B #{source} に置換されます。"
         }
       },
 
@@ -1250,7 +1284,18 @@ class I18n {
           pageTitle: "Dashboard - Maiimg Hosting",
           helpTitle: "Ersetzen-Modus erklärt",
           helpDesc: "Wählen Sie eine gelöschte Galerie als Ziel (A), dann eine aktive als Quelle (B). Inhalte und Einstellungen von B werden auf A kopiert, während der Originallink von A erhalten bleibt. So können Sie einen bestehenden Link mit neuem Inhalt wiederverwenden.",
-          expirationTz: "Zeitzone für Ablauf"
+          expirationTz: "Zeitzone für Ablauf",
+          mobileRoleTarget: "Ziel A",
+          mobileRoleSource: "Quelle B",
+          mobileSetTarget: "Als A setzen",
+          mobileSetSource: "Als B setzen",
+          mobileStep1: "Schritt 1: Ziel A wählen",
+          mobileStep2: "Schritt 2: Quelle B wählen",
+          mobileHint: "Wählen Sie A und B in den Karten unten.",
+          mobilePickedTarget: "A gewählt: #{target}. Jetzt B wählen.",
+          mobilePickedSource: "B gewählt: #{source}. Jetzt A wählen.",
+          mobileReady: "Bereit zum Ersetzen",
+          mobileReadySummary: "A #{target} wird durch B #{source} ersetzt."
         }
       },
 
@@ -1498,7 +1543,18 @@ class I18n {
           pageTitle: "대시보드 - Maiimg 호스팅",
           helpTitle: "대체 모드 설명",
           helpDesc: "삭제된 갤러리를 대상(A)으로 선택한 후, 활성 갤러리를 소스(B)로 선택하세요. B의 내용과 설정이 A에 복사되며, A의 원래 링크는 그대로 유지됩니다. 이를 통해 기존 링크를 새 내용으로 재사용할 수 있습니다.",
-          expirationTz: "만료 시간대"
+          expirationTz: "만료 시간대",
+          mobileRoleTarget: "대상 A",
+          mobileRoleSource: "소스 B",
+          mobileSetTarget: "A로 설정",
+          mobileSetSource: "B로 설정",
+          mobileStep1: "1단계: 대상 A 선택",
+          mobileStep2: "2단계: 소스 B 선택",
+          mobileHint: "아래 카드에서 A와 B를 선택하세요.",
+          mobilePickedTarget: "A 선택됨: #{target}. 이제 B를 선택하세요.",
+          mobilePickedSource: "B 선택됨: #{source}. 이제 A를 선택하세요.",
+          mobileReady: "교체 준비 완료",
+          mobileReadySummary: "A #{target} 가 B #{source} 로 교체됩니다."
         }
       },
 
@@ -1746,7 +1802,18 @@ class I18n {
           pageTitle: "Tableau de bord - Maiimg Hosting",
           helpTitle: "Comment fonctionne le mode remplacement",
           helpDesc: "Sélectionnez une galerie supprimée comme cible (A), puis une galerie active comme source (B). Le contenu et les paramètres de B seront copiés vers A, tandis que le lien original de A reste inchangé. Cela permet de réutiliser un lien existant avec un nouveau contenu.",
-          expirationTz: "Fuseau horaire d'expiration"
+          expirationTz: "Fuseau horaire d'expiration",
+          mobileRoleTarget: "Cible A",
+          mobileRoleSource: "Source B",
+          mobileSetTarget: "Définir en A",
+          mobileSetSource: "Définir en B",
+          mobileStep1: "Étape 1 : Sélectionnez la cible A",
+          mobileStep2: "Étape 2 : Sélectionnez la source B",
+          mobileHint: "Choisissez A et B dans les cartes ci-dessous.",
+          mobilePickedTarget: "A sélectionné : #{target}. Choisissez maintenant B.",
+          mobilePickedSource: "B sélectionné : #{source}. Choisissez maintenant A.",
+          mobileReady: "Prêt à remplacer",
+          mobileReadySummary: "A #{target} sera remplacé par B #{source}."
         }
       },
 
@@ -1994,7 +2061,18 @@ class I18n {
           pageTitle: "Dashboard - Maiimg Hosting",
           helpTitle: "Come funziona la modalità sostituzione",
           helpDesc: "Seleziona una galleria eliminata come target (A), poi una galleria attiva come sorgente (B). Il contenuto e le impostazioni di B verranno copiati su A, mentre il link originale di A rimane invariato. Questo permette di riutilizzare un link esistente con nuovo contenuto.",
-          expirationTz: "Fuso orario scadenza"
+          expirationTz: "Fuso orario scadenza",
+          mobileRoleTarget: "Target A",
+          mobileRoleSource: "Sorgente B",
+          mobileSetTarget: "Imposta come A",
+          mobileSetSource: "Imposta come B",
+          mobileStep1: "Passo 1: Seleziona il target A",
+          mobileStep2: "Passo 2: Seleziona la sorgente B",
+          mobileHint: "Scegli A e B dalle schede qui sotto.",
+          mobilePickedTarget: "A selezionato: #{target}. Ora scegli B.",
+          mobilePickedSource: "B selezionato: #{source}. Ora scegli A.",
+          mobileReady: "Pronto per la sostituzione",
+          mobileReadySummary: "A #{target} sarà sostituito da B #{source}."
         }
       }
     };
