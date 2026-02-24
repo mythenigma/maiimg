@@ -415,7 +415,7 @@ function encodeGalleryId(numericId) {
   }).join('');
 }
 
-function getToken() { return sessionStorage.getItem('jwt_token'); }
+function getToken() { return sessionStorage.getItem('maiimg_jwt'); }
 
 function i(key, fallback) {
   if (window.i18n && window.i18n.t) return window.i18n.t(key) || fallback;
@@ -459,9 +459,9 @@ function checkAuth() {
     const payload = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
     document.getElementById('navEmail').textContent = payload.sub || '';
     if (payload.exp && payload.exp * 1000 < Date.now()) {
-      sessionStorage.removeItem('jwt_token');
-      window.location.href = 'maiimg.html';
-      return false;
+    sessionStorage.removeItem('maiimg_jwt');
+    window.location.href = 'maiimg.html';
+    return false;
     }
   } catch (e) {
     window.location.href = 'maiimg.html';
@@ -471,7 +471,7 @@ function checkAuth() {
 }
 
 function logout() {
-  sessionStorage.removeItem('jwt_token');
+  sessionStorage.removeItem('maiimg_jwt');
   window.location.href = 'maiimg.html';
 }
 
