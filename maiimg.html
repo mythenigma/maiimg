@@ -43,6 +43,9 @@
       <!-- User Auth Area -->
       <div class="d-flex align-items-center gap-2">
         <div id="userInfo" class="small d-none" style="background: rgba(255,255,255,0.9); color: #333; padding: 4px 12px; border-radius: 20px; font-weight: 500;"></div>
+        <a href="dashboard.html" class="btn btn-light btn-sm d-none" id="dashboardBtn">
+          <i class="fas fa-th-large me-1"></i><span data-translate="dash.title">My Galleries</span>
+        </a>
         <button type="button" class="btn btn-light btn-sm" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal">
           <i class="fas fa-sign-in-alt me-1"></i><span data-translate="auth.login">Login</span>
         </button>
@@ -1766,6 +1769,7 @@
     const loginBtn = document.getElementById("loginBtn");
     const logoutBtn = document.getElementById("logoutBtn");
     const userInfoEl = document.getElementById("userInfo");
+    const dashboardBtn = document.getElementById("dashboardBtn");
 
     // View elements
     const views = {
@@ -1961,11 +1965,13 @@
           loginBtn.classList.remove("d-none");
           logoutBtn.classList.add("d-none");
           userInfoEl.classList.add("d-none");
+          dashboardBtn.classList.add("d-none");
           return;
         }
         loginBtn.classList.add("d-none");
         logoutBtn.classList.remove("d-none");
         userInfoEl.classList.remove("d-none");
+        dashboardBtn.classList.remove("d-none");
         userInfoEl.textContent = user.email || user.displayName || "User";
 
         await workerAuth(user.email || user.providerData[0]?.email || user.uid, user.uid);
@@ -1973,6 +1979,7 @@
         loginBtn.classList.remove("d-none");
         logoutBtn.classList.add("d-none");
         userInfoEl.classList.add("d-none");
+        dashboardBtn.classList.add("d-none");
         userInfoEl.textContent = "";
       }
     });

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Dashboard - Image QR Generator</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="i18n.js?v=2026021902"></script>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+    .dash-nav {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 12px 0;
+    }
+    .dash-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .dash-nav .brand {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dash-nav .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dash-nav .user-email {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.85rem;
+    }
+    .dash-header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    .dash-header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    .dash-header .stats {
+      display: flex;
+      gap: 20px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .dash-header .stat-item {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .dash-header .stat-item strong {
+      color: var(--text);
+    }
+    .swap-bar {
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .swap-bar.active { display: flex; }
+    .swap-bar .swap-info {
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+    }
+
+    /* Table view (desktop) */
+    .gallery-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .gallery-table thead th {
+      background: #f1f5f9;
+      padding: 12px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .gallery-table tbody td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      vertical-align: middle;
+    }
+    .gallery-table tbody tr:last-child td { border-bottom: none; }
+    .gallery-table tbody tr:hover { background: #f8fafc; }
+    .gallery-table .swap-check { width: 40px; }
+
+    .badge-active { background: var(--success); color: #fff; }
+    .badge-deleted { background: var(--danger); color: #fff; }
+    .badge-expired { background: var(--warning); color: #fff; }
+
+    .action-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      transition: background 0.15s;
+    }
+    .action-btn:hover { background: #f1f5f9; }
+    .action-btn.text-danger:hover { background: #fef2f2; }
+    .action-btn.text-success:hover { background: #f0fdf4; }
+
+    .gallery-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
+    .gallery-link:hover { text-decoration: underline; }
+
+    /* Card view (mobile) */
+    .gallery-cards { display: none; }
+    .gallery-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      border: 1px solid var(--border);
+    }
+    .gallery-card .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .gallery-card .card-top .card-id {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .gallery-card .card-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 0.85rem;
+    }
+    .gallery-card .card-row .label {
+      color: var(--text-muted);
+    }
+    .gallery-card .card-actions {
+      display: flex;
+      gap: 4px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+    .gallery-card .swap-checkbox-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state i { font-size: 3rem; margin-bottom: 16px; opacity: 0.4; }
+    .empty-state h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; }
+
+    .loading-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-table-wrap { display: none; }
+      .gallery-cards { display: block; }
+      .dash-header h1 { font-size: 1.25rem; }
+    }
+    @media (min-width: 769px) {
+      .gallery-table-wrap { display: block; }
+      .gallery-cards { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="dash-nav">
+  <div class="container">
+    <a class="brand" href="maiimg.html">
+      <i class="fas fa-images"></i>
+      <span data-translate="nav.title">Image QR Generator</span>
+    </a>
+    <div class="nav-right">
+      <span class="user-email" id="navEmail"></span>
+      <a href="maiimg.html" class="btn btn-sm btn-light">
+        <i class="fas fa-plus me-1"></i><span data-translate="dash.newGallery">New Gallery</span>
+      </a>
+      <button class="btn btn-sm btn-outline-light" id="logoutBtn" onclick="logout()">
+        <i class="fas fa-sign-out-alt me-1"></i><span data-translate="auth.logout">Logout</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Header -->
+<div class="dash-header">
+  <div class="container">
+    <h1><i class="fas fa-th-large me-2"></i><span data-translate="dash.title">My Galleries</span></h1>
+    <div class="stats" id="statsBar">
+      <div class="stat-item"><span data-translate="dash.total">Total</span>: <strong id="statTotal">0</strong></div>
+      <div class="stat-item"><span data-translate="dash.active">Active</span>: <strong id="statActive">0</strong></div>
+      <div class="stat-item"><span data-translate="dash.deleted">Deleted</span>: <strong id="statDeleted">0</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="container py-3">
+
+  <!-- Swap Bar -->
+  <div class="swap-bar" id="swapBar">
+    <div class="swap-info">
+      <i class="fas fa-exchange-alt me-1"></i>
+      <span id="swapStatus" data-translate="dash.selectTwo">Select 2 galleries to swap</span>
+    </div>
+    <div>
+      <button class="btn btn-sm btn-outline-secondary me-1" onclick="cancelSwap()">
+        <span data-translate="dash.cancel">Cancel</span>
+      </button>
+      <button class="btn btn-sm btn-primary" id="swapBtn" onclick="executeSwap()" disabled>
+        <i class="fas fa-exchange-alt me-1"></i><span data-translate="dash.swap">Swap</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Swap Toggle -->
+  <div class="mb-3 d-flex justify-content-end gap-2">
+    <button class="btn btn-sm btn-outline-primary" id="swapModeBtn" onclick="toggleSwapMode()">
+      <i class="fas fa-exchange-alt me-1"></i><span data-translate="dash.swapMode">Swap Mode</span>
+    </button>
+    <button class="btn btn-sm btn-outline-secondary" onclick="loadGalleries()">
+      <i class="fas fa-sync-alt me-1"></i><span data-translate="dash.refresh">Refresh</span>
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-state" id="loadingState">
+    <div class="spinner-border text-primary mb-3" role="status"></div>
+    <p data-translate="dash.loading">Loading galleries...</p>
+  </div>
+
+  <!-- Empty -->
+  <div class="empty-state d-none" id="emptyState">
+    <i class="fas fa-images d-block"></i>
+    <h3 data-translate="dash.noGalleries">No galleries yet</h3>
+    <p data-translate="dash.createFirst">Create your first gallery on the main page.</p>
+    <a href="maiimg.html" class="btn btn-primary btn-sm mt-2">
+      <i class="fas fa-plus me-1"></i><span data-translate="dash.newGallery">New Gallery</span>
+    </a>
+  </div>
+
+  <!-- Table View (Desktop) -->
+  <div class="gallery-table-wrap d-none" id="tableWrap">
+    <table class="gallery-table">
+      <thead>
+        <tr>
+          <th class="swap-check d-none" id="thSwap"></th>
+          <th>ID</th>
+          <th data-translate="dash.colCaption">Caption</th>
+          <th data-translate="dash.colViews">Views</th>
+          <th data-translate="dash.colLink">Link</th>
+          <th data-translate="dash.colStatus">Status</th>
+          <th data-translate="dash.colActions">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Card View (Mobile) -->
+  <div class="gallery-cards d-none" id="cardsWrap"></div>
+
+</div>
+
+<!-- Toast -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Restore Modal -->
+<div class="modal fade" id="restoreModal" tabindex="-1">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title" data-translate="dash.restoreTitle">Restore Gallery</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <label class="form-label" data-translate="dash.newViewCount">New view count</label>
+        <input type="number" class="form-control" id="restoreViewCount" value="100" min="1">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal" data-translate="dash.cancel">Cancel</button>
+        <button class="btn btn-success btn-sm" id="confirmRestoreBtn" data-translate="dash.restore">Restore</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+const API_BASE = 'https://fetch.maipdf.com';
+let galleries = [];
+let swapMode = false;
+let swapSelection = [];
+let restoreTargetId = null;
+
+class ReversibleEncoder {
+  constructor() {
+    this.charset = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789abcdefghjkmnpqrstuvwxyz';
+    this.base = this.charset.length;
+    this.secretKey = 0x5A5A5A5A;
+    this.charMap = {
+      'A':'X','B':'Y','C':'Z','D':'a','E':'b','F':'c','G':'d','H':'e',
+      'J':'f','K':'g','L':'h','M':'j','N':'k','P':'m','Q':'n','R':'p',
+      'S':'q','T':'r','U':'s','V':'t','W':'u','X':'v','Y':'w','Z':'x',
+      '2':'y','3':'z','4':'A','5':'B','6':'C','7':'D','8':'E','9':'F',
+      'a':'G','b':'H','c':'J','d':'K','e':'L','f':'M','g':'N','h':'P',
+      'j':'Q','k':'R','m':'S','n':'T','p':'U','q':'V','r':'W','s':'2',
+      't':'3','u':'4','v':'5','w':'6','x':'7','y':'8','z':'9'
+    };
+    this.reverseCharMap = {};
+    for (let [k, v] of Object.entries(this.charMap)) this.reverseCharMap[v] = k;
+  }
+  calculateChecksum(str) {
+    let sum = 0;
+    for (let i = 0; i < str.length; i++) sum += str.charCodeAt(i) * (i + 1);
+    return this.charset[sum % this.base];
+  }
+  toBase58(num) {
+    if (num === 0) return this.charset[0];
+    let r = '';
+    while (num > 0) { r = this.charset[num % this.base] + r; num = Math.floor(num / this.base); }
+    return r;
+  }
+  substituteChars(str) { return str.split('').map(c => this.charMap[c] || c).join(''); }
+  scramblePositions(str) {
+    const chars = str.split(''), result = [];
+    for (let i = 1; i < chars.length; i += 2) result.push(chars[i]);
+    for (let i = 0; i < chars.length; i += 2) result.push(chars[i]);
+    return result.join('');
+  }
+  encode(autoId) {
+    const encrypted = autoId ^ this.secretKey;
+    const base58 = this.toBase58(encrypted);
+    const substituted = this.substituteChars(base58);
+    const scrambled = this.scramblePositions(substituted);
+    return scrambled + this.calculateChecksum(scrambled);
+  }
+}
+
+const encoder = new ReversibleEncoder();
+
+function encodeGalleryId(numericId) {
+  return numericId.toString().split('').map(d => {
+    let v = parseInt(d); if (v === 0) v = 10;
+    return String.fromCharCode(64 + v);
+  }).join('');
+}
+
+function getToken() { return sessionStorage.getItem('jwt_token'); }
+
+function i(key, fallback) {
+  if (window.i18n && window.i18n.t) return window.i18n.t(key) || fallback;
+  return fallback;
+}
+
+function getGalleryStatus(g) {
+  if (parseInt(g.viewLimit) === 0) return 'deleted';
+  if (g.endtime) {
+    const end = new Date(g.endtime);
+    if (!isNaN(end.getTime()) && end < new Date()) return 'expired';
+  }
+  return 'active';
+}
+
+function statusBadge(status) {
+  const labels = { active: 'Active', deleted: 'Deleted', expired: 'Expired' };
+  const cls = { active: 'badge-active', deleted: 'badge-deleted', expired: 'badge-expired' };
+  return `<span class="badge ${cls[status]}">${labels[status]}</span>`;
+}
+
+function galleryLink(id) {
+  const alphaId = encodeGalleryId(id);
+  return `https://maiimg.com/file/${alphaId}/`;
+}
+
+function trackingLink(id) {
+  const code = encoder.encode(id);
+  return `tracking.html?code=${code}`;
+}
+
+// ---- Auth Gate ----
+function checkAuth() {
+  const token = getToken();
+  if (!token) {
+    window.location.href = 'maiimg.html';
+    return false;
+  }
+  try {
+    const parts = token.split('.');
+    const payload = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+    document.getElementById('navEmail').textContent = payload.sub || '';
+    if (payload.exp && payload.exp * 1000 < Date.now()) {
+      sessionStorage.removeItem('jwt_token');
+      window.location.href = 'maiimg.html';
+      return false;
+    }
+  } catch (e) {
+    window.location.href = 'maiimg.html';
+    return false;
+  }
+  return true;
+}
+
+function logout() {
+  sessionStorage.removeItem('jwt_token');
+  window.location.href = 'maiimg.html';
+}
+
+// ---- Load Galleries ----
+async function loadGalleries() {
+  const token = getToken();
+  document.getElementById('loadingState').classList.remove('d-none');
+  document.getElementById('emptyState').classList.add('d-none');
+  document.getElementById('tableWrap').classList.add('d-none');
+  document.getElementById('cardsWrap').classList.add('d-none');
+
+  try {
+    const res = await fetch(`${API_BASE}/api/user/galleries`, {
+      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }
+    });
+    const data = await res.json();
+    if (data.status !== 'ok') throw new Error(data.error || 'Failed');
+
+    galleries = data.galleries || [];
+    document.getElementById('loadingState').classList.add('d-none');
+
+    if (galleries.length === 0) {
+      document.getElementById('emptyState').classList.remove('d-none');
+      return;
+    }
+
+    updateStats();
+    renderTable();
+    renderCards();
+    document.getElementById('tableWrap').classList.remove('d-none');
+    document.getElementById('cardsWrap').classList.remove('d-none');
+  } catch (err) {
+    document.getElementById('loadingState').classList.add('d-none');
+    showToast('Failed to load galleries: ' + err.message, 'danger');
+  }
+}
+
+function updateStats() {
+  let active = 0, deleted = 0;
+  galleries.forEach(g => {
+    const s = getGalleryStatus(g);
+    if (s === 'deleted') deleted++;
+    else active++;
+  });
+  document.getElementById('statTotal').textContent = galleries.length;
+  document.getElementById('statActive').textContent = active;
+  document.getElementById('statDeleted').textContent = deleted;
+}
+
+// ---- Table Render ----
+function renderTable() {
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = galleries.map(g => {
+    const status = getGalleryStatus(g);
+    const link = galleryLink(g.id);
+    const swap = swapMode ? `<td class="swap-check"><input type="checkbox" class="form-check-input swap-cb" data-id="${g.id}" onchange="onSwapCheck(this)" ${swapSelection.includes(g.id) ? 'checked' : ''}></td>` : '';
+    return `<tr>
+      ${swap}
+      <td><strong>#${g.id}</strong></td>
+      <td>${escHtml(g.caption || '-')}</td>
+      <td>${g.viewLimit}</td>
+      <td><a class="gallery-link" href="${link}" target="_blank">${link.replace('https://','')}</a></td>
+      <td>${statusBadge(status)}</td>
+      <td class="text-nowrap">
+        <a href="${trackingLink(g.id)}" class="action-btn text-primary" title="Tracking"><i class="fas fa-chart-line"></i></a>
+        ${status === 'active' ? `<button class="action-btn text-danger" onclick="deleteGallery(${g.id})" title="Delete"><i class="fas fa-trash-alt"></i></button>` : ''}
+        ${status === 'deleted' ? `<button class="action-btn text-success" onclick="showRestore(${g.id})" title="Restore"><i class="fas fa-undo"></i></button>` : ''}
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// ---- Card Render (Mobile) ----
+function renderCards() {
+  const wrap = document.getElementById('cardsWrap');
+  wrap.innerHTML = galleries.map(g => {
+    const status = getGalleryStatus(g);
+    const link = galleryLink(g.id);
+    return `<div class="gallery-card">
+      <div class="card-top">
+        <span class="card-id">#${g.id}</span>
+        ${statusBadge(status)}
+      </div>
+      <div class="card-row"><span class="label">Caption</span><span>${escHtml(g.caption || '-')}</span></div>
+      <div class="card-row"><span class="label">Views</span><span>${g.viewLimit}</span></div>
+      <div class="card-row"><span class="label">Link</span><a class="gallery-link" href="${link}" target="_blank">${link.replace('https://','').substring(0,28)}...</a></div>
+      <div class="card-actions">
+        ${swapMode ? `<div class="swap-checkbox-wrap"><input type="checkbox" class="form-check-input swap-cb" data-id="${g.id}" onchange="onSwapCheck(this)" ${swapSelection.includes(g.id) ? 'checked' : ''}> Swap</div>` : ''}
+        <a href="${trackingLink(g.id)}" class="action-btn text-primary"><i class="fas fa-chart-line me-1"></i>Tracking</a>
+        ${status === 'active' ? `<button class="action-btn text-danger" onclick="deleteGallery(${g.id})"><i class="fas fa-trash-alt me-1"></i>Delete</button>` : ''}
+        ${status === 'deleted' ? `<button class="action-btn text-success" onclick="showRestore(${g.id})"><i class="fas fa-undo me-1"></i>Restore</button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ---- Delete Gallery ----
+async function deleteGallery(id) {
+  if (!confirm(`Delete gallery #${id}? This will set views to 0.`)) return;
+  try {
+    const res = await fetch(`${API_BASE}/api/delete-gallery`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ galleryId: id, confirmCode: `DELETE-${id}` })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast(`Gallery #${id} deleted`, 'success');
+      loadGalleries();
+    } else {
+      showToast(data.error || 'Delete failed', 'danger');
+    }
+  } catch (err) {
+    showToast('Delete failed: ' + err.message, 'danger');
+  }
+}
+
+// ---- Restore Gallery ----
+function showRestore(id) {
+  restoreTargetId = id;
+  const modal = new bootstrap.Modal(document.getElementById('restoreModal'));
+  modal.show();
+}
+
+document.getElementById('confirmRestoreBtn').addEventListener('click', async () => {
+  const viewCount = parseInt(document.getElementById('restoreViewCount').value, 10);
+  if (!restoreTargetId || isNaN(viewCount) || viewCount < 1) return;
+  try {
+    const res = await fetch(`${API_BASE}/api/restore-gallery`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ galleryId: restoreTargetId, newViewCount: viewCount })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast(`Gallery #${restoreTargetId} restored with ${viewCount} views`, 'success');
+      bootstrap.Modal.getInstance(document.getElementById('restoreModal')).hide();
+      loadGalleries();
+    } else {
+      showToast(data.error || 'Restore failed', 'danger');
+    }
+  } catch (err) {
+    showToast('Restore failed: ' + err.message, 'danger');
+  }
+});
+
+// ---- Swap Mode ----
+function toggleSwapMode() {
+  swapMode = !swapMode;
+  swapSelection = [];
+  const bar = document.getElementById('swapBar');
+  const btn = document.getElementById('swapModeBtn');
+  const thSwap = document.getElementById('thSwap');
+  if (swapMode) {
+    bar.classList.add('active');
+    btn.classList.replace('btn-outline-primary', 'btn-primary');
+    thSwap.classList.remove('d-none');
+  } else {
+    bar.classList.remove('active');
+    btn.classList.replace('btn-primary', 'btn-outline-primary');
+    thSwap.classList.add('d-none');
+  }
+  renderTable();
+  renderCards();
+  updateSwapUI();
+}
+
+function cancelSwap() {
+  swapMode = false;
+  swapSelection = [];
+  document.getElementById('swapBar').classList.remove('active');
+  document.getElementById('swapModeBtn').classList.replace('btn-primary', 'btn-outline-primary');
+  document.getElementById('thSwap').classList.add('d-none');
+  renderTable();
+  renderCards();
+}
+
+function onSwapCheck(el) {
+  const id = parseInt(el.dataset.id, 10);
+  if (el.checked) {
+    if (swapSelection.length >= 2) {
+      el.checked = false;
+      return;
+    }
+    swapSelection.push(id);
+  } else {
+    swapSelection = swapSelection.filter(x => x !== id);
+  }
+  document.querySelectorAll('.swap-cb').forEach(cb => {
+    const cbId = parseInt(cb.dataset.id, 10);
+    cb.checked = swapSelection.includes(cbId);
+  });
+  updateSwapUI();
+}
+
+function updateSwapUI() {
+  const btn = document.getElementById('swapBtn');
+  const status = document.getElementById('swapStatus');
+  if (swapSelection.length === 2) {
+    btn.disabled = false;
+    status.textContent = `Swap #${swapSelection[0]} ↔ #${swapSelection[1]}`;
+  } else {
+    btn.disabled = true;
+    status.textContent = i('dash.selectTwo', `Select 2 galleries to swap (${swapSelection.length}/2)`);
+  }
+}
+
+async function executeSwap() {
+  if (swapSelection.length !== 2) return;
+  const [a, b] = swapSelection;
+  if (!confirm(`Swap content of gallery #${a} and #${b}?`)) return;
+  try {
+    const res = await fetch(`${API_BASE}/api/user/swap-galleries`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
+      },
+      body: JSON.stringify({ galleryIdA: a, galleryIdB: b })
+    });
+    const data = await res.json();
+    if (data.status === 'ok') {
+      showToast(`Swapped #${a} ↔ #${b} successfully`, 'success');
+      cancelSwap();
+      loadGalleries();
+    } else {
+      showToast(data.error || 'Swap failed', 'danger');
+    }
+  } catch (err) {
+    showToast('Swap failed: ' + err.message, 'danger');
+  }
+}
+
+// ---- Utils ----
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function showToast(msg, type = 'info') {
+  const c = document.getElementById('toastContainer');
+  const id = 'toast-' + Date.now();
+  const bgClass = type === 'success' ? 'bg-success' : type === 'danger' ? 'bg-danger' : 'bg-primary';
+  c.insertAdjacentHTML('beforeend', `
+    <div id="${id}" class="toast align-items-center text-white ${bgClass} border-0 show" role="alert">
+      <div class="d-flex">
+        <div class="toast-body">${escHtml(msg)}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  `);
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  }, 4000);
+}
+
+// ---- Init ----
+if (checkAuth()) {
+  loadGalleries();
+}
+
+if (window.i18n) {
+  window.i18n.onReady(() => {
+    document.querySelectorAll('[data-translate]').forEach(el => {
+      const key = el.getAttribute('data-translate');
+      const translated = window.i18n.t(key);
+      if (translated) el.textContent = translated;
+    });
+  });
+}
+</script>
+</body>
+</html>

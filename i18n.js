@@ -211,6 +211,29 @@ class I18n {
           invalidEmail: "Invalid email address",
           emailNotVerified: "Email not yet verified. Please check your inbox.",
           waitBeforeResend: "Please wait before requesting again"
+        },
+        dash: {
+          title: "My Galleries",
+          newGallery: "New Gallery",
+          total: "Total",
+          active: "Active",
+          deleted: "Deleted",
+          selectTwo: "Select 2 galleries to swap",
+          cancel: "Cancel",
+          swap: "Swap",
+          swapMode: "Swap Mode",
+          refresh: "Refresh",
+          loading: "Loading galleries...",
+          noGalleries: "No galleries yet",
+          createFirst: "Create your first gallery on the main page.",
+          colCaption: "Caption",
+          colViews: "Views",
+          colLink: "Link",
+          colStatus: "Status",
+          colActions: "Actions",
+          restoreTitle: "Restore Gallery",
+          newViewCount: "New view count",
+          restore: "Restore"
         }
       },
       
@@ -421,6 +444,29 @@ class I18n {
           invalidEmail: "邮箱格式不正确",
           emailNotVerified: "邮箱尚未验证，请查收验证邮件。",
           waitBeforeResend: "请稍后再发送"
+        },
+        dash: {
+          title: "我的图集",
+          newGallery: "新建图集",
+          total: "总计",
+          active: "有效",
+          deleted: "已删除",
+          selectTwo: "选择2个图集进行互换",
+          cancel: "取消",
+          swap: "互换",
+          swapMode: "互换模式",
+          refresh: "刷新",
+          loading: "加载图集中...",
+          noGalleries: "暂无图集",
+          createFirst: "前往主页创建您的第一个图集。",
+          colCaption: "标题",
+          colViews: "查看次数",
+          colLink: "链接",
+          colStatus: "状态",
+          colActions: "操作",
+          restoreTitle: "恢复图集",
+          newViewCount: "新的查看次数",
+          restore: "恢复"
         }
       },
 
@@ -631,6 +677,29 @@ class I18n {
           invalidEmail: "信箱格式不正確",
           emailNotVerified: "信箱尚未驗證，請查收驗證郵件。",
           waitBeforeResend: "請稍後再發送"
+        },
+        dash: {
+          title: "我的圖集",
+          newGallery: "新建圖集",
+          total: "總計",
+          active: "有效",
+          deleted: "已刪除",
+          selectTwo: "選擇2個圖集進行互換",
+          cancel: "取消",
+          swap: "互換",
+          swapMode: "互換模式",
+          refresh: "重新整理",
+          loading: "載入圖集中...",
+          noGalleries: "暫無圖集",
+          createFirst: "前往首頁建立您的第一個圖集。",
+          colCaption: "標題",
+          colViews: "查看次數",
+          colLink: "連結",
+          colStatus: "狀態",
+          colActions: "操作",
+          restoreTitle: "恢復圖集",
+          newViewCount: "新的查看次數",
+          restore: "恢復"
         }
       },
 
@@ -841,6 +910,29 @@ class I18n {
           invalidEmail: "メールアドレスの形式が正しくありません",
           emailNotVerified: "メールがまだ確認されていません。受信トレイを確認してください。",
           waitBeforeResend: "しばらくお待ちください"
+        },
+        dash: {
+          title: "マイギャラリー",
+          newGallery: "新規ギャラリー",
+          total: "合計",
+          active: "有効",
+          deleted: "削除済み",
+          selectTwo: "入れ替えるギャラリーを2つ選択",
+          cancel: "キャンセル",
+          swap: "入れ替え",
+          swapMode: "入れ替えモード",
+          refresh: "更新",
+          loading: "ギャラリーを読み込み中...",
+          noGalleries: "ギャラリーがありません",
+          createFirst: "メインページで最初のギャラリーを作成してください。",
+          colCaption: "キャプション",
+          colViews: "閲覧数",
+          colLink: "リンク",
+          colStatus: "ステータス",
+          colActions: "操作",
+          restoreTitle: "ギャラリーを復元",
+          newViewCount: "新しい閲覧数",
+          restore: "復元"
         }
       },
 
@@ -1051,6 +1143,29 @@ class I18n {
           invalidEmail: "Ungültige E-Mail-Adresse",
           emailNotVerified: "E-Mail noch nicht bestätigt. Bitte überprüfen Sie Ihren Posteingang.",
           waitBeforeResend: "Bitte warten Sie vor dem erneuten Senden"
+        },
+        dash: {
+          title: "Meine Galerien",
+          newGallery: "Neue Galerie",
+          total: "Gesamt",
+          active: "Aktiv",
+          deleted: "Gelöscht",
+          selectTwo: "2 Galerien zum Tauschen auswählen",
+          cancel: "Abbrechen",
+          swap: "Tauschen",
+          swapMode: "Tauschmodus",
+          refresh: "Aktualisieren",
+          loading: "Galerien werden geladen...",
+          noGalleries: "Noch keine Galerien",
+          createFirst: "Erstellen Sie Ihre erste Galerie auf der Hauptseite.",
+          colCaption: "Titel",
+          colViews: "Aufrufe",
+          colLink: "Link",
+          colStatus: "Status",
+          colActions: "Aktionen",
+          restoreTitle: "Galerie wiederherstellen",
+          newViewCount: "Neue Aufrufanzahl",
+          restore: "Wiederherstellen"
         }
       },
 
@@ -1261,6 +1376,29 @@ class I18n {
           invalidEmail: "잘못된 이메일 주소입니다",
           emailNotVerified: "이메일이 아직 인증되지 않았습니다. 받은 편지함을 확인해주세요.",
           waitBeforeResend: "잠시 후에 다시 시도해주세요"
+        },
+        dash: {
+          title: "내 갤러리",
+          newGallery: "새 갤러리",
+          total: "전체",
+          active: "활성",
+          deleted: "삭제됨",
+          selectTwo: "교환할 갤러리 2개 선택",
+          cancel: "취소",
+          swap: "교환",
+          swapMode: "교환 모드",
+          refresh: "새로고침",
+          loading: "갤러리 로딩 중...",
+          noGalleries: "갤러리가 없습니다",
+          createFirst: "메인 페이지에서 첫 번째 갤러리를 만드세요.",
+          colCaption: "제목",
+          colViews: "조회수",
+          colLink: "링크",
+          colStatus: "상태",
+          colActions: "작업",
+          restoreTitle: "갤러리 복원",
+          newViewCount: "새 조회수",
+          restore: "복원"
         }
       },
 
@@ -1471,6 +1609,29 @@ class I18n {
           invalidEmail: "Adresse e-mail invalide",
           emailNotVerified: "E-mail non encore vérifié. Veuillez vérifier votre boîte de réception.",
           waitBeforeResend: "Veuillez patienter avant de renvoyer"
+        },
+        dash: {
+          title: "Mes galeries",
+          newGallery: "Nouvelle galerie",
+          total: "Total",
+          active: "Actif",
+          deleted: "Supprimé",
+          selectTwo: "Sélectionnez 2 galeries à échanger",
+          cancel: "Annuler",
+          swap: "Échanger",
+          swapMode: "Mode échange",
+          refresh: "Actualiser",
+          loading: "Chargement des galeries...",
+          noGalleries: "Aucune galerie",
+          createFirst: "Créez votre première galerie sur la page principale.",
+          colCaption: "Titre",
+          colViews: "Vues",
+          colLink: "Lien",
+          colStatus: "Statut",
+          colActions: "Actions",
+          restoreTitle: "Restaurer la galerie",
+          newViewCount: "Nouveau nombre de vues",
+          restore: "Restaurer"
         }
       },
 
@@ -1681,6 +1842,29 @@ class I18n {
           invalidEmail: "Indirizzo e-mail non valido",
           emailNotVerified: "E-mail non ancora verificata. Controlla la tua casella di posta.",
           waitBeforeResend: "Attendi prima di rinviare"
+        },
+        dash: {
+          title: "Le mie gallerie",
+          newGallery: "Nuova galleria",
+          total: "Totale",
+          active: "Attivo",
+          deleted: "Eliminato",
+          selectTwo: "Seleziona 2 gallerie da scambiare",
+          cancel: "Annulla",
+          swap: "Scambia",
+          swapMode: "Modalità scambio",
+          refresh: "Aggiorna",
+          loading: "Caricamento gallerie...",
+          noGalleries: "Nessuna galleria",
+          createFirst: "Crea la tua prima galleria nella pagina principale.",
+          colCaption: "Titolo",
+          colViews: "Visualizzazioni",
+          colLink: "Link",
+          colStatus: "Stato",
+          colActions: "Azioni",
+          restoreTitle: "Ripristina galleria",
+          newViewCount: "Nuovo conteggio visualizzazioni",
+          restore: "Ripristina"
         }
       }
     };
