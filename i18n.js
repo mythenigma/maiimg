@@ -248,7 +248,17 @@ class I18n {
           pageTitle: "Dashboard - Maiimg Hosting",
           helpTitle: "How Replace Mode Works",
           helpDesc: "Select a deleted gallery as target (A), then pick an active gallery as source (B). B's content and settings will be copied to A, while A's original link stays the same. This lets you reuse an existing link with new content.",
-          expirationTz: "Expiration timezone"
+          expirationTz: "Expiration timezone",
+          mobileRoleTarget: "Target A",
+          mobileRoleSource: "Source B",
+          mobileSetTarget: "Set as A",
+          mobileSetSource: "Set as B",
+          mobileStep1: "Step 1: Select target A",
+          mobileStep2: "Step 2: Select source B",
+          mobileHint: "Choose A and B from cards below.",
+          mobilePickedTarget: "Selected A: #{target}. Now pick B.",
+          mobileReady: "Ready to replace",
+          mobileReadySummary: "A #{target} will be replaced by B #{source}."
         }
       },
       

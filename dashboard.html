@@ -213,6 +213,15 @@
       margin-bottom: 12px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.06);
       border: 1px solid var(--border);
+      position: relative;
+    }
+    .gallery-card.is-target {
+      border-color: #3b82f6;
+      background: #eff6ff;
+    }
+    .gallery-card.is-source {
+      border-color: #f59e0b;
+      background: #fffbeb;
     }
     .gallery-card .card-top {
       display: flex;
@@ -233,6 +242,55 @@
     .gallery-card .card-row .label {
       color: var(--text-muted);
     }
+    .gallery-card .replace-role-badge {
+      position: absolute;
+      top: 48px;
+      right: 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .gallery-card .replace-role-badge.role-a {
+      color: #1d4ed8;
+      background: #dbeafe;
+      border-color: #bfdbfe;
+    }
+    .gallery-card .replace-role-badge.role-b {
+      color: #92400e;
+      background: #fef3c7;
+      border-color: #fde68a;
+    }
+    .gallery-card .replace-pick-row {
+      margin-top: 10px;
+      border-top: 1px dashed var(--border);
+      padding-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .gallery-card .pick-btn {
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 700;
+      min-height: 40px;
+      padding: 8px 10px;
+    }
+    .gallery-card .pick-btn.pick-target.active {
+      border-color: #3b82f6;
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+    .gallery-card .pick-btn.pick-source.active {
+      border-color: #f59e0b;
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .gallery-card .pick-btn:active { transform: scale(0.98); }
     .gallery-card .card-actions {
       display: flex;
       gap: 4px;
@@ -441,11 +499,56 @@
       outline: none;
       border-color: var(--primary);
     }
+
+    .mobile-replace-panel {
+      display: none;
+    }
+
     @media (max-width: 768px) {
       .gallery-table-wrap { display: none; }
       .gallery-cards { display: block; }
       .dash-header h1 { font-size: 1.25rem; }
       .tz-bar-mobile { display: flex; }
+      .swap-bar,
+      .swap-bar.active {
+        display: none !important;
+      }
+      .mobile-replace-panel.show {
+        display: block;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1200;
+        background: rgba(255,255,255,0.98);
+        border-top: 1px solid var(--border);
+        box-shadow: 0 -8px 20px rgba(15,23,42,0.12);
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      }
+      body.mobile-replace-open {
+        padding-bottom: 170px;
+      }
+      .mobile-replace-step {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin-bottom: 2px;
+      }
+      .mobile-replace-summary {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+      }
+      .mobile-replace-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .mobile-replace-actions .btn {
+        min-height: 42px;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
     }
     @media (min-width: 769px) {
       .gallery-table-wrap { display: block; }
@@ -600,6 +703,16 @@
 
   <!-- Card View (Mobile) -->
   <div class="gallery-cards d-none" id="cardsWrap"></div>
+
+  <!-- Replace Footer (Mobile) -->
+  <div class="mobile-replace-panel" id="mobileReplacePanel">
+    <div class="mobile-replace-step" id="mobileReplaceStep">Step 1: Select target A</div>
+    <div class="mobile-replace-summary" id="mobileReplaceSummary">Choose A and B from cards below.</div>
+    <div class="mobile-replace-actions">
+      <button class="btn btn-outline-secondary btn-sm" onclick="cancelReplace()">Cancel</button>
+      <button class="btn btn-primary btn-sm" id="mobileReplaceBtn" onclick="executeReplace()" disabled>Replace</button>
+    </div>
+  </div>
 
 </div>
 
@@ -841,21 +954,28 @@ function renderCards() {
   wrap.innerHTML = galleries.map(g => {
     const status = getGalleryStatus(g);
     const link = galleryLink(g.id);
-    return `<div class="gallery-card" ${replaceTarget === g.id ? 'style="border-color:#3b82f6;background:#eff6ff"' : ''} ${replaceSource === g.id ? 'style="border-color:#f59e0b;background:#fffbeb"' : ''}>
+    const cardClass = `gallery-card${replaceTarget === g.id ? ' is-target' : ''}${replaceSource === g.id ? ' is-source' : ''}`;
+    const roleBadge = replaceTarget === g.id
+      ? `<span class="replace-role-badge role-a">${i('dash.mobileRoleTarget','Target A')}</span>`
+      : (replaceSource === g.id ? `<span class="replace-role-badge role-b">${i('dash.mobileRoleSource','Source B')}</span>` : '');
+    return `<div class="${cardClass}">
       <div class="card-top">
         <span class="card-id">#${g.id}</span>
         ${statusBadge(status)}
       </div>
+      ${roleBadge}
       <div class="card-row"><span class="label">${i('dash.colCaption','Caption')}</span><span>${escHtml(g.caption || '-')}</span></div>
       <div class="card-row"><span class="label">${i('dash.colViews','Views')}</span><span>${g.viewLimit}</span></div>
       <div class="card-row"><span class="label">${i('dash.colDuration','Duration')}</span><span>${formatDuration(g.viewDuration)}</span></div>
       <div class="card-row"><span class="label">${i('dash.colExpiration','Expiration')}</span><span>${formatEndtime(g.endtime)}</span></div>
       <div class="card-row"><span class="label">${i('dash.colLink','Link')}</span><a class="gallery-link" href="${link}" target="_blank">${link.replace('https://','').substring(0,28)}...</a></div>
+      ${replaceMode ? `
+        <div class="replace-pick-row">
+          <button class="pick-btn pick-target ${replaceTarget === g.id ? 'active' : ''}" onclick="onPickTarget(${g.id})">${i('dash.mobileSetTarget','Set as A')}</button>
+          <button class="pick-btn pick-source ${replaceSource === g.id ? 'active' : ''}" onclick="onPickSource(${g.id})">${i('dash.mobileSetSource','Set as B')}</button>
+        </div>
+      ` : ''}
       <div class="card-actions">
-        ${replaceMode ? `
-          <label class="action-btn text-primary" style="cursor:pointer"><input type="radio" name="mTarget" class="me-1" ${replaceTarget === g.id ? 'checked' : ''} onchange="onPickTarget(${g.id})">A</label>
-          <label class="action-btn text-warning" style="cursor:pointer"><input type="radio" name="mSource" class="me-1" ${replaceSource === g.id ? 'checked' : ''} onchange="onPickSource(${g.id})">B</label>
-        ` : ''}
         <a href="${trackingLink(g.id)}" class="action-btn text-primary"><i class="fas fa-chart-line me-1"></i>${i('dash.accessRecord','Access Record')}</a>
         ${status === 'active' ? `<button class="action-btn text-danger" onclick="deleteGallery(${g.id})"><i class="fas fa-trash-alt me-1"></i>${i('dash.delete','Delete')}</button>` : ''}
         ${status === 'deleted' ? `<button class="action-btn text-success" onclick="startRestoreFor(${g.id})"><i class="fas fa-undo-alt me-1"></i>${i('dash.restore','Restore')}</button>` : ''}
@@ -923,6 +1043,7 @@ function cancelReplace() {
   document.getElementById('thSource').classList.add('d-none');
   renderTable();
   renderCards();
+  updateReplaceUI();
 }
 
 function onPickTarget(id) {
@@ -943,14 +1064,46 @@ function onPickSource(id) {
 
 function updateReplaceUI() {
   const btn = document.getElementById('replaceBtn');
+  const btnMobile = document.getElementById('mobileReplaceBtn');
   const status = document.getElementById('replaceStatus');
   if (replaceTarget && replaceSource) {
     btn.disabled = false;
+    if (btnMobile) btnMobile.disabled = false;
     status.innerHTML = `<strong>#${replaceTarget}</strong> (A) ← <strong>#${replaceSource}</strong> (B)`;
   } else {
     btn.disabled = true;
+    if (btnMobile) btnMobile.disabled = true;
     const hint = i('dash.replaceHint', 'Select target A, then source B. All of B\'s settings will be copied to A.');
     status.textContent = hint;
+  }
+  updateMobileReplacePanel();
+}
+
+function updateMobileReplacePanel() {
+  const panel = document.getElementById('mobileReplacePanel');
+  const step = document.getElementById('mobileReplaceStep');
+  const summary = document.getElementById('mobileReplaceSummary');
+  if (!panel || !step || !summary) return;
+
+  const mobile = window.matchMedia('(max-width: 768px)').matches;
+  if (!replaceMode || !mobile) {
+    panel.classList.remove('show');
+    document.body.classList.remove('mobile-replace-open');
+    return;
+  }
+
+  panel.classList.add('show');
+  document.body.classList.add('mobile-replace-open');
+
+  if (!replaceTarget) {
+    step.textContent = i('dash.mobileStep1', 'Step 1: Select target A');
+    summary.textContent = i('dash.mobileHint', 'Choose A and B from cards below.');
+  } else if (!replaceSource) {
+    step.textContent = i('dash.mobileStep2', 'Step 2: Select source B');
+    summary.textContent = i('dash.mobilePickedTarget', 'Selected A: #{target}. Now pick B.', { target: replaceTarget });
+  } else {
+    step.textContent = i('dash.mobileReady', 'Ready to replace');
+    summary.textContent = i('dash.mobileReadySummary', 'A #{target} will be replaced by B #{source}.', { target: replaceTarget, source: replaceSource });
   }
 }
 
@@ -1093,6 +1246,7 @@ function onTzChange(fromEl) {
 }
 
 initTzSelect();
+window.addEventListener('resize', updateMobileReplacePanel);
 
 // ---- Help Modal ----
 function showHelp() { document.getElementById('helpOverlay').classList.add('show'); }
