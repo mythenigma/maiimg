@@ -130,6 +130,23 @@
   </section>
 
   <div class="container">
+    <section class="flow-nav" id="flowNavigator" aria-label="Upload steps">
+      <div class="flow-nav-inner">
+        <button type="button" class="flow-step is-current" data-step="1">
+          <span class="flow-step-num"><span>1</span></span>
+          <span class="flow-step-label">Upload Images</span>
+        </button>
+        <button type="button" class="flow-step" data-step="2">
+          <span class="flow-step-num"><span>2</span></span>
+          <span class="flow-step-label">Set Access</span>
+        </button>
+        <button type="button" class="flow-step" data-step="3">
+          <span class="flow-step-num"><span>3</span></span>
+          <span class="flow-step-label">Generate Link & QR</span>
+        </button>
+      </div>
+    </section>
+
     <!-- Main Upload Section -->
     <section class="main-upload-section" id="upload">
       <div class="text-center mb-4">
@@ -706,7 +723,10 @@
     const LOGIN_NUDGE_KEY = 'maiimg_login_nudge_last_ts';
     const LOGIN_NUDGE_COOLDOWN_MS = 60 * 60 * 1000;
     const LOGIN_NUDGE_AUTO_CLOSE_SECONDS = 7;
+    const FLOW_MANUAL_HOLD_MS = 3500;
     let loginNudgeTimer = null;
+    let flowManualStep = 0;
+    let flowManualUntil = 0;
 
     // Language functionality
     let currentLanguage = 'en';
@@ -1137,6 +1157,7 @@
 
           // Show results section
           document.getElementById("results").style.display = 'block';
+          updateFlowNavigator();
           
           // *** 关键修改：生成链接成功后，重置上传会话 ***
           // 重置 dropzone 和上传状态，准备下一次上传
@@ -1318,6 +1339,93 @@
         }
         updateLoginNudgeLaterButton(secondsLeft);
       }, 1000);
+    }
+
+    function getFlowProgressState() {
+      const limitInput = document.getElementById('limit');
+      const passwordInput = document.getElementById('password');
+      const captionInput = document.getElementById('caption');
+      const resultsEl = document.getElementById('results');
+      const hasLimit = !!(limitInput && limitInput.value.trim());
+      const hasPassword = !!(passwordInput && passwordInput.value.trim());
+      const hasCaption = !!(captionInput && captionInput.value.trim());
+      const hasFiles = uploadedFiles.length > 0;
+      const hasConfig = hasLimit && hasPassword && hasCaption;
+      const hasResults = !!(resultsEl && window.getComputedStyle(resultsEl).display !== 'none');
+      return { hasFiles, hasConfig, hasResults };
+    }
+
+    function getAutoFlowStep() {
+      const state = getFlowProgressState();
+      if (state.hasResults) return 3;
+      if (state.hasFiles && state.hasConfig) return 3;
+      if (state.hasFiles) return 2;
+      return 1;
+    }
+
+    function renderFlowStepState(activeStep) {
+      const state = getFlowProgressState();
+      const steps = document.querySelectorAll('.flow-step');
+      steps.forEach((el) => {
+        const stepNum = Number(el.dataset.step);
+        const isDone = (stepNum === 1 && (state.hasFiles || state.hasConfig || state.hasResults))
+          || (stepNum === 2 && (state.hasConfig || state.hasResults))
+          || (stepNum === 3 && state.hasResults);
+        const isCurrent = stepNum === activeStep && !isDone;
+        el.classList.toggle('is-done', isDone);
+        el.classList.toggle('is-current', isCurrent);
+        el.setAttribute('aria-current', isCurrent ? 'step' : 'false');
+      });
+    }
+
+    function updateFlowNavigator() {
+      const now = Date.now();
+      const activeStep = (flowManualStep && now < flowManualUntil) ? flowManualStep : getAutoFlowStep();
+      renderFlowStepState(activeStep);
+    }
+
+    function updateFlowTopOffset() {
+      const nav = document.querySelector('.navbar');
+      const navHeight = nav ? nav.offsetHeight : 0;
+      document.documentElement.style.setProperty('--flow-top-offset', `${navHeight + 10}px`);
+    }
+
+    function getFlowTarget(step) {
+      if (step === 1) return document.getElementById('upload');
+      if (step === 2) return document.getElementById('config');
+      if (step === 3) {
+        const results = document.getElementById('results');
+        if (results && window.getComputedStyle(results).display !== 'none') return results;
+        return document.getElementById('config');
+      }
+      return null;
+    }
+
+    function scrollToFlowStep(step) {
+      const target = getFlowTarget(step);
+      if (!target) return;
+      const nav = document.querySelector('.navbar');
+      const flow = document.getElementById('flowNavigator');
+      const offset = (nav ? nav.offsetHeight : 0) + (flow ? flow.offsetHeight : 0) + 14;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+    }
+
+    function initFlowNavigator() {
+      const steps = document.querySelectorAll('.flow-step');
+      if (!steps.length) return;
+      steps.forEach((el) => {
+        el.addEventListener('click', () => {
+          const stepNum = Number(el.dataset.step);
+          flowManualStep = stepNum;
+          flowManualUntil = Date.now() + FLOW_MANUAL_HOLD_MS;
+          updateFlowNavigator();
+          scrollToFlowStep(stepNum);
+        });
+      });
+      updateFlowTopOffset();
+      window.addEventListener('resize', updateFlowTopOffset);
+      updateFlowNavigator();
     }
 
     function formatEndtimeDisplay(endtime) {
@@ -1621,6 +1729,7 @@
         generateBtnStatus.textContent = `Missing: ${missing.join(', ')}`;
         generateBtnStatus.className = 'text-muted';
       }
+      updateFlowNavigator();
     }
 
     // Update upload status function
@@ -1643,6 +1752,7 @@
       
       // 不在页面加载时生成会话ID，改为在第一次上传时生成
       initExpirationControls();
+      initFlowNavigator();
 
       const dropzEl = document.getElementById('dropz');
       if (dropzEl) {
