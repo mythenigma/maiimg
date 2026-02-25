@@ -21,13 +21,15 @@
     .ok { color:var(--ok); border-color:#a7f3d0; background:#ecfdf5; }
     .info { color:var(--info); border-color:#bfdbfe; background:#eff6ff; }
     .sub, .foot { color:var(--muted); font-size:12px; }
+    .mermaid { min-height: 120px; }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 </head>
 <body>
   <main class="wrap">
     <section class="head">
       <h1>最新工作记录</h1>
-      <p class="sub">更新时间：2026-02-24</p>
+      <p class="sub">更新时间：2026-02-25</p>
     </section>
 
     <section class="card">
@@ -68,7 +70,50 @@
     </section>
 
     <section class="card">
-      <div class="row"><h2>5) 项目看法与改善建议（Roadmap）</h2><span class="tag info">建议</span></div>
+      <div class="row"><h2>5) Dashboard 登出与首页登录状态同步</h2><span class="tag info">待做</span></div>
+      <p><strong>问题：</strong>Dashboard 检测登录只读 <code>sessionStorage.maiimg_jwt</code>；登出时只清除 sessionStorage 并跳转 maiimg.html，<strong>未调用 Firebase signOut</strong>。结果：① 跳转到 maiimg 后 Firebase 仍为已登录，<code>onAuthStateChanged</code> 会再次写入 JWT，用户马上又显示已登录；② 多标签时，另一标签的 index 与 dashboard 各自一份 sessionStorage，在 dashboard 登出不会让另一标签的 index 登出。</p>
+      <p><strong>交互关系（Mermaid）：</strong></p>
+      <pre class="mermaid" style="background:#f8fafc;border-radius:8px;padding:12px;overflow:auto;font-size:12px;">
+flowchart TB
+  subgraph same["同源同标签"]
+    A["index/maiimg"]
+    B["dashboard"]
+    S["sessionStorage JWT"]
+    A -->|"登录 workerAuth"| S
+    S -->|"checkAuth 读取"| B
+    B -->|"登出仅清 storage"| S2["storage 清空"]
+    S2 -->|"跳转 maiimg"| C["maiimg 加载"]
+    C -->|"Firebase 仍登录"| F["onAuthStateChanged"]
+    F -->|"再次写入 JWT"| S
+  end
+
+  subgraph tabs["多标签"]
+    T1["标签A index"]
+    T2["标签B dashboard"]
+    ST1["sessionStorage A"]
+    ST2["sessionStorage B"]
+    T1 --> ST1
+    T2 --> ST2
+    T2 -->|"登出只清 B"| ST2
+    ST1 -.->|"不受影响"| T1
+  end
+
+  subgraph fix["修复方案"]
+    D1["dashboard 调用 signOut"]
+    D2["可选: 广播其他标签"]
+    D1 --> D2
+  end
+      </pre>
+      <p><strong>修复要点：</strong></p>
+      <ul>
+        <li>在 <code>dashboard.html</code> 的 <code>logout()</code> 中：引入 Firebase Auth（与 index/maiimg 同配置），先调用 <code>signOut(auth)</code>，再清除 sessionStorage，最后跳转 maiimg.html。</li>
+        <li>可选（多标签一致）：登出时向 <code>localStorage</code> 写一条“登出”标记或发 <code>BroadcastChannel</code> 消息；<code>index.html</code> / <code>maiimg.html</code> 监听 <code>storage</code> 或 <code>message</code>，收到后执行 <code>signOut</code> + 清除 sessionStorage + 刷新或更新 UI。</li>
+      </ul>
+      <p><strong>涉及文件：</strong><code>dashboard.html</code>（登出逻辑 + 可选 Firebase 引入）、<code>index.html</code> / <code>maiimg.html</code>（可选：监听跨标签登出）。</p>
+    </section>
+
+    <section class="card">
+      <div class="row"><h2>6) 项目看法与改善建议（Roadmap）</h2><span class="tag info">建议</span></div>
       <p><strong>当前判断：</strong>MaiIMG 已具备“上传-分享-追踪-管理”的完整闭环，功能已经不弱；下一步重点应从“能用”转向“稳定转化 + 性能体验 + 内容增长”。</p>
       <ul>
         <li><strong>P0（优先）：登录转化与新功能可见性</strong>：未登录上传提醒继续保留；在生成成功区增加“登录后可管理历史链接/替换/访问记录”的固定提示；把“到期时间设置”放入首页与 blog 的首屏文案。</li>
@@ -84,5 +129,8 @@
 
     <p class="foot">备注：本页为最新执行记录，按你的确认状态更新。</p>
   </main>
+  <script>
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral', flowchart: { useMaxWidth: true, htmlLabels: true } });
+  </script>
 </body>
 </html>
