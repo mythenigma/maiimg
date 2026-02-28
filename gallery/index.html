@@ -406,6 +406,43 @@ class ImageGallery {
         }
     }
 
+    /** localStorage 键：由 wechat.html 写入，gallery 读取后即删，用于同源下隐藏 URL 中的 ID */
+    static get GALLERY_ID_STORAGE_KEY() { return 'maiimg_gallery_id'; }
+
+    /**
+     * 获取画廊 ID：maiimg.com 仅从 URL（hash / path / query）；maiimg.sendpdfonline.com 在 URL 无 ID 时从 localStorage 取
+     */
+    getGalleryId() {
+        const host = (window.location.hostname || '').toLowerCase();
+        const isWechatDomain = host === 'maiimg.sendpdfonline.com';
+
+        const hashRaw = (window.location.hash || '').replace(/^#/, '');
+        if (hashRaw) {
+            try {
+                const id = decodeURIComponent(hashRaw);
+                if (id) {
+                    console.log('Found ID in hash:', id);
+                    return id;
+                }
+            } catch (e) {}
+        }
+        const fromPath = this.extractIdFromPath();
+        if (fromPath) {
+            return fromPath;
+        }
+        if (isWechatDomain) {
+            try {
+                const stored = localStorage.getItem(ImageGallery.GALLERY_ID_STORAGE_KEY);
+                if (stored) {
+                    console.log('Found ID in localStorage');
+                    localStorage.removeItem(ImageGallery.GALLERY_ID_STORAGE_KEY);
+                    return stored;
+                }
+            } catch (e) {}
+        }
+        return null;
+    }
+
     /**
      * 从友好的URL路径中提取ID
      * 支持格式：/gallery/ID 或 /g/ID
@@ -828,10 +865,10 @@ class ImageGallery {
             this.showBotMessage();
             return;
         }
-        // 从友好的URL路径中提取ID（需在微信检测前提取，供 redirect 使用）
-        const encodedId = this.extractIdFromPath();
+        // 获取画廊 ID：hash > localStorage > path（与 wechat 配合可隐藏 path 中的 ID）
+        const encodedId = this.getGalleryId();
         if (!encodedId) {
-            throw new Error("Please use a valid gallery URL, e.g.: /gallery/A");
+            throw new Error("Please use a valid gallery URL, e.g.: /gallery/A or /gallery/#A");
         }
         // 微信内打开 → 跳转到 wechat.html 展示指引，ID 放在 hash，不暴露在 path 上
         if (this.isWeChat()) {

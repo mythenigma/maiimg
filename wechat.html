@@ -56,11 +56,17 @@
 
     <script>
         (function() {
+            var STORAGE_KEY = 'maiimg_gallery_id';
             var params = new URLSearchParams(window.location.search);
             var base = params.get('base') || (window.location.origin);
             var idRaw = (window.location.hash || '#').slice(1).replace(/^#/, '');
             var id = idRaw ? decodeURIComponent(idRaw) : '';
-            var galleryUrl = id ? (base.replace(/\/$/, '') + '/gallery/' + encodeURIComponent(id)) : '';
+            base = base.replace(/\/$/, '');
+            // 复制链接用 /gallery/#ID，path 不暴露 ID；gallery 端从 hash 或 localStorage 取 ID
+            var galleryUrl = id ? (base + '/gallery/#' + encodeURIComponent(id)) : (base + '/gallery/');
+            if (id) {
+                try { localStorage.setItem(STORAGE_KEY, id); } catch (e) {}
+            }
 
             var img = document.getElementById('wechat-hint-img');
             var copyBtn = document.getElementById('wechat-copy-btn');
@@ -85,7 +91,7 @@
             }
 
             copyBtn.onclick = function() {
-                var url = galleryUrl || window.location.href.split('#')[0];
+                var url = galleryUrl || (base + '/gallery/');
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(url).then(function() {
                         toast.style.display = 'block';
