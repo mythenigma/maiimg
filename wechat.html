@@ -56,17 +56,31 @@
 
     <script>
         (function() {
-            var STORAGE_KEY = 'maiimg_gallery_id';
+            // 逻辑：本页只在 sendpdfonline.com。微信内始终展示本指引；非微信且 URL 带 #ID 时写入 localStorage 并跳 /gallery/，由 gallery 读 ID 展示图片
+            var STORAGE_KEY = 'maiimg_gallery_id'; // 与 gallery/index.html 的 GALLERY_ID_STORAGE_KEY 一致
             var params = new URLSearchParams(window.location.search);
             var base = params.get('base') || (window.location.origin);
             var idRaw = (window.location.hash || '#').slice(1).replace(/^#/, '');
             var id = idRaw ? decodeURIComponent(idRaw) : '';
             base = base.replace(/\/$/, '');
-            // 复制链接用 /gallery/#ID，path 不暴露 ID；gallery 端从 hash 或 localStorage 取 ID
-            var galleryUrl = id ? (base + '/gallery/#' + encodeURIComponent(id)) : (base + '/gallery/');
+            var isWeChat = /micromessenger/i.test(navigator.userAgent || '');
+
             if (id) {
                 try { localStorage.setItem(STORAGE_KEY, id); } catch (e) {}
             }
+
+            // 已「在浏览器中打开」：非微信 + 有 ID + 本域 sendpdfonline.com → 用 localStorage 传 ID，跳 /gallery/ 展示
+            if (id && !isWeChat && window.location.hostname === 'maiimg.sendpdfonline.com') {
+                window.location.replace(window.location.origin + '/gallery/');
+                return;
+            }
+
+            // 复制链接：本域 /gallery/（gallery 从 localStorage 取 ID）；跨域 base + /gallery/#ID
+            var galleryUrl = id
+                ? (window.location.hostname === 'maiimg.sendpdfonline.com'
+                    ? (window.location.origin + '/gallery/')
+                    : (base + '/gallery/#' + encodeURIComponent(id)))
+                : (base + '/gallery/');
 
             var img = document.getElementById('wechat-hint-img');
             var copyBtn = document.getElementById('wechat-copy-btn');

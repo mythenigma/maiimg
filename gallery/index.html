@@ -876,8 +876,9 @@ class ImageGallery {
         if (!encodedId) {
             throw new Error("Please use a valid gallery URL, e.g.: /gallery/A or /gallery/#A");
         }
-        // 老逻辑：/gallery/A 在微信内打开 → 立即重定向到 maiimg.sendpdfonline.com/wechat.html
-        if (this.isWeChat()) {
+        // 仅 maiimg.com 在微信内不展示：重定向到 sendpdfonline.com/wechat.html；sendpdfonline.com 在微信内正常展示 gallery
+        const host = (window.location.hostname || '').toLowerCase();
+        if (this.isWeChat() && host !== 'maiimg.sendpdfonline.com') {
             this.redirectToWechatGuide(encodedId);
             return;
         }
