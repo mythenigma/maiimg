@@ -828,17 +828,15 @@ class ImageGallery {
             this.showBotMessage();
             return;
         }
+        // 从友好的URL路径中提取ID（需在微信检测前提取，供 redirect 使用）
+        const encodedId = this.extractIdFromPath();
+        if (!encodedId) {
+            throw new Error("Please use a valid gallery URL, e.g.: /gallery/A");
+        }
         // 微信内打开 → 跳转到 wechat.html 展示指引，ID 放在 hash，不暴露在 path 上
         if (this.isWeChat()) {
             this.redirectToWechatGuide(encodedId);
             return;
-        }
-
-        // 从友好的URL路径中提取ID
-        const encodedId = this.extractIdFromPath();
-
-        if (!encodedId) {
-            throw new Error("Please use a valid gallery URL, e.g.: /gallery/A");
         }
 
         // Decode ID
