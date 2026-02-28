@@ -56,7 +56,9 @@
 
     <script>
         (function() {
-            // 逻辑：本页只在 sendpdfonline.com。微信内始终展示本指引；非微信且 URL 带 #ID 时写入 localStorage 并跳 /gallery/，由 gallery 读 ID 展示图片
+            // 设为 true 恢复「有 ID 时自动跳转到 gallery」；设为 false 暂停转向，只展示本指引页
+            var REDIRECT_TO_GALLERY = false;
+
             var STORAGE_KEY = 'maiimg_gallery_id'; // 与 gallery/index.html 的 GALLERY_ID_STORAGE_KEY 一致
             var params = new URLSearchParams(window.location.search);
             var base = params.get('base') || (window.location.origin);
@@ -69,8 +71,8 @@
                 try { localStorage.setItem(STORAGE_KEY, id); } catch (e) {}
             }
 
-            // 有 ID 时：跳转到 gallery 展示图片（微信内用 sendpdfonline.com，非微信用 base 或本域）
-            if (id) {
+            // 有 ID 且开启转向时：跳转到 gallery 展示图片
+            if (id && REDIRECT_TO_GALLERY) {
                 var host = (window.location.hostname || '').toLowerCase();
                 var isSendpdf = host.indexOf('sendpdfonline.com') !== -1;
                 var targetUrl;
