@@ -388,7 +388,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-// 若 wechat.html 部署在其它域名，填该域名；空则同源
+// 微信内打开 /gallery/A 时重定向到此域名的 wechat.html（与 maiimg.com 可不同域名）
 var WECHAT_GUIDE_ORIGIN = 'https://maiimg.sendpdfonline.com';
 class ImageGallery {
     constructor() {
@@ -445,20 +445,25 @@ class ImageGallery {
 
     /**
      * 从友好的URL路径中提取ID
-     * 支持格式：/gallery/ID 或 /g/ID
+     * 支持格式：/gallery/ID 或 /g/ID（path 或 href 中匹配，应对部分托管重写后 pathname 变化）
      */
     extractIdFromPath() {
         const path = window.location.pathname;
         console.log('Current path:', path);
         
-        // 匹配 /gallery/ID 或 /g/ID 格式
         let match = path.match(/\/(?:gallery|g)\/([^\/\?#]+)/);
         if (match) {
             console.log('Found ID in path:', match[1]);
             return match[1];
         }
+        // 若 path 被重写成 /gallery/，仍从完整 href 尝试取 ID（部分 CDN 重写后 pathname 可能变）
+        const href = window.location.href || '';
+        match = href.match(/\/(?:gallery|g)\/([^\/\?#]+)/);
+        if (match) {
+            console.log('Found ID in href:', match[1]);
+            return match[1];
+        }
         
-        // 备用：从查询参数获取
         const urlParams = new URLSearchParams(window.location.search);
         const idFromParams = urlParams.get('id');
         if (idFromParams) {
@@ -502,13 +507,14 @@ class ImageGallery {
     }
 
     /**
-     * 微信内跳转到 wechat.html，通过 hash 传画廊 ID，query 传 gallery 所在域名（供跨域时用）
+     * 微信内打开 /gallery/A 时：跳转到 maiimg.sendpdfonline.com/wechat.html?base=当前域&#ID
      */
     redirectToWechatGuide(encodedId) {
-        document.getElementById('loading').style.display = 'none';
+        var loadingEl = document.getElementById('loading');
+        if (loadingEl) loadingEl.style.display = 'none';
         var base = window.location.origin;
         var wechatOrigin = (typeof WECHAT_GUIDE_ORIGIN !== 'undefined' && WECHAT_GUIDE_ORIGIN)
-            ? WECHAT_GUIDE_ORIGIN.replace(/\/$/, '')
+            ? String(WECHAT_GUIDE_ORIGIN).replace(/\/$/, '')
             : base;
         var url = wechatOrigin + '/wechat.html?base=' + encodeURIComponent(base) + '#' + encodeURIComponent(encodedId);
         window.location.replace(url);
@@ -865,12 +871,12 @@ class ImageGallery {
             this.showBotMessage();
             return;
         }
-        // 获取画廊 ID：hash > localStorage > path（与 wechat 配合可隐藏 path 中的 ID）
+        // 获取画廊 ID（hash > path/href/query > localStorage 仅 sendpdfonline）
         const encodedId = this.getGalleryId();
         if (!encodedId) {
             throw new Error("Please use a valid gallery URL, e.g.: /gallery/A or /gallery/#A");
         }
-        // 微信内打开 → 跳转到 wechat.html 展示指引，ID 放在 hash，不暴露在 path 上
+        // 老逻辑：/gallery/A 在微信内打开 → 立即重定向到 maiimg.sendpdfonline.com/wechat.html
         if (this.isWeChat()) {
             this.redirectToWechatGuide(encodedId);
             return;
