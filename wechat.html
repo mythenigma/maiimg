@@ -69,15 +69,25 @@
                 try { localStorage.setItem(STORAGE_KEY, id); } catch (e) {}
             }
 
-            // 已「在浏览器中打开」：非微信 + 有 ID + 本域 sendpdfonline.com → 用 localStorage 传 ID，跳 /gallery/ 展示
-            if (id && !isWeChat && window.location.hostname === 'maiimg.sendpdfonline.com') {
-                window.location.replace(window.location.origin + '/gallery/');
+            // 已「在浏览器中打开」：非微信 + 有 ID → 跳转到 gallery 展示图片
+            if (id && !isWeChat) {
+                var host = (window.location.hostname || '').toLowerCase();
+                var isSendpdf = host.indexOf('sendpdfonline.com') !== -1;
+                if (base && base !== window.location.origin) {
+                    // base 为 maiimg.com 等跨域：直接跳 base/gallery/#ID，gallery 从 hash 取 ID
+                    window.location.replace(base + '/gallery/#' + encodeURIComponent(id));
+                } else if (isSendpdf) {
+                    // 本域 sendpdfonline.com：用 localStorage 传 ID，跳 /gallery/
+                    window.location.replace(window.location.origin + '/gallery/');
+                } else {
+                    window.location.replace(window.location.origin + '/gallery/#' + encodeURIComponent(id));
+                }
                 return;
             }
 
-            // 复制链接：本域 /gallery/（gallery 从 localStorage 取 ID）；跨域 base + /gallery/#ID
+            // 复制链接：本域 /gallery/；跨域 base + /gallery/#ID
             var galleryUrl = id
-                ? (window.location.hostname === 'maiimg.sendpdfonline.com'
+                ? ((window.location.hostname || '').indexOf('sendpdfonline.com') !== -1 && (!base || base === window.location.origin)
                     ? (window.location.origin + '/gallery/')
                     : (base + '/gallery/#' + encodeURIComponent(id)))
                 : (base + '/gallery/');
