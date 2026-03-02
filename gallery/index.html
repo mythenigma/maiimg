@@ -389,7 +389,7 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
 // 微信内打开 /gallery/A 时重定向到此域名的 wechat.html（与 maiimg.com 可不同域名）
-var WECHAT_GUIDE_ORIGIN = 'https://maiimg.sendpdfonline.com';
+var WECHAT_GUIDE_ORIGIN = 'https://special.maiimg.com';
 class ImageGallery {
     constructor() {
         this.swiper = null;
@@ -410,11 +410,11 @@ class ImageGallery {
     static get GALLERY_ID_STORAGE_KEY() { return 'maiimg_gallery_id'; }
 
     /**
-     * 获取画廊 ID：maiimg.com 仅从 URL（hash / path / query）；maiimg.sendpdfonline.com 在 URL 无 ID 时从 localStorage 取
+     * 获取画廊 ID：maiimg.com 仅从 URL（hash / path / query）；special.maiimg.com 在 URL 无 ID 时从 localStorage 取
      */
     getGalleryId() {
         const host = (window.location.hostname || '').toLowerCase();
-        const isWechatDomain = host === 'maiimg.sendpdfonline.com';
+        const isWechatDomain = host === 'special.maiimg.com';
 
         const hashRaw = (window.location.hash || '').replace(/^#/, '');
         if (hashRaw) {
@@ -507,7 +507,7 @@ class ImageGallery {
     }
 
     /**
-     * 微信内打开 /gallery/A 时：跳转到 maiimg.sendpdfonline.com/wechat.html?base=当前域&#ID
+     * 微信内打开 /gallery/A 时：跳转到 special.maiimg.com/wechat.html?base=当前域&#ID
      */
     redirectToWechatGuide(encodedId) {
         var loadingEl = document.getElementById('loading');
@@ -871,14 +871,14 @@ class ImageGallery {
             this.showBotMessage();
             return;
         }
-        // 获取画廊 ID（hash > path/href/query > localStorage 仅 sendpdfonline）
+        // 获取画廊 ID（hash > path/href/query > localStorage 仅 special.maiimg.com）
         const encodedId = this.getGalleryId();
         if (!encodedId) {
             throw new Error("Please use a valid gallery URL, e.g.: /gallery/A or /gallery/#A");
         }
-        // 仅 maiimg.com 在微信内不展示：重定向到 sendpdfonline.com/wechat.html；sendpdfonline.com 在微信内正常展示 gallery
+        // 仅 maiimg.com 在微信内不展示：重定向到 special.maiimg.com/wechat.html；special.maiimg.com 在微信内正常展示 gallery
         const host = (window.location.hostname || '').toLowerCase();
-        if (this.isWeChat() && host !== 'maiimg.sendpdfonline.com') {
+        if (this.isWeChat() && host !== 'special.maiimg.com') {
             this.redirectToWechatGuide(encodedId);
             return;
         }

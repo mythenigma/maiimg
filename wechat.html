@@ -74,13 +74,13 @@
             // 有 ID 且开启转向时：跳转到 gallery 展示图片
             if (id && REDIRECT_TO_GALLERY) {
                 var host = (window.location.hostname || '').toLowerCase();
-                var isSendpdf = host.indexOf('sendpdfonline.com') !== -1;
+                var isSendpdf = host.indexOf('special.maiimg.com') !== -1;
                 var targetUrl;
                 if (isWeChat) {
-                    // 微信内：只展示 sendpdfonline.com 的 gallery
+                    // 微信内：只展示 special.maiimg.com 的 gallery
                     targetUrl = isSendpdf
                         ? (window.location.origin + '/gallery/')
-                        : ('https://maiimg.sendpdfonline.com/gallery/#' + encodeURIComponent(id));
+                        : ('https://special.maiimg.com/gallery/#' + encodeURIComponent(id));
                 } else if (base && base !== window.location.origin) {
                     // 非微信 + base 跨域：跳 base/gallery/#ID（如 maiimg.com）
                     targetUrl = base + '/gallery/#' + encodeURIComponent(id);
@@ -95,7 +95,7 @@
 
             // 复制链接：本域 /gallery/；跨域 base + /gallery/#ID
             var galleryUrl = id
-                ? ((window.location.hostname || '').indexOf('sendpdfonline.com') !== -1 && (!base || base === window.location.origin)
+                ? ((window.location.hostname || '').indexOf('special.maiimg.com') !== -1 && (!base || base === window.location.origin)
                     ? (window.location.origin + '/gallery/')
                     : (base + '/gallery/#' + encodeURIComponent(id)))
                 : (base + '/gallery/');
