@@ -20,7 +20,6 @@
             --safe-right: max(16px, env(safe-area-inset-right));
             --safe-bottom: max(20px, env(safe-area-inset-bottom));
             --safe-left: max(16px, env(safe-area-inset-left));
-            --video-controls-space: calc(var(--safe-bottom) + 64px);
         }
 
         * {
@@ -168,7 +167,7 @@
         }
 
         .media-shell.is-video {
-            padding: 0 calc(var(--safe-right) - 8px) var(--video-controls-space) calc(var(--safe-left) - 8px);
+            padding: 0;
         }
 
         .swiper-slide img,
@@ -183,10 +182,30 @@
             background: #000;
         }
 
-        .media-shell.is-video video {
+        .media-shell.is-video video,
+        .media-shell.is-video .video-poster-fallback {
             display: block;
-            max-width: min(100%, 1100px);
-            max-height: calc(100% - var(--video-controls-space));
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            background: #000;
+        }
+
+        .media-shell.is-video .video-poster-fallback {
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .media-shell.is-video.video-started .video-poster-fallback,
+        .media-shell.is-video .video-poster-fallback[hidden] {
+            display: none;
         }
 
         .swiper-pagination {
@@ -249,10 +268,6 @@
         }
 
         @media (max-width: 768px) {
-            :root {
-                --video-controls-space: calc(var(--safe-bottom) + 72px);
-            }
-
             .swiper-button-next,
             .swiper-button-prev {
                 width: 40px;
@@ -647,22 +662,28 @@ class MediaGallery {
         items.forEach((mediaInfo, index) => {
             const fileName = mediaInfo.fileName || mediaInfo.filename || mediaInfo.originalName || mediaInfo;
             const fullPath = mediaInfo.fullPath || mediaInfo.key || `${markPath}/${fileName}`;
-            const mediaUrl = `https://fetch.maipdf.com/media/${fullPath}`;
+            const mediaUrl = this.resolveMediaAssetUrl(fullPath, markPath);
             const kind = mediaInfo.kind || 'image';
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
 
             if (kind === 'video') {
-                const posterAttr = mediaInfo.poster ? `poster="${mediaInfo.poster}"` : '';
+                const posterUrl = this.resolveMediaAssetUrl(mediaInfo.poster, markPath);
+                const posterAttr = posterUrl ? `poster="${posterUrl}"` : '';
+                const fallbackPoster = posterUrl
+                    ? `<img class="video-poster-fallback" src="${posterUrl}" alt="" aria-hidden="true">`
+                    : '<img class="video-poster-fallback" alt="" aria-hidden="true" hidden>';
                 slide.innerHTML = `
                     <div class="swiper-zoom-container media-shell is-video">
-                        <video src="${mediaUrl}" ${posterAttr} preload="metadata" playsinline webkit-playsinline controls controlsList="nodownload">
+                        <video src="${mediaUrl}" ${posterAttr} preload="${posterUrl ? 'metadata' : 'auto'}" playsinline webkit-playsinline controls controlsList="nodownload">
                             Your browser does not support video playback.
                         </video>
+                        ${fallbackPoster}
                     </div>
                 `;
                 const video = slide.querySelector('video');
-                this.attachVideoEvents(video);
+                const fallbackImage = slide.querySelector('.video-poster-fallback');
+                this.attachVideoEvents(video, fallbackImage);
             } else {
                 slide.innerHTML = `
                     <div class="swiper-zoom-container media-shell">
@@ -675,10 +696,64 @@ class MediaGallery {
         });
     }
 
-    attachVideoEvents(video) {
+    resolveMediaAssetUrl(assetPath, markPath = '') {
+        if (!assetPath) return '';
+        const rawValue = String(assetPath).trim();
+        if (!rawValue) return '';
+        if (/^(?:data:|blob:|https?:\/\/)/i.test(rawValue)) return rawValue;
+        if (rawValue.startsWith('//')) return `${window.location.protocol}${rawValue}`;
+        if (rawValue.startsWith('/')) return `https://fetch.maipdf.com${rawValue}`;
+
+        const normalizedValue = rawValue.includes('/') ? rawValue : `${markPath}/${rawValue}`;
+        return `https://fetch.maipdf.com/media/${normalizedValue}`;
+    }
+
+    attachVideoEvents(video, fallbackImage) {
+        const shell = video.closest('.media-shell');
+        const hideFallback = () => {
+            shell?.classList.add('video-started');
+            if (fallbackImage) fallbackImage.hidden = true;
+        };
+
+        const showFallback = () => {
+            if (!fallbackImage || !fallbackImage.getAttribute('src')) return;
+            fallbackImage.hidden = false;
+        };
+
+        const captureFrame = () => {
+            if (!fallbackImage || fallbackImage.getAttribute('src') || !video.videoWidth || !video.videoHeight) return;
+            try {
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const context = canvas.getContext('2d');
+                if (!context) return;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                fallbackImage.src = canvas.toDataURL('image/jpeg', 0.82);
+                fallbackImage.hidden = false;
+            } catch (error) {
+            }
+        };
+
+        showFallback();
         video.addEventListener('play', () => {
             this.pauseOtherVideos(video);
+            hideFallback();
         });
+
+        video.addEventListener('loadeddata', () => {
+            captureFrame();
+            if (!fallbackImage?.getAttribute('src')) {
+                try {
+                    if (video.currentTime === 0 && Number.isFinite(video.duration) && video.duration > 0) {
+                        video.currentTime = Math.min(0.05, video.duration / 2);
+                    }
+                } catch (error) {
+                }
+            }
+        }, { once: true });
+
+        video.addEventListener('seeked', captureFrame, { once: true });
     }
 
     isFullscreenSupported() {
