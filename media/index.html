@@ -20,6 +20,7 @@
             --safe-right: max(16px, env(safe-area-inset-right));
             --safe-bottom: max(20px, env(safe-area-inset-bottom));
             --safe-left: max(16px, env(safe-area-inset-left));
+            --video-controls-space: calc(var(--safe-bottom) + 88px);
         }
 
         * {
@@ -137,6 +138,7 @@
         .swiper {
             width: 100%;
             height: 100vh;
+            height: 100dvh;
             background: #000;
         }
 
@@ -165,6 +167,10 @@
             justify-content: center;
         }
 
+        .media-shell.is-video {
+            padding: var(--safe-top) var(--safe-right) var(--video-controls-space) var(--safe-left);
+        }
+
         .swiper-slide img,
         .swiper-slide video {
             max-width: 100%;
@@ -175,6 +181,12 @@
             border-radius: 10px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
             background: #000;
+        }
+
+        .media-shell.is-video video {
+            display: block;
+            max-width: min(100%, 960px);
+            max-height: 100%;
         }
 
         .swiper-pagination {
@@ -237,6 +249,10 @@
         }
 
         @media (max-width: 768px) {
+            :root {
+                --video-controls-space: calc(var(--safe-bottom) + 96px);
+            }
+
             .swiper-button-next,
             .swiper-button-prev {
                 width: 40px;
@@ -256,8 +272,7 @@
 
         @media (hover: none) and (pointer: coarse) {
             .fullscreen-toggle {
-                left: var(--safe-left);
-                right: auto;
+                display: none;
             }
 
             .swiper-button-next,
@@ -640,7 +655,7 @@ class MediaGallery {
             if (kind === 'video') {
                 const posterAttr = mediaInfo.poster ? `poster="${mediaInfo.poster}"` : '';
                 slide.innerHTML = `
-                    <div class="swiper-zoom-container media-shell">
+                    <div class="swiper-zoom-container media-shell is-video">
                         <video src="${mediaUrl}" ${posterAttr} preload="metadata" playsinline webkit-playsinline controls controlsList="nodownload">
                             Your browser does not support video playback.
                         </video>
