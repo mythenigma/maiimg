@@ -182,8 +182,7 @@
             background: #000;
         }
 
-        .media-shell.is-video video,
-        .media-shell.is-video .video-poster-fallback {
+        .media-shell.is-video video {
             display: block;
             max-width: 100%;
             max-height: 100%;
@@ -193,19 +192,6 @@
             border-radius: 10px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
             background: #000;
-        }
-
-        .media-shell.is-video .video-poster-fallback {
-            position: absolute;
-            inset: 0;
-            margin: auto;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .media-shell.is-video.video-started .video-poster-fallback,
-        .media-shell.is-video .video-poster-fallback[hidden] {
-            display: none;
         }
 
         .swiper-pagination {
@@ -668,22 +654,16 @@ class MediaGallery {
             slide.className = 'swiper-slide';
 
             if (kind === 'video') {
-                const posterUrl = this.resolveMediaAssetUrl(mediaInfo.poster, markPath);
-                const posterAttr = posterUrl ? `poster="${posterUrl}"` : '';
-                const fallbackPoster = posterUrl
-                    ? `<img class="video-poster-fallback" src="${posterUrl}" alt="" aria-hidden="true">`
-                    : '<img class="video-poster-fallback" alt="" aria-hidden="true" hidden>';
+                const posterUrl = this.resolveVideoPosterUrl(mediaInfo, markPath, fileName);
                 slide.innerHTML = `
                     <div class="swiper-zoom-container media-shell is-video">
-                        <video src="${mediaUrl}" ${posterAttr} preload="${posterUrl ? 'metadata' : 'auto'}" playsinline webkit-playsinline controls controlsList="nodownload">
+                        <video src="${mediaUrl}" poster="${posterUrl}" preload="metadata" playsinline webkit-playsinline controls controlsList="nodownload">
                             Your browser does not support video playback.
                         </video>
-                        ${fallbackPoster}
                     </div>
                 `;
                 const video = slide.querySelector('video');
-                const fallbackImage = slide.querySelector('.video-poster-fallback');
-                this.attachVideoEvents(video, fallbackImage);
+                this.attachVideoEvents(video);
             } else {
                 slide.innerHTML = `
                     <div class="swiper-zoom-container media-shell">
@@ -708,52 +688,63 @@ class MediaGallery {
         return `https://fetch.maipdf.com/media/${normalizedValue}`;
     }
 
-    attachVideoEvents(video, fallbackImage) {
-        const shell = video.closest('.media-shell');
-        const hideFallback = () => {
-            shell?.classList.add('video-started');
-            if (fallbackImage) fallbackImage.hidden = true;
-        };
+    resolveVideoPosterUrl(mediaInfo, markPath, fileName) {
+        const candidateFields = [
+            mediaInfo.poster,
+            mediaInfo.thumbnail,
+            mediaInfo.thumb,
+            mediaInfo.cover,
+            mediaInfo.preview
+        ];
 
-        const showFallback = () => {
-            if (!fallbackImage || !fallbackImage.getAttribute('src')) return;
-            fallbackImage.hidden = false;
-        };
+        for (const candidate of candidateFields) {
+            const resolved = this.resolveMediaAssetUrl(candidate, markPath);
+            if (resolved) return resolved;
+        }
 
-        const captureFrame = () => {
-            if (!fallbackImage || fallbackImage.getAttribute('src') || !video.videoWidth || !video.videoHeight) return;
-            try {
-                const canvas = document.createElement('canvas');
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                const context = canvas.getContext('2d');
-                if (!context) return;
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                fallbackImage.src = canvas.toDataURL('image/jpeg', 0.82);
-                fallbackImage.hidden = false;
-            } catch (error) {
-            }
-        };
+        return this.generateVideoPosterDataUri(fileName);
+    }
 
-        showFallback();
+    generateVideoPosterDataUri(fileName) {
+        const safeName = String(fileName || 'Video').replace(/\.[^/.]+$/, '').trim() || 'Video';
+        const title = safeName.length > 28 ? `${safeName.slice(0, 25)}...` : safeName;
+        const escapedTitle = title
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+        const svg = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#132238"/>
+      <stop offset="55%" stop-color="#0f5132"/>
+      <stop offset="100%" stop-color="#05070d"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.22)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.06)"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1800" fill="url(#bg)"/>
+  <circle cx="1030" cy="210" r="180" fill="rgba(255,255,255,0.05)"/>
+  <circle cx="170" cy="1490" r="250" fill="rgba(255,255,255,0.04)"/>
+  <rect x="110" y="170" width="980" height="1460" rx="56" fill="rgba(0,0,0,0.24)" stroke="rgba(255,255,255,0.16)" stroke-width="4"/>
+  <rect x="160" y="240" width="880" height="1240" rx="36" fill="rgba(255,255,255,0.08)"/>
+  <rect x="160" y="1340" width="420" height="90" rx="45" fill="rgba(255,255,255,0.12)"/>
+  <rect x="160" y="1468" width="700" height="32" rx="16" fill="rgba(255,255,255,0.12)"/>
+  <rect x="160" y="1524" width="520" height="32" rx="16" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="600" cy="920" r="140" fill="rgba(0,0,0,0.38)" stroke="rgba(255,255,255,0.2)" stroke-width="6"/>
+  <polygon points="560,840 560,1000 690,920" fill="#ffffff"/>
+  <text x="160" y="900" fill="rgba(255,255,255,0.18)" font-size="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Preview</text>
+  <text x="160" y="1400" fill="#ffffff" font-size="48" font-weight="700" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">${escapedTitle}</text>
+</svg>`;
+        return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg.trim())}`;
+    }
+
+    attachVideoEvents(video) {
         video.addEventListener('play', () => {
             this.pauseOtherVideos(video);
-            hideFallback();
         });
-
-        video.addEventListener('loadeddata', () => {
-            captureFrame();
-            if (!fallbackImage?.getAttribute('src')) {
-                try {
-                    if (video.currentTime === 0 && Number.isFinite(video.duration) && video.duration > 0) {
-                        video.currentTime = Math.min(0.05, video.duration / 2);
-                    }
-                } catch (error) {
-                }
-            }
-        }, { once: true });
-
-        video.addEventListener('seeked', captureFrame, { once: true });
     }
 
     isFullscreenSupported() {
