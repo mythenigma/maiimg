@@ -312,6 +312,7 @@ class MediaGallery {
         this.totalItems = 0;
         this.currentIndex = 0;
         this.viewTimer = null;
+        this.fullscreenToggle = document.getElementById('fullscreen-toggle');
         this.init();
     }
 
@@ -665,6 +666,30 @@ class MediaGallery {
         });
     }
 
+    isFullscreenSupported() {
+        const root = document.documentElement;
+        return !!(
+            document.fullscreenEnabled ||
+            document.webkitFullscreenEnabled ||
+            root.requestFullscreen ||
+            root.webkitRequestFullscreen
+        );
+    }
+
+    getActiveSlide() {
+        if (!this.swiper || !this.swiper.slides || !this.swiper.slides.length) {
+            return document.querySelector('#swiper-wrapper .swiper-slide');
+        }
+        return this.swiper.slides[this.swiper.activeIndex] || null;
+    }
+
+    updateFullscreenToggle() {
+        if (!this.fullscreenToggle) return;
+        const activeSlide = this.getActiveSlide();
+        const hasVideo = !!activeSlide?.querySelector('video');
+        this.fullscreenToggle.hidden = !this.isFullscreenSupported() || hasVideo;
+    }
+
     pauseOtherVideos(activeVideo = null) {
         document.querySelectorAll('#swiper-wrapper video').forEach((video) => {
             if (activeVideo && video === activeVideo) return;
@@ -754,11 +779,13 @@ class MediaGallery {
                     this.currentIndex = swiper.activeIndex;
                     this.pauseOtherVideos();
                     this.updateProgress();
+                    this.updateFullscreenToggle();
                 },
                 init: (swiper) => {
                     this.currentIndex = swiper.activeIndex;
                     this.pauseOtherVideos();
                     this.updateProgress();
+                    this.updateFullscreenToggle();
                     setTimeout(() => {
                         const hintEl = document.getElementById('gesture-hint');
                         if (hintEl) hintEl.style.display = 'none';
@@ -864,10 +891,13 @@ class MediaGallery {
 }
 
 document.getElementById('fullscreen-toggle').addEventListener('click', () => {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
+    const root = document.documentElement;
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (root.requestFullscreen) root.requestFullscreen();
+        else if (root.webkitRequestFullscreen) root.webkitRequestFullscreen();
     } else {
-        document.exitFullscreen();
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
     }
 });
 
