@@ -7,6 +7,12 @@
 # 备用短链接支持 (可选)
 /g/:id /gallery/ 200
 
+# 主要的媒体重写规则
+/media/:id /media/ 200
+
+# 备用短链接支持 (可选)
+/m/:id /media/ 200
+
 # 主页重定向
 / /index.html 200
 

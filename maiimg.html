@@ -181,7 +181,7 @@
         <i class="fas fa-cloud-upload-alt upload-icon"></i>
         <div class="upload-text" data-translate="upload.dropText">Drop or tap to upload</div>
         <div class="upload-subtext" data-translate="upload.supportText">
-          PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 25 files
+          PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM, M4V • Images up to 50MB • Videos up to 100MB / 120s • Up to 25 files
         </div>
         <div class="mt-3">
           <span class="badge bg-primary px-3 py-2">
@@ -1780,8 +1780,8 @@
     const UPLOAD_API_BASE = 'https://fetch.maipdf.com/api/maiimgs/upload';
     const MAX_MEDIA_FILES = 25;
     const MAX_IMAGE_BYTES = 50 * 1024 * 1024;
-    const MAX_VIDEO_BYTES = 10 * 1024 * 1024;
-    const MAX_VIDEO_SECONDS = 15;
+    const MAX_VIDEO_BYTES = 100 * 1024 * 1024;
+    const MAX_VIDEO_SECONDS = 120;
     const MAX_PARALLEL_MEDIA_UPLOADS = 3;
     const pendingUploadTasks = [];
     let activeUploadCount = 0;
@@ -1915,7 +1915,7 @@
     async function prepareMediaFile(file) {
       const kind = getFileKind(file);
       if (!kind) {
-        throw new Error('Only PNG, JPG, JPEG, GIF, WebP, MP4, MOV and WebM are supported right now.');
+        throw new Error('Only PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM and M4V are supported right now.');
       }
 
       if (kind === 'image') {
@@ -1933,7 +1933,7 @@
       }
 
       if (file.size > MAX_VIDEO_BYTES) {
-        throw new Error('Video too large. Maximum size is 10MB for now.');
+        throw new Error('Video too large. Maximum size is 100MB.');
       }
 
       const duration = await readVideoDuration(file);
@@ -1949,7 +1949,7 @@
       };
     }
 
-    async function requestUploadInit(file, uploadSessionId) {
+    async function requestUploadInit(file, uploadSessionId, duration) {
       const response = await fetch(`${UPLOAD_API_BASE}/init`, {
         method: 'POST',
         headers: {
@@ -1959,6 +1959,7 @@
           fileName: file.name,
           fileType: file.type,
           fileSize: file.size,
+          duration,
           uploadSessionId
         })
       });
@@ -2088,7 +2089,7 @@
       }
 
       const prepared = await prepareMediaFile(file);
-      const initResult = await requestUploadInit(prepared.uploadFile, currentUploadSessionId);
+      const initResult = await requestUploadInit(prepared.uploadFile, currentUploadSessionId, prepared.duration);
       let result;
 
       file.status = Dropzone.UPLOADING;
@@ -2150,16 +2151,16 @@
         method: "post",
         autoProcessQueue: false,
         maxFiles: MAX_MEDIA_FILES,
-        maxFilesize: 50,
-        acceptedFiles: ".png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,image/jpeg,image/png,image/gif,image/webp,video/mp4,video/quicktime,video/webm",
+        maxFilesize: 100,
+        acceptedFiles: ".png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,.m4v,image/jpeg,image/png,image/gif,image/webp,video/mp4,video/quicktime,video/webm,video/x-m4v",
         addRemoveLinks: true,
         parallelUploads: MAX_PARALLEL_MEDIA_UPLOADS,
         clickable: true,
         createImageThumbnails: true,
-        dictDefaultMessage: '<i class="fas fa-cloud-upload-alt upload-icon"></i><div class="upload-text">Drop or tap to upload</div><div class="upload-subtext">PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM • Images up to 50MB • Videos up to 10MB / 15s • Up to 25 files</div>',
+        dictDefaultMessage: '<i class="fas fa-cloud-upload-alt upload-icon"></i><div class="upload-text">Drop or tap to upload</div><div class="upload-subtext">PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM, M4V • Images up to 50MB • Videos up to 100MB / 120s • Up to 25 files</div>',
         dictMaxFilesExceeded: "Maximum 25 files allowed!",
         dictResponseError: 'Upload failed!',
-        dictInvalidFileType: "Only supported image and small video files are allowed.",
+        dictInvalidFileType: "Only supported image and video files are allowed.",
         dictFallbackMessage: "Your browser does not support drag and drop uploads.",
         dictFileTooBig: "File is too big ({{filesize}}MB). Max filesize: {{maxFilesize}}MB.",
         dictRemoveFile: "Remove file",
