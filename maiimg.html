@@ -27,6 +27,28 @@
   
   <!-- Custom Styles -->
   <link href="qr-styles010.css" rel="stylesheet">
+  <style>
+    .flow-step.is-guided {
+      animation: flowStepPulse 1.1s ease-in-out infinite;
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.45);
+    }
+
+    @keyframes flowStepPulse {
+      0% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.35);
+      }
+      70% {
+        transform: translateY(-1px);
+        box-shadow: 0 0 0 8px rgba(99, 102, 241, 0);
+      }
+      100% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+      }
+    }
+  </style>
   
   <!-- Internationalization -->
   <script src="i18n.js?v=2026021902"></script>
@@ -40,9 +62,9 @@
         <i class="fas fa-images me-2"></i><span data-translate="nav.title">Image QR Generator</span>
       </a>
       
-      <!-- User Auth Area -->
-      <div class="d-flex align-items-center gap-2">
-        <div id="userInfo" class="small d-none" style="background: rgba(255,255,255,0.9); color: #333; padding: 4px 12px; border-radius: 20px; font-weight: 500;"></div>
+      <!-- Desktop User/Auth + Language -->
+      <div class="nav-actions-desktop d-none d-md-flex align-items-center gap-2">
+        <div id="userInfo" class="small d-none user-pill"></div>
         <a href="dashboard.html" class="btn btn-light btn-sm d-none" id="dashboardBtn">
           <i class="fas fa-th-large me-1"></i><span data-translate="dash.title">My Galleries</span>
         </a>
@@ -53,65 +75,49 @@
           <i class="fas fa-sign-out-alt me-1"></i><span data-translate="auth.logout">Logout</span>
         </button>
 
-      <!-- Language Selector -->
-      <div class="language-selector">
-        <div class="dropdown">
-          <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <span id="currentLanguageFlag">🇺🇸</span>
-            <span id="currentLanguageName" data-translate="language.english">English</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('en')">
-                <span class="flag-icon">🇺🇸</span>
-                <span data-translate="language.english">English</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('zh')">
-                <span class="flag-icon">🇨🇳</span>
-                <span data-translate="language.chinese">中文</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('tw')">
-                <span class="flag-icon">🇹🇼</span>
-                <span data-translate="language.taiwan">中華民國</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('ja')">
-                <span class="flag-icon">🇯🇵</span>
-                <span data-translate="language.japanese">日本語</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('de')">
-                <span class="flag-icon">🇩🇪</span>
-                <span data-translate="language.german">Deutsch</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('ko')">
-                <span class="flag-icon">🇰🇷</span>
-                <span data-translate="language.korean">한국어</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('fr')">
-                <span class="flag-icon">🇫🇷</span>
-                <span data-translate="language.french">Français</span>
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#" onclick="changeLanguage('it')">
-                <span class="flag-icon">🇮🇹</span>
-                <span data-translate="language.italian">Italiano</span>
-              </a>
-            </li>
-          </ul>
+        <div class="language-selector">
+          <div class="dropdown">
+            <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="currentLanguageFlag">🇺🇸</span>
+              <span id="currentLanguageName" data-translate="language.english">English</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('en'); return false;"><span class="flag-icon">🇺🇸</span><span data-translate="language.english">English</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('zh'); return false;"><span class="flag-icon">🇨🇳</span><span data-translate="language.chinese">中文</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('tw'); return false;"><span class="flag-icon">🇹🇼</span><span data-translate="language.taiwan">中華民國</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('ja'); return false;"><span class="flag-icon">🇯🇵</span><span data-translate="language.japanese">日本語</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('de'); return false;"><span class="flag-icon">🇩🇪</span><span data-translate="language.german">Deutsch</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('ko'); return false;"><span class="flag-icon">🇰🇷</span><span data-translate="language.korean">한국어</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr'); return false;"><span class="flag-icon">🇫🇷</span><span data-translate="language.french">Français</span></a></li>
+              <li><a class="dropdown-item" href="#" onclick="changeLanguage('it'); return false;"><span class="flag-icon">🇮🇹</span><span data-translate="language.italian">Italiano</span></a></li>
+            </ul>
+          </div>
         </div>
       </div>
+
+      <!-- Mobile User Menu -->
+      <div class="nav-actions-mobile dropdown d-md-none">
+        <button class="btn btn-light mobile-user-trigger" type="button" id="mobileUserMenuBtn" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open user menu">
+          <i class="fas fa-user-circle"></i>
+          <span class="mobile-user-sep">/</span>
+          <span id="mobileCurrentLanguageFlag" class="mobile-lang-flag" aria-hidden="true">🇺🇸</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end mobile-user-menu" aria-labelledby="mobileUserMenuBtn">
+          <li><h6 class="dropdown-header" id="mobileUserEmail">Guest</h6></li>
+          <li><a href="dashboard.html" class="dropdown-item d-none" id="mobileDashboardBtn"><i class="fas fa-th-large me-2"></i><span data-translate="dash.title">My Galleries</span></a></li>
+          <li><button type="button" class="dropdown-item" id="mobileLoginBtn" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt me-2"></i><span data-translate="auth.login">Login</span></button></li>
+          <li><button type="button" class="dropdown-item d-none" id="mobileLogoutBtn"><i class="fas fa-sign-out-alt me-2"></i><span data-translate="auth.logout">Logout</span></button></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><span class="dropdown-item-text mobile-lang-title">Language</span></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('en'); return false;">🇺🇸 English</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('zh'); return false;">🇨🇳 中文</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('tw'); return false;">🇹🇼 中華民國</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('ja'); return false;">🇯🇵 日本語</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('de'); return false;">🇩🇪 Deutsch</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('ko'); return false;">🇰🇷 한국어</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr'); return false;">🇫🇷 Français</a></li>
+          <li><a class="dropdown-item" href="#" onclick="changeLanguage('it'); return false;">🇮🇹 Italiano</a></li>
+        </ul>
       </div>
     </div>
   </nav>
@@ -134,15 +140,15 @@
       <div class="flow-nav-inner">
         <button type="button" class="flow-step is-current" data-step="1">
           <span class="flow-step-num"><span>1</span></span>
-          <span class="flow-step-label">Upload Images</span>
+          <span class="flow-step-label" data-translate="flow.step1">Upload Images</span>
         </button>
         <button type="button" class="flow-step" data-step="2">
           <span class="flow-step-num"><span>2</span></span>
-          <span class="flow-step-label">Set Access</span>
+          <span class="flow-step-label" data-translate="flow.step2">Set Access</span>
         </button>
         <button type="button" class="flow-step" data-step="3">
           <span class="flow-step-num"><span>3</span></span>
-          <span class="flow-step-label">Generate Link & QR</span>
+          <span class="flow-step-label" data-translate="flow.step3">Generate Link & QR</span>
         </button>
       </div>
     </section>
@@ -175,7 +181,7 @@
         <i class="fas fa-cloud-upload-alt upload-icon"></i>
         <div class="upload-text" data-translate="upload.dropText">Drop or tap to upload</div>
         <div class="upload-subtext" data-translate="upload.supportText">
-          Supports: PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 25 files
+          PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 25 files
         </div>
         <div class="mt-3">
           <span class="badge bg-primary px-3 py-2">
@@ -194,7 +200,7 @@
         <div class="col-12 mb-4">
           <div class="alert alert-info border-0 rounded-4" id="uploadStatus">
             <i class="fas fa-info-circle me-2"></i>
-            <span id="pleaseupload" data-translate="upload.ready">Ready to upload images</span>
+            <span id="pleaseupload" data-translate="upload.ready">Ready to upload media</span>
           </div>
         </div>
       </div>
@@ -248,7 +254,7 @@
           <button type="button" class="btn btn-primary w-100" onclick="generateImageQR()" disabled id="generateBtn">
             <i class="fas fa-link me-2"></i><span data-translate="features.generate.button">Create Link & QR Code</span>
           </button>
-          <small class="text-muted" id="generateBtnStatus" data-translate="features.generate.status">Fill all fields and upload images first</small>
+          <small class="text-muted" id="generateBtnStatus" data-translate="features.generate.status">Fill all fields and upload media first</small>
         </div>
       </div>
     </section>
@@ -744,6 +750,7 @@
       if (window.i18n) {
         window.i18n.setLanguage(lang);
         currentLanguage = lang;
+        syncMobileLanguageFlag(lang);
         updateFooterComplianceText(lang);
         if (typeof window.__updateMaiimgExpiration === 'function') {
           window.__updateMaiimgExpiration();
@@ -756,6 +763,26 @@
       } else {
         console.error('i18n instance not found');
       }
+    }
+
+    function getLanguageFlag(lang) {
+      const map = {
+        en: '🇺🇸',
+        zh: '🇨🇳',
+        tw: '🇹🇼',
+        ja: '🇯🇵',
+        de: '🇩🇪',
+        ko: '🇰🇷',
+        fr: '🇫🇷',
+        it: '🇮🇹'
+      };
+      return map[lang] || map.en;
+    }
+
+    function syncMobileLanguageFlag(lang) {
+      const flagEl = document.getElementById('mobileCurrentLanguageFlag');
+      if (!flagEl) return;
+      flagEl.textContent = getLanguageFlag(lang || currentLanguage || 'en');
     }
 
     // Update all translations on the page
@@ -1053,18 +1080,18 @@
     // Generate Image QR Code
     async function generateImageQR() {
       if (uploadedFiles.length === 0) {
-        showNotification('Please upload at least one image first!', 'warning');
+        showNotification('Please upload at least one media file first!', 'warning');
         return;
       }
 
       const limit = document.getElementById("limit").value || "100000000";
       const password = document.getElementById("password").value || "1999999927";
-      const caption = document.getElementById("caption").value || "Image Gallery";
+      const caption = document.getElementById("caption").value || "Media Gallery";
       const expirationDay = document.getElementById("expiration_day").value || "";
       const expirationTs = document.getElementById("expiration_ts").value || "";
 
       // Show loading state
-      const button = event.target;
+      const button = document.getElementById('generateBtn');
       const originalText = button.innerHTML;
       button.innerHTML = '<span class="loading"></span> Generating...';
       button.disabled = true;
@@ -1074,7 +1101,7 @@
         const createHeaders = { 'Content-Type': 'application/json' };
         const jwt = sessionStorage.getItem('maiimg_jwt');
         if (jwt) createHeaders['Authorization'] = 'Bearer ' + jwt;
-        const response = await fetch('https://fetch.maipdf.com/api/create-image-link', {
+        const response = await fetch('https://fetch.maipdf.com/api/maiimgs/link', {
           method: 'POST',
           headers: createHeaders,
           body: JSON.stringify({
@@ -1111,7 +1138,7 @@
           generatedTypeB = trackingEncoder.encode(autoId);
           
           // Update share link input
-          const shareLink = `https://maiimg.com/gallery/${generatedTypeA}`;
+          const shareLink = `https://maiimg.com/media/${generatedTypeA}`;
           document.getElementById("webinputpic").value = shareLink;
 
           // Update stats display with enhanced information
@@ -1139,7 +1166,7 @@
             <div class="tracking-info-compact mb-3">
               <div class="gallery-info">
                 <i class="fas fa-images me-2"></i>
-                <span class="info-text">${result.fileCount} images uploaded</span>
+                <span class="info-text">${result.fileCount} media files uploaded</span>
               </div>
             </div>
             
@@ -1195,10 +1222,10 @@
           showNotification(`✅ QR code generated successfully! Database ID: ${result.autoId}. Ready for next upload.`, 'success');
           
         } else {
-          showNotification('Error creating image link: ' + (result.error || 'Unknown error'), 'error');
+          showNotification('Error creating media link: ' + (result.error || 'Unknown error'), 'error');
         }
       } catch (error) {
-        showNotification('Network error creating image link. Please check your connection and try again.', 'error');
+        showNotification('Network error creating media link. Please check your connection and try again.', 'error');
       } finally {
         // Restore button state
         button.innerHTML = originalText;
@@ -1372,10 +1399,20 @@
           || (stepNum === 2 && (state.hasConfig || state.hasResults))
           || (stepNum === 3 && state.hasResults);
         const isCurrent = stepNum === activeStep && !isDone;
+        const isGuided = stepNum === 2 && state.hasFiles && !state.hasConfig && !state.hasResults;
         el.classList.toggle('is-done', isDone);
         el.classList.toggle('is-current', isCurrent);
+        el.classList.toggle('is-guided', isGuided);
         el.setAttribute('aria-current', isCurrent ? 'step' : 'false');
       });
+      ensureFlowStepVisible(activeStep);
+    }
+
+    function ensureFlowStepVisible(activeStep) {
+      if (!window.matchMedia('(max-width: 768px)').matches) return;
+      const activeEl = document.querySelector(`.flow-step[data-step="${activeStep}"]`);
+      if (!activeEl) return;
+      activeEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
 
     function updateFlowNavigator() {
@@ -1724,7 +1761,7 @@
         if (!hasLimit) missing.push('View limit');
         if (!hasPassword) missing.push('Time control');
         if (!hasCaption) missing.push('Description');
-        if (!hasFiles) missing.push('Upload images');
+        if (!hasFiles) missing.push('Upload media');
         
         generateBtnStatus.textContent = `Missing: ${missing.join(', ')}`;
         generateBtnStatus.className = 'text-muted';
@@ -1740,17 +1777,364 @@
       }
     }
 
+    const UPLOAD_API_BASE = 'https://fetch.maipdf.com/api/maiimgs/upload';
+    const MAX_MEDIA_FILES = 25;
+    const MAX_IMAGE_BYTES = 50 * 1024 * 1024;
+    const MAX_VIDEO_BYTES = 10 * 1024 * 1024;
+    const MAX_VIDEO_SECONDS = 15;
+    const MAX_PARALLEL_MEDIA_UPLOADS = 3;
+    const pendingUploadTasks = [];
+    let activeUploadCount = 0;
+
     // 生成新的上传会话ID
     function generateUploadSessionId() {
-      return 'img_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      return 'maiimgs_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
     }
 
-    // Initialize Dropzone for image upload
+    function getFileKind(file) {
+      if (!file) return null;
+      if ((file.type || '').startsWith('image/')) return 'image';
+      if ((file.type || '').startsWith('video/')) return 'video';
+      const lowerName = (file.name || '').toLowerCase();
+      if (/\.(png|jpe?g|gif|webp)$/.test(lowerName)) return 'image';
+      if (/\.(mp4|mov|webm|m4v)$/.test(lowerName)) return 'video';
+      return null;
+    }
+
+    function replaceFileExtension(fileName, nextExtension) {
+      const cleanExtension = nextExtension.startsWith('.') ? nextExtension : `.${nextExtension}`;
+      if (/\.[^.]+$/.test(fileName)) {
+        return fileName.replace(/\.[^.]+$/, '') + cleanExtension;
+      }
+      return `${fileName}${cleanExtension}`;
+    }
+
+    function scheduleMediaUpload(task) {
+      return new Promise((resolve, reject) => {
+        pendingUploadTasks.push({ task, resolve, reject });
+        drainMediaUploadQueue();
+      });
+    }
+
+    function drainMediaUploadQueue() {
+      while (activeUploadCount < MAX_PARALLEL_MEDIA_UPLOADS && pendingUploadTasks.length > 0) {
+        const nextTask = pendingUploadTasks.shift();
+        activeUploadCount += 1;
+
+        Promise.resolve()
+          .then(nextTask.task)
+          .then((value) => {
+            activeUploadCount -= 1;
+            nextTask.resolve(value);
+            drainMediaUploadQueue();
+          })
+          .catch((error) => {
+            activeUploadCount -= 1;
+            nextTask.reject(error);
+            drainMediaUploadQueue();
+          });
+      }
+    }
+
+    async function readVideoDuration(file) {
+      return new Promise((resolve) => {
+        const video = document.createElement('video');
+        const objectUrl = URL.createObjectURL(file);
+
+        const cleanup = () => {
+          URL.revokeObjectURL(objectUrl);
+          video.removeAttribute('src');
+          video.load();
+        };
+
+        video.preload = 'metadata';
+        video.onloadedmetadata = () => {
+          const duration = Number.isFinite(video.duration) ? video.duration : null;
+          cleanup();
+          resolve(duration);
+        };
+        video.onerror = () => {
+          cleanup();
+          resolve(null);
+        };
+        video.src = objectUrl;
+      });
+    }
+
+    async function optimizeImageBeforeUpload(file) {
+      if (!file || !/^image\/(jpeg|jpg|webp)$/i.test(file.type || '')) {
+        return file;
+      }
+
+      const imageUrl = URL.createObjectURL(file);
+      try {
+        const img = await new Promise((resolve, reject) => {
+          const imageEl = new Image();
+          imageEl.onload = () => resolve(imageEl);
+          imageEl.onerror = reject;
+          imageEl.src = imageUrl;
+        });
+
+        const maxDimension = 2400;
+        const scale = Math.min(1, maxDimension / Math.max(img.naturalWidth, img.naturalHeight));
+        const width = Math.max(1, Math.round(img.naturalWidth * scale));
+        const height = Math.max(1, Math.round(img.naturalHeight * scale));
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+
+        const context = canvas.getContext('2d', { alpha: false });
+        if (!context) {
+          return file;
+        }
+
+        context.drawImage(img, 0, 0, width, height);
+        const quality = file.size > 4 * 1024 * 1024 ? 0.78 : 0.84;
+        const outputType = file.type === 'image/webp' ? 'image/webp' : 'image/jpeg';
+        const optimizedBlob = await new Promise((resolve) => canvas.toBlob(resolve, outputType, quality));
+        if (!optimizedBlob || optimizedBlob.size >= file.size * 0.96) {
+          return file;
+        }
+
+        const nextName = outputType === 'image/webp'
+          ? replaceFileExtension(file.name, '.webp')
+          : replaceFileExtension(file.name, '.jpg');
+
+        return new File([optimizedBlob], nextName, {
+          type: outputType,
+          lastModified: Date.now()
+        });
+      } catch (error) {
+        console.warn('Image optimization skipped:', error);
+        return file;
+      } finally {
+        URL.revokeObjectURL(imageUrl);
+      }
+    }
+
+    async function prepareMediaFile(file) {
+      const kind = getFileKind(file);
+      if (!kind) {
+        throw new Error('Only PNG, JPG, JPEG, GIF, WebP, MP4, MOV and WebM are supported right now.');
+      }
+
+      if (kind === 'image') {
+        if (file.size > MAX_IMAGE_BYTES) {
+          throw new Error('Image too large. Maximum size is 50MB.');
+        }
+
+        const processedFile = await optimizeImageBeforeUpload(file);
+        return {
+          kind,
+          originalFile: file,
+          uploadFile: processedFile,
+          duration: null
+        };
+      }
+
+      if (file.size > MAX_VIDEO_BYTES) {
+        throw new Error('Video too large. Maximum size is 10MB for now.');
+      }
+
+      const duration = await readVideoDuration(file);
+      if (duration && duration > MAX_VIDEO_SECONDS) {
+        throw new Error(`Video too long. Maximum duration is ${MAX_VIDEO_SECONDS} seconds.`);
+      }
+
+      return {
+        kind,
+        originalFile: file,
+        uploadFile: file,
+        duration
+      };
+    }
+
+    async function requestUploadInit(file, uploadSessionId) {
+      const response = await fetch(`${UPLOAD_API_BASE}/init`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          fileName: file.name,
+          fileType: file.type,
+          fileSize: file.size,
+          uploadSessionId
+        })
+      });
+
+      const result = await response.json();
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Failed to initialize upload.');
+      }
+
+      return result;
+    }
+
+    async function uploadSingleMedia(uploadFile, initResult, file, dropzone) {
+      const controller = new AbortController();
+      file._uploadAbortController = controller;
+
+      const response = await fetch(`${UPLOAD_API_BASE}/single`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': uploadFile.type || 'application/octet-stream',
+          'X-File-Key': initResult.key,
+          'X-File-Name': uploadFile.name,
+          'X-File-Type': uploadFile.type || 'application/octet-stream',
+          'X-Media-Kind': initResult.kind,
+          'X-Upload-Session-Id': initResult.uploadSessionId
+        },
+        body: uploadFile,
+        signal: controller.signal
+      });
+
+      const result = await response.json();
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Upload failed.');
+      }
+
+      dropzone.emit('uploadprogress', file, 100, uploadFile.size);
+      return result;
+    }
+
+    async function uploadMultipartMedia(uploadFile, initResult, file, dropzone, duration) {
+      const parts = [];
+      let uploadedBytes = 0;
+      let partNumber = 1;
+
+      file._multipartUpload = {
+        key: initResult.key,
+        uploadId: initResult.uploadId
+      };
+
+      while (uploadedBytes < uploadFile.size) {
+        const chunk = uploadFile.slice(uploadedBytes, uploadedBytes + initResult.chunkSize);
+        const controller = new AbortController();
+        file._uploadAbortController = controller;
+
+        const chunkResponse = await fetch(`${UPLOAD_API_BASE}/chunk`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/octet-stream',
+            'X-File-Key': initResult.key,
+            'X-Upload-Id': initResult.uploadId,
+            'X-Part-Number': String(partNumber)
+          },
+          body: chunk,
+          signal: controller.signal
+        });
+
+        const chunkResult = await chunkResponse.json();
+        if (!chunkResponse.ok || !chunkResult.success) {
+          throw new Error(chunkResult.error || `Chunk ${partNumber} upload failed.`);
+        }
+
+        parts.push(chunkResult.part);
+        uploadedBytes += chunk.size;
+        dropzone.emit('uploadprogress', file, Math.min(100, (uploadedBytes / uploadFile.size) * 100), uploadedBytes);
+        partNumber += 1;
+      }
+
+      const completeResponse = await fetch(`${UPLOAD_API_BASE}/complete`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          key: initResult.key,
+          uploadId: initResult.uploadId,
+          fileName: uploadFile.name,
+          fileType: uploadFile.type || 'application/octet-stream',
+          fileSize: uploadFile.size,
+          uploadSessionId: initResult.uploadSessionId,
+          kind: initResult.kind,
+          duration,
+          parts
+        })
+      });
+
+      const completeResult = await completeResponse.json();
+      if (!completeResponse.ok || !completeResult.success) {
+        throw new Error(completeResult.error || 'Failed to complete upload.');
+      }
+
+      return completeResult;
+    }
+
+    async function abortMultipartUpload(file) {
+      if (!file?._multipartUpload?.key || !file?._multipartUpload?.uploadId) {
+        return;
+      }
+
+      try {
+        await fetch(`${UPLOAD_API_BASE}/abort`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(file._multipartUpload)
+        });
+      } catch (error) {
+        console.warn('Abort multipart upload failed:', error);
+      }
+    }
+
+    async function uploadMediaFile(file, dropzone) {
+      if (file._removed) return;
+
+      if (!currentUploadSessionId) {
+        currentUploadSessionId = generateUploadSessionId();
+      }
+
+      const prepared = await prepareMediaFile(file);
+      const initResult = await requestUploadInit(prepared.uploadFile, currentUploadSessionId);
+      let result;
+
+      file.status = Dropzone.UPLOADING;
+      dropzone.emit('processing', file);
+      dropzone.emit('uploadprogress', file, 0, 0);
+      updateUploadStatus(`Uploading: ${file.name}...`);
+
+      if (initResult.uploadMode === 'multipart') {
+        result = await uploadMultipartMedia(prepared.uploadFile, initResult, file, dropzone, prepared.duration);
+      } else {
+        result = await uploadSingleMedia(prepared.uploadFile, initResult, file, dropzone);
+      }
+
+      if (file._removed) {
+        return;
+      }
+
+      const uploadedRecord = {
+        filename: result.filename,
+        originalName: file.name,
+        size: prepared.uploadFile.size,
+        sourceSize: file.size,
+        type: prepared.uploadFile.type || file.type,
+        kind: result.kind || prepared.kind,
+        duration: prepared.duration || null,
+        key: result.key,
+        url: result.url,
+        directory: result.directory || initResult.directory,
+        uploadSessionId: result.uploadSessionId || initResult.uploadSessionId
+      };
+
+      file._uploadedKey = uploadedRecord.key;
+      file._multipartUpload = null;
+      file.status = Dropzone.SUCCESS;
+      uploadedFiles.push(uploadedRecord);
+      dropzone.emit('success', file, result);
+      dropzone.emit('complete', file);
+
+      updateUploadStatus(`✅ Uploaded: ${file.name} (${uploadedRecord.kind})`);
+      updateGenerateButton();
+    }
+
+    // Initialize Dropzone for mixed media upload
     document.addEventListener('DOMContentLoaded', function() {
-      // Disable auto discovery
       Dropzone.autoDiscover = false;
-      
-      // 不在页面加载时生成会话ID，改为在第一次上传时生成
+
       initExpirationControls();
       initFlowNavigator();
 
@@ -1760,28 +2144,28 @@
           setTimeout(showLoginNudgeIfNeeded, 120);
         }, true);
       }
-      
+
       myDropzone = new Dropzone("#dropz", {
-        url: "https://fetch.maipdf.com/api/upload-image",
+        url: `${UPLOAD_API_BASE}/init`,
         method: "post",
-        paramName: "file",
-        maxFiles: 25,
-        maxFilesize: 50, // 50MB
-        acceptedFiles: ".png,.jpg,.jpeg,.gif,.webp,image/*",
+        autoProcessQueue: false,
+        maxFiles: MAX_MEDIA_FILES,
+        maxFilesize: 50,
+        acceptedFiles: ".png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,image/jpeg,image/png,image/gif,image/webp,video/mp4,video/quicktime,video/webm",
         addRemoveLinks: true,
-        parallelUploads: 3,
-        clickable: true, // 确保可以点击
-        createImageThumbnails: true, // 启用缩略图
-        dictDefaultMessage: '<i class="fas fa-cloud-upload-alt upload-icon"></i><div class="upload-text">Drop or tap to upload</div><div class="upload-subtext">PNG, JPG, JPEG, GIF, WebP • Max 50MB each • Up to 25 files</div>',
+        parallelUploads: MAX_PARALLEL_MEDIA_UPLOADS,
+        clickable: true,
+        createImageThumbnails: true,
+        dictDefaultMessage: '<i class="fas fa-cloud-upload-alt upload-icon"></i><div class="upload-text">Drop or tap to upload</div><div class="upload-subtext">PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM • Images up to 50MB • Videos up to 10MB / 15s • Up to 25 files</div>',
         dictMaxFilesExceeded: "Maximum 25 files allowed!",
         dictResponseError: 'Upload failed!',
-        dictInvalidFileType: "Only image files are allowed.",
+        dictInvalidFileType: "Only supported image and small video files are allowed.",
         dictFallbackMessage: "Your browser does not support drag and drop uploads.",
         dictFileTooBig: "File is too big ({{filesize}}MB). Max filesize: {{maxFilesize}}MB.",
         dictRemoveFile: "Remove file",
         dictCancelUpload: "Cancel upload",
-        timeout: 300000, // 5 minutes timeout
-        
+        timeout: 300000,
+
         init: function() {
           const dropzone = this;
           if (this.hiddenFileInput) {
@@ -1789,95 +2173,64 @@
               setTimeout(showLoginNudgeIfNeeded, 120);
             }, true);
           }
-          
+
           this.on("addedfile", function(file) {
             setTimeout(showLoginNudgeIfNeeded, 250);
-            // 在添加第一个文件时生成会话ID（如果还没有的话）
-            if (!currentUploadSessionId) {
-              currentUploadSessionId = generateUploadSessionId();
-              console.log(`New upload session started: ${currentUploadSessionId}`);
-            }
-            
-            updateUploadStatus(`Added: ${file.name} (Session: ${currentUploadSessionId})`);
-            console.log(`File added: ${file.name}, Session ID: ${currentUploadSessionId}`);
-          });
-          
-          this.on("sending", function(file, xhr, formData) {
-            updateUploadStatus(`Uploading: ${file.name}...`);
-            
-            // 确保使用当前会话ID
+            file._removed = false;
+
             if (!currentUploadSessionId) {
               currentUploadSessionId = generateUploadSessionId();
             }
-            
-            // 通过请求头发送会话ID（后端API从请求头中读取）
-            xhr.setRequestHeader('X-Upload-Session-Id', currentUploadSessionId);
-            console.log(`Uploading file: ${file.name} with Session ID: ${currentUploadSessionId}`);
-          });
-          
-          this.on("success", function(file, response) {
-            try {
-              const result = typeof response === 'string' ? JSON.parse(response) : response;
-              
-              if (result.success) {
-                // Add to uploaded files array with all necessary fields
-                uploadedFiles.push({
-                  filename: result.filename,
-                  originalName: file.name,
-                  size: file.size,
-                  url: result.url,
-                  directory: result.directory || currentUploadSessionId,
-                  uploadSessionId: currentUploadSessionId
-                });
-                
-                updateUploadStatus(`✅ Uploaded: ${file.name} (Folder: ${result.directory || currentUploadSessionId})`);
-                updateGenerateButton(); // Update button state when files are uploaded
-                
-                console.log(`File uploaded successfully: ${file.name}, Directory: ${result.directory || currentUploadSessionId}`);
-                
-              } else {
-                updateUploadStatus(`❌ Failed: ${file.name} - ${result.error}`);
+
+            updateUploadStatus(`Queued: ${file.name} (Session: ${currentUploadSessionId})`);
+            scheduleMediaUpload(() => uploadMediaFile(file, dropzone)).catch(async (error) => {
+              if (file._removed) {
+                return;
               }
-            } catch (error) {
-              updateUploadStatus(`❌ Error processing: ${file.name}`);
-              console.error('Error processing upload response:', error);
-            }
+
+              file.status = Dropzone.ERROR;
+              dropzone.emit('error', file, error.message || 'Upload failed');
+              dropzone.emit('complete', file);
+              updateUploadStatus(`❌ Error: ${file.name} - ${error.message || 'Upload failed'}`);
+              showNotification(error.message || 'Upload failed', 'error');
+              await abortMultipartUpload(file);
+            });
           });
-          
-          this.on("error", function(file, errorMessage) {
-            updateUploadStatus(`❌ Error: ${file.name} - ${errorMessage}`);
-            console.error(`Upload error for ${file.name}:`, errorMessage);
-          });
-          
+
           this.on("removedfile", function(file) {
-            // Remove from uploaded files array
-            uploadedFiles = uploadedFiles.filter(f => f.originalName !== file.name);
-            updateUploadStatus(`Removed: ${file.name}`);
-            updateGenerateButton(); // Update button state when files are removed
-            console.log(`File removed: ${file.name}, Remaining files: ${uploadedFiles.length}`);
-            
-            // 如果所有文件都被删除了，重置会话ID
-            if (uploadedFiles.length === 0) {
+            file._removed = true;
+            if (file._uploadAbortController) {
+              file._uploadAbortController.abort();
+            }
+            if (!file._uploadedKey) {
+              abortMultipartUpload(file);
+            }
+
+            uploadedFiles = uploadedFiles.filter((uploadedFile) => uploadedFile.key !== file._uploadedKey && uploadedFile.originalName !== file.name);
+            updateGenerateButton();
+
+            const hasRemainingFiles = this.files.some((dzFile) => dzFile !== file && !dzFile._removed);
+            if (!hasRemainingFiles && uploadedFiles.length === 0) {
               currentUploadSessionId = null;
               updateUploadStatus('Ready for new upload session');
+            } else {
+              updateUploadStatus(`Removed: ${file.name}`);
             }
           });
-          
+
           this.on("queuecomplete", function() {
             if (uploadedFiles.length > 0) {
-              updateUploadStatus(`Ready! ${uploadedFiles.length} files uploaded to folder: ${currentUploadSessionId}`);
+              updateUploadStatus(`Ready! ${uploadedFiles.length} media files uploaded to folder: ${currentUploadSessionId}`);
             } else {
               updateUploadStatus('Ready for new upload session');
             }
-            console.log(`Upload queue complete. Total files: ${uploadedFiles.length}, Session ID: ${currentUploadSessionId}`);
           });
-          
+
           this.on("reset", function() {
-            // 当 dropzone 重置时，不立即生成新的 session ID
             currentUploadSessionId = null;
             uploadedFiles = [];
-            updateUploadStatus('Upload area reset - ready for new images');
-            console.log(`Dropzone reset. Session ID cleared.`);
+            updateUploadStatus('Upload area reset - ready for new media');
+            updateGenerateButton();
           });
         }
       });
@@ -1938,6 +2291,7 @@
       // Initialize translations
       initializeTranslations();
       updateFooterComplianceText(window.i18n ? window.i18n.currentLanguage : currentLanguage);
+      syncMobileLanguageFlag(window.i18n ? window.i18n.currentLanguage : currentLanguage);
       
       // Load saved language preference
       const savedLanguage = localStorage.getItem('preferred-language');
@@ -2011,6 +2365,37 @@
     const logoutBtn = document.getElementById("logoutBtn");
     const userInfoEl = document.getElementById("userInfo");
     const dashboardBtn = document.getElementById("dashboardBtn");
+    const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+    const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
+    const mobileDashboardBtn = document.getElementById("mobileDashboardBtn");
+    const mobileUserEmail = document.getElementById("mobileUserEmail");
+
+    function syncAuthUI(user, allowAccess) {
+      if (allowAccess) {
+        const name = user?.email || user?.displayName || "User";
+        loginBtn.classList.add("d-none");
+        logoutBtn.classList.remove("d-none");
+        userInfoEl.classList.remove("d-none");
+        dashboardBtn.classList.remove("d-none");
+        userInfoEl.textContent = name;
+
+        mobileLoginBtn.classList.add("d-none");
+        mobileLogoutBtn.classList.remove("d-none");
+        mobileDashboardBtn.classList.remove("d-none");
+        mobileUserEmail.textContent = name;
+      } else {
+        loginBtn.classList.remove("d-none");
+        logoutBtn.classList.add("d-none");
+        userInfoEl.classList.add("d-none");
+        dashboardBtn.classList.add("d-none");
+        userInfoEl.textContent = "";
+
+        mobileLoginBtn.classList.remove("d-none");
+        mobileLogoutBtn.classList.add("d-none");
+        mobileDashboardBtn.classList.add("d-none");
+        mobileUserEmail.textContent = "Guest";
+      }
+    }
 
     // View elements
     const views = {
@@ -2187,7 +2572,7 @@
     });
 
     // --- Logout ---
-    logoutBtn.addEventListener("click", async () => {
+    async function doLogout() {
       try {
         await signOut(auth);
         sessionStorage.removeItem("maiimg_jwt");
@@ -2196,32 +2581,24 @@
       } catch (error) {
         console.error("Logout failed:", error);
       }
-    });
+    }
+
+    logoutBtn.addEventListener("click", doLogout);
+    mobileLogoutBtn.addEventListener("click", doLogout);
 
     // --- Auth State ---
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         // Google users are auto-verified; email users must verify
         if (!user.emailVerified && user.providerData[0]?.providerId === 'password') {
-          loginBtn.classList.remove("d-none");
-          logoutBtn.classList.add("d-none");
-          userInfoEl.classList.add("d-none");
-          dashboardBtn.classList.add("d-none");
+          syncAuthUI(null, false);
           return;
         }
-        loginBtn.classList.add("d-none");
-        logoutBtn.classList.remove("d-none");
-        userInfoEl.classList.remove("d-none");
-        dashboardBtn.classList.remove("d-none");
-        userInfoEl.textContent = user.email || user.displayName || "User";
+        syncAuthUI(user, true);
 
         await workerAuth(user.email || user.providerData[0]?.email || user.uid, user.uid);
       } else {
-        loginBtn.classList.remove("d-none");
-        logoutBtn.classList.add("d-none");
-        userInfoEl.classList.add("d-none");
-        dashboardBtn.classList.add("d-none");
-        userInfoEl.textContent = "";
+        syncAuthUI(null, false);
       }
     });
   </script>

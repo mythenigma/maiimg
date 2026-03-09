@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Media Gallery</title>
+
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="shortcut icon" type="image/svg+xml" href="../favicon.svg">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background: #000;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: white;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .loading-screen,
+        .error-screen {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999;
+        }
+
+        .loading-screen {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: opacity 0.45s ease;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255, 255, 255, 0.28);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s linear infinite;
+            margin-bottom: 18px;
+        }
+
+        .loading-text {
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .error-screen {
+            display: none;
+            padding: 40px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+
+        .error-icon {
+            font-size: 64px;
+            margin-bottom: 18px;
+        }
+
+        .error-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .error-message {
+            max-width: 420px;
+            line-height: 1.6;
+            opacity: 0.95;
+            margin-bottom: 28px;
+        }
+
+        .error-button {
+            border: 0;
+            border-radius: 999px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        .fullscreen-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border: 0;
+            border-radius: 50%;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.46);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .swiper {
+            width: 100%;
+            height: 100vh;
+            background: #000;
+        }
+
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .swiper-zoom-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .media-shell {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .swiper-slide img,
+        .swiper-slide video {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            background: #000;
+        }
+
+        .video-play-button {
+            position: absolute;
+            left: 50%;
+            bottom: 42px;
+            transform: translateX(-50%);
+            border: 0;
+            border-radius: 999px;
+            padding: 12px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            background: rgba(15, 23, 42, 0.76);
+            backdrop-filter: blur(12px);
+            cursor: pointer;
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .video-play-button.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .swiper-pagination {
+            bottom: 80px !important;
+        }
+
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 1;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #fff;
+            transform: scale(1.2);
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: rgba(255, 255, 255, 0.86);
+            background: rgba(0, 0, 0, 0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .gesture-hint {
+            position: fixed;
+            right: 24px;
+            bottom: 28px;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            opacity: 0.84;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInOut 4s ease-in-out;
+        }
+
+        .ad-container {
+            position: fixed;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            display: none;
+            max-width: 90%;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+        }
+
+        @media (max-width: 768px) {
+            .swiper-button-next,
+            .swiper-button-prev {
+                width: 40px;
+                height: 40px;
+            }
+
+            .swiper-button-next::after,
+            .swiper-button-prev::after {
+                font-size: 14px;
+            }
+
+            .gesture-hint {
+                right: 18px;
+                bottom: 20px;
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .swiper-button-next,
+            .swiper-button-prev {
+                display: none;
+            }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            20%, 80% { opacity: 0.84; }
+        }
+    </style>
+</head>
+<body>
+<div id="loading" class="loading-screen">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading Media...</div>
+</div>
+
+<div id="error-screen" class="error-screen">
+    <div class="error-icon">⚠️</div>
+    <div class="error-title">Loading Failed</div>
+    <div class="error-message" id="error-text">Please check your connection or try again later</div>
+    <button class="error-button" onclick="location.reload()">Reload</button>
+</div>
+
+<div id="progress-bar" class="progress-bar"></div>
+<button id="fullscreen-toggle" class="fullscreen-toggle" title="Fullscreen Mode">⛶</button>
+
+<div class="swiper" id="main-swiper" style="display: none;">
+    <div class="swiper-wrapper" id="swiper-wrapper"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<div id="gesture-hint" class="gesture-hint">Swipe to view more • Pinch to zoom images • Tap to play videos</div>
+<div id="ad-container" class="ad-container"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+var WECHAT_GUIDE_ORIGIN = 'https://special.maiimg.com';
+
+class MediaGallery {
+    constructor() {
+        this.swiper = null;
+        this.totalItems = 0;
+        this.currentIndex = 0;
+        this.viewTimer = null;
+        this.init();
+    }
+
+    static get STORAGE_KEY() { return 'maiimg_gallery_id'; }
+
+    async init() {
+        try {
+            await this.loadMediaData();
+        } catch (error) {
+            this.showError(error.message || 'Unable to load media');
+        }
+    }
+
+    getMediaId() {
+        const host = (window.location.hostname || '').toLowerCase();
+        const isWechatDomain = host === 'special.maiimg.com';
+        const hashRaw = (window.location.hash || '').replace(/^#/, '');
+        if (hashRaw) {
+            try {
+                const id = decodeURIComponent(hashRaw);
+                if (id) return id;
+            } catch (error) {}
+        }
+
+        const fromPath = this.extractIdFromPath();
+        if (fromPath) return fromPath;
+
+        if (isWechatDomain) {
+            try {
+                const stored = localStorage.getItem(MediaGallery.STORAGE_KEY);
+                if (stored) {
+                    localStorage.removeItem(MediaGallery.STORAGE_KEY);
+                    return stored;
+                }
+            } catch (error) {}
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');
+    }
+
+    extractIdFromPath() {
+        const path = window.location.pathname || '';
+        let match = path.match(/\/(?:media|m|gallery|g)\/([^\/?#]+)/i);
+        if (match) return match[1];
+
+        const href = window.location.href || '';
+        match = href.match(/\/(?:media|m|gallery|g)\/([^\/?#]+)/i);
+        return match ? match[1] : null;
+    }
+
+    decodeId(encodedId) {
+        if (!encodedId || typeof encodedId !== 'string') return null;
+        const upperId = encodedId.toUpperCase();
+        let decoded = '';
+        for (let i = 0; i < upperId.length; i++) {
+            const charCode = upperId.charCodeAt(i);
+            let digit;
+            if (charCode >= 65 && charCode <= 74) {
+                digit = charCode - 64;
+            } else if (charCode >= 75 && charCode <= 84) {
+                digit = charCode - 74;
+            } else {
+                return null;
+            }
+            if (digit === 10) digit = 0;
+            decoded += digit;
+        }
+        return parseInt(decoded, 10);
+    }
+
+    isWeChat() {
+        return /micromessenger/i.test(navigator.userAgent);
+    }
+
+    redirectToWechatGuide(encodedId) {
+        const loadingEl = document.getElementById('loading');
+        if (loadingEl) loadingEl.style.display = 'none';
+        const base = window.location.origin;
+        const wechatOrigin = String(WECHAT_GUIDE_ORIGIN || base).replace(/\/$/, '');
+        const target = `${wechatOrigin}/wechat.html?base=${encodeURIComponent(base)}#${encodeURIComponent(encodedId)}`;
+        window.location.replace(target);
+    }
+
+    isBot(userAgent) {
+        const botPatterns = [
+            /bot/i, /crawler/i, /spider/i, /scraper/i,
+            /googlebot/i, /bingbot/i, /slurp/i, /duckduckbot/i,
+            /baiduspider/i, /yandexbot/i, /facebookexternalhit/i,
+            /twitterbot/i, /linkedinbot/i, /telegrambot/i,
+            /discordbot/i, /slackbot/i, /curl/i, /wget/i,
+            /python-requests/i, /postman/i, /insomnia/i
+        ];
+        return botPatterns.some((pattern) => pattern.test(userAgent || ''));
+    }
+
+    showBotMessage() {
+        const loading = document.getElementById('loading');
+        const errorScreen = document.getElementById('error-screen');
+        loading.style.display = 'none';
+        errorScreen.querySelector('.error-icon').textContent = '🤖';
+        errorScreen.querySelector('.error-title').textContent = 'Automated Access Detected';
+        errorScreen.querySelector('.error-message').innerHTML = `
+            This media gallery has limited view counts and is optimized for human visitors only.<br><br>
+            For automated access, please use approved API endpoints instead of the interactive viewer.
+        `;
+        errorScreen.querySelector('.error-button').textContent = 'Learn More';
+        errorScreen.querySelector('.error-button').onclick = () => window.open('https://maiimg.com/api', '_blank');
+        errorScreen.style.display = 'flex';
+    }
+
+    parseUserAgent(ua) {
+        const uaLower = (ua || '').toLowerCase();
+        let context = '';
+        let osName = '';
+        let osVersion = '';
+
+        if (uaLower.includes('micromessenger')) {
+            context = 'WeChat In-App Browser';
+        } else if (uaLower.includes('instagram')) {
+            context = 'Instagram In-App Browser';
+        } else if (uaLower.includes('fb_iab') || uaLower.includes('fbav')) {
+            context = 'Facebook In-App Browser';
+        } else if (uaLower.includes('twitter')) {
+            context = 'Twitter In-App Browser';
+        } else if (uaLower.includes(' wv')) {
+            context = 'Generic In-App WebView';
+        }
+
+        if (uaLower.includes('android')) {
+            osName = 'Android';
+            const match = uaLower.match(/android\s+([0-9]+(?:\.[0-9]+)?)/);
+            osVersion = match ? match[1] : '';
+        } else if (uaLower.includes('iphone os') || uaLower.includes('cpu os')) {
+            osName = 'iOS';
+            const match = uaLower.match(/(?:iphone os|cpu os)\s+([0-9_]+)/);
+            osVersion = match ? match[1].replace(/_/g, '.').split('.')[0] : '';
+        } else if (uaLower.includes('windows nt')) {
+            osName = 'Windows';
+        } else if (uaLower.includes('mac os x')) {
+            osName = 'macOS';
+        }
+
+        return `${context || 'Browser'}${osName ? ` (${osName}${osVersion ? ` ${osVersion}` : ''})` : ''}`;
+    }
+
+    async fetchGalleryData(id) {
+        const browserTime = new Date().toString();
+        const parsedUserAgent = this.parseUserAgent(navigator.userAgent);
+        const referrer = document.referrer || 'direct';
+        const endpoints = [
+            `https://fetch.maipdf.com/api/gallery/${id}`,
+            `https://fetch.maipdf.com/api/maiimgs/gallery/${id}`
+        ];
+
+        let lastError = null;
+        for (const endpoint of endpoints) {
+            try {
+                const apiUrl = new URL(endpoint);
+                apiUrl.searchParams.set('browser_time', browserTime);
+                apiUrl.searchParams.set('user_agent', parsedUserAgent);
+                apiUrl.searchParams.set('referrer', referrer);
+                const response = await fetch(apiUrl.toString());
+                const data = await response.json();
+
+                if (!response.ok) {
+                    if (response.status === 403 && data.error === 'Gallery access expired') {
+                        throw new Error('🚫 This gallery has reached its view limit and is no longer accessible');
+                    }
+                    if (response.status === 404) {
+                        throw new Error('❓ Gallery not found. The link may be invalid or expired');
+                    }
+                    if (response.status < 500) {
+                        throw new Error(data.error || data.message || `HTTP error! status: ${response.status}`);
+                    }
+                    lastError = new Error(data.error || data.message || `HTTP error! status: ${response.status}`);
+                    continue;
+                }
+
+                return data;
+            } catch (error) {
+                lastError = error;
+            }
+        }
+
+        throw lastError || new Error('Unable to fetch gallery data');
+    }
+
+    async fetchMediaItems(markPath) {
+        const normalizedPath = encodeURIComponent(markPath);
+        const endpoints = [
+            `https://fetch.maipdf.com/api/maiimgs/items/${normalizedPath}`,
+            `https://fetch.maipdf.com/api/images/${normalizedPath}`
+        ];
+
+        let lastError = null;
+        for (const endpoint of endpoints) {
+            try {
+                const response = await fetch(endpoint);
+                if (!response.ok) {
+                    if (response.status < 500) {
+                        throw new Error('Unable to fetch media list');
+                    }
+                    lastError = new Error(`HTTP error! status: ${response.status}`);
+                    continue;
+                }
+
+                const payload = await response.json();
+                const items = Array.isArray(payload.items)
+                    ? payload.items
+                    : Array.isArray(payload.images)
+                        ? payload.images.map((imageInfo) => ({ ...imageInfo, kind: 'image' }))
+                        : [];
+
+                if (!items.length) {
+                    throw new Error('No media found in this gallery');
+                }
+
+                return items;
+            } catch (error) {
+                lastError = error;
+            }
+        }
+
+        throw lastError || new Error('Unable to fetch media list');
+    }
+
+    startViewTimer(seconds) {
+        if (!seconds || seconds >= 1999999927) return;
+        let remainingTime = seconds;
+        let timerDisplay = null;
+
+        const updateTimer = () => {
+            if (remainingTime <= 100 && !timerDisplay) {
+                timerDisplay = document.createElement('div');
+                timerDisplay.id = 'view-timer';
+                timerDisplay.style.cssText = `
+                    position: fixed;
+                    top: 50px;
+                    right: 20px;
+                    background: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    padding: 10px 15px;
+                    border-radius: 20px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    z-index: 1001;
+                    min-width: 120px;
+                    text-align: center;
+                    backdrop-filter: blur(10px);
+                `;
+                document.body.appendChild(timerDisplay);
+            }
+
+            if (timerDisplay) {
+                const minutes = Math.floor(remainingTime / 60);
+                const secs = remainingTime % 60;
+                timerDisplay.textContent = `⏰ ${minutes}:${secs.toString().padStart(2, '0')}`;
+                if (remainingTime <= 30) {
+                    timerDisplay.style.background = 'rgba(239, 68, 68, 0.9)';
+                } else if (remainingTime <= 60) {
+                    timerDisplay.style.background = 'rgba(245, 158, 11, 0.9)';
+                }
+            }
+
+            remainingTime -= 1;
+            if (remainingTime < 0) {
+                this.showError('⏰ Viewing time has expired. Redirecting to homepage...');
+                if (this.viewTimer) clearInterval(this.viewTimer);
+                setTimeout(() => window.location.replace('https://maiimg.com'), 2000);
+            }
+        };
+
+        updateTimer();
+        this.viewTimer = setInterval(updateTimer, 1000);
+    }
+
+    async loadMediaData() {
+        if (this.isBot(navigator.userAgent)) {
+            this.showBotMessage();
+            return;
+        }
+
+        const encodedId = this.getMediaId();
+        if (!encodedId) {
+            throw new Error('Please use a valid media URL, e.g.: /media/A or /media/#A');
+        }
+
+        const host = (window.location.hostname || '').toLowerCase();
+        if (this.isWeChat() && host !== 'special.maiimg.com') {
+            this.redirectToWechatGuide(encodedId);
+            return;
+        }
+
+        const numericId = this.decodeId(encodedId);
+        if (numericId === null || Number.isNaN(numericId)) {
+            throw new Error(`Invalid ID "${encodedId}" provided`);
+        }
+
+        const galleryData = await this.fetchGalleryData(numericId);
+        document.title = galleryData.md5 || 'Media Gallery';
+        if (galleryData.subject && galleryData.subject < 1999999927) {
+            this.startViewTimer(galleryData.subject);
+        }
+
+        const items = await this.fetchMediaItems(galleryData.mark);
+        await this.createSlides(items, galleryData.mark);
+        this.initializeSwiper();
+        this.showGallery();
+        setTimeout(() => this.showAds(), 3000);
+    }
+
+    async createSlides(items, markPath) {
+        const wrapper = document.getElementById('swiper-wrapper');
+        wrapper.innerHTML = '';
+        this.totalItems = items.length;
+
+        items.forEach((mediaInfo, index) => {
+            const fileName = mediaInfo.fileName || mediaInfo.filename || mediaInfo.originalName || mediaInfo;
+            const fullPath = mediaInfo.fullPath || mediaInfo.key || `${markPath}/${fileName}`;
+            const mediaUrl = `https://fetch.maipdf.com/media/${fullPath}`;
+            const kind = mediaInfo.kind || 'image';
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+
+            if (kind === 'video') {
+                const posterAttr = mediaInfo.poster ? `poster="${mediaInfo.poster}"` : '';
+                slide.innerHTML = `
+                    <div class="swiper-zoom-container media-shell">
+                        <video src="${mediaUrl}" ${posterAttr} preload="metadata" playsinline controls controlsList="nodownload">
+                            Your browser does not support video playback.
+                        </video>
+                        <button type="button" class="video-play-button">Tap to play</button>
+                    </div>
+                `;
+                const video = slide.querySelector('video');
+                const playButton = slide.querySelector('.video-play-button');
+                this.attachVideoEvents(video, playButton);
+            } else {
+                slide.innerHTML = `
+                    <div class="swiper-zoom-container media-shell">
+                        <img src="${mediaUrl}" alt="Image ${index + 1}" loading="lazy">
+                    </div>
+                `;
+            }
+
+            wrapper.appendChild(slide);
+        });
+    }
+
+    attachVideoEvents(video, playButton) {
+        const syncButton = () => {
+            if (playButton) {
+                playButton.classList.toggle('hidden', !video.paused && !video.ended);
+            }
+        };
+
+        if (playButton) {
+            playButton.addEventListener('click', async (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                this.pauseOtherVideos(video);
+                try {
+                    await video.play();
+                } catch (error) {
+                    console.warn('Video playback failed:', error);
+                }
+                syncButton();
+            });
+        }
+
+        video.addEventListener('play', () => {
+            this.pauseOtherVideos(video);
+            syncButton();
+        });
+        video.addEventListener('pause', syncButton);
+        video.addEventListener('ended', syncButton);
+        syncButton();
+    }
+
+    pauseOtherVideos(activeVideo = null) {
+        document.querySelectorAll('#swiper-wrapper video').forEach((video) => {
+            if (activeVideo && video === activeVideo) return;
+            if (!video.paused) video.pause();
+            const button = video.closest('.media-shell')?.querySelector('.video-play-button');
+            if (button) button.classList.remove('hidden');
+        });
+    }
+
+    isVideoInteractionTarget(target) {
+        return !!(target && typeof target.closest === 'function' && (target.closest('video') || target.closest('.video-play-button')));
+    }
+
+    initializeSwiper() {
+        this.swiper = new Swiper('.swiper', {
+            direction: 'vertical',
+            loop: this.totalItems > 1,
+            speed: 600,
+            effect: 'slide',
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true
+            },
+            mousewheel: {
+                enabled: true,
+                thresholdDelta: 20,
+                sensitivity: 0.5,
+                forceToAxis: false
+            },
+            keyboard: {
+                enabled: true,
+                onlyInViewport: true
+            },
+            touchRatio: 1,
+            touchAngle: 45,
+            grabCursor: true,
+            resistanceRatio: 0.85,
+            zoom: {
+                enabled: true,
+                maxRatio: 3,
+                minRatio: 0.5,
+                toggle: false,
+                containerClass: 'swiper-zoom-container',
+                zoomedSlideClass: 'swiper-slide-zoomed'
+            },
+            preloadImages: false,
+            lazy: true,
+            on: {
+                slideChange: (swiper) => {
+                    this.currentIndex = swiper.activeIndex;
+                    this.pauseOtherVideos();
+                    this.updateProgress();
+                },
+                init: (swiper) => {
+                    this.currentIndex = swiper.activeIndex;
+                    this.pauseOtherVideos();
+                    this.updateProgress();
+                    setTimeout(() => {
+                        const hintEl = document.getElementById('gesture-hint');
+                        if (hintEl) hintEl.style.display = 'none';
+                    }, 4000);
+                    this.addScrollSupport();
+                }
+            }
+        });
+    }
+
+    addScrollSupport() {
+        let isScrolling = false;
+        let scrollTimeout = null;
+        let touchStartY = 0;
+        let isSliding = false;
+
+        document.addEventListener('wheel', (event) => {
+            if (!this.swiper || this.isVideoInteractionTarget(event.target)) return;
+            event.preventDefault();
+            if (isScrolling) return;
+            if (Math.abs(event.deltaY) <= 10) return;
+
+            isScrolling = true;
+            if (event.deltaY > 0) {
+                this.swiper.slideNext();
+            } else {
+                this.swiper.slidePrev();
+            }
+
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+            }, 150);
+        }, { passive: false });
+
+        document.addEventListener('touchstart', (event) => {
+            if (!this.swiper || this.isVideoInteractionTarget(event.target)) return;
+            if (event.touches.length === 1) {
+                touchStartY = event.touches[0].clientY;
+                isSliding = true;
+            } else {
+                isSliding = false;
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (event) => {
+            if (!this.swiper || this.isVideoInteractionTarget(event.target)) return;
+            if (event.touches.length === 1 && isSliding) {
+                const deltaY = touchStartY - event.touches[0].clientY;
+                if (Math.abs(deltaY) > 50) {
+                    if (deltaY > 0) this.swiper.slideNext();
+                    else this.swiper.slidePrev();
+                    isSliding = false;
+                }
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchend', () => {
+            isSliding = false;
+        }, { passive: true });
+
+        document.addEventListener('touchcancel', () => {
+            isSliding = false;
+        }, { passive: true });
+    }
+
+    updateProgress() {
+        if (!this.totalItems) return;
+        const progress = ((this.currentIndex + 1) / this.totalItems) * 100;
+        const progressBar = document.getElementById('progress-bar');
+        if (progressBar) progressBar.style.width = `${progress}%`;
+    }
+
+    showGallery() {
+        const loading = document.getElementById('loading');
+        const gallery = document.getElementById('main-swiper');
+        loading.style.opacity = '0';
+        setTimeout(() => {
+            loading.style.display = 'none';
+            gallery.style.display = 'block';
+        }, 450);
+    }
+
+    showError(message) {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error-text').textContent = message;
+        document.getElementById('error-screen').style.display = 'flex';
+    }
+
+    showAds() {
+        try {
+            const adContainer = document.getElementById('ad-container');
+            if (adContainer) {
+                adContainer.classList.remove('show');
+            }
+        } catch (error) {
+            console.log('Ad display error:', error);
+        }
+    }
+}
+
+document.getElementById('fullscreen-toggle').addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+});
+
+document.addEventListener('contextmenu', (event) => event.preventDefault());
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+        event.preventDefault();
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    new MediaGallery();
+});
+</script>
+</body>
+</html>
