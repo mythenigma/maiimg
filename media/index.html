@@ -851,11 +851,15 @@ class MediaGallery {
         });
     }
 
-    isVideoInteractionTarget(target) {
+    isVideoInteractionTarget(target, includeVideo = true) {
+        const selector = includeVideo
+            ? 'video, .video-play-button, .video-control-button, #fullscreen-toggle, .swiper-pagination, .swiper-button-next, .swiper-button-prev'
+            : '.video-play-button, .video-control-button, #fullscreen-toggle, .swiper-pagination, .swiper-button-next, .swiper-button-prev';
+
         return !!(
             target &&
             typeof target.closest === 'function' &&
-            target.closest('.video-play-button, #fullscreen-toggle, .swiper-pagination, .swiper-button-next, .swiper-button-prev')
+            target.closest(selector)
         );
     }
 
@@ -925,7 +929,7 @@ class MediaGallery {
         let isSliding = false;
 
         document.addEventListener('wheel', (event) => {
-            if (!this.swiper || this.isVideoInteractionTarget(event.target)) return;
+            if (!this.swiper || this.isVideoInteractionTarget(event.target, false)) return;
             event.preventDefault();
             if (isScrolling) return;
             if (Math.abs(event.deltaY) <= 10) return;
