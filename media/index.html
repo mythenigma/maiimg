@@ -20,7 +20,7 @@
             --safe-right: max(16px, env(safe-area-inset-right));
             --safe-bottom: max(20px, env(safe-area-inset-bottom));
             --safe-left: max(16px, env(safe-area-inset-left));
-            --video-controls-space: calc(var(--safe-bottom) + 88px);
+            --video-controls-space: calc(var(--safe-bottom) + 64px);
         }
 
         * {
@@ -168,7 +168,7 @@
         }
 
         .media-shell.is-video {
-            padding: var(--safe-top) var(--safe-right) var(--video-controls-space) var(--safe-left);
+            padding: 0 calc(var(--safe-right) - 8px) var(--video-controls-space) calc(var(--safe-left) - 8px);
         }
 
         .swiper-slide img,
@@ -185,8 +185,8 @@
 
         .media-shell.is-video video {
             display: block;
-            max-width: min(100%, 960px);
-            max-height: 100%;
+            max-width: min(100%, 1100px);
+            max-height: calc(100% - var(--video-controls-space));
         }
 
         .swiper-pagination {
@@ -250,7 +250,7 @@
 
         @media (max-width: 768px) {
             :root {
-                --video-controls-space: calc(var(--safe-bottom) + 96px);
+                --video-controls-space: calc(var(--safe-bottom) + 72px);
             }
 
             .swiper-button-next,
