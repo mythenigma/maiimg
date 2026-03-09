@@ -15,6 +15,13 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
+        :root {
+            --safe-top: max(16px, env(safe-area-inset-top));
+            --safe-right: max(16px, env(safe-area-inset-right));
+            --safe-bottom: max(20px, env(safe-area-inset-bottom));
+            --safe-left: max(16px, env(safe-area-inset-left));
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -114,8 +121,8 @@
 
         .fullscreen-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: var(--safe-top);
+            right: var(--safe-right);
             width: 40px;
             height: 40px;
             border: 0;
@@ -158,6 +165,10 @@
             justify-content: center;
         }
 
+        .media-shell.is-video {
+            padding: calc(var(--safe-top) + 8px) calc(var(--safe-right) + 8px) calc(var(--safe-bottom) + 24px) calc(var(--safe-left) + 8px);
+        }
+
         .swiper-slide img,
         .swiper-slide video {
             max-width: 100%;
@@ -168,6 +179,53 @@
             border-radius: 10px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
             background: #000;
+        }
+
+        .swiper-slide video {
+            touch-action: pan-y;
+        }
+
+        .media-shell.is-video video {
+            width: 100%;
+            max-width: min(100%, 960px);
+            max-height: 100%;
+        }
+
+        .video-control-stack {
+            position: absolute;
+            top: var(--safe-top);
+            right: var(--safe-right);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .video-control-button {
+            width: 42px;
+            height: 42px;
+            border: 0;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.46);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            pointer-events: auto;
+            touch-action: manipulation;
+        }
+
+        .video-control-button svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .video-control-button.is-muted {
+            background: rgba(15, 23, 42, 0.8);
         }
 
         .video-play-button {
@@ -186,6 +244,8 @@
             cursor: pointer;
             box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
             transition: opacity 0.2s ease, transform 0.2s ease;
+            z-index: 2;
+            touch-action: manipulation;
         }
 
         .video-play-button.hidden {
@@ -271,6 +331,11 @@
         }
 
         @media (hover: none) and (pointer: coarse) {
+            .fullscreen-toggle {
+                left: var(--safe-left);
+                right: auto;
+            }
+
             .swiper-button-next,
             .swiper-button-prev {
                 display: none;
@@ -327,6 +392,12 @@ class MediaGallery {
     }
 
     static get STORAGE_KEY() { return 'maiimg_gallery_id'; }
+    static get SOUND_ON_ICON() {
+        return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.2 9.8 9H6a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h3.8l4.7 3.8a1 1 0 0 0 1.7-.8V6a1 1 0 0 0-1.7-.8ZM18.1 8.1a1 1 0 0 1 1.4 0 5.5 5.5 0 0 1 0 7.8 1 1 0 0 1-1.4-1.4 3.5 3.5 0 0 0 0-5 1 1 0 0 1 0-1.4Zm-1.7 2a1 1 0 0 1 1.4 0 2.7 2.7 0 0 1 0 3.8 1 1 0 0 1-1.4-1.4.7.7 0 0 0 0-1 1 1 0 0 1 0-1.4Z"/></svg>';
+    }
+    static get SOUND_OFF_ICON() {
+        return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.2 9.8 9H6a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h3.8l4.7 3.8a1 1 0 0 0 1.7-.8V6a1 1 0 0 0-1.7-.8Zm2.2 4.2a1 1 0 0 1 1.4 0L20 11.3l1.9-1.9a1 1 0 1 1 1.4 1.4L21.4 12.7l1.9 1.9a1 1 0 0 1-1.4 1.4L20 14.1l-1.9 1.9a1 1 0 1 1-1.4-1.4l1.9-1.9-1.9-1.9a1 1 0 0 1 0-1.4Z"/></svg>';
+    }
 
     async init() {
         try {
@@ -651,16 +722,20 @@ class MediaGallery {
             if (kind === 'video') {
                 const posterAttr = mediaInfo.poster ? `poster="${mediaInfo.poster}"` : '';
                 slide.innerHTML = `
-                    <div class="swiper-zoom-container media-shell">
-                        <video src="${mediaUrl}" ${posterAttr} preload="metadata" playsinline controls controlsList="nodownload">
+                    <div class="swiper-zoom-container media-shell is-video">
+                        <video src="${mediaUrl}" ${posterAttr} preload="metadata" playsinline webkit-playsinline disablepictureinpicture disableremoteplayback>
                             Your browser does not support video playback.
                         </video>
+                        <div class="video-control-stack">
+                            <button type="button" class="video-sound-button video-control-button" aria-label="Mute video" title="Mute video"></button>
+                        </div>
                         <button type="button" class="video-play-button">Tap to play</button>
                     </div>
                 `;
                 const video = slide.querySelector('video');
                 const playButton = slide.querySelector('.video-play-button');
-                this.attachVideoEvents(video, playButton);
+                const soundButton = slide.querySelector('.video-sound-button');
+                this.attachVideoEvents(video, playButton, soundButton);
             } else {
                 slide.innerHTML = `
                     <div class="swiper-zoom-container media-shell">
@@ -673,26 +748,88 @@ class MediaGallery {
         });
     }
 
-    attachVideoEvents(video, playButton) {
+    attachVideoEvents(video, playButton, soundButton) {
+        let touchStartY = 0;
+        let touchStartX = 0;
+        let gestureHandled = false;
+
         const syncButton = () => {
             if (playButton) {
                 playButton.classList.toggle('hidden', !video.paused && !video.ended);
             }
         };
 
-        if (playButton) {
-            playButton.addEventListener('click', async (event) => {
-                event.preventDefault();
-                event.stopPropagation();
+        const syncSoundButton = () => {
+            if (!soundButton) return;
+            const muted = video.muted || video.volume === 0;
+            soundButton.innerHTML = muted ? MediaGallery.SOUND_OFF_ICON : MediaGallery.SOUND_ON_ICON;
+            soundButton.classList.toggle('is-muted', muted);
+            soundButton.setAttribute('aria-label', muted ? 'Unmute video' : 'Mute video');
+            soundButton.title = muted ? 'Unmute video' : 'Mute video';
+        };
+
+        const togglePlayback = async () => {
+            if (video.paused || video.ended) {
                 this.pauseOtherVideos(video);
                 try {
                     await video.play();
                 } catch (error) {
                     console.warn('Video playback failed:', error);
                 }
-                syncButton();
+            } else {
+                video.pause();
+            }
+            syncButton();
+        };
+
+        if (playButton) {
+            playButton.addEventListener('click', async (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                await togglePlayback();
             });
         }
+
+        if (soundButton) {
+            soundButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                video.muted = !video.muted;
+                syncSoundButton();
+            });
+        }
+
+        video.addEventListener('click', async () => {
+            if (gestureHandled) {
+                gestureHandled = false;
+                return;
+            }
+            await togglePlayback();
+        });
+
+        video.addEventListener('touchstart', (event) => {
+            if (event.touches.length !== 1) return;
+            touchStartY = event.touches[0].clientY;
+            touchStartX = event.touches[0].clientX;
+            gestureHandled = false;
+        }, { passive: true });
+
+        video.addEventListener('touchmove', (event) => {
+            if (gestureHandled || event.touches.length !== 1 || !this.swiper) return;
+
+            const deltaY = touchStartY - event.touches[0].clientY;
+            const deltaX = touchStartX - event.touches[0].clientX;
+            if (Math.abs(deltaY) <= 60 || Math.abs(deltaY) <= Math.abs(deltaX)) return;
+
+            this.pauseOtherVideos();
+            if (deltaY > 0) this.swiper.slideNext();
+            else this.swiper.slidePrev();
+            gestureHandled = true;
+        }, { passive: true });
+
+        video.addEventListener('touchcancel', () => {
+            gestureHandled = false;
+        }, { passive: true });
 
         video.addEventListener('play', () => {
             this.pauseOtherVideos(video);
@@ -700,7 +837,9 @@ class MediaGallery {
         });
         video.addEventListener('pause', syncButton);
         video.addEventListener('ended', syncButton);
+        video.addEventListener('volumechange', syncSoundButton);
         syncButton();
+        syncSoundButton();
     }
 
     pauseOtherVideos(activeVideo = null) {
@@ -713,7 +852,11 @@ class MediaGallery {
     }
 
     isVideoInteractionTarget(target) {
-        return !!(target && typeof target.closest === 'function' && (target.closest('video') || target.closest('.video-play-button')));
+        return !!(
+            target &&
+            typeof target.closest === 'function' &&
+            target.closest('.video-play-button, #fullscreen-toggle, .swiper-pagination, .swiper-button-next, .swiper-button-prev')
+        );
     }
 
     initializeSwiper() {
