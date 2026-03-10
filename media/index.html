@@ -536,10 +536,11 @@ class MediaGallery {
                 }
 
                 const payload = await response.json();
+                const normalizeItem = (item) => ({ ...item, kind: this.inferMediaKind(item) });
                 const items = Array.isArray(payload.items)
-                    ? payload.items
+                    ? payload.items.map(normalizeItem)
                     : Array.isArray(payload.images)
-                        ? payload.images.map((imageInfo) => ({ ...imageInfo, kind: 'image' }))
+                        ? payload.images.map(normalizeItem)
                         : [];
 
                 if (!items.length) {
@@ -705,6 +706,35 @@ class MediaGallery {
         }
 
         return '';
+    }
+
+    inferMediaKind(mediaInfo) {
+        if (!mediaInfo || typeof mediaInfo !== 'object') return 'image';
+
+        const explicitKind = String(
+            mediaInfo.kind ||
+            mediaInfo.mediaKind ||
+            mediaInfo.type ||
+            mediaInfo.fileType ||
+            mediaInfo.mimeType ||
+            mediaInfo.contentType ||
+            ''
+        ).trim().toLowerCase();
+
+        if (explicitKind === 'video' || explicitKind.startsWith('video/')) return 'video';
+        if (explicitKind === 'image' || explicitKind.startsWith('image/')) return 'image';
+
+        const joinedHints = [
+            mediaInfo.filename,
+            mediaInfo.fileName,
+            mediaInfo.originalName,
+            mediaInfo.key,
+            mediaInfo.fullPath,
+            mediaInfo.url
+        ].filter(Boolean).join(' ').toLowerCase();
+
+        if (/\.((mp4)|(mov)|(webm)|(m4v))(?:[?#\s]|$)/i.test(joinedHints)) return 'video';
+        return 'image';
     }
 
     attachVideoEvents(video) {

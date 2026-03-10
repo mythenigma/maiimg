@@ -172,6 +172,7 @@
 
         .media-shell.is-live-photo {
             cursor: pointer;
+            touch-action: none;
         }
 
         .media-shell.is-live-active .media-live-badge {
@@ -258,6 +259,10 @@
             border-radius: 10px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
             background: #000;
+        }
+
+        .media-shell.is-live-photo video {
+            touch-action: none;
         }
 
         .swiper-pagination {
@@ -397,6 +402,7 @@ class MediaGallery {
         this.fullscreenToggle = document.getElementById('fullscreen-toggle');
         this.livePhotoHoldDelay = 180;
         this.livePhotoMoveThreshold = 18;
+        this.livePhotoGestureLocked = false;
         this.init();
     }
 
@@ -604,10 +610,11 @@ class MediaGallery {
                 }
 
                 const payload = await response.json();
+                const normalizeItem = (item) => ({ ...item, kind: this.inferMediaKind(item) });
                 const items = Array.isArray(payload.items)
-                    ? payload.items
+                    ? payload.items.map(normalizeItem)
                     : Array.isArray(payload.images)
-                        ? payload.images.map((imageInfo) => ({ ...imageInfo, kind: 'image' }))
+                        ? payload.images.map(normalizeItem)
                         : [];
 
                 if (!items.length) {
@@ -739,7 +746,7 @@ class MediaGallery {
                         <video
                             src="${mediaUrl}"
                             ${posterAttr}
-                            preload="metadata"
+                            preload="${isLivePhoto ? 'auto' : 'metadata'}"
                             playsinline
                             webkit-playsinline
                             ${controlsAttr}
@@ -807,11 +814,40 @@ class MediaGallery {
         return value.trim().toLowerCase().replace(/-/g, '_');
     }
 
+    inferMediaKind(mediaInfo) {
+        if (!mediaInfo || typeof mediaInfo !== 'object') return 'image';
+
+        const explicitKind = String(
+            mediaInfo.kind ||
+            mediaInfo.mediaKind ||
+            mediaInfo.type ||
+            mediaInfo.fileType ||
+            mediaInfo.mimeType ||
+            mediaInfo.contentType ||
+            ''
+        ).trim().toLowerCase();
+
+        if (explicitKind === 'video' || explicitKind.startsWith('video/')) return 'video';
+        if (explicitKind === 'image' || explicitKind.startsWith('image/')) return 'image';
+
+        const joinedHints = [
+            mediaInfo.filename,
+            mediaInfo.fileName,
+            mediaInfo.originalName,
+            mediaInfo.key,
+            mediaInfo.fullPath,
+            mediaInfo.url
+        ].filter(Boolean).join(' ').toLowerCase();
+
+        if (/\.((mp4)|(mov)|(webm)|(m4v))(?:[?#\s]|$)/i.test(joinedHints)) return 'video';
+        return 'image';
+    }
+
     isLivePhotoMedia(mediaInfo) {
         const presentation = this.normalizePresentation(
             mediaInfo.presentation || mediaInfo.displayMode || mediaInfo.variant || mediaInfo.mode
         );
-        return (mediaInfo.kind || 'image') === 'video' && (
+        return this.inferMediaKind(mediaInfo) === 'video' && (
             this.isTruthyFlag(mediaInfo.isLivePhoto) ||
             this.isTruthyFlag(mediaInfo.livePhoto) ||
             presentation === 'live_photo'
@@ -826,10 +862,55 @@ class MediaGallery {
                 pointerId: null,
                 playbackStarted: false,
                 startX: 0,
-                startY: 0
+                startY: 0,
+                usingTouch: false
             };
         }
         return video._livePhotoState;
+    }
+
+    setLivePhotoGestureLock(locked) {
+        this.livePhotoGestureLocked = !!locked;
+        if (this.swiper) {
+            this.swiper.allowTouchMove = !locked;
+        }
+    }
+
+    getEventPoint(event) {
+        if (!event) return null;
+        if (event.touches && event.touches[0]) return event.touches[0];
+        if (event.changedTouches && event.changedTouches[0]) return event.changedTouches[0];
+        if (typeof event.clientX === 'number' && typeof event.clientY === 'number') {
+            return event;
+        }
+        return null;
+    }
+
+    async ensureLivePhotoReady(video) {
+        if (!video) return;
+        if (video.readyState >= 2) return;
+
+        try {
+            video.load();
+        } catch (error) {
+        }
+
+        await new Promise((resolve) => {
+            let settled = false;
+            const finish = () => {
+                if (settled) return;
+                settled = true;
+                video.removeEventListener('canplay', finish);
+                video.removeEventListener('loadeddata', finish);
+                video.removeEventListener('error', finish);
+                resolve();
+            };
+
+            video.addEventListener('canplay', finish, { once: true });
+            video.addEventListener('loadeddata', finish, { once: true });
+            video.addEventListener('error', finish, { once: true });
+            setTimeout(finish, 900);
+        });
     }
 
     clearLivePhotoHoldTimer(video) {
@@ -854,6 +935,7 @@ class MediaGallery {
         video.muted = true;
         video.defaultMuted = true;
         video.playsInline = true;
+        video.preload = 'auto';
 
         try {
             if (video.ended || video.currentTime > 0.25) {
@@ -863,6 +945,7 @@ class MediaGallery {
         }
 
         try {
+            await this.ensureLivePhotoReady(video);
             await video.play();
             this.setLivePhotoVisualState(video, true);
         } catch (error) {
@@ -878,6 +961,8 @@ class MediaGallery {
         state.pointerActive = false;
         state.pointerId = null;
         state.playbackStarted = false;
+        state.usingTouch = false;
+        this.setLivePhotoGestureLock(false);
 
         if (!video.paused) {
             video.pause();
@@ -894,52 +979,100 @@ class MediaGallery {
     }
 
     attachLivePhotoEvents(video) {
+        const shell = video?.closest('.media-shell') || video;
         const release = () => {
             this.resetLivePhoto(video, true);
         };
 
-        video.addEventListener('pointerdown', (event) => {
+        const beginHold = (event) => {
             if (event.pointerType === 'mouse' && event.button !== 0) return;
+            if (event.touches && event.touches.length !== 1) return;
+
+            const point = this.getEventPoint(event);
+            if (!point) return;
 
             const state = this.getLivePhotoState(video);
             this.clearLivePhotoHoldTimer(video);
 
             state.pointerActive = true;
-            state.pointerId = event.pointerId;
+            state.pointerId = typeof event.pointerId === 'number' ? event.pointerId : 'touch';
             state.playbackStarted = false;
-            state.startX = event.clientX;
-            state.startY = event.clientY;
+            state.startX = point.clientX;
+            state.startY = point.clientY;
+            state.usingTouch = !!(event.touches || event.changedTouches);
+            this.setLivePhotoGestureLock(true);
 
             try {
-                video.setPointerCapture(event.pointerId);
+                if (typeof event.pointerId === 'number' && shell && shell.setPointerCapture) {
+                    shell.setPointerCapture(event.pointerId);
+                }
             } catch (error) {
             }
+
+            if (event.cancelable) {
+                event.preventDefault();
+            }
+            event.stopPropagation();
 
             state.holdTimer = setTimeout(() => {
                 if (!state.pointerActive) return;
                 this.startLivePhotoPlayback(video);
             }, this.livePhotoHoldDelay);
-        });
+        };
 
-        video.addEventListener('pointermove', (event) => {
+        const handleMove = (event) => {
             const state = this.getLivePhotoState(video);
             if (!state.pointerActive) return;
 
-            const deltaX = event.clientX - state.startX;
-            const deltaY = event.clientY - state.startY;
-            if (Math.hypot(deltaX, deltaY) >= this.livePhotoMoveThreshold) {
-                release();
-            }
-        });
+            const point = this.getEventPoint(event);
+            if (!point) return;
 
-        video.addEventListener('pointerup', release);
-        video.addEventListener('pointercancel', release);
-        video.addEventListener('lostpointercapture', release);
-        video.addEventListener('mouseleave', (event) => {
-            if (event.buttons === 1) {
+            if (event.cancelable) {
+                event.preventDefault();
+            }
+            event.stopPropagation();
+
+            const deltaX = point.clientX - state.startX;
+            const deltaY = point.clientY - state.startY;
+            if (Math.hypot(deltaX, deltaY) >= this.livePhotoMoveThreshold) {
+                const shouldNavigate =
+                    !state.playbackStarted &&
+                    this.swiper &&
+                    Math.abs(deltaY) > Math.abs(deltaX) &&
+                    Math.abs(deltaY) >= this.livePhotoMoveThreshold * 1.8;
                 release();
+                if (shouldNavigate) {
+                    if (deltaY < 0) this.swiper.slideNext();
+                    else this.swiper.slidePrev();
+                }
+            }
+        };
+
+        const stopAndRelease = (event) => {
+            if (event?.cancelable) {
+                event.preventDefault();
+            }
+            if (event?.stopPropagation) {
+                event.stopPropagation();
+            }
+            release();
+        };
+
+        shell.addEventListener('pointerdown', beginHold);
+        shell.addEventListener('pointermove', handleMove);
+        shell.addEventListener('pointerup', stopAndRelease);
+        shell.addEventListener('pointercancel', stopAndRelease);
+        shell.addEventListener('lostpointercapture', stopAndRelease);
+        shell.addEventListener('mouseleave', (event) => {
+            if (event.buttons === 1) {
+                stopAndRelease(event);
             }
         });
+        shell.addEventListener('touchstart', beginHold, { passive: false });
+        shell.addEventListener('touchmove', handleMove, { passive: false });
+        shell.addEventListener('touchend', stopAndRelease, { passive: false });
+        shell.addEventListener('touchcancel', stopAndRelease, { passive: false });
+        shell.addEventListener('contextmenu', (event) => event.preventDefault());
         video.addEventListener('ended', release);
     }
 
@@ -1086,9 +1219,15 @@ class MediaGallery {
     }
 
     shouldBlockSwipe(event) {
+        if (this.livePhotoGestureLocked) return true;
         const target = event.target;
         if (this.isOverlayControlTarget(target)) return true;
         if (!target || typeof target.closest !== 'function') return false;
+
+        const liveShell = target.closest('.media-shell.is-live-photo');
+        if (liveShell && (event.type === 'touchstart' || event.type === 'touchmove')) {
+            return true;
+        }
 
         const video = target.closest('video');
         if (!video) return false;
