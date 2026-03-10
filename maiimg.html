@@ -26,7 +26,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" rel="stylesheet">
   
   <!-- Custom Styles -->
-  <link href="qr-styles018.css" rel="stylesheet">
+  <link href="qr-styles019.css" rel="stylesheet">
   <style>
     .flow-step.is-guided {
       animation: flowStepPulse 1.1s ease-in-out infinite;
@@ -484,7 +484,7 @@
             </div>
 
             <div class="feature-cards advanced-stack">
-              <div class="feature-card">
+              <div class="feature-card feature-card--security">
                 <div class="feature-card-head">
                   <span class="feature-icon-badge">
                     <i class="fas fa-shield-alt feature-icon"></i>
@@ -495,19 +495,21 @@
                   </div>
                 </div>
 
-                <div class="feature-field">
-                  <label class="config-label" for="limit" data-translate="features.viewLimit.title">View Limit</label>
-                  <div class="input-with-unit">
-                    <input class="form-control" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="Max views (required)" min="1" max="99999999" required>
-                    <span class="input-unit" data-translate="features.viewLimit.unit">views</span>
+                <div class="security-control-grid">
+                  <div class="feature-field">
+                    <label class="config-label" for="limit" data-translate="features.viewLimit.title">View Limit</label>
+                    <div class="input-with-unit">
+                      <input class="form-control" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="Max views (required)" min="1" max="99999999" required>
+                      <span class="input-unit" data-translate="features.viewLimit.unit">views</span>
+                    </div>
                   </div>
-                </div>
 
-                <div class="feature-field">
-                  <label class="config-label" for="password" data-translate="features.timeControl.title">Time Control</label>
-                  <div class="input-with-unit">
-                    <input class="form-control" type="number" id="password" data-translate-placeholder="features.timeControl.placeholder" placeholder="Seconds per view (required)" min="1" max="99999999" required>
-                    <span class="input-unit" data-translate="features.timeControl.unit">sec</span>
+                  <div class="feature-field">
+                    <label class="config-label" for="password" data-translate="features.timeControl.title">Time Control</label>
+                    <div class="input-with-unit">
+                      <input class="form-control" type="number" id="password" data-translate-placeholder="features.timeControl.placeholder" placeholder="Seconds per view (required)" min="1" max="99999999" required>
+                      <span class="input-unit" data-translate="features.timeControl.unit">sec</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -548,7 +550,7 @@
                 </div>
               </div>
 
-              <div class="feature-card feature-card--wide">
+              <div class="feature-card">
                 <div class="feature-card-head">
                   <span class="feature-icon-badge">
                     <i class="fas fa-tag feature-icon"></i>
@@ -2207,21 +2209,21 @@
     const SECURITY_PRESETS = {
       public: {
         limit: '99999999',
-        password: '300',
+        password: '600',
         expiration: 'unlimited',
         customDays: '',
         titleKey: 'features.presets.public.title'
       },
       temporary: {
         limit: '25',
-        password: '60',
+        password: '180',
         expiration: '24h',
         customDays: '',
         titleKey: 'features.presets.temporary.title'
       },
       strict: {
         limit: '3',
-        password: '15',
+        password: '60',
         expiration: '1h',
         customDays: '',
         titleKey: 'features.presets.strict.title'

@@ -475,6 +475,16 @@ body {
   gap: 1rem;
 }
 
+.security-control-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.security-control-grid .feature-field + .feature-field {
+  margin-top: 0;
+}
+
 .feature-card--wide {
   grid-column: 1 / -1;
 }
@@ -551,6 +561,14 @@ body {
 
 .config-variant-b .advanced-stack {
   margin: 0;
+}
+
+.config-variant-b .feature-card--security {
+  grid-column: 1 / -1;
+}
+
+.config-variant-b .feature-card--security .feature-copy {
+  max-width: 42rem;
 }
 
 @media (min-width: 992px) {
@@ -950,7 +968,8 @@ footer {
 
   .config-summary-grid,
   .advanced-stack,
-  .preset-grid {
+  .preset-grid,
+  .security-control-grid {
     grid-template-columns: 1fr;
   }
 
