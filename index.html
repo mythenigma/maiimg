@@ -1190,6 +1190,24 @@
       });
     }
 
+    function bindFullDropzoneClickArea(dropzone) {
+      if (!dropzone?.element) return;
+
+      dropzone.element.addEventListener('click', (event) => {
+        if (!dropzone.hiddenFileInput || event.target === dropzone.hiddenFileInput) {
+          return;
+        }
+
+        if (event.target.closest('.dz-preview, .dz-remove, .dz-details, .dz-progress')) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        dropzone.hiddenFileInput.click();
+      }, true);
+    }
+
     function renderTrackingSummary(summary = lastGeneratedSummary) {
       const panel = document.getElementById('btypesay');
       if (!panel || !summary) return;
@@ -2499,6 +2517,36 @@
       }
     }
 
+    function createSafeUploadFileName(fileName) {
+      const rawName = (fileName || '').trim();
+      const lastDotIndex = rawName.lastIndexOf('.');
+      const hasExtension = lastDotIndex > 0 && lastDotIndex < rawName.length - 1;
+      const baseName = hasExtension ? rawName.slice(0, lastDotIndex) : rawName;
+      const extension = hasExtension ? rawName.slice(lastDotIndex).toLowerCase() : '';
+      const safeBase = baseName
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^A-Za-z0-9._-]+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^[._-]+|[._-]+$/g, '')
+        .slice(0, 80);
+      const safeExtension = extension.replace(/[^.A-Za-z0-9]+/g, '').slice(0, 16);
+      const fallbackBase = `file-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+      return `${safeBase || fallbackBase}${safeExtension}`;
+    }
+
+    function createUploadReadyFile(file) {
+      const safeName = createSafeUploadFileName(file?.name);
+      if (!file || !safeName || safeName === file.name) {
+        return file;
+      }
+
+      return new File([file], safeName, {
+        type: file.type,
+        lastModified: file.lastModified || Date.now()
+      });
+    }
+
     async function prepareMediaFile(file) {
       const kind = getFileKind(file);
       if (!kind) {
@@ -2516,7 +2564,7 @@
           throw new Error(translateText('messages.imageTooLarge', null, 'Image too large. Maximum size is 50MB.'));
         }
 
-        const processedFile = await optimizeImageBeforeUpload(file);
+        const processedFile = createUploadReadyFile(await optimizeImageBeforeUpload(file));
         return {
           kind,
           originalFile: file,
@@ -2543,7 +2591,7 @@
       return {
         kind,
         originalFile: file,
-        uploadFile: file,
+        uploadFile: createUploadReadyFile(file),
         duration
       };
     }
@@ -2762,7 +2810,7 @@
         acceptedFiles: ".png,.jpg,.jpeg,.gif,.webp,.mp4,.mov,.webm,.m4v,image/jpeg,image/png,image/gif,image/webp,video/mp4,video/quicktime,video/webm,video/x-m4v",
         addRemoveLinks: true,
         parallelUploads: MAX_PARALLEL_MEDIA_UPLOADS,
-        clickable: true,
+        clickable: "#dropz",
         createImageThumbnails: true,
         dictDefaultMessage: getDropzoneDefaultMessageHtml(),
         dictMaxFilesExceeded: translateText('messages.maxFilesExceeded', null, 'Maximum 25 files allowed!'),
@@ -2776,6 +2824,7 @@
 
         init: function() {
           const dropzone = this;
+          bindFullDropzoneClickArea(dropzone);
           if (this.hiddenFileInput) {
             this.hiddenFileInput.addEventListener('click', () => {
               setTimeout(showLoginNudgeIfNeeded, 120);
