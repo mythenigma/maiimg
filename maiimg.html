@@ -1948,7 +1948,8 @@
     }
 
     async function optimizeImageBeforeUpload(file) {
-      if (!file || !/^image\/(jpeg|jpg|webp)$/i.test(file.type || '')) {
+      const sourceType = (file?.type || '').toLowerCase();
+      if (!file || !/^image\/(jpeg|jpg|png|webp)$/i.test(sourceType)) {
         return file;
       }
 
@@ -1969,22 +1970,30 @@
         canvas.width = width;
         canvas.height = height;
 
-        const context = canvas.getContext('2d', { alpha: false });
+        const preserveAlpha = /^image\/(png|webp)$/i.test(sourceType);
+        const context = canvas.getContext('2d', { alpha: preserveAlpha });
         if (!context) {
           return file;
         }
 
+        if (!preserveAlpha) {
+          context.fillStyle = '#ffffff';
+          context.fillRect(0, 0, width, height);
+        } else {
+          context.clearRect(0, 0, width, height);
+        }
+
         context.drawImage(img, 0, 0, width, height);
-        const quality = file.size > 4 * 1024 * 1024 ? 0.78 : 0.84;
-        const outputType = file.type === 'image/webp' ? 'image/webp' : 'image/jpeg';
+        const quality = /^image\/png$/i.test(sourceType)
+          ? (file.size > 4 * 1024 * 1024 ? 0.86 : 0.9)
+          : (file.size > 4 * 1024 * 1024 ? 0.8 : 0.86);
+        const outputType = 'image/webp';
         const optimizedBlob = await new Promise((resolve) => canvas.toBlob(resolve, outputType, quality));
         if (!optimizedBlob || optimizedBlob.size >= file.size * 0.96) {
           return file;
         }
 
-        const nextName = outputType === 'image/webp'
-          ? replaceFileExtension(file.name, '.webp')
-          : replaceFileExtension(file.name, '.jpg');
+        const nextName = replaceFileExtension(file.name, '.webp');
 
         return new File([optimizedBlob], nextName, {
           type: outputType,
