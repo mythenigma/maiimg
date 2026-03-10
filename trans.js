@@ -2319,16 +2319,709 @@ class I18n {
     }
   }
   
+  function mergeTranslationObjects(target, source) {
+    Object.entries(source).forEach(([key, value]) => {
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        if (!target[key] || typeof target[key] !== 'object' || Array.isArray(target[key])) {
+          target[key] = {};
+        }
+        mergeTranslationObjects(target[key], value);
+      } else {
+        target[key] = value;
+      }
+    });
+    return target;
+  }
+
+  const PAGE_TRANSLATION_OVERRIDES = {
+    en: {
+      seo: {
+        title: "Maiimg Hosting - Upload Images & Short Videos with QR Share",
+        description: "Upload images and short videos in seconds with Maiimg Hosting. Free media hosting with direct links, QR sharing, view limits, and expiration controls.",
+        keywords: "maiimg hosting,free media hosting,image upload,short video upload,qr media sharing,temporary media hosting"
+      },
+      hero: {
+        title: "Upload Images & Short Videos",
+        subtitle: "Turn your photos and short videos into shareable QR links with tracking and access controls"
+      },
+      upload: {
+        title: "Media Upload Center",
+        subtitle: "Drag & drop images or short videos, or click to browse",
+        ready: "Ready to upload images and short videos",
+        previewTitle: "Selected Media"
+      },
+      flow: {
+        step1: "Upload Media"
+      },
+      features: {
+        description: {
+          description: "Enter gallery description"
+        },
+        generate: {
+          status: "Fill all fields and upload media first"
+        }
+      },
+      results: {
+        subtitle: "Your media gallery link and QR code are ready to share",
+        stats: {
+          images: "Media"
+        },
+        galleryLink: "Gallery Link",
+        generatedLinkPlaceholder: "Generated link will appear here",
+        copy: "Copy",
+        scanHint: "Scan to open the gallery",
+        accessRecords: "Access Records",
+        goToInsights: "Go to access records",
+        accessIntro: "These records show when visitors open your gallery link.",
+        accessCodeLabel: "Access records code",
+        copyCode: "Copy Code",
+        mediaFilesUploaded: "{count} media files uploaded",
+        openAccessRecords: "Open Access Records",
+        accessCodeHint: "Use this code to see who opened the link and when."
+      },
+      messages: {
+        unknownError: "Unknown error",
+        uploadMediaFirst: "Please upload at least one media file first!",
+        generateReady: "Ready to generate QR code!",
+        missingPrefix: "Missing: {items}",
+        missingViewLimit: "View limit",
+        missingTimeControl: "Time control",
+        missingDescription: "Description",
+        missingUpload: "Upload media",
+        createMediaError: "Error creating media link: {error}",
+        networkCreateMediaError: "Network error while creating the media link. Please check your connection and try again.",
+        accessCodeCopied: "Access code \"{code}\" copied to clipboard!",
+        accessCodeCopiedPlain: "Access code copied to clipboard!",
+        livePhotoOn: "LIVE Photo mode on",
+        livePhotoOff: "Mark as Live Photo",
+        livePhotoTitle: "Use iPhone-style LIVE playback for this media item",
+        maxFilesExceeded: "Maximum 25 files allowed!",
+        uploadFailedShort: "Upload failed.",
+        invalidFileType: "Only supported image and video files are allowed.",
+        fallbackMessage: "Your browser does not support drag-and-drop uploads.",
+        fileTooBig: "File is too big ({{filesize}}MB). Max filesize: {{maxFilesize}}MB.",
+        removeFile: "Remove file",
+        cancelUpload: "Cancel upload",
+        queued: "Queued: {name} (Session: {session})",
+        removed: "Removed: {name}",
+        readyUploadedCountSession: "Ready! {count} media files uploaded to folder: {session}",
+        readyNewSession: "Ready for a new upload session",
+        uploadAreaReset: "Upload area reset. Ready for new media.",
+        supportedFormatsOnly: "Only PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM, and M4V are supported right now.",
+        imageTooLarge: "Image too large. Maximum size is 50MB.",
+        videoTooLarge: "Video too large. Maximum size is 100MB.",
+        videoTooLong: "Video too long. Maximum duration is {seconds} seconds.",
+        initUploadFailed: "Failed to initialize upload.",
+        completeUploadFailed: "Failed to complete upload.",
+        uploading: "Uploading: {name}...",
+        uploaded: "Uploaded: {name}",
+        uploadErrorFile: "Error: {name} - {error}"
+      }
+    },
+    zh: {
+      seo: {
+        title: "麦瓜图床 - 图片和小视频上传分享，支持二维码外链",
+        description: "麦瓜图床支持图片和小视频上传分享，提供二维码生成、外链分享、访问控制与过期设置。",
+        keywords: "麦瓜图床,免费图床,图片上传,小视频上传,媒体分享,二维码外链,临时图床"
+      },
+      hero: {
+        title: "上传和分享图片与小视频",
+        subtitle: "将您的图片和小视频生成可分享的二维码链接，并支持访问控制与追踪"
+      },
+      upload: {
+        title: "媒体上传中心",
+        subtitle: "拖放图片或小视频，或点击浏览",
+        ready: "准备上传图片和小视频",
+        previewTitle: "已选媒体"
+      },
+      flow: {
+        step1: "上传媒体"
+      },
+      features: {
+        description: {
+          description: "输入图集描述"
+        },
+        generate: {
+          status: "请先填写所有字段并上传媒体"
+        }
+      },
+      results: {
+        subtitle: "您的媒体画廊链接和二维码已准备好分享",
+        stats: {
+          images: "媒体"
+        },
+        galleryLink: "画廊链接",
+        generatedLinkPlaceholder: "生成后的链接将显示在这里",
+        copy: "复制",
+        scanHint: "扫码打开画廊",
+        accessRecords: "访问记录",
+        goToInsights: "前往访问记录",
+        accessIntro: "这里会显示访客打开画廊链接的时间记录。",
+        accessCodeLabel: "访问记录码",
+        copyCode: "复制代码",
+        mediaFilesUploaded: "已上传 {count} 个媒体文件",
+        openAccessRecords: "打开访问记录",
+        accessCodeHint: "使用此代码可查看谁在何时打开了链接。"
+      },
+      messages: {
+        unknownError: "未知错误",
+        uploadMediaFirst: "请先上传至少一个媒体文件！",
+        generateReady: "可以生成二维码了！",
+        missingPrefix: "还缺少：{items}",
+        missingViewLimit: "查看限制",
+        missingTimeControl: "时间控制",
+        missingDescription: "描述",
+        missingUpload: "上传媒体",
+        createMediaError: "创建媒体链接时出错：{error}",
+        networkCreateMediaError: "创建媒体链接时网络异常，请检查连接后重试。",
+        accessCodeCopied: "访问记录码“{code}”已复制到剪贴板！",
+        accessCodeCopiedPlain: "访问记录码已复制到剪贴板！",
+        livePhotoOn: "LIVE Photo 已开启",
+        livePhotoOff: "标记为 Live Photo",
+        livePhotoTitle: "将此媒体按 iPhone 风格 LIVE 方式播放",
+        maxFilesExceeded: "最多只能上传 25 个文件！",
+        uploadFailedShort: "上传失败。",
+        invalidFileType: "仅支持上传图片和视频文件。",
+        fallbackMessage: "您的浏览器不支持拖放上传。",
+        fileTooBig: "文件太大（{{filesize}}MB）。最大允许：{{maxFilesize}}MB。",
+        removeFile: "移除文件",
+        cancelUpload: "取消上传",
+        queued: "已加入队列：{name}（会话：{session}）",
+        removed: "已移除：{name}",
+        readyUploadedCountSession: "已就绪！{count} 个媒体文件已上传到目录：{session}",
+        readyNewSession: "可以开始新的上传会话",
+        uploadAreaReset: "上传区已重置，可继续上传新媒体。",
+        supportedFormatsOnly: "目前仅支持 PNG、JPG、JPEG、GIF、WebP、MP4、MOV、WebM 和 M4V。",
+        imageTooLarge: "图片过大，最大支持 50MB。",
+        videoTooLarge: "视频过大，最大支持 100MB。",
+        videoTooLong: "视频时长过长，最长支持 {seconds} 秒。",
+        initUploadFailed: "初始化上传失败。",
+        completeUploadFailed: "完成上传失败。",
+        uploading: "正在上传：{name}...",
+        uploaded: "已上传：{name}",
+        uploadErrorFile: "出错：{name} - {error}"
+      }
+    },
+    tw: {
+      seo: {
+        title: "麥瓜圖床 - 圖片和短影片上傳分享，支援二維碼外鏈",
+        description: "麥瓜圖床支援圖片和短影片上傳分享，提供二維碼生成、外鏈分享、存取控制與到期設定。",
+        keywords: "麥瓜圖床,免費圖床,圖片上傳,短影片上傳,媒體分享,二維碼外鏈,臨時圖床"
+      },
+      hero: {
+        title: "上傳和分享圖片與短影片",
+        subtitle: "將您的圖片和短影片轉成可分享的 QR 連結，並支援追蹤與存取控制"
+      },
+      upload: {
+        title: "媒體上傳中心",
+        subtitle: "拖放圖片或短影片，或點擊瀏覽",
+        ready: "準備上傳圖片和短影片",
+        previewTitle: "已選媒體"
+      },
+      flow: {
+        step1: "上傳媒體"
+      },
+      features: {
+        description: {
+          description: "輸入圖集描述"
+        },
+        generate: {
+          status: "請先填寫所有欄位並上傳媒體"
+        }
+      },
+      results: {
+        subtitle: "您的媒體圖集連結和二維碼已準備好分享",
+        stats: {
+          images: "媒體"
+        },
+        galleryLink: "圖集連結",
+        generatedLinkPlaceholder: "生成後的連結將顯示在這裡",
+        copy: "複製",
+        scanHint: "掃碼開啟圖集",
+        accessRecords: "存取記錄",
+        goToInsights: "前往存取記錄",
+        accessIntro: "這裡會顯示訪客開啟圖集連結的時間記錄。",
+        accessCodeLabel: "存取記錄碼",
+        copyCode: "複製代碼",
+        mediaFilesUploaded: "已上傳 {count} 個媒體檔案",
+        openAccessRecords: "開啟存取記錄",
+        accessCodeHint: "使用此代碼可查看誰在何時開啟了連結。"
+      },
+      messages: {
+        unknownError: "未知錯誤",
+        uploadMediaFirst: "請先上傳至少一個媒體檔案！",
+        generateReady: "可以生成二維碼了！",
+        missingPrefix: "尚缺：{items}",
+        missingViewLimit: "檢視限制",
+        missingTimeControl: "時間控制",
+        missingDescription: "描述",
+        missingUpload: "上傳媒體",
+        createMediaError: "建立媒體連結時發生錯誤：{error}",
+        networkCreateMediaError: "建立媒體連結時網路異常，請檢查連線後再試。",
+        accessCodeCopied: "存取記錄碼「{code}」已複製到剪貼簿！",
+        accessCodeCopiedPlain: "存取記錄碼已複製到剪貼簿！",
+        livePhotoOn: "LIVE Photo 已開啟",
+        livePhotoOff: "標記為 Live Photo",
+        livePhotoTitle: "將此媒體以 iPhone 風格 LIVE 方式播放",
+        maxFilesExceeded: "最多只能上傳 25 個檔案！",
+        uploadFailedShort: "上傳失敗。",
+        invalidFileType: "僅支援上傳圖片與影片檔案。",
+        fallbackMessage: "您的瀏覽器不支援拖放上傳。",
+        fileTooBig: "檔案太大（{{filesize}}MB）。最大允許：{{maxFilesize}}MB。",
+        removeFile: "移除檔案",
+        cancelUpload: "取消上傳",
+        queued: "已加入佇列：{name}（會話：{session}）",
+        removed: "已移除：{name}",
+        readyUploadedCountSession: "已就緒！{count} 個媒體檔案已上傳到目錄：{session}",
+        readyNewSession: "可以開始新的上傳會話",
+        uploadAreaReset: "上傳區已重設，可繼續上傳新媒體。",
+        supportedFormatsOnly: "目前僅支援 PNG、JPG、JPEG、GIF、WebP、MP4、MOV、WebM 與 M4V。",
+        imageTooLarge: "圖片過大，最大支援 50MB。",
+        videoTooLarge: "影片過大，最大支援 100MB。",
+        videoTooLong: "影片時長過長，最長支援 {seconds} 秒。",
+        initUploadFailed: "初始化上傳失敗。",
+        completeUploadFailed: "完成上傳失敗。",
+        uploading: "正在上傳：{name}...",
+        uploaded: "已上傳：{name}",
+        uploadErrorFile: "出錯：{name} - {error}"
+      }
+    },
+    ja: {
+      seo: {
+        title: "Maiimg Hosting - 画像とショート動画をアップロードしてQR共有",
+        description: "画像とショート動画をすばやくアップロードして共有。QR共有、閲覧制限、有効期限設定に対応した無料メディアホスティングです。",
+        keywords: "maiimg hosting,画像アップロード,ショート動画アップロード,メディア共有,QR共有"
+      },
+      hero: {
+        title: "画像とショート動画をアップロードして共有",
+        subtitle: "写真とショート動画を、追跡とアクセス制御付きの共有QRリンクに変換します"
+      },
+      upload: {
+        title: "メディアアップロードセンター",
+        subtitle: "画像やショート動画をドラッグ&ドロップ、またはクリックして参照",
+        ready: "画像とショート動画のアップロード準備完了",
+        previewTitle: "選択したメディア"
+      },
+      flow: {
+        step1: "メディアをアップロード"
+      },
+      features: {
+        description: {
+          description: "ギャラリーの説明を入力"
+        },
+        generate: {
+          status: "すべての項目を入力し、メディアをアップロードしてください"
+        }
+      },
+      results: {
+        subtitle: "メディアギャラリーのリンクとQRコードが共有準備完了",
+        stats: {
+          images: "メディア"
+        },
+        galleryLink: "ギャラリーリンク",
+        generatedLinkPlaceholder: "生成されたリンクがここに表示されます",
+        copy: "コピー",
+        scanHint: "スキャンしてギャラリーを開く",
+        accessRecords: "アクセス記録",
+        goToInsights: "アクセス記録へ移動",
+        accessIntro: "この記録では、訪問者がギャラリーリンクを開いた時間を確認できます。",
+        accessCodeLabel: "アクセス記録コード",
+        copyCode: "コードをコピー",
+        mediaFilesUploaded: "{count} 件のメディアをアップロード済み",
+        openAccessRecords: "アクセス記録を開く",
+        accessCodeHint: "このコードで、誰がいつリンクを開いたかを確認できます。"
+      },
+      messages: {
+        unknownError: "不明なエラー",
+        uploadMediaFirst: "先に少なくとも1件のメディアファイルをアップロードしてください！",
+        generateReady: "QRコードを生成できます！",
+        missingPrefix: "未入力: {items}",
+        missingViewLimit: "表示制限",
+        missingTimeControl: "時間制御",
+        missingDescription: "説明",
+        missingUpload: "メディアをアップロード",
+        createMediaError: "メディアリンクの作成エラー: {error}",
+        networkCreateMediaError: "メディアリンク作成中にネットワークエラーが発生しました。接続を確認して再試行してください。",
+        accessCodeCopied: "アクセス記録コード「{code}」をクリップボードにコピーしました！",
+        accessCodeCopiedPlain: "アクセス記録コードをクリップボードにコピーしました！",
+        livePhotoOn: "LIVE Photo モード ON",
+        livePhotoOff: "Live Photo として扱う",
+        livePhotoTitle: "このメディアを iPhone 風 LIVE 再生として扱います",
+        maxFilesExceeded: "アップロードできるのは最大25ファイルです！",
+        uploadFailedShort: "アップロードに失敗しました。",
+        invalidFileType: "対応している画像ファイルと動画ファイルのみアップロードできます。",
+        fallbackMessage: "お使いのブラウザはドラッグ&ドロップアップロードに対応していません。",
+        fileTooBig: "ファイルサイズが大きすぎます ({{filesize}}MB)。最大: {{maxFilesize}}MB。",
+        removeFile: "ファイルを削除",
+        cancelUpload: "アップロードをキャンセル",
+        queued: "キューに追加: {name} (セッション: {session})",
+        removed: "削除: {name}",
+        readyUploadedCountSession: "準備完了! {count} 件のメディアがフォルダ {session} にアップロードされました",
+        readyNewSession: "新しいアップロードセッションを開始できます",
+        uploadAreaReset: "アップロードエリアをリセットしました。新しいメディアを追加できます。",
+        supportedFormatsOnly: "現在対応しているのは PNG、JPG、JPEG、GIF、WebP、MP4、MOV、WebM、M4V のみです。",
+        imageTooLarge: "画像サイズが大きすぎます。最大50MBです。",
+        videoTooLarge: "動画サイズが大きすぎます。最大100MBです。",
+        videoTooLong: "動画が長すぎます。最大 {seconds} 秒です。",
+        initUploadFailed: "アップロードの初期化に失敗しました。",
+        completeUploadFailed: "アップロードの完了に失敗しました。",
+        uploading: "アップロード中: {name}...",
+        uploaded: "アップロード済み: {name}",
+        uploadErrorFile: "エラー: {name} - {error}"
+      }
+    },
+    de: {
+      seo: {
+        title: "Maiimg Hosting - Bilder & Kurzvideos mit QR teilen",
+        description: "Bilder und Kurzvideos in Sekunden hochladen und teilen. Kostenloses Medienhosting mit Direktlink, QR-Sharing, Aufruflimits und Ablaufsteuerung.",
+        keywords: "maiimg hosting,medienhosting,bilder hochladen,kurzvideos hochladen,qr sharing"
+      },
+      hero: {
+        title: "Bilder & Kurzvideos hochladen und teilen",
+        subtitle: "Fotos und Kurzvideos in teilbare QR-Links mit Tracking und Zugriffskontrolle umwandeln"
+      },
+      upload: {
+        title: "Medien-Upload-Center",
+        subtitle: "Bilder oder Kurzvideos per Drag-and-drop hochladen oder zum Auswählen klicken",
+        ready: "Bereit zum Hochladen von Bildern und Kurzvideos",
+        previewTitle: "Ausgewählte Medien"
+      },
+      flow: {
+        step1: "Medien hochladen"
+      },
+      features: {
+        description: {
+          description: "Galeriebeschreibung eingeben"
+        },
+        generate: {
+          status: "Bitte alle Felder ausfüllen und zuerst Medien hochladen"
+        }
+      },
+      results: {
+        subtitle: "Ihr Mediengalerie-Link und QR-Code sind bereit zum Teilen",
+        stats: {
+          images: "Medien"
+        },
+        galleryLink: "Galerie-Link",
+        generatedLinkPlaceholder: "Der generierte Link erscheint hier",
+        copy: "Kopieren",
+        scanHint: "Scannen, um die Galerie zu öffnen",
+        accessRecords: "Zugriffsprotokolle",
+        goToInsights: "Zu den Zugriffsprotokollen",
+        accessIntro: "Diese Einträge zeigen, wann Besucher Ihren Galerie-Link öffnen.",
+        accessCodeLabel: "Zugriffscode",
+        copyCode: "Code kopieren",
+        mediaFilesUploaded: "{count} Mediendateien hochgeladen",
+        openAccessRecords: "Zugriffsprotokolle öffnen",
+        accessCodeHint: "Mit diesem Code sehen Sie, wer den Link wann geöffnet hat."
+      },
+      messages: {
+        unknownError: "Unbekannter Fehler",
+        uploadMediaFirst: "Bitte laden Sie zuerst mindestens eine Mediendatei hoch!",
+        generateReady: "Bereit zum Generieren des QR-Codes!",
+        missingPrefix: "Fehlt: {items}",
+        missingViewLimit: "Aufruflimit",
+        missingTimeControl: "Zeitsteuerung",
+        missingDescription: "Beschreibung",
+        missingUpload: "Medien hochladen",
+        createMediaError: "Fehler beim Erstellen des Medienlinks: {error}",
+        networkCreateMediaError: "Netzwerkfehler beim Erstellen des Medienlinks. Bitte Verbindung prüfen und erneut versuchen.",
+        accessCodeCopied: "Zugriffscode \"{code}\" in die Zwischenablage kopiert!",
+        accessCodeCopiedPlain: "Zugriffscode in die Zwischenablage kopiert!",
+        livePhotoOn: "LIVE-Photo-Modus aktiv",
+        livePhotoOff: "Als Live Photo markieren",
+        livePhotoTitle: "Dieses Medium wie ein iPhone-LIVE-Foto abspielen",
+        maxFilesExceeded: "Maximal 25 Dateien erlaubt!",
+        uploadFailedShort: "Upload fehlgeschlagen.",
+        invalidFileType: "Nur unterstützte Bild- und Videodateien sind erlaubt.",
+        fallbackMessage: "Ihr Browser unterstützt kein Drag-and-drop-Upload.",
+        fileTooBig: "Datei ist zu groß ({{filesize}}MB). Maximal: {{maxFilesize}}MB.",
+        removeFile: "Datei entfernen",
+        cancelUpload: "Upload abbrechen",
+        queued: "In Warteschlange: {name} (Sitzung: {session})",
+        removed: "Entfernt: {name}",
+        readyUploadedCountSession: "Bereit! {count} Mediendateien in Ordner {session} hochgeladen",
+        readyNewSession: "Bereit für eine neue Upload-Sitzung",
+        uploadAreaReset: "Upload-Bereich zurückgesetzt. Bereit für neue Medien.",
+        supportedFormatsOnly: "Derzeit werden nur PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM und M4V unterstützt.",
+        imageTooLarge: "Bild ist zu groß. Maximale Größe: 50MB.",
+        videoTooLarge: "Video ist zu groß. Maximale Größe: 100MB.",
+        videoTooLong: "Video ist zu lang. Maximale Dauer: {seconds} Sekunden.",
+        initUploadFailed: "Upload konnte nicht initialisiert werden.",
+        completeUploadFailed: "Upload konnte nicht abgeschlossen werden.",
+        uploading: "Lädt hoch: {name}...",
+        uploaded: "Hochgeladen: {name}",
+        uploadErrorFile: "Fehler: {name} - {error}"
+      }
+    },
+    ko: {
+      seo: {
+        title: "Maiimg Hosting - 이미지와 짧은 동영상을 QR로 공유",
+        description: "이미지와 짧은 동영상을 빠르게 업로드하고 공유하세요. 직접 링크, QR 공유, 조회 제한, 만료 설정을 지원하는 무료 미디어 호스팅입니다.",
+        keywords: "maiimg hosting,미디어 호스팅,이미지 업로드,짧은 동영상 업로드,QR 공유"
+      },
+      hero: {
+        title: "이미지와 짧은 동영상 업로드 및 공유",
+        subtitle: "사진과 짧은 동영상을 추적 및 접근 제어가 가능한 QR 링크로 바꾸세요"
+      },
+      upload: {
+        title: "미디어 업로드 센터",
+        subtitle: "이미지나 짧은 동영상을 드래그 앤 드롭하거나 클릭해서 찾아보세요",
+        ready: "이미지와 짧은 동영상을 업로드할 준비가 되었습니다",
+        previewTitle: "선택한 미디어"
+      },
+      flow: {
+        step1: "미디어 업로드"
+      },
+      features: {
+        description: {
+          description: "갤러리 설명을 입력하세요"
+        },
+        generate: {
+          status: "모든 항목을 입력하고 먼저 미디어를 업로드하세요"
+        }
+      },
+      results: {
+        subtitle: "미디어 갤러리 링크와 QR 코드를 공유할 수 있습니다",
+        stats: {
+          images: "미디어"
+        },
+        galleryLink: "갤러리 링크",
+        generatedLinkPlaceholder: "생성된 링크가 여기에 표시됩니다",
+        copy: "복사",
+        scanHint: "스캔하여 갤러리 열기",
+        accessRecords: "접속 기록",
+        goToInsights: "접속 기록으로 이동",
+        accessIntro: "방문자가 갤러리 링크를 연 시간을 여기서 확인할 수 있습니다.",
+        accessCodeLabel: "접속 기록 코드",
+        copyCode: "코드 복사",
+        mediaFilesUploaded: "{count}개의 미디어 파일 업로드 완료",
+        openAccessRecords: "접속 기록 열기",
+        accessCodeHint: "이 코드로 누가 언제 링크를 열었는지 확인할 수 있습니다."
+      },
+      messages: {
+        unknownError: "알 수 없는 오류",
+        uploadMediaFirst: "먼저 미디어 파일을 하나 이상 업로드해주세요!",
+        generateReady: "QR 코드를 생성할 준비가 되었습니다!",
+        missingPrefix: "누락됨: {items}",
+        missingViewLimit: "조회 제한",
+        missingTimeControl: "시간 제어",
+        missingDescription: "설명",
+        missingUpload: "미디어 업로드",
+        createMediaError: "미디어 링크 생성 오류: {error}",
+        networkCreateMediaError: "미디어 링크 생성 중 네트워크 오류가 발생했습니다. 연결을 확인한 후 다시 시도하세요.",
+        accessCodeCopied: "접속 기록 코드 \"{code}\"가 클립보드에 복사되었습니다!",
+        accessCodeCopiedPlain: "접속 기록 코드가 클립보드에 복사되었습니다!",
+        livePhotoOn: "LIVE Photo 모드 켜짐",
+        livePhotoOff: "Live Photo로 표시",
+        livePhotoTitle: "이 미디어를 iPhone 스타일 LIVE 재생으로 사용",
+        maxFilesExceeded: "최대 25개 파일까지 업로드할 수 있습니다!",
+        uploadFailedShort: "업로드에 실패했습니다.",
+        invalidFileType: "지원되는 이미지 및 동영상 파일만 업로드할 수 있습니다.",
+        fallbackMessage: "브라우저가 드래그 앤 드롭 업로드를 지원하지 않습니다.",
+        fileTooBig: "파일이 너무 큽니다 ({{filesize}}MB). 최대 크기: {{maxFilesize}}MB.",
+        removeFile: "파일 제거",
+        cancelUpload: "업로드 취소",
+        queued: "대기열에 추가됨: {name} (세션: {session})",
+        removed: "제거됨: {name}",
+        readyUploadedCountSession: "준비 완료! {count}개의 미디어 파일이 {session} 폴더에 업로드되었습니다",
+        readyNewSession: "새 업로드 세션을 시작할 수 있습니다",
+        uploadAreaReset: "업로드 영역이 초기화되었습니다. 새 미디어를 업로드할 수 있습니다.",
+        supportedFormatsOnly: "현재 PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM, M4V만 지원합니다.",
+        imageTooLarge: "이미지가 너무 큽니다. 최대 50MB까지 가능합니다.",
+        videoTooLarge: "동영상이 너무 큽니다. 최대 100MB까지 가능합니다.",
+        videoTooLong: "동영상이 너무 깁니다. 최대 길이는 {seconds}초입니다.",
+        initUploadFailed: "업로드 초기화에 실패했습니다.",
+        completeUploadFailed: "업로드 완료에 실패했습니다.",
+        uploading: "업로드 중: {name}...",
+        uploaded: "업로드 완료: {name}",
+        uploadErrorFile: "오류: {name} - {error}"
+      }
+    },
+    fr: {
+      seo: {
+        title: "Maiimg Hosting - Téléverser images et vidéos courtes avec partage QR",
+        description: "Téléversez rapidement des images et vidéos courtes. Hébergement média gratuit avec lien direct, partage QR, limites de vues et expiration.",
+        keywords: "maiimg hosting,hebergement media,televerser images,televerser videos courtes,partage QR"
+      },
+      hero: {
+        title: "Téléverser et partager images et vidéos courtes",
+        subtitle: "Transformez vos photos et vidéos courtes en liens QR partageables avec suivi et contrôle d'accès"
+      },
+      upload: {
+        title: "Centre de téléversement média",
+        subtitle: "Glissez-déposez des images ou vidéos courtes, ou cliquez pour parcourir",
+        ready: "Prêt à téléverser des images et vidéos courtes",
+        previewTitle: "Médias sélectionnés"
+      },
+      flow: {
+        step1: "Téléverser des médias"
+      },
+      features: {
+        description: {
+          description: "Saisissez la description de la galerie"
+        },
+        generate: {
+          status: "Remplissez tous les champs et téléversez d'abord les médias"
+        }
+      },
+      results: {
+        subtitle: "Le lien de votre galerie média et son code QR sont prêts à être partagés",
+        stats: {
+          images: "Médias"
+        },
+        galleryLink: "Lien de galerie",
+        generatedLinkPlaceholder: "Le lien généré apparaîtra ici",
+        copy: "Copier",
+        scanHint: "Scannez pour ouvrir la galerie",
+        accessRecords: "Historique d'accès",
+        goToInsights: "Aller à l'historique d'accès",
+        accessIntro: "Ces enregistrements montrent quand des visiteurs ouvrent votre lien de galerie.",
+        accessCodeLabel: "Code d'accès aux enregistrements",
+        copyCode: "Copier le code",
+        mediaFilesUploaded: "{count} fichiers média téléversés",
+        openAccessRecords: "Ouvrir l'historique d'accès",
+        accessCodeHint: "Utilisez ce code pour voir qui a ouvert le lien et quand."
+      },
+      messages: {
+        unknownError: "Erreur inconnue",
+        uploadMediaFirst: "Veuillez d'abord téléverser au moins un fichier média !",
+        generateReady: "Prêt à générer le code QR !",
+        missingPrefix: "Manque : {items}",
+        missingViewLimit: "Limite de vues",
+        missingTimeControl: "Contrôle du temps",
+        missingDescription: "Description",
+        missingUpload: "Téléverser des médias",
+        createMediaError: "Erreur lors de la création du lien média : {error}",
+        networkCreateMediaError: "Erreur réseau lors de la création du lien média. Vérifiez votre connexion puis réessayez.",
+        accessCodeCopied: "Le code d'accès \"{code}\" a été copié dans le presse-papiers !",
+        accessCodeCopiedPlain: "Le code d'accès a été copié dans le presse-papiers !",
+        livePhotoOn: "Mode LIVE Photo activé",
+        livePhotoOff: "Marquer comme Live Photo",
+        livePhotoTitle: "Utiliser une lecture LIVE de style iPhone pour ce média",
+        maxFilesExceeded: "25 fichiers maximum autorisés !",
+        uploadFailedShort: "Échec du téléversement.",
+        invalidFileType: "Seuls les fichiers image et vidéo pris en charge sont autorisés.",
+        fallbackMessage: "Votre navigateur ne prend pas en charge le téléversement par glisser-déposer.",
+        fileTooBig: "Le fichier est trop volumineux ({{filesize}}MB). Taille max : {{maxFilesize}}MB.",
+        removeFile: "Retirer le fichier",
+        cancelUpload: "Annuler le téléversement",
+        queued: "En file d'attente : {name} (session : {session})",
+        removed: "Retiré : {name}",
+        readyUploadedCountSession: "Prêt ! {count} fichiers média téléversés dans le dossier {session}",
+        readyNewSession: "Prêt pour une nouvelle session de téléversement",
+        uploadAreaReset: "Zone de téléversement réinitialisée. Prête pour de nouveaux médias.",
+        supportedFormatsOnly: "Seuls PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM et M4V sont actuellement pris en charge.",
+        imageTooLarge: "L'image est trop volumineuse. Taille maximale : 50MB.",
+        videoTooLarge: "La vidéo est trop volumineuse. Taille maximale : 100MB.",
+        videoTooLong: "La vidéo est trop longue. Durée maximale : {seconds} secondes.",
+        initUploadFailed: "Impossible d'initialiser le téléversement.",
+        completeUploadFailed: "Impossible de finaliser le téléversement.",
+        uploading: "Téléversement : {name}...",
+        uploaded: "Téléversé : {name}",
+        uploadErrorFile: "Erreur : {name} - {error}"
+      }
+    },
+    it: {
+      seo: {
+        title: "Maiimg Hosting - Carica immagini e video brevi con condivisione QR",
+        description: "Carica rapidamente immagini e video brevi. Hosting media gratuito con link diretto, condivisione QR, limiti di visualizzazione e scadenza.",
+        keywords: "maiimg hosting,hosting media,caricare immagini,caricare video brevi,condivisione QR"
+      },
+      hero: {
+        title: "Carica e condividi immagini e video brevi",
+        subtitle: "Trasforma foto e video brevi in link QR condivisibili con tracciamento e controllo accessi"
+      },
+      upload: {
+        title: "Centro caricamento media",
+        subtitle: "Trascina immagini o video brevi, oppure clicca per sfogliare",
+        ready: "Pronto a caricare immagini e video brevi",
+        previewTitle: "Media selezionati"
+      },
+      flow: {
+        step1: "Carica media"
+      },
+      features: {
+        description: {
+          description: "Inserisci la descrizione della galleria"
+        },
+        generate: {
+          status: "Compila tutti i campi e carica prima i media"
+        }
+      },
+      results: {
+        subtitle: "Il link della tua galleria media e il codice QR sono pronti da condividere",
+        stats: {
+          images: "Media"
+        },
+        galleryLink: "Link galleria",
+        generatedLinkPlaceholder: "Il link generato apparirà qui",
+        copy: "Copia",
+        scanHint: "Scansiona per aprire la galleria",
+        accessRecords: "Registro accessi",
+        goToInsights: "Vai al registro accessi",
+        accessIntro: "Questi registri mostrano quando i visitatori aprono il link della galleria.",
+        accessCodeLabel: "Codice registro accessi",
+        copyCode: "Copia codice",
+        mediaFilesUploaded: "{count} file media caricati",
+        openAccessRecords: "Apri registro accessi",
+        accessCodeHint: "Usa questo codice per vedere chi ha aperto il link e quando."
+      },
+      messages: {
+        unknownError: "Errore sconosciuto",
+        uploadMediaFirst: "Carica prima almeno un file multimediale!",
+        generateReady: "Pronto per generare il codice QR!",
+        missingPrefix: "Manca: {items}",
+        missingViewLimit: "Limite visualizzazioni",
+        missingTimeControl: "Controllo del tempo",
+        missingDescription: "Descrizione",
+        missingUpload: "Carica media",
+        createMediaError: "Errore durante la creazione del link media: {error}",
+        networkCreateMediaError: "Errore di rete durante la creazione del link media. Controlla la connessione e riprova.",
+        accessCodeCopied: "Il codice di accesso \"{code}\" è stato copiato negli appunti!",
+        accessCodeCopiedPlain: "Il codice di accesso è stato copiato negli appunti!",
+        livePhotoOn: "Modalità LIVE Photo attiva",
+        livePhotoOff: "Segna come Live Photo",
+        livePhotoTitle: "Usa la riproduzione LIVE stile iPhone per questo media",
+        maxFilesExceeded: "Sono consentiti al massimo 25 file!",
+        uploadFailedShort: "Caricamento non riuscito.",
+        invalidFileType: "Sono consentiti solo file immagine e video supportati.",
+        fallbackMessage: "Il tuo browser non supporta il caricamento drag-and-drop.",
+        fileTooBig: "Il file è troppo grande ({{filesize}}MB). Dimensione massima: {{maxFilesize}}MB.",
+        removeFile: "Rimuovi file",
+        cancelUpload: "Annulla caricamento",
+        queued: "In coda: {name} (sessione: {session})",
+        removed: "Rimosso: {name}",
+        readyUploadedCountSession: "Pronto! {count} file media caricati nella cartella {session}",
+        readyNewSession: "Pronto per una nuova sessione di caricamento",
+        uploadAreaReset: "Area di caricamento reimpostata. Pronta per nuovi media.",
+        supportedFormatsOnly: "Al momento sono supportati solo PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM e M4V.",
+        imageTooLarge: "Immagine troppo grande. Dimensione massima: 50MB.",
+        videoTooLarge: "Video troppo grande. Dimensione massima: 100MB.",
+        videoTooLong: "Video troppo lungo. Durata massima: {seconds} secondi.",
+        initUploadFailed: "Impossibile inizializzare il caricamento.",
+        completeUploadFailed: "Impossibile completare il caricamento.",
+        uploading: "Caricamento: {name}...",
+        uploaded: "Caricato: {name}",
+        uploadErrorFile: "Errore: {name} - {error}"
+      }
+    }
+  };
+
   // Global i18n instance
   window.i18n = new I18n();
+  Object.entries(PAGE_TRANSLATION_OVERRIDES).forEach(([lang, overrides]) => {
+    if (window.i18n.translations[lang]) {
+      mergeTranslationObjects(window.i18n.translations[lang], overrides);
+    }
+  });
   
   // Global function to change language (called from HTML)
   window.changeLanguage = function(lang) {
     window.i18n.setLanguage(lang);
   };
-  
+
   // Initialize when DOM is loaded
   document.addEventListener('DOMContentLoaded', function() {
     window.i18n.init();
   });
-  

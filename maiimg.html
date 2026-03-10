@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="keywords" content="image hosting,image upload,photo sharing,image qr code,free image host,secure image sharing">
-  <meta name="description" content="Upload and share images instantly with QR codes. Secure, fast, and free image hosting service with tracking and analytics.">
+  <meta name="keywords" content="media hosting,image upload,short video upload,photo sharing,video sharing,qr media sharing,free media host,secure media sharing">
+  <meta name="description" content="Upload images and short videos instantly with QR codes. Secure, fast, and free media hosting with tracking, view limits, and expiration controls.">
   <!-- Favicon -->
       <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="alternate icon" type="image/x-icon" href="favicon.ico">
@@ -15,7 +15,7 @@
   <!-- SEO -->
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <meta name="robots" content="index, follow">
-  <title>Image QR Generator - Upload & Share Images with QR Codes</title>
+  <title>Maiimg Hosting - Upload Images & Short Videos with QR Share</title>
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
@@ -80,7 +80,7 @@
   </style>
   
   <!-- Internationalization -->
-  <script src="trans.js?v=2026021902"></script>
+  <script src="trans.js?v=2026031001"></script>
 </head>
 
 <body>
@@ -88,7 +88,7 @@
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a class="navbar-brand" href="#hero">
-        <i class="fas fa-images me-2"></i><span data-translate="nav.title">Image QR Generator</span>
+        <i class="fas fa-images me-2"></i><span data-translate="nav.title">Maiimg Hosting</span>
       </a>
       
       <!-- Desktop User/Auth + Language -->
@@ -156,10 +156,10 @@
     <div class="container">
       <h1 class="hero-title">
         <i class="fas fa-cloud-upload-alt"></i><br>
-        <span data-translate="hero.title">Upload & Share Images</span>
+        <span data-translate="hero.title">Upload Images & Short Videos</span>
       </h1>
       <p class="hero-subtitle" data-translate="hero.subtitle">
-        Turn your images into shareable QR codes with advanced tracking and analytics
+        Turn your photos and short videos into shareable QR links with tracking and access controls
       </p>
     </div>
   </section>
@@ -169,7 +169,7 @@
       <div class="flow-nav-inner">
         <button type="button" class="flow-step is-current" data-step="1">
           <span class="flow-step-num"><span>1</span></span>
-          <span class="flow-step-label" data-translate="flow.step1">Upload Images</span>
+          <span class="flow-step-label" data-translate="flow.step1">Upload Media</span>
         </button>
         <button type="button" class="flow-step" data-step="2">
           <span class="flow-step-num"><span>2</span></span>
@@ -185,8 +185,8 @@
     <!-- Main Upload Section -->
     <section class="main-upload-section" id="upload">
       <div class="text-center mb-4">
-        <h2 class="section-title" data-translate="upload.title">Image Upload Center</h2>
-        <p class="section-subtitle" data-translate="upload.subtitle">Drag & drop your images or click to browse</p>
+        <h2 class="section-title" data-translate="upload.title">Media Upload Center</h2>
+        <p class="section-subtitle" data-translate="upload.subtitle">Drag & drop images or short videos, or click to browse</p>
         
         <!-- Feature Badges -->
         <div class="feature-badges mb-4">
@@ -229,14 +229,14 @@
         <div class="col-12 mb-4">
           <div class="alert alert-info border-0 rounded-4" id="uploadStatus">
             <i class="fas fa-info-circle me-2"></i>
-            <span id="pleaseupload" data-translate="upload.ready">Ready to upload media</span>
+            <span id="pleaseupload" data-translate="upload.ready">Ready to upload images and short videos</span>
           </div>
         </div>
       </div>
 
       <!-- File Preview Area -->
       <div class="file-preview-area" id="filePreviewArea" style="display: none;">
-        <h4>Selected Images</h4>
+        <h4 data-translate="upload.previewTitle">Selected Media</h4>
         <div class="file-grid" id="fileGrid"></div>
       </div>
     </section>
@@ -278,7 +278,7 @@
           <i class="fas fa-tag feature-icon"></i>
           <h5 class="feature-title" data-translate="features.description.title">Description</h5>
           <input class="form-control mb-2" type="text" id="caption" data-translate-placeholder="features.description.placeholder" placeholder="Add a description (required)" maxlength="100" required>
-          <small class="text-muted d-block mb-2" data-translate="features.description.description">Enter image description</small>
+          <small class="text-muted d-block mb-2" data-translate="features.description.description">Enter gallery description</small>
           <h5 class="feature-title" data-translate="features.generate.title">Generate Link & QR</h5>
           <button type="button" class="btn btn-primary w-100" onclick="generateImageQR()" disabled id="generateBtn">
             <i class="fas fa-link me-2"></i><span data-translate="features.generate.button">Create Link & QR Code</span>
@@ -298,7 +298,7 @@
         <h2 class="success-title">
           <span data-translate="results.success">QR Code Generated Successfully!</span>
         </h2>
-        <p class="success-subtitle" data-translate="results.subtitle">Your image gallery link and QR code are ready to share</p>
+        <p class="success-subtitle" data-translate="results.subtitle">Your media gallery link and QR code are ready to share</p>
       </div>
 
       <!-- Enhanced Statistics Cards -->
@@ -311,7 +311,7 @@
               </div>
               <div class="stat-content">
                 <div class="stat-number" id="fileCount">0</div>
-                <div class="stat-label" data-translate="results.stats.images">Images</div>
+                <div class="stat-label" data-translate="results.stats.images">Media</div>
               </div>
             </div>
           </div>
@@ -348,18 +348,18 @@
             <div class="result-card-body">
               <div class="share-link-container">
                 <div class="gallery-link-header">
-                  <label class="form-label mb-0" id="gallery-link-title">Gallery Link</label>
+                  <label class="form-label mb-0" id="gallery-link-title" data-translate="results.galleryLink">Gallery Link</label>
                   <span class="gallery-link-arrow" aria-hidden="true">
                     <i class="fas fa-arrow-right"></i>
                   </span>
-                  <a href="#insights-section" class="gallery-link-jump" title="Go to Insights">
+                  <a href="#insights-section" class="gallery-link-jump" data-translate-title="results.goToInsights" title="Go to access records">
                     <i class="fas fa-chart-line"></i>
                   </a>
                 </div>
                 <div class="input-group mb-2">
-                  <input type="text" class="form-control" id="webinputpic" readonly placeholder="Generated link will appear here">
+                  <input type="text" class="form-control" id="webinputpic" readonly data-translate-placeholder="results.generatedLinkPlaceholder" placeholder="Generated link will appear here">
                   <button class="btn btn-primary" type="button" onclick="myFunctionpic()">
-                    <i class="fas fa-copy me-1"></i>Copy
+                    <i class="fas fa-copy me-1"></i><span data-translate="results.copy">Copy</span>
                   </button>
                 </div>
                 <div id="Copied" class="copy-feedback"></div>
@@ -367,9 +367,9 @@
 
               <div class="inline-qr-block text-center mt-3">
                 <div id="qrcodewebpic" class="qr-container-enhanced">
-                  <p class="text-muted">QR code will appear here</p>
+                  <p class="text-muted" data-translate="modals.common.qrPlaceholder">QR code will appear here</p>
                 </div>
-                <small class="text-muted mt-2 d-block">Scan to access gallery</small>
+                <small class="text-muted mt-2 d-block" data-translate="results.scanHint">Scan to open the gallery</small>
               </div>
               
               <div class="action-buttons mt-3">
@@ -386,12 +386,12 @@
 
         <!-- Tracking Information -->
         <div class="col-12 col-lg-5">
-          <div class="result-card tracking-card h-100" id="insights-section">
-            <div class="result-card-header">
-              <h5><i class="fas fa-list-check me-2"></i>Access Records</h5>
-            </div>
-            <div class="result-card-body">
-              <div id="btypesay" class="tracking-info">
+            <div class="result-card tracking-card h-100" id="insights-section">
+              <div class="result-card-header">
+              <h5><i class="fas fa-list-check me-2"></i><span data-translate="results.accessRecords">Access Records</span></h5>
+              </div>
+              <div class="result-card-body">
+                <div id="btypesay" class="tracking-info">
                 <!-- Insight info will be inserted here -->
               </div>
             </div>
@@ -752,6 +752,7 @@
     // Global variables for generated codes
     let generatedTypeA = 'Reader';
     let generatedTypeB = 'Tracker';
+    let lastGeneratedSummary = null;
     let uploadedFiles = [];
     let currentUploadSessionId = null; // 保持为 null，在第一次上传时生成
     let myDropzone; // 添加全局变量来存储 dropzone 实例
@@ -768,8 +769,11 @@
 
     // Initialize translations when page loads
     function initializeTranslations() {
-      // i18n system is already initialized in i18n.js
-      // No need to do anything here
+      if (window.i18n) {
+        currentLanguage = window.i18n.currentLanguage || currentLanguage;
+        window.i18n.updatePageTranslations();
+        refreshLocalizedRuntimeUi();
+      }
     }
 
     // Change language function
@@ -778,12 +782,13 @@
       // Use the global i18n instance from i18n.js
       if (window.i18n) {
         window.i18n.setLanguage(lang);
-        currentLanguage = lang;
+        currentLanguage = window.i18n.currentLanguage || lang;
         syncMobileLanguageFlag(lang);
         updateFooterComplianceText(lang);
         if (typeof window.__updateMaiimgExpiration === 'function') {
           window.__updateMaiimgExpiration();
         }
+        refreshLocalizedRuntimeUi();
         
         // 保存语言偏好到 localStorage
         localStorage.setItem('preferred-language', lang);
@@ -832,11 +837,138 @@
 
     // Get translation for a specific key and language
     function getTranslation(key, lang) {
-      // Use the global i18n instance
-      if (window.i18n) {
-        return window.i18n.t(key);
+      if (window.i18n && window.i18n.translations) {
+        const keys = key.split('.');
+        const languages = [];
+        if (lang && window.i18n.translations[lang]) languages.push(window.i18n.translations[lang]);
+        if (window.i18n.translations[window.i18n.currentLanguage]) languages.push(window.i18n.translations[window.i18n.currentLanguage]);
+        if (window.i18n.translations.en) languages.push(window.i18n.translations.en);
+
+        for (const source of languages) {
+          let value = source;
+          for (const part of keys) {
+            if (value && typeof value === 'object') {
+              value = value[part];
+            } else {
+              value = null;
+              break;
+            }
+          }
+          if (typeof value === 'string' && value.length > 0) {
+            return value;
+          }
+        }
       }
-      return key; // fallback
+      return key;
+    }
+
+    function translateText(key, replacements = null, fallback = '') {
+      let text = getTranslation(key, currentLanguage);
+      if (!text || text === key) {
+        text = fallback || key;
+      }
+      if (replacements && typeof text === 'string') {
+        text = text.replace(/\{(\w+)\}|#\{(\w+)\}/g, (match, a, b) => {
+          const token = a || b;
+          return Object.prototype.hasOwnProperty.call(replacements, token) ? String(replacements[token]) : match;
+        });
+      }
+      return text;
+    }
+
+    function getDropzoneDefaultMessageHtml() {
+      return `
+        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+        <div class="upload-text">${translateText('upload.dropText', null, 'Drop or tap to upload')}</div>
+        <div class="upload-subtext">${translateText('upload.supportText', null, 'PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM, M4V • Images up to 50MB • Videos up to 100MB / 120s • Up to 25 files')}</div>
+      `.trim();
+    }
+
+    function applyDropzoneTranslations() {
+      if (!myDropzone) return;
+
+      myDropzone.options.dictDefaultMessage = getDropzoneDefaultMessageHtml();
+      myDropzone.options.dictMaxFilesExceeded = translateText('messages.maxFilesExceeded', null, 'Maximum 25 files allowed!');
+      myDropzone.options.dictResponseError = translateText('messages.uploadFailedShort', null, 'Upload failed.');
+      myDropzone.options.dictInvalidFileType = translateText('messages.invalidFileType', null, 'Only supported image and video files are allowed.');
+      myDropzone.options.dictFallbackMessage = translateText('messages.fallbackMessage', null, 'Your browser does not support drag and drop uploads.');
+      myDropzone.options.dictFileTooBig = translateText('messages.fileTooBig', null, 'File is too big ({{filesize}}MB). Max filesize: {{maxFilesize}}MB.');
+      myDropzone.options.dictRemoveFile = translateText('messages.removeFile', null, 'Remove file');
+      myDropzone.options.dictCancelUpload = translateText('messages.cancelUpload', null, 'Cancel upload');
+
+      const messageEl = myDropzone.element?.querySelector('.dz-message');
+      const hasNoFiles = !myDropzone.files || myDropzone.files.every((file) => file._removed);
+      if (messageEl && hasNoFiles) {
+        messageEl.innerHTML = myDropzone.options.dictDefaultMessage;
+      }
+
+      myDropzone.element?.querySelectorAll('.dz-remove')?.forEach((link) => {
+        link.textContent = myDropzone.options.dictRemoveFile;
+      });
+    }
+
+    function renderTrackingSummary(summary = lastGeneratedSummary) {
+      const panel = document.getElementById('btypesay');
+      if (!panel || !summary) return;
+
+      panel.innerHTML = `
+        <div class="insights-intro text-center mb-2">
+          ${translateText('results.accessIntro', null, 'These records show when visitors open your gallery link.')}
+        </div>
+        <div class="text-center mb-3">
+          <div class="tracking-code-display">
+            <div class="tracking-code-label">${translateText('results.accessCodeLabel', null, 'Access records code')}</div>
+            <div class="tracking-code-row">
+              <div class="tracking-code-value">${summary.trackingCode}</div>
+              <button class="btn btn-outline-secondary btn-sm tracking-copy-btn" onclick="copyTrackingCode('${summary.trackingCode}')">
+                <i class="fas fa-copy me-1"></i>${translateText('results.copyCode', null, 'Copy Code')}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tracking-info-compact mb-3">
+          <div class="gallery-info">
+            <i class="fas fa-images me-2"></i>
+            <span class="info-text">${translateText('results.mediaFilesUploaded', { count: summary.fileCount }, `${summary.fileCount} media files uploaded`)}</span>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a href="https://maiimg.com/tracking.html?id=${summary.trackingCode}" target="_blank" class="btn btn-primary btn-sm">
+            <i class="fas fa-external-link-alt me-1"></i>${translateText('results.openAccessRecords', null, 'Open Access Records')}
+          </a>
+        </div>
+
+        <small class="text-muted d-block text-center mt-2">${translateText('results.accessCodeHint', null, 'Use this code to see who opened the link and when.')}</small>
+      `;
+    }
+
+    function refreshLocalizedRuntimeUi() {
+      updateGenerateButton();
+      applyDropzoneTranslations();
+
+      const statusElement = document.getElementById('pleaseupload');
+      const resultsVisible = !!(document.getElementById('results') && window.getComputedStyle(document.getElementById('results')).display !== 'none');
+      if (statusElement && !currentUploadSessionId && uploadedFiles.length === 0) {
+        statusElement.textContent = resultsVisible
+          ? translateText('messages.readyNewSession', null, 'Ready for a new upload session')
+          : translateText('upload.ready', null, 'Ready to upload images and short videos');
+      }
+
+      if (myDropzone?.files?.length) {
+        myDropzone.files.forEach((file) => {
+          const button = file.previewElement?.querySelector('.live-photo-toggle-btn');
+          if (button) {
+            button.title = translateText('messages.livePhotoTitle', null, 'Use iPhone-style LIVE playback for this media item');
+            renderLivePhotoToggleState(button, file);
+          }
+        });
+      }
+
+      if (lastGeneratedSummary) {
+        renderTrackingSummary(lastGeneratedSummary);
+      }
     }
 
     // Update footer compliance text based on selected language
@@ -1109,7 +1241,7 @@
     // Generate Image QR Code
     async function generateImageQR() {
       if (uploadedFiles.length === 0) {
-        showNotification('Please upload at least one media file first!', 'warning');
+        showNotification(translateText('messages.uploadMediaFirst', null, 'Please upload at least one media file first!'), 'warning');
         return;
       }
 
@@ -1122,7 +1254,7 @@
       // Show loading state
       const button = document.getElementById('generateBtn');
       const originalText = button.innerHTML;
-      button.innerHTML = '<span class="loading"></span> Generating...';
+      button.innerHTML = `<span class="loading"></span> ${translateText('messages.generating', null, 'Generating...')}`;
       button.disabled = true;
 
       try {
@@ -1174,39 +1306,11 @@
           document.getElementById("fileCount").textContent = result.fileCount;
           document.getElementById("viewLimit").textContent = result.limit === 100000000 ? '∞' : result.limit.toLocaleString();
           document.getElementById("expirationDisplay").textContent = formatEndtimeDisplay(result.endtime);
-
-          // Update tracking code information in the new enhanced layout
-          document.getElementById("btypesay").innerHTML = `
-            <div class="insights-intro text-center mb-2">
-              These records show when people open your Gallery Link.
-            </div>
-            <div class="text-center mb-3">
-              <div class="tracking-code-display">
-                <div class="tracking-code-label">Records Access Code:</div>
-                <div class="tracking-code-row">
-                  <div class="tracking-code-value">${generatedTypeB}</div>
-                  <button class="btn btn-outline-secondary btn-sm tracking-copy-btn" onclick="copyTrackingCode('${generatedTypeB}')">
-                    <i class="fas fa-copy me-1"></i>Copy Code
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <div class="tracking-info-compact mb-3">
-              <div class="gallery-info">
-                <i class="fas fa-images me-2"></i>
-                <span class="info-text">${result.fileCount} media files uploaded</span>
-              </div>
-            </div>
-            
-            <div class="text-center">
-              <a href="https://maiimg.com/tracking.html?id=${generatedTypeB}" target="_blank" class="btn btn-primary btn-sm">
-                <i class="fas fa-external-link-alt me-1"></i>Open Access Records
-              </a>
-            </div>
-            
-            <small class="text-muted d-block text-center mt-2">Use this code to view who opened the link and when.</small>
-          `;
+          lastGeneratedSummary = {
+            fileCount: result.fileCount,
+            trackingCode: generatedTypeB
+          };
+          renderTrackingSummary(lastGeneratedSummary);
 
           // Generate QR code for the share link
           makeCodeweb();
@@ -1235,7 +1339,7 @@
           
           // 更新按钮状态
           updateGenerateButton();
-          updateUploadStatus('Ready for new upload session');
+          updateUploadStatus(translateText('messages.readyNewSession', null, 'Ready for a new upload session'));
 
           // Scroll to Gallery Link title after layout settles
           setTimeout(() => {
@@ -1248,13 +1352,27 @@
             }
           }, 80);
           
-          showNotification(`✅ QR code generated successfully! Database ID: ${result.autoId}. Ready for next upload.`, 'success');
+          showNotification(translateText('messages.linkGenerated', null, 'Link and QR code generated successfully!'), 'success');
           
         } else {
-          showNotification('Error creating media link: ' + (result.error || 'Unknown error'), 'error');
+          showNotification(
+            translateText(
+              'messages.createMediaError',
+              { error: result.error || translateText('messages.unknownError', null, 'Unknown error') },
+              `Error creating media link: ${result.error || 'Unknown error'}`
+            ),
+            'error'
+          );
         }
       } catch (error) {
-        showNotification('Network error creating media link. Please check your connection and try again.', 'error');
+        showNotification(
+          translateText(
+            'messages.networkCreateMediaError',
+            null,
+            'Network error while creating the media link. Please check your connection and try again.'
+          ),
+          'error'
+        );
       } finally {
         // Restore button state
         button.innerHTML = originalText;
@@ -1266,7 +1384,14 @@
     async function copyTrackingCode(trackingCode) {
       try {
         await navigator.clipboard.writeText(trackingCode);
-        showNotification(`✅ Access code "${trackingCode}" copied to clipboard!`, 'success');
+        showNotification(
+          translateText(
+            'messages.accessCodeCopied',
+            { code: trackingCode },
+            `Access code "${trackingCode}" copied to clipboard!`
+          ),
+          'success'
+        );
       } catch (err) {
         // Fallback for older browsers
         const textArea = document.createElement('textarea');
@@ -1275,7 +1400,7 @@
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        showNotification(`✅ Access code copied to clipboard!`, 'success');
+        showNotification(translateText('messages.accessCodeCopiedPlain', null, 'Access code copied to clipboard!'), 'success');
       }
     }
 
@@ -1285,7 +1410,7 @@
       
       try {
         await navigator.clipboard.writeText(copyText.value);
-        document.getElementById("Copied").innerHTML = '<span class="copy-success"><i class="fas fa-check me-1"></i>Copied to clipboard!</span>';
+        document.getElementById("Copied").innerHTML = `<span class="copy-success"><i class="fas fa-check me-1"></i>${translateText('messages.copied', null, 'Copied to clipboard!')}</span>`;
         setTimeout(() => {
           document.getElementById("Copied").innerHTML = "";
         }, 3000);
@@ -1294,7 +1419,7 @@
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         document.execCommand("copy");
-        document.getElementById("Copied").innerHTML = '<span class="copy-success"><i class="fas fa-check me-1"></i>Copied!</span>';
+        document.getElementById("Copied").innerHTML = `<span class="copy-success"><i class="fas fa-check me-1"></i>${translateText('messages.copied', null, 'Copied to clipboard!')}</span>`;
         setTimeout(() => {
           document.getElementById("Copied").innerHTML = "";
         }, 3000);
@@ -1767,6 +1892,7 @@
     function updateGenerateButton() {
       const generateBtn = document.getElementById('generateBtn');
       const generateBtnStatus = document.getElementById('generateBtnStatus');
+      if (!generateBtn || !generateBtnStatus) return;
       const limitInput = document.getElementById('limit');
       const passwordInput = document.getElementById('password');
       const captionInput = document.getElementById('caption');
@@ -1780,19 +1906,19 @@
       // Enable button only if all conditions are met
       if (hasLimit && hasPassword && hasCaption && hasFiles) {
         generateBtn.disabled = false;
-        generateBtnStatus.textContent = 'Ready to generate QR code!';
+        generateBtnStatus.textContent = translateText('messages.generateReady', null, 'Ready to generate QR code!');
         generateBtnStatus.className = 'text-success';
       } else {
         generateBtn.disabled = true;
         
         // Show specific missing requirements
         const missing = [];
-        if (!hasLimit) missing.push('View limit');
-        if (!hasPassword) missing.push('Time control');
-        if (!hasCaption) missing.push('Description');
-        if (!hasFiles) missing.push('Upload media');
+        if (!hasLimit) missing.push(translateText('messages.missingViewLimit', null, 'View limit'));
+        if (!hasPassword) missing.push(translateText('messages.missingTimeControl', null, 'Time control'));
+        if (!hasCaption) missing.push(translateText('messages.missingDescription', null, 'Description'));
+        if (!hasFiles) missing.push(translateText('messages.missingUpload', null, 'Upload media'));
         
-        generateBtnStatus.textContent = `Missing: ${missing.join(', ')}`;
+        generateBtnStatus.textContent = translateText('messages.missingPrefix', { items: missing.join(', ') }, `Missing: ${missing.join(', ')}`);
         generateBtnStatus.className = 'text-muted';
       }
       updateFlowNavigator();
@@ -1865,7 +1991,9 @@
       const isLivePhoto = isLivePhotoFile(file);
       button.classList.toggle('is-active', isLivePhoto);
       button.setAttribute('aria-pressed', isLivePhoto ? 'true' : 'false');
-      button.textContent = isLivePhoto ? 'LIVE Photo mode on' : 'Mark as Live Photo';
+      button.textContent = isLivePhoto
+        ? translateText('messages.livePhotoOn', null, 'LIVE Photo mode on')
+        : translateText('messages.livePhotoOff', null, 'Mark as Live Photo');
     }
 
     function attachLivePhotoToggle(file) {
@@ -1879,7 +2007,7 @@
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'live-photo-toggle-btn';
-      button.title = 'Use iPhone-style LIVE playback for this media item';
+      button.title = translateText('messages.livePhotoTitle', null, 'Use iPhone-style LIVE playback for this media item');
       renderLivePhotoToggleState(button, file);
 
       button.addEventListener('click', (event) => {
@@ -2010,12 +2138,18 @@
     async function prepareMediaFile(file) {
       const kind = getFileKind(file);
       if (!kind) {
-        throw new Error('Only PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM and M4V are supported right now.');
+        throw new Error(
+          translateText(
+            'messages.supportedFormatsOnly',
+            null,
+            'Only PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM and M4V are supported right now.'
+          )
+        );
       }
 
       if (kind === 'image') {
         if (file.size > MAX_IMAGE_BYTES) {
-          throw new Error('Image too large. Maximum size is 50MB.');
+          throw new Error(translateText('messages.imageTooLarge', null, 'Image too large. Maximum size is 50MB.'));
         }
 
         const processedFile = await optimizeImageBeforeUpload(file);
@@ -2028,12 +2162,18 @@
       }
 
       if (file.size > MAX_VIDEO_BYTES) {
-        throw new Error('Video too large. Maximum size is 100MB.');
+        throw new Error(translateText('messages.videoTooLarge', null, 'Video too large. Maximum size is 100MB.'));
       }
 
       const duration = await readVideoDuration(file);
       if (duration && duration > MAX_VIDEO_SECONDS) {
-        throw new Error(`Video too long. Maximum duration is ${MAX_VIDEO_SECONDS} seconds.`);
+        throw new Error(
+          translateText(
+            'messages.videoTooLong',
+            { seconds: MAX_VIDEO_SECONDS },
+            `Video too long. Maximum duration is ${MAX_VIDEO_SECONDS} seconds.`
+          )
+        );
       }
 
       return {
@@ -2061,7 +2201,7 @@
 
       const result = await response.json();
       if (!response.ok || !result.success) {
-        throw new Error(result.error || 'Failed to initialize upload.');
+        throw new Error(result.error || translateText('messages.initUploadFailed', null, 'Failed to initialize upload.'));
       }
 
       return result;
@@ -2087,7 +2227,7 @@
 
       const result = await response.json();
       if (!response.ok || !result.success) {
-        throw new Error(result.error || 'Upload failed.');
+        throw new Error(result.error || translateText('messages.uploadFailedShort', null, 'Upload failed.'));
       }
 
       dropzone.emit('uploadprogress', file, 100, uploadFile.size);
@@ -2123,7 +2263,7 @@
 
         const chunkResult = await chunkResponse.json();
         if (!chunkResponse.ok || !chunkResult.success) {
-          throw new Error(chunkResult.error || `Chunk ${partNumber} upload failed.`);
+          throw new Error(chunkResult.error || translateText('messages.uploadFailedShort', null, 'Upload failed.'));
         }
 
         parts.push(chunkResult.part);
@@ -2152,7 +2292,7 @@
 
       const completeResult = await completeResponse.json();
       if (!completeResponse.ok || !completeResult.success) {
-        throw new Error(completeResult.error || 'Failed to complete upload.');
+        throw new Error(completeResult.error || translateText('messages.completeUploadFailed', null, 'Failed to complete upload.'));
       }
 
       return completeResult;
@@ -2190,7 +2330,7 @@
       file.status = Dropzone.UPLOADING;
       dropzone.emit('processing', file);
       dropzone.emit('uploadprogress', file, 0, 0);
-      updateUploadStatus(`Uploading: ${file.name}...`);
+      updateUploadStatus(translateText('messages.uploading', { name: file.name }, `Uploading: ${file.name}...`));
 
       if (initResult.uploadMode === 'multipart') {
         result = await uploadMultipartMedia(prepared.uploadFile, initResult, file, dropzone, prepared.duration);
@@ -2225,7 +2365,7 @@
       dropzone.emit('success', file, result);
       dropzone.emit('complete', file);
 
-      updateUploadStatus(`✅ Uploaded: ${file.name} (${uploadedRecord.kind})`);
+      updateUploadStatus(translateText('messages.uploaded', { name: file.name }, `Uploaded: ${file.name}`));
       updateGenerateButton();
     }
 
@@ -2254,14 +2394,14 @@
         parallelUploads: MAX_PARALLEL_MEDIA_UPLOADS,
         clickable: true,
         createImageThumbnails: true,
-        dictDefaultMessage: '<i class="fas fa-cloud-upload-alt upload-icon"></i><div class="upload-text">Drop or tap to upload</div><div class="upload-subtext">PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM, M4V • Images up to 50MB • Videos up to 100MB / 120s • Up to 25 files</div>',
-        dictMaxFilesExceeded: "Maximum 25 files allowed!",
-        dictResponseError: 'Upload failed!',
-        dictInvalidFileType: "Only supported image and video files are allowed.",
-        dictFallbackMessage: "Your browser does not support drag and drop uploads.",
-        dictFileTooBig: "File is too big ({{filesize}}MB). Max filesize: {{maxFilesize}}MB.",
-        dictRemoveFile: "Remove file",
-        dictCancelUpload: "Cancel upload",
+        dictDefaultMessage: getDropzoneDefaultMessageHtml(),
+        dictMaxFilesExceeded: translateText('messages.maxFilesExceeded', null, 'Maximum 25 files allowed!'),
+        dictResponseError: translateText('messages.uploadFailedShort', null, 'Upload failed.'),
+        dictInvalidFileType: translateText('messages.invalidFileType', null, 'Only supported image and video files are allowed.'),
+        dictFallbackMessage: translateText('messages.fallbackMessage', null, 'Your browser does not support drag and drop uploads.'),
+        dictFileTooBig: translateText('messages.fileTooBig', null, 'File is too big ({{filesize}}MB). Max filesize: {{maxFilesize}}MB.'),
+        dictRemoveFile: translateText('messages.removeFile', null, 'Remove file'),
+        dictCancelUpload: translateText('messages.cancelUpload', null, 'Cancel upload'),
         timeout: 300000,
 
         init: function() {
@@ -2281,17 +2421,29 @@
               currentUploadSessionId = generateUploadSessionId();
             }
 
-            updateUploadStatus(`Queued: ${file.name} (Session: ${currentUploadSessionId})`);
+            updateUploadStatus(
+              translateText(
+                'messages.queued',
+                { name: file.name, session: currentUploadSessionId },
+                `Queued: ${file.name} (Session: ${currentUploadSessionId})`
+              )
+            );
             scheduleMediaUpload(() => uploadMediaFile(file, dropzone)).catch(async (error) => {
               if (file._removed) {
                 return;
               }
 
               file.status = Dropzone.ERROR;
-              dropzone.emit('error', file, error.message || 'Upload failed');
+              dropzone.emit('error', file, error.message || translateText('messages.uploadFailedShort', null, 'Upload failed.'));
               dropzone.emit('complete', file);
-              updateUploadStatus(`❌ Error: ${file.name} - ${error.message || 'Upload failed'}`);
-              showNotification(error.message || 'Upload failed', 'error');
+              updateUploadStatus(
+                translateText(
+                  'messages.uploadErrorFile',
+                  { name: file.name, error: error.message || translateText('messages.uploadFailedShort', null, 'Upload failed.') },
+                  `Error: ${file.name} - ${error.message || 'Upload failed.'}`
+                )
+              );
+              showNotification(error.message || translateText('messages.uploadFailedShort', null, 'Upload failed.'), 'error');
               await abortMultipartUpload(file);
             });
           });
@@ -2311,28 +2463,36 @@
             const hasRemainingFiles = this.files.some((dzFile) => dzFile !== file && !dzFile._removed);
             if (!hasRemainingFiles && uploadedFiles.length === 0) {
               currentUploadSessionId = null;
-              updateUploadStatus('Ready for new upload session');
+              updateUploadStatus(translateText('messages.readyNewSession', null, 'Ready for a new upload session'));
             } else {
-              updateUploadStatus(`Removed: ${file.name}`);
+              updateUploadStatus(translateText('messages.removed', { name: file.name }, `Removed: ${file.name}`));
             }
           });
 
           this.on("queuecomplete", function() {
             if (uploadedFiles.length > 0) {
-              updateUploadStatus(`Ready! ${uploadedFiles.length} media files uploaded to folder: ${currentUploadSessionId}`);
+              updateUploadStatus(
+                translateText(
+                  'messages.readyUploadedCountSession',
+                  { count: uploadedFiles.length, session: currentUploadSessionId },
+                  `Ready! ${uploadedFiles.length} media files uploaded to folder: ${currentUploadSessionId}`
+                )
+              );
             } else {
-              updateUploadStatus('Ready for new upload session');
+              updateUploadStatus(translateText('messages.readyNewSession', null, 'Ready for a new upload session'));
             }
           });
 
           this.on("reset", function() {
             currentUploadSessionId = null;
             uploadedFiles = [];
-            updateUploadStatus('Upload area reset - ready for new media');
+            updateUploadStatus(translateText('messages.uploadAreaReset', null, 'Upload area reset. Ready for new media.'));
             updateGenerateButton();
           });
         }
       });
+
+      applyDropzoneTranslations();
 
       // Add real-time validation listeners
       ['limit', 'password', 'caption', 'expiration_preset', 'expiration_custom_days'].forEach(fieldId => {
