@@ -2582,6 +2582,13 @@
       };
     }
 
+    function encodeHeaderSafeFileName(fileName) {
+      if (!fileName) return 'file';
+      return encodeURIComponent(fileName).replace(/[!'()*]/g, (char) => (
+        `%${char.charCodeAt(0).toString(16).toUpperCase()}`
+      ));
+    }
+
     async function requestUploadInit(file, uploadSessionId, duration) {
       const response = await fetch(`${UPLOAD_API_BASE}/init`, {
         method: 'POST',
@@ -2614,7 +2621,7 @@
         headers: {
           'Content-Type': uploadFile.type || 'application/octet-stream',
           'X-File-Key': initResult.key,
-          'X-File-Name': uploadFile.name,
+          'X-File-Name': encodeHeaderSafeFileName(uploadFile.name),
           'X-File-Type': uploadFile.type || 'application/octet-stream',
           'X-Media-Kind': initResult.kind,
           'X-Upload-Session-Id': initResult.uploadSessionId
