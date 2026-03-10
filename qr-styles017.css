@@ -1358,8 +1358,6 @@ footer {
   user-select: none;
 }
 
-.live-photo-toggle-wrap,
-.live-photo-toggle-btn,
 .upload-area.dropzone .dz-remove,
 .upload-area.dropzone .dz-details,
 .upload-area.dropzone .dz-progress {
@@ -1485,11 +1483,6 @@ footer {
 .upload-area.dropzone .dz-preview[data-media-kind="video"]::before {
   background: #f97316;
   box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.16);
-}
-
-.upload-area.dropzone .dz-preview.is-live-photo-preview::before {
-  background: #10b981;
-  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.18);
 }
 
 .upload-area.dropzone .dz-preview:hover {
