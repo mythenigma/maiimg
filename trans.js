@@ -2354,11 +2354,47 @@ class I18n {
         step1: "Upload Media"
       },
       features: {
+        viewLimit: {
+          unit: "views"
+        },
+        timeControl: {
+          unit: "sec"
+        },
+        expiration: {
+          description: "Choose how long the gallery stays available."
+        },
         description: {
           description: "Enter gallery description"
         },
         generate: {
+          description: "Create the gallery link once your media and access rules are ready.",
           status: "Fill all fields and upload media first"
+        },
+        presets: {
+          eyebrow: "Quick presets",
+          title: "Pick a sharing mode",
+          description: "Start with a recommended setup, then fine-tune the limits below.",
+          summaryLabel: "Mode",
+          public: {
+            title: "Open share",
+            copy: "Almost unrestricted sharing for easy access."
+          },
+          temporary: {
+            title: "Temporary",
+            copy: "Short-term sharing that expires automatically."
+          },
+          strict: {
+            title: "Strict",
+            copy: "Few views, short sessions, and fast expiration."
+          },
+          custom: {
+            title: "Custom",
+            copy: "Manually adjusted settings."
+          }
+        },
+        advanced: {
+          title: "Advanced settings",
+          description: "Adjust the details after choosing a preset."
         }
       },
       results: {
@@ -2435,11 +2471,47 @@ class I18n {
         step1: "上传媒体"
       },
       features: {
+        viewLimit: {
+          unit: "次"
+        },
+        timeControl: {
+          unit: "秒"
+        },
+        expiration: {
+          description: "设置这个图集会在多久后自动失效。"
+        },
         description: {
           description: "输入图集描述"
         },
         generate: {
+          description: "媒体和访问规则都确认后，再生成链接和二维码。",
           status: "请先填写所有字段并上传媒体"
+        },
+        presets: {
+          eyebrow: "快捷模式",
+          title: "先选一个分享模式",
+          description: "先用推荐方案快速开始，下面仍然可以继续细调。",
+          summaryLabel: "模式",
+          public: {
+            title: "公开分享",
+            copy: "适合普通传播，限制较少，访问更顺畅。"
+          },
+          temporary: {
+            title: "临时分享",
+            copy: "适合短期使用，到期后自动失效。"
+          },
+          strict: {
+            title: "严格保护",
+            copy: "查看次数少、时长短、过期更快。"
+          },
+          custom: {
+            title: "自定义",
+            copy: "已手动调整设置。"
+          }
+        },
+        advanced: {
+          title: "高级设置",
+          description: "选完模式后，还可以继续微调详细参数。"
         }
       },
       results: {

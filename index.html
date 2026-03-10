@@ -450,48 +450,117 @@
     </section>
 
     <!-- Configuration Section -->
-    <section class="config-section" id="config">
+    <section class="config-section config-variant-a" id="config">
       <div class="feature-cards">
         <div class="feature-card">
-          <i class="fas fa-shield-alt feature-icon"></i>
-          <h5 class="feature-title" data-translate="features.accessControl.title">Access Control</h5>
-          <input class="form-control mb-2" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="Max views (required)" min="1" max="99999999" required>
-          <input class="form-control" type="number" id="password" data-translate-placeholder="features.timeControl.placeholder" placeholder="Seconds per view (required)" min="1" max="99999999" required>
-          <small class="text-muted" data-translate="features.accessControl.description">Set both view limit and per-view duration in one panel</small>
+          <div class="feature-card-head">
+            <span class="feature-icon-badge">
+              <i class="fas fa-shield-alt feature-icon"></i>
+            </span>
+            <div>
+              <h5 class="feature-title" data-translate="features.accessControl.title">Access Control</h5>
+              <p class="feature-copy" data-translate="features.accessControl.description">Set both view limit and per-view duration in one panel</p>
+            </div>
+          </div>
+
+          <div class="feature-field">
+            <label class="config-label" for="limit" data-translate="features.viewLimit.title">View Limit</label>
+            <div class="input-with-unit">
+              <input class="form-control" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="Max views (required)" min="1" max="99999999" required>
+              <span class="input-unit" data-translate="features.viewLimit.unit">views</span>
+            </div>
+          </div>
+
+          <div class="feature-field">
+            <label class="config-label" for="password" data-translate="features.timeControl.title">Time Control</label>
+            <div class="input-with-unit">
+              <input class="form-control" type="number" id="password" data-translate-placeholder="features.timeControl.placeholder" placeholder="Seconds per view (required)" min="1" max="99999999" required>
+              <span class="input-unit" data-translate="features.timeControl.unit">sec</span>
+            </div>
+          </div>
         </div>
 
         <div class="feature-card">
-          <i class="fas fa-hourglass-half feature-icon"></i>
-          <h5 class="feature-title" data-translate="features.expiration.title">Expiration</h5>
-          <select class="form-select mb-2" id="expiration_preset" aria-label="Expiration preset">
-            <option value="" selected data-translate="features.expiration.select">Select expiration</option>
-            <option value="1h" data-translate="features.expiration.option1h">1 hour</option>
-            <option value="3h" data-translate="features.expiration.option3h">3 hours</option>
-            <option value="24h" data-translate="features.expiration.option24h">24 hours</option>
-            <option value="5d" data-translate="features.expiration.option5d">5 days</option>
-            <option value="custom" data-translate="features.expiration.custom">Custom days</option>
-            <option value="unlimited" data-translate="features.expiration.unlimited">Unlimited</option>
-          </select>
-          <input class="form-control mb-2" type="number" id="expiration_custom_days" min="1" step="1" data-translate-placeholder="features.expiration.customPlaceholder" placeholder="Custom days" style="display:none;">
-          <input type="hidden" id="expiration_day" value="">
-          <input type="hidden" id="expiration_ts" value="">
-          <small class="text-muted d-block mb-1" id="expiration_result" style="display:none;" data-translate="features.expiration.utcNone">UTC expiry time: -</small>
-          <div id="timezone_row" style="display:none;">
-            <select class="form-select form-select-sm mb-2" id="timezone_tz" aria-label="Time zone"></select>
+          <div class="feature-card-head">
+            <span class="feature-icon-badge">
+              <i class="fas fa-hourglass-half feature-icon"></i>
+            </span>
+            <div>
+              <h5 class="feature-title" data-translate="features.expiration.title">Expiration</h5>
+              <p class="feature-copy" data-translate="features.expiration.description">Choose how long the gallery stays available.</p>
+            </div>
           </div>
-          <small class="text-muted d-block" id="expiration_local" style="display:none;" data-translate="features.expiration.localNone">Local time: -</small>
+
+          <div class="feature-field">
+            <label class="config-label" for="expiration_preset" data-translate="features.expiration.select">Select expiration</label>
+            <select class="form-select" id="expiration_preset" aria-label="Expiration preset">
+              <option value="" selected data-translate="features.expiration.select">Select expiration</option>
+              <option value="1h" data-translate="features.expiration.option1h">1 hour</option>
+              <option value="3h" data-translate="features.expiration.option3h">3 hours</option>
+              <option value="24h" data-translate="features.expiration.option24h">24 hours</option>
+              <option value="5d" data-translate="features.expiration.option5d">5 days</option>
+              <option value="custom" data-translate="features.expiration.custom">Custom days</option>
+              <option value="unlimited" data-translate="features.expiration.unlimited">Unlimited</option>
+            </select>
+          </div>
+
+          <div class="feature-field">
+            <input class="form-control" type="number" id="expiration_custom_days" min="1" step="1" data-translate-placeholder="features.expiration.customPlaceholder" placeholder="Custom days" style="display:none;">
+            <input type="hidden" id="expiration_day" value="">
+            <input type="hidden" id="expiration_ts" value="">
+            <small class="text-muted d-block mb-1" id="expiration_result" style="display:none;" data-translate="features.expiration.utcNone">UTC expiry time: -</small>
+            <div id="timezone_row" style="display:none;">
+              <select class="form-select form-select-sm mb-2" id="timezone_tz" aria-label="Time zone"></select>
+            </div>
+            <small class="text-muted d-block" id="expiration_local" style="display:none;" data-translate="features.expiration.localNone">Local time: -</small>
+          </div>
         </div>
-        
+
         <div class="feature-card">
-          <i class="fas fa-tag feature-icon"></i>
-          <h5 class="feature-title" data-translate="features.description.title">Description</h5>
-          <input class="form-control mb-2" type="text" id="caption" data-translate-placeholder="features.description.placeholder" placeholder="Add a description (required)" maxlength="100" required>
-          <small class="text-muted d-block mb-2" data-translate="features.description.description">Enter gallery description</small>
+          <div class="feature-card-head">
+            <span class="feature-icon-badge">
+              <i class="fas fa-tag feature-icon"></i>
+            </span>
+            <div>
+              <h5 class="feature-title" data-translate="features.description.title">Description</h5>
+              <p class="feature-copy" data-translate="features.description.description">Enter gallery description</p>
+            </div>
+          </div>
+
+          <div class="feature-field">
+            <label class="config-label" for="caption" data-translate="features.description.title">Description</label>
+            <input class="form-control" type="text" id="caption" data-translate-placeholder="features.description.placeholder" placeholder="Add a description (required)" maxlength="100" required>
+          </div>
+
+          <div class="feature-field">
+            <div class="config-summary-grid">
+              <div class="config-summary-card">
+                <span class="summary-label" data-translate="features.viewLimit.title">View Limit</span>
+                <span class="summary-value" id="summaryLimitValue">-</span>
+              </div>
+              <div class="config-summary-card">
+                <span class="summary-label" data-translate="features.timeControl.title">Time Control</span>
+                <span class="summary-value" id="summaryDurationValue">-</span>
+              </div>
+              <div class="config-summary-card">
+                <span class="summary-label" data-translate="features.expiration.title">Expiration</span>
+                <span class="summary-value" id="summaryExpiryValue">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="generate-panel">
+        <div class="generate-panel-copy">
           <h5 class="feature-title" data-translate="features.generate.title">Generate Link & QR</h5>
+          <p class="feature-copy" data-translate="features.generate.description">Create the gallery link once your media and access rules are ready.</p>
+        </div>
+        <div class="generate-panel-actions">
           <button type="button" class="btn btn-primary w-100" onclick="generateImageQR()" disabled id="generateBtn">
             <i class="fas fa-link me-2"></i><span data-translate="features.generate.button">Create Link & QR Code</span>
           </button>
-          <small class="text-muted" id="generateBtnStatus" data-translate="features.generate.status">Fill all fields and upload media first</small>
+          <small class="generate-status text-muted" id="generateBtnStatus" data-translate="features.generate.status">Fill all fields and upload media first</small>
         </div>
       </div>
     </section>
@@ -2101,6 +2170,137 @@
       }
     }
 
+    const SECURITY_PRESETS = {
+      public: {
+        limit: '99999999',
+        password: '300',
+        expiration: 'unlimited',
+        customDays: '',
+        titleKey: 'features.presets.public.title'
+      },
+      temporary: {
+        limit: '25',
+        password: '60',
+        expiration: '24h',
+        customDays: '',
+        titleKey: 'features.presets.temporary.title'
+      },
+      strict: {
+        limit: '3',
+        password: '15',
+        expiration: '1h',
+        customDays: '',
+        titleKey: 'features.presets.strict.title'
+      }
+    };
+
+    function applySecurityPreset(presetName) {
+      const presetConfig = SECURITY_PRESETS[presetName];
+      if (!presetConfig) return;
+
+      const limitInput = document.getElementById('limit');
+      const passwordInput = document.getElementById('password');
+      const expirationPreset = document.getElementById('expiration_preset');
+      const customDaysInput = document.getElementById('expiration_custom_days');
+
+      if (limitInput) limitInput.value = presetConfig.limit;
+      if (passwordInput) passwordInput.value = presetConfig.password;
+      if (customDaysInput) customDaysInput.value = presetConfig.customDays || '';
+
+      if (expirationPreset) {
+        expirationPreset.value = presetConfig.expiration;
+        expirationPreset.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+
+      updatePresetSelection();
+      updateGenerateButton();
+    }
+
+    function getMatchingSecurityPreset() {
+      const limitValue = document.getElementById('limit')?.value.trim() || '';
+      const passwordValue = document.getElementById('password')?.value.trim() || '';
+      const expirationValue = document.getElementById('expiration_preset')?.value || '';
+      const customDaysValue = document.getElementById('expiration_custom_days')?.value.trim() || '';
+
+      return Object.entries(SECURITY_PRESETS).find(([, preset]) => {
+        return limitValue === preset.limit
+          && passwordValue === preset.password
+          && expirationValue === preset.expiration
+          && customDaysValue === (preset.customDays || '');
+      })?.[0] || '';
+    }
+
+    function updatePresetSelection() {
+      const activePreset = getMatchingSecurityPreset();
+      document.querySelectorAll('.preset-card[data-preset]').forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.preset === activePreset);
+      });
+
+      const summaryPresetValue = document.getElementById('summaryPresetValue');
+      if (!summaryPresetValue) return;
+
+      if (activePreset && SECURITY_PRESETS[activePreset]) {
+        summaryPresetValue.textContent = translateText(
+          SECURITY_PRESETS[activePreset].titleKey,
+          null,
+          'Preset'
+        );
+      } else {
+        summaryPresetValue.textContent = translateText('features.presets.custom.title', null, 'Custom');
+      }
+    }
+
+    function updateConfigSummary() {
+      const limitValueEl = document.getElementById('summaryLimitValue');
+      const durationValueEl = document.getElementById('summaryDurationValue');
+      const expiryValueEl = document.getElementById('summaryExpiryValue');
+
+      if (!limitValueEl && !durationValueEl && !expiryValueEl) {
+        updatePresetSelection();
+        return;
+      }
+
+      const limitValue = document.getElementById('limit')?.value.trim() || '';
+      const durationValue = document.getElementById('password')?.value.trim() || '';
+      const expirationPreset = document.getElementById('expiration_preset')?.value || '';
+      const expirationTs = document.getElementById('expiration_ts')?.value || '';
+
+      if (limitValueEl) {
+        limitValueEl.textContent = limitValue || '-';
+      }
+
+      if (durationValueEl) {
+        durationValueEl.textContent = durationValue
+          ? `${durationValue} ${translateText('features.timeControl.unit', null, 'sec')}`
+          : '-';
+      }
+
+      if (expiryValueEl) {
+        if (expirationPreset === 'unlimited') {
+          expiryValueEl.textContent = translateText('features.expiration.unlimited', null, 'Unlimited');
+        } else if (expirationTs) {
+          expiryValueEl.textContent = formatEndtimeDisplay(expirationTs);
+        } else {
+          expiryValueEl.textContent = '-';
+        }
+      }
+
+      updatePresetSelection();
+    }
+
+    function initSecurityPresets() {
+      const presetButtons = document.querySelectorAll('.preset-card[data-preset]');
+      if (!presetButtons.length) return;
+
+      presetButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          applySecurityPreset(button.dataset.preset);
+        });
+      });
+
+      updatePresetSelection();
+    }
+
     // Update button state based on form validation and uploaded files
     function updateGenerateButton() {
       const generateBtn = document.getElementById('generateBtn');
@@ -2120,7 +2320,7 @@
       if (hasLimit && hasPassword && hasCaption && hasFiles) {
         generateBtn.disabled = false;
         generateBtnStatus.textContent = translateText('messages.generateReady', null, 'Ready to generate QR code!');
-        generateBtnStatus.className = 'text-success';
+        generateBtnStatus.className = 'generate-status text-success';
       } else {
         generateBtn.disabled = true;
         
@@ -2132,8 +2332,9 @@
         if (!hasFiles) missing.push(translateText('messages.missingUpload', null, 'Upload media'));
         
         generateBtnStatus.textContent = translateText('messages.missingPrefix', { items: missing.join(', ') }, `Missing: ${missing.join(', ')}`);
-        generateBtnStatus.className = 'text-muted';
+        generateBtnStatus.className = 'generate-status text-muted';
       }
+      updateConfigSummary();
       updateFlowNavigator();
     }
 
@@ -2533,6 +2734,7 @@
       Dropzone.autoDiscover = false;
 
       initExpirationControls();
+      initSecurityPresets();
       initFlowNavigator();
 
       const dropzEl = document.getElementById('dropz');
