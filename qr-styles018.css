@@ -553,6 +553,53 @@ body {
   margin: 0;
 }
 
+@media (min-width: 992px) {
+  .config-variant-a .feature-cards {
+    gap: 1.25rem;
+  }
+
+  .config-variant-a .feature-card {
+    padding: 1.35rem 1.3rem;
+  }
+
+  .config-variant-a .feature-card-head {
+    gap: 0.85rem;
+    margin-bottom: 0.95rem;
+  }
+
+  .config-variant-a .feature-icon-badge {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+
+  .config-variant-a .feature-copy {
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+
+  .config-variant-a .feature-field + .feature-field {
+    margin-top: 0.8rem;
+  }
+
+  .config-variant-a .form-control,
+  .config-variant-a .form-select {
+    padding: 11px 15px;
+  }
+
+  .config-variant-a .input-with-unit .form-control {
+    padding-right: 4.6rem;
+  }
+
+  .config-variant-a .config-summary-card {
+    padding: 0.72rem 0.8rem;
+  }
+
+  .config-variant-a .generate-panel {
+    padding: 1.15rem 1.35rem;
+  }
+}
+
 .feature-card::before {
   content: '';
   position: absolute;
