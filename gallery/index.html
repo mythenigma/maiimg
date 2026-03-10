@@ -170,6 +170,20 @@
             padding: 0;
         }
 
+        .media-shell.is-live-photo {
+            cursor: pointer;
+        }
+
+        .media-shell.is-live-active .media-live-badge {
+            background: rgba(255, 255, 255, 0.96);
+            color: #000;
+            box-shadow: 0 12px 28px rgba(255, 255, 255, 0.18);
+        }
+
+        .media-shell.is-live-active .media-live-hint {
+            opacity: 1;
+        }
+
         .swiper-slide img,
         .swiper-slide video {
             max-width: 100%;
@@ -180,6 +194,58 @@
             border-radius: 10px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
             background: #000;
+        }
+
+        .media-live-overlay {
+            position: absolute;
+            top: var(--safe-top);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .media-live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.58);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(16px);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.22s ease;
+        }
+
+        .media-live-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+        }
+
+        .media-live-hint {
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.36);
+            color: rgba(255, 255, 255, 0.84);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.82;
+            transition: opacity 0.2s ease;
         }
 
         .media-shell.is-video video {
@@ -329,6 +395,8 @@ class MediaGallery {
         this.currentIndex = 0;
         this.viewTimer = null;
         this.fullscreenToggle = document.getElementById('fullscreen-toggle');
+        this.livePhotoHoldDelay = 180;
+        this.livePhotoMoveThreshold = 18;
         this.init();
     }
 
@@ -650,16 +718,35 @@ class MediaGallery {
             const fullPath = mediaInfo.fullPath || mediaInfo.key || `${markPath}/${fileName}`;
             const mediaUrl = this.resolveMediaAssetUrl(fullPath, markPath);
             const kind = mediaInfo.kind || 'image';
+            const isLivePhoto = this.isLivePhotoMedia(mediaInfo);
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
 
             if (kind === 'video') {
                 const posterUrl = this.resolveVideoPosterUrl(mediaInfo, markPath);
                 const posterAttr = posterUrl ? `poster="${posterUrl}"` : '';
-                const needsPreviewPrime = posterUrl ? '0' : '1';
+                const needsPreviewPrime = posterUrl || isLivePhoto ? '0' : '1';
+                const controlsAttr = isLivePhoto ? '' : 'controls controlsList="nodownload"';
+                const livePhotoOverlay = isLivePhoto ? `
+                    <div class="media-live-overlay" aria-hidden="true">
+                        <div class="media-live-badge">LIVE</div>
+                        <div class="media-live-hint">Press and hold</div>
+                    </div>
+                ` : '';
                 slide.innerHTML = `
-                    <div class="swiper-zoom-container media-shell is-video">
-                        <video src="${mediaUrl}" ${posterAttr} preload="metadata" playsinline webkit-playsinline controls controlsList="nodownload" data-needs-preview-prime="${needsPreviewPrime}">
+                    <div class="swiper-zoom-container media-shell is-video${isLivePhoto ? ' is-live-photo' : ''}">
+                        ${livePhotoOverlay}
+                        <video
+                            src="${mediaUrl}"
+                            ${posterAttr}
+                            preload="metadata"
+                            playsinline
+                            webkit-playsinline
+                            ${controlsAttr}
+                            ${isLivePhoto ? 'muted' : ''}
+                            aria-label="${isLivePhoto ? 'Live Photo. Press and hold to play.' : `Video ${index + 1}`}"
+                            data-live-photo="${isLivePhoto ? '1' : '0'}"
+                            data-needs-preview-prime="${needsPreviewPrime}">
                             Your browser does not support video playback.
                         </video>
                     </div>
@@ -707,10 +794,170 @@ class MediaGallery {
         return '';
     }
 
+    isTruthyFlag(value) {
+        if (value === true || value === 1 || value === '1') return true;
+        if (typeof value === 'string') {
+            return value.trim().toLowerCase() === 'true';
+        }
+        return false;
+    }
+
+    normalizePresentation(value) {
+        if (typeof value !== 'string') return '';
+        return value.trim().toLowerCase().replace(/-/g, '_');
+    }
+
+    isLivePhotoMedia(mediaInfo) {
+        const presentation = this.normalizePresentation(
+            mediaInfo.presentation || mediaInfo.displayMode || mediaInfo.variant || mediaInfo.mode
+        );
+        return (mediaInfo.kind || 'image') === 'video' && (
+            this.isTruthyFlag(mediaInfo.isLivePhoto) ||
+            this.isTruthyFlag(mediaInfo.livePhoto) ||
+            presentation === 'live_photo'
+        );
+    }
+
+    getLivePhotoState(video) {
+        if (!video._livePhotoState) {
+            video._livePhotoState = {
+                holdTimer: null,
+                pointerActive: false,
+                pointerId: null,
+                playbackStarted: false,
+                startX: 0,
+                startY: 0
+            };
+        }
+        return video._livePhotoState;
+    }
+
+    clearLivePhotoHoldTimer(video) {
+        const state = this.getLivePhotoState(video);
+        if (state.holdTimer) {
+            clearTimeout(state.holdTimer);
+            state.holdTimer = null;
+        }
+    }
+
+    setLivePhotoVisualState(video, active) {
+        const shell = video?.closest('.media-shell');
+        if (shell) {
+            shell.classList.toggle('is-live-active', !!active);
+        }
+    }
+
+    async startLivePhotoPlayback(video) {
+        if (!video) return;
+        const state = this.getLivePhotoState(video);
+        state.playbackStarted = true;
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+
+        try {
+            if (video.ended || video.currentTime > 0.25) {
+                video.currentTime = 0;
+            }
+        } catch (error) {
+        }
+
+        try {
+            await video.play();
+            this.setLivePhotoVisualState(video, true);
+        } catch (error) {
+            state.playbackStarted = false;
+            this.setLivePhotoVisualState(video, false);
+        }
+    }
+
+    resetLivePhoto(video, resetToStart = true) {
+        if (!video) return;
+        const state = this.getLivePhotoState(video);
+        this.clearLivePhotoHoldTimer(video);
+        state.pointerActive = false;
+        state.pointerId = null;
+        state.playbackStarted = false;
+
+        if (!video.paused) {
+            video.pause();
+        }
+
+        this.setLivePhotoVisualState(video, false);
+
+        if (resetToStart) {
+            try {
+                video.currentTime = 0;
+            } catch (error) {
+            }
+        }
+    }
+
+    attachLivePhotoEvents(video) {
+        const release = () => {
+            this.resetLivePhoto(video, true);
+        };
+
+        video.addEventListener('pointerdown', (event) => {
+            if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+            const state = this.getLivePhotoState(video);
+            this.clearLivePhotoHoldTimer(video);
+
+            state.pointerActive = true;
+            state.pointerId = event.pointerId;
+            state.playbackStarted = false;
+            state.startX = event.clientX;
+            state.startY = event.clientY;
+
+            try {
+                video.setPointerCapture(event.pointerId);
+            } catch (error) {
+            }
+
+            state.holdTimer = setTimeout(() => {
+                if (!state.pointerActive) return;
+                this.startLivePhotoPlayback(video);
+            }, this.livePhotoHoldDelay);
+        });
+
+        video.addEventListener('pointermove', (event) => {
+            const state = this.getLivePhotoState(video);
+            if (!state.pointerActive) return;
+
+            const deltaX = event.clientX - state.startX;
+            const deltaY = event.clientY - state.startY;
+            if (Math.hypot(deltaX, deltaY) >= this.livePhotoMoveThreshold) {
+                release();
+            }
+        });
+
+        video.addEventListener('pointerup', release);
+        video.addEventListener('pointercancel', release);
+        video.addEventListener('lostpointercapture', release);
+        video.addEventListener('mouseleave', (event) => {
+            if (event.buttons === 1) {
+                release();
+            }
+        });
+        video.addEventListener('ended', release);
+    }
+
     attachVideoEvents(video) {
+        const isLivePhoto = video?.dataset.livePhoto === '1';
         video.addEventListener('play', () => {
             this.pauseOtherVideos(video);
+            if (isLivePhoto) {
+                this.setLivePhotoVisualState(video, true);
+            }
         });
+
+        if (isLivePhoto) {
+            video.addEventListener('pause', () => {
+                this.setLivePhotoVisualState(video, false);
+            });
+            this.attachLivePhotoEvents(video);
+        }
     }
 
     isFullscreenSupported() {
@@ -739,6 +986,7 @@ class MediaGallery {
 
     async primeVideoPreview(video) {
         if (!video) return;
+        if (video.dataset.livePhoto === '1') return;
         if (video.dataset.needsPreviewPrime !== '1') return;
         if (video.dataset.previewPrimed || video.dataset.previewPriming === '1') return;
         if (!video.paused || document.visibilityState === 'hidden') return;
@@ -803,6 +1051,10 @@ class MediaGallery {
     pauseOtherVideos(activeVideo = null) {
         document.querySelectorAll('#swiper-wrapper video').forEach((video) => {
             if (activeVideo && video === activeVideo) return;
+            if (video.dataset.livePhoto === '1') {
+                this.resetLivePhoto(video, true);
+                return;
+            }
             if (!video.paused) video.pause();
         });
     }
@@ -817,6 +1069,7 @@ class MediaGallery {
 
     isNativeVideoControlZone(video, point) {
         if (!video || !point) return false;
+        if (video.dataset.livePhoto === '1') return false;
         const rect = video.getBoundingClientRect();
         if (!rect.width || !rect.height) return false;
 
