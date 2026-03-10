@@ -34,6 +34,35 @@
       box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.45);
     }
 
+    .live-photo-toggle-wrap {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .live-photo-toggle-btn {
+      border: 1px solid rgba(13, 110, 253, 0.25);
+      border-radius: 999px;
+      padding: 6px 12px;
+      background: rgba(13, 110, 253, 0.08);
+      color: #0d6efd;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: all 0.2s ease;
+    }
+
+    .live-photo-toggle-btn:hover {
+      background: rgba(13, 110, 253, 0.14);
+    }
+
+    .live-photo-toggle-btn.is-active {
+      border-color: rgba(13, 110, 253, 0.85);
+      background: linear-gradient(135deg, #0d6efd, #5b8cff);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(13, 110, 253, 0.18);
+    }
+
     @keyframes flowStepPulse {
       0% {
         transform: translateY(0);
@@ -1809,6 +1838,63 @@
       return `${fileName}${cleanExtension}`;
     }
 
+    function isLivePhotoFile(file) {
+      return !!(file && file._isLivePhoto);
+    }
+
+    function syncUploadedFilePresentation(file) {
+      if (!file) return;
+      const isLivePhoto = isLivePhotoFile(file);
+      const presentation = isLivePhoto ? 'live_photo' : null;
+
+      uploadedFiles.forEach((uploadedFile) => {
+        if (file._uploadedKey && uploadedFile.key !== file._uploadedKey) {
+          return;
+        }
+        if (!file._uploadedKey && uploadedFile.originalName !== file.name) {
+          return;
+        }
+
+        uploadedFile.presentation = presentation;
+        uploadedFile.isLivePhoto = isLivePhoto;
+      });
+    }
+
+    function renderLivePhotoToggleState(button, file) {
+      if (!button) return;
+      const isLivePhoto = isLivePhotoFile(file);
+      button.classList.toggle('is-active', isLivePhoto);
+      button.setAttribute('aria-pressed', isLivePhoto ? 'true' : 'false');
+      button.textContent = isLivePhoto ? 'LIVE Photo mode on' : 'Mark as Live Photo';
+    }
+
+    function attachLivePhotoToggle(file) {
+      if (!file || getFileKind(file) !== 'video' || !file.previewElement || file._livePhotoToggleAttached) {
+        return;
+      }
+
+      const actions = document.createElement('div');
+      actions.className = 'live-photo-toggle-wrap';
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'live-photo-toggle-btn';
+      button.title = 'Use iPhone-style LIVE playback for this media item';
+      renderLivePhotoToggleState(button, file);
+
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        file._isLivePhoto = !isLivePhotoFile(file);
+        syncUploadedFilePresentation(file);
+        renderLivePhotoToggleState(button, file);
+      });
+
+      actions.appendChild(button);
+      file.previewElement.appendChild(actions);
+      file._livePhotoToggleAttached = true;
+    }
+
     function scheduleMediaUpload(task) {
       return new Promise((resolve, reject) => {
         pendingUploadTasks.push({ task, resolve, reject });
@@ -2114,6 +2200,8 @@
         sourceSize: file.size,
         type: prepared.uploadFile.type || file.type,
         kind: result.kind || prepared.kind,
+        presentation: isLivePhotoFile(file) ? 'live_photo' : null,
+        isLivePhoto: isLivePhotoFile(file),
         duration: prepared.duration || null,
         key: result.key,
         url: result.url,
@@ -2178,6 +2266,7 @@
           this.on("addedfile", function(file) {
             setTimeout(showLoginNudgeIfNeeded, 250);
             file._removed = false;
+            attachLivePhotoToggle(file);
 
             if (!currentUploadSessionId) {
               currentUploadSessionId = generateUploadSessionId();

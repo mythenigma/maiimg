@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 尽量禁止缓存，减少后退时使用快照的概率 -->
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Image Gallery</title>
-    
-    <!-- Favicon -->
+    <title>Media Gallery</title>
+
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="alternate icon" type="image/x-icon" href="../favicon.ico">
     <link rel="shortcut icon" type="image/svg+xml" href="../favicon.svg">
-    
-    <!-- Google AdSense -->
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
-    <!-- Swiper Latest Version v11.2.10 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
+        :root {
+            --safe-top: max(16px, env(safe-area-inset-top));
+            --safe-right: max(16px, env(safe-area-inset-right));
+            --safe-bottom: max(20px, env(safe-area-inset-bottom));
+            --safe-left: max(16px, env(safe-area-inset-left));
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -35,142 +38,117 @@
             background: #000;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             color: white;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
             user-select: none;
+            -webkit-user-select: none;
         }
 
-        /* Loading Screen */
-        .loading-screen {
+        .loading-screen,
+        .error-screen {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            inset: 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 10000;
-            transition: opacity 0.5s ease;
+            text-align: center;
+            z-index: 9999;
+        }
+
+        .loading-screen {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: opacity 0.45s ease;
         }
 
         .loading-spinner {
             width: 60px;
             height: 60px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.28);
             border-radius: 50%;
             border-top-color: #fff;
             animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+            margin-bottom: 18px;
         }
 
         .loading-text {
             font-size: 18px;
-            font-weight: 300;
             letter-spacing: 2px;
-            animation: pulse 2s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        /* Error Screen */
         .error-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
             display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
             padding: 40px;
-            z-index: 9999;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
         }
 
         .error-icon {
             font-size: 64px;
-            margin-bottom: 20px;
-            opacity: 0.8;
+            margin-bottom: 18px;
         }
 
         .error-title {
             font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 10px;
+            font-weight: 700;
+            margin-bottom: 12px;
         }
 
         .error-message {
-            font-size: 16px;
-            opacity: 0.9;
-            margin-bottom: 30px;
-            max-width: 400px;
-            line-height: 1.5;
+            max-width: 420px;
+            line-height: 1.6;
+            opacity: 0.95;
+            margin-bottom: 28px;
         }
 
         .error-button {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
+            border: 0;
+            border-radius: 999px;
             padding: 12px 24px;
-            border-radius: 25px;
-            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
             cursor: pointer;
-            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
 
-        .error-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            z-index: 1000;
+            transition: width 0.3s ease;
         }
 
-        /* Swiper Container */
+        .fullscreen-toggle {
+            position: fixed;
+            top: var(--safe-top);
+            right: var(--safe-right);
+            width: 40px;
+            height: 40px;
+            border: 0;
+            border-radius: 50%;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.46);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
         .swiper {
             width: 100%;
             height: 100vh;
+            height: 100dvh;
             background: #000;
         }
 
         .swiper-slide {
-            position: relative;
             display: flex;
-            justify-content: center;
             align-items: center;
-            background: #000;
+            justify-content: center;
             overflow: hidden;
+            background: #000;
         }
 
-        .swiper-slide img {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .swiper-slide img:hover {
-            transform: scale(1.02);
-        }
-        
-        /* 缩放相关样式 */
         .swiper-zoom-container {
             display: flex;
             align-items: center;
@@ -178,16 +156,44 @@
             width: 100%;
             height: 100%;
         }
-        
-        .swiper-slide-zoomed .swiper-zoom-container {
-            cursor: grab;
-        }
-        
-        .swiper-slide-zoomed .swiper-zoom-container:active {
-            cursor: grabbing;
+
+        .media-shell {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Navigation Controls */
+        .media-shell.is-video {
+            padding: 0;
+        }
+
+        .swiper-slide img,
+        .swiper-slide video {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            background: #000;
+        }
+
+        .media-shell.is-video video {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            background: #000;
+        }
+
         .swiper-pagination {
             bottom: 80px !important;
         }
@@ -197,7 +203,6 @@
             height: 12px;
             background: rgba(255, 255, 255, 0.5);
             opacity: 1;
-            transition: all 0.3s ease;
         }
 
         .swiper-pagination-bullet-active {
@@ -207,61 +212,47 @@
 
         .swiper-button-next,
         .swiper-button-prev {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.86);
             background: rgba(0, 0, 0, 0.3);
             width: 50px;
             height: 50px;
             border-radius: 50%;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .swiper-button-next:hover,
-        .swiper-button-prev:hover {
-            background: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            transform: scale(1.1);
         }
 
         .swiper-button-next::after,
         .swiper-button-prev::after {
             font-size: 18px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        /* Progress Bar */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            z-index: 1000;
-            transition: width 0.3s ease;
-        }
-
-        /* Gesture Hint */
         .gesture-hint {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
+            right: 24px;
+            bottom: 28px;
             padding: 10px 15px;
             border-radius: 20px;
             font-size: 12px;
-            opacity: 0.8;
-            animation: fadeInOut 4s ease-in-out;
+            opacity: 0.84;
+            background: rgba(0, 0, 0, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInOut 4s ease-in-out;
         }
 
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0; }
-            20%, 80% { opacity: 0.8; }
+        .ad-container {
+            position: fixed;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            display: none;
+            max-width: 90%;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 999;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .swiper-button-next,
             .swiper-button-prev {
@@ -275,80 +266,38 @@
             }
 
             .gesture-hint {
+                right: 18px;
                 bottom: 20px;
-                right: 20px;
-                font-size: 11px;
             }
         }
 
-        /* Hide native controls on touch devices - 手机端隐藏按钮 */
         @media (hover: none) and (pointer: coarse) {
+            .fullscreen-toggle {
+                display: none;
+            }
+
             .swiper-button-next,
             .swiper-button-prev {
                 display: none;
             }
         }
 
-        /* Ad Container */
-        .ad-container {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 10px;
-            padding: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 999;
-            max-width: 90%;
-            display: none;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
-        .ad-container.show {
-            display: block;
-        }
-
-        /* Fullscreen Mode */
-        .fullscreen-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-        }
-
-        .fullscreen-toggle:hover {
-            background: rgba(0, 0, 0, 0.7);
-            transform: scale(1.1);
-        }
-
-        @media print {
-            body { display: none; }
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            20%, 80% { opacity: 0.84; }
         }
     </style>
 </head>
 <body>
-
-<!-- Loading Screen -->
 <div id="loading" class="loading-screen">
     <div class="loading-spinner"></div>
-    <div class="loading-text">Loading Gallery...</div>
+    <div class="loading-text">Loading Media...</div>
 </div>
 
-<!-- Error Screen -->
 <div id="error-screen" class="error-screen">
     <div class="error-icon">⚠️</div>
     <div class="error-title">Loading Failed</div>
@@ -356,139 +305,90 @@
     <button class="error-button" onclick="location.reload()">Reload</button>
 </div>
 
-<!-- Progress Bar -->
-<div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
-
-<!-- Fullscreen Toggle -->
+<div id="progress-bar" class="progress-bar"></div>
 <button id="fullscreen-toggle" class="fullscreen-toggle" title="Fullscreen Mode">⛶</button>
 
-<!-- Swiper Container -->
 <div class="swiper" id="main-swiper" style="display: none;">
-    <div class="swiper-wrapper" id="swiper-wrapper">
-        <!-- Images will be loaded here -->
-    </div>
-    
-    <!-- Navigation -->
+    <div class="swiper-wrapper" id="swiper-wrapper"></div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
-    
-    <!-- Pagination -->
     <div class="swiper-pagination"></div>
 </div>
 
-<!-- Gesture Hint -->
-<div id="gesture-hint" class="gesture-hint">
-    Swipe to view more • Pinch to zoom
-</div>
-
-<!-- AdSense Container -->
-<div id="ad-container" class="ad-container">
-    <!-- Ads will be displayed here -->
-</div>
+<div id="gesture-hint" class="gesture-hint">Swipe to view more • Pinch to zoom images</div>
+<div id="ad-container" class="ad-container"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-// 微信内打开 /gallery/A 时重定向到此域名的 wechat.html（与 maiimg.com 可不同域名）
 var WECHAT_GUIDE_ORIGIN = 'https://special.maiimg.com';
-class ImageGallery {
+
+class MediaGallery {
     constructor() {
         this.swiper = null;
-        this.totalImages = 0;
+        this.totalItems = 0;
         this.currentIndex = 0;
+        this.viewTimer = null;
+        this.fullscreenToggle = document.getElementById('fullscreen-toggle');
         this.init();
     }
 
+    static get STORAGE_KEY() { return 'maiimg_gallery_id'; }
     async init() {
         try {
-            await this.loadGalleryData();
+            await this.loadMediaData();
         } catch (error) {
-            this.showError(error.message);
+            this.showError(error.message || 'Unable to load media');
         }
     }
 
-    /** localStorage 键：由 wechat.html 写入，gallery 读取后即删，用于同源下隐藏 URL 中的 ID */
-    static get GALLERY_ID_STORAGE_KEY() { return 'maiimg_gallery_id'; }
-
-    /**
-     * 获取画廊 ID：maiimg.com 仅从 URL（hash / path / query）；special.maiimg.com 在 URL 无 ID 时从 localStorage 取
-     */
-    getGalleryId() {
+    getMediaId() {
         const host = (window.location.hostname || '').toLowerCase();
         const isWechatDomain = host === 'special.maiimg.com';
-
         const hashRaw = (window.location.hash || '').replace(/^#/, '');
         if (hashRaw) {
             try {
                 const id = decodeURIComponent(hashRaw);
-                if (id) {
-                    console.log('Found ID in hash:', id);
-                    return id;
-                }
-            } catch (e) {}
+                if (id) return id;
+            } catch (error) {}
         }
+
         const fromPath = this.extractIdFromPath();
-        if (fromPath) {
-            return fromPath;
-        }
+        if (fromPath) return fromPath;
+
         if (isWechatDomain) {
             try {
-                const stored = localStorage.getItem(ImageGallery.GALLERY_ID_STORAGE_KEY);
+                const stored = localStorage.getItem(MediaGallery.STORAGE_KEY);
                 if (stored) {
-                    console.log('Found ID in localStorage');
-                    localStorage.removeItem(ImageGallery.GALLERY_ID_STORAGE_KEY);
+                    localStorage.removeItem(MediaGallery.STORAGE_KEY);
                     return stored;
                 }
-            } catch (e) {}
+            } catch (error) {}
         }
-        return null;
-    }
 
-    /**
-     * 从友好的URL路径中提取ID
-     * 支持格式：/gallery/ID 或 /g/ID（path 或 href 中匹配，应对部分托管重写后 pathname 变化）
-     */
-    extractIdFromPath() {
-        const path = window.location.pathname;
-        console.log('Current path:', path);
-        
-        let match = path.match(/\/(?:gallery|g)\/([^\/\?#]+)/);
-        if (match) {
-            console.log('Found ID in path:', match[1]);
-            return match[1];
-        }
-        // 若 path 被重写成 /gallery/，仍从完整 href 尝试取 ID（部分 CDN 重写后 pathname 可能变）
-        const href = window.location.href || '';
-        match = href.match(/\/(?:gallery|g)\/([^\/\?#]+)/);
-        if (match) {
-            console.log('Found ID in href:', match[1]);
-            return match[1];
-        }
-        
         const urlParams = new URLSearchParams(window.location.search);
-        const idFromParams = urlParams.get('id');
-        if (idFromParams) {
-            console.log('Found ID in params:', idFromParams);
-            return idFromParams;
-        }
-        
-        return null;
+        return urlParams.get('id');
     }
 
-    /**
-     * Decodes the alphabetic ID (e.g., 'A') into a numeric ID (e.g., 1).
-     */
+    extractIdFromPath() {
+        const path = window.location.pathname || '';
+        let match = path.match(/\/(?:media|m|gallery|g)\/([^\/?#]+)/i);
+        if (match) return match[1];
+
+        const href = window.location.href || '';
+        match = href.match(/\/(?:media|m|gallery|g)\/([^\/?#]+)/i);
+        return match ? match[1] : null;
+    }
+
     decodeId(encodedId) {
-        if (!encodedId || typeof encodedId !== 'string') {
-            return null;
-        }
+        if (!encodedId || typeof encodedId !== 'string') return null;
         const upperId = encodedId.toUpperCase();
         let decoded = '';
         for (let i = 0; i < upperId.length; i++) {
             const charCode = upperId.charCodeAt(i);
             let digit;
-            if (charCode >= 65 && charCode <= 74) { // A-J
+            if (charCode >= 65 && charCode <= 74) {
                 digit = charCode - 64;
-            } else if (charCode >= 75 && charCode <= 84) { // K-T
+            } else if (charCode >= 75 && charCode <= 84) {
                 digit = charCode - 74;
             } else {
                 return null;
@@ -499,262 +399,169 @@ class ImageGallery {
         return parseInt(decoded, 10);
     }
 
-    /**
-     * 是否微信内置浏览器
-     */
     isWeChat() {
         return /micromessenger/i.test(navigator.userAgent);
     }
 
-    /**
-     * 微信内打开 /gallery/A 时：跳转到 special.maiimg.com/wechat.html?base=当前域&#ID
-     */
     redirectToWechatGuide(encodedId) {
-        var loadingEl = document.getElementById('loading');
+        const loadingEl = document.getElementById('loading');
         if (loadingEl) loadingEl.style.display = 'none';
-        var base = window.location.origin;
-        var wechatOrigin = (typeof WECHAT_GUIDE_ORIGIN !== 'undefined' && WECHAT_GUIDE_ORIGIN)
-            ? String(WECHAT_GUIDE_ORIGIN).replace(/\/$/, '')
-            : base;
-        var url = wechatOrigin + '/wechat.html?base=' + encodeURIComponent(base) + '#' + encodeURIComponent(encodedId);
-        window.location.replace(url);
+        const base = window.location.origin;
+        const wechatOrigin = String(WECHAT_GUIDE_ORIGIN || base).replace(/\/$/, '');
+        const target = `${wechatOrigin}/wechat.html?base=${encodeURIComponent(base)}#${encodeURIComponent(encodedId)}`;
+        window.location.replace(target);
     }
 
-    /**
-     * Check if the user agent is a bot/crawler
-     */
     isBot(userAgent) {
         const botPatterns = [
             /bot/i, /crawler/i, /spider/i, /scraper/i,
             /googlebot/i, /bingbot/i, /slurp/i, /duckduckbot/i,
             /baiduspider/i, /yandexbot/i, /facebookexternalhit/i,
-            /twitterbot/i, /linkedinbot/i, /whatsapp/i,
-            /telegrambot/i, /discordbot/i, /slackbot/i,
-            /curl/i, /wget/i, /python-requests/i,
-            /postman/i, /insomnia/i, /httpie/i
+            /twitterbot/i, /linkedinbot/i, /telegrambot/i,
+            /discordbot/i, /slackbot/i, /curl/i, /wget/i,
+            /python-requests/i, /postman/i, /insomnia/i
         ];
-        
-        return botPatterns.some(pattern => pattern.test(userAgent));
+        return botPatterns.some((pattern) => pattern.test(userAgent || ''));
     }
 
-    /**
-     * Show professional message for bot access
-     */
     showBotMessage() {
         const loading = document.getElementById('loading');
         const errorScreen = document.getElementById('error-screen');
-        
-        // 隐藏加载屏幕
         loading.style.display = 'none';
-        
-        // 自定义错误屏幕内容
         errorScreen.querySelector('.error-icon').textContent = '🤖';
         errorScreen.querySelector('.error-title').textContent = 'Automated Access Detected';
         errorScreen.querySelector('.error-message').innerHTML = `
-            This image gallery has limited view counts and is optimized for human visitors only.<br><br>
-            <strong>For automated access:</strong><br>
-            • Please use our API endpoints for programmatic access<br>
-            • Contact us for bulk access permissions<br>
-            • Respect our rate limits and terms of service<br><br>
-            <em>Thank you for understanding.</em>
+            This media gallery has limited view counts and is optimized for human visitors only.<br><br>
+            For automated access, please use approved API endpoints instead of the interactive viewer.
         `;
         errorScreen.querySelector('.error-button').textContent = 'Learn More';
-        errorScreen.querySelector('.error-button').onclick = () => {
-            window.open('https://maiimg.com/api', '_blank');
-        };
-        
-        // 显示错误屏幕
+        errorScreen.querySelector('.error-button').onclick = () => window.open('https://maiimg.com/api', '_blank');
         errorScreen.style.display = 'flex';
     }
 
-    /**
-     * Parse User-Agent string to extract key information
-     */
     parseUserAgent(ua) {
-        const uaLower = ua.toLowerCase();
+        const uaLower = (ua || '').toLowerCase();
         let context = '';
         let osName = '';
         let osVersion = '';
-        let browserVersion = '';
 
-        // In-App Browsers Detection
         if (uaLower.includes('micromessenger')) {
             context = 'WeChat In-App Browser';
-        } else if (uaLower.includes('fb_iab') || uaLower.includes('fbav') || uaLower.includes('fban') || uaLower.includes('fbios')) {
-            context = 'Facebook In-App Browser';
         } else if (uaLower.includes('instagram')) {
             context = 'Instagram In-App Browser';
-        } else if (uaLower.includes('twitter') || uaLower.includes('twitterandroid')) {
+        } else if (uaLower.includes('fb_iab') || uaLower.includes('fbav')) {
+            context = 'Facebook In-App Browser';
+        } else if (uaLower.includes('twitter')) {
             context = 'Twitter In-App Browser';
-        } else if (uaLower.includes('musical_ly') || uaLower.includes('tiktok') || uaLower.includes('bytelocale')) {
-            context = 'TikTok In-App Browser';
         } else if (uaLower.includes(' wv')) {
             context = 'Generic In-App WebView';
         }
 
-        // OS Detection
         if (uaLower.includes('android')) {
             osName = 'Android';
-            const androidMatch = uaLower.match(/android\s+([0-9]+(?:\.[0-9]+)?)/);
-            if (androidMatch) {
-                osVersion = androidMatch[1];
-            }
+            const match = uaLower.match(/android\s+([0-9]+(?:\.[0-9]+)?)/);
+            osVersion = match ? match[1] : '';
         } else if (uaLower.includes('iphone os') || uaLower.includes('cpu os')) {
             osName = 'iOS';
-            const iosMatch = uaLower.match(/(?:iphone os|cpu os)\s+([0-9_]+)/);
-            if (iosMatch) {
-                osVersion = iosMatch[1].replace(/_/g, '.').split('.')[0];
-            }
+            const match = uaLower.match(/(?:iphone os|cpu os)\s+([0-9_]+)/);
+            osVersion = match ? match[1].replace(/_/g, '.').split('.')[0] : '';
         } else if (uaLower.includes('windows nt')) {
             osName = 'Windows';
-            const winMatch = uaLower.match(/windows nt\s*([0-9\.]+)/);
-            if (winMatch) {
-                const ntVer = winMatch[1];
-                if (ntVer.startsWith('10.0')) {
-                    osVersion = '10';
-                } else if (ntVer.startsWith('6.3')) {
-                    osVersion = '8.1';
-                } else if (ntVer.startsWith('6.2')) {
-                    osVersion = '8';
-                } else if (ntVer.startsWith('6.1')) {
-                    osVersion = '7';
-                } else {
-                    osVersion = ntVer;
-                }
-            }
         } else if (uaLower.includes('mac os x')) {
             osName = 'macOS';
-            const macMatch = uaLower.match(/mac os x\s*([0-9_]+)/);
-            if (macMatch) {
-                const macVer = macMatch[1].replace(/_/g, '.');
-                const osParts = macVer.split('.');
-                osVersion = osParts[0] + '.' + (osParts[1] || '0');
-            }
-        } else if (uaLower.includes('linux')) {
-            osName = 'Linux';
         }
 
-        // Standalone Browsers Detection (only if not in-app)
-        if (context === '') {
-            if (uaLower.includes('edg/')) {
-                context = 'Edge';
-                const edgeMatch = uaLower.match(/edg\/([\d\.]+)/);
-                browserVersion = edgeMatch ? edgeMatch[1] : '';
-            } else if (uaLower.includes('chrome/') || uaLower.includes('crios/')) {
-                context = 'Chrome';
-                const chromeMatch = uaLower.match(/(?:chrome|crios)\/([\d\.]+)/);
-                browserVersion = chromeMatch ? chromeMatch[1] : '';
-            } else if (uaLower.includes('firefox/') || uaLower.includes('fxios/')) {
-                context = 'Firefox';
-                const firefoxMatch = uaLower.match(/(?:firefox|fxios)\/([\d\.]+)/);
-                browserVersion = firefoxMatch ? firefoxMatch[1] : '';
-            } else if (uaLower.includes('safari/') && !uaLower.includes('chrome') && !uaLower.includes('crios')) {
-                context = 'Safari';
-                const safariMatch = uaLower.match(/version\/([\d\.]+)/);
-                browserVersion = safariMatch ? safariMatch[1] : '';
-            } else {
-                context = 'Browser';
-            }
-        }
-
-        // Build result string
-        let result = context;
-        if (browserVersion) {
-            result += ' ' + browserVersion.split('.')[0];
-        }
-        if (osName) {
-            result += ' (' + osName;
-            if (osVersion) result += ' ' + osVersion;
-            result += ')';
-        }
-
-        return result;
+        return `${context || 'Browser'}${osName ? ` (${osName}${osVersion ? ` ${osVersion}` : ''})` : ''}`;
     }
 
-    /**
-     * Fetches gallery data from the API.
-     */
     async fetchGalleryData(id) {
-        // 获取浏览器本地时间
-        var d = new Date();
-        const browserTime = d.toString();
-        
-        // 获取完整的原始User-Agent
-        const rawUserAgent = navigator.userAgent;
-        const parsedUserAgent = this.parseUserAgent(rawUserAgent);
-        
+        const browserTime = new Date().toString();
+        const parsedUserAgent = this.parseUserAgent(navigator.userAgent);
         const referrer = document.referrer || 'direct';
-        
-        // 构建API URL
-        const apiUrl = new URL(`https://fetch.maipdf.com/api/gallery/${id}`);
-        apiUrl.searchParams.set('browser_time', browserTime);
-        apiUrl.searchParams.set('user_agent', parsedUserAgent);
-        apiUrl.searchParams.set('referrer', referrer);
-        
-        console.log('📊 Browser info being sent:');
-        console.log('  - Time:', browserTime);
-        console.log('  - Raw User Agent:', rawUserAgent);
-        console.log('  - Parsed User Agent:', parsedUserAgent);
-        console.log('  - Referrer:', referrer);
-        console.log('  - API URL:', apiUrl.toString());
-        
-        const response = await fetch(apiUrl.toString());
-        
-        if (!response.ok) {
-            const errorData = await response.json();
-            
-            // Handle specific error cases with user-friendly messages
-            if (response.status === 403 && errorData.error === "Gallery access expired") {
-                throw new Error("🚫 This gallery has reached its view limit and is no longer accessible");
-            } else if (response.status === 404) {
-                throw new Error("❓ Gallery not found. The link may be invalid or expired");
-            } else {
-                throw new Error(errorData.error || errorData.message || `HTTP error! status: ${response.status}`);
+        const endpoints = [
+            `https://fetch.maipdf.com/api/gallery/${id}`,
+            `https://fetch.maipdf.com/api/maiimgs/gallery/${id}`
+        ];
+
+        let lastError = null;
+        for (const endpoint of endpoints) {
+            try {
+                const apiUrl = new URL(endpoint);
+                apiUrl.searchParams.set('browser_time', browserTime);
+                apiUrl.searchParams.set('user_agent', parsedUserAgent);
+                apiUrl.searchParams.set('referrer', referrer);
+                const response = await fetch(apiUrl.toString());
+                const data = await response.json();
+
+                if (!response.ok) {
+                    if (response.status === 403 && data.error === 'Gallery access expired') {
+                        throw new Error('🚫 This gallery has reached its view limit and is no longer accessible');
+                    }
+                    if (response.status === 404) {
+                        throw new Error('❓ Gallery not found. The link may be invalid or expired');
+                    }
+                    if (response.status < 500) {
+                        throw new Error(data.error || data.message || `HTTP error! status: ${response.status}`);
+                    }
+                    lastError = new Error(data.error || data.message || `HTTP error! status: ${response.status}`);
+                    continue;
+                }
+
+                return data;
+            } catch (error) {
+                lastError = error;
             }
         }
-        
-        const data = await response.json();
-        console.log('✅ Gallery data received:', data);
-        
-        return data;
+
+        throw lastError || new Error('Unable to fetch gallery data');
     }
 
-    async fetchImageList(markPath) {
-        const imageListUrl = `https://fetch.maipdf.com/api/images/${encodeURIComponent(markPath)}`;
-        const response = await fetch(imageListUrl);
-        
-        if (!response.ok) {
-            throw new Error('Unable to fetch image list');
+    async fetchMediaItems(markPath) {
+        const normalizedPath = encodeURIComponent(markPath);
+        const endpoints = [
+            `https://fetch.maipdf.com/api/maiimgs/items/${normalizedPath}`,
+            `https://fetch.maipdf.com/api/images/${normalizedPath}`
+        ];
+
+        let lastError = null;
+        for (const endpoint of endpoints) {
+            try {
+                const response = await fetch(endpoint);
+                if (!response.ok) {
+                    if (response.status < 500) {
+                        throw new Error('Unable to fetch media list');
+                    }
+                    lastError = new Error(`HTTP error! status: ${response.status}`);
+                    continue;
+                }
+
+                const payload = await response.json();
+                const items = Array.isArray(payload.items)
+                    ? payload.items
+                    : Array.isArray(payload.images)
+                        ? payload.images.map((imageInfo) => ({ ...imageInfo, kind: 'image' }))
+                        : [];
+
+                if (!items.length) {
+                    throw new Error('No media found in this gallery');
+                }
+
+                return items;
+            } catch (error) {
+                lastError = error;
+            }
         }
-        
-        const imageList = await response.json();
-        if (!imageList.images || imageList.images.length === 0) {
-            throw new Error('No images found in this gallery');
-        }
-        
-        return imageList;
+
+        throw lastError || new Error('Unable to fetch media list');
     }
 
-    /**
-     * Starts the view timer - only shows in the last 100 seconds
-     */
     startViewTimer(seconds) {
-        if (!seconds || seconds >= 1999999927) {
-            console.log('🕐 No time limit set');
-            return; // No time limit
-        }
-        
-        console.log(`⏰ Starting view timer: ${seconds} seconds`);
-        
+        if (!seconds || seconds >= 1999999927) return;
         let remainingTime = seconds;
         let timerDisplay = null;
-        let timerInterval = null;
-        
-        // Update timer function
+
         const updateTimer = () => {
-            // Only show timer in the last 100 seconds
             if (remainingTime <= 100 && !timerDisplay) {
-                // Create timer display when we reach 100 seconds
                 timerDisplay = document.createElement('div');
                 timerDisplay.id = 'view-timer';
                 timerDisplay.style.cssText = `
@@ -768,382 +575,413 @@ class ImageGallery {
                     font-size: 14px;
                     font-weight: 600;
                     z-index: 1001;
-                    backdrop-filter: blur(10px);
-                    border: 1px solid rgba(255, 255, 255, 0.2);
                     min-width: 120px;
                     text-align: center;
-                    transition: all 0.3s ease;
-                    animation: slideInRight 0.3s ease-out;
+                    backdrop-filter: blur(10px);
                 `;
                 document.body.appendChild(timerDisplay);
-                
-                // Add slide-in animation CSS if not already added
-                if (!document.getElementById('timer-animations')) {
-                    const style = document.createElement('style');
-                    style.id = 'timer-animations';
-                    style.textContent = `
-                        @keyframes slideInRight {
-                            from {
-                                transform: translateX(100%);
-                                opacity: 0;
-                            }
-                            to {
-                                transform: translateX(0);
-                                opacity: 1;
-                            }
-                        }
-                        @keyframes pulse {
-                            0%, 100% { opacity: 1; transform: scale(1); }
-                            50% { opacity: 0.8; transform: scale(1.05); }
-                        }
-                    `;
-                    document.head.appendChild(style);
-                }
-                
-                console.log('⏰ Timer display activated - 100 seconds remaining');
             }
-            
-            // Update timer display if it exists
+
             if (timerDisplay) {
                 const minutes = Math.floor(remainingTime / 60);
                 const secs = remainingTime % 60;
-                const timeString = `${minutes}:${secs.toString().padStart(2, '0')}`;
-                
-                timerDisplay.innerHTML = `⏰ ${timeString}`;
-                
-                // Change color as time runs out
+                timerDisplay.textContent = `⏰ ${minutes}:${secs.toString().padStart(2, '0')}`;
                 if (remainingTime <= 30) {
-                    timerDisplay.style.background = 'rgba(239, 68, 68, 0.9)'; // Red
-                    timerDisplay.style.animation = 'pulse 1s infinite';
-                    timerDisplay.innerHTML = `🚨 ${timeString}`;
+                    timerDisplay.style.background = 'rgba(239, 68, 68, 0.9)';
                 } else if (remainingTime <= 60) {
-                    timerDisplay.style.background = 'rgba(245, 158, 11, 0.9)'; // Orange
-                    timerDisplay.innerHTML = `⚠️ ${timeString}`;
+                    timerDisplay.style.background = 'rgba(245, 158, 11, 0.9)';
                 }
             }
-            
-            remainingTime--;
-            
-            if (remainingTime < 0) {
-                // Time's up - redirect to maiimg.com
-                console.log('⏰ Time limit reached, redirecting...');
-                
-                if (timerDisplay) {
-                    // Show redirect notification
-                    timerDisplay.innerHTML = '🔄 Redirecting...';
-                    timerDisplay.style.background = 'rgba(239, 68, 68, 0.9)';
-                    timerDisplay.style.animation = 'pulse 0.5s infinite';
-                }
 
-                // 使用错误遮罩覆盖整个页面，避免缓存中保留图片画面
-                try {
-                    this.showError('⏰ Viewing time has expired. Redirecting to homepage...');
-                } catch (e) {
-                    console.log('showError failed:', e);
-                }
-                
-                // 使用 location.replace 替换当前历史记录，避免后退返回 gallery
-                setTimeout(() => {
-                    window.location.replace('https://maiimg.com');
-                }, 2000);
-                
-                // Clear the timer
-                if (timerInterval) {
-                    clearInterval(timerInterval);
-                }
-                return;
+            remainingTime -= 1;
+            if (remainingTime < 0) {
+                this.showError('⏰ Viewing time has expired. Redirecting to homepage...');
+                if (this.viewTimer) clearInterval(this.viewTimer);
+                setTimeout(() => window.location.replace('https://maiimg.com'), 2000);
             }
         };
-        
-        // Start the timer
-        updateTimer(); // Initial call
-        timerInterval = setInterval(updateTimer, 1000);
-        
-        // Store timer reference for cleanup
-        this.viewTimer = timerInterval;
-        this.viewTimerDisplay = timerDisplay;
+
+        updateTimer();
+        this.viewTimer = setInterval(updateTimer, 1000);
     }
 
-    async loadGalleryData() {
-        // 检查是否是 bot
-        const userAgent = navigator.userAgent;
-        if (this.isBot(userAgent)) {
+    async loadMediaData() {
+        if (this.isBot(navigator.userAgent)) {
             this.showBotMessage();
             return;
         }
-        // 获取画廊 ID（hash > path/href/query > localStorage 仅 special.maiimg.com）
-        const encodedId = this.getGalleryId();
+
+        const encodedId = this.getMediaId();
         if (!encodedId) {
-            throw new Error("Please use a valid gallery URL, e.g.: /gallery/A or /gallery/#A");
+            throw new Error('Please use a valid media URL, e.g.: /media/A or /media/#A');
         }
-        // 仅 maiimg.com 在微信内不展示：重定向到 special.maiimg.com/wechat.html；special.maiimg.com 在微信内正常展示 gallery
+
         const host = (window.location.hostname || '').toLowerCase();
         if (this.isWeChat() && host !== 'special.maiimg.com') {
             this.redirectToWechatGuide(encodedId);
             return;
         }
 
-        // Decode ID
         const numericId = this.decodeId(encodedId);
-        if (numericId === null || isNaN(numericId)) {
+        if (numericId === null || Number.isNaN(numericId)) {
             throw new Error(`Invalid ID "${encodedId}" provided`);
         }
 
-        // Fetch the data from the D1 database via our API
         const galleryData = await this.fetchGalleryData(numericId);
-        
-        console.log('🎯 Gallery data received:', galleryData);
-        console.log('📊 Remaining views:', galleryData.email);
-        console.log('⏰ Time limit:', galleryData.subject, 'seconds');
-
-        // Set page title
-        document.title = galleryData.md5 || 'Image Gallery';
-
-        // Start view timer if time limit is set
+        document.title = galleryData.md5 || 'Media Gallery';
         if (galleryData.subject && galleryData.subject < 1999999927) {
             this.startViewTimer(galleryData.subject);
         }
 
-        // Get image list
-        const imageList = await this.fetchImageList(galleryData.mark);
-        
-        // Create Swiper slides
-        await this.createSlides(imageList.images, galleryData.mark);
-        
-        // Initialize Swiper
+        const items = await this.fetchMediaItems(galleryData.mark);
+        await this.createSlides(items, galleryData.mark);
         this.initializeSwiper();
-        
-        // Show gallery
         this.showGallery();
-        
-        // Show ads (delayed)
         setTimeout(() => this.showAds(), 3000);
     }
 
-    async createSlides(images, markPath) {
+    async createSlides(items, markPath) {
         const wrapper = document.getElementById('swiper-wrapper');
         wrapper.innerHTML = '';
-        this.totalImages = images.length;
+        this.totalItems = items.length;
 
-        images.forEach((imageInfo, index) => {
-            const fileName = imageInfo.fileName || imageInfo;
-            const fullPath = imageInfo.fullPath || `${markPath}/${fileName}`;
-            const imageUrl = `https://fetch.maipdf.com/file/${fullPath}`;
-
+        items.forEach((mediaInfo, index) => {
+            const fileName = mediaInfo.fileName || mediaInfo.filename || mediaInfo.originalName || mediaInfo;
+            const fullPath = mediaInfo.fullPath || mediaInfo.key || `${markPath}/${fileName}`;
+            const mediaUrl = this.resolveMediaAssetUrl(fullPath, markPath);
+            const kind = mediaInfo.kind || 'image';
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
-            slide.innerHTML = `
-                <div class="swiper-zoom-container">
-                    <img src="${imageUrl}" alt="Image ${index + 1}" loading="lazy">
-                </div>
-            `;
+
+            if (kind === 'video') {
+                const posterUrl = this.resolveVideoPosterUrl(mediaInfo, markPath);
+                const posterAttr = posterUrl ? `poster="${posterUrl}"` : '';
+                const needsPreviewPrime = posterUrl ? '0' : '1';
+                slide.innerHTML = `
+                    <div class="swiper-zoom-container media-shell is-video">
+                        <video src="${mediaUrl}" ${posterAttr} preload="metadata" playsinline webkit-playsinline controls controlsList="nodownload" data-needs-preview-prime="${needsPreviewPrime}">
+                            Your browser does not support video playback.
+                        </video>
+                    </div>
+                `;
+                const video = slide.querySelector('video');
+                this.attachVideoEvents(video);
+            } else {
+                slide.innerHTML = `
+                    <div class="swiper-zoom-container media-shell">
+                        <img src="${mediaUrl}" alt="Image ${index + 1}" loading="lazy">
+                    </div>
+                `;
+            }
+
             wrapper.appendChild(slide);
         });
+    }
+
+    resolveMediaAssetUrl(assetPath, markPath = '') {
+        if (!assetPath) return '';
+        const rawValue = String(assetPath).trim();
+        if (!rawValue) return '';
+        if (/^(?:data:|blob:|https?:\/\/)/i.test(rawValue)) return rawValue;
+        if (rawValue.startsWith('//')) return `${window.location.protocol}${rawValue}`;
+        if (rawValue.startsWith('/')) return `https://fetch.maipdf.com${rawValue}`;
+
+        const normalizedValue = rawValue.includes('/') ? rawValue : `${markPath}/${rawValue}`;
+        return `https://fetch.maipdf.com/media/${normalizedValue}`;
+    }
+
+    resolveVideoPosterUrl(mediaInfo, markPath) {
+        const candidateFields = [
+            mediaInfo.poster,
+            mediaInfo.thumbnail,
+            mediaInfo.thumb,
+            mediaInfo.cover,
+            mediaInfo.preview
+        ];
+
+        for (const candidate of candidateFields) {
+            const resolved = this.resolveMediaAssetUrl(candidate, markPath);
+            if (resolved) return resolved;
+        }
+
+        return '';
+    }
+
+    attachVideoEvents(video) {
+        video.addEventListener('play', () => {
+            this.pauseOtherVideos(video);
+        });
+    }
+
+    isFullscreenSupported() {
+        const root = document.documentElement;
+        return !!(
+            document.fullscreenEnabled ||
+            document.webkitFullscreenEnabled ||
+            root.requestFullscreen ||
+            root.webkitRequestFullscreen
+        );
+    }
+
+    getActiveSlide() {
+        if (!this.swiper || !this.swiper.slides || !this.swiper.slides.length) {
+            return document.querySelector('#swiper-wrapper .swiper-slide');
+        }
+        return this.swiper.slides[this.swiper.activeIndex] || null;
+    }
+
+    updateFullscreenToggle() {
+        if (!this.fullscreenToggle) return;
+        const activeSlide = this.getActiveSlide();
+        const hasVideo = !!activeSlide?.querySelector('video');
+        this.fullscreenToggle.hidden = !this.isFullscreenSupported() || hasVideo;
+    }
+
+    async primeVideoPreview(video) {
+        if (!video) return;
+        if (video.dataset.needsPreviewPrime !== '1') return;
+        if (video.dataset.previewPrimed || video.dataset.previewPriming === '1') return;
+        if (!video.paused || document.visibilityState === 'hidden') return;
+
+        video.dataset.previewPriming = '1';
+        const originalMuted = video.muted;
+        const originalDefaultMuted = video.defaultMuted;
+        const originalVolume = video.volume;
+
+        try {
+            video.muted = true;
+            video.defaultMuted = true;
+            video.playsInline = true;
+
+            await video.play();
+            await new Promise((resolve) => setTimeout(resolve, 140));
+
+            const targetTime = Number.isFinite(video.duration) && video.duration > 0
+                ? Math.min(0.12, Math.max(0.06, video.duration / 20))
+                : 0.08;
+
+            if (video.currentTime < targetTime) {
+                try {
+                    video.currentTime = targetTime;
+                    await new Promise((resolve) => {
+                        const onSeeked = () => {
+                            video.removeEventListener('seeked', onSeeked);
+                            resolve();
+                        };
+                        video.addEventListener('seeked', onSeeked, { once: true });
+                        setTimeout(() => {
+                            video.removeEventListener('seeked', onSeeked);
+                            resolve();
+                        }, 160);
+                    });
+                } catch (error) {
+                }
+            }
+
+            video.pause();
+            video.dataset.previewPrimed = '1';
+        } catch (error) {
+            video.dataset.previewPrimed = '0';
+        } finally {
+            delete video.dataset.previewPriming;
+            video.muted = originalMuted;
+            video.defaultMuted = originalDefaultMuted;
+            try {
+                video.volume = originalVolume;
+            } catch (error) {
+            }
+        }
+    }
+
+    primeActiveVideoPreview() {
+        const activeSlide = this.getActiveSlide();
+        const activeVideo = activeSlide?.querySelector('video');
+        if (!activeVideo) return;
+        this.primeVideoPreview(activeVideo);
+    }
+
+    pauseOtherVideos(activeVideo = null) {
+        document.querySelectorAll('#swiper-wrapper video').forEach((video) => {
+            if (activeVideo && video === activeVideo) return;
+            if (!video.paused) video.pause();
+        });
+    }
+
+    isOverlayControlTarget(target) {
+        return !!(
+            target &&
+            typeof target.closest === 'function' &&
+            target.closest('#fullscreen-toggle, .swiper-pagination, .swiper-button-next, .swiper-button-prev')
+        );
+    }
+
+    isNativeVideoControlZone(video, point) {
+        if (!video || !point) return false;
+        const rect = video.getBoundingClientRect();
+        if (!rect.width || !rect.height) return false;
+
+        const insideVideo = (
+            point.clientX >= rect.left &&
+            point.clientX <= rect.right &&
+            point.clientY >= rect.top &&
+            point.clientY <= rect.bottom
+        );
+        if (!insideVideo) return false;
+
+        const bottomControlZone = Math.min(96, Math.max(56, rect.height * 0.18));
+        return point.clientY >= rect.bottom - bottomControlZone;
+    }
+
+    shouldBlockSwipe(event) {
+        const target = event.target;
+        if (this.isOverlayControlTarget(target)) return true;
+        if (!target || typeof target.closest !== 'function') return false;
+
+        const video = target.closest('video');
+        if (!video) return false;
+        if (!video.paused && !video.ended) return true;
+
+        const point = event.touches && event.touches[0] ? event.touches[0] : null;
+        return this.isNativeVideoControlZone(video, point);
     }
 
     initializeSwiper() {
         this.swiper = new Swiper('.swiper', {
             direction: 'vertical',
-            loop: this.totalImages > 1,
+            loop: this.totalItems > 1,
             speed: 600,
             effect: 'slide',
-
-            // Navigation
             navigation: {
                 nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                prevEl: '.swiper-button-prev'
             },
-
-            // Pagination
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
-                dynamicBullets: true,
+                dynamicBullets: true
             },
-
-            // 增强的鼠标滚轮支持 - 兼容 Mac 设备
             mousewheel: {
                 enabled: true,
                 thresholdDelta: 20,
                 sensitivity: 0.5,
-                forceToAxis: false,
-                releaseOnEdges: false,
-                invert: false,
-                eventsTarget: 'container'
+                forceToAxis: false
             },
-
-            // Keyboard control
             keyboard: {
                 enabled: true,
-                onlyInViewport: true,
+                onlyInViewport: true
             },
-
-                    // 优化的触摸控制
-        touchRatio: 1,
-        touchAngle: 45,
-        grabCursor: true,
-        resistanceRatio: 0.85,
-        
-        // 启用缩放功能
-        zoom: {
-            enabled: true,
-            maxRatio: 3,
-            minRatio: 0.5,
-            toggle: false,
-            containerClass: 'swiper-zoom-container',
-            zoomedSlideClass: 'swiper-slide-zoomed'
-        },
-
-            // Preloading
+            touchRatio: 1,
+            touchAngle: 45,
+            grabCursor: true,
+            resistanceRatio: 0.85,
+            zoom: {
+                enabled: true,
+                maxRatio: 3,
+                minRatio: 0.5,
+                toggle: false,
+                containerClass: 'swiper-zoom-container',
+                zoomedSlideClass: 'swiper-slide-zoomed'
+            },
             preloadImages: false,
             lazy: true,
-
-            // Event listeners
             on: {
                 slideChange: (swiper) => {
                     this.currentIndex = swiper.activeIndex;
+                    this.pauseOtherVideos();
                     this.updateProgress();
+                    this.updateFullscreenToggle();
+                    this.primeActiveVideoPreview();
                 },
                 init: (swiper) => {
                     this.currentIndex = swiper.activeIndex;
+                    this.pauseOtherVideos();
                     this.updateProgress();
+                    this.updateFullscreenToggle();
+                    this.primeActiveVideoPreview();
                     setTimeout(() => {
                         const hintEl = document.getElementById('gesture-hint');
                         if (hintEl) hintEl.style.display = 'none';
                     }, 4000);
-                    
-                    // 添加额外的 Mac 滚轮事件监听
-                    this.addMacScrollSupport();
+                    this.addScrollSupport();
                 }
             }
         });
     }
 
-    // 添加 Mac 滚轮支持和触摸手势识别
-    addMacScrollSupport() {
+    addScrollSupport() {
         let isScrolling = false;
-        let scrollTimeout;
-        
-        // 触摸状态跟踪
+        let scrollTimeout = null;
         let touchStartY = 0;
-        let touchStartDistance = 0;
-        let isZooming = false;
+        let touchStartX = 0;
         let isSliding = false;
-        
-        // 监听 wheel 事件以支持 Mac 设备
-        document.addEventListener('wheel', (e) => {
-            if (!this.swiper) return;
-            
-            // 防止页面滚动
-            e.preventDefault();
-            
-            // 检测滚动方向
-            const delta = e.deltaY;
-            const threshold = 10;
-            
-            // 防止过快触发
+
+        document.addEventListener('wheel', (event) => {
+            if (!this.swiper || this.isOverlayControlTarget(event.target)) return;
+            event.preventDefault();
             if (isScrolling) return;
-            
-            if (Math.abs(delta) > threshold) {
-                isScrolling = true;
-                
-                if (delta > 0) {
-                    // 向下滚动 - 下一张
-                    this.swiper.slideNext();
-                } else {
-                    // 向上滚动 - 上一张
-                    this.swiper.slidePrev();
-                }
-                
-                // 重置滚动状态
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    isScrolling = false;
-                }, 150);
+            if (Math.abs(event.deltaY) <= 10) return;
+
+            isScrolling = true;
+            if (event.deltaY > 0) {
+                this.swiper.slideNext();
+            } else {
+                this.swiper.slidePrev();
             }
+
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+            }, 150);
         }, { passive: false });
-        
-        // 触摸开始事件
-        document.addEventListener('touchstart', (e) => {
-            if (!this.swiper) return;
-            
-            if (e.touches.length === 1) {
-                // 单指触摸 - 准备滑动
-                touchStartY = e.touches[0].clientY;
+
+        document.addEventListener('touchstart', (event) => {
+            if (!this.swiper || this.shouldBlockSwipe(event)) return;
+            if (event.touches.length === 1) {
+                touchStartY = event.touches[0].clientY;
+                touchStartX = event.touches[0].clientX;
                 isSliding = true;
-                isZooming = false;
-            } else if (e.touches.length === 2) {
-                // 双指触摸 - 准备缩放
-                touchStartDistance = this.getTouchDistance(e.touches);
-                isZooming = true;
+            } else {
                 isSliding = false;
             }
         }, { passive: true });
-        
-        // 触摸移动事件
-        document.addEventListener('touchmove', (e) => {
-            if (!this.swiper) return;
-            
-            if (e.touches.length === 1 && isSliding) {
-                // 单指滑动 - 切换图片
-                const currentY = e.touches[0].clientY;
-                const deltaY = touchStartY - currentY;
-                const threshold = 50; // 增加阈值，避免误触
-                
-                if (Math.abs(deltaY) > threshold) {
-                    if (deltaY > 0) {
-                        this.swiper.slideNext();
-                    } else {
-                        this.swiper.slidePrev();
-                    }
-                    isSliding = false; // 防止连续触发
+
+        document.addEventListener('touchmove', (event) => {
+            if (!this.swiper || this.shouldBlockSwipe(event)) return;
+            if (event.touches.length === 1 && isSliding) {
+                const deltaY = touchStartY - event.touches[0].clientY;
+                const deltaX = touchStartX - event.touches[0].clientX;
+                if (Math.abs(deltaY) > 50 && Math.abs(deltaY) > Math.abs(deltaX)) {
+                    if (deltaY > 0) this.swiper.slideNext();
+                    else this.swiper.slidePrev();
+                    isSliding = false;
                 }
-            } else if (e.touches.length === 2 && isZooming) {
-                // 双指缩放 - 让 Swiper 的 zoom 功能处理
-                // 这里不需要额外处理，Swiper 会自动处理缩放
             }
         }, { passive: true });
-        
-        // 触摸结束事件
+
         document.addEventListener('touchend', () => {
             isSliding = false;
-            isZooming = false;
         }, { passive: true });
-        
-        // 触摸取消事件
+
         document.addEventListener('touchcancel', () => {
             isSliding = false;
-            isZooming = false;
         }, { passive: true });
-    }
-    
-    // 计算两个触摸点之间的距离
-    getTouchDistance(touches) {
-        if (touches.length < 2) return 0;
-        const dx = touches[0].clientX - touches[1].clientX;
-        const dy = touches[0].clientY - touches[1].clientY;
-        return Math.sqrt(dx * dx + dy * dy);
     }
 
     updateProgress() {
-        if (this.totalImages > 0) {
-            const progress = ((this.currentIndex + 1) / this.totalImages) * 100;
-            const progressBar = document.getElementById('progress-bar');
-            if (progressBar) {
-                progressBar.style.width = `${progress}%`;
-            }
-        }
+        if (!this.totalItems) return;
+        const progress = ((this.currentIndex + 1) / this.totalItems) * 100;
+        const progressBar = document.getElementById('progress-bar');
+        if (progressBar) progressBar.style.width = `${progress}%`;
     }
 
     showGallery() {
         const loading = document.getElementById('loading');
         const gallery = document.getElementById('main-swiper');
-        
         loading.style.opacity = '0';
         setTimeout(() => {
             loading.style.display = 'none';
             gallery.style.display = 'block';
-        }, 500);
+        }, 450);
     }
 
     showError(message) {
@@ -1153,43 +991,38 @@ class ImageGallery {
     }
 
     showAds() {
-        // Google AdSense ad display logic
         try {
             const adContainer = document.getElementById('ad-container');
-            // Add AdSense ad code here
-            // (adsbygoogle = window.adsbygoogle || []).push({});
-            
-            // Only show container if there are actual ads to display
-            // For now, we'll not show anything unless there's real ad content
-            
+            if (adContainer) {
+                adContainer.classList.remove('show');
+            }
         } catch (error) {
             console.log('Ad display error:', error);
         }
     }
 }
 
-// Fullscreen functionality
 document.getElementById('fullscreen-toggle').addEventListener('click', () => {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
+    const root = document.documentElement;
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (root.requestFullscreen) root.requestFullscreen();
+        else if (root.webkitRequestFullscreen) root.webkitRequestFullscreen();
     } else {
-        document.exitFullscreen();
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
     }
 });
 
-// Prevent right-click and developer tools
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
-        e.preventDefault();
+document.addEventListener('contextmenu', (event) => event.preventDefault());
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+        event.preventDefault();
     }
 });
 
-// Initialize application
 document.addEventListener('DOMContentLoaded', () => {
-    new ImageGallery();
+    new MediaGallery();
 });
 </script>
-
 </body>
 </html>
