@@ -26,7 +26,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" rel="stylesheet">
   
   <!-- Custom Styles -->
-  <link href="qr-styles010.css" rel="stylesheet">
+  <link href="qr-styles017.css" rel="stylesheet">
   <style>
     .flow-step.is-guided {
       animation: flowStepPulse 1.1s ease-in-out infinite;
@@ -1566,7 +1566,18 @@
       if (!window.matchMedia('(max-width: 768px)').matches) return;
       const activeEl = document.querySelector(`.flow-step[data-step="${activeStep}"]`);
       if (!activeEl) return;
-      activeEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      const container = activeEl.closest('.flow-nav-inner');
+      if (!container) return;
+
+      const containerRect = container.getBoundingClientRect();
+      const activeRect = activeEl.getBoundingClientRect();
+      const currentLeft = container.scrollLeft;
+      const targetLeft = currentLeft + (activeRect.left - containerRect.left) - Math.max((containerRect.width - activeRect.width) / 2, 12);
+
+      container.scrollTo({
+        left: Math.max(0, targetLeft),
+        behavior: 'smooth'
+      });
     }
 
     function updateFlowNavigator() {
@@ -1968,6 +1979,14 @@
       return !!(file && file._isLivePhoto);
     }
 
+    function decorateDropzonePreview(file) {
+      const preview = file?.previewElement;
+      if (!preview) return;
+      const kind = getFileKind(file) || 'media';
+      preview.dataset.mediaKind = kind;
+      preview.classList.toggle('is-live-photo-preview', isLivePhotoFile(file));
+    }
+
     function syncUploadedFilePresentation(file) {
       if (!file) return;
       const isLivePhoto = isLivePhotoFile(file);
@@ -1989,6 +2008,7 @@
     function renderLivePhotoToggleState(button, file) {
       if (!button) return;
       const isLivePhoto = isLivePhotoFile(file);
+      file?.previewElement?.classList.toggle('is-live-photo-preview', isLivePhoto);
       button.classList.toggle('is-active', isLivePhoto);
       button.setAttribute('aria-pressed', isLivePhoto ? 'true' : 'false');
       button.textContent = isLivePhoto
@@ -2415,6 +2435,7 @@
           this.on("addedfile", function(file) {
             setTimeout(showLoginNudgeIfNeeded, 250);
             file._removed = false;
+            decorateDropzonePreview(file);
             attachLivePhotoToggle(file);
 
             if (!currentUploadSessionId) {
