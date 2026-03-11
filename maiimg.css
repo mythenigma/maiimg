@@ -3797,3 +3797,945 @@ body.index-refined.maiimg-vivid .modal .btn-close {
     font-size: clamp(1.7rem, 8vw, 2.35rem);
   }
 }
+
+body.maiimg-workspace {
+  --mai-bg: #edf2f8;
+  --mai-surface: rgba(255, 255, 255, 0.78);
+  --mai-panel: #ffffff;
+  --mai-panel-soft: #f6f8fc;
+  --mai-panel-soft-2: #f2f5fb;
+  --mai-border: rgba(15, 23, 42, 0.08);
+  --mai-border-strong: rgba(79, 70, 229, 0.18);
+  --mai-ink: #0f172a;
+  --mai-muted: #60708a;
+  --mai-primary: #4f46e5;
+  --mai-primary-strong: #4338ca;
+  --mai-accent: #0ea5e9;
+  --mai-accent-soft: rgba(14, 165, 233, 0.12);
+  --mai-amber: #f59e0b;
+  --mai-shadow: 0 26px 60px rgba(15, 23, 42, 0.09);
+  background:
+    radial-gradient(circle at 8% 10%, rgba(14, 165, 233, 0.12), transparent 23%),
+    radial-gradient(circle at 92% 12%, rgba(79, 70, 229, 0.10), transparent 24%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2f7 48%, #f6f8fb 100%);
+  color: var(--mai-ink);
+  font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body.maiimg-workspace::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(79, 70, 229, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 70, 229, 0.022) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65), transparent 88%);
+  z-index: 0;
+}
+
+body.maiimg-workspace > * {
+  position: relative;
+  z-index: 1;
+}
+
+body.maiimg-workspace .container {
+  position: relative;
+}
+
+body.maiimg-workspace .navbar {
+  background: rgba(248, 250, 252, 0.82) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(18px);
+}
+
+body.maiimg-workspace .navbar-brand {
+  color: var(--mai-primary);
+  background: none !important;
+  -webkit-text-fill-color: currentColor;
+  font-family: 'Sora', 'Space Grotesk', sans-serif;
+  font-size: clamp(1.35rem, 2vw, 1.6rem);
+  letter-spacing: -0.03em;
+}
+
+body.maiimg-workspace .navbar-brand i {
+  color: var(--mai-accent);
+}
+
+body.maiimg-workspace .navbar .btn-light,
+body.maiimg-workspace .navbar .btn-outline-light,
+body.maiimg-workspace .nav-actions-mobile .mobile-user-trigger {
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--mai-ink) !important;
+  border: 1px solid rgba(148, 163, 184, 0.28) !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+body.maiimg-workspace .navbar .btn-light:hover,
+body.maiimg-workspace .navbar .btn-outline-light:hover,
+body.maiimg-workspace .nav-actions-mobile .mobile-user-trigger:hover {
+  background: #fff;
+  border-color: rgba(79, 70, 229, 0.24) !important;
+}
+
+body.maiimg-workspace .dropdown-menu,
+body.maiimg-workspace .mobile-user-menu {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: var(--mai-shadow);
+}
+
+body.maiimg-workspace .dropdown-item,
+body.maiimg-workspace .dropdown-item-text,
+body.maiimg-workspace .dropdown-header {
+  color: var(--mai-ink);
+}
+
+body.maiimg-workspace .dropdown-item:hover {
+  background: rgba(79, 70, 229, 0.08);
+  color: var(--mai-primary-strong);
+}
+
+body.maiimg-workspace .user-pill {
+  background: rgba(79, 70, 229, 0.08);
+  color: var(--mai-primary-strong);
+  border: 1px solid rgba(79, 70, 229, 0.12);
+}
+
+body.maiimg-workspace .hero-section {
+  padding: 7.4rem 0 1.5rem;
+}
+
+body.maiimg-workspace .hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.9fr);
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+body.maiimg-workspace .hero-copy,
+body.maiimg-workspace .hero-outline {
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 249, 252, 0.88));
+  box-shadow: var(--mai-shadow);
+}
+
+body.maiimg-workspace .hero-copy {
+  padding: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+body.maiimg-workspace .hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.82rem;
+  border-radius: 999px;
+  border: 1px solid rgba(79, 70, 229, 0.14);
+  background: rgba(79, 70, 229, 0.07);
+  color: var(--mai-primary-strong);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body.maiimg-workspace .hero-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+  font-family: 'Sora', 'Space Grotesk', sans-serif;
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  color: var(--mai-ink);
+}
+
+body.maiimg-workspace .hero-title i {
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  color: var(--mai-accent);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  margin: 0;
+}
+
+body.maiimg-workspace .hero-title span {
+  display: inline-block;
+  max-width: 14ch;
+}
+
+body.maiimg-workspace .hero-subtitle {
+  max-width: 44rem;
+  margin: 0;
+  color: var(--mai-muted);
+  font-size: 1.02rem;
+  line-height: 1.72;
+}
+
+body.maiimg-workspace .hero-badges {
+  justify-content: flex-start;
+  gap: 0.7rem;
+  margin-top: 1.25rem;
+}
+
+body.maiimg-workspace .feature-badges .badge {
+  padding: 0.62rem 0.94rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: #fff;
+  color: var(--mai-ink);
+  box-shadow: none;
+}
+
+body.maiimg-workspace .badge-secure i {
+  color: var(--mai-primary);
+}
+
+body.maiimg-workspace .badge-fast i {
+  color: var(--mai-accent);
+}
+
+body.maiimg-workspace .badge-free i {
+  color: var(--mai-amber);
+}
+
+body.maiimg-workspace .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+body.maiimg-workspace .hero-outline {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.35rem;
+  background:
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 247, 251, 0.96));
+}
+
+body.maiimg-workspace .hero-outline-copy {
+  padding-bottom: 1rem;
+  color: var(--mai-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+body.maiimg-workspace .hero-outline-steps {
+  display: grid;
+  gap: 0.8rem;
+  padding-top: 1rem;
+}
+
+body.maiimg-workspace .hero-outline-step {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 0.9rem;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+body.maiimg-workspace .hero-outline-step-num {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(79, 70, 229, 0.08);
+  color: var(--mai-primary-strong);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+body.maiimg-workspace .hero-outline-step-label {
+  color: var(--mai-ink);
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+body.maiimg-workspace .maiimg-shell {
+  display: grid;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+body.maiimg-workspace .flow-nav {
+  margin: 0;
+}
+
+body.maiimg-workspace .flow-nav-inner {
+  padding: 0.55rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(14px);
+}
+
+body.maiimg-workspace .flow-step {
+  color: var(--mai-muted);
+  border-radius: 18px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+body.maiimg-workspace .flow-step:hover {
+  transform: translateY(-1px);
+  color: var(--mai-ink);
+}
+
+body.maiimg-workspace .flow-step.is-current,
+body.maiimg-workspace .flow-step.is-guided {
+  color: var(--mai-primary-strong);
+  border-color: rgba(79, 70, 229, 0.16);
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.11), rgba(14, 165, 233, 0.08));
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.08);
+}
+
+body.maiimg-workspace .flow-step-num {
+  background: rgba(79, 70, 229, 0.08);
+  color: var(--mai-primary-strong);
+}
+
+body.maiimg-workspace .flow-step.is-guided {
+  animation: maiimgWorkspacePulse 1.4s ease-in-out infinite;
+}
+
+body.maiimg-workspace .main-upload-section,
+body.maiimg-workspace .config-section,
+body.maiimg-workspace .results-section,
+body.maiimg-workspace .tools-section {
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 1.8rem);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(245, 247, 251, 0.92));
+  box-shadow: var(--mai-shadow);
+}
+
+body.maiimg-workspace .main-upload-section::before,
+body.maiimg-workspace .config-section::before,
+body.maiimg-workspace .results-section::before,
+body.maiimg-workspace .tools-section::before {
+  background: linear-gradient(90deg, var(--mai-primary), var(--mai-accent));
+  opacity: 0.92;
+}
+
+body.maiimg-workspace .upload-section-head.text-center,
+body.maiimg-workspace .tools-section-head.text-center {
+  text-align: left !important;
+}
+
+body.maiimg-workspace .upload-section-head {
+  max-width: 760px;
+  margin: 0 0 1.2rem;
+}
+
+body.maiimg-workspace .upload-section-kicker,
+body.maiimg-workspace .config-panel-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.48rem 0.78rem;
+  border-radius: 999px;
+  border: 1px solid rgba(79, 70, 229, 0.12);
+  background: rgba(79, 70, 229, 0.07);
+  color: var(--mai-primary-strong);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body.maiimg-workspace .section-title,
+body.maiimg-workspace .preset-panel-title,
+body.maiimg-workspace .advanced-panel-title,
+body.maiimg-workspace .success-title {
+  font-family: 'Sora', 'Space Grotesk', sans-serif;
+  color: var(--mai-ink);
+  letter-spacing: -0.045em;
+}
+
+body.maiimg-workspace .upload-section-head .section-title,
+body.maiimg-workspace .tools-section .section-title {
+  margin: 0.85rem 0 0.45rem;
+  font-size: clamp(1.7rem, 2.8vw, 2.45rem);
+}
+
+body.maiimg-workspace .section-subtitle,
+body.maiimg-workspace .preset-panel-copy,
+body.maiimg-workspace .advanced-panel-copy,
+body.maiimg-workspace .feature-copy,
+body.maiimg-workspace .success-subtitle,
+body.maiimg-workspace .generate-status,
+body.maiimg-workspace .text-muted {
+  color: var(--mai-muted) !important;
+}
+
+body.maiimg-workspace .section-subtitle {
+  display: block;
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+body.maiimg-workspace .upload-area {
+  padding: 0.85rem;
+  border: 1.5px dashed rgba(79, 70, 229, 0.18);
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.96), rgba(243, 246, 250, 0.96));
+}
+
+body.maiimg-workspace .upload-area::before {
+  inset: 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.45));
+}
+
+body.maiimg-workspace .upload-area.dropzone {
+  gap: 14px;
+}
+
+body.maiimg-workspace .upload-area.dropzone .dz-message {
+  width: 100%;
+  max-width: none;
+  min-height: 290px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 3vw, 2.2rem);
+  border-radius: 22px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background:
+    radial-gradient(circle at top, rgba(79, 70, 229, 0.05), transparent 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 248, 252, 0.96));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+body.maiimg-workspace .dropzone-hero {
+  max-width: 680px;
+}
+
+body.maiimg-workspace .upload-orb {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 1rem;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #5b55f7, #179ce8);
+  box-shadow: 0 18px 40px rgba(79, 70, 229, 0.16);
+}
+
+body.maiimg-workspace .upload-orb .upload-icon {
+  font-size: 2.35rem;
+  color: #fff;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  margin: 0;
+}
+
+body.maiimg-workspace .upload-text {
+  margin-bottom: 0.55rem;
+  font-family: 'Sora', 'Space Grotesk', sans-serif;
+  font-size: clamp(1.35rem, 2.4vw, 1.95rem);
+  font-weight: 700;
+  color: var(--mai-ink);
+  letter-spacing: -0.03em;
+}
+
+body.maiimg-workspace .upload-subtext {
+  max-width: 46rem;
+  margin: 0 auto;
+  color: var(--mai-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+body.maiimg-workspace #uploadStatus {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(14, 165, 233, 0.08));
+  border: 1px solid rgba(79, 70, 229, 0.08) !important;
+  color: var(--mai-ink);
+  box-shadow: none;
+}
+
+body.maiimg-workspace #uploadStatus i {
+  color: var(--mai-primary);
+}
+
+body.maiimg-workspace .file-preview-area {
+  padding: 1.15rem;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+body.maiimg-workspace .file-preview-area h4,
+body.maiimg-workspace .feature-title,
+body.maiimg-workspace .config-label,
+body.maiimg-workspace .summary-value,
+body.maiimg-workspace .stat-number,
+body.maiimg-workspace .stat-label,
+body.maiimg-workspace .result-card-header h5,
+body.maiimg-workspace .tool-card h5 {
+  color: var(--mai-ink);
+}
+
+body.maiimg-workspace .config-section {
+  margin-top: 0;
+}
+
+body.maiimg-workspace .preset-panel,
+body.maiimg-workspace .feature-card,
+body.maiimg-workspace .generate-side-panel,
+body.maiimg-workspace .config-summary-card,
+body.maiimg-workspace .result-card,
+body.maiimg-workspace .tool-card,
+body.maiimg-workspace .stat-card-enhanced {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 248, 252, 0.98));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: none;
+}
+
+body.maiimg-workspace .preset-panel,
+body.maiimg-workspace .feature-card,
+body.maiimg-workspace .generate-side-panel,
+body.maiimg-workspace .result-card,
+body.maiimg-workspace .tool-card {
+  border-radius: 24px;
+}
+
+body.maiimg-workspace .preset-panel {
+  padding: 1.4rem;
+  background:
+    radial-gradient(circle at top right, rgba(79, 70, 229, 0.08), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 247, 251, 0.98));
+}
+
+body.maiimg-workspace .preset-panel-title,
+body.maiimg-workspace .advanced-panel-title {
+  margin: 0.85rem 0 0.35rem;
+  font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+}
+
+body.maiimg-workspace .preset-grid,
+body.maiimg-workspace .advanced-stack,
+body.maiimg-workspace .security-control-grid,
+body.maiimg-workspace .config-b-layout {
+  gap: 1rem;
+}
+
+body.maiimg-workspace .preset-card,
+body.maiimg-workspace .config-summary-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+body.maiimg-workspace .preset-card.is-active {
+  border-color: rgba(79, 70, 229, 0.24);
+  background: linear-gradient(180deg, rgba(240, 242, 255, 0.96), rgba(255, 255, 255, 0.98));
+}
+
+body.maiimg-workspace .preset-card:hover,
+body.maiimg-workspace .feature-card:hover,
+body.maiimg-workspace .tool-card:hover,
+body.maiimg-workspace .result-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(79, 70, 229, 0.2);
+  box-shadow: 0 18px 30px rgba(15, 23, 42, 0.08);
+}
+
+body.maiimg-workspace .advanced-panel-head {
+  margin-bottom: 1rem;
+}
+
+body.maiimg-workspace .feature-card {
+  padding: 1.3rem;
+}
+
+body.maiimg-workspace .feature-card::before {
+  display: none;
+}
+
+body.maiimg-workspace .feature-card--security {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 247, 255, 0.98));
+}
+
+body.maiimg-workspace .feature-card-head {
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-bottom: 0.95rem;
+}
+
+body.maiimg-workspace .feature-icon-badge,
+body.maiimg-workspace .stat-icon {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(14, 165, 233, 0.12));
+  color: var(--mai-primary);
+}
+
+body.maiimg-workspace .feature-card-head .feature-icon {
+  color: currentColor;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+body.maiimg-workspace .feature-title {
+  margin-bottom: 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+body.maiimg-workspace .feature-copy {
+  font-size: 0.93rem;
+  line-height: 1.56;
+}
+
+body.maiimg-workspace .config-label,
+body.maiimg-workspace .summary-label {
+  color: var(--mai-muted);
+}
+
+body.maiimg-workspace .form-control,
+body.maiimg-workspace .form-select {
+  background: #fbfcfe;
+  color: var(--mai-ink);
+  border: 1.5px solid rgba(148, 163, 184, 0.22);
+}
+
+body.maiimg-workspace .form-control::placeholder {
+  color: rgba(96, 112, 138, 0.78);
+}
+
+body.maiimg-workspace .form-control:focus,
+body.maiimg-workspace .form-select:focus {
+  background: #fff;
+  color: var(--mai-ink);
+  border-color: rgba(79, 70, 229, 0.34);
+  box-shadow: 0 0 0 0.22rem rgba(79, 70, 229, 0.1);
+}
+
+body.maiimg-workspace .input-unit {
+  color: var(--mai-muted);
+}
+
+body.maiimg-workspace .generate-side-panel {
+  position: sticky;
+  top: calc(var(--flow-top-offset, 90px) + 16px);
+  padding: 1.35rem;
+  background:
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 247, 252, 0.98));
+}
+
+body.maiimg-workspace .generate-side-panel .config-summary-grid {
+  gap: 0.7rem;
+}
+
+body.maiimg-workspace .generate-side-panel .feature-title,
+body.maiimg-workspace .generate-side-panel .feature-copy {
+  text-align: left;
+}
+
+body.maiimg-workspace .btn {
+  border-radius: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+body.maiimg-workspace .btn-primary,
+body.maiimg-workspace .btn-success {
+  color: #fff;
+  border: none;
+  background: linear-gradient(135deg, #5650ef, #1b93e3);
+  box-shadow: 0 14px 28px rgba(79, 70, 229, 0.18);
+}
+
+body.maiimg-workspace .btn-primary:hover,
+body.maiimg-workspace .btn-success:hover {
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 18px 30px rgba(79, 70, 229, 0.22);
+}
+
+body.maiimg-workspace .btn-outline-secondary,
+body.maiimg-workspace .btn-outline-dark {
+  color: var(--mai-primary-strong);
+  background: #fff;
+  border: 1px solid rgba(79, 70, 229, 0.16);
+}
+
+body.maiimg-workspace .btn-outline-secondary:hover,
+body.maiimg-workspace .btn-outline-dark:hover {
+  color: var(--mai-primary-strong);
+  background: rgba(79, 70, 229, 0.06);
+  border-color: rgba(79, 70, 229, 0.24);
+}
+
+body.maiimg-workspace .results-section {
+  margin-top: 0;
+  background:
+    radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 248, 252, 0.96));
+}
+
+body.maiimg-workspace .success-icon-container {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(79, 70, 229, 0.08));
+  border: 1px solid rgba(16, 185, 129, 0.12);
+}
+
+body.maiimg-workspace .success-icon {
+  color: #10b981;
+}
+
+body.maiimg-workspace .stat-card-enhanced {
+  border-radius: 20px;
+}
+
+body.maiimg-workspace .qr-container-enhanced,
+body.maiimg-workspace .qr-container {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+body.maiimg-workspace .gallery-link-jump,
+body.maiimg-workspace .gallery-link-arrow {
+  color: var(--mai-primary);
+}
+
+body.maiimg-workspace .tracking-info,
+body.maiimg-workspace .copy-feedback {
+  color: var(--mai-muted);
+}
+
+body.maiimg-workspace .tools-section {
+  background:
+    linear-gradient(180deg, rgba(250, 251, 254, 0.92), rgba(245, 247, 251, 0.92));
+}
+
+body.maiimg-workspace .tools-section-head {
+  margin-bottom: 1.1rem !important;
+}
+
+body.maiimg-workspace .tool-card {
+  min-height: 100%;
+  padding: 1.3rem 1.1rem;
+}
+
+body.maiimg-workspace .tool-icon {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(14, 165, 233, 0.12));
+}
+
+body.maiimg-workspace footer {
+  margin-top: 2rem;
+  background: rgba(248, 250, 252, 0.86);
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+body.maiimg-workspace .footer-links a,
+body.maiimg-workspace footer p,
+body.maiimg-workspace footer small,
+body.maiimg-workspace footer a {
+  color: var(--mai-muted);
+}
+
+body.maiimg-workspace .footer-links a:hover,
+body.maiimg-workspace footer a:hover {
+  color: var(--mai-primary-strong);
+}
+
+body.maiimg-workspace .modal .modal-content {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 247, 251, 0.98));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: var(--mai-shadow);
+}
+
+body.maiimg-workspace .modal .modal-header,
+body.maiimg-workspace .modal .modal-footer {
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+body.maiimg-workspace .modal .btn-close {
+  opacity: 0.78;
+}
+
+@keyframes maiimgWorkspacePulse {
+  0%, 100% {
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.08);
+  }
+  50% {
+    box-shadow: 0 16px 24px rgba(79, 70, 229, 0.14);
+  }
+}
+
+@media (max-width: 991px) {
+  body.maiimg-workspace .hero-layout,
+  body.maiimg-workspace .config-b-layout {
+    grid-template-columns: 1fr;
+  }
+
+  body.maiimg-workspace .generate-side-panel {
+    position: static;
+    top: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  body.maiimg-workspace .hero-section {
+    padding: 6.6rem 0 1.1rem;
+  }
+
+  body.maiimg-workspace .hero-copy,
+  body.maiimg-workspace .hero-outline,
+  body.maiimg-workspace .main-upload-section,
+  body.maiimg-workspace .config-section,
+  body.maiimg-workspace .results-section,
+  body.maiimg-workspace .tools-section {
+    border-radius: 24px;
+  }
+
+  body.maiimg-workspace .hero-copy {
+    padding: 1.4rem 1.1rem;
+  }
+
+  body.maiimg-workspace .hero-title {
+    font-size: clamp(2.15rem, 10vw, 3.25rem);
+    gap: 0.7rem;
+  }
+
+  body.maiimg-workspace .hero-title span {
+    max-width: none;
+  }
+
+  body.maiimg-workspace .hero-actions {
+    flex-direction: column;
+  }
+
+  body.maiimg-workspace .hero-actions .btn {
+    width: 100%;
+  }
+
+  body.maiimg-workspace .feature-badges.hero-badges {
+    gap: 0.55rem;
+  }
+
+  body.maiimg-workspace .feature-badges .badge {
+    padding: 0.52rem 0.8rem;
+    font-size: 0.82rem;
+  }
+
+  body.maiimg-workspace .flow-nav-inner {
+    border-radius: 20px;
+  }
+
+  body.maiimg-workspace .main-upload-section,
+  body.maiimg-workspace .config-section,
+  body.maiimg-workspace .results-section,
+  body.maiimg-workspace .tools-section {
+    padding: 1.1rem 0.9rem;
+  }
+
+  body.maiimg-workspace .upload-section-head.text-center,
+  body.maiimg-workspace .tools-section-head.text-center {
+    text-align: center !important;
+  }
+
+  body.maiimg-workspace .upload-section-head {
+    margin-bottom: 1rem;
+  }
+
+  body.maiimg-workspace .upload-area {
+    padding: 0.7rem;
+  }
+
+  body.maiimg-workspace .upload-area.dropzone .dz-message {
+    min-height: 240px;
+    padding: 1.25rem 0.9rem;
+  }
+
+  body.maiimg-workspace .upload-orb {
+    width: 78px;
+    height: 78px;
+    border-radius: 24px;
+  }
+
+  body.maiimg-workspace .upload-orb .upload-icon {
+    font-size: 2.05rem;
+  }
+
+  body.maiimg-workspace .feature-card,
+  body.maiimg-workspace .preset-panel,
+  body.maiimg-workspace .generate-side-panel {
+    padding: 1rem;
+  }
+
+  body.maiimg-workspace .feature-card-head {
+    gap: 0.75rem;
+    margin-bottom: 0.8rem;
+  }
+
+  body.maiimg-workspace .feature-icon-badge {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+  }
+
+  body.maiimg-workspace .advanced-stack,
+  body.maiimg-workspace .preset-grid,
+  body.maiimg-workspace .security-control-grid,
+  body.maiimg-workspace .config-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.maiimg-workspace .tools-section .row {
+    --bs-gutter-x: 0.8rem;
+    --bs-gutter-y: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  body.maiimg-workspace .hero-kicker,
+  body.maiimg-workspace .upload-section-kicker,
+  body.maiimg-workspace .config-panel-eyebrow {
+    font-size: 0.68rem;
+  }
+
+  body.maiimg-workspace .hero-outline {
+    padding: 1rem;
+  }
+
+  body.maiimg-workspace .hero-outline-step {
+    padding: 0.72rem 0.8rem;
+  }
+
+  body.maiimg-workspace .section-title,
+  body.maiimg-workspace .upload-section-head .section-title,
+  body.maiimg-workspace .tools-section .section-title {
+    font-size: clamp(1.45rem, 8vw, 1.95rem);
+  }
+
+  body.maiimg-workspace .upload-subtext,
+  body.maiimg-workspace .hero-outline-copy,
+  body.maiimg-workspace .feature-copy,
+  body.maiimg-workspace .section-subtitle {
+    font-size: 0.88rem;
+  }
+}

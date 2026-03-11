@@ -298,7 +298,7 @@
   <script src="trans.js?v=2026031051"></script>
 </head>
 
-<body class="index-refined maiimg-vivid">
+<body class="maiimg-workspace">
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
@@ -368,18 +368,65 @@
 
   <!-- Hero Section -->
   <section class="hero-section" id="hero">
-    <div class="container">
-      <h1 class="hero-title">
-        <i class="fas fa-cloud-upload-alt"></i><br>
-        <span data-translate="hero.title">Upload Images & Short Videos</span>
-      </h1>
-      <p class="hero-subtitle" data-translate="hero.subtitle">
-        Turn your photos and short videos into shareable QR links with tracking and access controls
-      </p>
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <div class="hero-kicker">Maiimg Workspace</div>
+        <h1 class="hero-title">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <span data-translate="hero.title">Upload Images & Short Videos</span>
+        </h1>
+        <p class="hero-subtitle" data-translate="hero.subtitle">
+          Turn your photos and short videos into shareable QR links with tracking and access controls
+        </p>
+
+        <div class="feature-badges hero-badges">
+          <span class="badge badge-secure">
+            <i class="fas fa-shield-alt"></i>
+            <span data-translate="badges.secure">Secure</span>
+          </span>
+          <span class="badge badge-fast">
+            <i class="fas fa-bolt"></i>
+            <span data-translate="badges.fast">Fast</span>
+          </span>
+          <span class="badge badge-free">
+            <i class="fas fa-gift"></i>
+            <span data-translate="badges.free">Free</span>
+          </span>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#upload">
+            <i class="fas fa-arrow-down me-2"></i><span data-translate="flow.step1">Upload Media</span>
+          </a>
+          <a class="btn btn-outline-secondary" href="#config">
+            <i class="fas fa-sliders-h me-2"></i><span data-translate="flow.step2">Set Access</span>
+          </a>
+        </div>
+      </div>
+
+      <aside class="hero-outline" aria-label="Workflow overview">
+        <div class="hero-outline-copy" data-translate="upload.supportText">
+          PNG, JPG, JPEG, GIF, WebP, MP4, MOV, WebM, M4V • Images up to 50MB • Videos up to 100MB / 120s • Up to 25 files
+        </div>
+        <div class="hero-outline-steps">
+          <div class="hero-outline-step">
+            <span class="hero-outline-step-num">01</span>
+            <span class="hero-outline-step-label" data-translate="flow.step1">Upload Media</span>
+          </div>
+          <div class="hero-outline-step">
+            <span class="hero-outline-step-num">02</span>
+            <span class="hero-outline-step-label" data-translate="flow.step2">Set Access</span>
+          </div>
+          <div class="hero-outline-step">
+            <span class="hero-outline-step-num">03</span>
+            <span class="hero-outline-step-label" data-translate="flow.step3">Generate Link & QR</span>
+          </div>
+        </div>
+      </aside>
     </div>
   </section>
 
-  <div class="container">
+  <div class="container maiimg-shell">
     <section class="flow-nav" id="flowNavigator" aria-label="Upload steps">
       <div class="flow-nav-inner">
         <button type="button" class="flow-step is-current" data-step="1">
@@ -405,22 +452,7 @@
           <span data-translate="flow.step1">Upload Media</span>
         </div>
         <h2 class="section-title" data-translate="upload.title">Media Upload Center</h2>
-        
-        <!-- Feature Badges -->
-        <div class="feature-badges">
-          <span class="badge badge-secure">
-            <i class="fas fa-shield-alt"></i>
-            <span data-translate="badges.secure">Secure</span>
-          </span>
-          <span class="badge badge-fast">
-            <i class="fas fa-bolt"></i>
-            <span data-translate="badges.fast">Fast</span>
-          </span>
-          <span class="badge badge-free">
-            <i class="fas fa-gift"></i>
-            <span data-translate="badges.free">Free</span>
-          </span>
-        </div>
+        <p class="section-subtitle" data-translate="upload.ready">Ready to upload images and short videos</p>
       </div>
 
       <!-- Upload Zone -->
@@ -718,47 +750,45 @@
 
     <!-- Tools Section -->
     <section class="tools-section" id="tools">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="section-title" data-translate="tools.title">Other QR Tools</h2>
-          <p class="section-subtitle" data-translate="tools.subtitle">Quick access to other QR code generators</p>
+      <div class="tools-section-head text-center mb-4">
+        <h2 class="section-title" data-translate="tools.title">Other QR Tools</h2>
+        <p class="section-subtitle" data-translate="tools.subtitle">Quick access to other QR code generators</p>
+      </div>
+      
+      <div class="row g-4">
+        <div class="col-md-3 col-sm-6">
+          <div class="tool-card" data-bs-toggle="modal" data-bs-target="#wifi-modal">
+            <div class="tool-icon">
+              <i class="fas fa-wifi"></i>
+            </div>
+            <h5 data-translate="tools.wifi">WiFi QR</h5>
+          </div>
         </div>
         
-        <div class="row g-4">
-          <div class="col-md-3 col-sm-6">
-            <div class="tool-card" data-bs-toggle="modal" data-bs-target="#wifi-modal">
-              <div class="tool-icon">
-                <i class="fas fa-wifi"></i>
-              </div>
-              <h5 data-translate="tools.wifi">WiFi QR</h5>
+        <div class="col-md-3 col-sm-6">
+          <div class="tool-card" data-bs-toggle="modal" data-bs-target="#sms-modal">
+            <div class="tool-icon">
+              <i class="fas fa-sms"></i>
             </div>
+            <h5 data-translate="tools.sms">SMS QR</h5>
           </div>
-          
-          <div class="col-md-3 col-sm-6">
-            <div class="tool-card" data-bs-toggle="modal" data-bs-target="#sms-modal">
-              <div class="tool-icon">
-                <i class="fas fa-sms"></i>
-              </div>
-              <h5 data-translate="tools.sms">SMS QR</h5>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+          <div class="tool-card" data-bs-toggle="modal" data-bs-target="#url-modal">
+            <div class="tool-icon">
+              <i class="fas fa-link"></i>
             </div>
+            <h5 data-translate="tools.url">URL QR</h5>
           </div>
-          
-          <div class="col-md-3 col-sm-6">
-            <div class="tool-card" data-bs-toggle="modal" data-bs-target="#url-modal">
-              <div class="tool-icon">
-                <i class="fas fa-link"></i>
-              </div>
-              <h5 data-translate="tools.url">URL QR</h5>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+          <div class="tool-card" data-bs-toggle="modal" data-bs-target="#phone-modal">
+            <div class="tool-icon">
+              <i class="fas fa-phone"></i>
             </div>
-          </div>
-          
-          <div class="col-md-3 col-sm-6">
-            <div class="tool-card" data-bs-toggle="modal" data-bs-target="#phone-modal">
-              <div class="tool-icon">
-                <i class="fas fa-phone"></i>
-              </div>
-              <h5 data-translate="tools.phone">Phone QR</h5>
-            </div>
+            <h5 data-translate="tools.phone">Phone QR</h5>
           </div>
         </div>
       </div>
