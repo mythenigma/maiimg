@@ -630,6 +630,48 @@
     }
     .mockup-footer i { margin-right: 3px; }
 
+    /* ═══════════ Clean Config Layout ═══════════ */
+    .config-clean .config-clean-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.85fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+    .config-clean .config-clean-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .config-clean .config-clean-fields .feature-card {
+      margin: 0;
+    }
+    .config-clean .config-clean-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .config-clean .config-clean-row .feature-card {
+      height: 100%;
+    }
+    /* Keep Generate side-panel sticky */
+    .config-clean .generate-side-panel {
+      position: sticky;
+      top: calc(var(--flow-top-offset, 90px) + 16px);
+    }
+    @media (max-width: 991px) {
+      .config-clean .config-clean-layout {
+        grid-template-columns: 1fr;
+      }
+      .config-clean .generate-side-panel {
+        position: static;
+      }
+    }
+    @media (max-width: 576px) {
+      .config-clean .config-clean-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ═══════════ Responsive for new sections ═══════════ */
     @media (max-width: 991px) {
       .hiw-timeline {
@@ -1007,8 +1049,10 @@
     </section>
 
     <!-- Configuration Section -->
-    <section class="config-section config-variant-b" id="config">
+    <section class="config-section config-variant-b config-clean" id="config">
       <div id="adsense-exclude-config-b" class="adsense-excluded-zone">
+
+        <!-- Step 2a: Quick Presets -->
         <div class="preset-panel mb-4">
           <span class="config-panel-eyebrow">
             <i class="fas fa-sliders-h"></i>
@@ -1033,44 +1077,45 @@
           </div>
         </div>
 
-        <div class="config-b-layout">
-          <div>
+        <!-- Step 2b: All settings in a clean vertical stack -->
+        <div class="config-clean-layout">
+          <div class="config-clean-fields">
             <div class="advanced-panel-head">
               <h4 class="advanced-panel-title" data-translate="features.advanced.title">Advanced settings</h4>
               <p class="advanced-panel-copy" data-translate="features.advanced.description">Adjust the details after choosing a preset.</p>
             </div>
 
-            <div class="feature-cards advanced-stack">
-              <div class="feature-card feature-card--security">
-                <div class="feature-card-head">
-                  <span class="feature-icon-badge">
-                    <i class="fas fa-shield-alt feature-icon"></i>
-                  </span>
-                  <div>
-                    <h5 class="feature-title" data-translate="features.accessControl.title">Access Control</h5>
-                    <p class="feature-copy" data-translate="features.accessControl.description">Set both view limit and per-view duration in one panel</p>
+            <!-- Access Control (full width) -->
+            <div class="feature-card feature-card--security">
+              <div class="feature-card-head">
+                <span class="feature-icon-badge">
+                  <i class="fas fa-shield-alt feature-icon"></i>
+                </span>
+                <div>
+                  <h5 class="feature-title" data-translate="features.accessControl.title">Access Control</h5>
+                  <p class="feature-copy" data-translate="features.accessControl.description">Set both view limit and per-view duration in one panel</p>
+                </div>
+              </div>
+              <div class="security-control-grid">
+                <div class="feature-field">
+                  <label class="config-label" for="limit" data-translate="features.viewLimit.title">View Limit</label>
+                  <div class="input-with-unit">
+                    <input class="form-control" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="Max views (required)" min="1" max="99999999" required>
+                    <span class="input-unit" data-translate="features.viewLimit.unit">views</span>
                   </div>
                 </div>
-
-                <div class="security-control-grid">
-                  <div class="feature-field">
-                    <label class="config-label" for="limit" data-translate="features.viewLimit.title">View Limit</label>
-                    <div class="input-with-unit">
-                      <input class="form-control" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="Max views (required)" min="1" max="99999999" required>
-                      <span class="input-unit" data-translate="features.viewLimit.unit">views</span>
-                    </div>
-                  </div>
-
-                  <div class="feature-field">
-                    <label class="config-label" for="password" data-translate="features.timeControl.title">Time Control</label>
-                    <div class="input-with-unit">
-                      <input class="form-control" type="number" id="password" data-translate-placeholder="features.timeControl.placeholder" placeholder="Seconds per view (required)" min="1" max="99999999" required>
-                      <span class="input-unit" data-translate="features.timeControl.unit">sec</span>
-                    </div>
+                <div class="feature-field">
+                  <label class="config-label" for="password" data-translate="features.timeControl.title">Time Control</label>
+                  <div class="input-with-unit">
+                    <input class="form-control" type="number" id="password" data-translate-placeholder="features.timeControl.placeholder" placeholder="Seconds per view (required)" min="1" max="99999999" required>
+                    <span class="input-unit" data-translate="features.timeControl.unit">sec</span>
                   </div>
                 </div>
               </div>
+            </div>
 
+            <!-- Expiration + Description side by side -->
+            <div class="config-clean-row">
               <div class="feature-card">
                 <div class="feature-card-head">
                   <span class="feature-icon-badge">
@@ -1081,7 +1126,6 @@
                     <p class="feature-copy" data-translate="features.expiration.description">Choose how long the gallery stays available.</p>
                   </div>
                 </div>
-
                 <div class="feature-field">
                   <label class="config-label" for="expiration_preset" data-translate="features.expiration.select">Select expiration</label>
                   <select class="form-select" id="expiration_preset" aria-label="Expiration preset">
@@ -1094,7 +1138,6 @@
                     <option value="unlimited" data-translate="features.expiration.unlimited">Unlimited</option>
                   </select>
                 </div>
-
                 <div class="feature-field">
                   <input class="form-control" type="number" id="expiration_custom_days" min="1" step="1" data-translate-placeholder="features.expiration.customPlaceholder" placeholder="Custom days" style="display:none;">
                   <input type="hidden" id="expiration_day" value="">
@@ -1117,7 +1160,6 @@
                     <p class="feature-copy" data-translate="features.description.description">Enter gallery description</p>
                   </div>
                 </div>
-
                 <div class="feature-field">
                   <label class="config-label" for="caption" data-translate="features.description.title">Description</label>
                   <input class="form-control" type="text" id="caption" data-translate-placeholder="features.description.placeholder" placeholder="Add a description (required)" maxlength="100" required>
@@ -1126,6 +1168,7 @@
             </div>
           </div>
 
+          <!-- Step 3: Generate panel (right side on desktop) -->
           <aside class="generate-side-panel">
             <h5 class="feature-title" data-translate="features.generate.title">Generate Link & QR</h5>
             <p class="feature-copy mb-3" data-translate="features.generate.description">Create the gallery link once your media and access rules are ready.</p>
@@ -1155,6 +1198,7 @@
             <small class="generate-status text-muted" id="generateBtnStatus" data-translate="features.generate.status">Fill all fields and upload media first</small>
           </aside>
         </div>
+
       </div>
     </section>
 
