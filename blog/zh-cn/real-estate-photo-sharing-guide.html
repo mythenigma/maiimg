@@ -1,52 +1,288 @@
-﻿<!DOCTYPE html><html lang="zh-CN"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>房产图片分享指南｜麦瓜图床</title>
-<meta name="description" content="看房资料统一分发，链接与二维码并用，减少重复解释。"/>
-<meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效"/>
-<link rel="canonical" href="https://maiimg.com/blog/zh-cn/real-estate-photo-sharing-guide"/>
-<meta property="og:type" content="article"/><meta property="og:title" content="房产图片分享指南｜麦瓜图床"/>
-<meta property="og:description" content="看房资料统一分发，链接与二维码并用，减少重复解释。"/><meta property="og:url" content="https://maiimg.com/blog/zh-cn/real-estate-photo-sharing-guide"/>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
-<style>
-:root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-.wrap{width:min(940px,92vw);margin:0 auto}
-.top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
-article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
-h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
-.tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
-.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.shot img{width:100%;border:1px solid var(--line);border-radius:10px}.shot p{font-size:13px;color:var(--muted);margin:6px 0 0}
-footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-@media (max-width:760px){.shots{grid-template-columns:1fr} h1{font-size:28px}}
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"房产图片怎么发，客户看得更顺","description":"看房资料统一分发，链接与二维码并用，减少重复解释。","inLanguage":"zh-CN","mainEntityOfPage":"https://maiimg.com/blog/zh-cn/real-estate-photo-sharing-guide"}</script>
-</head><body>
-<header class="top"><div class="wrap"><a href="./">中文博客</a> / 房产图片怎么发，客户看得更顺</div></header>
-<article class="wrap">
-<h1>房产图片怎么发，客户看得更顺</h1>
-<div class="lead">看房资料统一分发，链接与二维码并用，减少重复解释。</div>
-<h2>核心功能（真实可用）</h2>
-<ul>
-<li>一组图片生成一个分享链接（最多 25 张）</li>
-<li>链接可转二维码，线上线下都能发</li>
-<li>可设置链接/二维码打开次数和有效期</li>
-<li>发出去后可一键失效，停止继续访问</li>
-</ul>
-<h2>操作流程图（SVG）</h2>
-<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/>
-<img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
-<h2>中文界面截图</h2>
-<div class="shots">
-  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页"/><p>首页入口：开始上传</p></div>
-  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成结果页面"/><p>生成结果：链接 + 二维码</p></div>
-  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数"/><p>控制设置：打开次数与有效期</p></div>
-  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片"/><p>一键失效：停止继续访问</p></div>
-</div>
-<div class="tip">提示：本文已去除夸张和不贴合现状的描述，全部围绕麦瓜图床当前能力编写。</div>
-<h2>一句话总结</h2>
-<p>麦瓜图床比普通图床更实用的地方在于：不只“能发图”，还能“发出去后继续控制”。</p>
-</article><footer>Copyright 2026 麦瓜图床（MaiIMG）</footer></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>房产图片分享指南｜麦瓜图床</title>
+  <meta name="description" content="看房资料统一分发，链接与二维码并用，减少重复解释。" />
+  <meta name="keywords" content="麦瓜图床,maiimg,房产图片分享,二维码,图床,打开次数,一键失效" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/real-estate-photo-sharing-guide" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="房产图片分享指南｜麦瓜图床" />
+  <meta property="og:description" content="看房资料统一分发，链接与二维码并用，减少重复解释。" />
+  <meta property="og:url" content="https://maiimg.com/blog/zh-cn/real-estate-photo-sharing-guide" />
+  <meta property="og:site_name" content="麦瓜图床" />
+  <meta property="article:published_time" content="2026-03-23T00:00:00Z" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="房产图片分享指南｜麦瓜图床" />
+  <meta name="twitter:description" content="看房资料统一分发，链接与二维码并用，减少重复解释。" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "房产图片怎么发，客户看得更顺",
+    "description": "看房资料统一分发，链接与二维码并用，减少重复解释。",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": "https://maiimg.com/blog/zh-cn/real-estate-photo-sharing-guide"
+  }
+  </script>
+</head>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>麦瓜图床</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">主站</a></li>
+          <li class="nav-item"><a class="nav-link" href="./">中文博客</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-building"></i> 房产场景</span>
+            <p class="breadcrumb-cyber mb-0"><a href="./" style="color:inherit;text-decoration:none;">中文博客</a> · 房产图片分享</p>
+            <div class="article-meta-row">
+              <span class="meta-pill"><i class="fas fa-calendar-check"></i>最后编辑 <span data-last-edited="2026-03-23"></span></span>
+              <span class="meta-pill"><i class="fas fa-clock"></i><span data-reading-minutes="6"></span></span>
+            </div>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">房产图片</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">分享指南</h1>
+            </div>
+            <p class="hero-lead">看房资料最怕发得碎。户型图、现场照片、装修细节、周边说明，如果散在聊天里，客户很快就会失去耐心。更顺的方式，是把看房资料收成一个入口，让客户打开即看，你自己也保留后续控制。</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">看房资料</span>
+              <span class="tag-chip tag-chip--cyan">二维码带看</span>
+              <span class="tag-chip tag-chip--blue">有效期控制</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">打开麦瓜图床</a>
+              <a href="#flow" class="btn-cyber btn-cyber-outline">看房产流程</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack">
+              <div class="cyber-mini-card cyber-mini-card--p">
+                <span class="cyber-mini-card__num">01</span>
+                <div>
+                  <h3>客户先看到整体，不先被消息淹没</h3>
+                  <p>房源图、细节图和说明集中到一个入口里，比在聊天里连续发十几条更容易被看完。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--c">
+                <span class="cyber-mini-card__num">02</span>
+                <div>
+                  <h3>线下带看更适合二维码</h3>
+                  <p>楼盘现场、带看单页、物料展架都可以用二维码承接，不用临时找链接。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--b">
+                <span class="cyber-mini-card__num">03</span>
+                <div>
+                  <h3>客户沟通过后也能及时收口</h3>
+                  <p>如果某套房源不想继续开放，次数、有效期和一键失效会比事后追链接更直接。</p>
+                </div>
+              </div>
+            </div>
+            <div class="brand-footer d-none d-md-flex">
+              <span class="brand-footer__icon">M</span>
+              <span>MaiIMG · 把看房资料发清楚，比发得多更重要</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section-dark">
+    <section class="section-card">
+      <h2><i class="fas fa-map"></i> 这篇文章想解决什么</h2>
+      <p>房产沟通里最常见的问题不是“没有图”，而是图太散。客户想了解一个房源，却被分散的照片、重复解释和不同入口打断。更专业的做法，是把看房资料收成一个轻量入口，再根据客户接触方式决定发链接还是二维码。</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>适合谁看</h4>
+            <p>中介、置业顾问、楼盘营销人员，以及需要把房源图片发给客户的人。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>更适合什么</h4>
+            <p>精选房源图、样板间预览、活动现场扫码看房、阶段性项目资料分发。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>不要期待什么</h4>
+            <p>这不是完整房产 CRM 或楼盘系统，更像是一个轻量的图片分享入口。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-star"></i> 这些能力，正好对应看房资料的痛点</h2>
+      <ul>
+        <li>一组图片生成一个分享链接（最多 25 张）</li>
+        <li>链接可转二维码，线上线下都能发</li>
+        <li>可设置链接/二维码打开次数和有效期</li>
+        <li>发出去后可一键失效，停止继续访问</li>
+      </ul>
+      <div class="callout-cyber mt-3">
+        <p class="mb-0">对房产场景来说，真正重要的不是“能放多少功能”，而是客户拿到资料以后能不能更快理解房源，同时你自己还能不能把传播边界握住。</p>
+      </div>
+    </section>
+
+    <section class="section-card" id="flow">
+      <h2><i class="fas fa-diagram-project"></i> 先把房源资料聚起来，再谈怎么发</h2>
+      <p class="small mb-0" style="color:var(--neon-cyan);font-weight:600;">提示：下面的流程图和配图都可以点击放大，细节会更清楚。</p>
+      <div class="story-flow-grid mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-house"></i> 看房路径</span>
+            <h3>客户最怕的不是图少，而是入口太碎</h3>
+            <p>一套房源如果拆成很多零散消息，客户很难形成完整印象。先把房源图、细节图和补充图整理成一个入口，再去发链接或二维码，阅读路径会顺很多。</p>
+          </div>
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/real-estate-sharing-flow.svg" alt="房产图片分享流程图" loading="lazy" data-zoom-caption="房产分享流程：先聚合房源资料，再生成统一入口，最后按线上线下场景分发。" />
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/permission-control-flow.svg" alt="房产图片权限控制流程图" loading="lazy" data-zoom-caption="房源资料开放范围控制：次数、有效期和关闭时机，决定资料传播边界。" />
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-shield-halved"></i> 沟通边界</span>
+            <h3>客户沟通过后，入口不一定要永久留在外面</h3>
+            <p>房源会变、项目会变、带看阶段也会变，所以房产图片分享尤其需要有效期和后续关闭能力。发出去不等于永远开放，这一点在看房场景里很实际。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-images"></i> 让客户看到重点，而不是看到一堆消息</h2>
+      <div class="story-stack mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-eye"></i> 第一印象</span>
+            <h3>客户拿到的应该是“房源入口”，不是聊天记录</h3>
+            <p>这类展示图最大的价值，是让你一眼理解“统一入口”是什么意思。客户点进去就能连续看，不需要在多个消息里反复上滑找图。</p>
+          </div>
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/common/show/sharegallery.png" alt="房产图片统一入口展示图" loading="lazy" data-zoom-caption="房源资料如果被收进同一个入口里，客户会更快形成完整印象。" />
+            </div>
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame media-frame--contain">
+              <img src="../static-images/cn/宣传/扫码分享.jpg" alt="房产图片扫码分享宣传图" loading="lazy" data-zoom-caption="带看现场、单页物料或展架上，用二维码承接房源资料会更自然。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-qrcode"></i> 线下带看</span>
+            <h3>二维码比临时翻聊天记录更适合线下场景</h3>
+            <p>如果客户在线下看房或者现场咨询，二维码会比临时找链接快很多。它把线下触达和线上资料连接起来，让沟通更完整。</p>
+          </div>
+        </article>
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-link"></i> 对外入口</span>
+            <h3>生成结果页，是房源资料真正被拿出去的时刻</h3>
+            <p>在这里，同一套房源图会同时得到链接和二维码。你后面发给客户、放到资料页或者现场物料里，都是从这个入口继续往外延伸。</p>
+          </div>
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/生成结果.png" alt="房产图片生成结果页面" loading="lazy" data-zoom-caption="生成结果页：房源图片的链接和二维码会一起出现，方便后续统一分发。" />
+            </div>
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/设置打开次数.png" alt="房产图片设置打开次数页面" loading="lazy" data-zoom-caption="如果某套房源只想在特定阶段开放，次数和有效期就是最直接的控制点。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-sliders"></i> 节奏控制</span>
+            <h3>房源沟通要有节奏，图片入口也一样</h3>
+            <p>当客户沟通结束、项目切换或房源下线时，你不一定希望旧入口一直流传。这个时候，打开次数、有效期和失效设置会比事后追链接更省心。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-lightbulb"></i> 更专业的关键，其实是“减少解释成本”</h2>
+      <div class="callout-cyber">
+        <p class="mb-0">房产图片分享真正该优化的，不是再多发几张图，而是让客户更快进入状态，也让你自己少做重复解释。</p>
+      </div>
+    </section>
+
+    <section class="section-card" id="faq">
+      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <div class="accordion accordion-cyber mt-3" id="faqAccordion">
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">适合给客户发精选房源图吗？</button>
+          </h3>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">适合。尤其是你希望客户先快速形成整体印象，而不是在聊天里翻多张零散图片的时候，这种轻量入口会更顺。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">线下带看时二维码有意义吗？</button>
+          </h3>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">有意义。它让客户在现场直接扫码看资料，不需要你现场翻找聊天记录或重新发送多张图片。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">这能替代完整楼盘系统吗？</button>
+          </h3>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">不能。它更适合做轻量的房源图片入口，把沟通动作变得更清楚，而不是完整取代 CRM 或楼盘资料系统。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-cyber mb-4">
+      <h2 class="mb-3" style="color:#fff;">想把看房资料发得更顺一点？</h2>
+      <p class="mx-auto mb-4" style="max-width:680px;color:var(--text-soft);">先把房源图片聚成一个入口，再决定是发链接还是转二维码。客户会更容易看完，你自己也更容易继续控制传播范围。</p>
+      <a href="https://maiimg.com" class="btn-cyber">去麦瓜图床试试</a>
+    </div>
+  </main>
+
+  <footer class="footer-cyber">
+    Copyright <span data-current-year></span> 麦瓜图床（MaiIMG）
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="title desc">
+  <title id="title">English QR channel flow</title>
+  <desc id="desc">Four-step flow: build one share, publish one link, convert to QR for physical touchpoints, and guide people to the same destination page.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1321"/>
+      <stop offset="52%" stop-color="#101933"/>
+      <stop offset="100%" stop-color="#0a111d"/>
+    </linearGradient>
+    <radialGradient id="glowL" cx="16%" cy="18%" r="72%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowR" cx="86%" cy="22%" r="72%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity=".14"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cardFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#141d31"/>
+      <stop offset="100%" stop-color="#10192a"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="rgba(255,255,255,.034)" stroke-width="1"/>
+    </pattern>
+    <style>
+      .title{font:700 24px Inter,Arial,sans-serif;fill:#f8fafc}
+      .copy{font:400 15px Inter,Arial,sans-serif;fill:#a7b7cd}
+      .label{font:700 11px Inter,Arial,sans-serif;letter-spacing:1.8px;fill:#93c5fd}
+      .cardTitle{font:700 22px Inter,Arial,sans-serif;fill:#f8fafc}
+      .cardCopy{font:400 15px Inter,Arial,sans-serif;fill:#c5d2e7}
+      .chip{font:700 12px Inter,Arial,sans-serif;fill:#dbeafe}
+      .num{font:700 13px Inter,Arial,sans-serif;fill:#eaf2ff}
+      .accent{font:700 13px Inter,Arial,sans-serif;fill:#bfdbfe}
+      .trace{stroke:url(#lineGrad);stroke-width:4;stroke-linecap:round;fill:none;opacity:.95}
+      .pulse{fill:#60a5fa;filter:url(#softGlow)}
+      @keyframes dashMove { to { stroke-dashoffset: -56; } }
+      .moving { stroke-dasharray: 10 14; animation: dashMove 2.2s linear infinite; }
+      @keyframes pulseGlow { 0%,100% { opacity:.45; transform:scale(1);} 50% {opacity:1; transform:scale(1.12);} }
+      .p1,.p2,.p3 { transform-box: fill-box; transform-origin: center; animation: pulseGlow 2.2s ease-in-out infinite; }
+      .p2 { animation-delay: .45s; }
+      .p3 { animation-delay: .9s; }
+    </style>
+  </defs>
+  <rect width="1200" height="320" fill="transparent"/>
+  <rect x="16" y="16" width="1168" height="288" rx="28" fill="url(#bg)"/>
+  <rect x="16" y="16" width="1168" height="288" rx="28" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1168" height="288" rx="28" fill="url(#glowL)"/>
+  <rect x="16" y="16" width="1168" height="288" rx="28" fill="url(#glowR)"/>
+  <rect x="16" y="16" width="1168" height="288" rx="28" fill="none" stroke="rgba(255,255,255,.08)"/>
+
+  <text class="label" x="52" y="52">QR FLOW</text>
+  <text class="copy" x="1118" y="52" text-anchor="end">Use the code in the right place, but keep one share underneath</text>
+
+  <g transform="translate(52,74)">
+    <rect width="248" height="150" rx="22" fill="url(#cardFill)" stroke="rgba(56,189,248,.3)"/>
+    <rect x="18" y="18" width="54" height="30" rx="12" fill="rgba(56,189,248,.12)" stroke="rgba(56,189,248,.24)"/>
+    <text class="num" x="45" y="38" text-anchor="middle">01</text>
+    <text class="cardTitle" x="22" y="82">Build one share</text>
+    <text class="cardCopy" x="22" y="108">Keep the image set focused before</text>
+    <text class="cardCopy" x="22" y="131">you think about QR placement.</text>
+    <rect x="22" y="116" width="116" height="24" rx="12" fill="rgba(56,189,248,.14)"/>
+    <text class="chip" x="80" y="132" text-anchor="middle">one set</text>
+  </g>
+
+  <g transform="translate(330,74)">
+    <rect width="248" height="150" rx="22" fill="url(#cardFill)" stroke="rgba(96,165,250,.3)"/>
+    <rect x="18" y="18" width="54" height="30" rx="12" fill="rgba(96,165,250,.12)" stroke="rgba(96,165,250,.24)"/>
+    <text class="num" x="45" y="38" text-anchor="middle">02</text>
+    <text class="cardTitle" x="22" y="82">Publish one link</text>
+    <text class="cardCopy" x="22" y="108">The direct link stays the core entry</text>
+    <text class="cardCopy" x="22" y="131">even when QR is added later.</text>
+    <rect x="22" y="116" width="116" height="24" rx="12" fill="rgba(96,165,250,.14)"/>
+    <text class="chip" x="80" y="132" text-anchor="middle">core URL</text>
+  </g>
+
+  <g transform="translate(608,74)">
+    <rect width="248" height="150" rx="22" fill="url(#cardFill)" stroke="rgba(139,92,246,.3)"/>
+    <rect x="18" y="18" width="54" height="30" rx="12" fill="rgba(139,92,246,.12)" stroke="rgba(139,92,246,.24)"/>
+    <text class="num" x="45" y="38" text-anchor="middle">03</text>
+    <text class="cardTitle" x="22" y="82">Convert to QR</text>
+    <text class="cardCopy" x="22" y="108">Use it for cards, signs, labels,</text>
+    <text class="cardCopy" x="22" y="131">print, booths, or screen displays.</text>
+    <rect x="22" y="116" width="116" height="24" rx="12" fill="rgba(139,92,246,.14)"/>
+    <text class="chip" x="80" y="132" text-anchor="middle">scan path</text>
+  </g>
+
+  <g transform="translate(886,74)">
+    <rect width="248" height="150" rx="22" fill="url(#cardFill)" stroke="rgba(34,211,238,.3)"/>
+    <rect x="18" y="18" width="54" height="30" rx="12" fill="rgba(34,211,238,.12)" stroke="rgba(34,211,238,.24)"/>
+    <text class="num" x="45" y="38" text-anchor="middle">04</text>
+    <text class="cardTitle" x="22" y="82">Open the same page</text>
+    <text class="cardCopy" x="22" y="108">The QR code should still lead to</text>
+    <text class="cardCopy" x="22" y="131">one clear destination page.</text>
+    <rect x="22" y="116" width="116" height="24" rx="12" fill="rgba(34,211,238,.14)"/>
+    <text class="chip" x="80" y="132" text-anchor="middle">same destination</text>
+  </g>
+
+  <path class="trace" d="M300 250 H330 M578 250 H608 M856 250 H886"/>
+  <path class="trace moving" d="M300 250 H330 M578 250 H608 M856 250 H886"/>
+  <circle class="pulse p1" cx="315" cy="250" r="5.5"/>
+  <circle class="pulse p2" cx="593" cy="250" r="5.5"/>
+  <circle class="pulse p3" cx="871" cy="250" r="5.5"/>
+
+  <text class="accent" x="52" y="280">prepare the set</text>
+  <text class="accent" x="330" y="280">publish the URL</text>
+  <text class="accent" x="608" y="280">add the QR</text>
+  <text class="accent" x="886" y="280">keep one page</text>
+</svg>

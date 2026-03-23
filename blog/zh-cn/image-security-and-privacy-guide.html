@@ -1,52 +1,303 @@
-﻿<!DOCTYPE html><html lang="zh-CN"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>图片分享的隐私与安全设置｜麦瓜图床指南</title>
-<meta name="description" content="围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。"/>
-<meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效"/>
-<link rel="canonical" href="https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide"/>
-<meta property="og:type" content="article"/><meta property="og:title" content="图片分享的隐私与安全设置｜麦瓜图床指南"/>
-<meta property="og:description" content="围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。"/><meta property="og:url" content="https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide"/>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
-<style>
-:root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-.wrap{width:min(940px,92vw);margin:0 auto}
-.top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
-article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
-h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
-.tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
-.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.shot img{width:100%;border:1px solid var(--line);border-radius:10px}.shot p{font-size:13px;color:var(--muted);margin:6px 0 0}
-footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-@media (max-width:760px){.shots{grid-template-columns:1fr} h1{font-size:28px}}
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"图片分享的隐私与安全设置：别让链接失控","description":"围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。","inLanguage":"zh-CN","mainEntityOfPage":"https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide"}</script>
-</head><body>
-<header class="top"><div class="wrap"><a href="./">中文博客</a> / 图片分享的隐私与安全设置：别让链接失控</div></header>
-<article class="wrap">
-<h1>图片分享的隐私与安全设置：别让链接失控</h1>
-<div class="lead">围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。</div>
-<h2>核心功能（真实可用）</h2>
-<ul>
-<li>一组图片生成一个分享链接（最多 25 张）</li>
-<li>链接可转二维码，线上线下都能发</li>
-<li>可设置链接/二维码打开次数和有效期</li>
-<li>发出去后可一键失效，停止继续访问</li>
-</ul>
-<h2>操作流程图（SVG）</h2>
-<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/>
-<img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
-<h2>中文界面截图</h2>
-<div class="shots">
-  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页"/><p>首页入口：开始上传</p></div>
-  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成结果页面"/><p>生成结果：链接 + 二维码</p></div>
-  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数"/><p>控制设置：打开次数与有效期</p></div>
-  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片"/><p>一键失效：停止继续访问</p></div>
-</div>
-<div class="tip">提示：本文已去除夸张和不贴合现状的描述，全部围绕麦瓜图床当前能力编写。</div>
-<h2>一句话总结</h2>
-<p>麦瓜图床比普通图床更实用的地方在于：不只“能发图”，还能“发出去后继续控制”。</p>
-</article><footer>Copyright 2026 麦瓜图床（MaiIMG）</footer></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>图片分享的隐私与安全设置｜麦瓜图床指南</title>
+  <meta name="description" content="围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。" />
+  <meta name="keywords" content="麦瓜图床,maiimg,图片分享,隐私设置,访问控制,打开次数,一键失效" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="图片分享的隐私与安全设置｜麦瓜图床指南" />
+  <meta property="og:description" content="围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。" />
+  <meta property="og:url" content="https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide" />
+  <meta property="og:site_name" content="麦瓜图床" />
+  <meta property="article:published_time" content="2026-03-23T00:00:00Z" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="图片分享的隐私与安全设置｜麦瓜图床指南" />
+  <meta name="twitter:description" content="围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "图片分享的隐私与安全设置：别让链接失控",
+    "description": "围绕真实可用能力：打开次数、有效期、一键失效，降低误发和扩散风险。",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": "https://maiimg.com/blog/zh-cn/image-security-and-privacy-guide"
+  }
+  </script>
+</head>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>麦瓜图床</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">主站</a></li>
+          <li class="nav-item"><a class="nav-link" href="./">中文博客</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-shield-halved"></i> 控制指南</span>
+            <p class="breadcrumb-cyber mb-0"><a href="./" style="color:inherit;text-decoration:none;">中文博客</a> · 图片隐私与安全设置</p>
+            <div class="article-meta-row">
+              <span class="meta-pill"><i class="fas fa-calendar-check"></i>最后编辑 <span data-last-edited="2026-03-23"></span></span>
+              <span class="meta-pill"><i class="fas fa-clock"></i><span data-reading-minutes="6"></span></span>
+            </div>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">图片分享的隐私</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">安全设置</h1>
+            </div>
+            <p class="hero-lead">真正让人不安的，从来不是“把图发出去”这件事，而是<strong>发出去以后不知道会被看几次、会留多久、会不会继续传下去</strong>。这篇文章讲的，就是怎么用现在真实存在的控制能力，把这种不确定感收回来一点。</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">打开次数</span>
+              <span class="tag-chip tag-chip--cyan">有效期</span>
+              <span class="tag-chip tag-chip--blue">一键失效</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">去主站设置</a>
+              <a href="#core" class="btn-cyber btn-cyber-outline">先看控制点</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack">
+              <div class="cyber-mini-card cyber-mini-card--p">
+                <span class="cyber-mini-card__num">01</span>
+                <div>
+                  <h3>别把链接当成“发完就算了”</h3>
+                  <p>很多风险不是上传时发生的，而是链接发出去以后失去边界，旧入口一直留在外面。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--c">
+                <span class="cyber-mini-card__num">02</span>
+                <div>
+                  <h3>先设上限，再决定开放多久</h3>
+                  <p>打开次数和有效期不是多余选项，它们就是控制传播范围最直接的手段。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--b">
+                <span class="cyber-mini-card__num">03</span>
+                <div>
+                  <h3>当内容不该继续看时，要能及时关掉</h3>
+                  <p>活动结束、版本更新、误发内容时，一键失效比事后解释更有用。</p>
+                </div>
+              </div>
+            </div>
+            <div class="brand-footer d-none d-md-flex">
+              <span class="brand-footer__icon">M</span>
+              <span>MaiIMG · 适合把分享做得更清楚，也把后续边界留在自己手里</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section-dark">
+    <section class="section-card toc-card">
+      <h2><i class="fas fa-map"></i> 这篇文章想解决什么</h2>
+      <p>很多人以为“隐私和安全”一定很复杂，其实在图片分享里，最常见的问题很简单：链接被转发得太久、被打开得太多、旧内容还挂在外面。这篇页只讲现在真实可用的几种控制方式，帮你把传播边界先收住。</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>适合谁看</h4>
+            <p>会发活动图、作品图、客户预览图，但又不想让入口长期失控的人。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>你会看到什么</h4>
+            <p>打开次数、有效期和一键失效的真实使用方式，不讲概念空话。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>这篇的边界</h4>
+            <p>它不是讲加密体系或企业级审计，只讲当前页面里真的能设置的控制点。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="core">
+      <h2><i class="fas fa-star"></i> 你真正需要盯住的三个控制点</h2>
+      <p>隐私安全在这里不是一个抽象概念，而是三个很具体的问题：它能被看多少次、它能留多久、以及你是否能在需要时把入口关掉。</p>
+      <ul>
+        <li>限制单个分享入口的打开次数</li>
+        <li>给分享设置有效期，按时间自动失效</li>
+        <li>在不想继续传播时，一键让入口失效</li>
+      </ul>
+      <div class="callout-cyber mt-3">
+        <p class="mb-0">这篇不把“安全”说得很玄。对大多数日常分享来说，先把这三件事做好，已经能挡掉大部分“误发后无能为力”的情况。</p>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-diagram-project"></i> 风险不是在上传时开始，而是在分享之后扩散</h2>
+      <p>上传本身通常不是问题，真正的问题是入口被不断打开、转发和遗留。所以这两张流程图不只是配图，而是把“怎么发”和“怎么收口”放在同一条线里看。</p>
+      <p class="small mb-0" style="color:var(--neon-cyan);font-weight:600;">提示：下面的流程图和示意图都可以点击放大，细节会更清楚。</p>
+      <div class="story-flow-grid mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-route"></i> 分享路径</span>
+            <h3>先整理、再生成入口，别让风险从一开始就失控</h3>
+            <p>当图片先被整理进一个统一入口时，后面的控制才有意义。如果一开始就是零散发图、多个链接并行，你后面几乎没法判断哪一个还在外面流转。</p>
+            <p>这张图讲的其实是“为什么要先把入口收拢”，而不只是怎么操作。</p>
+          </div>
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图" loading="lazy" data-zoom-caption="核心分享流程：上传图片、生成链接、转二维码、发后可控。" />
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图" loading="lazy" data-zoom-caption="控制流程：设置次数、设置有效期、持续分享、一键失效。" />
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-shield-halved"></i> 收口路径</span>
+            <h3>真正的安全感，来自你还能把入口收回来</h3>
+            <p>打开次数、有效期和一键失效，决定的是这份内容会不会一直失控地挂在外面。很多时候你不需要更复杂的系统，只需要让这个入口在合适的时候停下来。</p>
+            <p>这也是这张控制图必须和正文放在一起的原因，它不是配饰，而是结论本身。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-images"></i> 每个设置项，都对应一种现实风险</h2>
+      <div class="story-stack mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-eye"></i> 查看上限</span>
+            <h3>如果你知道这批图只该被少数人看，就先设打开次数</h3>
+            <p>次数上限最适合用来挡“继续被往外传”的情况。特别是发客户预览图、活动临时资料、内部选片时，限制打开次数比事后追着问“是谁又转发了”更实际。</p>
+            <p>它不是绝对意义上的安全，但能把扩散速度和传播范围先压住。</p>
+          </div>
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/设置打开次数.png" alt="设置打开次数" loading="lazy" data-zoom-caption="打开次数设置：限制一个分享入口能被打开的总次数。" />
+            </div>
+          </div>
+        </article>
+
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame media-frame--contain">
+              <img src="../static-images/common/show/limtandexpirtion.png" alt="有效期与限制展示图" loading="lazy" data-zoom-caption="有效期与次数控制展示：让一份内容在合适的时间里开放，而不是永久挂在外面。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-hourglass-half"></i> 有效期</span>
+            <h3>很多内容不是不能看，而是不该一直能看</h3>
+            <p>活动图、阶段性方案、旧版本作品集，最常见的问题不是被谁看到了，而是它一直留在外面，过了时间还在被访问。有效期能让入口在合适的时候自动下线。</p>
+            <p>这样你不用记着每一条旧链接，也不用担心它半年后还在群里被翻出来。</p>
+          </div>
+        </article>
+
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-link"></i> 结果页</span>
+            <h3>生成结果页，其实就是你决定边界的起点</h3>
+            <p>很多人把结果页当成“生成成功”的提示页，但更准确地说，它是分享真正开始的地方。你在这里拿到链接、二维码，也决定接下来是开放传播，还是先把规则设好再发。</p>
+            <p>这也是为什么这张图值得保留，它不是纯界面截图，而是一个决策节点。</p>
+          </div>
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/生成结果.png" alt="生成结果页面" loading="lazy" data-zoom-caption="生成结果：链接和二维码在这里一起出现，也是你开始决定传播边界的地方。" />
+            </div>
+          </div>
+        </article>
+
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/一键删除图片.png" alt="一键删除图片" loading="lazy" data-zoom-caption="一键失效：当内容不该继续传播时，可以直接把入口及时关掉。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-ban"></i> 一键失效</span>
+            <h3>误发、过期、换版时，最需要的是立刻止损</h3>
+            <p>并不是每个问题都能提前预防，所以一键失效很重要。它解决的是“事情已经发生了，现在怎么尽快把影响收住”这个问题。</p>
+            <p>对现实工作来说，这种能力比把一套安全术语堆得很满更有价值。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-lightbulb"></i> 一个更实际的提醒</h2>
+      <div class="callout-cyber">
+        <p class="mb-0">不要把所有“隐私保护”都理解成技术门槛很高的事。很多时候，先把次数、时效和失效能力用起来，就已经比“直接扔一个永久链接过去”稳得多。</p>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-flag-checkered"></i> 结论很简单</h2>
+      <p>图片分享的隐私与安全，核心不是把工具讲得多高级，而是你能不能在分享之后仍然保留控制权。能限制、能到期、能及时关掉，这三件事比空谈“安全”更重要。</p>
+    </section>
+
+    <section class="section-card" id="faq">
+      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <div class="accordion accordion-cyber mt-3" id="faqAccordion">
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">只靠打开次数和有效期，真的有意义吗？</button>
+          </h3>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">有意义。它们不能替代所有安全措施，但对日常分享来说，已经能明显降低长期外传、旧链接遗留和误发后持续扩散的问题。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">什么时候最应该用有效期？</button>
+          </h3>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">活动结束后会失去时效的内容、阶段性方案、旧版本作品集、客户临时预览图，这些都很适合加有效期。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">一键失效适合什么情况？</button>
+          </h3>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">误发了内容、内容换版了、活动结束了，或者你突然发现链接传播范围超出预期时，都应该优先考虑一键失效。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-cyber mb-4">
+      <h2 class="mb-3" style="color:#fff;">先把边界设好，再把图发出去</h2>
+      <p class="mx-auto mb-4" style="max-width:680px;color:var(--text-soft);">下一次你要发活动图、预览图或作品图时，先把次数、有效期和失效方式想清楚。真正省心的分享，不是发得快，而是发出去以后也不会慌。</p>
+      <a href="https://maiimg.com" class="btn-cyber">去主站试试</a>
+    </div>
+  </main>
+
+  <footer class="footer-cyber">
+    Copyright <span data-current-year></span> 麦瓜图床（MaiIMG）
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
+</body>
+</html>

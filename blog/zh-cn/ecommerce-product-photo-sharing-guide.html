@@ -1,52 +1,204 @@
-﻿<!DOCTYPE html><html lang="zh-CN"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>电商产品图分享指南｜麦瓜图床</title>
-<meta name="description" content="把产品图按系列组织后统一分发，方便运营、客服和渠道协同。"/>
-<meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效"/>
-<link rel="canonical" href="https://maiimg.com/blog/zh-cn/ecommerce-product-photo-sharing-guide"/>
-<meta property="og:type" content="article"/><meta property="og:title" content="电商产品图分享指南｜麦瓜图床"/>
-<meta property="og:description" content="把产品图按系列组织后统一分发，方便运营、客服和渠道协同。"/><meta property="og:url" content="https://maiimg.com/blog/zh-cn/ecommerce-product-photo-sharing-guide"/>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
-<style>
-:root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-.wrap{width:min(940px,92vw);margin:0 auto}
-.top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
-article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
-h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
-.tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
-.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.shot img{width:100%;border:1px solid var(--line);border-radius:10px}.shot p{font-size:13px;color:var(--muted);margin:6px 0 0}
-footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-@media (max-width:760px){.shots{grid-template-columns:1fr} h1{font-size:28px}}
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"电商产品图怎么高效分发","description":"把产品图按系列组织后统一分发，方便运营、客服和渠道协同。","inLanguage":"zh-CN","mainEntityOfPage":"https://maiimg.com/blog/zh-cn/ecommerce-product-photo-sharing-guide"}</script>
-</head><body>
-<header class="top"><div class="wrap"><a href="./">中文博客</a> / 电商产品图怎么高效分发</div></header>
-<article class="wrap">
-<h1>电商产品图怎么高效分发</h1>
-<div class="lead">把产品图按系列组织后统一分发，方便运营、客服和渠道协同。</div>
-<h2>核心功能（真实可用）</h2>
-<ul>
-<li>一组图片生成一个分享链接（最多 25 张）</li>
-<li>链接可转二维码，线上线下都能发</li>
-<li>可设置链接/二维码打开次数和有效期</li>
-<li>发出去后可一键失效，停止继续访问</li>
-</ul>
-<h2>操作流程图（SVG）</h2>
-<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/>
-<img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
-<h2>中文界面截图</h2>
-<div class="shots">
-  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页"/><p>首页入口：开始上传</p></div>
-  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成结果页面"/><p>生成结果：链接 + 二维码</p></div>
-  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数"/><p>控制设置：打开次数与有效期</p></div>
-  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片"/><p>一键失效：停止继续访问</p></div>
-</div>
-<div class="tip">提示：本文已去除夸张和不贴合现状的描述，全部围绕麦瓜图床当前能力编写。</div>
-<h2>一句话总结</h2>
-<p>麦瓜图床比普通图床更实用的地方在于：不只“能发图”，还能“发出去后继续控制”。</p>
-</article><footer>Copyright 2026 麦瓜图床（MaiIMG）</footer></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>电商产品图分享指南｜麦瓜图床</title>
+  <meta name="description" content="把产品图按系列组织后统一分发，方便运营、客服和渠道协同。" />
+  <meta name="keywords" content="麦瓜图床,maiimg,电商产品图分享,二维码,图床,打开次数,一键失效" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/ecommerce-product-photo-sharing-guide" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="电商产品图分享指南｜麦瓜图床" />
+  <meta property="og:description" content="把产品图按系列组织后统一分发，方便运营、客服和渠道协同。" />
+  <meta property="og:url" content="https://maiimg.com/blog/zh-cn/ecommerce-product-photo-sharing-guide" />
+  <meta property="og:site_name" content="麦瓜图床" />
+  <meta property="article:published_time" content="2026-03-23T00:00:00Z" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="电商产品图分享指南｜麦瓜图床" />
+  <meta name="twitter:description" content="把产品图按系列组织后统一分发，方便运营、客服和渠道协同。" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "电商产品图怎么高效分发",
+    "description": "把产品图按系列组织后统一分发，方便运营、客服和渠道协同。",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": "https://maiimg.com/blog/zh-cn/ecommerce-product-photo-sharing-guide"
+  }
+  </script>
+</head>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>麦瓜图床</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">主站</a></li>
+          <li class="nav-item"><a class="nav-link" href="./">中文博客</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-bag-shopping"></i> 电商场景</span>
+            <p class="breadcrumb-cyber mb-0"><a href="./" style="color:inherit;text-decoration:none;">中文博客</a> · 电商产品图分享</p>
+            <div class="article-meta-row">
+              <span class="meta-pill"><i class="fas fa-calendar-check"></i>最后编辑 <span data-last-edited="2026-03-23"></span></span>
+              <span class="meta-pill"><i class="fas fa-clock"></i><span data-reading-minutes="6"></span></span>
+            </div>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">电商产品图</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">分享指南</h1>
+            </div>
+            <p class="hero-lead">电商场景里，产品图经常要在运营、客服、渠道、活动页之间来回流转。真正麻烦的不是图不够多，而是分发路径太碎，导致大家总在问“最新版在哪”“这一组是不是还能用”。</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">产品图分发</span>
+              <span class="tag-chip tag-chip--cyan">团队协同入口</span>
+              <span class="tag-chip tag-chip--blue">阶段开放</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">打开麦瓜图床</a>
+              <a href="#flow" class="btn-cyber btn-cyber-outline">看电商流程</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack">
+              <div class="cyber-mini-card cyber-mini-card--p"><span class="cyber-mini-card__num">01</span><div><h3>同一组产品图只走一个入口</h3><p>运营、客服和渠道拿到的是同一份入口，沟通就不会总在确认“是不是这一版”。</p></div></div>
+              <div class="cyber-mini-card cyber-mini-card--c"><span class="cyber-mini-card__num">02</span><div><h3>适合轻量快速分发</h3><p>不是完整资产管理平台，而是把一组产品图更快、更清楚地递出去。</p></div></div>
+              <div class="cyber-mini-card cyber-mini-card--b"><span class="cyber-mini-card__num">03</span><div><h3>活动期结束后可以及时收口</h3><p>如果某批素材只在活动期或上新期有效，开放时长和失效能力会很实用。</p></div></div>
+            </div>
+            <div class="brand-footer d-none d-md-flex"><span class="brand-footer__icon">M</span><span>MaiIMG · 把电商产品图发清楚，比反复确认版本更高效</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section-dark">
+    <section class="section-card">
+      <h2><i class="fas fa-map"></i> 这篇文章想解决什么</h2>
+      <p>电商产品图的传播范围通常很广，但又常常是阶段性的。上新图、活动图、客服回复图、渠道素材图，如果分发方式不清楚，很容易在团队里形成版本混乱。与其后面不断确认，不如一开始就把入口整理好。</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4"><div class="fact-grid-card"><h4>适合谁看</h4><p>电商运营、客服、内容团队、品牌方，或者需要把一组产品图快速发给多个角色的人。</p></div></div>
+        <div class="col-md-4"><div class="fact-grid-card"><h4>更适合什么</h4><p>上新期产品图、活动素材包、客服常用图、渠道分发图等轻量场景。</p></div></div>
+        <div class="col-md-4"><div class="fact-grid-card"><h4>不要误解什么</h4><p>它更像轻量分发入口，不是完整的 DAM 或多人审批协作系统。</p></div></div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-star"></i> 这些能力，正好适合电商产品图分发</h2>
+      <ul>
+        <li>一组图片生成一个分享链接（最多 25 张）</li>
+        <li>链接可转二维码，线上线下都能发</li>
+        <li>可设置链接/二维码打开次数和有效期</li>
+        <li>发出去后可一键失效，停止继续访问</li>
+      </ul>
+      <div class="callout-cyber mt-3"><p class="mb-0">对电商团队来说，最省时间的不是“找更多分发方法”，而是让所有人先认同同一个入口。</p></div>
+    </section>
+
+    <section class="section-card" id="flow">
+      <h2><i class="fas fa-diagram-project"></i> 电商产品图先整理再分发，效率会高很多</h2>
+      <p class="small mb-0" style="color:var(--neon-cyan);font-weight:600;">提示：下面的流程图和配图都可以点击放大，细节会更清楚。</p>
+      <div class="story-flow-grid mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-box-open"></i> 上新路径</span>
+            <h3>先把同系列产品图收成一组，再对外分发</h3>
+            <p>电商素材一旦零散流转，后面很容易变成“各自拿着一套图”。把同一系列产品图收成一个入口，能让运营、客服和渠道至少先站在同一个版本上。</p>
+          </div>
+          <div class="story-visual story-visual--diagram"><img class="img-cyber" src="diagram/image-upload-flow.svg" alt="电商产品图上传与整理流程图" loading="lazy" data-zoom-caption="电商产品图流程：先收集并整理同系列图片，再生成统一入口继续对外分发。" /></div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual story-visual--diagram"><img class="img-cyber" src="diagram/permission-control-flow.svg" alt="电商产品图控制流程图" loading="lazy" data-zoom-caption="电商产品图控制：活动期结束或素材更新后，可以通过时效和失效能力及时收口。" /></div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-clock"></i> 活动周期</span>
+            <h3>活动图和上新图，不一定需要长期开放</h3>
+            <p>一些产品图只在活动期或上新期有效，时间一过就不该继续传播。把有效期和失效能力留在手里，会比事后追版本轻松得多。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-images"></i> 发图动作更清楚，协同就会更顺</h2>
+      <div class="story-stack mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-upload"></i> 整理入口</span>
+            <h3>把同一批产品图收进同一次分享，后面才不会反复确认</h3>
+            <p>电商团队最容易耗时间的地方，不是在制作素材，而是在后面不断确认“你拿的是哪一版”。入口先收口，后续的沟通成本会明显下降。</p>
+          </div>
+          <div class="story-visual"><div class="media-frame"><img src="../static-images/common/show/upload.jpg" alt="电商产品图上传展示图" loading="lazy" data-zoom-caption="先把同一组产品图整理到一起，后面的分发和确认才会稳定。" /></div></div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual"><div class="media-frame"><img src="../static-images/common/image_result.png" alt="电商产品图结果展示图" loading="lazy" data-zoom-caption="产品图如果已经被整理成统一入口，团队内部分发会更轻松，也更不容易乱。" /></div></div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-link"></i> 团队入口</span>
+            <h3>一组产品图一个入口，比很多零散消息更适合团队协同</h3>
+            <p>入口清楚以后，运营、客服、内容或渠道拿到的都是同一份入口。这样需要解释的就少了，真正能用的效率才会上来。</p>
+          </div>
+        </article>
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-arrow-up-right-from-square"></i> 对外分发</span>
+            <h3>生成结果页，就是产品图真正开始流通的那个节点</h3>
+            <p>链接和二维码在这里出现后，这组产品图就可以被转给不同角色。统一入口的价值，也从这一刻开始体现。</p>
+          </div>
+          <div class="story-visual"><div class="media-frame"><img src="../static-images/cn/生成结果.png" alt="电商产品图生成结果页面" loading="lazy" data-zoom-caption="生成结果页：这里会给出统一链接和二维码，让同一批产品图可以更顺地继续流转。" /></div></div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual"><div class="media-frame"><img src="../static-images/cn/设置打开次数.png" alt="电商产品图设置打开次数页面" loading="lazy" data-zoom-caption="如果某批产品图只想在特定阶段使用，次数和有效期是最直接的边界设置。" /></div></div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-sliders"></i> 周期控制</span>
+            <h3>素材阶段结束后，入口也该跟着更新</h3>
+            <p>电商图片的时效性很强。把旧图一直放在外面，往往比重新发入口更危险。及时收口，会让团队更少出错。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-lightbulb"></i> 记住这件事就够了</h2>
+      <div class="callout-cyber"><p class="mb-0">电商产品图分发真正该优化的，不是消息发得更快，而是让所有需要用图的人拿到同一个清楚入口。</p></div>
+    </section>
+
+    <section class="section-card" id="faq">
+      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <div class="accordion accordion-cyber mt-3" id="faqAccordion">
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">适合给客服或渠道发产品图吗？</button></h3><div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body">适合。尤其是你想让不同角色先拿到同一份入口，而不是各自保存零散图片时，这种方式会更顺。</div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">这能替代完整素材库吗？</button></h3><div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">不能。它更适合轻量产品图分发，而不是大型品牌资产管理或多人审批平台。</div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">为什么电商场景也要讲有效期？</button></h3><div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">因为很多产品图和活动图都有明显时效。阶段结束以后，如果入口还长期开放，就很容易带来旧图继续流转的问题。</div></div></div>
+      </div>
+    </section>
+
+    <div class="cta-cyber mb-4">
+      <h2 class="mb-3" style="color:#fff;">想把产品图分发得更清楚？</h2>
+      <p class="mx-auto mb-4" style="max-width:680px;color:var(--text-soft);">先让同一组产品图走同一个入口，再让不同角色继续流转。减少确认版本的时间，团队协同才会真的轻松。</p>
+      <a href="https://maiimg.com" class="btn-cyber">去麦瓜图床试试</a>
+    </div>
+  </main>
+
+  <footer class="footer-cyber">Copyright <span data-current-year></span> 麦瓜图床（MaiIMG）</footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
+</body>
+</html>

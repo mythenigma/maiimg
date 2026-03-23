@@ -3,77 +3,627 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>work - 最新工作记录</title>
+  <title>work - 项目工作与日志记录</title>
   <style>
-    :root { --bg:#f6f8fb; --card:#fff; --text:#111827; --muted:#6b7280; --line:#e5e7eb; --ok:#065f46; --info:#1d4ed8; }
-    * { box-sizing:border-box; }
-    body { margin:0; background:var(--bg); color:var(--text); font-family:"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.6; }
-    .wrap { max-width:1000px; margin:24px auto; padding:0 16px 30px; }
-    .head { background:linear-gradient(135deg,#dbeafe,#e0e7ff); border:1px solid #bfdbfe; border-radius:12px; padding:16px 18px; margin-bottom:12px; }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
-    h1 { margin:0 0 6px; font-size:22px; }
-    h2 { margin:0; font-size:17px; }
-    p { margin:8px 0; font-size:14px; }
-    ul { margin:8px 0 0 18px; padding:0; }
-    code { background:#f3f4f6; border-radius:6px; padding:1px 6px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; }
-    .row { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
-    .tag { font-size:12px; font-weight:600; border-radius:999px; padding:2px 8px; border:1px solid; white-space:nowrap; }
-    .ok { color:var(--ok); border-color:#a7f3d0; background:#ecfdf5; }
-    .info { color:var(--info); border-color:#bfdbfe; background:#eff6ff; }
-    .sub, .foot { color:var(--muted); font-size:12px; }
+    :root {
+      --bg: #f6f8fb;
+      --card: #fff;
+      --text: #111827;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --ok: #065f46;
+      --info: #1d4ed8;
+      --warn: #92400e;
+      --tab-bg: #eef2ff;
+      --tab-active: #1d4ed8;
+      --tab-active-bg: #dbeafe;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+    }
+    .wrap { max-width: 1000px; margin: 24px auto; padding: 0 16px 30px; }
+    .head {
+      background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .tab-btn {
+      appearance: none;
+      border: 1px solid #c7d2fe;
+      background: var(--tab-bg);
+      color: #3730a3;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      transform: translateY(-1px);
+      background: #e0e7ff;
+    }
+    .tab-btn.active {
+      color: var(--tab-active);
+      background: var(--tab-active-bg);
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+    h1 { margin: 0 0 6px; font-size: 22px; }
+    h2 { margin: 0; font-size: 17px; }
+    h3 { margin: 0 0 6px; font-size: 15px; }
+    p { margin: 8px 0; font-size: 14px; }
+    ul { margin: 8px 0 0 18px; padding: 0; }
+    li { margin: 4px 0; }
+    code {
+      background: #f3f4f6;
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-size: 13px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    a.path-link { text-decoration: none; }
+    a.path-link:hover code { background: #e0e7ff; }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 2px 8px;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+    .ok { color: var(--ok); border-color: #a7f3d0; background: #ecfdf5; }
+    .info { color: var(--info); border-color: #bfdbfe; background: #eff6ff; }
+    .warn { color: var(--warn); border-color: #fcd34d; background: #fffbeb; }
+    .sub, .foot { color: var(--muted); font-size: 12px; }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .meta-item {
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .meta-item strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
     .mermaid { min-height: 120px; }
+    @media (max-width: 768px) {
+      .wrap { margin: 16px auto; }
+      .tab-btn { width: 100%; justify-content: center; }
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 </head>
 <body>
   <main class="wrap">
     <section class="head">
-      <h1>最新工作记录</h1>
-      <p class="sub">更新时间：2026-02-25</p>
+      <h1>项目工作与日志记录</h1>
+      <p class="sub">更新时间：2026-03-23</p>
+      <p class="sub">说明：保留“最新工作记录”，新增“项目总日志”tab，后续整个项目的重要变更与阶段性盘点统一往项目总日志里追加。</p>
     </section>
 
-    <section class="card">
-      <div class="row"><h2>1) 首页底部链接（手机端）排版优化</h2><span class="tag ok">已完成</span></div>
-      <ul>
-        <li>修复 footer 链接在小屏挤压换行问题。</li>
-        <li>手机端改为稳定网格：前两项同排，第三项独占一行居中。</li>
-      </ul>
-      <p><strong>文件：</strong><code>qr-styles010.css</code></p>
+    <nav class="tabs" aria-label="工作记录标签页">
+      <button class="tab-btn" data-tab="knowledge-base">Knowledge Base</button>
+      <button class="tab-btn" data-tab="project-log">项目总日志</button>
+      <button class="tab-btn active" data-tab="latest-work">最新工作记录</button>
+    </nav>
+
+    <section class="tab-panel" id="knowledge-base">
+      <section class="card">
+        <div class="row"><h2>Knowledge Base 使用原则</h2><span class="tag info">写作基线</span></div>
+        <ul>
+          <li>这个 tab 只记录已经从当前项目代码、页面结构、接口调用里确认过的能力与边界。</li>
+          <li>后续写 blog 时，优先引用这里的事实，不要凭行业想象补功能。</li>
+          <li>如果某项能力没有在这里确认，默认不要写成“产品已支持”。</li>
+          <li>不要写夸张结论、绝对化承诺或无法从当前项目里确认的效果描述；如果拿不准，先问用户再写。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>中文 Blog 文案基线</h2><span class="tag info">表达约束</span></div>
+        <ul>
+          <li>不要用“中文界面截图”“操作流程图（SVG）”“一句话总结”这类像内部备注或说明书目录的标题。</li>
+          <li>标题要围绕读者问题来写，例如“你会在页面里看到什么”“这篇文章想解决什么”“结论很简单”。</li>
+          <li>截图说明不要只描述界面名称，要解释这张图对读者有什么意义，例如“生成结果：同一份分享同时给你链接和二维码”。</li>
+          <li>首屏导语要先讲场景和痛点，不要一上来堆功能名词。</li>
+          <li>文案允许有吸引力，但所有能力点都必须和当前真实产品能力一致。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>产品定位（已确认）</h2><span class="tag ok">真实能力</span></div>
+        <ul>
+          <li>MaiIMG 当前是一个以静态前端为主的媒体分享站点，核心流程是：上传媒体 → 生成分享链接与二维码 → 设置访问控制 → 查看访问记录 → 登录后在 dashboard 管理。</li>
+          <li>主站入口在 <code>index.html</code> 与 <code>maiimg.html</code>，两页都直接调用 <code>https://fetch.maipdf.com</code> 的接口。</li>
+          <li>项目已经不只是“图片图床”，前端文案和上传校验都明确包含 <strong>images + short videos</strong>。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>上传与分享能力（已确认）</h2><span class="tag ok">代码已证实</span></div>
+        <ul>
+          <li>支持格式：<code>PNG</code>、<code>JPG</code>、<code>JPEG</code>、<code>GIF</code>、<code>WebP</code>、<code>MP4</code>、<code>MOV</code>、<code>WebM</code>、<code>M4V</code>。</li>
+          <li>单次分享上限：<strong>最多 25 个文件</strong>。</li>
+          <li>图片大小限制：<strong>50MB</strong>；视频大小限制：<strong>100MB</strong>；视频时长限制：<strong>120 秒</strong>。</li>
+          <li>生成结果会同时给出 <strong>分享链接</strong> 和 <strong>二维码</strong>，两者来自同一份分享结果。</li>
+          <li>结果区还会生成 <strong>Access Records code</strong>，可跳到 <code>tracking.html</code> 查看访问记录。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>访问控制（已确认）</h2><span class="tag ok">代码已证实</span></div>
+        <ul>
+          <li>前端明确要求填写 <strong>View Limit</strong>、<strong>Time Control</strong>、<strong>Description</strong>。</li>
+          <li><strong>Time Control</strong> 在产品文案里表示“每次可查看秒数 / per-view duration”；虽然部分旧变量名仍叫 <code>password</code>，但写 blog 时不要把它写成普通密码功能。</li>
+          <li>有效期支持预设：<code>1 hour</code>、<code>3 hours</code>、<code>24 hours</code>、<code>5 days</code>、<code>custom days</code>、<code>unlimited</code>。</li>
+          <li>有效期支持 UTC 与本地时区显示，界面里有对应的时区下拉与本地时间展示。</li>
+          <li>已发出的分享支持禁用/删除，当前语义上等价于让链接失效；在 dashboard 中删除会把视图限制置为 0。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>查看页体验（已确认）</h2><span class="tag ok">代码已证实</span></div>
+        <ul>
+          <li><code>gallery/index.html</code> 与 <code>media/index.html</code> 都是竖向 Swiper 查看器，不是传统网格式相册页。</li>
+          <li>图片支持滑动浏览与缩放；页面有 <code>Swipe to view more • Pinch to zoom images</code> 的交互提示。</li>
+          <li>视频支持原生播放控件，查看器会在切换页面时暂停其他视频，并带视频预览首帧预热逻辑。</li>
+          <li>查看页有进度条、分页点、上一张/下一张按钮，以及图片全屏按钮；当前全屏按钮在视频页会隐藏。</li>
+          <li>微信内打开时，会引导到 <code>wechat.html</code> 提示“请在浏览器中打开”，并配合 <code>special.maiimg.com</code> 做中转。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>登录与 Dashboard（已确认）</h2><span class="tag ok">代码已证实</span></div>
+        <ul>
+          <li>登录走 Firebase Auth，支持 Google 登录与邮箱登录。</li>
+          <li>登录后可进入 <code>dashboard.html</code> 查看自己的 galleries 列表。</li>
+          <li>Dashboard 已有的真实动作包括：刷新列表、查看状态、打开分享链接、打开访问记录、删除 gallery、Restore、Replace Mode。</li>
+          <li><strong>Replace Mode</strong> 的真实语义是：选一个目标 A 和一个来源 B，把 B 的内容和设置复制到 A，但 <strong>A 原来的链接保持不变</strong>。</li>
+          <li>Restore 现在不是“独立恢复旧版本系统”，而是通过 Replace Mode 先选中被删 gallery 作为目标 A，再挑一个 source B 来复用原链接。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>Tracking / Access Records（已确认）</h2><span class="tag ok">代码已证实</span></div>
+        <ul>
+          <li><code>tracking.html</code> 会根据 gallery id 与 access code 请求 <code>/api/get-access-logs</code>。</li>
+          <li>页面会展示 gallery 信息、统计信息和访问日志表，不只是单一明细列表。</li>
+          <li>当前代码里明确渲染的统计维度包括：<strong>Total Access</strong>、<strong>Unique IPs</strong>、<strong>Different Browsers</strong>、<strong>First Access</strong>。</li>
+          <li>Tracking 页也支持删除 gallery，需要输入形如 <code>DELETE-{id}</code> 的确认码。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>Blog 写作时不要乱写的内容</h2><span class="tag warn">边界提醒</span></div>
+        <ul>
+          <li>不要写“无限张图片/无限容量单链接分享”，当前代码明确上限是 <strong>25 个文件</strong>。</li>
+          <li>不要写成“团队协同审批系统”“多人批注系统”“在线审片评论流”“品牌资产管理平台（DAM）”，这些都没有在当前代码里确认。</li>
+          <li>不要写“端到端加密”“私有化部署”“开放 API”“自动 AI 打标/搜索/识图”，当前项目里没有对应实现证据。</li>
+          <li>不要把 <strong>Time Control</strong> 描述成普通密码输入框；更准确的表达是“单次查看时长/时间控制”。</li>
+          <li>如果文章主题只是图片分享，不要强行把视频能力塞进标题和核心卖点；但如果写产品总览，可以明确说明站点也支持 short videos。</li>
+          <li>“访问记录 / access records”可以写，“高级商业 BI 分析平台”不要写太满；当前确认到的是日志、统计和访问明细，不是完整分析套件。</li>
+        </ul>
+      </section>
     </section>
 
-    <section class="card">
-      <div class="row"><h2>2) 登录提醒逻辑统一（index/maiimg）</h2><span class="tag ok">已完成</span></div>
-      <ul>
-        <li>新增未登录提醒弹窗（Sign In / Maybe Later）。</li>
-        <li>频控：<code>1 小时内不重复提醒</code>（localStorage 时间戳）。</li>
-        <li>两页逻辑完全同步：<code>index.html</code> 与 <code>maiimg.html</code>。</li>
-      </ul>
+    <section class="tab-panel" id="project-log">
+      <section class="card">
+        <div class="row"><h2>项目日志使用说明</h2><span class="tag info">已启用</span></div>
+        <ul>
+          <li>这个 tab 用于记录整个 <code>maiimg.com</code> 项目的阶段性动作、目录盘点、结构调整、内容大修与重要决策。</li>
+          <li><code>最新工作记录</code> 继续保留即时任务卡片；跨模块、跨阶段的事情统一往这里累计。</li>
+          <li>本次已先补入 <code>blog/</code> 目录的基础盘点，作为后续大修的起始基线。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：项目界面总表</h2><span class="tag info">基线清单</span></div>
+        <p><strong>主站核心界面：</strong></p>
+        <ul>
+          <li><code>index.html</code>：主上传页（图片 / 短视频上传、链接与二维码生成、访问记录入口）。</li>
+          <li><code>maiimg.html</code>：主上传页的另一套主界面版本。</li>
+          <li><code>dashboard.html</code>：登录后管理界面（galleries、删除、Restore、Replace Mode、访问记录入口）。</li>
+          <li><code>tracking.html</code>：访问记录查询页（gallery 信息、统计、日志、删除入口）。</li>
+          <li><code>gallery/index.html</code>：主查看器页面（图片/视频浏览、滑动、缩放、全屏、微信分流）。</li>
+          <li><code>media/index.html</code>：媒体查看器页面，结构与 gallery 接近。</li>
+          <li><code>wechat.html</code>：微信内打开引导页。</li>
+        </ul>
+        <p><strong>主站辅助/测试界面：</strong></p>
+        <ul>
+          <li><code>qrback.html</code>：旧版/备用二维码生成与上传相关页面。</li>
+          <li><code>blog-summary.html</code>：博客摘要与说明页。</li>
+          <li><code>url-test.html</code>：URL 测试页。</li>
+          <li><code>view-test.html</code>：查看页测试。</li>
+          <li><code>work.html</code>：项目工作日志与知识库。</li>
+        </ul>
+        <p><strong>Blog 入口界面：</strong></p>
+        <ul>
+          <li><a class="path-link" href="blog/index.html"><code>blog/index.html</code></a>：博客总入口。</li>
+          <li><a class="path-link" href="blog/en/index.html"><code>blog/en/index.html</code></a>：英文博客入口。</li>
+          <li><a class="path-link" href="blog/zh-cn/index.html"><code>blog/zh-cn/index.html</code></a>：中文博客入口。</li>
+          <li><a class="path-link" href="blog/ja/index.html"><code>blog/ja/index.html</code></a>、<a class="path-link" href="blog/fr/index.html"><code>blog/fr/index.html</code></a>、<a class="path-link" href="blog/de/index.html"><code>blog/de/index.html</code></a>、<a class="path-link" href="blog/es/index.html"><code>blog/es/index.html</code></a>、<a class="path-link" href="blog/it/index.html"><code>blog/it/index.html</code></a>、<a class="path-link" href="blog/ko/index.html"><code>blog/ko/index.html</code></a>、<a class="path-link" href="blog/pt/index.html"><code>blog/pt/index.html</code></a>、<a class="path-link" href="blog/ru/index.html"><code>blog/ru/index.html</code></a>、<a class="path-link" href="blog/ar/index.html"><code>blog/ar/index.html</code></a>：其他语言博客入口。</li>
+        </ul>
+        <p><strong>中文 Blog 文章界面（当前改造对象）：</strong></p>
+        <ul>
+          <li><a class="path-link" href="blog/zh-cn/how-to-generate-image-sharing-links.html"><code>blog/zh-cn/how-to-generate-image-sharing-links.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/how-to-create-qr-codes-for-images.html"><code>blog/zh-cn/how-to-create-qr-codes-for-images.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/image-security-and-privacy-guide.html"><code>blog/zh-cn/image-security-and-privacy-guide.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/image-sharing-best-practices.html"><code>blog/zh-cn/image-sharing-best-practices.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/image-sharing-workflow-flowcharts.html"><code>blog/zh-cn/image-sharing-workflow-flowcharts.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/wedding-photo-sharing-guide.html"><code>blog/zh-cn/wedding-photo-sharing-guide.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/real-estate-photo-sharing-guide.html"><code>blog/zh-cn/real-estate-photo-sharing-guide.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/photographer-portfolio-sharing-guide.html"><code>blog/zh-cn/photographer-portfolio-sharing-guide.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/birthday-party-photo-sharing-guide.html"><code>blog/zh-cn/birthday-party-photo-sharing-guide.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/designer-portfolio-sharing-guide.html"><code>blog/zh-cn/designer-portfolio-sharing-guide.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/ecommerce-product-photo-sharing-guide.html"><code>blog/zh-cn/ecommerce-product-photo-sharing-guide.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/automotive-photo-sharing-guide.html"><code>blog/zh-cn/automotive-photo-sharing-guide.html</code></a></li>
+          <li><a class="path-link" href="blog/zh-cn/artist-portfolio-sharing-guide.html"><code>blog/zh-cn/artist-portfolio-sharing-guide.html</code></a></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：中文 Blog 文案方向修正</h2><span class="tag warn">已执行</span></div>
+        <ul>
+          <li>确认后续中文文章不能再使用“界面截图”“流程图”“一句话总结”这类说明书式标题。</li>
+          <li>后续每篇文章的首屏、分节标题、截图说明都要改成更面向读者场景的写法，保持内容真实但表达更有吸引力。</li>
+          <li><a class="path-link" href="blog/_article-template.html"><code>blog/_article-template.html</code></a> 已补充这个写作约束，避免后面继续沿用旧口吻。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：Blog 配图使用方式修正</h2><span class="tag warn">已执行</span></div>
+        <ul>
+          <li>确认后续中文文章不要再把 4 张原始后台截图平铺成一个大图片区，这样信息太碎，也不够像成品页。</li>
+          <li>优先使用 <code>blog/static-images/common/show</code> 与 <code>blog/static-images/cn/宣传</code> 里的展示图做主视觉，再补 1 到 2 张真实操作截图作为证据图。</li>
+          <li><code>blog/zh-cn/artist-portfolio-sharing-guide.html</code> 已先按这个方式调整，后续中文页沿用。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：流程配图原文件精修</h2><span class="tag warn">已执行</span></div>
+        <ul>
+          <li>用户确认当前流程配图本身质感不够，需要直接修原图，而不是只改页面布局。</li>
+          <li>已重绘 <code>blog/zh-cn/diagram/core-share-flow.svg</code> 与 <code>blog/zh-cn/diagram/control-flow-animated.svg</code>，保留原文件名不变。</li>
+          <li>新版本统一改成深色信息图风格，和 blog 页面主视觉更接近，避免继续出现“白底廉价流程图”的感觉。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：图片结构与放大查看</h2><span class="tag warn">已执行</span></div>
+        <ul>
+          <li>用户指出图片区结构不对称，尤其作品集页的展示区视觉重心偏左、右侧过碎。</li>
+          <li><code>blog/zh-cn/artist-portfolio-sharing-guide.html</code> 已去掉单独图片区，改成更平衡的图片展示结构，并减少大片空白。</li>
+          <li><code>blog/blog-common.js</code> 与 <code>blog/blog-cyber.css</code> 已新增通用图片放大预览能力，文章内图片和 SVG 流程图可点击放大查看。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：图文穿插结构调整</h2><span class="tag warn">已执行</span></div>
+        <ul>
+          <li>用户明确要求“图文结合”，不要出现图片区和文字区彻底分开的排版。</li>
+          <li><code>blog/zh-cn/artist-portfolio-sharing-guide.html</code> 已从纯图片网格改成交替的图文块，图片紧跟对应段落解释出现。</li>
+          <li><code>blog/blog-cyber.css</code> 已补充可复用的图文穿插样式，后续中文页按这个方向继续改。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：阅读时间与最后编辑日期</h2><span class="tag warn">已执行</span></div>
+        <ul>
+          <li>用户要求 blog 页面明确标注“几分钟阅读时间”和“最后编辑日期”。</li>
+          <li><code>blog/blog-common.js</code> 与 <code>blog/blog-cyber.css</code> 已补充共用显示能力。</li>
+          <li>已先接入到已改好的中文文章页，后续继续沿用。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：中文 Blog 改造进度表</h2><span class="tag ok">已完成</span></div>
+        <p><strong>共享资源：</strong></p>
+        <ul>
+          <li><code>blog/blog-cyber.css</code>：已建立，供 blog 新模板共用。<strong>已就位</strong></li>
+          <li><code>blog/blog-common.js</code>：已建立，负责文章日期与年份展示。<strong>已就位</strong></li>
+        </ul>
+        <p><strong>页面状态：</strong></p>
+        <ul>
+          <li><code>blog/zh-cn/index.html</code>：已修好</li>
+          <li><code>blog/zh-cn/how-to-generate-image-sharing-links.html</code>：已修好</li>
+          <li><code>blog/zh-cn/how-to-create-qr-codes-for-images.html</code>：已修好</li>
+          <li><code>blog/zh-cn/image-security-and-privacy-guide.html</code>：已修好</li>
+          <li><code>blog/zh-cn/image-sharing-best-practices.html</code>：已修好</li>
+          <li><code>blog/zh-cn/image-sharing-workflow-flowcharts.html</code>：已修好</li>
+          <li><code>blog/zh-cn/wedding-photo-sharing-guide.html</code>：已修好</li>
+          <li><code>blog/zh-cn/real-estate-photo-sharing-guide.html</code>：已修好</li>
+          <li><code>blog/zh-cn/photographer-portfolio-sharing-guide.html</code>：已修好</li>
+          <li><code>blog/zh-cn/birthday-party-photo-sharing-guide.html</code>：已修好</li>
+          <li><code>blog/zh-cn/designer-portfolio-sharing-guide.html</code>：已修好</li>
+          <li><code>blog/zh-cn/ecommerce-product-photo-sharing-guide.html</code>：已修好</li>
+          <li><code>blog/zh-cn/automotive-photo-sharing-guide.html</code>：已修好</li>
+          <li><code>blog/zh-cn/artist-portfolio-sharing-guide.html</code>：已修好</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：中文 Blog 已全部切到新模板</h2><span class="tag ok">已收尾</span></div>
+        <ul>
+          <li>剩余 9 篇中文文章已全部改成深色统一模板，并补齐阅读时间、最后编辑日期、FAQ 和 CTA。</li>
+          <li>正文结构统一改成图文穿插，避免“图片堆一块、文字堆一块”的旧排法。</li>
+          <li>所有文章继续沿用 <code>blog/blog-cyber.css</code> 与 <code>blog/blog-common.js</code>，图片和 SVG 保留点击放大查看。</li>
+          <li><code>blog/zh-cn/index.html</code> 已同步补齐全部文章卡片的“几分钟阅读 / 最后编辑”信息。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：英文 Blog 改造基线</h2><span class="tag info">已启动</span></div>
+        <ul>
+          <li>英文文章继续沿用中文这套版式能力：统一 layout、图文穿插、可点击放大、阅读时间、最后编辑日期。</li>
+          <li>英文写作会比中文更进一步收紧成 <strong>short, clear, easy to scan</strong> 的表达，优先短句、直接句，不写花哨营销文。</li>
+          <li>英文页面必须优先使用英文配图、英文 diagram 和英文界面素材，不能把中文截图硬套进去。</li>
+          <li>每篇英文文章都要保留原来的主题差异和场景角度，不允许把所有页面改成同一篇换标题。</li>
+          <li>如果某个英文页面的卖点或场景表达拿不准，先停下来确认，不补不确定内容。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：英文 Blog 首批改造进度</h2><span class="tag ok">已完成</span></div>
+        <ul>
+          <li><code>blog/en/index.html</code>：已修好</li>
+          <li><code>blog/en/how-to-generate-image-sharing-links.html</code>：已修好</li>
+          <li><code>blog/en/how-to-create-qr-codes-for-images.html</code>：已修好</li>
+          <li><code>blog/en/image-security-and-privacy-guide.html</code>：已修好</li>
+          <li><code>blog/en/artist-portfolio-sharing-guide.html</code>：已修好</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：英文 Blog 首批页面已切到新模板</h2><span class="tag ok">已记录</span></div>
+        <ul>
+          <li>已先完成英文入口页和 4 篇代表文章：上手页、二维码页、安全控制页、艺术作品集页。</li>
+          <li>首批英文页统一接入 <code>blog/blog-cyber.css</code> 与 <code>blog/blog-common.js</code>，补齐阅读时间、最后编辑日期与图片放大查看。</li>
+          <li>英文文案已按“short, clear, easy to scan”重写，尽量缩短句子，避免中文式长句和夸张 marketing 口吻。</li>
+          <li>每篇保留了自己的场景重点：链接页讲最短流程，二维码页讲 scan-first 使用场景，安全页讲边界控制，作品集页讲 presentation 与 first impression。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：英文宣传图与流程图样例</h2><span class="tag ok">已新建</span></div>
+        <ul>
+          <li>已新增一张英文主视觉展示图：<code>blog/static-images/common/show/english-share-entry-hero.svg</code></li>
+          <li>已新增一张英文 QR 宣传图：<code>blog/static-images/common/show/english-qr-poster.svg</code></li>
+          <li>已新增一张英文控制流程图：<code>blog/en/diagram/english-share-control-flow.svg</code></li>
+          <li>后续又继续扩展了 4 张英文图：<code>english-link-sharing-card.svg</code>、<code>english-security-control-board.svg</code>、<code>english-portfolio-preview.svg</code>、<code>english-qr-channel-flow.svg</code></li>
+          <li>新图已直接接入首批英文文章，不只是单独建文件，打开对应英文页就能看到实际效果。</li>
+          <li>这批图只画当前真实能力：一个分享入口、二维码、打开次数、有效期、失效控制，没有补不存在的产品功能。</li>
+          <li>同日又检查并收紧了新英文 SVG 的构图边界，重点修正了 <code>english-portfolio-preview.svg</code>、<code>english-link-sharing-card.svg</code>、<code>english-security-control-board.svg</code> 的标题区压图与左右重叠问题。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：Blog 目录大修前基线盘点</h2><span class="tag ok">已记录</span></div>
+        <p><strong>目标：</strong>在正式大修 <code>blog/</code> 前，先确认目录结构、内容密度、素材分布和图表文件现状，避免后续改造时误判范围。</p>
+
+        <div class="meta-grid">
+          <div class="meta-item">
+            <strong>blog 根目录</strong>
+            11 个语言目录 + 1 个 <code>static-images</code> 目录 + 若干根文件。
+          </div>
+          <div class="meta-item">
+            <strong>内容重心</strong>
+            目前真正有规模内容的主要是 <code>en</code> 与 <code>zh-cn</code>。
+          </div>
+          <div class="meta-item">
+            <strong>图表目录</strong>
+            当前只有 <code>blog/en/diagram</code> 与 <code>blog/zh-cn/diagram</code> 存在。
+          </div>
+          <div class="meta-item">
+            <strong>素材目录</strong>
+            <code>blog/static-images</code> 现有 21 个素材文件。
+          </div>
+        </div>
+
+        <p><strong>blog 根目录当前可见内容：</strong></p>
+        <ul>
+          <li>目录：<code>ar</code>、<code>de</code>、<code>en</code>、<code>es</code>、<code>fr</code>、<code>it</code>、<code>ja</code>、<code>ko</code>、<code>pt</code>、<code>ru</code>、<code>zh-cn</code>、<code>static-images</code>。</li>
+          <li>文件：<code>index.html</code>、<code>README.md</code>、<code>_article-template.html</code>、<code>feb10back</code>、<code>.DS_Store</code>。</li>
+        </ul>
+
+        <p><strong>语言目录现状：</strong></p>
+        <ul>
+          <li><code>blog/en</code>：共 77 个 HTML 文件，含大量完整文章，是当前英文内容主阵地。</li>
+          <li><code>blog/zh-cn</code>：共 14 个 HTML 文件，是当前中文内容主阵地。</li>
+          <li><code>blog/ar</code>、<code>de</code>、<code>es</code>、<code>fr</code>、<code>it</code>、<code>ja</code>、<code>ko</code>、<code>pt</code>、<code>ru</code>：目前都只有 1 个 <code>index.html</code> 入口页，尚未形成完整文章库。</li>
+        </ul>
+
+        <p><strong>diagram 目录现状：</strong></p>
+        <ul>
+          <li><code>blog/en/diagram</code>：10 个 SVG，包括 <code>airdrop-alternative-reliable-photo-sharing.svg</code>、<code>client-gallery-delivery.svg</code>、<code>event-photo-runbook.svg</code>、<code>image-sharing-workflow-diagram.svg</code>、<code>security-control-flow.svg</code> 等。</li>
+          <li><code>blog/zh-cn/diagram</code>：10 个 SVG，包括 <code>analytics-optimization-flow.svg</code>、<code>birthday-sharing-flow.svg</code>、<code>core-share-flow.svg</code>、<code>image-upload-flow.svg</code>、<code>permission-control-flow.svg</code> 等。</li>
+          <li>当前并不是“每个语言目录下都有 diagram”，而是只有 <code>en</code> 和 <code>zh-cn</code> 这两个内容密度较高的目录具备独立图表文件夹。</li>
+        </ul>
+
+        <p><strong>static-images 目录现状：</strong></p>
+        <ul>
+          <li>共 21 个文件，主要分布在 <code>blog/static-images/cn</code>、<code>blog/static-images/cn/宣传</code>、<code>blog/static-images/common</code>、<code>blog/static-images/common/show</code>。</li>
+          <li>中文素材偏截图与宣传图，例如 <code>麦瓜二维码首页.png</code>、<code>生成结果.png</code>、<code>微信发.jpg</code>、<code>扫码分享.jpg</code>。</li>
+          <li>通用素材偏产品展示与结果页，例如 <code>maiimg-head.png</code>、<code>maiimg-setting.png</code>、<code>result_tracking.png</code>、<code>sharegallery.png</code>、<code>upload.jpg</code>。</li>
+        </ul>
+
+        <p><strong>当前对后续 blog 大修的直接判断：</strong></p>
+        <ul>
+          <li>重构时要把 <code>en</code> 和 <code>zh-cn</code> 当成主内容库处理，其他语言目录更像多语言入口壳层。</li>
+          <li>图表资源目前分布不均，后续如果统一文章结构，需要同步考虑 diagram 的命名、引用和语言映射策略。</li>
+          <li><code>static-images</code> 里存在“中文宣传图”和“通用产品图”两类素材，后面大修时最好明确哪些是博客正文素材，哪些是营销展示素材。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：统一 Blog 模板方向已确定</h2><span class="tag ok">已落地</span></div>
+        <p><strong>动作：</strong>已把 <code>blog/_article-template.html</code> 升级成新的统一模板，先锁定 style 与 layout，再进入正文内容改造。</p>
+        <p><strong>统一版式原则：</strong></p>
+        <ul>
+          <li>统一采用：顶部语言面包屑 + 单卡片文章主体 + Lead 导语 + 3 个 meta cards + 事实盒子 + 正文分节 + 可选 diagrams/screenshots + checklist + FAQ + CTA。</li>
+          <li>视觉上延续当前项目里已经成熟的蓝色渐变头部、浅底文章卡片、紧凑型信息卡，而不是继续保留旧模板那种偏通用博客皮肤。</li>
+          <li>模板内已加入 editorial guardrails，明确提醒写作时只能使用已确认能力，避免再写出不存在的功能。</li>
+        </ul>
+        <p><strong>下一阶段建议：</strong>先选 <code>en</code> 与 <code>zh-cn</code> 各 1-2 篇代表文章，按新模板试改，确认结构稳定后再批量推进。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：Blog 模板视觉方向已二次重定</h2><span class="tag ok">已更新</span></div>
+        <p><strong>背景：</strong>第一版统一模板过于普通，宽屏下视觉张力不够，也不符合你给的参考图方向。</p>
+        <p><strong>本次调整：</strong></p>
+        <ul>
+          <li>已按参考图重做为 <strong>暗色科技感 / 网格背景 / 霓虹描边 / 宽屏双栏 hero</strong> 的结构。</li>
+          <li>Hero 现在采用左侧大标题、右侧三张信息卡的布局，解决大屏只有一列时空而散的问题。</li>
+          <li>正文区改成 <strong>主内容面板 + 右侧信息侧栏</strong>，同时限制正文最大阅读宽度，避免宽屏阅读发散。</li>
+          <li>整体保留模板占位符，但视觉语言已经从“普通博客页”切换为“品牌展示型文章页”。</li>
+        </ul>
+        <p><strong>当前最新模板文件：</strong><code>blog/_article-template.html</code></p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：模板已按截图继续收敛</h2><span class="tag ok">已更新</span></div>
+        <p><strong>收到的新反馈：</strong>宽屏左右留白仍然太多，配色还不够接近参考图，且需要补一组更有存在感的 badges。</p>
+        <p><strong>已做调整：</strong></p>
+        <ul>
+          <li>主容器宽度从偏保守值继续放大，宽屏下 hero 和正文区域占比更满，不再缩在中间一小块。</li>
+          <li>背景和面板颜色整体压暗，减少偏蓝灰感，改成更接近参考图的 <strong>黑底 + 紫色高光 + 冷青点缀</strong>。</li>
+          <li>Hero 里新增一排 badge chips，做成更明显的状态标签，而不是只有普通 pills。</li>
+          <li>右侧卡片、边框、顶部高光线都进一步收细，避免厚重感，向参考图那种“更利落、更克制”的质感靠拢。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：模板信息层级继续优化</h2><span class="tag ok">已更新</span></div>
+        <p><strong>新目标：</strong>不只是“看起来酷”，还要做到第一屏信息易懂、版块职责清晰、专业感稳定。</p>
+        <ul>
+          <li>Hero 左侧新增 <strong>summary strip</strong>，把关键信息拆成 3 张小卡，避免大标题下方只有一段文案显得空。</li>
+          <li>正文主面板顶部新增 <strong>intro cards</strong>，让文章进入正文前先给出结构化摘要。</li>
+          <li>侧栏的第一块改成 <strong>summary + snapshot list</strong>，更像“快速理解区”，不再只是普通边栏文字堆叠。</li>
+          <li>正文分节标题增加更明确的上边界线，长文阅读时层级更稳定。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：宽屏占比再次上调</h2><span class="tag ok">已更新</span></div>
+        <p><strong>触发原因：</strong>模板在宽屏下仍然显得缩在中间，左右留白超出预期，不够像参考图。</p>
+        <ul>
+          <li>主容器最大宽度继续上调，页面外边距进一步缩小，优先让首屏更接近“近全宽”观感。</li>
+          <li>Hero 最小高度抬高，左侧标题区和右侧信息卡区的横向比例进一步拉开。</li>
+          <li>1600px 以上宽屏单独加了一层增强布局，避免超宽显示器上又重新变窄。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：模板参考基准切换</h2><span class="tag ok">已切换</span></div>
+        <p><strong>新参考页：</strong><code>blog/free-image-hosting-sharing.html</code></p>
+        <p><strong>原因：</strong>这个页面的整体质感、横向布局和 section 节奏比之前的抽象模板更接近你认可的方向，因此后续模板统一以它作为主要基准。</p>
+        <ul>
+          <li>Hero 采用它那种 <strong>宽框 + 左标题右卡片</strong> 的成熟结构，而不是继续试错自定义布局。</li>
+          <li>正文改回它那种 <strong>section-card 分段</strong> 的方式，更利于长文阅读和批量套版。</li>
+          <li>配色、边框、tag、CTA、FAQ 也都向它靠齐，减少“模板感”，增强“成品感”。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-03-23：Blog 内容密度样本记录</h2><span class="tag info">结构观察</span></div>
+        <p><strong>英文目录代表文件：</strong></p>
+        <ul>
+          <li><code>agency-client-proofing-link-guide.html</code></li>
+          <li><code>best-free-image-hosting-sites-2025.html</code></li>
+          <li><code>client-gallery-delivery-playbook.html</code></li>
+          <li><code>image-sharing-workflow-diagrams-guide.html</code></li>
+          <li><code>wedding-photo-sharing-complete-guide.html</code></li>
+        </ul>
+        <p><strong>中文目录代表文件：</strong></p>
+        <ul>
+          <li><code>birthday-party-photo-sharing-guide.html</code></li>
+          <li><code>image-sharing-workflow-flowcharts.html</code></li>
+          <li><code>photographer-portfolio-sharing-guide.html</code></li>
+          <li><code>real-estate-photo-sharing-guide.html</code></li>
+          <li><code>wedding-photo-sharing-guide.html</code></li>
+        </ul>
+        <p><strong>备注：</strong>从文件量和命名看，英文内容库已经更接近完整 SEO 内容矩阵，中文目前是精选主题集合，改造时可能需要先决定“以英文为主模板统一改造”还是“中英双主线同步改造”。</p>
+      </section>
     </section>
 
-    <section class="card">
-      <div class="row"><h2>3) 触发时机已按你要求收敛</h2><span class="tag info">已确认</span></div>
-      <ul>
-        <li>当前只在用户开始上传（Dropzone <code>addedfile</code>）时触发提醒。</li>
-        <li>已删除“生成成功后再提醒”的旧触发，避免无效/重复打扰。</li>
-      </ul>
-      <p><strong>文件：</strong><code>index.html</code>、<code>maiimg.html</code></p>
-    </section>
+    <section class="tab-panel active" id="latest-work">
+      <section class="card">
+        <div class="row"><h2>1) 首页底部链接（手机端）排版优化</h2><span class="tag ok">已完成</span></div>
+        <ul>
+          <li>修复 footer 链接在小屏挤压换行问题。</li>
+          <li>手机端改为稳定网格：前两项同排，第三项独占一行居中。</li>
+        </ul>
+        <p><strong>文件：</strong><code>qr-styles010.css</code></p>
+      </section>
 
-    <section class="card">
-      <div class="row"><h2>4) Dashboard 替换交互（前面已完成）</h2><span class="tag ok">已完成</span></div>
-      <ul>
-        <li>手机版 A/B 选择按钮化 + 底部固定替换栏。</li>
-        <li>顶部替换关系可视化为 <code>A ← B</code>，并带轻动效。</li>
-        <li>新增文案已补齐多语言键，英文为基础默认。</li>
-      </ul>
-      <p><strong>文件：</strong><code>dashboard.html</code>、<code>i18n.js</code></p>
-    </section>
+      <section class="card">
+        <div class="row"><h2>2) 登录提醒逻辑统一（index/maiimg）</h2><span class="tag ok">已完成</span></div>
+        <ul>
+          <li>新增未登录提醒弹窗（Sign In / Maybe Later）。</li>
+          <li>频控：<code>1 小时内不重复提醒</code>（localStorage 时间戳）。</li>
+          <li>两页逻辑完全同步：<code>index.html</code> 与 <code>maiimg.html</code>。</li>
+        </ul>
+      </section>
 
-    <section class="card">
-      <div class="row"><h2>5) Dashboard 登出与首页登录状态同步</h2><span class="tag info">待做</span></div>
-      <p><strong>问题：</strong>Dashboard 检测登录只读 <code>sessionStorage.maiimg_jwt</code>；登出时只清除 sessionStorage 并跳转 maiimg.html，<strong>未调用 Firebase signOut</strong>。结果：① 跳转到 maiimg 后 Firebase 仍为已登录，<code>onAuthStateChanged</code> 会再次写入 JWT，用户马上又显示已登录；② 多标签时，另一标签的 index 与 dashboard 各自一份 sessionStorage，在 dashboard 登出不会让另一标签的 index 登出。</p>
-      <p><strong>交互关系（Mermaid）：</strong></p>
-      <pre class="mermaid" style="background:#f8fafc;border-radius:8px;padding:12px;overflow:auto;font-size:12px;">
+      <section class="card">
+        <div class="row"><h2>3) 触发时机已按你要求收敛</h2><span class="tag info">已确认</span></div>
+        <ul>
+          <li>当前只在用户开始上传（Dropzone <code>addedfile</code>）时触发提醒。</li>
+          <li>已删除“生成成功后再提醒”的旧触发，避免无效/重复打扰。</li>
+        </ul>
+        <p><strong>文件：</strong><code>index.html</code>、<code>maiimg.html</code></p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>4) Dashboard 替换交互（前面已完成）</h2><span class="tag ok">已完成</span></div>
+        <ul>
+          <li>手机版 A/B 选择按钮化 + 底部固定替换栏。</li>
+          <li>顶部替换关系可视化为 <code>A ← B</code>，并带轻动效。</li>
+          <li>新增文案已补齐多语言键，英文为基础默认。</li>
+        </ul>
+        <p><strong>文件：</strong><code>dashboard.html</code>、<code>i18n.js</code></p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>5) Dashboard 登出与首页登录状态同步</h2><span class="tag info">待做</span></div>
+        <p><strong>问题：</strong>Dashboard 检测登录只读 <code>sessionStorage.maiimg_jwt</code>；登出时只清除 sessionStorage 并跳转 maiimg.html，<strong>未调用 Firebase signOut</strong>。结果：① 跳转到 maiimg 后 Firebase 仍为已登录，<code>onAuthStateChanged</code> 会再次写入 JWT，用户马上又显示已登录；② 多标签时，另一标签的 index 与 dashboard 各自一份 sessionStorage，在 dashboard 登出不会让另一标签的 index 登出。</p>
+        <p><strong>交互关系（Mermaid）：</strong></p>
+        <pre class="mermaid" style="background:#f8fafc;border-radius:8px;padding:12px;overflow:auto;font-size:12px;">
 flowchart TB
   subgraph same["同源同标签"]
     A["index/maiimg"]
@@ -103,34 +653,55 @@ flowchart TB
     D2["可选: 广播其他标签"]
     D1 --> D2
   end
-      </pre>
-      <p><strong>修复要点：</strong></p>
-      <ul>
-        <li>在 <code>dashboard.html</code> 的 <code>logout()</code> 中：引入 Firebase Auth（与 index/maiimg 同配置），先调用 <code>signOut(auth)</code>，再清除 sessionStorage，最后跳转 maiimg.html。</li>
-        <li>可选（多标签一致）：登出时向 <code>localStorage</code> 写一条“登出”标记或发 <code>BroadcastChannel</code> 消息；<code>index.html</code> / <code>maiimg.html</code> 监听 <code>storage</code> 或 <code>message</code>，收到后执行 <code>signOut</code> + 清除 sessionStorage + 刷新或更新 UI。</li>
-      </ul>
-      <p><strong>涉及文件：</strong><code>dashboard.html</code>（登出逻辑 + 可选 Firebase 引入）、<code>index.html</code> / <code>maiimg.html</code>（可选：监听跨标签登出）。</p>
+        </pre>
+        <p><strong>修复要点：</strong></p>
+        <ul>
+          <li>在 <code>dashboard.html</code> 的 <code>logout()</code> 中：引入 Firebase Auth（与 index/maiimg 同配置），先调用 <code>signOut(auth)</code>，再清除 sessionStorage，最后跳转 maiimg.html。</li>
+          <li>可选（多标签一致）：登出时向 <code>localStorage</code> 写一条“登出”标记或发 <code>BroadcastChannel</code> 消息；<code>index.html</code> / <code>maiimg.html</code> 监听 <code>storage</code> 或 <code>message</code>，收到后执行 <code>signOut</code> + 清除 sessionStorage + 刷新或更新 UI。</li>
+        </ul>
+        <p><strong>涉及文件：</strong><code>dashboard.html</code>（登出逻辑 + 可选 Firebase 引入）、<code>index.html</code> / <code>maiimg.html</code>（可选：监听跨标签登出）。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>6) 项目看法与改善建议（Roadmap）</h2><span class="tag info">建议</span></div>
+        <p><strong>当前判断：</strong>MaiIMG 已具备“上传-分享-追踪-管理”的完整闭环，功能已经不弱；下一步重点应从“能用”转向“稳定转化 + 性能体验 + 内容增长”。</p>
+        <ul>
+          <li><strong>P0（优先）：登录转化与新功能可见性</strong>：未登录上传提醒继续保留；在生成成功区增加“登录后可管理历史链接/替换/访问记录”的固定提示；把“到期时间设置”放入首页与 blog 的首屏文案。</li>
+          <li><strong>P0（优先）：移动端体验一致性</strong>：统一 index / maiimg / dashboard 的头部、按钮高度、卡片间距；减少手机版操作跳转层级，关键动作保持单屏可见。</li>
+          <li><strong>P1：Gallery 加载策略</strong>：保持逐张懒加载，增加“缩略图 + 原图”两级资源与下一张预加载，优先提升弱网首屏速度，不建议先做复杂 chunk。</li>
+          <li><strong>P1：数据与埋点</strong>：补齐关键漏斗事件（打开上传、开始上传、生成成功、点击登录、完成登录、进入 dashboard），每周看转化率再迭代文案和交互。</li>
+          <li><strong>P1：SEO/知识库体系</strong>：围绕真实功能写主题（过期时间、访问记录、A/B 替换、登录管理）；每篇固定结构：问题场景 → 操作步骤 → 常见问题 → 相关功能入口。</li>
+          <li><strong>P2：可信度建设</strong>：补“隐私与存储时长说明”“游客与登录用户能力对比”“常见错误码说明”，降低新用户不确定感。</li>
+        </ul>
+        <p><strong>建议执行方式：</strong>先做 P0 两周冲刺（转化+移动端），再做 P1（性能+内容+埋点），每周复盘一次核心指标。</p>
+        <p><strong>相关页面：</strong><code>index.html</code>、<code>maiimg.html</code>、<code>gallery/index.html</code>、<code>dashboard.html</code>、<code>work.html</code></p>
+      </section>
     </section>
 
-    <section class="card">
-      <div class="row"><h2>6) 项目看法与改善建议（Roadmap）</h2><span class="tag info">建议</span></div>
-      <p><strong>当前判断：</strong>MaiIMG 已具备“上传-分享-追踪-管理”的完整闭环，功能已经不弱；下一步重点应从“能用”转向“稳定转化 + 性能体验 + 内容增长”。</p>
-      <ul>
-        <li><strong>P0（优先）：登录转化与新功能可见性</strong>：未登录上传提醒继续保留；在生成成功区增加“登录后可管理历史链接/替换/访问记录”的固定提示；把“到期时间设置”放入首页与 blog 的首屏文案。</li>
-        <li><strong>P0（优先）：移动端体验一致性</strong>：统一 index / maiimg / dashboard 的头部、按钮高度、卡片间距；减少手机版操作跳转层级，关键动作保持单屏可见。</li>
-        <li><strong>P1：Gallery 加载策略</strong>：保持逐张懒加载，增加“缩略图 + 原图”两级资源与下一张预加载，优先提升弱网首屏速度，不建议先做复杂 chunk。</li>
-        <li><strong>P1：数据与埋点</strong>：补齐关键漏斗事件（打开上传、开始上传、生成成功、点击登录、完成登录、进入 dashboard），每周看转化率再迭代文案和交互。</li>
-        <li><strong>P1：SEO/知识库体系</strong>：围绕真实功能写主题（过期时间、访问记录、A/B 替换、登录管理）；每篇固定结构：问题场景 → 操作步骤 → 常见问题 → 相关功能入口。</li>
-        <li><strong>P2：可信度建设</strong>：补“隐私与存储时长说明”“游客与登录用户能力对比”“常见错误码说明”，降低新用户不确定感。</li>
-      </ul>
-      <p><strong>建议执行方式：</strong>先做 P0 两周冲刺（转化+移动端），再做 P1（性能+内容+埋点），每周复盘一次核心指标。</p>
-      <p><strong>相关页面：</strong><code>index.html</code>、<code>maiimg.html</code>、<code>gallery/index.html</code>、<code>dashboard.html</code>、<code>work.html</code></p>
-    </section>
-
-    <p class="foot">备注：本页为最新执行记录，按你的确认状态更新。</p>
+    <p class="foot">备注：本页继续作为项目执行记录页使用；即时任务记在“最新工作记录”，跨阶段与跨模块内容记在“项目总日志”。</p>
   </main>
   <script>
     mermaid.initialize({ startOnLoad: true, theme: 'neutral', flowchart: { useMaxWidth: true, htmlLabels: true } });
+
+    (function() {
+      var buttons = document.querySelectorAll('.tab-btn');
+      var panels = document.querySelectorAll('.tab-panel');
+
+      function activateTab(tabId) {
+        buttons.forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
+        });
+        panels.forEach(function(panel) {
+          panel.classList.toggle('active', panel.id === tabId);
+        });
+      }
+
+      buttons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          activateTab(btn.getAttribute('data-tab'));
+        });
+      });
+    })();
   </script>
 </body>
 </html>

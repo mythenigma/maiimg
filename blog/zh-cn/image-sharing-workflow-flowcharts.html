@@ -1,52 +1,282 @@
-﻿<!DOCTYPE html><html lang="zh-CN"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>图片分享流程图（简版）｜麦瓜图床</title>
-<meta name="description" content="上传→链接→二维码→分享→控制，配合中文流程图可直接用于团队培训。"/>
-<meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效"/>
-<link rel="canonical" href="https://maiimg.com/blog/zh-cn/image-sharing-workflow-flowcharts"/>
-<meta property="og:type" content="article"/><meta property="og:title" content="图片分享流程图（简版）｜麦瓜图床"/>
-<meta property="og:description" content="上传→链接→二维码→分享→控制，配合中文流程图可直接用于团队培训。"/><meta property="og:url" content="https://maiimg.com/blog/zh-cn/image-sharing-workflow-flowcharts"/>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
-<style>
-:root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-.wrap{width:min(940px,92vw);margin:0 auto}
-.top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
-article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
-h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
-.tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
-.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.shot img{width:100%;border:1px solid var(--line);border-radius:10px}.shot p{font-size:13px;color:var(--muted);margin:6px 0 0}
-footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-@media (max-width:760px){.shots{grid-template-columns:1fr} h1{font-size:28px}}
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"图片分享流程图（简版）：一眼看懂","description":"上传→链接→二维码→分享→控制，配合中文流程图可直接用于团队培训。","inLanguage":"zh-CN","mainEntityOfPage":"https://maiimg.com/blog/zh-cn/image-sharing-workflow-flowcharts"}</script>
-</head><body>
-<header class="top"><div class="wrap"><a href="./">中文博客</a> / 图片分享流程图（简版）：一眼看懂</div></header>
-<article class="wrap">
-<h1>图片分享流程图（简版）：一眼看懂</h1>
-<div class="lead">上传→链接→二维码→分享→控制，配合中文流程图可直接用于团队培训。</div>
-<h2>核心功能（真实可用）</h2>
-<ul>
-<li>一组图片生成一个分享链接（最多 25 张）</li>
-<li>链接可转二维码，线上线下都能发</li>
-<li>可设置链接/二维码打开次数和有效期</li>
-<li>发出去后可一键失效，停止继续访问</li>
-</ul>
-<h2>操作流程图（SVG）</h2>
-<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/>
-<img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
-<h2>中文界面截图</h2>
-<div class="shots">
-  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页"/><p>首页入口：开始上传</p></div>
-  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成结果页面"/><p>生成结果：链接 + 二维码</p></div>
-  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数"/><p>控制设置：打开次数与有效期</p></div>
-  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片"/><p>一键失效：停止继续访问</p></div>
-</div>
-<div class="tip">提示：本文已去除夸张和不贴合现状的描述，全部围绕麦瓜图床当前能力编写。</div>
-<h2>一句话总结</h2>
-<p>麦瓜图床比普通图床更实用的地方在于：不只“能发图”，还能“发出去后继续控制”。</p>
-</article><footer>Copyright 2026 麦瓜图床（MaiIMG）</footer></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>图片分享流程图（简版）｜麦瓜图床</title>
+  <meta name="description" content="上传→链接→二维码→分享→控制，配合中文流程图可直接用于团队培训。" />
+  <meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/image-sharing-workflow-flowcharts" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="图片分享流程图（简版）｜麦瓜图床" />
+  <meta property="og:description" content="上传→链接→二维码→分享→控制，配合中文流程图可直接用于团队培训。" />
+  <meta property="og:url" content="https://maiimg.com/blog/zh-cn/image-sharing-workflow-flowcharts" />
+  <meta property="og:site_name" content="麦瓜图床" />
+  <meta property="article:published_time" content="2026-03-23T00:00:00Z" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="图片分享流程图（简版）｜麦瓜图床" />
+  <meta name="twitter:description" content="上传→链接→二维码→分享→控制，配合中文流程图可直接用于团队培训。" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "图片分享流程图（简版）：一眼看懂",
+    "description": "上传→链接→二维码→分享→控制，配合中文流程图可直接用于团队培训。",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": "https://maiimg.com/blog/zh-cn/image-sharing-workflow-flowcharts"
+  }
+  </script>
+</head>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>麦瓜图床</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">主站</a></li>
+          <li class="nav-item"><a class="nav-link" href="./">中文博客</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-diagram-project"></i> 流程拆解</span>
+            <p class="breadcrumb-cyber mb-0"><a href="./" style="color:inherit;text-decoration:none;">中文博客</a> · 图片分享流程图</p>
+            <div class="article-meta-row">
+              <span class="meta-pill"><i class="fas fa-calendar-check"></i>最后编辑 <span data-last-edited="2026-03-23"></span></span>
+              <span class="meta-pill"><i class="fas fa-clock"></i><span data-reading-minutes="5"></span></span>
+            </div>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">图片分享</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">流程图</h1>
+            </div>
+            <p class="hero-lead">如果你不想每次都靠解释把别人带进来，最好的办法就是先把流程讲清楚。这页把上传、生成链接、转二维码、继续分发和后续控制，压缩成一套能一眼看懂的路径。</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">流程可视化</span>
+              <span class="tag-chip tag-chip--cyan">培训可用</span>
+              <span class="tag-chip tag-chip--blue">点击放大</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">打开麦瓜图床</a>
+              <a href="#flow" class="btn-cyber btn-cyber-outline">看流程图</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack">
+              <div class="cyber-mini-card cyber-mini-card--p">
+                <span class="cyber-mini-card__num">01</span>
+                <div>
+                  <h3>先理解顺序</h3>
+                  <p>上传和整理在前，生成入口在中间，分发与控制在后。顺序一乱，内容就会变得难解释。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--c">
+                <span class="cyber-mini-card__num">02</span>
+                <div>
+                  <h3>把图当成路线图</h3>
+                  <p>流程图不是装饰，而是帮助读者理解“下一步发生什么”的最短路径。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--b">
+                <span class="cyber-mini-card__num">03</span>
+                <div>
+                  <h3>配合关键界面一起看</h3>
+                  <p>抽象流程和真实结果页放在一起看，才不会变成一张好看但无用的图。</p>
+                </div>
+              </div>
+            </div>
+            <div class="brand-footer d-none d-md-flex">
+              <span class="brand-footer__icon">M</span>
+              <span>MaiIMG · 把分享动作讲清楚，比功能堆得多更重要</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section-dark">
+    <section class="section-card">
+      <h2><i class="fas fa-map"></i> 这页怎么读最省时间</h2>
+      <p>先看第一张总流程图，理解“从整理内容到把入口发出去”这条主线；再看第二张控制流程图，理解为什么分享不是发完就结束。最后再配两张关键界面图，就能把抽象流程落回到真实页面里。</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>适合谁看</h4>
+            <p>要做内部培训、对外说明、团队交接，或者想快速讲明白这套分享流程的人。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>这页解决什么</h4>
+            <p>把“图片怎么从你手里出去，又怎么保持边界”压缩成几张能直接讲解的图。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>怎么使用</h4>
+            <p>你可以直接拿这页给团队看，也可以只摘其中的流程图去配合自己讲解。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="flow">
+      <h2><i class="fas fa-diagram-project"></i> 主流程和控制流程，要分开讲</h2>
+      <p class="section-note">真正好懂的流程图，通常不会把所有事情塞进一张里。先讲主流程，再讲边界控制，读者会轻松很多。</p>
+      <div class="story-flow-grid mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-route"></i> 主流程</span>
+            <h3>一条最短路径：上传、出入口、开始传播</h3>
+            <p>这张图负责回答“内容是怎么被发出去的”。从上传图片开始，到生成统一链接，再到需要时转成二维码去接线下场景，整条链路都应该是顺的。</p>
+            <p>只要主流程讲明白，别人就能理解这不是零散传图，而是一个完整入口。</p>
+          </div>
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/core-share-flow.svg" alt="图片分享主流程图" loading="lazy" data-zoom-caption="主流程图：上传图片、生成统一链接、按需要转成二维码再分发。" />
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/control-flow-animated.svg" alt="图片分享控制流程图" loading="lazy" data-zoom-caption="控制流程图：设置打开次数、设置有效期、继续传播或及时失效。" />
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-sliders"></i> 控制流程</span>
+            <h3>分享真正难的地方，通常发生在发出去以后</h3>
+            <p>主流程解决“怎么发”，控制流程解决“发出去以后怎么不乱”。如果不把这部分单独讲出来，很多人会误以为生成链接就是全部工作。</p>
+            <p>但现实里更重要的往往是：能看几次、开放多久、什么时候该结束传播。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-qrcode"></i> 二维码不是第二套入口，而是同一路径的延伸</h2>
+      <div class="story-stack mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-mobile-screen"></i> 分发形态</span>
+            <h3>聊天里发链接，现场里发二维码，但底层还是同一份内容</h3>
+            <p>很多流程讲不清，是因为把链接和二维码讲成了两件事。其实更准确的说法应该是：二维码只是链接的另一种呈现方式，它让线下触达更自然，但内容入口本身没有变。</p>
+          </div>
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/qr-distribution-flow.svg" alt="二维码分发流程图" loading="lazy" data-zoom-caption="二维码分发图：同一份内容可以在线上线下通过不同方式到达读者。" />
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame media-frame--contain">
+              <img src="../static-images/cn/宣传/扫码分享.jpg" alt="扫码分享宣传图" loading="lazy" data-zoom-caption="线下传播时，二维码会比长链接更自然，但它承接的仍然是同一个分享入口。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-bullseye"></i> 理解重点</span>
+            <h3>先把入口做对，再考虑放在哪个触点上</h3>
+            <p>当你把链接和二维码都理解成“同一个入口的不同打开方式”时，流程就会一下清晰很多。线上发链接，线下贴二维码，读者最终看到的是同一份内容。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-images"></i> 配两张关键界面，流程就能落地</h2>
+      <p class="section-note">流程图讲的是路径，界面图讲的是你真正会看到什么。两者穿起来，整套逻辑才完整。</p>
+      <div class="story-stack mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-link"></i> 结果入口</span>
+            <h3>生成结果页，是流程真正从“内部动作”变成“对外入口”的节点</h3>
+            <p>你会在这里看到链接和二维码同时出现，所以这张图不是后台截图那么简单。它是流程里最关键的转折点，意味着内容已经准备好被分发出去。</p>
+          </div>
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/生成结果.png" alt="生成结果页面" loading="lazy" data-zoom-caption="生成结果页：链接和二维码会在这里一起出现，内容从内部整理转向外部传播。" />
+            </div>
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/设置打开次数.png" alt="设置打开次数页面" loading="lazy" data-zoom-caption="设置打开次数和有效期，是让流程闭环的关键动作，而不是可有可无的补充。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-shield-halved"></i> 关闭回路</span>
+            <h3>如果没有后续控制，这张流程图其实只走了一半</h3>
+            <p>真正完整的图片分享流程，不是发完就散，而是你随时知道边界在哪里。这张图对应的动作，就是把传播范围收紧、把有效期设好，或者在需要时直接让入口失效。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-lightbulb"></i> 一句话记住这页</h2>
+      <div class="callout-cyber">
+        <p class="mb-0">流程图最有用的地方，不是把所有步骤画满，而是让人一眼看懂“先做什么、后做什么、最后怎么收口”。</p>
+      </div>
+    </section>
+
+    <section class="section-card" id="faq">
+      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <div class="accordion accordion-cyber mt-3" id="faqAccordion">
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">为什么要把流程拆成两张图？</button>
+          </h3>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">因为“怎么发出去”和“发出去以后怎么管”是两类不同问题。分开讲，读者更容易理解，也更方便团队培训时逐步解释。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">这些 SVG 为什么支持放大？</button>
+          </h3>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">因为流程图细节比较多，缩在正文里会看不清。现在点击图片或 SVG 就可以用弹层查看，更适合看节点和说明文字。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">这页适合给外部客户看吗？</button>
+          </h3>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">适合。因为这页不是技术实现说明，而是把分享路径讲成了客户也能理解的动作顺序，内部培训和外部讲解都能用。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-cyber mb-4">
+      <h2 class="mb-3" style="color:#fff;">想把流程从“靠解释”变成“一眼看懂”？</h2>
+      <p class="mx-auto mb-4" style="max-width:680px;color:var(--text-soft);">先把主流程和控制流程分开，再配上关键界面，团队和读者都会更快明白这套分享方式为什么顺手。</p>
+      <a href="https://maiimg.com" class="btn-cyber">去麦瓜图床试试</a>
+    </div>
+  </main>
+
+  <footer class="footer-cyber">
+    Copyright <span data-current-year></span> 麦瓜图床（MaiIMG）
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
+</body>
+</html>

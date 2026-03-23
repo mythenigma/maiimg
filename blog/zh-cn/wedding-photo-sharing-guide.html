@@ -1,52 +1,288 @@
-﻿<!DOCTYPE html><html lang="zh-CN"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>婚礼照片分享指南｜麦瓜图床</title>
-<meta name="description" content="给新人和摄影师一套简单流程：选图分组、生成链接二维码、限制打开次数。"/>
-<meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效"/>
-<link rel="canonical" href="https://maiimg.com/blog/zh-cn/wedding-photo-sharing-guide"/>
-<meta property="og:type" content="article"/><meta property="og:title" content="婚礼照片分享指南｜麦瓜图床"/>
-<meta property="og:description" content="给新人和摄影师一套简单流程：选图分组、生成链接二维码、限制打开次数。"/><meta property="og:url" content="https://maiimg.com/blog/zh-cn/wedding-photo-sharing-guide"/>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
-<style>
-:root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-.wrap{width:min(940px,92vw);margin:0 auto}
-.top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
-article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
-h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
-.tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
-.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.shot img{width:100%;border:1px solid var(--line);border-radius:10px}.shot p{font-size:13px;color:var(--muted);margin:6px 0 0}
-footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-@media (max-width:760px){.shots{grid-template-columns:1fr} h1{font-size:28px}}
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"婚礼照片怎么分享更省心","description":"给新人和摄影师一套简单流程：选图分组、生成链接二维码、限制打开次数。","inLanguage":"zh-CN","mainEntityOfPage":"https://maiimg.com/blog/zh-cn/wedding-photo-sharing-guide"}</script>
-</head><body>
-<header class="top"><div class="wrap"><a href="./">中文博客</a> / 婚礼照片怎么分享更省心</div></header>
-<article class="wrap">
-<h1>婚礼照片怎么分享更省心</h1>
-<div class="lead">给新人和摄影师一套简单流程：选图分组、生成链接二维码、限制打开次数。</div>
-<h2>核心功能（真实可用）</h2>
-<ul>
-<li>一组图片生成一个分享链接（最多 25 张）</li>
-<li>链接可转二维码，线上线下都能发</li>
-<li>可设置链接/二维码打开次数和有效期</li>
-<li>发出去后可一键失效，停止继续访问</li>
-</ul>
-<h2>操作流程图（SVG）</h2>
-<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/>
-<img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
-<h2>中文界面截图</h2>
-<div class="shots">
-  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页"/><p>首页入口：开始上传</p></div>
-  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成结果页面"/><p>生成结果：链接 + 二维码</p></div>
-  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数"/><p>控制设置：打开次数与有效期</p></div>
-  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片"/><p>一键失效：停止继续访问</p></div>
-</div>
-<div class="tip">提示：本文已去除夸张和不贴合现状的描述，全部围绕麦瓜图床当前能力编写。</div>
-<h2>一句话总结</h2>
-<p>麦瓜图床比普通图床更实用的地方在于：不只“能发图”，还能“发出去后继续控制”。</p>
-</article><footer>Copyright 2026 麦瓜图床（MaiIMG）</footer></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>婚礼照片分享指南｜麦瓜图床</title>
+  <meta name="description" content="给新人和摄影师一套简单流程：选图分组、生成链接二维码、限制打开次数。" />
+  <meta name="keywords" content="麦瓜图床,maiimg,婚礼照片分享,二维码,图床,打开次数,一键失效" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/wedding-photo-sharing-guide" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="婚礼照片分享指南｜麦瓜图床" />
+  <meta property="og:description" content="给新人和摄影师一套简单流程：选图分组、生成链接二维码、限制打开次数。" />
+  <meta property="og:url" content="https://maiimg.com/blog/zh-cn/wedding-photo-sharing-guide" />
+  <meta property="og:site_name" content="麦瓜图床" />
+  <meta property="article:published_time" content="2026-03-23T00:00:00Z" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="婚礼照片分享指南｜麦瓜图床" />
+  <meta name="twitter:description" content="给新人和摄影师一套简单流程：选图分组、生成链接二维码、限制打开次数。" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "婚礼照片怎么分享更省心",
+    "description": "给新人和摄影师一套简单流程：选图分组、生成链接二维码、限制打开次数。",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": "https://maiimg.com/blog/zh-cn/wedding-photo-sharing-guide"
+  }
+  </script>
+</head>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>麦瓜图床</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">主站</a></li>
+          <li class="nav-item"><a class="nav-link" href="./">中文博客</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-heart"></i> 婚礼场景</span>
+            <p class="breadcrumb-cyber mb-0"><a href="./" style="color:inherit;text-decoration:none;">中文博客</a> · 婚礼照片分享</p>
+            <div class="article-meta-row">
+              <span class="meta-pill"><i class="fas fa-calendar-check"></i>最后编辑 <span data-last-edited="2026-03-23"></span></span>
+              <span class="meta-pill"><i class="fas fa-clock"></i><span data-reading-minutes="6"></span></span>
+            </div>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">婚礼照片</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">分享指南</h1>
+            </div>
+            <p class="hero-lead">婚礼照片最怕两件事：一是亲友找不到完整入口，二是精修图和预览图在群里越传越乱。更省心的做法，是把照片先整理成一组，再决定给谁看、开放多久、要不要继续传播。</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">亲友分享</span>
+              <span class="tag-chip tag-chip--cyan">现场扫码</span>
+              <span class="tag-chip tag-chip--blue">精修边界</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">打开麦瓜图床</a>
+              <a href="#flow" class="btn-cyber btn-cyber-outline">看婚礼流程</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack">
+              <div class="cyber-mini-card cyber-mini-card--p">
+                <span class="cyber-mini-card__num">01</span>
+                <div>
+                  <h3>给亲友一个明确入口</h3>
+                  <p>不用在群里发十几张图和多个网盘地址，一组婚礼照片对应一个入口就够了。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--c">
+                <span class="cyber-mini-card__num">02</span>
+                <div>
+                  <h3>婚礼现场也能自然传播</h3>
+                  <p>链接可以转二维码，适合放在婚礼海报、迎宾台、桌卡或感谢卡上。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--b">
+                <span class="cyber-mini-card__num">03</span>
+                <div>
+                  <h3>精修图别长期外放</h3>
+                  <p>次数限制、有效期和一键失效，能帮你把预览和正式交付之间的边界留住。</p>
+                </div>
+              </div>
+            </div>
+            <div class="brand-footer d-none d-md-flex">
+              <span class="brand-footer__icon">M</span>
+              <span>MaiIMG · 婚礼照片不必发得很乱，也能照顾到亲友体验</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section-dark">
+    <section class="section-card">
+      <h2><i class="fas fa-map"></i> 这篇文章想解决什么</h2>
+      <p>婚礼结束后通常会出现一个很现实的问题：亲友想尽快看到照片，新人又不希望精修样张长期裸奔在群里。摄影师还可能需要先发预览、再发正式版。真正省心的做法，应该兼顾“让人容易打开”和“让内容不过度扩散”。</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>适合谁看</h4>
+            <p>婚礼摄影师、新人、婚礼策划，或者需要把婚礼照片发给家人和宾客的人。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>重点场景</h4>
+            <p>先发预览图、现场扫码回看、婚后给亲友补发，以及后续把旧入口及时关掉。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>能力边界</h4>
+            <p>当前更适合轻量婚礼图集分享，一组最多 25 个文件，不是完整云相册系统。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-star"></i> 这些能力，正好适合婚礼照片</h2>
+      <ul>
+        <li>一组图片生成一个分享链接（最多 25 张）</li>
+        <li>链接可转二维码，线上线下都能发</li>
+        <li>可设置链接/二维码打开次数和有效期</li>
+        <li>发出去后可一键失效，停止继续访问</li>
+      </ul>
+      <div class="callout-cyber mt-3">
+        <p class="mb-0">婚礼照片不是发得越快越好，而是要让亲友看得顺手，同时让你自己保留后续管理的余地。</p>
+      </div>
+    </section>
+
+    <section class="section-card" id="flow">
+      <h2><i class="fas fa-diagram-project"></i> 婚礼照片分享，顺序比工具更多更重要</h2>
+      <p class="small mb-0" style="color:var(--neon-cyan);font-weight:600;">提示：下面的流程图和配图都可以点击放大，细节会更清楚。</p>
+      <div class="story-flow-grid mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-heart-circle-check"></i> 婚礼路径</span>
+            <h3>先整理预览，再给亲友一个统一入口</h3>
+            <p>婚礼场景里最容易失控的，就是预览图、精修图和朋友圈转发混在一起。先把一组照片整理出来，再生成统一链接，读者拿到的会是一个清楚入口，而不是零散图片。</p>
+          </div>
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/wedding-sharing-flow.svg" alt="婚礼照片分享流程图" loading="lazy" data-zoom-caption="婚礼照片分享流程：整理照片、生成入口、面向亲友分发，并保留后续控制。" />
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/qr-distribution-flow.svg" alt="婚礼照片二维码分发流程图" loading="lazy" data-zoom-caption="二维码让婚礼现场、感谢卡或桌卡上的分享动作更自然。" />
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-qrcode"></i> 线下触达</span>
+            <h3>婚礼现场要发，不一定非得靠群消息</h3>
+            <p>婚礼这种线下场景，本来就很适合二维码。把同一个入口转成二维码以后，贴在桌卡、感谢卡或现场物料上，比临时在群里翻链接更自然。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-images"></i> 让亲友容易看，也让自己容易管</h2>
+      <div class="story-stack mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-comments"></i> 群里分发</span>
+            <h3>先把入口发出去，而不是先把聊天刷满</h3>
+            <p>婚礼后最常见的动作就是把照片发到家庭群、朋友群、新人群。与其一次发很多张，不如先发一个完整入口，让大家知道“去哪里看”。</p>
+          </div>
+          <div class="story-visual">
+            <div class="media-frame media-frame--contain">
+              <img src="../static-images/cn/宣传/微信发.jpg" alt="微信发婚礼照片宣传图" loading="lazy" data-zoom-caption="婚礼照片在聊天里分发时，统一入口会比一张张刷屏更轻松。" />
+            </div>
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame media-frame--contain">
+              <img src="../static-images/cn/宣传/扫码分享.jpg" alt="婚礼二维码分享宣传图" loading="lazy" data-zoom-caption="婚礼线下场景里，二维码比长链接更自然，适合感谢卡和现场物料。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-mobile-screen-button"></i> 现场回看</span>
+            <h3>二维码更适合婚礼这种偏现场的分享动作</h3>
+            <p>把二维码放进婚礼现场或者后续感谢卡里，亲友扫码就能回看，不需要你二次解释“链接在哪”。这类场景里，入口清楚比功能堆得多更重要。</p>
+          </div>
+        </article>
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-link"></i> 关键节点</span>
+            <h3>生成结果页，是照片真正开始流转的地方</h3>
+            <p>链接和二维码在这里一起出现，所以它不是一个普通后台页面，而是婚礼照片开始被亲友接触的起点。</p>
+          </div>
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/生成结果.png" alt="婚礼照片生成结果页面" loading="lazy" data-zoom-caption="婚礼照片生成结果页：这里会同时给出链接和二维码，方便继续分发。" />
+            </div>
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/设置打开次数.png" alt="婚礼照片设置打开次数页面" loading="lazy" data-zoom-caption="如果婚礼预览图只想在有限时间内开放，次数和有效期就是最直接的控制点。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-sliders"></i> 后续控制</span>
+            <h3>精修图和预览图，最好别一直混在外面</h3>
+            <p>如果你只想让亲友在某个时间段看预览图，或者婚礼结束后一段时间就把入口关掉，打开次数、有效期和失效设置会非常实用。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-lightbulb"></i> 记住这件事就够了</h2>
+      <div class="callout-cyber">
+        <p class="mb-0">婚礼照片分享最好的状态，不是亲友收到最多图片，而是他们一打开就能顺着看完，同时你自己仍然知道什么时候该把入口收回来。</p>
+      </div>
+    </section>
+
+    <section class="section-card" id="faq">
+      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <div class="accordion accordion-cyber mt-3" id="faqAccordion">
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">适合给所有宾客都看吗？</button>
+          </h3>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">适合轻量婚礼图集或精选预览。你可以按传播范围决定开放时间和次数，而不是默认让入口一直在外面。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">二维码适合放在哪里？</button>
+          </h3>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">迎宾牌、桌卡、婚礼海报、感谢卡都可以。关键不是放得多，而是让扫码的人清楚这是婚礼照片入口。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">能长期当婚礼相册吗？</button>
+          </h3>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">当前更适合轻量分享和阶段性分发。如果你只是想让婚礼预览或精选照片被顺手查看，这种方式很合适。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-cyber mb-4">
+      <h2 class="mb-3" style="color:#fff;">想把婚礼照片发得更体面一点？</h2>
+      <p class="mx-auto mb-4" style="max-width:680px;color:var(--text-soft);">先把照片整理成一组，再给亲友一个统一入口。这样不管是在群里、现场还是后续补发，都比零散传图更清楚。</p>
+      <a href="https://maiimg.com" class="btn-cyber">去麦瓜图床试试</a>
+    </div>
+  </main>
+
+  <footer class="footer-cyber">
+    Copyright <span data-current-year></span> 麦瓜图床（MaiIMG）
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
+</body>
+</html>

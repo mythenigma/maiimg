@@ -1,617 +1,240 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Blog - MaiIMG | Image Sharing & QR Code Tutorials</title>
-    <meta name="description" content="Learn image sharing, QR code generation, and photo hosting with Practical English tutorials and guides from MaiIMG.">
-    <meta name="keywords" content="image sharing, QR code generator, photo hosting, image upload, gallery creation, tutorials, English">
-    <link rel="canonical" href="https://maiimg.com/blog/en/">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-    <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg">
-    
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="English Blog - MaiIMG Image Sharing Tutorials">
-    <meta property="og:description" content="Practical English tutorials on image sharing, QR code generation, and photo hosting.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://maiimg.com/blog/en/">
-    <meta property="og:image" content="https://maiimg.com/assets/en-blog-banner.jpg">
-    
-    <!-- Language alternatives -->
-    <link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/">
-    <link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/">
-    <link rel="alternate" hreflang="ja" href="https://maiimg.com/blog/ja/">
-    <link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f8fafc;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 0;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .language-switcher {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 8px 16px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .language-switcher select {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        
-        .language-switcher select option {
-            color: #333;
-        }
-        
-        .breadcrumb {
-            background: white;
-            padding: 15px 0;
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        .breadcrumb a {
-            color: #667eea;
-            text-decoration: none;
-        }
-        
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-        
-        main {
-            padding: 40px 0;
-        }
-        
-        .intro {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            margin-bottom: 40px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .article-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-            transition: all 0.3s ease;
-        }
-        
-        .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .article-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-        
-        .article-content {
-            padding: 25px;
-        }
-        
-        .article-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #1f2937;
-        }
-        
-        .article-desc {
-            color: #6b7280;
-            margin-bottom: 15px;
-        }
-        
-        .article-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.875rem;
-            color: #9ca3af;
-        }
-        
-        .read-more {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .read-more:hover {
-            text-decoration: underline;
-        }
-        
-        .categories {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        
-        .category-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .category-tag {
-            background: #f3f4f6;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            color: #4b5563;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .category-tag:hover {
-            background: #667eea;
-            color: white;
-        }
-        
-        footer {
-            background: #1f2937;
-            color: white;
-            text-align: center;
-            padding: 40px 0;
-            margin-top: 60px;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-            }
-            
-            .articles-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .intro, .article-content, .categories {
-                padding: 25px;
-            }
-        }
-    
-@media (max-width: 900px){
-  .wrap{width:min(96vw, 96vw)}
-  article{padding:20px}
-}
-@media (max-width: 640px){
-  body{line-height:1.65}
-  .top{padding:14px 0}
-  article{margin:14px auto 28px;padding:16px;border-radius:12px}
-  h1{font-size:28px;line-height:1.28}
-  h2{font-size:20px;margin:20px 0 10px}
-  p,li{font-size:16px}
-  ul{padding-left:18px}
-  .lead,.tip{padding:12px}
-  .flow img{margin:8px 0;border-radius:8px}
-}
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Blog | MaiIMG</title>
+  <meta name="description" content="Simple English guides for image links, QR code sharing, access limits, expiry settings, and lightweight gallery delivery." />
+  <meta name="keywords" content="image sharing, qr code image links, photo hosting, gallery delivery, image access control, english blog" />
+  <link rel="canonical" href="https://maiimg.com/blog/en/" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="English Blog | MaiIMG" />
+  <meta property="og:description" content="Simple English guides for image links, QR code sharing, access limits, expiry settings, and lightweight gallery delivery." />
+  <meta property="og:url" content="https://maiimg.com/blog/en/" />
+  <meta property="og:site_name" content="MaiIMG" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="English Blog | MaiIMG" />
+  <meta name="twitter:description" content="Simple English guides for image links, QR code sharing, access limits, expiry settings, and lightweight gallery delivery." />
+  <link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/blog/zh-cn/" />
+  <link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
 </head>
-<body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div>
-                    <h1>🇺🇸 English Blog</h1>
-                    <p>Image Sharing & QR Code Tutorials</p>
-                </div>
-                <div class="language-switcher">
-                    <select onchange="switchLanguage(this.value)">
-                        <option value="en">🇺🇸 English</option>
-                        <option value="zh-cn">🇨🇳 中文</option>
-                        <option value="ja">🇯🇵 日本語</option>
-                        <option value="fr">🇫🇷 Français</option>
-                        <option value="de">🇩🇪 Deutsch</option>
-                        <option value="es">🇪🇸 Español</option>
-                        <option value="it">🇮🇹 Italiano</option>
-                        <option value="ko">🇰🇷 한국어</option>
-                        <option value="pt">🇵🇹 Português</option>
-                        <option value="ru">🇷🇺 Русский</option>
-                        <option value="ar">🇸🇦 العربية</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="breadcrumb">
-        <div class="container">
-            <a href="../../">MaiIMG</a> / <a href="../">Blog</a> / English
-        </div>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>MaiIMG</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">Main Site</a></li>
+          <li class="nav-item"><a class="nav-link" href="#articles">Articles</a></li>
+          <li class="nav-item"><a class="nav-link" href="#topics">Topics</a></li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <main class="container">
-        <div class="intro">
-            <h2>Welcome to MaiIMG English Blog</h2>
-            <p>Discover Practical tutorials and guides about image sharing, QR code generation, photo hosting, and digital gallery creation. Our English blog provides step-by-step instructions, best practices, and expert tips to help you make the most of image sharing technologies.</p>
-        </div>
-
-        <div class="articles-grid">
-            <article class="article-card">
-                <div class="article-image">🆚</div>
-                <div class="article-content">
-                    <h3 class="article-title">ImgBB Alternative for Controlled Image Sharing</h3>
-                    <p class="article-desc">A practical comparison for teams that need one-link sharing, QR delivery, view limits, expiry rules, and one-click revoke.</p>
-                    <div class="article-meta">
-                        <span>Alternative</span>
-                        <a href="imgbb-alternative-for-controlled-image-sharing" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">🧭</div>
-                <div class="article-content">
-                    <h3 class="article-title">Image Sharing Workflow Diagrams</h3>
-                    <p class="article-desc">A practical guide with visual diagrams for upload, access control, distribution, and analytics optimization.</p>
-                    <div class="article-meta">
-                        <span>Workflow</span>
-                        <a href="image-sharing-workflow-diagrams-guide" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">⏳</div>
-                <div class="article-content">
-                    <h3 class="article-title">Image Link Expiry Rules for Client Delivery</h3>
-                    <p class="article-desc">Set review windows, access limits, and clean closeout rules so client delivery stays clear and predictable.</p>
-                    <div class="article-meta">
-                        <span>Delivery</span>
-                        <a href="image-link-expiry-rules-for-client-delivery" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">📍</div>
-                <div class="article-content">
-                    <h3 class="article-title">QR Image Sharing for Events: Practical Checklist</h3>
-                    <p class="article-desc">A no-fluff event checklist for one-link + QR distribution, on-site placement, and post-event closeout.</p>
-                    <div class="article-meta">
-                        <span>Events</span>
-                        <a href="qr-image-sharing-for-events-practical-checklist" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">🏁</div>
-                <div class="article-content">
-                    <h3 class="article-title">Best ImgBB Alternatives for Teams</h3>
-                    <p class="article-desc">A practical alternatives page focused on team workflow quality, not just upload speed.</p>
-                    <div class="article-meta">
-                        <span>Alternative</span>
-                        <a href="best-imgbb-alternatives-for-teams" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">📊</div>
-                <div class="article-content">
-                    <h3 class="article-title">Photo Sharing Workflow Comparison for Marketing Teams</h3>
-                    <p class="article-desc">A side-by-side comparison of workflow models with practical launch and closeout rules.</p>
-                    <div class="article-meta">
-                        <span>Comparison</span>
-                        <a href="photo-sharing-workflow-comparison-for-marketing-teams" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">🏘️</div>
-                <div class="article-content">
-                    <h3 class="article-title">Real Estate Photo Sharing Setup Guide</h3>
-                    <p class="article-desc">A use-case guide for listing media: one-link sets, QR flyers, and clean expiry rules.</p>
-                    <div class="article-meta">
-                        <span>Use Case</span>
-                        <a href="real-estate-photo-sharing-setup-guide" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">💍</div>
-                <div class="article-content">
-                    <h3 class="article-title">Wedding Photo Delivery Workflow Guide</h3>
-                    <p class="article-desc">A practical wedding workflow for set packaging, easy family access, and clean link closeout.</p>
-                    <div class="article-meta">
-                        <span>Use Case</span>
-                        <a href="wedding-photo-delivery-workflow-guide" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">🏢</div>
-                <div class="article-content">
-                    <h3 class="article-title">Agency Client Proofing Link Guide</h3>
-                    <p class="article-desc">A practical proofing structure for agency teams with clear stage-based sharing rules.</p>
-                    <div class="article-meta">
-                        <span>Agency</span>
-                        <a href="agency-client-proofing-link-guide" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">🖼️</div>
-                <div class="article-content">
-                    <h3 class="article-title">Portfolio Image Sharing Best Practice Guide</h3>
-                    <p class="article-desc">A portfolio-focused best-practice guide for cleaner review loops and controlled access windows.</p>
-                    <div class="article-meta">
-                        <span>Portfolio</span>
-                        <a href="portfolio-image-sharing-best-practice-guide" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">💬</div>
-                <div class="article-content">
-                    <h3 class="article-title">How to Share a Photo Album on WhatsApp with One Link</h3>
-                    <p class="article-desc">A plain-language guide for everyday users who want to send one clean photo set in chat.</p>
-                    <div class="article-meta">
-                        <span>Everyday Use</span>
-                        <a href="how-to-share-a-photo-album-on-whatsapp-with-one-link" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">👥</div>
-                <div class="article-content">
-                    <h3 class="article-title">Facebook Photo Sharing with One Link (Simple Guide)</h3>
-                    <p class="article-desc">A normal-user guide to posting one link instead of many separate photos.</p>
-                    <div class="article-meta">
-                        <span>Everyday Use</span>
-                        <a href="facebook-photo-sharing-with-one-link" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">🏖️</div>
-                <div class="article-content">
-                    <h3 class="article-title">Send Vacation Photos Without Spamming Chat</h3>
-                    <p class="article-desc">A simple everyday guide for sharing travel photos in one clean link.</p>
-                    <div class="article-meta">
-                        <span>Everyday Use</span>
-                        <a href="send-vacation-photos-without-spamming-chat" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">👨‍👩‍👧‍👦</div>
-                <div class="article-content">
-                    <h3 class="article-title">Share Family Photos with a QR Code</h3>
-                    <p class="article-desc">A plain guide for family sharing across different apps and devices.</p>
-                    <div class="article-meta">
-                        <span>Everyday Use</span>
-                        <a href="share-family-photos-with-a-qr-code" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">🎪</div>
-                <div class="article-content">
-                    <h3 class="article-title">Event Photo Sharing Runbook</h3>
-                    <p class="article-desc">A fast operational playbook for event-day teams to collect, package, distribute, and measure photo sharing.</p>
-                    <div class="article-meta">
-                        <span>Operations</span>
-                        <a href="event-photo-sharing-runbook" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">📦</div>
-                <div class="article-content">
-                    <h3 class="article-title">Client Gallery Delivery Playbook</h3>
-                    <p class="article-desc">A structured delivery workflow for photographers and teams to reduce rework and improve client feedback cycles.</p>
-                    <div class="article-meta">
-                        <span>Delivery</span>
-                        <a href="client-gallery-delivery-playbook" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">📸</div>
-                <div class="article-content">
-                    <h3 class="article-title">How to Create QR Codes for Images</h3>
-                    <p class="article-desc">Learn the complete process of generating QR codes for your image galleries, including customization options and best practices.</p>
-                    <div class="article-meta">
-                        <span>Tutorial</span>
-                        <a href="how-to-create-qr-codes-for-images" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">🔗</div>
-                <div class="article-content">
-                    <h3 class="article-title">How to Generate Image Sharing Links</h3>
-                    <p class="article-desc">Practical guide to creating controlled sharing links for your images with advanced features like view limits and analytics.</p>
-                    <div class="article-meta">
-                        <span>Tutorial</span>
-                        <a href="how-to-generate-image-sharing-links" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">🎯</div>
-                <div class="article-content">
-                    <h3 class="article-title">Image Sharing Best Practices</h3>
-                    <p class="article-desc">Master professional image sharing with proven strategies for security, optimization, and user engagement in 2025.</p>
-                    <div class="article-meta">
-                        <span>Best Practices</span>
-                        <a href="image-sharing-best-practices" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">🏠</div>
-                <div class="article-content">
-                    <h3 class="article-title">Photo Hosting Solutions Comparison</h3>
-                    <p class="article-desc">Compare the best photo hosting platforms in 2025 with detailed analysis of features, pricing, security, and performance.</p>
-                    <div class="article-meta">
-                        <span>Comparison</span>
-                        <a href="photo-hosting-solutions-comparison" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">⚡</div>
-                <div class="article-content">
-                    <h3 class="article-title">Image Optimization Techniques</h3>
-                    <p class="article-desc">Master image optimization for faster loading, better SEO, and improved user experience with professional techniques.</p>
-                    <div class="article-meta">
-                        <span>Technical</span>
-                        <a href="image-optimization-techniques" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">🔒</div>
-                <div class="article-content">
-                    <h3 class="article-title">Image Security and access control Guide</h3>
-                    <p class="article-desc">Practical guide to protecting your photos online with access controls, watermarking, and controlled sharing practices.</p>
-                    <div class="article-meta">
-                        <span>Security</span>
-                        <a href="image-security-and-access control-guide" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="article-image">📊</div>
-                <div class="article-content">
-                    <h3 class="article-title">Image Performance Guide</h3>
-                    <p class="article-desc">Learn how to run performance checks, read usage signals, and improve your image sharing strategy with practical insights.</p>
-                    <div class="article-meta">
-                        <span>Analytics</span>
-                        <a href="image-analytics-and-measurement-guide" class="read-more">Read More →</a>
-                    </div>
-                </div>
-            </article>
-        </div>
-
-        <div class="categories">
-            <h3>Browse by Category</h3>
-            <div class="category-list">
-                <a href="#" class="category-tag">Tutorials</a>
-                <a href="#" class="category-tag">QR Codes</a>
-                <a href="#" class="category-tag">Image Hosting</a>
-                <a href="#" class="category-tag">Photo Sharing</a>
-                <a href="#" class="category-tag">Security</a>
-                <a href="#" class="category-tag">Analytics</a>
-                <a href="#" class="category-tag">Best Practices</a>
-                <a href="#" class="category-tag">Optimization</a>
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-compass"></i> English Guides</span>
+            <p class="breadcrumb-cyber mb-0">Clear language · Real features · No inflated claims</p>
+            <p class="small mt-2 mb-0 article-date"><i class="fas fa-calendar-check me-1"></i>Updated <span data-article-date="2026-03-23"></span></p>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">MaiIMG</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">English Blog</h1>
             </div>
+            <p class="hero-lead">This section explains what the product actually does: one link for up to 25 files, QR code sharing, open limits, expiry settings, and link revocation. The writing stays short, direct, and easy to scan.</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">Image links</span>
+              <span class="tag-chip tag-chip--cyan">QR sharing</span>
+              <span class="tag-chip tag-chip--blue">Access control</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">Open Main Site</a>
+              <a href="#articles" class="btn-cyber btn-cyber-outline">Browse Articles</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack" id="topics">
+              <div class="cyber-mini-card cyber-mini-card--p">
+                <span class="cyber-mini-card__num">01</span>
+                <div>
+                  <h3>Start with the basics</h3>
+                  <p>How to make one image link, how QR codes fit in, and how to keep a share clear from the start.</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--c">
+                <span class="cyber-mini-card__num">02</span>
+                <div>
+                  <h3>Keep the language simple</h3>
+                  <p>Short sentences, clear promises, no invented product claims, and no heavy technical jargon.</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--b">
+                <span class="cyber-mini-card__num">03</span>
+                <div>
+                  <h3>Keep each article distinct</h3>
+                  <p>Portfolio guides, QR guides, security guides, and workflow guides should not read like the same page with new headlines.</p>
+                </div>
+              </div>
+            </div>
+            <div class="brand-footer d-none d-md-flex">
+              <span class="brand-footer__icon">M</span>
+              <span>MaiIMG English Blog · practical guides for lightweight image sharing</span>
+            </div>
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </header>
 
-    <footer>
-        <div class="container">
-            <p>Copyright 2026 MaiIMG English Blog. All rights reserved.</p>
+  <main class="section-dark">
+    <section class="section-card">
+      <h2><i class="fas fa-map"></i> Reading Guide</h2>
+      <p>The English section is being rebuilt in batches. The first group focuses on the core workflow: direct image links, QR code delivery, access limits, and one portfolio-style use case. These pages use English visuals and keep the wording intentionally simple.</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>Start Here</h4>
+            <p>Read the setup guides first if you want the shortest path from upload to link sharing.</p>
+          </div>
         </div>
-    </footer>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>Then Read Control</h4>
+            <p>Open limits, expiry, and link revocation are the main reasons this feels more controlled than plain file sharing.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>Then Read Scenarios</h4>
+            <p>Use-case pages explain how the same core workflow changes between portfolios, events, and other distribution jobs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script>
-        function switchLanguage(lang) {
-            window.location.href = `../${lang}/`;
-        }
-    </script>
+    <section class="section-card" id="articles">
+      <h2><i class="fas fa-list"></i> Featured English Articles</h2>
+      <div class="row g-3 mt-1">
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="how-to-generate-image-sharing-links">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">Start</div>
+              <h3>How To Generate Image Sharing Links</h3>
+              <p>A direct guide to building one clear share link for a focused image set.</p>
+              <div class="blog-index-meta">Quick Start</div>
+              <div class="blog-index-submeta">5 min read · Last edited 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="how-to-create-qr-codes-for-images">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">QR</div>
+              <h3>How To Create QR Codes For Images</h3>
+              <p>Turn one image link into a scan-ready entry point for events, posters, and printed material.</p>
+              <div class="blog-index-meta">QR Guide</div>
+              <div class="blog-index-submeta">5 min read · Last edited 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="image-security-and-privacy-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">Control</div>
+              <h3>Image Security And Privacy Guide</h3>
+              <p>Keep image sharing tighter with limits, expiry rules, and faster link cleanup.</p>
+              <div class="blog-index-meta">Access Control</div>
+              <div class="blog-index-submeta">6 min read · Last edited 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="artist-portfolio-sharing-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">Portfolio</div>
+              <h3>Artist Portfolio Sharing Guide</h3>
+              <p>Share artwork in a way that feels more like one finished entry point than a loose set of files.</p>
+              <div class="blog-index-meta">Scenario Guide</div>
+              <div class="blog-index-submeta">7 min read · Last edited 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="image-sharing-workflow-diagrams-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">Flow</div>
+              <h3>Image Sharing Workflow Diagrams Guide</h3>
+              <p>See the upload, link, QR, and control steps as a short visual system instead of separate features.</p>
+              <div class="blog-index-meta">Workflow</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="airdrop-alternative-reliable-photo-sharing">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">Alt</div>
+              <h3>AirDrop Alternative For Reliable Photo Sharing</h3>
+              <p>When direct device-to-device sharing is not enough, one stable link can be easier to manage.</p>
+              <div class="blog-index-meta">Practical Comparison</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="client-gallery-delivery-playbook">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">Client</div>
+              <h3>Client Gallery Delivery Playbook</h3>
+              <p>Keep image delivery cleaner when a client only needs one simple access point.</p>
+              <div class="blog-index-meta">Delivery</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="wedding-photo-sharing-complete-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">Wedding</div>
+              <h3>Wedding Photo Sharing Complete Guide</h3>
+              <p>Useful when photos need to go to family and guests without turning group chat into a mess.</p>
+              <div class="blog-index-meta">Scenario Guide</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="real-estate-photo-sharing-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">Property</div>
+              <h3>Real Estate Photo Sharing Guide</h3>
+              <p>Useful for sending listing images through one clear entry point instead of multiple attachments.</p>
+              <div class="blog-index-meta">Scenario Guide</div>
+            </article>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Blog",
-        "name": "MaiIMG English Blog",
-        "description": "English tutorials and guides about image sharing, QR code generation, and photo hosting",
-        "url": "https://maiimg.com/blog/en/",
-        "inLanguage": "en",
-        "publisher": {
-            "@type": "Organization",
-            "name": "MaiIMG",
-            "url": "https://maiimg.com"
-        }
-    }
-    </script>
+  <footer class="footer-cyber">
+    Copyright <span data-current-year></span> MaiIMG English Blog
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
 </body>
 </html>
-

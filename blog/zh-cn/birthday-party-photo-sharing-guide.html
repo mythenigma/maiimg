@@ -1,52 +1,288 @@
-﻿<!DOCTYPE html><html lang="zh-CN"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>生日会照片分享指南｜麦瓜图床</title>
-<meta name="description" content="活动结束后快速把照片发给亲友，扫码即看，不再反复传图。"/>
-<meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效"/>
-<link rel="canonical" href="https://maiimg.com/blog/zh-cn/birthday-party-photo-sharing-guide"/>
-<meta property="og:type" content="article"/><meta property="og:title" content="生日会照片分享指南｜麦瓜图床"/>
-<meta property="og:description" content="活动结束后快速把照片发给亲友，扫码即看，不再反复传图。"/><meta property="og:url" content="https://maiimg.com/blog/zh-cn/birthday-party-photo-sharing-guide"/>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
-<style>
-:root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-.wrap{width:min(940px,92vw);margin:0 auto}
-.top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
-article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
-h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
-.tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
-.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.shot img{width:100%;border:1px solid var(--line);border-radius:10px}.shot p{font-size:13px;color:var(--muted);margin:6px 0 0}
-footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-@media (max-width:760px){.shots{grid-template-columns:1fr} h1{font-size:28px}}
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"生日会照片怎么快速分享","description":"活动结束后快速把照片发给亲友，扫码即看，不再反复传图。","inLanguage":"zh-CN","mainEntityOfPage":"https://maiimg.com/blog/zh-cn/birthday-party-photo-sharing-guide"}</script>
-</head><body>
-<header class="top"><div class="wrap"><a href="./">中文博客</a> / 生日会照片怎么快速分享</div></header>
-<article class="wrap">
-<h1>生日会照片怎么快速分享</h1>
-<div class="lead">活动结束后快速把照片发给亲友，扫码即看，不再反复传图。</div>
-<h2>核心功能（真实可用）</h2>
-<ul>
-<li>一组图片生成一个分享链接（最多 25 张）</li>
-<li>链接可转二维码，线上线下都能发</li>
-<li>可设置链接/二维码打开次数和有效期</li>
-<li>发出去后可一键失效，停止继续访问</li>
-</ul>
-<h2>操作流程图（SVG）</h2>
-<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/>
-<img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
-<h2>中文界面截图</h2>
-<div class="shots">
-  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页"/><p>首页入口：开始上传</p></div>
-  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成结果页面"/><p>生成结果：链接 + 二维码</p></div>
-  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数"/><p>控制设置：打开次数与有效期</p></div>
-  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片"/><p>一键失效：停止继续访问</p></div>
-</div>
-<div class="tip">提示：本文已去除夸张和不贴合现状的描述，全部围绕麦瓜图床当前能力编写。</div>
-<h2>一句话总结</h2>
-<p>麦瓜图床比普通图床更实用的地方在于：不只“能发图”，还能“发出去后继续控制”。</p>
-</article><footer>Copyright 2026 麦瓜图床（MaiIMG）</footer></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>生日会照片分享指南｜麦瓜图床</title>
+  <meta name="description" content="活动结束后快速把照片发给亲友，扫码即看，不再反复传图。" />
+  <meta name="keywords" content="麦瓜图床,maiimg,生日会照片分享,二维码,图床,打开次数,一键失效" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/birthday-party-photo-sharing-guide" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="生日会照片分享指南｜麦瓜图床" />
+  <meta property="og:description" content="活动结束后快速把照片发给亲友，扫码即看，不再反复传图。" />
+  <meta property="og:url" content="https://maiimg.com/blog/zh-cn/birthday-party-photo-sharing-guide" />
+  <meta property="og:site_name" content="麦瓜图床" />
+  <meta property="article:published_time" content="2026-03-23T00:00:00Z" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="生日会照片分享指南｜麦瓜图床" />
+  <meta name="twitter:description" content="活动结束后快速把照片发给亲友，扫码即看，不再反复传图。" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "生日会照片怎么快速分享",
+    "description": "活动结束后快速把照片发给亲友，扫码即看，不再反复传图。",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": "https://maiimg.com/blog/zh-cn/birthday-party-photo-sharing-guide"
+  }
+  </script>
+</head>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>麦瓜图床</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">主站</a></li>
+          <li class="nav-item"><a class="nav-link" href="./">中文博客</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-cake-candles"></i> 生日会场景</span>
+            <p class="breadcrumb-cyber mb-0"><a href="./" style="color:inherit;text-decoration:none;">中文博客</a> · 生日会照片分享</p>
+            <div class="article-meta-row">
+              <span class="meta-pill"><i class="fas fa-calendar-check"></i>最后编辑 <span data-last-edited="2026-03-23"></span></span>
+              <span class="meta-pill"><i class="fas fa-clock"></i><span data-reading-minutes="5"></span></span>
+            </div>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">生日会照片</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">分享指南</h1>
+            </div>
+            <p class="hero-lead">生日会照片通常不需要复杂系统，但很需要一个省事办法。大家玩完就想看图，如果还要反复传原图、补发链接、解释哪组才是完整版，分享动作很快就会变得又碎又累。</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">亲友分享</span>
+              <span class="tag-chip tag-chip--cyan">活动回看</span>
+              <span class="tag-chip tag-chip--blue">阶段开放</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">打开麦瓜图床</a>
+              <a href="#flow" class="btn-cyber btn-cyber-outline">看生日会流程</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack">
+              <div class="cyber-mini-card cyber-mini-card--p">
+                <span class="cyber-mini-card__num">01</span>
+                <div>
+                  <h3>活动刚结束就能发</h3>
+                  <p>把精选照片集中到一个入口里，亲友不用等你一张张整理和补发。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--c">
+                <span class="cyber-mini-card__num">02</span>
+                <div>
+                  <h3>扫码回看比翻群聊轻松</h3>
+                  <p>链接能转二维码，适合放在现场小卡片、活动海报或会后回顾页里。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--b">
+                <span class="cyber-mini-card__num">03</span>
+                <div>
+                  <h3>活动过后入口也能收回</h3>
+                  <p>如果这组照片只想在生日会后一段时间开放，次数和有效期会很实用。</p>
+                </div>
+              </div>
+            </div>
+            <div class="brand-footer d-none d-md-flex">
+              <span class="brand-footer__icon">M</span>
+              <span>MaiIMG · 让生日会照片分享轻一点，不要变成重复劳动</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section-dark">
+    <section class="section-card">
+      <h2><i class="fas fa-map"></i> 这篇文章想解决什么</h2>
+      <p>生日会场景很典型：照片拍了很多，但真正要分享出去的往往只是其中一组。大家会马上问“照片在哪”，如果你只能靠群里反复补图，体验就会很碎。更好的做法，是快速给亲友一个入口，让想看的人马上看，想收的时候也能及时收。</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>适合谁看</h4>
+            <p>生日会主理人、亲友组织者、活动拍摄者，以及需要会后快速发图的人。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>最适合什么</h4>
+            <p>活动精选照、现场回顾、会后亲友分享，不追求复杂协作，只追求轻松好发。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>为什么有用</h4>
+            <p>因为生日会这种轻场景里，最重要的不是工具炫，而是分享动作别打断气氛。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-star"></i> 这些能力，正好适合生日会照片</h2>
+      <ul>
+        <li>一组图片生成一个分享链接（最多 25 张）</li>
+        <li>链接可转二维码，线上线下都能发</li>
+        <li>可设置链接/二维码打开次数和有效期</li>
+        <li>发出去后可一键失效，停止继续访问</li>
+      </ul>
+      <div class="callout-cyber mt-3">
+        <p class="mb-0">生日会这种轻松场景，更需要“少操作、少解释、少补发”，而不是更复杂的后台系统。</p>
+      </div>
+    </section>
+
+    <section class="section-card" id="flow">
+      <h2><i class="fas fa-diagram-project"></i> 一场生日会的照片，最好有一条轻巧路线</h2>
+      <p class="small mb-0" style="color:var(--neon-cyan);font-weight:600;">提示：下面的流程图和配图都可以点击放大，细节会更清楚。</p>
+      <div class="story-flow-grid mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-party-horn"></i> 活动路径</span>
+            <h3>先选一组精选照，再给大家一个能马上打开的入口</h3>
+            <p>生日会照片不需要一开始就追求完整大图库。先整理一组值得看的精选照，再生成统一入口，会比在群里反复发图轻松得多。</p>
+          </div>
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/birthday-sharing-flow.svg" alt="生日会照片分享流程图" loading="lazy" data-zoom-caption="生日会分享流程：挑选精选照、生成入口、会后快速分享给亲友。" />
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/qr-distribution-flow.svg" alt="生日会照片二维码分发流程图" loading="lazy" data-zoom-caption="二维码让生日会现场和会后回顾页里的访问动作更直接。" />
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-qrcode"></i> 会后回看</span>
+            <h3>要么发链接，要么直接让大家扫码，不必两头都乱</h3>
+            <p>生日会结束后，亲友常常只想马上看图。你可以在群里发链接，也可以把同一个入口转成二维码，让现场物料或会后回顾页自然承接。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-images"></i> 轻场景也值得一个清楚入口</h2>
+      <div class="story-stack mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-comments"></i> 群里补发</span>
+            <h3>生日会分享最累的，通常不是拍照，而是会后补图</h3>
+            <p>如果活动一结束，大家都在群里问照片在哪，一个统一入口会立刻减少你的重复劳动。你发的是“去这里看”，而不是“我再补你几张”。</p>
+          </div>
+          <div class="story-visual">
+            <div class="media-frame media-frame--contain">
+              <img src="../static-images/cn/宣传/微信发.jpg" alt="生日会照片微信分享宣传图" loading="lazy" data-zoom-caption="活动结束后，如果已经有一个统一入口，群里分享会变得更轻松。" />
+            </div>
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame media-frame--contain">
+              <img src="../static-images/cn/宣传/带人物.png" alt="生日会照片展示图" loading="lazy" data-zoom-caption="生日会照片分享更适合轻巧直接的入口，不需要复杂说明，能打开就够重要。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-smile"></i> 轻松感</span>
+            <h3>这种场景里，入口应该顺手，而不是显得很重</h3>
+            <p>生日会本来就是轻松场景，所以分享入口也不需要太重。只要大家能快点看到照片、顺手转发给亲友，就已经很够用。</p>
+          </div>
+        </article>
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-link"></i> 出口页面</span>
+            <h3>生成结果页，就是“会后照片已经能看”的那个时刻</h3>
+            <p>这一步很关键，因为它让你马上拿到可以继续分发的入口。会后不管是补发链接还是贴二维码，都从这里开始。</p>
+          </div>
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/生成结果.png" alt="生日会照片生成结果页面" loading="lazy" data-zoom-caption="生日会照片生成结果页：这里会给出链接和二维码，方便会后马上分享。" />
+            </div>
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/一键删除图片.png" alt="生日会照片一键失效页面" loading="lazy" data-zoom-caption="如果这组生日会照片只想在短时间内开放，一键失效会比事后到处找旧链接更省事。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-ban"></i> 活动结束</span>
+            <h3>当照片不想继续外放时，及时收回会更轻松</h3>
+            <p>生日会照片通常是阶段性内容。活动结束一阵子后，如果不想继续开放，直接让入口失效会比把旧图长期留在外面更安心。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-lightbulb"></i> 记住这件事就够了</h2>
+      <div class="callout-cyber">
+        <p class="mb-0">生日会照片分享最好的状态，不是群里刷满图片，而是大家很快就能看到，活动结束后你也很快就能收口。</p>
+      </div>
+    </section>
+
+    <section class="section-card" id="faq">
+      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <div class="accordion accordion-cyber mt-3" id="faqAccordion">
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">适合活动结束后马上发给亲友吗？</button>
+          </h3>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">适合。尤其是你不想一张张补发时，一个统一入口会比连续发图轻松很多。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">生日会这种场景也有必要用二维码吗？</button>
+          </h3>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">如果你有现场物料、活动回顾卡片或者会后页面，二维码会很自然。没有线下触点时，直接发链接也完全够用。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">能一直保留这组入口吗？</button>
+          </h3>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">可以按需要决定，但生日会这种内容通常更适合阶段性开放。如果只想短期分享，设置有效期或一键失效会更省心。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-cyber mb-4">
+      <h2 class="mb-3" style="color:#fff;">想把生日会照片分享得更轻松？</h2>
+      <p class="mx-auto mb-4" style="max-width:680px;color:var(--text-soft);">先把精选照片整理成一组，再把入口发给亲友。这样会后回顾不会变成你一个人的重复劳动。</p>
+      <a href="https://maiimg.com" class="btn-cyber">去麦瓜图床试试</a>
+    </div>
+  </main>
+
+  <footer class="footer-cyber">
+    Copyright <span data-current-year></span> 麦瓜图床（MaiIMG）
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
+</body>
+</html>

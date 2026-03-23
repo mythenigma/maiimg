@@ -1,52 +1,302 @@
-﻿<!DOCTYPE html><html lang="zh-CN"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>艺术作品集分享指南｜麦瓜图床</title>
-<meta name="description" content="给观众一个直观入口，支持二维码传播和后续失效管理。"/>
-<meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效"/>
-<link rel="canonical" href="https://maiimg.com/blog/zh-cn/artist-portfolio-sharing-guide"/>
-<meta property="og:type" content="article"/><meta property="og:title" content="艺术作品集分享指南｜麦瓜图床"/>
-<meta property="og:description" content="给观众一个直观入口，支持二维码传播和后续失效管理。"/><meta property="og:url" content="https://maiimg.com/blog/zh-cn/artist-portfolio-sharing-guide"/>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
-<style>
-:root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-.wrap{width:min(940px,92vw);margin:0 auto}
-.top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
-article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
-h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
-.tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
-.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.shot img{width:100%;border:1px solid var(--line);border-radius:10px}.shot p{font-size:13px;color:var(--muted);margin:6px 0 0}
-footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-@media (max-width:760px){.shots{grid-template-columns:1fr} h1{font-size:28px}}
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"艺术作品集怎么分享更友好","description":"给观众一个直观入口，支持二维码传播和后续失效管理。","inLanguage":"zh-CN","mainEntityOfPage":"https://maiimg.com/blog/zh-cn/artist-portfolio-sharing-guide"}</script>
-</head><body>
-<header class="top"><div class="wrap"><a href="./">中文博客</a> / 艺术作品集怎么分享更友好</div></header>
-<article class="wrap">
-<h1>艺术作品集怎么分享更友好</h1>
-<div class="lead">给观众一个直观入口，支持二维码传播和后续失效管理。</div>
-<h2>核心功能（真实可用）</h2>
-<ul>
-<li>一组图片生成一个分享链接（最多 25 张）</li>
-<li>链接可转二维码，线上线下都能发</li>
-<li>可设置链接/二维码打开次数和有效期</li>
-<li>发出去后可一键失效，停止继续访问</li>
-</ul>
-<h2>操作流程图（SVG）</h2>
-<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/>
-<img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
-<h2>中文界面截图</h2>
-<div class="shots">
-  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页"/><p>首页入口：开始上传</p></div>
-  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成结果页面"/><p>生成结果：链接 + 二维码</p></div>
-  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数"/><p>控制设置：打开次数与有效期</p></div>
-  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片"/><p>一键失效：停止继续访问</p></div>
-</div>
-<div class="tip">提示：本文已去除夸张和不贴合现状的描述，全部围绕麦瓜图床当前能力编写。</div>
-<h2>一句话总结</h2>
-<p>麦瓜图床比普通图床更实用的地方在于：不只“能发图”，还能“发出去后继续控制”。</p>
-</article><footer>Copyright 2026 麦瓜图床（MaiIMG）</footer></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>艺术作品集分享指南｜麦瓜图床</title>
+  <meta name="description" content="给观众一个直观入口，支持二维码传播和后续失效管理。" />
+  <meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/artist-portfolio-sharing-guide" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="艺术作品集分享指南｜麦瓜图床" />
+  <meta property="og:description" content="给观众一个直观入口，支持二维码传播和后续失效管理。" />
+  <meta property="og:url" content="https://maiimg.com/blog/zh-cn/artist-portfolio-sharing-guide" />
+  <meta property="og:site_name" content="麦瓜图床" />
+  <meta property="article:published_time" content="2026-03-23T00:00:00Z" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="艺术作品集分享指南｜麦瓜图床" />
+  <meta name="twitter:description" content="给观众一个直观入口，支持二维码传播和后续失效管理。" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "艺术作品集怎么分享更友好",
+    "description": "给观众一个直观入口，支持二维码传播和后续失效管理。",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": "https://maiimg.com/blog/zh-cn/artist-portfolio-sharing-guide"
+  }
+  </script>
+</head>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>麦瓜图床</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">主站</a></li>
+          <li class="nav-item"><a class="nav-link" href="./">中文博客</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-palette"></i> 场景指南</span>
+            <p class="breadcrumb-cyber mb-0"><a href="./" style="color:inherit;text-decoration:none;">中文博客</a> · 艺术作品集分享</p>
+            <div class="article-meta-row">
+              <span class="meta-pill"><i class="fas fa-calendar-check"></i>最后编辑 <span data-last-edited="2026-03-23"></span></span>
+              <span class="meta-pill"><i class="fas fa-clock"></i><span data-reading-minutes="7"></span></span>
+            </div>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">艺术作品集</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">分享指南</h1>
+            </div>
+            <p class="hero-lead">作品本身值得被认真看，而不是淹没在聊天记录里。更友好的分享方式，不是“发更多图”，而是给观众一个更清楚的入口：一个链接，必要时再配二维码，发出去以后你还握着控制权。</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">作品集入口</span>
+              <span class="tag-chip tag-chip--cyan">二维码传播</span>
+              <span class="tag-chip tag-chip--blue">后续可控</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">打开麦瓜图床</a>
+              <a href="#core" class="btn-cyber btn-cyber-outline">看核心能力</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack">
+              <div class="cyber-mini-card cyber-mini-card--p">
+                <span class="cyber-mini-card__num">01</span>
+                <div>
+                  <h3>别让作品散在聊天里</h3>
+                  <p>把一组作品整理成一个统一入口，观众点开就能看，不需要在多条消息里来回翻找。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--c">
+                <span class="cyber-mini-card__num">02</span>
+                <div>
+                  <h3>线上能发，线下也能接住</h3>
+                  <p>分享链接可转二维码，适合展签、海报、讲座页面、作品说明卡等线下触点。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--b">
+                <span class="cyber-mini-card__num">03</span>
+                <div>
+                  <h3>发出去以后不是失控</h3>
+                  <p>可以设置打开次数和有效期，必要时一键失效，不让旧作品链接一直在外面扩散。</p>
+                </div>
+              </div>
+            </div>
+            <div class="brand-footer d-none d-md-flex">
+              <span class="brand-footer__icon">M</span>
+              <span>MaiIMG · 适合把作品集发得更清楚、更轻量</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section-dark">
+    <section class="section-card toc-card">
+      <h2><i class="fas fa-map"></i> 这篇文章想解决什么</h2>
+      <p>很多作品分享不是真的“内容不够好”，而是入口太乱：图片散在聊天里、链接过多、线下场景又接不上。这篇页讲的，就是怎么把作品集发得更像一个完整入口，而不是一堆零碎附件。</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>适合谁看</h4>
+            <p>做艺术作品集、展览物料、作品预览页，想把入口发得更轻、更清楚的人。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>你会看到什么</h4>
+            <p>链接分享、二维码、次数控制、有效期与失效能力的真实说明，不讲虚的。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>内容边界</h4>
+            <p>只围绕当前产品真实能力写，不额外虚构协作、评论、审批这类并不存在的功能。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="core">
+      <h2><i class="fas fa-star"></i> 这些能力，正好适合作品集分享</h2>
+      <p>作品集场景里最怕两件事：一是入口乱，二是发出去以后收不回来。下面这些能力之所以有用，就是因为它们刚好对应这两个问题。</p>
+      <ul>
+        <li>一组图片生成一个分享链接（最多 25 张）</li>
+        <li>链接可转二维码，线上线下都能发</li>
+        <li>可设置链接/二维码打开次数和有效期</li>
+        <li>发出去后可一键失效，停止继续访问</li>
+      </ul>
+      <div class="callout-cyber mt-3">
+        <p class="mb-0">这页的重点不是“功能很多”，而是“功能正好够用”：足够让观众打开顺手，也足够让作者保留后续控制。</p>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-diagram-project"></i> 看懂这条链路就够了</h2>
+      <p>作品集分享的动作其实并不复杂：先整理，再生成统一入口，再决定分发方式，最后根据传播范围决定要不要继续开放。</p>
+      <p class="small mb-0" style="color:var(--neon-cyan);font-weight:600;">提示：下面的流程图和配图都可以点击放大，细节会更清楚。</p>
+      <div class="story-flow-grid mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-route"></i> 分享路径</span>
+            <h3>先把作品聚成一个入口，再去考虑怎么发</h3>
+            <p>这张流程图讲的是“分享顺序”，不是功能罗列。先上传并整理，再生成统一链接，然后才决定要不要转二维码去接线下场景。这样观众拿到的不是一堆散图，而是一个清楚的入口。</p>
+            <p>对作品集来说，这一步最重要，因为入口一旦乱了，后面不管你怎么传播，读者感受到的都会是碎的。</p>
+          </div>
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图" loading="lazy" data-zoom-caption="核心分享流程：上传图片、生成链接、转二维码、发后可控。" />
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual story-visual--diagram">
+            <img class="img-cyber" src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图" loading="lazy" data-zoom-caption="控制流程：设置次数、设置有效期、持续分享、一键失效。" />
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-shield-halved"></i> 控制路径</span>
+            <h3>真正让作品集更专业的，是你发出去以后还有后手</h3>
+            <p>很多人只看到“能生成链接”和“能转二维码”，但真正把作品集和随手发图拉开差距的，是你能不能继续控制查看次数、有效期，以及在不想继续传播时及时关掉入口。</p>
+            <p>这也是为什么这张图应该和正文放在一起看，而不是孤零零摆成一张配图。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-images"></i> 先看整体，再看关键界面</h2>
+      <p class="section-note">作品集页不需要把每个后台角落都摊给读者看。更好的方式是先用一张成品感更强的展示图讲清楚“这是个什么入口”，再补两张关键实操图说明它到底怎么工作。</p>
+      <div class="story-stack mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-sparkles"></i> 第一印象</span>
+            <h3>先给读者一个“这是完整作品入口”的感觉</h3>
+            <p>这张展示图适合放在文章前半段，不是因为它好看，而是因为它能在几秒内把事情讲清楚：统一链接、二维码和访问控制，都收进了同一个作品集入口里。</p>
+            <p>对第一次接触这个工具的人来说，这比直接甩后台截图更容易理解，也更像真实使用场景。</p>
+          </div>
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/common/show/sharegallery.png" alt="麦瓜图床分享入口展示图" loading="lazy" data-zoom-caption="成品感展示：统一链接、二维码和访问控制被收进同一个作品集入口里。" />
+            </div>
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame media-frame--contain">
+              <img src="../static-images/common/show/limtandexpirtion.png" alt="查看次数与有效期控制展示图" loading="lazy" data-zoom-caption="控制能力展示：查看次数、有效期和关闭时机，决定这份作品集能开放到什么程度。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-eye"></i> 边界感</span>
+            <h3>读者看到的是作品，你真正握住的是边界</h3>
+            <p>作品集分享出去以后，真正重要的不是“它被发出去了”，而是你还能不能决定它被看多少次、开放多久，以及什么时候该停。</p>
+            <p>所以这里不应该只摆一张图，而是要把图和解释放在一起，让读者理解这张图为什么重要。</p>
+          </div>
+        </article>
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-link"></i> 关键页面</span>
+            <h3>生成结果页，就是作品真正“出门”的那一刻</h3>
+            <p>同一份内容在这里得到链接和二维码，后面的线上转发、线下展示，都是围绕这一个入口展开。与其把它当后台结果页，不如把它当成作品集开始流通的起点。</p>
+            <p>这也是为什么这张界面值得保留，它不是装饰图，而是流程里的关键节点。</p>
+          </div>
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/生成结果.png" alt="生成结果页面" loading="lazy" data-zoom-caption="关键实操：生成结果页会同时给你链接和二维码，这就是作品集真正被发出去的那个入口。" />
+            </div>
+          </div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual">
+            <div class="media-frame">
+              <img src="../static-images/cn/设置打开次数.png" alt="设置打开次数" loading="lazy" data-zoom-caption="访问设置：如果这组作品只想在某个时间段或某个传播范围内被看，你可以继续把边界收紧。" />
+            </div>
+          </div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-sliders"></i> 后手设置</span>
+            <h3>需要收紧传播范围时，这里就是最实际的后手</h3>
+            <p>如果这组作品只想给有限的人看，或者只开放一段时间，次数和时效设置就是最直接的控制点。它不是花哨附加项，而是专业感的一部分。</p>
+            <p>这样排版以后，读者会在看到图的同时读到解释，不会再出现“图片堆一块、文字堆一块”的割裂感。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-lightbulb"></i> 一个更重要的提醒</h2>
+      <div class="callout-cyber">
+        <p class="mb-0">艺术作品集最怕“入口太多、重点太散”。真正友好的分享，不是一次发更多图，而是让观众一打开就知道自己该看什么。</p>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-flag-checkered"></i> 结论很简单</h2>
+      <p>好的作品集分享，不只是把作品送出去，而是把“观看入口”和“后续控制”一起留在自己手里。</p>
+    </section>
+
+    <section class="section-card" id="faq">
+      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <div class="accordion accordion-cyber mt-3" id="faqAccordion">
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">一组作品最多能放多少张图？</button>
+          </h3>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">当前一组分享最多 25 张图，比较适合轻量作品集、专题展示、展览回顾或一组代表作整理。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">线下展览能用吗？</button>
+          </h3>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">可以，分享链接可以转二维码，适合展签、海报、名片、讲座页面或现场导览页。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">发出去以后还能控制吗？</button>
+          </h3>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">可以，当前支持打开次数、有效期和一键失效。这一点很重要，因为作品集一旦被长期转发，旧链接本身就会变成管理负担。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-cyber mb-4">
+      <h2 class="mb-3" style="color:#fff;">想让别人更认真看你的作品？</h2>
+      <p class="mx-auto mb-4" style="max-width:680px;color:var(--text-soft);">先别急着把作品一股脑发出去。先整理成一组，再生成统一入口和二维码，观众会比在聊天记录里翻图时更容易留下来。</p>
+      <a href="https://maiimg.com" class="btn-cyber">去麦瓜图床试试</a>
+    </div>
+  </main>
+
+  <footer class="footer-cyber">
+    Copyright <span data-current-year></span> 麦瓜图床（MaiIMG）
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
+</body>
+</html>

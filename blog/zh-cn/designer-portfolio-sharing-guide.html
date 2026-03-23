@@ -1,52 +1,225 @@
-﻿<!DOCTYPE html><html lang="zh-CN"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>设计作品分享指南｜麦瓜图床</title>
-<meta name="description" content="一组图一个链接，减少版本混乱，让客户更快看到重点作品。"/>
-<meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效"/>
-<link rel="canonical" href="https://maiimg.com/blog/zh-cn/designer-portfolio-sharing-guide"/>
-<meta property="og:type" content="article"/><meta property="og:title" content="设计作品分享指南｜麦瓜图床"/>
-<meta property="og:description" content="一组图一个链接，减少版本混乱，让客户更快看到重点作品。"/><meta property="og:url" content="https://maiimg.com/blog/zh-cn/designer-portfolio-sharing-guide"/>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
-<style>
-:root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-.wrap{width:min(940px,92vw);margin:0 auto}
-.top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
-article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
-h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
-.tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
-.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.shot img{width:100%;border:1px solid var(--line);border-radius:10px}.shot p{font-size:13px;color:var(--muted);margin:6px 0 0}
-footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-@media (max-width:760px){.shots{grid-template-columns:1fr} h1{font-size:28px}}
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"设计作品怎么分享更清晰","description":"一组图一个链接，减少版本混乱，让客户更快看到重点作品。","inLanguage":"zh-CN","mainEntityOfPage":"https://maiimg.com/blog/zh-cn/designer-portfolio-sharing-guide"}</script>
-</head><body>
-<header class="top"><div class="wrap"><a href="./">中文博客</a> / 设计作品怎么分享更清晰</div></header>
-<article class="wrap">
-<h1>设计作品怎么分享更清晰</h1>
-<div class="lead">一组图一个链接，减少版本混乱，让客户更快看到重点作品。</div>
-<h2>核心功能（真实可用）</h2>
-<ul>
-<li>一组图片生成一个分享链接（最多 25 张）</li>
-<li>链接可转二维码，线上线下都能发</li>
-<li>可设置链接/二维码打开次数和有效期</li>
-<li>发出去后可一键失效，停止继续访问</li>
-</ul>
-<h2>操作流程图（SVG）</h2>
-<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/>
-<img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
-<h2>中文界面截图</h2>
-<div class="shots">
-  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页"/><p>首页入口：开始上传</p></div>
-  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成结果页面"/><p>生成结果：链接 + 二维码</p></div>
-  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数"/><p>控制设置：打开次数与有效期</p></div>
-  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片"/><p>一键失效：停止继续访问</p></div>
-</div>
-<div class="tip">提示：本文已去除夸张和不贴合现状的描述，全部围绕麦瓜图床当前能力编写。</div>
-<h2>一句话总结</h2>
-<p>麦瓜图床比普通图床更实用的地方在于：不只“能发图”，还能“发出去后继续控制”。</p>
-</article><footer>Copyright 2026 麦瓜图床（MaiIMG）</footer></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>设计作品分享指南｜麦瓜图床</title>
+  <meta name="description" content="一组图一个链接，减少版本混乱，让客户更快看到重点作品。" />
+  <meta name="keywords" content="麦瓜图床,maiimg,设计作品分享,二维码,图床,打开次数,一键失效" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/designer-portfolio-sharing-guide" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="设计作品分享指南｜麦瓜图床" />
+  <meta property="og:description" content="一组图一个链接，减少版本混乱，让客户更快看到重点作品。" />
+  <meta property="og:url" content="https://maiimg.com/blog/zh-cn/designer-portfolio-sharing-guide" />
+  <meta property="og:site_name" content="麦瓜图床" />
+  <meta property="article:published_time" content="2026-03-23T00:00:00Z" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="设计作品分享指南｜麦瓜图床" />
+  <meta name="twitter:description" content="一组图一个链接，减少版本混乱，让客户更快看到重点作品。" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "设计作品怎么分享更清晰",
+    "description": "一组图一个链接，减少版本混乱，让客户更快看到重点作品。",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": "https://maiimg.com/blog/zh-cn/designer-portfolio-sharing-guide"
+  }
+  </script>
+</head>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>麦瓜图床</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">主站</a></li>
+          <li class="nav-item"><a class="nav-link" href="./">中文博客</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-pen-ruler"></i> 设计场景</span>
+            <p class="breadcrumb-cyber mb-0"><a href="./" style="color:inherit;text-decoration:none;">中文博客</a> · 设计作品分享</p>
+            <div class="article-meta-row">
+              <span class="meta-pill"><i class="fas fa-calendar-check"></i>最后编辑 <span data-last-edited="2026-03-23"></span></span>
+              <span class="meta-pill"><i class="fas fa-clock"></i><span data-reading-minutes="6"></span></span>
+            </div>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">设计作品</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">分享指南</h1>
+            </div>
+            <p class="hero-lead">设计作品分享最常见的问题不是作品不够好，而是版本太多、入口太乱、重点太散。客户本来只需要快速看懂方向，但如果你把图分散到多个聊天窗口和压缩包里，沟通成本会立刻上升。</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">版本清楚</span>
+              <span class="tag-chip tag-chip--cyan">客户预览</span>
+              <span class="tag-chip tag-chip--blue">阶段控制</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">打开麦瓜图床</a>
+              <a href="#flow" class="btn-cyber btn-cyber-outline">看设计流程</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack">
+              <div class="cyber-mini-card cyber-mini-card--p">
+                <span class="cyber-mini-card__num">01</span>
+                <div>
+                  <h3>一组方案一个入口</h3>
+                  <p>客户更容易理解你当前到底想让他看哪一版，而不是在很多图片里猜重点。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--c">
+                <span class="cyber-mini-card__num">02</span>
+                <div>
+                  <h3>入口清楚，讨论才会清楚</h3>
+                  <p>先让客户顺利看到东西，再进入下一轮反馈，效率会高很多。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--b">
+                <span class="cyber-mini-card__num">03</span>
+                <div>
+                  <h3>旧版本可以及时收口</h3>
+                  <p>如果某轮方案已经结束，入口不必长期在外面放着，收回边界会更稳。</p>
+                </div>
+              </div>
+            </div>
+            <div class="brand-footer d-none d-md-flex">
+              <span class="brand-footer__icon">M</span>
+              <span>MaiIMG · 让设计作品分享更清楚，而不是更嘈杂</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section-dark">
+    <section class="section-card">
+      <h2><i class="fas fa-map"></i> 这篇文章想解决什么</h2>
+      <p>设计方案沟通里经常会出现这种情况：版本很多、截图很多、补充说明也很多，但客户真正能顺着看完的并不多。与其不断补说明，不如先让入口和展示顺序变得更清楚。</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4"><div class="fact-grid-card"><h4>适合谁看</h4><p>平面设计师、品牌设计师、视觉设计团队，以及要向客户发提案或作品的人。</p></div></div>
+        <div class="col-md-4"><div class="fact-grid-card"><h4>适合什么内容</h4><p>精选方案、阶段性提案、概念草图整理、品牌视觉参考组图等轻量内容。</p></div></div>
+        <div class="col-md-4"><div class="fact-grid-card"><h4>真正目标</h4><p>不是做一个炫后台，而是让客户更快进入你的设计节奏，同时减少版本混乱。</p></div></div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-star"></i> 这些能力，正好适合设计方案分享</h2>
+      <ul>
+        <li>一组图片生成一个分享链接（最多 25 张）</li>
+        <li>链接可转二维码，线上线下都能发</li>
+        <li>可设置链接/二维码打开次数和有效期</li>
+        <li>发出去后可一键失效，停止继续访问</li>
+      </ul>
+      <div class="callout-cyber mt-3"><p class="mb-0">设计沟通最怕“版本散了以后再去补解释”。先把入口收口，往往比后面写很多说明更有效。</p></div>
+    </section>
+
+    <section class="section-card" id="flow">
+      <h2><i class="fas fa-diagram-project"></i> 设计作品分享最重要的是顺序和边界</h2>
+      <p class="small mb-0" style="color:var(--neon-cyan);font-weight:600;">提示：下面的流程图和配图都可以点击放大，细节会更清楚。</p>
+      <div class="story-flow-grid mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-layer-group"></i> 展示顺序</span>
+            <h3>先确定客户该看哪一组，再决定怎么发</h3>
+            <p>设计作品更像是有顺序的叙事，不适合在聊天里零散出现。先把同一轮方案收进一个入口，客户看到的重点会更稳定。</p>
+          </div>
+          <div class="story-visual story-visual--diagram"><img class="img-cyber" src="diagram/core-share-flow.svg" alt="设计作品分享主流程图" loading="lazy" data-zoom-caption="设计作品分享主流程：先整理同一轮方案，再生成统一入口继续对外分享。" /></div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual story-visual--diagram"><img class="img-cyber" src="diagram/permission-control-flow.svg" alt="设计作品分享控制流程图" loading="lazy" data-zoom-caption="阶段性提案分享后的控制重点：版本边界、开放时间和关闭时机。" /></div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-shield-halved"></i> 版本边界</span>
+            <h3>方案讨论结束后，旧入口最好也跟着退出</h3>
+            <p>很多设计项目的混乱，都是因为旧版本还在流转。把访问时效和失效能力留在手里，会让设计节奏更干净。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-images"></i> 图文要一起出现，客户才更容易进入状态</h2>
+      <div class="story-stack mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-swatchbook"></i> 第一印象</span>
+            <h3>设计作品入口本身，也在传递专业感</h3>
+            <p>如果你希望客户先感受到的是作品的秩序和方向感，那入口就不应该像临时文件堆。展示图的意义就在这里，它让“这是同一组东西”变得一眼可见。</p>
+          </div>
+          <div class="story-visual"><div class="media-frame"><img src="../static-images/common/show/sharemaiimg.png" alt="设计作品展示图" loading="lazy" data-zoom-caption="设计作品分享入口越清楚，客户越容易先看到重点，而不是先看到混乱。" /></div></div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual"><div class="media-frame media-frame--contain"><img src="../static-images/common/show/sharesmarter.jpg" alt="设计作品更聪明的分享方式展示图" loading="lazy" data-zoom-caption="好的设计分享不一定更复杂，但一定更清楚：入口统一、重点明确、边界稳定。" /></div></div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-bullseye"></i> 看重点</span>
+            <h3>让客户先看作品，而不是先猜哪张图才重要</h3>
+            <p>设计沟通里最怕客户先迷失在很多细节里。把重点方案组织进一个入口，再配少量说明，阅读路径会顺很多。</p>
+          </div>
+        </article>
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-link"></i> 出口页面</span>
+            <h3>生成结果页，是方案真正开始被对方查看的地方</h3>
+            <p>你会在这里拿到链接和二维码，所以它更像“设计提案正式出门”的节点，而不是单纯后台结果页。</p>
+          </div>
+          <div class="story-visual"><div class="media-frame"><img src="../static-images/cn/生成结果.png" alt="设计作品生成结果页面" loading="lazy" data-zoom-caption="设计作品生成结果页：统一链接和二维码让方案可以更有秩序地被递出去。" /></div></div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual"><div class="media-frame"><img src="../static-images/cn/设置打开次数.png" alt="设计作品设置打开次数页面" loading="lazy" data-zoom-caption="如果某一轮方案只想在当前讨论阶段开放，次数和有效期会让边界更清楚。" /></div></div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-sliders"></i> 阶段控制</span>
+            <h3>方案阶段结束以后，边界也应该跟着收回来</h3>
+            <p>这不是为了把设计“锁死”，而是为了避免旧版本在后续沟通里反复出现，影响判断。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-lightbulb"></i> 记住这件事就够了</h2>
+      <div class="callout-cyber"><p class="mb-0">设计作品分享最重要的，不是把所有图都发出去，而是让客户先进入你安排好的观看顺序，再进入下一轮讨论。</p></div>
+    </section>
+
+    <section class="section-card" id="faq">
+      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <div class="accordion accordion-cyber mt-3" id="faqAccordion">
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">适合发设计提案和阶段稿吗？</button></h3><div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body">适合。尤其是你想让客户先看同一轮方案，而不是在聊天里看到很多零散草图时，这种入口会更清楚。</div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">二维码对设计场景真的有用吗？</button></h3><div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">如果你的设计方案会出现在提案会、物料页或展示板上，二维码会很好用。纯线上沟通时，链接本身已经够用。</div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">这能替代完整协作评论工具吗？</button></h3><div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">不能。它更适合把设计作品发清楚，而不是做多人批注和协作审批系统。</div></div></div>
+      </div>
+    </section>
+
+    <div class="cta-cyber mb-4">
+      <h2 class="mb-3" style="color:#fff;">想让设计提案入口更清楚？</h2>
+      <p class="mx-auto mb-4" style="max-width:680px;color:var(--text-soft);">先把同一轮方案收成一个入口，再把重点递出去。这样客户更容易进入你的节奏，你也更容易控制版本边界。</p>
+      <a href="https://maiimg.com" class="btn-cyber">去麦瓜图床试试</a>
+    </div>
+  </main>
+
+  <footer class="footer-cyber">Copyright <span data-current-year></span> 麦瓜图床（MaiIMG）</footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
+</body>
+</html>

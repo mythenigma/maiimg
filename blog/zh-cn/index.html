@@ -1,34 +1,286 @@
-﻿<!DOCTYPE html><html lang="zh-CN"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>中文博客｜麦瓜图床（MaiIMG）</title>
-<meta name="description" content="麦瓜图床中文博客：围绕真实能力提供图片分享教程。核心是链接分享、二维码分发、次数控制与一键失效。"/>
-<meta name="keywords" content="麦瓜图床,maiimg,中文博客,图片分享,二维码,图床"/>
-<link rel="canonical" href="https://maiimg.com/blog/zh-cn/"/>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
-<style>
-:root{--bg:#f5f7fb;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5b6475;--brand:#2563eb}
-*{margin:0;padding:0;box-sizing:border-box} body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.75}
-.container{width:min(1120px,92vw);margin:0 auto}.hero{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:52px 0}
-.hero h1{font-size:clamp(28px,4vw,42px);margin-bottom:10px}.hero p{opacity:.92;max-width:760px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:26px 0 52px}
-.card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 24px rgba(15,23,42,.06);overflow:hidden}
-.thumb{height:86px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;background:linear-gradient(120deg,#2563eb,#0ea5e9)}
-.card .b{padding:14px}.card h3{font-size:17px;margin-bottom:8px}.card p{font-size:14px;color:var(--muted);margin-bottom:10px}.card a{text-decoration:none;color:#2563eb;font-weight:700}
-footer{border-top:1px solid var(--line);text-align:center;color:#6b7280;padding:20px 0 26px}
-@media(max-width:980px){.grid{grid-template-columns:1fr 1fr}}@media(max-width:700px){.grid{grid-template-columns:1fr}}
-</style></head><body>
-<header class="hero"><div class="container"><h1>中文博客｜麦瓜图床</h1><p>只讲真实能力：一组图生成链接（最多25张）、链接转二维码、打开次数控制、一键失效。</p></div></header>
-<main class="container"><section class="grid"><article class="card"><div class="thumb">入门</div><div class="b"><h3>图片分享链接怎么做</h3><p>从上传到分发，一次跑通。</p><a href="how-to-generate-image-sharing-links">阅读 →</a></div></article>
-<article class="card"><div class="thumb">二维码</div><div class="b"><h3>图片怎么转二维码分享</h3><p>线下触达更方便。</p><a href="how-to-create-qr-codes-for-images">阅读 →</a></div></article>
-<article class="card"><div class="thumb">安全</div><div class="b"><h3>图片分享的隐私与安全设置</h3><p>次数、时效、一键失效。</p><a href="image-security-and-privacy-guide">阅读 →</a></div></article>
-<article class="card"><div class="thumb">实践</div><div class="b"><h3>图片分发最佳实践</h3><p>给普通用户的执行清单。</p><a href="image-sharing-best-practices">阅读 →</a></div></article>
-<article class="card"><div class="thumb">流程图</div><div class="b"><h3>图片分享流程图（简版）</h3><p>可直接用于培训。</p><a href="image-sharing-workflow-flowcharts">阅读 →</a></div></article>
-<article class="card"><div class="thumb">婚礼</div><div class="b"><h3>婚礼照片分享指南</h3><p>新人和摄影师都好用。</p><a href="wedding-photo-sharing-guide">阅读 →</a></div></article>
-<article class="card"><div class="thumb">房产</div><div class="b"><h3>房产图片分享指南</h3><p>看房资料发得更顺。</p><a href="real-estate-photo-sharing-guide">阅读 →</a></div></article>
-<article class="card"><div class="thumb">摄影</div><div class="b"><h3>摄影作品集分享指南</h3><p>按项目清晰展示。</p><a href="photographer-portfolio-sharing-guide">阅读 →</a></div></article>
-<article class="card"><div class="thumb">生日会</div><div class="b"><h3>生日会照片分享指南</h3><p>活动后快速发图。</p><a href="birthday-party-photo-sharing-guide">阅读 →</a></div></article>
-<article class="card"><div class="thumb">设计</div><div class="b"><h3>设计作品分享指南</h3><p>减少作品混乱。</p><a href="designer-portfolio-sharing-guide">阅读 →</a></div></article>
-<article class="card"><div class="thumb">电商</div><div class="b"><h3>电商产品图分享指南</h3><p>提升素材协同效率。</p><a href="ecommerce-product-photo-sharing-guide">阅读 →</a></div></article>
-<article class="card"><div class="thumb">汽车</div><div class="b"><h3>汽车图片分享指南</h3><p>展车图统一分发。</p><a href="automotive-photo-sharing-guide">阅读 →</a></div></article>
-<article class="card"><div class="thumb">艺术</div><div class="b"><h3>艺术作品集分享指南</h3><p>让观众轻松查看。</p><a href="artist-portfolio-sharing-guide">阅读 →</a></div></article></section></main><footer>Copyright 2026 麦瓜图床（MaiIMG）中文博客</footer></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>中文博客｜麦瓜图床（MaiIMG）</title>
+  <meta name="description" content="麦瓜图床中文博客：围绕真实能力提供图片分享教程。核心是链接分享、二维码分发、次数控制与一键失效。" />
+  <meta name="keywords" content="麦瓜图床,maiimg,中文博客,图片分享,二维码,图床" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="中文博客｜麦瓜图床（MaiIMG）" />
+  <meta property="og:description" content="围绕真实能力提供图片分享教程：链接分享、二维码分发、次数控制与一键失效。" />
+  <meta property="og:url" content="https://maiimg.com/blog/zh-cn/" />
+  <meta property="og:site_name" content="麦瓜图床" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="中文博客｜麦瓜图床（MaiIMG）" />
+  <meta name="twitter:description" content="围绕真实能力提供图片分享教程：链接分享、二维码分发、次数控制与一键失效。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
+</head>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>麦瓜图床</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">主站</a></li>
+          <li class="nav-item"><a class="nav-link" href="#articles">文章</a></li>
+          <li class="nav-item"><a class="nav-link" href="#topics">主题</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-compass"></i> 中文内容入口</span>
+            <p class="breadcrumb-cyber mb-0">真实能力 · 中文教程 · 一页页精修</p>
+            <p class="small mt-2 mb-0 article-date"><i class="fas fa-calendar-check me-1"></i>更新于 <span data-article-date="2026-03-23"></span></p>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">麦瓜图床</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">中文博客</h1>
+            </div>
+            <p class="hero-lead">只讲已经存在的能力：<strong>一组图生成分享链接</strong>、<strong>二维码分发</strong>、<strong>次数与时效控制</strong>、<strong>一键失效</strong>。后续中文文章会按统一模板一页页精修，不批量糊改。</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">图片分享</span>
+              <span class="tag-chip tag-chip--cyan">二维码分发</span>
+              <span class="tag-chip tag-chip--blue">访问控制</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">打开主站</a>
+              <a href="#articles" class="btn-cyber btn-cyber-outline">浏览文章</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack" id="topics">
+              <div class="cyber-mini-card cyber-mini-card--p">
+                <span class="cyber-mini-card__num">01</span>
+                <div>
+                  <h3>上手教程</h3>
+                  <p>从“怎么生成图片分享链接”到“怎么转二维码”，先把最常用的动作跑通。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--c">
+                <span class="cyber-mini-card__num">02</span>
+                <div>
+                  <h3>真实边界</h3>
+                  <p>不讲虚的，不把没有的功能写成卖点，只围绕当前产品能力去解释场景。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--b">
+                <span class="cyber-mini-card__num">03</span>
+                <div>
+                  <h3>场景清单</h3>
+                  <p>婚礼、房产、摄影、作品集、电商产品图等中文场景页会持续按新模板重做。</p>
+                </div>
+              </div>
+            </div>
+            <div class="brand-footer d-none d-md-flex">
+              <span class="brand-footer__icon">M</span>
+              <span>MaiIMG 中文博客 · 从真实功能出发整理分享方法</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section-dark">
+    <section class="section-card">
+      <h2><i class="fas fa-map"></i> 阅读导航</h2>
+      <p>中文博客目前分成四类内容：上手教程、流程图与最佳实践、隐私控制、具体行业场景。你可以先从操作教程入手，再看场景页。</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>先学操作</h4>
+            <p>搞清楚链接怎么生成、二维码怎么分发，再进入后面的复杂场景。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>再看控制</h4>
+            <p>次数限制、有效期、一键失效，是这套工具比普通图床更实用的地方。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>最后看行业页</h4>
+            <p>婚礼、摄影、房产、电商这些文章更偏执行场景，适合直接套用。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="articles">
+      <h2><i class="fas fa-list"></i> 中文文章</h2>
+      <div class="row g-3 mt-1">
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="how-to-generate-image-sharing-links">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">入门</div>
+              <h3>图片分享链接怎么做</h3>
+              <p>从上传到分发，一次跑通图片分享的基本链路。</p>
+              <div class="blog-index-meta">上手教程</div>
+              <div class="blog-index-submeta">5 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="how-to-create-qr-codes-for-images">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">二维码</div>
+              <h3>图片怎么转二维码分享</h3>
+              <p>适合海报、活动、名片、展会等线下触达场景。</p>
+              <div class="blog-index-meta">操作教程</div>
+              <div class="blog-index-submeta">6 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="image-security-and-privacy-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">安全</div>
+              <h3>图片分享的隐私与安全设置</h3>
+              <p>围绕次数、有效期与失效控制，减少误发和扩散风险。</p>
+              <div class="blog-index-meta">控制能力</div>
+              <div class="blog-index-submeta">6 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="image-sharing-best-practices">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">实践</div>
+              <h3>图片分发最佳实践</h3>
+              <p>从普通用户视角出发，给你一套可执行的分发清单。</p>
+              <div class="blog-index-meta">执行清单</div>
+              <div class="blog-index-submeta">6 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="image-sharing-workflow-flowcharts">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">流程图</div>
+              <h3>图片分享流程图（简版）</h3>
+              <p>上传 → 链接 → 二维码 → 分享 → 控制，可直接用于培训。</p>
+              <div class="blog-index-meta">流程图</div>
+              <div class="blog-index-submeta">5 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="wedding-photo-sharing-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">婚礼</div>
+              <h3>婚礼照片分享指南</h3>
+              <p>给新人和摄影师一套简单流程：选图、发链、控制访问。</p>
+              <div class="blog-index-meta">场景页</div>
+              <div class="blog-index-submeta">6 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="real-estate-photo-sharing-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">房产</div>
+              <h3>房产图片分享指南</h3>
+              <p>把看房资料统一分发，减少客户来回问和重复解释。</p>
+              <div class="blog-index-meta">场景页</div>
+              <div class="blog-index-submeta">6 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="photographer-portfolio-sharing-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">摄影</div>
+              <h3>摄影作品集分享指南</h3>
+              <p>按项目分组展示，统一一个入口，发出去后还能继续控制。</p>
+              <div class="blog-index-meta">场景页</div>
+              <div class="blog-index-submeta">7 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="birthday-party-photo-sharing-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">生日会</div>
+              <h3>生日会照片分享指南</h3>
+              <p>活动结束后快速把照片发给亲友，扫码即看，不再反复传图。</p>
+              <div class="blog-index-meta">场景页</div>
+              <div class="blog-index-submeta">5 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="designer-portfolio-sharing-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">设计</div>
+              <h3>设计作品分享指南</h3>
+              <p>一组图一个链接，减少版本混乱，让客户更快看到重点作品。</p>
+              <div class="blog-index-meta">场景页</div>
+              <div class="blog-index-submeta">6 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="ecommerce-product-photo-sharing-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">电商</div>
+              <h3>电商产品图分享指南</h3>
+              <p>把产品图按系列组织后统一分发，方便运营、客服和渠道协同。</p>
+              <div class="blog-index-meta">场景页</div>
+              <div class="blog-index-submeta">6 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="automotive-photo-sharing-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">汽车</div>
+              <h3>汽车图片分享指南</h3>
+              <p>展车图、细节图、活动图集中到一个链接，二维码触达线下用户。</p>
+              <div class="blog-index-meta">场景页</div>
+              <div class="blog-index-submeta">6 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-4">
+          <a class="blog-card-link" href="artist-portfolio-sharing-guide">
+            <article class="blog-index-card">
+              <div class="blog-index-thumb">艺术</div>
+              <h3>艺术作品集分享指南</h3>
+              <p>给观众一个直观入口，支持二维码传播和后续失效管理。</p>
+              <div class="blog-index-meta">场景页</div>
+              <div class="blog-index-submeta">7 分钟阅读 · 最后编辑 2026-03-23</div>
+            </article>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-cyber">
+    Copyright <span data-current-year></span> 麦瓜图床（MaiIMG）中文博客
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
+</body>
+</html>

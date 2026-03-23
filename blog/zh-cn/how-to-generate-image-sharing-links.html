@@ -1,52 +1,257 @@
-﻿<!DOCTYPE html><html lang="zh-CN"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>图片分享链接怎么做｜麦瓜图床上手指南</title>
-<meta name="description" content="上传一组图片（最多25张）后生成分享链接，可转二维码，并支持次数限制与一键失效。"/>
-<meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效"/>
-<link rel="canonical" href="https://maiimg.com/blog/zh-cn/how-to-generate-image-sharing-links"/>
-<meta property="og:type" content="article"/><meta property="og:title" content="图片分享链接怎么做｜麦瓜图床上手指南"/>
-<meta property="og:description" content="上传一组图片（最多25张）后生成分享链接，可转二维码，并支持次数限制与一键失效。"/><meta property="og:url" content="https://maiimg.com/blog/zh-cn/how-to-generate-image-sharing-links"/>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
-<style>
-:root{--bg:#f6f8fc;--card:#fff;--line:#e5eaf3;--text:#1f2937;--muted:#5f6b7e;--brand:#2563eb}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.85}
-.wrap{width:min(940px,92vw);margin:0 auto}
-.top{background:linear-gradient(120deg,#1d4ed8,#0ea5e9);color:#fff;padding:20px 0}.top a{color:#fff;text-decoration:none}
-article{margin:22px auto 46px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 28px rgba(15,23,42,.05);padding:26px}
-h1{font-size:34px;line-height:1.35;margin-bottom:10px}.lead{background:#eef4ff;border-left:4px solid var(--brand);padding:14px;border-radius:8px;margin:14px 0 22px;color:#2f3f57}
-h2{font-size:24px;margin:28px 0 12px} p{margin-bottom:14px} ul{padding-left:20px;margin:8px 0 16px} li{margin:6px 0}
-.tip{background:#f8fbff;border:1px solid #dbeafe;border-radius:10px;padding:12px;margin:12px 0}
-.flow img{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0}
-.shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}.shot img{width:100%;border:1px solid var(--line);border-radius:10px}.shot p{font-size:13px;color:var(--muted);margin:6px 0 0}
-footer{color:#6b7280;text-align:center;font-size:14px;padding:0 0 24px}
-@media (max-width:760px){.shots{grid-template-columns:1fr} h1{font-size:28px}}
-</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"图片分享链接怎么做：给普通用户的上手指南","description":"上传一组图片（最多25张）后生成分享链接，可转二维码，并支持次数限制与一键失效。","inLanguage":"zh-CN","mainEntityOfPage":"https://maiimg.com/blog/zh-cn/how-to-generate-image-sharing-links"}</script>
-</head><body>
-<header class="top"><div class="wrap"><a href="./">中文博客</a> / 图片分享链接怎么做：给普通用户的上手指南</div></header>
-<article class="wrap">
-<h1>图片分享链接怎么做：给普通用户的上手指南</h1>
-<div class="lead">上传一组图片（最多25张）后生成分享链接，可转二维码，并支持次数限制与一键失效。</div>
-<h2>核心功能（真实可用）</h2>
-<ul>
-<li>一组图片生成一个分享链接（最多 25 张）</li>
-<li>链接可转二维码，线上线下都能发</li>
-<li>可设置链接/二维码打开次数和有效期</li>
-<li>发出去后可一键失效，停止继续访问</li>
-</ul>
-<h2>操作流程图（SVG）</h2>
-<div class="flow"><img src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图"/>
-<img src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图"/></div>
-<h2>中文界面截图</h2>
-<div class="shots">
-  <div class="shot"><img src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页"/><p>首页入口：开始上传</p></div>
-  <div class="shot"><img src="../static-images/cn/生成结果.png" alt="生成结果页面"/><p>生成结果：链接 + 二维码</p></div>
-  <div class="shot"><img src="../static-images/cn/设置打开次数.png" alt="设置打开次数"/><p>控制设置：打开次数与有效期</p></div>
-  <div class="shot"><img src="../static-images/cn/一键删除图片.png" alt="一键删除图片"/><p>一键失效：停止继续访问</p></div>
-</div>
-<div class="tip">提示：本文已去除夸张和不贴合现状的描述，全部围绕麦瓜图床当前能力编写。</div>
-<h2>一句话总结</h2>
-<p>麦瓜图床比普通图床更实用的地方在于：不只“能发图”，还能“发出去后继续控制”。</p>
-</article><footer>Copyright 2026 麦瓜图床（MaiIMG）</footer></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>图片分享链接怎么做｜麦瓜图床上手指南</title>
+  <meta name="description" content="上传一组图片（最多25张）后生成分享链接，可转二维码，并支持次数限制与一键失效。" />
+  <meta name="keywords" content="麦瓜图床,maiimg,图片分享,二维码,图床,打开次数,一键失效" />
+  <link rel="canonical" href="https://maiimg.com/blog/zh-cn/how-to-generate-image-sharing-links" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="图片分享链接怎么做｜麦瓜图床上手指南" />
+  <meta property="og:description" content="上传一组图片（最多25张）后生成分享链接，可转二维码，并支持次数限制与一键失效。" />
+  <meta property="og:url" content="https://maiimg.com/blog/zh-cn/how-to-generate-image-sharing-links" />
+  <meta property="og:site_name" content="麦瓜图床" />
+  <meta property="article:published_time" content="2026-03-23T00:00:00Z" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="图片分享链接怎么做｜麦瓜图床上手指南" />
+  <meta name="twitter:description" content="上传一组图片（最多25张）后生成分享链接，可转二维码，并支持次数限制与一键失效。" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "图片分享链接怎么做：给普通用户的上手指南",
+    "description": "上传一组图片（最多25张）后生成分享链接，可转二维码，并支持次数限制与一键失效。",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": "https://maiimg.com/blog/zh-cn/how-to-generate-image-sharing-links"
+  }
+  </script>
+</head>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>麦瓜图床</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">主站</a></li>
+          <li class="nav-item"><a class="nav-link" href="./">中文博客</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-link"></i> 上手教程</span>
+            <p class="breadcrumb-cyber mb-0"><a href="./" style="color:inherit;text-decoration:none;">中文博客</a> · 图片分享链接</p>
+            <div class="article-meta-row">
+              <span class="meta-pill"><i class="fas fa-calendar-check"></i>最后编辑 <span data-last-edited="2026-03-23"></span></span>
+              <span class="meta-pill"><i class="fas fa-clock"></i><span data-reading-minutes="5"></span></span>
+            </div>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">图片分享链接</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">上手指南</h1>
+            </div>
+            <p class="hero-lead">很多人并不缺“发图工具”，缺的是一种<strong>发出去以后别人好打开、自己还收得住</strong>的方式。麦瓜图床做的就是这件事：上传一组图片，生成一个链接，必要时再转成二维码，发出后还能继续控制。</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">一组图一个链接</span>
+              <span class="tag-chip tag-chip--cyan">链接转二维码</span>
+              <span class="tag-chip tag-chip--blue">发出后可控</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">现在去生成</a>
+              <a href="#core" class="btn-cyber btn-cyber-outline">先看能力</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack">
+              <div class="cyber-mini-card cyber-mini-card--p">
+                <span class="cyber-mini-card__num">01</span>
+                <div>
+                  <h3>先把图收进一个入口</h3>
+                  <p>你不用再把十几张图散着发出去，一个入口比一串聊天图片更容易被点开，也更容易被记住。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--c">
+                <span class="cyber-mini-card__num">02</span>
+                <div>
+                  <h3>再决定怎么分发</h3>
+                  <p>线上直接发链接，线下用二维码，两个入口来自同一份分享结果，不需要额外再做一套页面。</p>
+                </div>
+              </div>
+              <div class="cyber-mini-card cyber-mini-card--b">
+                <span class="cyber-mini-card__num">03</span>
+                <div>
+                  <h3>最后把后手留在自己手里</h3>
+                  <p>需要时可以限制打开次数、设置有效期，或者直接让链接失效，而不是发出去以后只能干看着。</p>
+                </div>
+              </div>
+            </div>
+            <div class="brand-footer d-none d-md-flex">
+              <span class="brand-footer__icon">M</span>
+              <span>MaiIMG · 适合把图片从“传出去”升级到“传出去以后还能控”</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section-dark">
+    <section class="section-card toc-card">
+      <h2><i class="fas fa-map"></i> 这页适合谁</h2>
+      <p>如果你只是想把一组图片快速发出去，又不想在聊天里一张张传图，这页就是给你的。它不是讲复杂系统，而是讲一个很现实的问题：怎么把图片发得更省事、更清楚、也更可控。</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>适合普通用户</h4>
+            <p>不需要复杂学习成本，先把“怎么做”跑通，比讲一堆概念更有用。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>适合活动后发图</h4>
+            <p>一组图一次发出去，避免朋友、客户或同事在消息记录里反复往上翻。</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="fact-grid-card">
+            <h4>适合后续控制</h4>
+            <p>如果你担心链接一直被转发，次数限制、有效期和失效控制就很有价值。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="core">
+      <h2><i class="fas fa-star"></i> 你真正会用到的能力</h2>
+      <p>这套方式最有用的地方，不是“它能上传图片”，而是它把分享这件事拆成了几个很实在的动作：先集中、再分发、最后还能收口。</p>
+      <ul>
+        <li>一组图片生成一个分享链接（最多 25 张）</li>
+        <li>链接可转二维码，线上线下都能发</li>
+        <li>可设置链接/二维码打开次数和有效期</li>
+        <li>发出去后可一键失效，停止继续访问</li>
+      </ul>
+      <div class="callout-cyber mt-3">
+        <p class="mb-0">这几条就是现在真的能用的能力，也是这篇上手页最重要的事实基线。它不是协作平台，不是审批系统，但很适合“把图片发出去并保持一点控制感”。</p>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-diagram-project"></i> 整个流程其实很短</h2>
+      <p>你可以把它理解成一个四步动作：上传一组图，得到一个统一入口，再把链接或二维码发出去，最后视情况决定要不要继续开放。</p>
+      <div class="row g-3 mt-2">
+        <div class="col-md-6">
+          <img class="img-cyber" src="diagram/core-share-flow.svg" alt="麦瓜图床核心分享流程图" loading="lazy" />
+        </div>
+        <div class="col-md-6">
+          <img class="img-cyber" src="diagram/control-flow-animated.svg" alt="麦瓜图床分享后控制流程图" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-images"></i> 你会在页面里看到什么</h2>
+      <p>如果你还没实际操作过，下面这几张图基本能把整条路径讲清楚：从进入首页，到生成结果，再到控制访问和让链接失效。</p>
+      <div class="row g-3 mt-2">
+        <div class="col-md-6">
+          <div class="article-shot">
+            <img class="img-cyber" src="../static-images/cn/麦瓜二维码首页.png" alt="麦瓜图床首页" loading="lazy" />
+            <p>首页入口：先把需要分享的图片拖进去，别再一张张零散发图。</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="article-shot">
+            <img class="img-cyber" src="../static-images/cn/生成结果.png" alt="生成结果页面" loading="lazy" />
+            <p>生成结果：同一份分享同时给你链接和二维码，线上线下都能接住。</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="article-shot">
+            <img class="img-cyber" src="../static-images/cn/设置打开次数.png" alt="设置打开次数" loading="lazy" />
+            <p>控制设置：不是发出去就结束了，你还能决定它被看多少次、留多久。</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="article-shot">
+            <img class="img-cyber" src="../static-images/cn/一键删除图片.png" alt="一键删除图片" loading="lazy" />
+            <p>一键失效：当这组图不该再被继续传播时，可以把入口及时关掉。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-lightbulb"></i> 一个很实际的提醒</h2>
+      <div class="callout-cyber">
+        <p class="mb-0">别把所有图都塞进同一个入口里。越清楚的一组图，越容易被点开，也越容易让对方快速看懂重点。</p>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-flag-checkered"></i> 结论很简单</h2>
+      <p>图片分享链接的价值，不在于“把图放上去”，而在于把一组图片变成一个更容易打开、也更容易收回的入口。</p>
+    </section>
+
+    <section class="section-card" id="faq">
+      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <div class="accordion accordion-cyber mt-3" id="faqAccordion">
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">一组分享最多支持多少张图？</button>
+          </h3>
+          <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">当前一组分享最多 25 张图，比较适合活动回顾、作品预览、轻量资料包和日常图片分发。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">为什么还要二维码？</button>
+          </h3>
+          <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">因为很多场景不只在线上，比如海报、活动现场、名片或展架。二维码的价值，是让别人不用再输入长链接，扫一下就能打开。</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">链接发出去以后还能关掉吗？</button>
+          </h3>
+          <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">可以。当前支持通过次数限制、有效期和一键失效来控制后续访问，这也是它和单纯“扔一个图片链接过去”最大的不同之一。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-cyber mb-4">
+      <h2 class="mb-3" style="color:#fff;">先试一次，你会比看说明更快明白</h2>
+      <p class="mx-auto mb-4" style="max-width:680px;color:var(--text-soft);">上传一组图，生成一个入口，再把链接或二维码发出去。只要你真的跑一遍，就会明白为什么它比在聊天里连发十几张图省事得多。</p>
+      <a href="https://maiimg.com" class="btn-cyber">现在去试</a>
+    </div>
+  </main>
+
+  <footer class="footer-cyber">
+    Copyright <span data-current-year></span> 麦瓜图床（MaiIMG）
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
+</body>
+</html>

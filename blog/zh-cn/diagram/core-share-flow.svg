@@ -1,45 +1,125 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid meet">
-  <style>
-    .box{fill:#fff;stroke:#94a3b8;stroke-width:2;rx:14}
-    .t1{font:700 22px 'Microsoft YaHei',sans-serif;fill:#0f172a}
-    .t2{font:400 16px 'Microsoft YaHei',sans-serif;fill:#334155}
-    .arr{stroke:#93c5fd;stroke-width:4;stroke-linecap:round}
-    .dot{fill:#2563eb}
-    @keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(165px)}}
-    .d1{animation:slide 1.9s linear infinite}
-    .d2{animation:slide 1.9s linear infinite .5s}
-    .d3{animation:slide 1.9s linear infinite 1s}
-  </style>
-  <rect width="1200" height="320" fill="#f8fafc"/>
-  <g transform="translate(30,60)">
-    <rect class="box" width="220" height="170"/>
-    <text class="t1" x="110" y="55" text-anchor="middle">① 上传图片</text>
-    <text class="t2" x="110" y="92" text-anchor="middle">单链接最多 25 张</text>
-    <text class="t2" x="110" y="122" text-anchor="middle">建议按场景分组</text>
-  </g>
-  <g transform="translate(320,60)">
-    <rect class="box" width="220" height="170"/>
-    <text class="t1" x="110" y="55" text-anchor="middle">② 生成链接</text>
-    <text class="t2" x="110" y="92" text-anchor="middle">得到可分享URL</text>
-    <text class="t2" x="110" y="122" text-anchor="middle">聊天/邮件可直接发</text>
-  </g>
-  <g transform="translate(610,60)">
-    <rect class="box" width="220" height="170"/>
-    <text class="t1" x="110" y="55" text-anchor="middle">③ 转二维码</text>
-    <text class="t2" x="110" y="92" text-anchor="middle">海报 / 名片 / 活动</text>
-    <text class="t2" x="110" y="122" text-anchor="middle">线下扫码更方便</text>
-  </g>
-  <g transform="translate(900,60)">
-    <rect class="box" width="220" height="170"/>
-    <text class="t1" x="110" y="55" text-anchor="middle">④ 发后可控</text>
-    <text class="t2" x="110" y="92" text-anchor="middle">设置打开次数/时效</text>
-    <text class="t2" x="110" y="122" text-anchor="middle">必要时一键失效</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="title desc">
+  <title id="title">麦瓜图床核心分享流程图</title>
+  <desc id="desc">四步流程：上传图片、生成链接、转二维码、发后可控。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10131d"/>
+      <stop offset="55%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0a1020"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="18%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="88%" cy="28%" r="72%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity=".14"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cardFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#171d2d"/>
+      <stop offset="100%" stop-color="#0f1626"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(255,255,255,.035)" stroke-width="1"/>
+    </pattern>
+    <style>
+      .title{font:700 24px 'Inter','Microsoft YaHei',sans-serif;fill:#f8fafc}
+      .copy{font:400 15px 'Inter','Microsoft YaHei',sans-serif;fill:#94a3b8}
+      .label{font:700 11px 'Inter','Microsoft YaHei',sans-serif;letter-spacing:1.8px;fill:#7dd3fc}
+      .cardTitle{font:700 22px 'Inter','Microsoft YaHei',sans-serif;fill:#f8fafc}
+      .cardCopy{font:400 15px 'Inter','Microsoft YaHei',sans-serif;fill:#b8c4d8}
+      .chip{font:700 12px 'Inter','Microsoft YaHei',sans-serif;fill:#dbeafe}
+      .num{font:700 13px 'Inter','Microsoft YaHei',sans-serif;fill:#e2e8f0}
+      .accent{font:700 13px 'Inter','Microsoft YaHei',sans-serif;fill:#bfdbfe}
+      .trace{stroke:url(#lineGrad);stroke-width:4;stroke-linecap:round;fill:none;opacity:.95}
+      .pulse{fill:#60a5fa;filter:url(#softGlow)}
+      @keyframes dashMove { to { stroke-dashoffset: -56; } }
+      .moving { stroke-dasharray: 10 14; animation: dashMove 2.2s linear infinite; }
+      @keyframes pulseGlow {
+        0%,100% { opacity: .45; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.12); }
+      }
+      .p1,.p2,.p3 { transform-box: fill-box; transform-origin: center; animation: pulseGlow 2.2s ease-in-out infinite; }
+      .p2 { animation-delay: .45s; }
+      .p3 { animation-delay: .9s; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="320" fill="transparent"/>
+  <rect x="16" y="16" width="1168" height="288" rx="28" fill="url(#bg)"/>
+  <rect x="16" y="16" width="1168" height="288" rx="28" fill="url(#grid)"/>
+  <rect x="16" y="16" width="1168" height="288" rx="28" fill="url(#glowA)"/>
+  <rect x="16" y="16" width="1168" height="288" rx="28" fill="url(#glowB)"/>
+  <rect x="16" y="16" width="1168" height="288" rx="28" fill="none" stroke="rgba(255,255,255,.08)"/>
+
+  <text class="label" x="52" y="52">SHARE FLOW</text>
+  <text class="copy" x="1118" y="52" text-anchor="end">把一组图变成一个更好打开的入口</text>
+
+  <g transform="translate(52,74)">
+    <rect width="248" height="150" rx="22" fill="url(#cardFill)" stroke="rgba(96,165,250,.28)"/>
+    <rect x="18" y="18" width="54" height="30" rx="12" fill="rgba(96,165,250,.12)" stroke="rgba(96,165,250,.25)"/>
+    <text class="num" x="45" y="38" text-anchor="middle">01</text>
+    <text class="cardTitle" x="22" y="82">上传图片</text>
+    <text class="cardCopy" x="22" y="108">把同一场景的图片先收进一个入口</text>
+    <text class="cardCopy" x="22" y="131">避免聊天里零散发图、重点被冲淡</text>
+    <rect x="22" y="118" width="0" height="0" fill="none"/>
+    <rect x="22" y="116" width="108" height="24" rx="12" fill="rgba(59,130,246,.14)"/>
+    <text class="chip" x="76" y="132" text-anchor="middle">最多 25 张</text>
   </g>
 
-  <line class="arr" x1="250" y1="255" x2="320" y2="255"/>
-  <line class="arr" x1="540" y1="255" x2="610" y2="255"/>
-  <line class="arr" x1="830" y1="255" x2="900" y2="255"/>
-  <circle class="dot d1" cx="255" cy="255" r="6"/>
-  <circle class="dot d2" cx="545" cy="255" r="6"/>
-  <circle class="dot d3" cx="835" cy="255" r="6"/>
+  <g transform="translate(330,74)">
+    <rect width="248" height="150" rx="22" fill="url(#cardFill)" stroke="rgba(139,92,246,.28)"/>
+    <rect x="18" y="18" width="54" height="30" rx="12" fill="rgba(139,92,246,.12)" stroke="rgba(139,92,246,.24)"/>
+    <text class="num" x="45" y="38" text-anchor="middle">02</text>
+    <text class="cardTitle" x="22" y="82">生成链接</text>
+    <text class="cardCopy" x="22" y="108">得到一个统一的分享入口</text>
+    <text class="cardCopy" x="22" y="131">聊天、邮件、社群里都能直接发</text>
+    <rect x="22" y="116" width="116" height="24" rx="12" fill="rgba(139,92,246,.14)"/>
+    <text class="chip" x="80" y="132" text-anchor="middle">统一 URL</text>
+  </g>
+
+  <g transform="translate(608,74)">
+    <rect width="248" height="150" rx="22" fill="url(#cardFill)" stroke="rgba(34,211,238,.3)"/>
+    <rect x="18" y="18" width="54" height="30" rx="12" fill="rgba(34,211,238,.12)" stroke="rgba(34,211,238,.24)"/>
+    <text class="num" x="45" y="38" text-anchor="middle">03</text>
+    <text class="cardTitle" x="22" y="82">转二维码</text>
+    <text class="cardCopy" x="22" y="108">海报、名片、活动现场都能接得住</text>
+    <text class="cardCopy" x="22" y="131">线下不用再手输长链接</text>
+    <rect x="22" y="116" width="108" height="24" rx="12" fill="rgba(34,211,238,.14)"/>
+    <text class="chip" x="76" y="132" text-anchor="middle">线下可扫</text>
+  </g>
+
+  <g transform="translate(886,74)">
+    <rect width="248" height="150" rx="22" fill="url(#cardFill)" stroke="rgba(16,185,129,.28)"/>
+    <rect x="18" y="18" width="54" height="30" rx="12" fill="rgba(16,185,129,.12)" stroke="rgba(16,185,129,.24)"/>
+    <text class="num" x="45" y="38" text-anchor="middle">04</text>
+    <text class="cardTitle" x="22" y="82">发后可控</text>
+    <text class="cardCopy" x="22" y="108">决定它能被看多少次、开多久</text>
+    <text class="cardCopy" x="22" y="131">必要时及时失效，不让入口失控</text>
+    <rect x="22" y="116" width="122" height="24" rx="12" fill="rgba(16,185,129,.14)"/>
+    <text class="chip" x="83" y="132" text-anchor="middle">后续可收口</text>
+  </g>
+
+  <path class="trace" d="M300 250 H330 M578 250 H608 M856 250 H886"/>
+  <path class="trace moving" d="M300 250 H330 M578 250 H608 M856 250 H886"/>
+  <circle class="pulse p1" cx="315" cy="250" r="5.5"/>
+  <circle class="pulse p2" cx="593" cy="250" r="5.5"/>
+  <circle class="pulse p3" cx="871" cy="250" r="5.5"/>
+
+  <text class="accent" x="52" y="280">一组图片</text>
+  <text class="accent" x="330" y="280">一个入口</text>
+  <text class="accent" x="608" y="280">扫码可达</text>
+  <text class="accent" x="886" y="280">后续可控</text>
 </svg>
