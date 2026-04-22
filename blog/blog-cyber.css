@@ -951,3 +951,74 @@ footer.footer-cyber a:hover { text-decoration: underline; }
     max-height: 78vh;
   }
 }
+
+/* Append-only: reviewed-on pill, checklist, related reads */
+.cyber-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 0;
+  display: grid;
+  gap: 0.65rem;
+}
+.cyber-checklist li {
+  position: relative;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  border-radius: 10px;
+  color: var(--text-soft, #cbd5f5);
+  line-height: 1.55;
+  font-size: 0.96rem;
+}
+.cyber-checklist li::before {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 0.9rem;
+  top: 0.85rem;
+  color: var(--neon-cyan, #22d3ee);
+  font-size: 0.85rem;
+}
+
+.related-reads {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.related-reads li {
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.related-reads li:hover {
+  border-color: rgba(139, 92, 246, 0.45);
+  background: rgba(139, 92, 246, 0.06);
+}
+.related-reads li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.related-reads li a:hover { color: var(--neon-cyan, #22d3ee); }
+.related-reads li a i {
+  font-size: 0.75rem;
+  color: var(--neon-purple, #a78bfa);
+}
+.related-reads li span {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--text-soft, #cbd5f5);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+

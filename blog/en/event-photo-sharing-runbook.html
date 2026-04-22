@@ -1,60 +1,216 @@
-﻿<!DOCTYPE html><html lang="en"><head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Event Photo Sharing Runbook | MaiIMG Blog</title>
-<meta name="description" content="Event Photo Sharing Runbook: practical steps to share image sets with one direct link (up to 25 images), convert links to QR codes, set open limits/expiry, and revoke access instantly."/>
-<meta name="keywords" content="event photo sharing runbook, image sharing, QR code image link, view limits, revoke link"/>
-<link rel="canonical" href="https://maiimg.com/blog/en/event-photo-sharing-runbook"/>
-<meta property="og:type" content="article"/>
-<meta property="og:title" content="Event Photo Sharing Runbook | MaiIMG Blog"/>
-<meta property="og:description" content="Event Photo Sharing Runbook: practical steps to share image sets with one direct link (up to 25 images), convert links to QR codes, set open limits/expiry, and revoke access instantly."/>
-<meta property="og:url" content="https://maiimg.com/blog/en/event-photo-sharing-runbook"/>
-<meta property="og:site_name" content="MaiIMG"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"/>
-<style>:root{--bg:#f3f6fb;--surface:#ffffff;--surface2:#f8fbff;--text:#1f2a37;--muted:#5b6778;--line:#dbe5f1;--brand:#2563eb;--brand2:#0ea5e9}*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.75}.container{width:min(980px,92vw);margin:0 auto}header.top{background:linear-gradient(135deg,#1e40af,#0ea5e9);color:#fff;padding:20px 0}header .crumb{font-size:14px;opacity:.95}header a{color:#fff;text-decoration:none}article{margin:22px auto 42px;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 14px 38px rgba(15,23,42,.06);padding:30px}h1{font-size:36px;line-height:1.24;margin-bottom:12px;letter-spacing:-.01em}.hero{background:linear-gradient(180deg,#eff6ff,#f8fbff);border:1px solid #dbeafe;border-radius:12px;padding:16px 18px;margin-bottom:20px;color:#28405f}.meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 22px}.card{background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:12px}.card b{display:block;font-size:13px;color:#3b4a5f;margin-bottom:4px}h2{font-size:25px;line-height:1.35;margin:28px 0 10px}h3{font-size:19px;margin:18px 0 8px}p{margin:0 0 13px}ul,ol{padding-left:20px;margin:8px 0 16px}li{margin:6px 0}.checklist li{list-style:'?  '}.flow{display:grid;gap:10px}.flow img{width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px}.note{border-left:4px solid var(--brand);background:#eef5ff;border-radius:8px;padding:12px 14px;color:#2f435e;margin:12px 0 16px}footer{text-align:center;color:#6b7280;font-size:14px;padding-bottom:24px}@media (max-width:760px){article{padding:18px;margin:14px auto 28px;border-radius:12px}h1{font-size:29px}h2{font-size:22px}.meta{grid-template-columns:1fr;gap:9px}body{line-height:1.65}}</style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Event Photo Sharing Runbook","description":"Event Photo Sharing Runbook: practical steps to share image sets with one direct link (up to 25 images), convert links to QR codes, set open limits/expiry, and revoke access instantly.","inLanguage":"en","mainEntityOfPage":"https://maiimg.com/blog/en/event-photo-sharing-runbook","publisher":{"@type":"Organization","name":"MaiIMG"}}</script>
-</head><body>
-<header class="top"><div class="container"><div class="crumb"><a href="./">English Blog</a> / Event Photo Sharing Runbook</div></div></header>
-<article class="container">
-<h1>Event Photo Sharing Runbook</h1>
-<p class="hero"><strong>Event Delivery:</strong> You need guests to open photos fast, without app installs, login walls, or messy chat spam.</p>
-<section class="meta">
-<div class="card"><b>Core limit</b>Up to 25 images per share link</div>
-<div class="card"><b>Access format</b>Direct link + QR code from the same URL</div>
-<div class="card"><b>Control</b>Open-count limits, expiry date, and one-click revoke</div>
-</section>
-<h2>What matters first</h2>
-<p>Before publishing, decide exactly what this link is for—review, handoff, delivery, or archive reference. That one decision makes the experience clearer for recipients and easier to manage for you.</p>
-<div class="note">Quick fact check: one link supports <strong>up to 25 images</strong>; the same URL can be turned into a <strong>QR code</strong>; you can define <strong>open limits and validity period</strong>; and you can <strong>disable the link instantly</strong>.</div>
-<h2>Execution plan</h2>
-<h3>1) Build a compact share set</h3>
-<ul>
-<li>Include only the files needed for this decision or handoff.</li>
-<li>Keep the order easy to follow (cover → key shots → details).</li>
-<li>If you need more than 25 images, split by scenario instead of packing everything into one link.</li>
-</ul>
-<h3>2) Match channel to context</h3>
-<ul>
-<li>Use direct URL in chat, email, docs, and social captions.</li>
-<li>Use QR codes in physical touchpoints: slides, posters, cards, booths, and packaging.</li>
-<li>Use short, human labels so people immediately know why they should open it.</li>
-</ul>
-<h3>3) Apply controls before distribution</h3>
-<ul class="checklist"><li>Create one clean link per moment block (ceremony, portraits, afterparty).</li><li>Put QR cards at the venue so guests can open on the spot.</li><li>Set an expiry window so old links do not float around forever.</li></ul>
-<h2>Visual workflow</h2>
-<div class="flow">
-  <img src="diagram/image-sharing-workflow-diagram.svg" alt="Image link and QR distribution workflow" loading="lazy"/>
-  <img src="diagram/channel-distribution-matrix.svg" alt="Best channel map for direct links and QR codes" loading="lazy"/>
-</div>
-<h2>Quick operating checklist</h2>
-<ol>
-<li>Confirm objective and recipient list.</li>
-<li>Package images (max 25) with clear ordering.</li>
-<li>Create link and QR from the same source URL.</li>
-<li>Set open count and expiry based on your timeline and distribution needs.</li>
-<li>Send, run a quick distribution review, and disable access when the task is complete.</li>
-</ol>
-<p>Treat every link like a mini product page: precise scope, easy access, and planned expiration.</p>
-</article>
-<footer>Copyright 2026 MaiIMG Blog</footer>
-</body></html>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Photo Sharing Runbook (QR + One Link) | MaiIMG Blog</title>
+  <meta name="description" content="A short runbook for sharing event photos without chat spam: one link per moment, a QR on the tables, view limits up front, and a clean switch-off when the party ends." />
+  <meta name="keywords" content="event photo sharing, share event photos, qr photo sharing event, event photo link, birthday photo sharing, party photo sharing" />
+  <link rel="canonical" href="https://maiimg.com/blog/en/event-photo-sharing-runbook" />
+  <link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/event-photo-sharing-runbook" />
+  <link rel="alternate" hreflang="x-default" href="https://maiimg.com/blog/en/event-photo-sharing-runbook" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Event Photo Sharing Runbook (QR + One Link) | MaiIMG Blog" />
+  <meta property="og:description" content="A short runbook for sharing event photos without chat spam: one link per moment, a QR on the tables, view limits up front, and a clean switch-off when the party ends." />
+  <meta property="og:url" content="https://maiimg.com/blog/en/event-photo-sharing-runbook" />
+  <meta property="og:site_name" content="MaiIMG" />
+  <meta property="og:image" content="https://maiimg.com/blog/static-images/common/show/scantoshare.jpg" />
+  <meta property="article:published_time" content="2026-02-28T00:00:00Z" />
+  <meta property="article:modified_time" content="2026-04-22T00:00:00Z" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Event Photo Sharing Runbook (QR + One Link) | MaiIMG Blog" />
+  <meta name="twitter:description" content="One link per moment, a QR on the tables, view limits up front, a clean switch-off at the end." />
+  <meta name="twitter:image" content="https://maiimg.com/blog/static-images/common/show/scantoshare.jpg" />
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="alternate icon" type="image/x-icon" href="../../favicon.ico" />
+  <link rel="shortcut icon" type="image/svg+xml" href="../../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="../blog-cyber.css" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Event Photo Sharing Runbook (QR + One Link)",
+    "description": "A short runbook for sharing event photos without chat spam: one link per moment, a QR on the tables, view limits up front, and a clean switch-off when the party ends.",
+    "inLanguage": "en",
+    "mainEntityOfPage": "https://maiimg.com/blog/en/event-photo-sharing-runbook",
+    "datePublished": "2026-02-28",
+    "dateModified": "2026-04-22",
+    "image": "https://maiimg.com/blog/static-images/common/show/scantoshare.jpg",
+    "author": {"@type": "Organization", "name": "MaiIMG"},
+    "publisher": {
+      "@type": "Organization",
+      "name": "MaiIMG",
+      "logo": {"@type": "ImageObject", "url": "https://maiimg.com/favicon.svg"}
+    }
+  }
+  </script>
+</head>
+<body class="blog-cyber grid-bg">
+  <nav class="navbar navbar-expand-lg nav-cyber sticky-top">
+    <div class="container-fluid px-3 px-xl-4 px-xxl-5" style="max-width:1920px;margin:0 auto">
+      <a class="navbar-brand" href="https://maiimg.com"><i class="fas fa-images me-2" style="color:var(--neon-purple)"></i>MaiIMG</a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="https://maiimg.com">Main Site</a></li>
+          <li class="nav-item"><a class="nav-link" href="./">English Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="#runbook">Runbook</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="container-fluid px-2 px-md-3 px-xl-4 px-xxl-5">
+    <div class="cyber-frame cyber-frame--wide">
+      <div class="cyber-frame-inner">
+        <div class="row g-4 g-xl-5 align-items-xl-center hero-landscape-row">
+          <div class="col-lg-6">
+            <span class="badge-pill-outline"><i class="fas fa-calendar-day"></i> Event runbook</span>
+            <p class="breadcrumb-cyber mb-0"><a href="./" style="color:inherit;text-decoration:none;">English Blog</a> · Event photo sharing</p>
+            <div class="article-meta-row">
+              <span class="meta-pill"><i class="fas fa-calendar-check"></i>Last edited <span data-last-edited="2026-02-28"></span></span>
+              <span class="meta-pill"><i class="fas fa-user-check"></i>Last reviewed <span data-last-reviewed="2026-04-22"></span></span>
+              <span class="meta-pill"><i class="fas fa-clock"></i>6 min read</span>
+            </div>
+            <div class="hero-headline-wrap">
+              <h1 class="hero-title-line1">Event Photo</h1>
+              <span class="hero-title-sep d-none d-xxl-inline" aria-hidden="true">/</span>
+              <h1 class="hero-title-line2">Sharing Runbook</h1>
+            </div>
+            <p class="hero-lead">Events don't need a gallery platform. They need a calm way to get photos from “just happened” to “already shared” — without flooding a chat group with 200 attachments or asking anyone to install an app.</p>
+            <div class="tag-row">
+              <span class="tag-chip tag-chip--purple">One link per moment</span>
+              <span class="tag-chip tag-chip--cyan">QR on the tables</span>
+              <span class="tag-chip tag-chip--blue">Quiet after closing</span>
+            </div>
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <a href="https://maiimg.com" class="btn-cyber">Open MaiIMG</a>
+              <a href="#runbook" class="btn-cyber btn-cyber-outline">See the runbook</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="cyber-stack">
+              <div class="cyber-mini-card cyber-mini-card--p"><span class="cyber-mini-card__num">01</span><div><h3>Split the event into moments</h3><p>Arrival, main moment, group shots, afterparty. One link per moment beats one giant dump every time.</p></div></div>
+              <div class="cyber-mini-card cyber-mini-card--c"><span class="cyber-mini-card__num">02</span><div><h3>Scan from the table</h3><p>Print one small QR card per table. Guests scan, photos open. No typing, no forwarding, no app install.</p></div></div>
+              <div class="cyber-mini-card cyber-mini-card--b"><span class="cyber-mini-card__num">03</span><div><h3>Turn it off when done</h3><p>After a few days, switch the link off. The photos stop drifting; old forwards stop working.</p></div></div>
+            </div>
+            <div class="brand-footer d-none d-md-flex"><span class="brand-footer__icon">M</span><span>MaiIMG · the quiet way to share an event</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section-dark">
+    <section class="section-card">
+      <h2><i class="fas fa-map"></i> What this runbook is for</h2>
+      <p>This covers the normal range of small-to-medium events: birthdays, anniversaries, small weddings, school concerts, team offsites, launches, and community gatherings. The goal isn't a permanent gallery. The goal is a clean, short-lived way to let the right people see the photos, without turning the group chat into a war zone.</p>
+      <div class="row mt-3 g-3">
+        <div class="col-md-4"><div class="fact-grid-card"><h4>Best for</h4><p>Any event with more than a handful of guests and more than a handful of photos worth sharing.</p></div></div>
+        <div class="col-md-4"><div class="fact-grid-card"><h4>Hard limit</h4><p>One share holds up to 25 files. Bigger nights should be split by moment — the storytelling works better that way too.</p></div></div>
+        <div class="col-md-4"><div class="fact-grid-card"><h4>Real tools</h4><p>One link + one QR per share, view limits, expiry windows, a clean revoke. No app install for viewers.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section-card" id="runbook">
+      <h2><i class="fas fa-list-check"></i> The runbook, step by step</h2>
+      <div class="row g-3 mt-2">
+        <div class="col-md-6"><div class="fact-grid-card"><h4>1. Pre-event: plan the moments</h4><p>Write down 3–5 moments you know you'll want to share afterwards. Each one will become its own link.</p></div></div>
+        <div class="col-md-6"><div class="fact-grid-card"><h4>2. During: take more, post less</h4><p>Don't spam the group chat with phone shots. Collect the photos in one place; sort at the end of the night, not during.</p></div></div>
+        <div class="col-md-6"><div class="fact-grid-card"><h4>3. Next morning: make the shares</h4><p>One share per moment, up to 25 photos each, ordered from cover → highlight → details. Generate link + QR.</p></div></div>
+        <div class="col-md-6"><div class="fact-grid-card"><h4>4. Distribute: chat + table</h4><p>Send the direct links in the group chat. For in-venue follow-ups or next events, print the QR on a small card.</p></div></div>
+        <div class="col-md-6"><div class="fact-grid-card"><h4>5. Mid-week: check the opens</h4><p>Look at the view counts. If nobody opened a link, consider re-sending; if people keep opening after a week, consider tightening expiry.</p></div></div>
+        <div class="col-md-6"><div class="fact-grid-card"><h4>6. End-of-week: close it out</h4><p>Switch the shares off. The right people have seen the photos; the forwards stop working; your inbox goes quiet.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-images"></i> What this looks like at the event</h2>
+      <div class="story-stack mt-3">
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-qrcode"></i> On the table</span>
+            <h3>One small QR card beats reading a URL out loud</h3>
+            <p>At an event, nobody is going to type `maiimg.com/s/a7f3k2`. A small printed QR card on each table turns “where are the photos?” into a one-second scan. Phone camera, one tap, the photos are already open.</p>
+          </div>
+          <div class="story-visual"><div class="media-frame"><img src="../static-images/common/show/scantoshare.jpg" alt="Guest scanning an event photo QR code with a phone camera" loading="lazy" data-zoom-caption="A QR on the table means guests open the photos during the event, not after three reminders in the group chat." /></div></div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual"><div class="media-frame"><img src="../static-images/common/show/english-qr-poster.svg" alt="Printed QR poster for event photo sharing" loading="lazy" data-zoom-caption="A light QR poster at the entrance or bar sets expectations: photos are coming, here's the link." /></div></div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-sign-hanging"></i> At the entrance</span>
+            <h3>Set expectations once, at the door</h3>
+            <p>A single poster near the entrance (“Photos will be shared here”) does a lot of the work. People relax about their own shots and stop spamming the group with bad phone pictures.</p>
+          </div>
+        </article>
+        <article class="story-block">
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-diagram-project"></i> The flow</span>
+            <h3>Upload once, one link, one QR, one off switch</h3>
+            <p>Every moment share follows the same shape. You don't reinvent the workflow per event — only the content changes. That's the whole point of a runbook: repeatable, low-stress, good enough every time.</p>
+          </div>
+          <div class="story-visual story-visual--diagram"><img class="img-cyber" src="diagram/event-photo-runbook.svg" alt="Event photo sharing runbook flow: plan, capture, upload, distribute, close" loading="lazy" data-zoom-caption="Plan the moments, capture, upload, distribute (link + QR), then close the shares at the end of the week." /></div>
+        </article>
+        <article class="story-block story-block--reverse">
+          <div class="story-visual"><div class="media-frame media-frame--contain"><img src="../static-images/common/show/sharegallery.png" alt="Shared event photo set opened on a phone" loading="lazy" data-zoom-caption="What guests actually see: a clean, ordered set on their phone, no login wall, no download prompt." /></div></div>
+          <div class="story-copy">
+            <span class="story-kicker"><i class="fas fa-mobile-screen"></i> On the phone</span>
+            <h3>No app, no login, no clutter</h3>
+            <p>The whole reason this works is the viewer experience is boring. The link opens. Photos appear. No sign-up flyway, no forced download, no ten-step onboarding. Boring is a feature here.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-clipboard-check"></i> The short on-the-day checklist</h2>
+      <ul class="cyber-checklist">
+        <li>3–5 moments planned, one share per moment.</li>
+        <li>Up to 25 photos per share, ordered from cover → highlight → details.</li>
+        <li>One direct link + one QR per share, both from the same source.</li>
+        <li>View limit and expiry set before the link leaves your phone.</li>
+        <li>QR cards on the tables or at the entrance for in-venue opens.</li>
+        <li>Direct links in the group chat, pinned if the platform supports it.</li>
+        <li>Close the shares at the end of the week; don't let old links drift.</li>
+      </ul>
+    </section>
+
+    <section class="section-card" id="faq">
+      <h2><i class="fas fa-question-circle"></i> FAQ</h2>
+      <div class="accordion accordion-cyber mt-3" id="faqAccordion">
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">Do guests have to install an app to see the photos?</button></h3><div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body">No. A direct link opens in any browser, and the QR code opens the same page. There's no app, no sign-up, and no login wall for viewing.</div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">How many photos can one share hold?</button></h3><div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Up to 25 files. For a larger event, split by moment. Three shares of 20 photos each usually tells a better story than one dump of 60.</div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">Can I see if guests actually opened the link?</button></h3><div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Yes. Each share has simple access records: total opens, unique IPs, different browsers, first access time. Enough to know whether people saw the photos, without tracking anyone in detail.</div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">What happens after the expiry?</button></h3><div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">The direct link and the QR both stop working — they share the same back end. Anyone who kept the link or saved the QR sees the same “no longer available” state.</div></div></div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2><i class="fas fa-book-open"></i> Related reads</h2>
+      <ul class="related-reads">
+        <li><a href="wedding-photo-sharing-complete-guide"><i class="fas fa-arrow-right"></i> Share Wedding Photos with Family</a><span>Same playbook, tuned for a wedding day: family, guests, venue QR cards.</span></li>
+        <li><a href="how-to-create-qr-codes-for-images"><i class="fas fa-arrow-right"></i> How to Create QR Codes for Images</a><span>Why one QR from the same share beats a separate QR tool.</span></li>
+        <li><a href="send-school-event-photos-to-parents"><i class="fas fa-arrow-right"></i> Send School Event Photos to Parents</a><span>A quieter variation of this runbook for schools and classroom events.</span></li>
+      </ul>
+    </section>
+
+    <div class="cta-cyber mb-4">
+      <h2 class="mb-3" style="color:#fff;">Run your next event without chat spam</h2>
+      <p class="mx-auto mb-4" style="max-width:680px;color:var(--text-soft);">One share per moment, one QR on the tables, view limits from the start, and a clean close at the end of the week.</p>
+      <a href="https://maiimg.com" class="btn-cyber">Try MaiIMG</a>
+    </div>
+  </main>
+
+  <footer class="footer-cyber">Copyright <span data-current-year></span> MaiIMG Blog</footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../blog-common.js"></script>
+</body>
+</html>

@@ -22,3 +22,129 @@
 /pdf/* 410
 /free/* 410
 /file/* 410
+
+# =====================================================================
+# Blog 合并规则（2026-04-22 追加，不影响上面的 gallery/media URL 重写）
+# 来源：work.html > Blog 合并与 SEO 计划 tab
+# 规则形式：每个旧路径同时匹配无扩展名 + .html 两种形式
+# =====================================================================
+
+# ---- 永久下线（410 Gone，不做 301，避免把无关流量汇入其它主题） ----
+/blog/en/professional-photo-sharing-for-businesses 410
+/blog/en/professional-photo-sharing-for-businesses.html 410
+/blog/en/photo-sharing-workflow-comparison-for-marketing-teams 410
+/blog/en/photo-sharing-workflow-comparison-for-marketing-teams.html 410
+/blog/en/why-your-business-needs-qr-code-image-strategy 410
+/blog/en/why-your-business-needs-qr-code-image-strategy.html 410
+/blog/en/image-optimization-techniques 410
+/blog/en/image-optimization-techniques.html 410
+/blog/en/photo-copyright-licensing-guide 410
+/blog/en/photo-copyright-licensing-guide.html 410
+/blog/en/photo-backup-strategies-guide 410
+/blog/en/photo-backup-strategies-guide.html 410
+/blog/en/mobile-photo-sharing-trends-2025 410
+/blog/en/mobile-photo-sharing-trends-2025.html 410
+/blog/en/secure-pdf-document-sharing-qr-codes 410
+/blog/en/secure-pdf-document-sharing-qr-codes.html 410
+
+# ---- 组 A：免费图床 / 上传工具对比 → 主文 ----
+/blog/en/best-free-online-photo-storage-solutions-2025 /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/best-free-online-photo-storage-solutions-2025.html /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/free-image-host-complete-guide-2025 /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/free-image-host-complete-guide-2025.html /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/free-icloud-alternative-unlimited-photo-storage /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/free-icloud-alternative-unlimited-photo-storage.html /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-hosting-free-complete-guide /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-hosting-free-complete-guide.html /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-hosting-no-registration-best-free-services /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-hosting-no-registration-best-free-services.html /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-hosting-and-sharing-platforms-guide /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-hosting-and-sharing-platforms-guide.html /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-uploader-online-best-free-tools-2025 /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-uploader-online-best-free-tools-2025.html /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-upload-service-best-platforms-compared /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-upload-service-best-platforms-compared.html /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/photo-hosting-solutions-comparison /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/photo-hosting-solutions-comparison.html /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-sharing-platform-complete-comparison /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/image-sharing-platform-complete-comparison.html /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/upload-images-online-free-best-platforms /blog/en/upload-images-online-best-practices 301
+/blog/en/upload-images-online-free-best-platforms.html /blog/en/upload-images-online-best-practices 301
+/blog/en/best-photo-hosting-for-forums-complete-guide /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/best-photo-hosting-for-forums-complete-guide.html /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/h5-image-gallery-platforms-comparison /blog/en/best-free-image-hosting-sites-2025 301
+/blog/en/h5-image-gallery-platforms-comparison.html /blog/en/best-free-image-hosting-sites-2025 301
+
+# ---- 组 B：ImgBB 替代 → 主文 ----
+/blog/en/free-image-uploader-best-alternatives-to-imgbb /blog/en/imgbb-alternative-for-controlled-image-sharing 301
+/blog/en/free-image-uploader-best-alternatives-to-imgbb.html /blog/en/imgbb-alternative-for-controlled-image-sharing 301
+/blog/en/direct-image-links-generator-imgbb-alternative /blog/en/imgbb-alternative-for-controlled-image-sharing 301
+/blog/en/direct-image-links-generator-imgbb-alternative.html /blog/en/imgbb-alternative-for-controlled-image-sharing 301
+/blog/en/best-imgbb-alternatives-for-teams /blog/en/imgbb-alternative-for-controlled-image-sharing 301
+/blog/en/best-imgbb-alternatives-for-teams.html /blog/en/imgbb-alternative-for-controlled-image-sharing 301
+
+# ---- 组 C：Image URL / Link 生成 → 主文 ----
+/blog/en/how-to-create-image-links-complete-guide /blog/en/how-to-generate-image-sharing-links 301
+/blog/en/how-to-create-image-links-complete-guide.html /blog/en/how-to-generate-image-sharing-links 301
+/blog/en/image-url-generator-free-complete-comparison /blog/en/how-to-generate-image-sharing-links 301
+/blog/en/image-url-generator-free-complete-comparison.html /blog/en/how-to-generate-image-sharing-links 301
+/blog/en/image-url-generator-tools-comparison /blog/en/how-to-generate-image-sharing-links 301
+/blog/en/image-url-generator-tools-comparison.html /blog/en/how-to-generate-image-sharing-links 301
+/blog/en/permanent-file-sharing-links-qr-codes /blog/en/how-to-generate-image-sharing-links 301
+/blog/en/permanent-file-sharing-links-qr-codes.html /blog/en/how-to-generate-image-sharing-links 301
+
+# ---- 组 D：二维码 → 活动主文 ----
+/blog/en/qr-image-sharing-for-events-practical-checklist /blog/en/event-photo-sharing-runbook 301
+/blog/en/qr-image-sharing-for-events-practical-checklist.html /blog/en/event-photo-sharing-runbook 301
+
+# ---- 组 E：安全 / 隐私 / 控制 → 主文 ----
+# 注意：组 E 里 ip-tracking-secure-file-sharing 与 image-analytics-and-tracking-guide 的 301
+#       目标 access-logs-for-shared-photo-links 尚未建立，留到下一阶段再追加。
+/blog/en/secure-image-sharing-guide /blog/en/image-security-and-privacy-guide 301
+/blog/en/secure-image-sharing-guide.html /blog/en/image-security-and-privacy-guide 301
+/blog/en/safest-way-to-share-photos-privately /blog/en/image-security-and-privacy-guide 301
+/blog/en/safest-way-to-share-photos-privately.html /blog/en/image-security-and-privacy-guide 301
+/blog/en/secure-family-photo-sharing-guide /blog/en/share-family-photos-with-a-qr-code 301
+/blog/en/secure-family-photo-sharing-guide.html /blog/en/share-family-photos-with-a-qr-code 301
+
+# ---- 组 F：婚礼 / 活动 → 主文 ----
+/blog/en/wedding-photo-delivery-workflow-guide /blog/en/wedding-photo-sharing-complete-guide 301
+/blog/en/wedding-photo-delivery-workflow-guide.html /blog/en/wedding-photo-sharing-complete-guide 301
+/blog/en/event-photography-workflow-guide /blog/en/event-photo-sharing-runbook 301
+/blog/en/event-photography-workflow-guide.html /blog/en/event-photo-sharing-runbook 301
+/blog/en/stop-flooding-chat-groups-share-event-photos /blog/en/event-photo-sharing-runbook 301
+/blog/en/stop-flooding-chat-groups-share-event-photos.html /blog/en/event-photo-sharing-runbook 301
+/blog/en/share-party-photos-on-whatsapp-without-chaos /blog/en/event-photo-sharing-runbook 301
+/blog/en/share-party-photos-on-whatsapp-without-chaos.html /blog/en/event-photo-sharing-runbook 301
+
+# ---- 组 G：作品集 → 摄影师主文 ----
+/blog/en/designer-portfolio-sharing-guide /blog/en/photographer-portfolio-sharing-guide 301
+/blog/en/designer-portfolio-sharing-guide.html /blog/en/photographer-portfolio-sharing-guide 301
+/blog/en/portfolio-image-sharing-best-practice-guide /blog/en/photographer-portfolio-sharing-guide 301
+/blog/en/portfolio-image-sharing-best-practice-guide.html /blog/en/photographer-portfolio-sharing-guide 301
+
+# ---- 组 H：Gallery / Album / 客户交付 ----
+/blog/en/how-to-create-online-image-galleries-guide /blog/en/how-to-create-online-photo-albums-complete-guide 301
+/blog/en/how-to-create-online-image-galleries-guide.html /blog/en/how-to-create-online-photo-albums-complete-guide 301
+/blog/en/agency-client-proofing-link-guide /blog/en/client-gallery-delivery-playbook 301
+/blog/en/agency-client-proofing-link-guide.html /blog/en/client-gallery-delivery-playbook 301
+
+# ---- 组 I：电商 / 场景 ----
+/blog/en/how-to-share-product-photos-with-customers-fast /blog/en/ecommerce-product-photo-sharing-guide 301
+/blog/en/how-to-share-product-photos-with-customers-fast.html /blog/en/ecommerce-product-photo-sharing-guide 301
+/blog/en/real-estate-photo-sharing-setup-guide /blog/en/real-estate-photo-sharing-guide 301
+/blog/en/real-estate-photo-sharing-setup-guide.html /blog/en/real-estate-photo-sharing-guide 301
+
+# ---- 组 J：不走社交媒体 / 群聊 ----
+/blog/en/share-photos-without-social-media-drama /blog/en/share-photos-without-social-media-complete-guide 301
+/blog/en/share-photos-without-social-media-drama.html /blog/en/share-photos-without-social-media-complete-guide 301
+/blog/en/social-media-photo-sharing-guide /blog/en/share-photos-without-social-media-complete-guide 301
+/blog/en/social-media-photo-sharing-guide.html /blog/en/share-photos-without-social-media-complete-guide 301
+/blog/en/send-vacation-photos-without-spamming-chat /blog/en/share-photos-without-social-media-complete-guide 301
+/blog/en/send-vacation-photos-without-spamming-chat.html /blog/en/share-photos-without-social-media-complete-guide 301
+/blog/en/phone-storage-unlimited-photo-sharing-solution /blog/en/airdrop-alternative-reliable-photo-sharing 301
+/blog/en/phone-storage-unlimited-photo-sharing-solution.html /blog/en/airdrop-alternative-reliable-photo-sharing 301
+
+# ---- 组 K：Facebook ----
+/blog/en/simple-facebook-photo-album-sharing-guide /blog/en/facebook-photo-sharing-with-one-link 301
+/blog/en/simple-facebook-photo-album-sharing-guide.html /blog/en/facebook-photo-sharing-with-one-link 301

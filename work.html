@@ -134,14 +134,15 @@
   <main class="wrap">
     <section class="head">
       <h1>项目工作与日志记录</h1>
-      <p class="sub">更新时间：2026-03-23</p>
-      <p class="sub">说明：保留“最新工作记录”，新增“项目总日志”tab，后续整个项目的重要变更与阶段性盘点统一往项目总日志里追加。</p>
+      <p class="sub">更新时间：2026-04-22</p>
+      <p class="sub">说明：保留“最新工作记录”，新增“项目总日志”与“Blog 合并与 SEO 计划”两个 tab，后续博客大修与关键词策略统一往计划 tab 里写，执行动作再回到总日志。</p>
     </section>
 
     <nav class="tabs" aria-label="工作记录标签页">
       <button class="tab-btn" data-tab="knowledge-base">Knowledge Base</button>
       <button class="tab-btn" data-tab="project-log">项目总日志</button>
-      <button class="tab-btn active" data-tab="latest-work">最新工作记录</button>
+      <button class="tab-btn" data-tab="latest-work">最新工作记录</button>
+      <button class="tab-btn active" data-tab="blog-seo-plan">Blog 合并与 SEO 计划</button>
     </nav>
 
     <section class="tab-panel" id="knowledge-base">
@@ -560,7 +561,155 @@
       </section>
 
       <section class="card">
-        <div class="row"><h2>2026-03-23：Blog 内容密度样本记录</h2><span class="tag info">结构观察</span></div>
+        <div class="row"><h2>2026-04-22：Blog 大修 Phase 1 基线快照</h2><span class="tag ok">只读盘点</span></div>
+        <p><strong>动作：</strong>按 Blog 计划 tab 的“执行前自检清单”把关键基础设施文件读了一遍，记录入此日志避免后续动作误伤。</p>
+        <p><strong>Cloudflare Pages <code>_redirects</code>（25 行）：</strong></p>
+        <ul>
+          <li>现有规则全部是 URL rewrite（<code>/gallery/:id</code>、<code>/g/:id</code>、<code>/media/:id</code>、<code>/m/:id</code>、<code>/</code> → <code>/index.html</code>，都是 <strong>200 rewrite</strong>）与 4 条 410 Gone（<code>/dec/*</code>、<code>/pdf/*</code>、<code>/free/*</code>、<code>/file/*</code>）。</li>
+          <li><strong>没有任何 blog 301 规则</strong>，空间干净。本次合并只追加 blog 相关行，不改任何已有规则。</li>
+        </ul>
+        <p><strong><code>robots.txt</code>：</strong></p>
+        <ul>
+          <li>已 <code>Allow: /blog/</code> 与 <code>Allow: /blog/*/</code>。</li>
+          <li>已 <code>Disallow: /gallery/*</code>（gallery 不进搜索结果，符合产品定位）。</li>
+          <li>已指向 <code>https://maiimg.com/sitemap.xml</code>。本次不动这份文件。</li>
+        </ul>
+        <p><strong><code>sitemap.xml</code>（51 条 URL）：</strong></p>
+        <ul>
+          <li>blog URL 统一<strong>无 <code>.html</code> 后缀</strong>（例如 <code>/blog/en/how-to-generate-image-sharing-links</code>），意味着 Google 索引的是无扩展名路径，<code>_redirects</code> 的 301 source 也按这个形式写。</li>
+          <li>sitemap 里当前收录了 8 篇本次要删除的 URL：<code>image-optimization-techniques</code>、<code>image-analytics-and-tracking-guide</code>、<code>why-your-business-needs-qr-code-image-strategy</code>、<code>secure-pdf-document-sharing-qr-codes</code>、<code>ip-tracking-secure-file-sharing</code>、<code>mobile-photo-sharing-trends-2025</code>、<code>photo-copyright-licensing-guide</code>、<code>photo-backup-strategies-guide</code>，需要同步移除。</li>
+          <li>另外还收录了若干 merge-source URL（例如 <code>photo-hosting-solutions-comparison</code>、<code>image-hosting-and-sharing-platforms-guide</code>、<code>secure-image-sharing-guide</code>、<code>safest-way-to-share-photos-privately</code>、<code>stop-flooding-chat-groups-share-event-photos</code>、<code>phone-storage-unlimited-photo-sharing-solution</code>、<code>share-photos-without-social-media-drama</code>、<code>free-icloud-alternative-unlimited-photo-storage</code>、<code>permanent-file-sharing-links-qr-codes</code>），合并后这些 URL 都会 301，也要从 sitemap 移除。</li>
+        </ul>
+        <p><strong><code>blog/en/index.html</code> 文章卡片链接：</strong></p>
+        <ul>
+          <li>共 9 条卡片，指向：<code>how-to-generate-image-sharing-links</code>、<code>how-to-create-qr-codes-for-images</code>、<code>image-security-and-privacy-guide</code>、<code>artist-portfolio-sharing-guide</code>、<code>image-sharing-workflow-diagrams-guide</code>、<code>airdrop-alternative-reliable-photo-sharing</code>、<code>client-gallery-delivery-playbook</code>、<code>wedding-photo-sharing-complete-guide</code>、<code>real-estate-photo-sharing-guide</code>。</li>
+          <li><strong>这 9 篇全部在 Keep 清单里，index 页本次不用改。</strong>（另外 60+ 篇英文文章都是游离的，也解释了它们为什么不被收录。）</li>
+        </ul>
+        <p><strong>保留文内链指向 merge-source 的情况：</strong></p>
+        <ul>
+          <li><code>blog/en/image-link-expiry-rules-for-client-delivery.html</code> 第 38 行：链到 <code>qr-image-sharing-for-events-practical-checklist</code>（该文会 301 到 <code>event-photo-sharing-runbook</code>）。</li>
+          <li><code>blog/en/imgbb-alternative-for-controlled-image-sharing.html</code> 第 89 行：同上。</li>
+          <li>为避免内链走 301 一跳的权重损耗，这次一并改成直指最终目标。</li>
+        </ul>
+        <p><strong>待执行的 Phase 3 / 4 动作（基于本基线）：</strong></p>
+        <ul>
+          <li>删除 8 个文件（决策清单里已确认）。</li>
+          <li>向 <code>_redirects</code> 追加 blog 合并的 301 规则（每个旧路径配无扩展名 + <code>.html</code> 两行）。</li>
+          <li>向 <code>_redirects</code> 追加 8 条 410 Gone（对应删除文件的无扩展名路径），走已有 <code>/dec/* 410</code> 同款语义，给 Google 更快的下线信号。</li>
+          <li>更新 <code>sitemap.xml</code>：移除 8 个删除项 + 移除所有 merge-source URL，留下 canonical 目标。</li>
+          <li><strong>组 E 涉及改名的 2 条 301（<code>ip-tracking-secure-file-sharing</code>、<code>image-analytics-and-tracking-guide</code> → <code>access-logs-for-shared-photo-links</code>）暂缓</strong>，等目标新文件建好再加，避免 301 指向 404。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-04-22：Blog 大修 Phase 5-1 首批（10 篇英文主文已精修）</h2><span class="tag ok">动作完成</span></div>
+        <p><strong>已完成动作：</strong></p>
+        <ul>
+          <li><strong>已精修 4 篇既有 cyber 英文主文</strong>（补 <code>Last reviewed</code>、<code>dateModified</code>、<code>image</code>、<code>author</code>、<code>publisher</code>、<code>hreflang</code>、<code>og:image</code>、<code>article:modified_time</code>、Related reads 三连；把会渲染中文“分钟阅读”的 <code>data-reading-minutes</code> 换成英文纯文本 <code>N min read</code>）：
+            <code>how-to-generate-image-sharing-links.html</code>、
+            <code>how-to-create-qr-codes-for-images.html</code>、
+            <code>image-security-and-privacy-guide.html</code>、
+            <code>artist-portfolio-sharing-guide.html</code>。</li>
+          <li><strong>已迁移 6 篇老模板文件到 cyber</strong>（整文重写，cyber-frame hero + 3 cyber-mini-cards + story-stack + 英文 FAQ + Related reads + CTA；每篇新增 5–8 张 static-images/common/show/ 的英文图或 diagram/ 流程图）：
+            <code>wedding-photo-sharing-complete-guide.html</code>（机翻标题 <em>Practical guide</em> 修掉，新标题 <em>Share Wedding Photos with Family (Complete Guide)</em>）、
+            <code>imgbb-alternative-for-controlled-image-sharing.html</code>（<em>Practical guide</em> 修掉，新标题 <em>ImgBB Alternative With Real Access Control</em>）、
+            <code>best-free-image-hosting-sites-2025.html</code>（SEO 最重磁铁，13 篇 merge-source 301 汇入）、
+            <code>event-photo-sharing-runbook.html</code>（多条 301 汇入）、
+            <code>share-photos-without-social-media-complete-guide.html</code>（<em>Practical guide</em> 修掉）、
+            <code>easiest-way-to-share-photos-with-qr-codes.html</code>（核心 QR 关键词落地页）。</li>
+          <li><strong>追加 <code>blog-common.js</code> 对 <code>data-last-reviewed</code> 属性的支持</strong>（新 <code>querySelectorAll</code>，与旧 <code>data-last-edited</code> 并列，未改动任何既有函数或输出）。</li>
+          <li><strong>追加 <code>blog-cyber.css</code> 两个新类：<code>.cyber-checklist</code>、<code>.related-reads</code></strong>（只在文件末尾追加 ~55 行样式，不改既有选择器；颜色/圆角/边框与原 cyber 主题一致，含 hover 态）。</li>
+        </ul>
+        <p><strong>英文博客图配图策略（本批已落地）：</strong></p>
+        <ul>
+          <li><code>show/english-*.svg</code> 系列（share-entry-hero / qr-poster / link-sharing-card / security-control-board / portfolio-preview）优先用于 hero 区或 story-block 主视觉。</li>
+          <li><code>show/*.jpg</code>（elegantphotoshare / scantoshare / secureshare / secureimageshareing / upload）用于情景化 story-block，匹配“一看就懂”的用户视角。</li>
+          <li><code>show/*.png</code>（limtandexpirtion / sharemaiimg / sharegallery / sharewithacharacter）用于“控制面板/成品界面”类 story-block。</li>
+          <li><code>blog/en/diagram/*.svg</code> 用于每篇的流程图 story-block，一篇配 1 张（event-runbook / security-control-flow / image-sharing-workflow / english-qr-channel-flow / best-free-image-hosting / channel-distribution-matrix）。</li>
+        </ul>
+        <p><strong>当前剩余老模板 Keep 文件（~17 篇，下一批）：</strong>
+          <code>one-link-photo-sharing-for-community-groups</code>、
+          <code>how-to-create-online-photo-albums-complete-guide</code>、
+          <code>photographer-portfolio-sharing-guide</code>、
+          <code>client-gallery-delivery-playbook</code>、
+          <code>share-family-photos-with-a-qr-code</code>、
+          <code>airdrop-alternative-reliable-photo-sharing</code>、
+          <code>send-school-event-photos-to-parents</code>、
+          <code>how-to-share-a-photo-album-on-whatsapp-with-one-link</code>、
+          <code>facebook-photo-sharing-with-one-link</code>、
+          <code>ecommerce-product-photo-sharing-guide</code>、
+          <code>real-estate-photo-sharing-guide</code>、
+          <code>automotive-photo-sharing-guide</code>、
+          <code>image-link-expiry-rules-for-client-delivery</code>、
+          <code>upload-images-online-best-practices</code>、
+          <code>image-sharing-best-practices</code>、
+          <code>image-sharing-workflow-diagrams-guide</code>、
+          <code>direct-file-viewing-no-redirects</code>（需改名为 Direct Image Links 主题）。</p>
+        <p><strong>验证结果：</strong></p>
+        <ul>
+          <li>10 篇文件 lint 通过（<code>ReadLints</code> 全绿）。</li>
+          <li><code>blog-common.js</code> 与 <code>blog-cyber.css</code> 的 diff 仅为纯追加（未动既有选择器/函数），红线未触碰。</li>
+          <li>配图全部指向实际存在的 <code>static-images/common/show/*</code> 或 <code>blog/en/diagram/*.svg</code>（已 Glob 全量盘点过）。</li>
+          <li>每篇 JSON-LD 含 <code>@type</code>、<code>headline</code>、<code>description</code>、<code>datePublished</code>、<code>dateModified=2026-04-22</code>、<code>image</code>、<code>author</code>、<code>publisher</code>、<code>mainEntityOfPage</code>、<code>inLanguage=en</code>；head 同步补 <code>article:modified_time</code>、<code>og:image</code>、<code>twitter:image</code>、<code>hreflang en/x-default</code>。</li>
+        </ul>
+        <p><strong>未触及的红线区域：</strong>
+          <code>gallery/index.html</code>、<code>media/index.html</code>、短链/URL rewrite 规则、
+          <code>index.html</code>、<code>maiimg.html</code>、<code>dashboard.html</code>、<code>tracking.html</code>、
+          <code>_redirects</code> 顶部 25 行。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-04-22：Blog 大修 Phase 3+4 已执行</h2><span class="tag ok">动作完成</span></div>
+        <p><strong>已完成动作：</strong></p>
+        <ul>
+          <li><strong>删除 8 个英文文章文件</strong>（决策 1-3 对应，无 301，直接下线）：
+            <code>professional-photo-sharing-for-businesses.html</code>、
+            <code>photo-sharing-workflow-comparison-for-marketing-teams.html</code>、
+            <code>why-your-business-needs-qr-code-image-strategy.html</code>、
+            <code>image-optimization-techniques.html</code>、
+            <code>photo-copyright-licensing-guide.html</code>、
+            <code>photo-backup-strategies-guide.html</code>、
+            <code>mobile-photo-sharing-trends-2025.html</code>、
+            <code>secure-pdf-document-sharing-qr-codes.html</code>。</li>
+          <li><strong>修正 2 条保留文内链</strong>，避免跳 301：
+            <code>image-link-expiry-rules-for-client-delivery.html</code> 与 <code>imgbb-alternative-for-controlled-image-sharing.html</code> 中对 <code>qr-image-sharing-for-events-practical-checklist</code> 的链接已直接改指 <code>event-photo-sharing-runbook</code>。</li>
+          <li><strong>向 <code>_redirects</code> 追加 105 行 blog 合并规则</strong>（顶部 25 行 URL rewrite + 410 规则原样保留，未动一字）：
+            <ul>
+              <li>8 篇删除页面 → <strong>410 Gone</strong>（无 301，直接让它们从搜索结果里出清，与站内已有 <code>/dec/* 410</code> 同款语义）。</li>
+              <li>组 A/B/C/D/E/F/G/H/I/J/K 的 merge-source 全部 → 301 到各自主文；每条旧路径同时匹配无扩展名 + <code>.html</code> 两种形式。</li>
+              <li>组 E 的 <code>ip-tracking-secure-file-sharing</code> 和 <code>image-analytics-and-tracking-guide</code> 的 301<strong>暂缓</strong>，等目标新文件 <code>access-logs-for-shared-photo-links</code> 建立后再追加，避免 301 指向 404。</li>
+            </ul>
+          </li>
+          <li><strong>清理 <code>sitemap.xml</code></strong>：移除 8 篇删除 URL + 9 条 merge-source URL；同时补入 17 条此前遗漏的 Keep 主文 URL（例如 <code>wedding-photo-sharing-complete-guide</code>、<code>photographer-portfolio-sharing-guide</code>、<code>best-free-image-hosting-sites-2025</code> 等，这些原 sitemap 里根本没有收录，也解释了为什么 Google 之前搜不到）。</li>
+        </ul>
+        <p><strong>当前数据点：</strong></p>
+        <ul>
+          <li>英文博客文件数：77 → <strong>69</strong>（减少 8）。</li>
+          <li><code>_redirects</code> 行数：25 → <strong>130</strong>（顶部原规则未动，新增 105 行分 12 组，带注释分隔）。</li>
+          <li>sitemap URL 总数：51 → <strong>51</strong>（移除 17 条重复/无效 URL，补入 17 条 Keep 主文 URL）。</li>
+          <li>sitemap 里 blog/en/ URL：28 → <strong>28</strong>（内容已全部指向物理存在的 Keep 文件；已逐条校验过没有坏链）。</li>
+        </ul>
+        <p><strong>验证结果：</strong></p>
+        <ul>
+          <li>sitemap.xml XML 解析通过（<code>[xml]</code> PowerShell 校验）。</li>
+          <li>sitemap 每条 <code>&lt;loc&gt;</code> 对应的物理文件都存在（逐条 Test-Path 校验通过）。</li>
+          <li>已保留文件的 HTML lint 无错。</li>
+          <li><code>_redirects</code> 顶部 25 行（<code>/gallery/:id</code>、<code>/g/:id</code>、<code>/media/:id</code>、<code>/m/:id</code>、<code>/ /index.html</code>、<code>/dec/* 410</code> 等）一字未改。</li>
+        </ul>
+        <p><strong>未触及的红线区域：</strong>
+          <code>gallery/index.html</code>、<code>media/index.html</code>、短链/URL rewrite 规则、
+          <code>index.html</code>、<code>maiimg.html</code>、<code>dashboard.html</code>、<code>tracking.html</code>、
+          <code>blog/blog-cyber.css</code>、<code>blog/blog-common.js</code>。</p>
+        <p><strong>下一步（Phase 5 预备）：</strong></p>
+        <ul>
+          <li>Phase 5-1：按主题区 Getting started → Privacy & control → Personal scenarios → Events → Creators → Reference 的顺序批量重写 Keep 主文。每篇补齐：合规标题（去掉“Practical guide”机翻痕迹）、精简首段、<code>Last reviewed on 2026-04-22</code>、Article JSON-LD（<code>dateModified</code>）、3 条 Related reads 内链。</li>
+          <li>Phase 5-2：创建 <code>blog/en/access-logs-for-shared-photo-links.html</code>（吸收 <code>ip-tracking</code> 与 <code>image-analytics-and-tracking</code> 的内容），上线后追加两条对应的 301。</li>
+          <li>Phase 5-3：重写 <code>blog/en/index.html</code> 卡片为 6 个主题区分组；所有 Keep 主文加入 Related reads 内链矩阵。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-04-22：Blog 大修 Phase 1 基线快照</h2><span class="tag ok">只读盘点</span></div>
         <p><strong>英文目录代表文件：</strong></p>
         <ul>
           <li><code>agency-client-proofing-link-guide.html</code></li>
@@ -581,7 +730,7 @@
       </section>
     </section>
 
-    <section class="tab-panel active" id="latest-work">
+    <section class="tab-panel" id="latest-work">
       <section class="card">
         <div class="row"><h2>1) 首页底部链接（手机端）排版优化</h2><span class="tag ok">已完成</span></div>
         <ul>
@@ -678,7 +827,469 @@ flowchart TB
       </section>
     </section>
 
-    <p class="foot">备注：本页继续作为项目执行记录页使用；即时任务记在“最新工作记录”，跨阶段与跨模块内容记在“项目总日志”。</p>
+    <section class="tab-panel active" id="blog-seo-plan">
+      <section class="card">
+        <div class="row"><h2>这份计划的目标</h2><span class="tag info">总纲</span></div>
+        <ul>
+          <li>当前 <code>blog/en/</code> 下有 <strong>76 篇正文 + 1 个 index</strong>，多处主题严重重合，关键词互相内耗。</li>
+          <li><code>maiimg.com</code> 目前在 Google 基本搜不到，说明落地页少、关键词散、标题偏弱、内链没形成矩阵。</li>
+          <li>产品定位必须回到“给普通人用的图片/短视频分享工具”：朋友、家人、群、活动、个人作品。<strong>不要写成企业级、团队协作、DAM、API 平台</strong>。</li>
+          <li>产品<strong>没有 API、没有 SDK、没有私有化、没有端到端加密</strong>，这几类字眼一律从 blog 里剔除。</li>
+          <li>所有保留下来的文章都要：<strong>标题精准、首段直接、信息不夸张、每篇有明确目标关键词</strong>。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>现状诊断：英文 blog 的三个问题</h2><span class="tag warn">问题</span></div>
+        <ul>
+          <li><strong>主题重复严重。</strong>例如“免费图床/上传工具对比”这一个方向就分散在 10 篇以上，关键词彼此相互稀释，Google 不知道该排哪一页。</li>
+          <li><strong>标题被模板污染。</strong>大量文章标题里出现 <code>Practical guide</code>（例如“Wedding Photo Sharing Practical guide”），是之前批处理把 <code>Complete Guide</code> 换词时留下的痕迹，读起来像机翻，不利于点击。另有个别页如 <code>image-analytics-and-tracking-guide.html</code> 的 <code>&lt;title&gt;</code> 被改成了 <code>Image Performance Guide</code>、<code>ip-tracking-secure-file-sharing.html</code> 被改成了 <code>IP measurement</code>，都属于这类异常。</li>
+          <li><strong>语气偏商业。</strong>存在 <code>Why Your Business Needs ...</code>、<code>For Marketing Teams</code>、<code>Agency Client Proofing</code>、<code>Professional Photo Sharing For Businesses</code> 这类偏 B 端的文章，和“给普通人用”的定位不一致，需要降调或合并。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>内容定位与表达基线（新口径）</h2><span class="tag info">写作约束</span></div>
+        <ul>
+          <li>读者默认是：想把一批照片或短视频发给朋友 / 家人 / 同学 / 同事 / 客户的普通用户，不是 IT、不是品牌团队。</li>
+          <li>核心卖点只讲当前真实能力：<strong>一次最多 25 个文件、链接 + 二维码、查看次数、单次查看时长、有效期、访问记录、登录后管理</strong>。</li>
+          <li>不出现的字眼：<code>API</code>、<code>SDK</code>、<code>enterprise</code>、<code>DAM</code>、<code>end-to-end encryption</code>、<code>self-hosted</code>、<code>white-label</code>、<code>unlimited team seats</code>、<code>AI tagging / search / auto-crop</code>。</li>
+          <li>语气要<strong>平实、直接、像同事在推荐一个小工具</strong>；不要“revolutionary / game-changing / enterprise-grade”这种夸张词。</li>
+          <li>避免把 MaiIMG 写成“平台”“系统”“解决方案”，它就是一个<strong>分享工具（a simple sharing tool）</strong>。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>SEO 关键词矩阵（建议的主轴）</h2><span class="tag info">关键词</span></div>
+        <p>先把产品真正能回答的搜索意图列出来，再把每篇 blog 绑定到 1 个主关键词 + 2~3 个长尾，不要再出现“一篇文章想覆盖五个方向”。</p>
+        <p><strong>核心主词（高优先级，每个都要有一个最强落地页）：</strong></p>
+        <ul>
+          <li><code>share photos via qr code</code> / <code>qr code for photo album</code></li>
+          <li><code>photo sharing link with expiration</code> / <code>expiring image link</code></li>
+          <li><code>private photo sharing link</code> / <code>share photos without social media</code></li>
+          <li><code>no signup photo sharing</code> / <code>photo sharing without account</code></li>
+          <li><code>share photos with view limit</code> / <code>one-time view photo link</code></li>
+          <li><code>share photo album with one link</code></li>
+        </ul>
+        <p><strong>场景长尾（每个场景一篇，就够了，不要写三篇）：</strong></p>
+        <ul>
+          <li>家庭 / 朋友：<code>share family photos with a qr code</code>、<code>send vacation photos to a group</code>。</li>
+          <li>活动 / 聚会：<code>share event photos with guests</code>、<code>share wedding photos with family</code>。</li>
+          <li>学校 / 社区：<code>send school event photos to parents</code>、<code>community group photo sharing</code>。</li>
+          <li>个人作品：<code>share portfolio photos online</code>、<code>send portfolio link to a client</code>。</li>
+          <li>平台迁移：<code>imgbb alternative for private sharing</code>（<strong>保留 1 篇就够</strong>，现在有 4 篇在互相抢）。</li>
+        </ul>
+        <p><strong>不建议再做的方向</strong>：<code>best free image hosting 2025</code> 这类泛对比题，竞争极高而且和 MaiIMG 的真实卖点（控时、控次、带二维码）不重合，保留 1 篇做兜底即可，其余合并。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>英文 blog 重复主题清单（合并决策）</h2><span class="tag warn">执行对象</span></div>
+        <p>下面按主题分组。每组指定 <strong>Keep（保留为主文）</strong>、<strong>Merge into（合并到主文并 301）</strong> 或 <strong>Rewrite（改写方向）</strong>。主文会作为该关键词的唯一落地页。</p>
+
+        <p><strong>组 A：免费图床 / 上传工具对比（共 12 篇，压到 2 篇）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>best-free-image-hosting-sites-2025.html</code>（做“年度对比”落地页，标题改得更克制：Best Free Image Hosting Sites, 2025 edition）。</li>
+          <li><strong>Keep：</strong><code>upload-images-online-best-practices.html</code>（做“怎么上传 / 上传注意点”的教学页，主词 <code>upload images online</code>）。</li>
+          <li><strong>Merge into best-free-image-hosting-sites-2025：</strong>
+            <code>best-free-online-photo-storage-solutions-2025.html</code>、
+            <code>free-image-host-complete-guide-2025.html</code>、
+            <code>free-icloud-alternative-unlimited-photo-storage.html</code>、
+            <code>image-hosting-free-complete-guide.html</code>、
+            <code>image-hosting-no-registration-best-free-services.html</code>、
+            <code>image-hosting-and-sharing-platforms-guide.html</code>、
+            <code>image-uploader-online-best-free-tools-2025.html</code>、
+            <code>image-upload-service-best-platforms-compared.html</code>、
+            <code>photo-hosting-solutions-comparison.html</code>、
+            <code>image-sharing-platform-complete-comparison.html</code>、
+            <code>upload-images-online-free-best-platforms.html</code>、
+            <code>best-photo-hosting-for-forums-complete-guide.html</code>、
+            <code>h5-image-gallery-platforms-comparison.html</code>。</li>
+        </ul>
+
+        <p><strong>组 B：ImgBB 替代（共 4 篇，压到 1 篇）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>imgbb-alternative-for-controlled-image-sharing.html</code>（这是和 MaiIMG 真实差异点最贴的，强调 view limit / 过期 / 二维码）。</li>
+          <li><strong>Merge：</strong>
+            <code>free-image-uploader-best-alternatives-to-imgbb.html</code>、
+            <code>direct-image-links-generator-imgbb-alternative.html</code>、
+            <code>best-imgbb-alternatives-for-teams.html</code>（<code>for-teams</code> 这篇语气偏 B 端，合并时整段去掉团队席位相关内容）。</li>
+        </ul>
+
+        <p><strong>组 C：Image URL / Link 生成（共 5 篇，压到 1 篇）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>how-to-generate-image-sharing-links.html</code>（主词 <code>how to generate image sharing links</code>，教学型，首屏放 3 步截图）。</li>
+          <li><strong>Merge：</strong>
+            <code>how-to-create-image-links-complete-guide.html</code>、
+            <code>image-url-generator-free-complete-comparison.html</code>、
+            <code>image-url-generator-tools-comparison.html</code>、
+            <code>permanent-file-sharing-links-qr-codes.html</code>（<strong>把“permanent”这种夸张词去掉</strong>，放进主文一个“what counts as a long-lived link”小节即可）。</li>
+        </ul>
+
+        <p><strong>组 D：二维码（共 7 篇，压到 2 篇）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>how-to-create-qr-codes-for-images.html</code>（教学型，主词 <code>how to create qr codes for images</code>）。</li>
+          <li><strong>Keep：</strong><code>easiest-way-to-share-photos-with-qr-codes.html</code>（场景型，主词 <code>share photos via qr code</code>，首屏放“扫一下就能看”的真实场景）。</li>
+          <li><strong>Merge：</strong>
+            <code>qr-image-sharing-for-events-practical-checklist.html</code>（并入“事件/聚会”主文）、
+            <code>share-family-photos-with-a-qr-code.html</code>（并入“家庭”主文）、
+            <code>secure-pdf-document-sharing-qr-codes.html</code>（PDF 不是 MaiIMG 的主线，<strong>直接删除或降链</strong>，避免混淆产品定位）。</li>
+          <li><strong>Rewrite 或删除：</strong><code>why-your-business-needs-qr-code-image-strategy.html</code>——“你的企业为什么需要 QR 策略”属于 B 端营销口吻，和普通用户定位冲突，<strong>建议直接删除</strong>，不合并。</li>
+        </ul>
+
+        <p><strong>组 E：安全 / 隐私 / 控制（共 7 篇，压到 2 篇）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>image-security-and-privacy-guide.html</code>（主词 <code>private photo sharing</code>，讲清楚 view limit + 过期 + 禁用链接 + 访问记录）。</li>
+          <li><strong>Keep：</strong><code>image-link-expiry-rules-for-client-delivery.html</code>（主词 <code>photo link expiration</code>，保留但把“client delivery”语气改轻，改成“sending a batch of photos”）。</li>
+          <li><strong>Merge：</strong>
+            <code>secure-image-sharing-guide.html</code>、
+            <code>safest-way-to-share-photos-privately.html</code>、
+            <code>imgbb-alternative-for-controlled-image-sharing.html</code>（该文主内容合并进组 B，仅保留壳做 301）、
+            <code>secure-family-photo-sharing-guide.html</code>（内容并入组 L 的家庭主文）。</li>
+          <li><strong>Rewrite：</strong><code>ip-tracking-secure-file-sharing.html</code>——标题“IP tracking”现在已被机翻成 <code>IP measurement</code>，而且“追踪 IP”语感偏 creepy。<strong>改名为 <code>access-logs-for-shared-photo-links.html</code></strong>，主词改为 <code>who viewed my shared link</code>。</li>
+        </ul>
+
+        <p><strong>组 F：婚礼 / 活动（共 8 篇，压到 3 篇）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>wedding-photo-sharing-complete-guide.html</code>（主词 <code>share wedding photos with family</code>，标题里的“Practical guide”改回 <code>Complete Guide</code>）。</li>
+          <li><strong>Keep：</strong><code>event-photo-sharing-runbook.html</code>（主词 <code>share event photos with guests</code>，活动/聚会通用）。</li>
+          <li><strong>Keep：</strong><code>send-school-event-photos-to-parents.html</code>（学校家长场景词好，留着）。</li>
+          <li><strong>Merge：</strong>
+            <code>wedding-photo-delivery-workflow-guide.html</code> → 婚礼主文；
+            <code>event-photography-workflow-guide.html</code> → 活动主文；
+            <code>qr-image-sharing-for-events-practical-checklist.html</code> → 活动主文的 checklist 小节；
+            <code>stop-flooding-chat-groups-share-event-photos.html</code>、<code>share-party-photos-on-whatsapp-without-chaos.html</code> → 活动主文下面的“发到群里”小节。</li>
+        </ul>
+
+        <p><strong>组 G：作品集 Portfolio（共 4 篇，压到 2 篇）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>photographer-portfolio-sharing-guide.html</code>（摄影师场景最清晰，主词 <code>photographer portfolio sharing</code>）。</li>
+          <li><strong>Keep：</strong><code>artist-portfolio-sharing-guide.html</code>（已按新模板精修完，保留当参考样本）。</li>
+          <li><strong>Merge：</strong><code>designer-portfolio-sharing-guide.html</code>、<code>portfolio-image-sharing-best-practice-guide.html</code> → 摄影师主文末尾加“for other creators (designers, illustrators)”一节即可。</li>
+        </ul>
+
+        <p><strong>组 H：Gallery / Album / 客户交付（共 4 篇，压到 1 篇）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>how-to-create-online-photo-albums-complete-guide.html</code>（主词 <code>online photo album</code>，<strong>标题把“Practical guide”改回 <code>Complete Guide</code></strong>）。</li>
+          <li><strong>Merge：</strong><code>how-to-create-online-image-galleries-guide.html</code> → 同主文。</li>
+          <li><strong>Rewrite：</strong><code>client-gallery-delivery-playbook.html</code>、<code>agency-client-proofing-link-guide.html</code>——“playbook / agency / proofing”是典型 B 端口吻，<strong>建议二选一保留为场景文</strong>，标题改成 <code>Send a Photo Album to a Client</code>，主词 <code>send photo album to client</code>，另一篇并掉。</li>
+        </ul>
+
+        <p><strong>组 I：电商 / 商务 / 营销（共 6 篇，大幅压缩）</strong></p>
+        <ul>
+          <li><strong>删除（和普通人定位冲突太强）：</strong>
+            <code>professional-photo-sharing-for-businesses.html</code>、
+            <code>photo-sharing-workflow-comparison-for-marketing-teams.html</code>、
+            <code>why-your-business-needs-qr-code-image-strategy.html</code>。</li>
+          <li><strong>Rewrite（把语气调到个人卖家 / 小店主）：</strong>
+            <code>ecommerce-product-photo-sharing-guide.html</code> → 改成 <code>share product photos with a customer</code>，面向个人卖家、小红书/闲鱼/Etsy 体量。
+            <code>how-to-share-product-photos-with-customers-fast.html</code> → 合并进上一篇，保留一个主文。</li>
+          <li><strong>Keep（场景够垂直，关键词也清楚）：</strong>
+            <code>real-estate-photo-sharing-guide.html</code>、<code>automotive-photo-sharing-guide.html</code>；但需要去掉“professional / agency”口吻。</li>
+          <li><strong>Merge：</strong><code>real-estate-photo-sharing-setup-guide.html</code> → 合进 <code>real-estate-photo-sharing-guide.html</code>，两篇几乎同义。</li>
+        </ul>
+
+        <p><strong>组 J：不走社交媒体 / 群聊替代（共 7 篇，压到 2 篇）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>share-photos-without-social-media-complete-guide.html</code>（主词 <code>share photos without social media</code>，标题把“Practical guide”改回“Complete Guide”）。</li>
+          <li><strong>Keep：</strong><code>airdrop-alternative-reliable-photo-sharing.html</code>（主词 <code>airdrop alternative</code>，跨平台场景非常实用）。</li>
+          <li><strong>Merge：</strong>
+            <code>share-photos-without-social-media-drama.html</code>、
+            <code>social-media-photo-sharing-guide.html</code>、
+            <code>stop-flooding-chat-groups-share-event-photos.html</code>（入组 F 活动主文）、
+            <code>send-vacation-photos-without-spamming-chat.html</code>、
+            <code>phone-storage-unlimited-photo-sharing-solution.html</code>（去掉“unlimited”这种夸张词后并掉）。</li>
+        </ul>
+
+        <p><strong>组 K：Facebook / WhatsApp（共 4 篇，压到 2 篇）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>how-to-share-a-photo-album-on-whatsapp-with-one-link.html</code>（主词 <code>share photo album whatsapp one link</code>，WhatsApp 搜索量很稳定）。</li>
+          <li><strong>Keep：</strong><code>facebook-photo-sharing-with-one-link.html</code>（主词 <code>facebook photo sharing one link</code>）。</li>
+          <li><strong>Merge：</strong>
+            <code>simple-facebook-photo-album-sharing-guide.html</code> → facebook 主文；
+            <code>share-party-photos-on-whatsapp-without-chaos.html</code> → 并入组 F 的活动主文，不在 WhatsApp 主文里重复。</li>
+        </ul>
+
+        <p><strong>组 L：家庭 / 社区（共 4 篇，压到 2 篇）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>share-family-photos-with-a-qr-code.html</code>（主词 <code>share family photos with qr code</code>）。</li>
+          <li><strong>Keep：</strong><code>one-link-photo-sharing-for-community-groups.html</code>（主词 <code>community group photo sharing</code>）。</li>
+          <li><strong>Merge：</strong>
+            <code>secure-family-photo-sharing-guide.html</code> → 家庭主文的“controls”小节；
+            <code>send-school-event-photos-to-parents.html</code> → 保留为组 F 的学校场景页，不复制到这里。</li>
+        </ul>
+
+        <p><strong>组 M：技术杂项（6 篇，个别删，个别保留）</strong></p>
+        <ul>
+          <li><strong>Keep：</strong><code>image-sharing-best-practices.html</code>（主词 <code>image sharing best practices</code>，保留但重写首段，去掉任何“enterprise / compliance”字眼）。</li>
+          <li><strong>Keep：</strong><code>image-sharing-workflow-diagrams-guide.html</code>（和 <code>blog/en/diagram/</code> 里的 SVG 配对，作为站内图解入口页）。</li>
+          <li><strong>Rewrite：</strong>
+            <code>image-analytics-and-tracking-guide.html</code> → 标题已被机翻成 <code>Image Performance Guide</code>，<strong>改回 <code>Access Logs for Shared Photo Links</code></strong>，和组 E 的 <code>ip-tracking</code> 改名版合并到同一篇。
+            <code>direct-file-viewing-no-redirects.html</code> → 标题改成 <code>Open Shared Photos Without Extra Redirects</code>，保留但删去“CDN / headers”这类偏技术口吻。</li>
+          <li><strong>删除或降优：</strong>
+            <code>image-optimization-techniques.html</code>（和 MaiIMG 真实能力关系弱，<strong>直接删除</strong>）、
+            <code>photo-copyright-licensing-guide.html</code>（版权话题风险高、没落地功能，<strong>删除</strong>）、
+            <code>photo-backup-strategies-guide.html</code>（MaiIMG 不是备份产品，<strong>删除</strong>，避免误导用户）、
+            <code>mobile-photo-sharing-trends-2025.html</code>（趋势文 2026 年读已过期，<strong>删除</strong>）。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>合并后的英文 blog 目标结构</h2><span class="tag ok">目标</span></div>
+        <p>合并完成后，英文 blog 从 76 篇压到大约 <strong>22~25 篇主文</strong>，分 6 个大主题区，每篇只盯一个主关键词。目录结构建议：</p>
+        <ul>
+          <li><strong>Getting started（3 篇）</strong>：how to generate image sharing links / how to create qr codes for images / easiest way to share photos with qr codes。</li>
+          <li><strong>Privacy & control（3 篇）</strong>：private photo sharing guide / photo link expiration / access logs for shared links。</li>
+          <li><strong>Scenarios — personal（6 篇）</strong>：family + qr / community groups / airdrop alternative / share without social media / school event / vacation。</li>
+          <li><strong>Scenarios — events & moments（3 篇）</strong>：wedding / event runbook / whatsapp + facebook one link。</li>
+          <li><strong>Scenarios — creators & small sellers（4 篇）</strong>：photographer portfolio / artist portfolio / product photos for small sellers / real estate / automotive。</li>
+          <li><strong>Reference（3~4 篇）</strong>：best free image hosting 2025 / upload images online best practices / image sharing best practices / image sharing workflow diagrams。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>SEO 基础设施待办（站点级）</h2><span class="tag warn">必做</span></div>
+        <ul>
+          <li><strong>sitemap.xml：</strong>目前如果没有，必须新建一份包含根目录主页 + <code>blog/index.html</code> + 每个语言 index + 每篇保留文章的 sitemap，并在 <code>robots.txt</code> 里引用。</li>
+          <li><strong>canonical：</strong>每篇 blog 的 <code>&lt;link rel="canonical"&gt;</code> 必须指向自己最终 URL；被合并掉的页面不加 canonical，而是走 301 → 主文。</li>
+          <li><strong>301 重定向：</strong>静态站点可以通过 <code>_redirects</code>（Netlify / Cloudflare Pages）或托管平台控制台统一配置，避免合并后旧链接 404。</li>
+          <li><strong>hreflang：</strong>每篇英文主文加 <code>&lt;link rel="alternate" hreflang="en" ...&gt;</code> 和对应中文版（如已存在），告诉 Google 语言对应关系。</li>
+          <li><strong>title / meta description：</strong>全部重写，控制在 title ≤ 60 字符、description 140–160 字符，每篇放一次主关键词 + 一次自然口语表达。</li>
+          <li><strong>H1：</strong>每篇只保留一个 H1，H1 必须包含主关键词，并和 title 不要完全一致（保持语义覆盖面）。</li>
+          <li><strong>Schema.org：</strong>给每篇 blog 加 <code>Article</code> JSON-LD（headline、datePublished、dateModified、author、image），这是 Google 识别 blog 的硬指标。</li>
+          <li><strong>图像 alt：</strong>所有正文图都加 alt，包含场景词（例如 “sharing wedding photos via qr code on phone screen”）。</li>
+          <li><strong>内链矩阵：</strong>每篇主文正文里必须有 3~5 条指向同主题区其他主文的内链；<code>blog/en/index.html</code> 重排成 6 个主题区而不是扁平列表。</li>
+          <li><strong>Google Search Console：</strong>合并完成后立刻提交 sitemap，并把被删页面用 GSC 的“移除旧 URL”能力登记一次。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>每篇保留文的重写 checklist</h2><span class="tag info">文章级</span></div>
+        <ul>
+          <li>标题里不要再出现 <code>Practical guide</code>、<code>Performance Guide</code>、<code>IP measurement</code> 这类机翻痕迹，恢复为自然英语。</li>
+          <li>首段三句话内要答：<strong>这篇写给谁、会得到什么结果、大概几步</strong>，不要用宏大的开场。</li>
+          <li>正文按 H2 分节，每节一个具体动作；避免出现“In today's digital world …”这种填充句。</li>
+          <li>插图优先使用 <code>blog/static-images/common/show/</code> 与 <code>blog/en/diagram/</code> 现有 SVG；不要塞中文截图。</li>
+          <li>CTA 固定一个：<strong>Try MaiIMG — upload photos, get a link and a QR code</strong>，不出现 “sign up / start free trial / request demo”。</li>
+          <li>FAQ 3~5 条，每条是真实用户会搜的问法（例如 “Does this work without an account?”、“Can I limit how many times a link is viewed?”）。</li>
+          <li>结尾加 3 条相关内链（Related reads），指向同主题区的其他主文。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>执行阶段（建议顺序）</h2><span class="tag ok">Roadmap</span></div>
+        <ul>
+          <li><strong>Phase 1 — 决策冻结（本周）：</strong>把上面的 Keep / Merge / Delete 列表再过一遍确认没有异议。产出物：最终“保留文清单”。</li>
+          <li><strong>Phase 2 — 站点级 SEO 基建（Phase 1 之后立即做）：</strong>sitemap.xml、robots.txt、canonical 模板、hreflang 模板、301 规则文件、Article JSON-LD 模板，一次补齐。不要等内容改完再补基建。</li>
+          <li><strong>Phase 3 — 主文重写（分批）：</strong>按主题区逐区改。建议顺序：Getting started → Privacy & control → Personal scenarios → Events → Creators → Reference。每区改完立刻提交 GSC 索引。</li>
+          <li><strong>Phase 4 — 301 合并：</strong>每一个主题区的主文写完后，立刻把该区的 merge 文件改成 301，避免长期留着内容重复页稀释权重。</li>
+          <li><strong>Phase 5 — 内链矩阵 + index：</strong>所有主题区完成后，重写 <code>blog/en/index.html</code>，按 6 个主题区分组展示。每篇主文结尾补“Related reads”三连。</li>
+          <li><strong>Phase 6 — 其他语言：</strong>等英文主轴稳定后再推中文、日文、法文等，<strong>不要先动小语种</strong>；英文不稳之前翻译越多越乱。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>Google 能搜到 MaiIMG 的前置条件</h2><span class="tag warn">补课</span></div>
+        <ul>
+          <li>域名有没有在 Google Search Console 里验证过？没有先验证，验证后提交 sitemap。</li>
+          <li>站点根页 <code>index.html</code> 的 <code>&lt;title&gt;</code> 与 <code>&lt;meta name="description"&gt;</code> 是否明确包含核心定位词（例如 “Share photos and short videos with a link and QR code”）？这是品牌词之外唯一的排名锚。</li>
+          <li>域名的 <code>robots.txt</code> 是否意外 <code>Disallow: /</code>？要先确认首页和 blog 能被抓。</li>
+          <li>有没有外链？冷启动阶段哪怕一两个自家 PDF / 帮助页 / Product Hunt 提交都比没有强。</li>
+          <li>blog 要不要真人可见更新日期（<code>dateModified</code>）？模板里已经在显示最后编辑日期，这一点继续保留并填真实日期。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>红线：不能碰的功能区域</h2><span class="tag warn">硬约束</span></div>
+        <p><strong>这次博客大修只动 blog/ 目录下的内容页、blog/en/index.html、sitemap/redirects、以及 blog 共享的 CSS/JS。</strong>其他任何地方不动。</p>
+        <ul>
+          <li><strong>不动 <code>gallery/index.html</code> 与 <code>media/index.html</code></strong> 的任何代码、样式、脚本、Swiper 逻辑、视频/图片渲染、微信分流、全屏按钮等展示相关部分。</li>
+          <li><strong>不动主站 URL 重写 / 路由规则</strong>，包括 <code>/g/</code>、<code>/m/</code>、短链解析、<code>special.maiimg.com</code> 相关中转、gallery/media 访问流程。</li>
+          <li><strong>不动 <code>index.html</code> / <code>maiimg.html</code> / <code>dashboard.html</code> / <code>tracking.html</code></strong> 的业务逻辑与上传接口。</li>
+          <li>Cloudflare Pages 的 <code>_redirects</code> 文件只允许新增 <strong>blog 合并相关的 301 行</strong>，不修改任何现有规则；新增前必须先确认该文件内已有规则不会被覆盖。</li>
+          <li>sitemap.xml 如果已有，只做 blog 部分的追加/替换，不改主站路径。</li>
+          <li>任何 blog 页面引用到的共享 JS/CSS（例如 <code>blog/blog-cyber.css</code>、<code>blog/blog-common.js</code>）只允许<strong>追加</strong>，不允许修改已有选择器或函数签名，以免影响已经上线的 blog 页面。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>已拍板决策（2026-04-22）</h2><span class="tag ok">已确认</span></div>
+        <ul>
+          <li><strong>决策 1 — 组 I 的 B 端文章：直接删除。</strong>
+            <ul>
+              <li><code>blog/en/professional-photo-sharing-for-businesses.html</code></li>
+              <li><code>blog/en/photo-sharing-workflow-comparison-for-marketing-teams.html</code></li>
+              <li><code>blog/en/why-your-business-needs-qr-code-image-strategy.html</code></li>
+            </ul>
+          </li>
+          <li><strong>决策 2 — 组 M 与 MaiIMG 真实能力挂不上钩的杂项：直接删除。</strong>
+            <ul>
+              <li><code>blog/en/image-optimization-techniques.html</code></li>
+              <li><code>blog/en/photo-copyright-licensing-guide.html</code></li>
+              <li><code>blog/en/photo-backup-strategies-guide.html</code></li>
+              <li><code>blog/en/mobile-photo-sharing-trends-2025.html</code></li>
+            </ul>
+          </li>
+          <li><strong>决策 3 — PDF 相关文章：直接删除。</strong>
+            <ul>
+              <li><code>blog/en/secure-pdf-document-sharing-qr-codes.html</code></li>
+            </ul>
+          </li>
+          <li><strong>决策 4 — 部署平台：Cloudflare Pages。</strong>
+            <ul>
+              <li>301 走 Cloudflare Pages 的 <code>_redirects</code> 文件，<strong>仅追加 blog 合并所需规则</strong>，不动任何主站、gallery、media、short link 相关重写。</li>
+              <li>每条规则格式：<code>/blog/en/&lt;old&gt;.html  /blog/en/&lt;keep&gt;.html  301</code>。</li>
+              <li>动 <code>_redirects</code> 前先读一次现有内容并在本 tab 里记录基线，再追加。</li>
+            </ul>
+          </li>
+          <li><strong>决策 5 — 每篇保留文补 “Last reviewed on” 字段。</strong>
+            <ul>
+              <li>和已有的 “最后编辑日期” 并列显示，语义是“人工复核”的时间戳。</li>
+              <li>同时写入 Article JSON-LD 的 <code>dateModified</code>。</li>
+              <li>只追加到保留文（约 22~25 篇），不反向补到将要被删的文件上。</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>最终删除清单（8 篇，不做 301）</h2><span class="tag warn">Delete</span></div>
+        <p>这些页面主题与产品定位不一致或与真实能力无关，合并也不合适，<strong>直接删除，不保留 301</strong>（如已被 Google 收录，走 GSC 的“已移除”登记）。</p>
+        <ul>
+          <li><code>blog/en/professional-photo-sharing-for-businesses.html</code></li>
+          <li><code>blog/en/photo-sharing-workflow-comparison-for-marketing-teams.html</code></li>
+          <li><code>blog/en/why-your-business-needs-qr-code-image-strategy.html</code></li>
+          <li><code>blog/en/image-optimization-techniques.html</code></li>
+          <li><code>blog/en/photo-copyright-licensing-guide.html</code></li>
+          <li><code>blog/en/photo-backup-strategies-guide.html</code></li>
+          <li><code>blog/en/mobile-photo-sharing-trends-2025.html</code></li>
+          <li><code>blog/en/secure-pdf-document-sharing-qr-codes.html</code></li>
+        </ul>
+        <p>删除前的收尾动作：</p>
+        <ul>
+          <li>检查 <code>blog/en/index.html</code> 是否有卡片指向这 8 篇，删除对应卡片。</li>
+          <li>检查其他保留的 blog 正文是否有内链指向这 8 篇，替换为同主题区的保留主文。</li>
+          <li>删除后确认 <code>_redirects</code> 里<strong>没有</strong>为这 8 篇加 301（它们是彻底下线，不是合并）。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>合并 301 清单（预估 40+ 条，只追加到 _redirects）</h2><span class="tag info">Merge</span></div>
+        <p>以下每行代表一条 Cloudflare Pages <code>_redirects</code> 规则：<code>&lt;source&gt;  &lt;target&gt;  301</code>。在真正写入前会先读一次 <code>_redirects</code> 现状，确认位置与换行风格。</p>
+        <pre style="background:#f8fafc;border-radius:8px;padding:12px;overflow:auto;font-size:12px;line-height:1.5;">
+# 组 A：免费图床 / 上传工具对比
+/blog/en/best-free-online-photo-storage-solutions-2025.html   /blog/en/best-free-image-hosting-sites-2025.html   301
+/blog/en/free-image-host-complete-guide-2025.html             /blog/en/best-free-image-hosting-sites-2025.html   301
+/blog/en/free-icloud-alternative-unlimited-photo-storage.html /blog/en/best-free-image-hosting-sites-2025.html   301
+/blog/en/image-hosting-free-complete-guide.html               /blog/en/best-free-image-hosting-sites-2025.html   301
+/blog/en/image-hosting-no-registration-best-free-services.html /blog/en/best-free-image-hosting-sites-2025.html  301
+/blog/en/image-hosting-and-sharing-platforms-guide.html       /blog/en/best-free-image-hosting-sites-2025.html   301
+/blog/en/image-uploader-online-best-free-tools-2025.html      /blog/en/best-free-image-hosting-sites-2025.html   301
+/blog/en/image-upload-service-best-platforms-compared.html    /blog/en/best-free-image-hosting-sites-2025.html   301
+/blog/en/photo-hosting-solutions-comparison.html              /blog/en/best-free-image-hosting-sites-2025.html   301
+/blog/en/image-sharing-platform-complete-comparison.html      /blog/en/best-free-image-hosting-sites-2025.html   301
+/blog/en/upload-images-online-free-best-platforms.html        /blog/en/upload-images-online-best-practices.html  301
+/blog/en/best-photo-hosting-for-forums-complete-guide.html    /blog/en/best-free-image-hosting-sites-2025.html   301
+/blog/en/h5-image-gallery-platforms-comparison.html           /blog/en/best-free-image-hosting-sites-2025.html   301
+
+# 组 B：ImgBB 替代
+/blog/en/free-image-uploader-best-alternatives-to-imgbb.html  /blog/en/imgbb-alternative-for-controlled-image-sharing.html  301
+/blog/en/direct-image-links-generator-imgbb-alternative.html  /blog/en/imgbb-alternative-for-controlled-image-sharing.html  301
+/blog/en/best-imgbb-alternatives-for-teams.html               /blog/en/imgbb-alternative-for-controlled-image-sharing.html  301
+
+# 组 C：Image URL / Link 生成
+/blog/en/how-to-create-image-links-complete-guide.html        /blog/en/how-to-generate-image-sharing-links.html  301
+/blog/en/image-url-generator-free-complete-comparison.html    /blog/en/how-to-generate-image-sharing-links.html  301
+/blog/en/image-url-generator-tools-comparison.html            /blog/en/how-to-generate-image-sharing-links.html  301
+/blog/en/permanent-file-sharing-links-qr-codes.html           /blog/en/how-to-generate-image-sharing-links.html  301
+
+# 组 D：二维码（注意 share-family-photos-with-a-qr-code 作为组 L 主文保留）
+/blog/en/qr-image-sharing-for-events-practical-checklist.html /blog/en/event-photo-sharing-runbook.html          301
+
+# 组 E：安全 / 隐私 / 控制
+/blog/en/secure-image-sharing-guide.html                      /blog/en/image-security-and-privacy-guide.html     301
+/blog/en/safest-way-to-share-photos-privately.html            /blog/en/image-security-and-privacy-guide.html     301
+/blog/en/secure-family-photo-sharing-guide.html               /blog/en/share-family-photos-with-a-qr-code.html   301
+# ip-tracking-secure-file-sharing.html 改名为 access-logs-for-shared-photo-links.html
+/blog/en/ip-tracking-secure-file-sharing.html                 /blog/en/access-logs-for-shared-photo-links.html   301
+/blog/en/image-analytics-and-tracking-guide.html              /blog/en/access-logs-for-shared-photo-links.html   301
+
+# 组 F：婚礼 / 活动
+/blog/en/wedding-photo-delivery-workflow-guide.html           /blog/en/wedding-photo-sharing-complete-guide.html 301
+/blog/en/event-photography-workflow-guide.html                /blog/en/event-photo-sharing-runbook.html          301
+/blog/en/stop-flooding-chat-groups-share-event-photos.html    /blog/en/event-photo-sharing-runbook.html          301
+/blog/en/share-party-photos-on-whatsapp-without-chaos.html    /blog/en/event-photo-sharing-runbook.html          301
+
+# 组 G：作品集
+/blog/en/designer-portfolio-sharing-guide.html                /blog/en/photographer-portfolio-sharing-guide.html 301
+/blog/en/portfolio-image-sharing-best-practice-guide.html     /blog/en/photographer-portfolio-sharing-guide.html 301
+
+# 组 H：Gallery / Album / 客户交付
+/blog/en/how-to-create-online-image-galleries-guide.html      /blog/en/how-to-create-online-photo-albums-complete-guide.html  301
+# client-gallery-delivery-playbook 与 agency-client-proofing-link-guide 二选一保留（默认保留前者），另一篇 301
+/blog/en/agency-client-proofing-link-guide.html               /blog/en/client-gallery-delivery-playbook.html     301
+
+# 组 I：电商场景
+/blog/en/how-to-share-product-photos-with-customers-fast.html /blog/en/ecommerce-product-photo-sharing-guide.html 301
+/blog/en/real-estate-photo-sharing-setup-guide.html           /blog/en/real-estate-photo-sharing-guide.html      301
+
+# 组 J：不走社交媒体 / 群聊
+/blog/en/share-photos-without-social-media-drama.html         /blog/en/share-photos-without-social-media-complete-guide.html  301
+/blog/en/social-media-photo-sharing-guide.html                /blog/en/share-photos-without-social-media-complete-guide.html  301
+/blog/en/send-vacation-photos-without-spamming-chat.html      /blog/en/share-photos-without-social-media-complete-guide.html  301
+/blog/en/phone-storage-unlimited-photo-sharing-solution.html  /blog/en/airdrop-alternative-reliable-photo-sharing.html        301
+
+# 组 K：Facebook / WhatsApp
+/blog/en/simple-facebook-photo-album-sharing-guide.html       /blog/en/facebook-photo-sharing-with-one-link.html 301
+        </pre>
+        <p>规则写入后需要的验证：</p>
+        <ul>
+          <li>在 Cloudflare Pages 构建产物里检查 <code>_redirects</code> 是否被正确打包。</li>
+          <li>本地用 <code>curl -I</code> 逐条回归一遍，确认返回 <code>301</code> 和正确的 <code>Location</code>。</li>
+          <li>上线后在 GSC 用“URL 检查”重测 5~10 个合并规则源 URL，确认 Google 可以识别 301。</li>
+          <li>整个过程中不动已有 <code>_redirects</code> 规则；如果现有文件里已经为这些 URL 配置过别的规则，先停下来问我再继续。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>改名清单（2 篇，内容同时重写）</h2><span class="tag info">Rename</span></div>
+        <ul>
+          <li><code>blog/en/ip-tracking-secure-file-sharing.html</code> → <code>blog/en/access-logs-for-shared-photo-links.html</code>
+            <ul>
+              <li>原标题 <code>IP measurement Secure File Sharing</code> 属于机翻异常，读起来偏 creepy。</li>
+              <li>新主词：<code>who viewed my shared link</code> / <code>access logs for shared photo link</code>。</li>
+              <li>同时承接 <code>image-analytics-and-tracking-guide.html</code> 的合并内容。</li>
+            </ul>
+          </li>
+          <li><code>blog/en/direct-file-viewing-no-redirects.html</code> 保留路径，但 <code>&lt;title&gt;</code> 和 H1 改成 <code>Open Shared Photos Without Extra Redirects</code>，删掉文中偏技术（CDN / headers）的描述。</li>
+        </ul>
+        <p>改名的页面需要同步加一条 301：旧文件 → 新文件（见上面 <code>_redirects</code> 清单）。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>“Last reviewed on” 字段落地方式</h2><span class="tag ok">细节</span></div>
+        <ul>
+          <li>在每篇保留文的 meta 区补一个 <code>&lt;meta name="last-reviewed" content="YYYY-MM-DD"&gt;</code>。</li>
+          <li>正文 meta cards 区新增一条可见行：<strong>Last reviewed on 2026-04-22</strong>，和“最后编辑日期”并列，不替换。</li>
+          <li>同步写入 Article JSON-LD 的 <code>dateModified</code>（如果已有 <code>dateModified</code>，就覆盖为 reviewed 日期）。</li>
+          <li>样式走 <code>blog/blog-cyber.css</code> 已有的 meta card 类；<strong>只新增一个新的 class，不改已有样式</strong>，避免影响已上线页面。</li>
+          <li>显示文案默认英文为 <code>Last reviewed on {date}</code>，中文为 <code>最近人工复核：{date}</code>（按语言目录切换，其他语种先不动）。</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>执行前自检清单（Phase 2 动工前必过）</h2><span class="tag warn">自检</span></div>
+        <ul>
+          <li>确认 Cloudflare Pages 根目录 <code>_redirects</code> 是否存在、当前内容是什么；在“项目总日志”里留一份基线快照。</li>
+          <li>确认站点是否已有 <code>sitemap.xml</code> 与 <code>robots.txt</code>；如有，记录基线后只对 blog 部分做增量。</li>
+          <li>确认 <code>blog/en/index.html</code> 现有卡片列表，找出所有指向“删除清单 8 篇”和“合并清单若干篇”的卡片。</li>
+          <li>确认 <code>blog/blog-cyber.css</code> / <code>blog/blog-common.js</code> 现有接口范围，只允许追加新 class / 新函数，不允许改旧的。</li>
+          <li>确认 <code>gallery/index.html</code>、<code>media/index.html</code>、短链/URL 重写规则<strong>不在</strong>改造范围内，动工前不读不写这些文件。</li>
+        </ul>
+        <p>以上全部过完再进入 Phase 2 基建动作。</p>
+      </section>
+    </section>
+
+    <p class="foot">备注：本页继续作为项目执行记录页使用；即时任务记在“最新工作记录”，跨阶段与跨模块内容记在“项目总日志”，Blog 改造方向与 SEO 战术单独写在“Blog 合并与 SEO 计划”tab。</p>
   </main>
   <script>
     mermaid.initialize({ startOnLoad: true, theme: 'neutral', flowchart: { useMaxWidth: true, htmlLabels: true } });

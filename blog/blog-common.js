@@ -20,6 +20,11 @@
     node.textContent = formatDate(value);
   });
 
+  document.querySelectorAll('[data-last-reviewed]').forEach(function (node) {
+    var value = node.getAttribute('data-last-reviewed');
+    node.textContent = formatDate(value);
+  });
+
   document.querySelectorAll('[data-reading-minutes]').forEach(function (node) {
     var value = node.getAttribute('data-reading-minutes');
     if (!value) return;
