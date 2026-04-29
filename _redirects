@@ -98,14 +98,17 @@
 /blog/en/qr-image-sharing-for-events-practical-checklist.html /blog/en/event-photo-sharing-runbook 301
 
 # ---- 组 E：安全 / 隐私 / 控制 → 主文 ----
-# 注意：组 E 里 ip-tracking-secure-file-sharing 与 image-analytics-and-tracking-guide 的 301
-#       目标 access-logs-for-shared-photo-links 尚未建立，留到下一阶段再追加。
+# access-logs-for-shared-photo-links 已建立，旧 tracking/analytics 口径合并到新主文。
 /blog/en/secure-image-sharing-guide /blog/en/image-security-and-privacy-guide 301
 /blog/en/secure-image-sharing-guide.html /blog/en/image-security-and-privacy-guide 301
 /blog/en/safest-way-to-share-photos-privately /blog/en/image-security-and-privacy-guide 301
 /blog/en/safest-way-to-share-photos-privately.html /blog/en/image-security-and-privacy-guide 301
 /blog/en/secure-family-photo-sharing-guide /blog/en/share-family-photos-with-a-qr-code 301
 /blog/en/secure-family-photo-sharing-guide.html /blog/en/share-family-photos-with-a-qr-code 301
+/blog/en/ip-tracking-secure-file-sharing /blog/en/access-logs-for-shared-photo-links 301
+/blog/en/ip-tracking-secure-file-sharing.html /blog/en/access-logs-for-shared-photo-links 301
+/blog/en/image-analytics-and-tracking-guide /blog/en/access-logs-for-shared-photo-links 301
+/blog/en/image-analytics-and-tracking-guide.html /blog/en/access-logs-for-shared-photo-links 301
 
 # ---- 组 F：婚礼 / 活动 → 主文 ----
 /blog/en/wedding-photo-delivery-workflow-guide /blog/en/wedding-photo-sharing-complete-guide 301
@@ -142,8 +145,10 @@
 /blog/en/social-media-photo-sharing-guide.html /blog/en/share-photos-without-social-media-complete-guide 301
 /blog/en/send-vacation-photos-without-spamming-chat /blog/en/share-photos-without-social-media-complete-guide 301
 /blog/en/send-vacation-photos-without-spamming-chat.html /blog/en/share-photos-without-social-media-complete-guide 301
-/blog/en/phone-storage-unlimited-photo-sharing-solution /blog/en/airdrop-alternative-reliable-photo-sharing 301
-/blog/en/phone-storage-unlimited-photo-sharing-solution.html /blog/en/airdrop-alternative-reliable-photo-sharing 301
+/blog/en/phone-storage-unlimited-photo-sharing-solution /blog/en/cross-platform-photo-sharing-with-one-link 301
+/blog/en/phone-storage-unlimited-photo-sharing-solution.html /blog/en/cross-platform-photo-sharing-with-one-link 301
+/blog/en/airdrop-alternative-reliable-photo-sharing /blog/en/cross-platform-photo-sharing-with-one-link 301
+/blog/en/airdrop-alternative-reliable-photo-sharing.html /blog/en/cross-platform-photo-sharing-with-one-link 301
 
 # ---- 组 K：Facebook ----
 /blog/en/simple-facebook-photo-album-sharing-guide /blog/en/facebook-photo-sharing-with-one-link 301

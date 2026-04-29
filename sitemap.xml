@@ -119,8 +119,8 @@
   </url>
 
   <url>
-    <loc>https://maiimg.com/blog/en/airdrop-alternative-reliable-photo-sharing</loc>
-    <lastmod>2025-09-01</lastmod>
+    <loc>https://maiimg.com/blog/en/cross-platform-photo-sharing-with-one-link</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -135,7 +135,14 @@
   <!-- Additional Keep articles added 2026-04-22 (blog consolidation) -->
   <url>
     <loc>https://maiimg.com/blog/en/image-link-expiry-rules-for-client-delivery</loc>
-    <lastmod>2026-04-22</lastmod>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maiimg.com/blog/en/access-logs-for-shared-photo-links</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -149,14 +156,14 @@
 
   <url>
     <loc>https://maiimg.com/blog/en/share-family-photos-with-a-qr-code</loc>
-    <lastmod>2026-04-22</lastmod>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://maiimg.com/blog/en/one-link-photo-sharing-for-community-groups</loc>
-    <lastmod>2026-04-22</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -170,7 +177,7 @@
 
   <url>
     <loc>https://maiimg.com/blog/en/send-school-event-photos-to-parents</loc>
-    <lastmod>2026-04-22</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -187,21 +194,21 @@
 
   <url>
     <loc>https://maiimg.com/blog/en/how-to-share-a-photo-album-on-whatsapp-with-one-link</loc>
-    <lastmod>2026-04-22</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://maiimg.com/blog/en/facebook-photo-sharing-with-one-link</loc>
-    <lastmod>2026-04-22</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://maiimg.com/blog/en/photographer-portfolio-sharing-guide</loc>
-    <lastmod>2026-04-22</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/blog/en/photographer-portfolio-sharing-guide" />
@@ -218,7 +225,7 @@
 
   <url>
     <loc>https://maiimg.com/blog/en/ecommerce-product-photo-sharing-guide</loc>
-    <lastmod>2026-04-22</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -256,7 +263,7 @@
 
   <url>
     <loc>https://maiimg.com/blog/en/how-to-create-online-photo-albums-complete-guide</loc>
-    <lastmod>2026-04-22</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

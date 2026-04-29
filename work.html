@@ -582,7 +582,7 @@
         </ul>
         <p><strong><code>blog/en/index.html</code> 文章卡片链接：</strong></p>
         <ul>
-          <li>共 9 条卡片，指向：<code>how-to-generate-image-sharing-links</code>、<code>how-to-create-qr-codes-for-images</code>、<code>image-security-and-privacy-guide</code>、<code>artist-portfolio-sharing-guide</code>、<code>image-sharing-workflow-diagrams-guide</code>、<code>airdrop-alternative-reliable-photo-sharing</code>、<code>client-gallery-delivery-playbook</code>、<code>wedding-photo-sharing-complete-guide</code>、<code>real-estate-photo-sharing-guide</code>。</li>
+          <li>共 9 条卡片，指向：<code>how-to-generate-image-sharing-links</code>、<code>how-to-create-qr-codes-for-images</code>、<code>image-security-and-privacy-guide</code>、<code>artist-portfolio-sharing-guide</code>、<code>image-sharing-workflow-diagrams-guide</code>、<code>airdrop-alternative-reliable-photo-sharing</code>、<code>client-gallery-delivery-playbook</code>、<code>wedding-photo-sharing-complete-guide</code>、<code>real-estate-photo-sharing-guide</code>。（2026-04-24 已把 AirDrop 卡片改为 <code>cross-platform-photo-sharing-with-one-link</code>。）</li>
           <li><strong>这 9 篇全部在 Keep 清单里，index 页本次不用改。</strong>（另外 60+ 篇英文文章都是游离的，也解释了它们为什么不被收录。）</li>
         </ul>
         <p><strong>保留文内链指向 merge-source 的情况：</strong></p>
@@ -633,7 +633,7 @@
           <code>photographer-portfolio-sharing-guide</code>、
           <code>client-gallery-delivery-playbook</code>、
           <code>share-family-photos-with-a-qr-code</code>、
-          <code>airdrop-alternative-reliable-photo-sharing</code>、
+          <code>cross-platform-photo-sharing-with-one-link</code>（由 <code>airdrop-alternative-reliable-photo-sharing</code> 去夸张改名）、
           <code>send-school-event-photos-to-parents</code>、
           <code>how-to-share-a-photo-album-on-whatsapp-with-one-link</code>、
           <code>facebook-photo-sharing-with-one-link</code>、
@@ -659,6 +659,109 @@
       </section>
 
       <section class="card">
+        <div class="row"><h2>2026-04-24：Blog 大修 Phase 5-2 Access Logs 主文已建立</h2><span class="tag ok">动作完成</span></div>
+        <p><strong>已完成动作：</strong></p>
+        <ul>
+          <li>新建 <code>blog/en/access-logs-for-shared-photo-links.html</code>，作为组 E 里 <code>ip-tracking-secure-file-sharing</code> 与 <code>image-analytics-and-tracking-guide</code> 的 canonical 合并目标。</li>
+          <li>标题与口径从 “IP tracking / Image Performance” 改成 <strong>Access Logs for Shared Photo Links</strong>，主词对应 <code>who viewed my shared link</code> 与 <code>access logs for shared photo links</code>。</li>
+          <li>页面使用已落地的 cyber 模板：hero、3 张 mini cards、story-stack、FAQ、Related reads、CTA；补齐 canonical、hreflang、OG/Twitter 图、Article JSON-LD、<code>dateModified=2026-04-24</code> 与 <code>Last reviewed</code>。</li>
+          <li>向 <code>_redirects</code> 追加 4 条 301（无扩展名 + <code>.html</code> 两种 source）：<code>ip-tracking-secure-file-sharing</code> 与 <code>image-analytics-and-tracking-guide</code> → <code>access-logs-for-shared-photo-links</code>。</li>
+          <li>向 <code>sitemap.xml</code> 补入新主文 URL：<code>https://maiimg.com/blog/en/access-logs-for-shared-photo-links</code>。</li>
+        </ul>
+        <p><strong>表达红线：</strong>新文没有写成 creepy 的 IP 追踪、企业监控或完整 analytics 平台，只讲真实能力：访问记录、查看次数/有效期、链接与二维码、关闭分享。</p>
+        <p><strong>下一步：</strong>继续 Phase 5-1 剩余 Keep 老模板重写，建议优先 <code>image-link-expiry-rules-for-client-delivery</code>、<code>share-family-photos-with-a-qr-code</code>、<code>cross-platform-photo-sharing-with-one-link</code>（旧 <code>airdrop-alternative-reliable-photo-sharing</code> 已去夸张改名）。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-04-24：Blog 大修 Phase 5-1 追加 2 篇 Keep 主文</h2><span class="tag ok">动作完成</span></div>
+        <p><strong>已完成动作：</strong></p>
+        <ul>
+          <li><code>image-link-expiry-rules-for-client-delivery.html</code> 已从老模板迁移到 cyber 模板，标题降 B 端口吻为 <strong>Photo Link Expiry Rules</strong>，主词集中到 <code>photo link expiry</code> / <code>expiring image link</code>。</li>
+          <li><code>share-family-photos-with-a-qr-code.html</code> 已从单行老模板迁移到 cyber 模板，作为 Personal scenarios 区的家庭照片 QR 主文，主词集中到 <code>share family photos with qr code</code>。</li>
+          <li>两篇均补齐 canonical、hreflang、OG/Twitter 图、Article JSON-LD、<code>dateModified=2026-04-24</code>、<code>Last reviewed</code>、FAQ、Related reads、CTA。</li>
+          <li><code>sitemap.xml</code> 中两篇 <code>lastmod</code> 已更新到 <code>2026-04-24</code>。</li>
+        </ul>
+        <p><strong>当前内链效果：</strong>Privacy & control 已形成 <code>image-security-and-privacy-guide</code> / <code>access-logs-for-shared-photo-links</code> / <code>image-link-expiry-rules-for-client-delivery</code> / <code>imgbb-alternative-for-controlled-image-sharing</code> 的互链闭环；家庭 QR 文接入 QR 与不走社媒主题。</p>
+        <p><strong>下一步建议：</strong><s>继续改 <code>airdrop-alternative-reliable-photo-sharing.html</code>，进入 Personal scenarios 的跨设备分享方向。</s> 已在下一条日志改名为跨设备分享页。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-04-24：AirDrop 主题去夸张化并改名</h2><span class="tag ok">动作完成</span></div>
+        <p><strong>已完成动作：</strong></p>
+        <ul>
+          <li>删除旧主文 <code>airdrop-alternative-reliable-photo-sharing.html</code>，新建 <code>cross-platform-photo-sharing-with-one-link.html</code>。</li>
+          <li>定位从 “AirDrop alternative” 改成 <strong>Share Photos Across Devices with One Link</strong>，明确说明 MaiIMG 不是系统级近距离传输替代品，只解决混合设备、不同 app、远程收件人的链接/二维码分享场景。</li>
+          <li><code>_redirects</code> 已补旧 AirDrop URL 的无扩展名 + <code>.html</code> 两条 301，并把 <code>phone-storage-unlimited-photo-sharing-solution</code> 的合并目标改到新主文。</li>
+          <li><code>sitemap.xml</code> 已把旧 URL 替换为 <code>https://maiimg.com/blog/en/cross-platform-photo-sharing-with-one-link</code>，<code>lastmod=2026-04-24</code>。</li>
+          <li><code>blog/en/index.html</code> 卡片已从 AirDrop comparison 改成跨设备分享场景页。</li>
+        </ul>
+        <p><strong>表达红线：</strong>不再写“替代 AirDrop”“比 AirDrop 更可靠”等不诚实比较，只讲真实能力：一个链接、一个二维码、浏览器打开、有效期/次数/撤销。</p>
+        <p><strong>下一步建议：</strong>继续 Personal scenarios：<code>one-link-photo-sharing-for-community-groups.html</code> 或 <code>how-to-share-a-photo-album-on-whatsapp-with-one-link.html</code>。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-04-27：Blog 大修 Phase 5-3 英文 Index 已分组</h2><span class="tag ok">动作完成</span></div>
+        <p><strong>已完成动作：</strong></p>
+        <ul>
+          <li><code>blog/en/index.html</code> 已从 9 张散卡改成 6 个主题区入口：Getting Started、Privacy &amp; Control、Personal Scenarios、Events &amp; Moments、Creators &amp; Small Sellers、Reference。</li>
+          <li>首页更新时间改为 <code>2026-04-24</code>，hero 文案改成“按真实用户意图浏览”，不再写“第一批正在重建”的临时口吻。</li>
+          <li>卡片链接全部指向当前存在的英文 HTML 文件；旧 <code>airdrop-alternative-reliable-photo-sharing</code> 卡片已替换为 <code>cross-platform-photo-sharing-with-one-link</code>。</li>
+          <li>已把新建和近期精修页纳入入口：<code>access-logs-for-shared-photo-links</code>、<code>image-link-expiry-rules-for-client-delivery</code>、<code>share-family-photos-with-a-qr-code</code>、<code>cross-platform-photo-sharing-with-one-link</code>。</li>
+        </ul>
+        <p><strong>验证结果：</strong>逐条检查 <code>blog/en/index.html</code> 内部文章链接，对应 <code>blog/en/*.html</code> 文件均存在；未发现缺失目标。</p>
+        <p><strong>下一步建议：</strong>继续重写仍是老模板的入口页，优先 <code>one-link-photo-sharing-for-community-groups.html</code> 与 <code>how-to-create-online-photo-albums-complete-guide.html</code>。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-04-27：Blog 大修 Phase 5-1 追加 2 篇普通人场景主文</h2><span class="tag ok">动作完成</span></div>
+        <p><strong>已完成动作：</strong></p>
+        <ul>
+          <li><code>one-link-photo-sharing-for-community-groups.html</code> 已从老模板迁到 cyber 模板，主词集中到 <code>community group photo sharing</code> / <code>one link photo sharing</code>，场景定位为俱乐部、班级、小组、社区公告。</li>
+          <li><code>how-to-create-online-photo-albums-complete-guide.html</code> 已修掉 <em>Practical guide</em> 机翻标题，迁到 cyber 模板，标题改为 <strong>How to Create Online Photo Albums with One Link</strong>。</li>
+          <li>两篇均补齐 canonical、hreflang、OG/Twitter 图、Article JSON-LD、<code>dateModified=2026-04-27</code>、<code>Last reviewed</code>、FAQ、Related reads、CTA。</li>
+          <li><code>sitemap.xml</code> 中两篇 <code>lastmod</code> 已更新到 <code>2026-04-27</code>。</li>
+        </ul>
+        <p><strong>下一步建议：</strong>继续处理 Events &amp; Moments 里仍是老模板的 <code>send-school-event-photos-to-parents.html</code> 与 <code>how-to-share-a-photo-album-on-whatsapp-with-one-link.html</code>。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-04-27：Blog 大修 Phase 5-1 追加 2 篇 Events 主文</h2><span class="tag ok">动作完成</span></div>
+        <p><strong>已完成动作：</strong></p>
+        <ul>
+          <li><code>send-school-event-photos-to-parents.html</code> 已从老模板迁到 cyber 模板，标题改为 <strong>Send School Event Photos to Parents with One Link</strong>，场景聚焦学校活动、家长群、通知板 QR、短期访问窗口。</li>
+          <li><code>how-to-share-a-photo-album-on-whatsapp-with-one-link.html</code> 已从老模板迁到 cyber 模板，主题聚焦 WhatsApp 群里用一个 album link 代替连续发送图片。</li>
+          <li>WhatsApp 文旧内链 <code>qr-image-sharing-for-events-practical-checklist</code> 已改为直链最终主文 <code>event-photo-sharing-runbook</code>，避免站内链接走 301。</li>
+          <li>两篇均补齐 canonical、hreflang、OG/Twitter 图、Article JSON-LD、<code>dateModified=2026-04-27</code>、<code>Last reviewed</code>、FAQ、Related reads、CTA。</li>
+          <li><code>sitemap.xml</code> 中两篇 <code>lastmod</code> 已更新到 <code>2026-04-27</code>。</li>
+        </ul>
+        <p><strong>下一步建议：</strong>继续 Events &amp; Moments 的 <code>facebook-photo-sharing-with-one-link.html</code>，或转到 Creators 区处理 <code>photographer-portfolio-sharing-guide.html</code>。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-04-27：Blog 大修 Phase 5-1 Facebook 主文已精修</h2><span class="tag ok">动作完成</span></div>
+        <p><strong>已完成动作：</strong></p>
+        <ul>
+          <li><code>facebook-photo-sharing-with-one-link.html</code> 已从老模板迁到 cyber 模板，标题保留为 <strong>Facebook Photo Sharing with One Link</strong>，但口径改成“Facebook 周边用一个链接分享 focused photo set”，避免把 MaiIMG 写成 Facebook 替代品。</li>
+          <li>页面补齐 canonical、hreflang、OG/Twitter 图、Article JSON-LD、<code>dateModified=2026-04-27</code>、<code>Last reviewed</code>、FAQ、Related reads、CTA。</li>
+          <li><code>sitemap.xml</code> 中该篇 <code>lastmod</code> 已更新到 <code>2026-04-27</code>。</li>
+          <li>保留 <code>simple-facebook-photo-album-sharing-guide</code> → <code>facebook-photo-sharing-with-one-link</code> 的 301 合并关系，不新增无关 redirect。</li>
+        </ul>
+        <p><strong>下一步建议：</strong>Events &amp; Moments 主入口基本收完，建议转到 Creators &amp; Small Sellers：先改 <code>photographer-portfolio-sharing-guide.html</code> 与 <code>ecommerce-product-photo-sharing-guide.html</code>。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-04-27：Blog 大修 Phase 5-1 追加 2 篇 Creators 主文</h2><span class="tag ok">动作完成</span></div>
+        <p><strong>已完成动作：</strong></p>
+        <ul>
+          <li><code>photographer-portfolio-sharing-guide.html</code> 已从老模板迁到 cyber 模板，主词集中到 <code>photographer portfolio sharing</code>，同时自然承接 designer / portfolio best practice 合并来源的“其他创作者也可用”语义。</li>
+          <li><code>ecommerce-product-photo-sharing-guide.html</code> 已从偏商业化口吻改成小卖家/个人卖家口径，标题改为 <strong>Share Product Photos with a Customer</strong>，避免 enterprise / campaign 语气。</li>
+          <li>两篇均补齐 canonical、hreflang、OG/Twitter 图、Article JSON-LD、<code>dateModified=2026-04-27</code>、<code>Last reviewed</code>、FAQ、Related reads、CTA。</li>
+          <li><code>sitemap.xml</code> 中两篇 <code>lastmod</code> 已更新到 <code>2026-04-27</code>。</li>
+        </ul>
+        <p><strong>下一步建议：</strong>继续 Creators &amp; Small Sellers：处理 <code>real-estate-photo-sharing-guide.html</code> 与 <code>automotive-photo-sharing-guide.html</code>。</p>
+      </section>
+
+      <section class="card">
         <div class="row"><h2>2026-04-22：Blog 大修 Phase 3+4 已执行</h2><span class="tag ok">动作完成</span></div>
         <p><strong>已完成动作：</strong></p>
         <ul>
@@ -677,7 +780,7 @@
             <ul>
               <li>8 篇删除页面 → <strong>410 Gone</strong>（无 301，直接让它们从搜索结果里出清，与站内已有 <code>/dec/* 410</code> 同款语义）。</li>
               <li>组 A/B/C/D/E/F/G/H/I/J/K 的 merge-source 全部 → 301 到各自主文；每条旧路径同时匹配无扩展名 + <code>.html</code> 两种形式。</li>
-              <li>组 E 的 <code>ip-tracking-secure-file-sharing</code> 和 <code>image-analytics-and-tracking-guide</code> 的 301<strong>暂缓</strong>，等目标新文件 <code>access-logs-for-shared-photo-links</code> 建立后再追加，避免 301 指向 404。</li>
+              <li>组 E 的 <code>ip-tracking-secure-file-sharing</code> 和 <code>image-analytics-and-tracking-guide</code> 的 301 当时<strong>暂缓</strong>，避免指向 404；已在 2026-04-24 Phase 5-2 建立目标页后补齐。</li>
             </ul>
           </li>
           <li><strong>清理 <code>sitemap.xml</code></strong>：移除 8 篇删除 URL + 9 条 merge-source URL；同时补入 17 条此前遗漏的 Keep 主文 URL（例如 <code>wedding-photo-sharing-complete-guide</code>、<code>photographer-portfolio-sharing-guide</code>、<code>best-free-image-hosting-sites-2025</code> 等，这些原 sitemap 里根本没有收录，也解释了为什么 Google 之前搜不到）。</li>
@@ -703,7 +806,7 @@
         <p><strong>下一步（Phase 5 预备）：</strong></p>
         <ul>
           <li>Phase 5-1：按主题区 Getting started → Privacy & control → Personal scenarios → Events → Creators → Reference 的顺序批量重写 Keep 主文。每篇补齐：合规标题（去掉“Practical guide”机翻痕迹）、精简首段、<code>Last reviewed on 2026-04-22</code>、Article JSON-LD（<code>dateModified</code>）、3 条 Related reads 内链。</li>
-          <li>Phase 5-2：创建 <code>blog/en/access-logs-for-shared-photo-links.html</code>（吸收 <code>ip-tracking</code> 与 <code>image-analytics-and-tracking</code> 的内容），上线后追加两条对应的 301。</li>
+          <li><s>Phase 5-2：创建 <code>blog/en/access-logs-for-shared-photo-links.html</code>（吸收 <code>ip-tracking</code> 与 <code>image-analytics-and-tracking</code> 的内容），上线后追加两条对应的 301。</s> 已于 2026-04-24 完成。</li>
           <li>Phase 5-3：重写 <code>blog/en/index.html</code> 卡片为 6 个主题区分组；所有 Keep 主文加入 Related reads 内链矩阵。</li>
         </ul>
       </section>
@@ -991,7 +1094,7 @@ flowchart TB
         <p><strong>组 J：不走社交媒体 / 群聊替代（共 7 篇，压到 2 篇）</strong></p>
         <ul>
           <li><strong>Keep：</strong><code>share-photos-without-social-media-complete-guide.html</code>（主词 <code>share photos without social media</code>，标题把“Practical guide”改回“Complete Guide”）。</li>
-          <li><strong>Keep：</strong><code>airdrop-alternative-reliable-photo-sharing.html</code>（主词 <code>airdrop alternative</code>，跨平台场景非常实用）。</li>
+          <li><strong>Keep / Rename：</strong><code>airdrop-alternative-reliable-photo-sharing.html</code> 已改名为 <code>cross-platform-photo-sharing-with-one-link.html</code>，主词从 <code>airdrop alternative</code> 改成 <code>share photos across devices</code> / <code>cross platform photo sharing</code>，避免不诚实比较。</li>
           <li><strong>Merge：</strong>
             <code>share-photos-without-social-media-drama.html</code>、
             <code>social-media-photo-sharing-guide.html</code>、
@@ -1039,7 +1142,7 @@ flowchart TB
         <ul>
           <li><strong>Getting started（3 篇）</strong>：how to generate image sharing links / how to create qr codes for images / easiest way to share photos with qr codes。</li>
           <li><strong>Privacy & control（3 篇）</strong>：private photo sharing guide / photo link expiration / access logs for shared links。</li>
-          <li><strong>Scenarios — personal（6 篇）</strong>：family + qr / community groups / airdrop alternative / share without social media / school event / vacation。</li>
+          <li><strong>Scenarios — personal（6 篇）</strong>：family + qr / community groups / cross-platform one-link sharing / share without social media / school event / vacation。</li>
           <li><strong>Scenarios — events & moments（3 篇）</strong>：wedding / event runbook / whatsapp + facebook one link。</li>
           <li><strong>Scenarios — creators & small sellers（4 篇）</strong>：photographer portfolio / artist portfolio / product photos for small sellers / real estate / automotive。</li>
           <li><strong>Reference（3~4 篇）</strong>：best free image hosting 2025 / upload images online best practices / image sharing best practices / image sharing workflow diagrams。</li>
@@ -1236,7 +1339,8 @@ flowchart TB
 /blog/en/share-photos-without-social-media-drama.html         /blog/en/share-photos-without-social-media-complete-guide.html  301
 /blog/en/social-media-photo-sharing-guide.html                /blog/en/share-photos-without-social-media-complete-guide.html  301
 /blog/en/send-vacation-photos-without-spamming-chat.html      /blog/en/share-photos-without-social-media-complete-guide.html  301
-/blog/en/phone-storage-unlimited-photo-sharing-solution.html  /blog/en/airdrop-alternative-reliable-photo-sharing.html        301
+/blog/en/phone-storage-unlimited-photo-sharing-solution.html  /blog/en/cross-platform-photo-sharing-with-one-link.html        301
+/blog/en/airdrop-alternative-reliable-photo-sharing.html      /blog/en/cross-platform-photo-sharing-with-one-link.html        301
 
 # 组 K：Facebook / WhatsApp
 /blog/en/simple-facebook-photo-album-sharing-guide.html       /blog/en/facebook-photo-sharing-with-one-link.html 301
