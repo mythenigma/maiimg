@@ -239,18 +239,30 @@
             animation: fadeInOut 4s ease-in-out;
         }
 
-        .ad-container {
-            position: fixed;
-            left: 50%;
-            bottom: 20px;
-            transform: translateX(-50%);
-            display: none;
-            max-width: 90%;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 999;
+        .ad-slide {
+            padding: calc(var(--safe-top) + 20px) var(--safe-right) calc(var(--safe-bottom) + 20px) var(--safe-left);
+        }
+
+        .ad-slide-inner {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .ad-label {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .ad-slide .adsbygoogle {
+            display: block;
+            min-height: 250px;
         }
 
         @media (max-width: 768px) {
@@ -316,7 +328,6 @@
 </div>
 
 <div id="gesture-hint" class="gesture-hint">Swipe to view more • Pinch to zoom images</div>
-<div id="ad-container" class="ad-container"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
@@ -638,7 +649,6 @@ class MediaGallery {
         await this.createSlides(items, galleryData.mark);
         this.initializeSwiper();
         this.showGallery();
-        setTimeout(() => this.showAds(), 3000);
     }
 
     async createSlides(items, markPath) {
@@ -686,6 +696,32 @@ class MediaGallery {
 
             wrapper.appendChild(slide);
         });
+
+        this.appendAdSlide(wrapper);
+        this.totalItems = items.length + 1;
+    }
+
+    appendAdSlide(wrapper) {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide ad-slide';
+        slide.innerHTML = `
+            <div class="ad-slide-inner">
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9224406325142860"
+                     data-ad-slot="6733998146"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        `;
+        wrapper.appendChild(slide);
+
+        try {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (error) {
+            console.log('AdSense push failed:', error);
+        }
     }
 
     resolveMediaAssetUrl(assetPath, markPath = '') {
@@ -1029,16 +1065,6 @@ class MediaGallery {
         document.getElementById('error-screen').style.display = 'flex';
     }
 
-    showAds() {
-        try {
-            const adContainer = document.getElementById('ad-container');
-            if (adContainer) {
-                adContainer.classList.remove('show');
-            }
-        } catch (error) {
-            console.log('Ad display error:', error);
-        }
-    }
 }
 
 document.getElementById('fullscreen-toggle').addEventListener('click', () => {
