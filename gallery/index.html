@@ -388,7 +388,6 @@ class MediaGallery {
         this.currentIndex = 0;
         this.viewTimer = null;
         this.fullscreenToggle = document.getElementById('fullscreen-toggle');
-        this.pendingAdRetry = null;
         this.init();
     }
 
@@ -753,7 +752,6 @@ class MediaGallery {
     appendAdSlide(wrapper) {
         const slide = document.createElement('div');
         slide.className = 'swiper-slide ad-slide';
-        slide.dataset.adSlide = 'true';
         slide.innerHTML = `
             <div class="ad-slide-inner">
                 <div class="ad-label">Sponsored</div>
@@ -775,44 +773,19 @@ class MediaGallery {
 
         const inner = slide.querySelector('.ad-slide-inner');
         const ins = slide.querySelector('ins.adsbygoogle');
-        const updateAdState = () => {
+        const observer = new MutationObserver(() => {
             if (ins.dataset.adStatus === 'filled') {
                 inner.dataset.adState = 'filled';
                 observer.disconnect();
-            } else if (ins.dataset.adStatus === 'unfilled') {
-                inner.dataset.adState = 'unfilled';
-                observer.disconnect();
             }
-        };
-        const observer = new MutationObserver(updateAdState);
+        });
         observer.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
-        updateAdState();
-    }
-
-    loadAdForSlide(slide) {
-        const ins = slide?.querySelector('ins.adsbygoogle');
-        if (!ins || ins.dataset.adPushed === '1') return;
-
-        const rect = ins.getBoundingClientRect();
-        if (rect.width < 120) {
-            clearTimeout(this.pendingAdRetry);
-            this.pendingAdRetry = setTimeout(() => this.loadAdForSlide(slide), 250);
-            return;
-        }
 
         try {
-            ins.dataset.adPushed = '1';
             (window.adsbygoogle = window.adsbygoogle || []).push({});
         } catch (error) {
-            ins.dataset.adPushed = '0';
             console.log('AdSense push failed:', error);
         }
-    }
-
-    loadActiveAd() {
-        requestAnimationFrame(() => {
-            this.loadAdForSlide(this.getActiveSlide());
-        });
     }
 
     resolveMediaAssetUrl(assetPath, markPath = '') {
@@ -1057,7 +1030,6 @@ class MediaGallery {
                     this.updateProgress();
                     this.updateFullscreenToggle();
                     this.primeActiveVideoPreview();
-                    this.loadActiveAd();
                 },
                 init: (swiper) => {
                     this.currentIndex = swiper.activeIndex;
@@ -1148,10 +1120,6 @@ class MediaGallery {
         setTimeout(() => {
             loading.style.display = 'none';
             gallery.style.display = 'block';
-            requestAnimationFrame(() => {
-                if (this.swiper) this.swiper.update();
-                this.loadActiveAd();
-            });
         }, 450);
     }
 
