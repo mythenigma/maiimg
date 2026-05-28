@@ -245,10 +245,10 @@
 
         .ad-slide-inner {
             width: 100%;
-            max-width: 600px;
+            max-width: 620px;
             background: #fff;
             border-radius: 12px;
-            padding: 20px;
+            padding: 18px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
             color: #1f2937;
         }
@@ -269,7 +269,8 @@
         .ad-slot {
             width: 100%;
             max-width: 336px;
-            margin: 14px auto 16px;
+            min-height: 250px;
+            margin: 12px auto 14px;
         }
 
         .ad-slot[data-ad-state="unfilled"],
@@ -292,10 +293,12 @@
 
         .self-promo-img {
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
+            max-height: min(28vh, 260px);
             height: auto;
+            object-fit: cover;
             border-radius: 8px;
-            margin: 0 auto 16px;
+            margin: 0 auto 12px;
             display: block;
         }
 
@@ -768,7 +771,6 @@ class MediaGallery {
             <div class="ad-slide-inner">
                 <div class="self-promo">
                     <img class="self-promo-img" src="../blog/static-images/common/show/sharegallery.png" alt="Maiimg gallery preview" loading="lazy">
-                    <h3 class="self-promo-title">Convert images to shareable galleries</h3>
                     <div class="ad-slot">
                         <div class="ad-label">Sponsored</div>
                         <ins class="adsbygoogle"
@@ -778,6 +780,7 @@ class MediaGallery {
                              data-ad-format="auto"
                              data-full-width-responsive="true"></ins>
                     </div>
+                    <h3 class="self-promo-title">Convert images to shareable galleries</h3>
                     <p class="self-promo-text">Free hosting with QR codes, view limits, and expiration controls.</p>
                     <a class="self-promo-cta" href="https://maiimg.com" target="_blank" rel="noopener">Create your gallery →</a>
                 </div>
