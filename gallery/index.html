@@ -408,7 +408,7 @@
 <div id="progress-bar" class="progress-bar"></div>
 <button id="fullscreen-toggle" class="fullscreen-toggle" title="Fullscreen Mode">⛶</button>
 
-<div class="swiper" id="main-swiper" style="visibility: hidden; pointer-events: none;">
+<div class="swiper" id="main-swiper" style="display: none;">
     <div class="swiper-wrapper" id="swiper-wrapper"></div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
@@ -1162,8 +1162,7 @@ class MediaGallery {
         loading.style.opacity = '0';
         setTimeout(() => {
             loading.style.display = 'none';
-            gallery.style.visibility = 'visible';
-            gallery.style.pointerEvents = 'auto';
+            gallery.style.display = 'block';
         }, 450);
     }
 
