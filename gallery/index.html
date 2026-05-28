@@ -267,10 +267,16 @@
         }
 
         .ad-slot {
-            width: 100%;
-            max-width: 336px;
-            min-height: 250px;
+            width: 336px;
+            max-width: 100%;
             margin: 12px auto 14px;
+        }
+
+        .gallery-ad-unit {
+            display: inline-block;
+            width: 336px;
+            height: 280px;
+            max-width: 100%;
         }
 
         .ad-slot[data-ad-state="unfilled"],
@@ -346,6 +352,25 @@
             }
         }
 
+        @media (max-width: 420px) {
+            .ad-slide-inner {
+                padding: 14px;
+            }
+
+            .ad-slot,
+            .gallery-ad-unit {
+                width: 300px;
+            }
+
+            .gallery-ad-unit {
+                height: 250px;
+            }
+
+            .self-promo-img {
+                max-height: min(22vh, 200px);
+            }
+        }
+
         @media (hover: none) and (pointer: coarse) {
             .fullscreen-toggle {
                 display: none;
@@ -383,7 +408,7 @@
 <div id="progress-bar" class="progress-bar"></div>
 <button id="fullscreen-toggle" class="fullscreen-toggle" title="Fullscreen Mode">⛶</button>
 
-<div class="swiper" id="main-swiper" style="display: none;">
+<div class="swiper" id="main-swiper" style="visibility: hidden; pointer-events: none;">
     <div class="swiper-wrapper" id="swiper-wrapper"></div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
@@ -773,11 +798,11 @@ class MediaGallery {
                     <img class="self-promo-img" src="../blog/static-images/common/show/sharegallery.png" alt="Maiimg gallery preview" loading="lazy">
                     <div class="ad-slot">
                         <div class="ad-label">Sponsored</div>
-                        <ins class="adsbygoogle"
-                             style="display:block"
+                        <ins class="adsbygoogle gallery-ad-unit"
+                             style="display:inline-block"
                              data-ad-client="ca-pub-9224406325142860"
                              data-ad-slot="6733998146"
-                             data-ad-format="auto"
+                             data-ad-format="rectangle"
                              data-full-width-responsive="true"></ins>
                     </div>
                     <h3 class="self-promo-title">Convert images to shareable galleries</h3>
@@ -1137,7 +1162,8 @@ class MediaGallery {
         loading.style.opacity = '0';
         setTimeout(() => {
             loading.style.display = 'none';
-            gallery.style.display = 'block';
+            gallery.style.visibility = 'visible';
+            gallery.style.pointerEvents = 'auto';
         }, 450);
     }
 
