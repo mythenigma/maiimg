@@ -266,12 +266,24 @@
             display: block;
         }
 
-        .ad-slide-inner[data-ad-state="filled"] .ad-label {
+        .ad-slot {
+            width: 100%;
+            max-width: 336px;
+            margin: 14px auto 16px;
+        }
+
+        .ad-slot[data-ad-state="unfilled"],
+        .ad-slot[data-ad-state="unfill-optimized"] {
+            display: none;
+        }
+
+        .ad-slot[data-ad-state="filled"] .ad-label {
             display: block;
         }
 
-        .ad-slide-inner[data-ad-state="filled"] .self-promo {
-            display: none;
+        .ad-slot .adsbygoogle[data-ad-status="unfilled"],
+        .ad-slot .adsbygoogle[data-ad-status="unfill-optimized"] {
+            display: none !important;
         }
 
         .self-promo {
@@ -754,16 +766,18 @@ class MediaGallery {
         slide.className = 'swiper-slide ad-slide';
         slide.innerHTML = `
             <div class="ad-slide-inner">
-                <div class="ad-label">Sponsored</div>
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9224406325142860"
-                     data-ad-slot="6733998146"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
                 <div class="self-promo">
                     <img class="self-promo-img" src="../blog/static-images/common/show/sharegallery.png" alt="Maiimg gallery preview" loading="lazy">
                     <h3 class="self-promo-title">Convert images to shareable galleries</h3>
+                    <div class="ad-slot">
+                        <div class="ad-label">Sponsored</div>
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-9224406325142860"
+                             data-ad-slot="6733998146"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                    </div>
                     <p class="self-promo-text">Free hosting with QR codes, view limits, and expiration controls.</p>
                     <a class="self-promo-cta" href="https://maiimg.com" target="_blank" rel="noopener">Create your gallery →</a>
                 </div>
@@ -771,11 +785,12 @@ class MediaGallery {
         `;
         wrapper.appendChild(slide);
 
-        const inner = slide.querySelector('.ad-slide-inner');
+        const adSlot = slide.querySelector('.ad-slot');
         const ins = slide.querySelector('ins.adsbygoogle');
         const observer = new MutationObserver(() => {
-            if (ins.dataset.adStatus === 'filled') {
-                inner.dataset.adState = 'filled';
+            const adStatus = ins.dataset.adStatus;
+            if (adStatus === 'filled' || adStatus === 'unfilled' || adStatus === 'unfill-optimized') {
+                adSlot.dataset.adState = adStatus;
                 observer.disconnect();
             }
         });
