@@ -134,7 +134,7 @@
   <main class="wrap">
     <section class="head">
       <h1>项目工作与日志记录</h1>
-      <p class="sub">更新时间：2026-04-22</p>
+      <p class="sub">更新时间：2026-05-29</p>
       <p class="sub">说明：保留“最新工作记录”，新增“项目总日志”与“Blog 合并与 SEO 计划”两个 tab，后续博客大修与关键词策略统一往计划 tab 里写，执行动作再回到总日志。</p>
     </section>
 
@@ -830,6 +830,57 @@
           <li><code>wedding-photo-sharing-guide.html</code></li>
         </ul>
         <p><strong>备注：</strong>从文件量和命名看，英文内容库已经更接近完整 SEO 内容矩阵，中文目前是精选主题集合，改造时可能需要先决定“以英文为主模板统一改造”还是“中英双主线同步改造”。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-05-29：Gallery 广告位与末尾交互方案重做</h2><span class="tag ok">已拍板</span></div>
+        <p><strong>对象文件：</strong><code>gallery/index.html</code>（媒体查看器主页）。</p>
+        <p><strong>背景：</strong>原版广告策略存在多个问题 —— AdSense 单元被夹在自家 promo 内（"Sponsored" 标签默认隐藏 + 紫色 CTA 紧挨广告，有"诱导误点"政策风险）；<code>loop: true</code> 模式下 Swiper 会克隆 ad slide 导致同一 <code>data-ad-slot</code> 在 DOM 里出现多份（违反 AdSense 单页加载规则）。本次重构同时确定末尾交互方案。</p>
+
+        <p><strong>核心决策一：广告位置 = 只在末尾一张 + promo & ad 永远一起显示</strong></p>
+        <ul>
+          <li>放弃"中间第 3 张媒体后插 in-feed + 末尾另放一个"的双广告位方案，<strong>只保留末尾这一张</strong>。中间广告会打断浏览节奏，且我们之前的"未填充就 removeSlide"的写法会让用户滑到那张时出现 slide 突然消失的"闪过"bug。</li>
+          <li>末尾 slide 结构：上半区 promo（图 + 标题 + 描述 + Create your gallery CTA），分隔线，下半区 "Advertisement" 标签 + In-feed 广告（<code>slot 2865284750</code>，<code>data-ad-format="fluid"</code>，<code>data-ad-layout-key="-6q+e9+15-2u+4y"</code>）。</li>
+          <li><strong>永远一起显示，不做条件 swap。</strong>即使 AdSense 未填充也保留空白广告区（<code>min-height: 200px</code>）+ "Advertisement" 标签。不能让 AdSense 检测到"未填充就换内容"的模式，否则长期 fill rate 会被算法压低 —— 这条之前踩过坑，已记入 memory。</li>
+        </ul>
+
+        <p><strong>核心决策二：末尾停住，不轮回</strong></p>
+        <ul>
+          <li>滑到末尾 promo 之后，<strong>停在那里</strong>，不绕回首张。Swiper 关掉 <code>loop</code> 也关掉 <code>rewind</code>。</li>
+          <li>理由：(a) promo + ad 是商业终点屏，让用户停留越久，dwell time 越长、CTA 转化越高；轮回会让用户继续刷掉这个停顿。(b) 心智模型 —— Instagram 轮播、Twitter 图集、Apple Photos、朋友圈图集都是停在末尾，loop 是 feed 型产品（抖音/Reels/Stories）的逻辑，内容无限才循环。(c) 启用 <code>loop</code> 触发 ad slide 克隆；启用 <code>rewind</code> 会因为下面那个 bug 出现"末尾闪一下回首张"。</li>
+          <li>替代回看方式已具备：<code>pagination.clickable: true</code>（点圆点跳任意张）+ 上下导航箭头。</li>
+        </ul>
+
+        <p><strong>核心决策三：消除自定义 handler 与 Swiper 内置的双触发</strong></p>
+        <ul>
+          <li>问题：项目里 <code>addScrollSupport</code> 自定义了 wheel 与 touch 监听器，会调 <code>swiper.slideNext()</code>；同时 Swiper 配置启用了 <code>mousewheel</code>，触摸默认也由 Swiper 处理。一次手势两个 handler 都触发 <code>slideNext</code>，等于推进两张。之前 <code>loop: true</code> 模式下因为无缝循环看不出来；关掉 loop 后直接表现为"第一张一滑就到末尾"。</li>
+          <li>修复：Swiper 配置改为 <code>mousewheel.enabled: false</code>（wheel 完全交给自定义 handler）+ <code>allowTouchMove: false</code>（touch 完全交给自定义 handler）。自定义 wheel 节流从 <code>150ms</code> 改为 <code>700ms</code>，盖过 600ms 的过渡动画 —— 触控板连续 wheel 不再叠加多次推进。</li>
+          <li>失去的部分：触摸时不再有"slide 跟着手指拖动"的视觉过渡，改成达到 50px 阈值就 snap，类似抖音/Reels 的切换感。Pinch zoom（独立模块）不受影响。</li>
+        </ul>
+
+        <p><strong>Promo 尺寸压缩（给广告区让位）：</strong></p>
+        <ul>
+          <li><code>self-promo-img</code> max-height 从 <code>min(28vh, 260px)</code> 降到 <code>min(16vh, 140px)</code>；mobile 断点从 <code>min(22vh, 200px)</code> 降到 <code>min(12vh, 110px)</code>。</li>
+          <li><code>self-promo-title</code> 18px → 16px；<code>self-promo-text</code> 14px → 13px、line-height 1.5 → 1.4。</li>
+          <li>用户当时定调："promo 视觉冲击力不重要，本来就是占位的，如果 AdSense 能一直显示就根本不需要 promo。" 因此尺寸服务于广告区。</li>
+        </ul>
+
+        <p><strong>清理掉的旧代码：</strong></p>
+        <ul>
+          <li>方法 <code>appendAdSlide</code>（中间 in-feed slide 的生成 + MutationObserver 未填充移除逻辑）。</li>
+          <li><code>createSlides</code> 中的 <code>adInsertAfterIndex</code> 与中间插入分支。</li>
+          <li>CSS <code>.ad-slide</code>、<code>.ad-slide-inner</code>、<code>.ad-slide[data-ad-state="unfilled"]</code> 及 mobile 断点里的对应项。</li>
+        </ul>
+
+        <p><strong>未变动的部分：</strong></p>
+        <ul>
+          <li>媒体（图片/视频）展示逻辑：原 <code>createSlides</code> 内的 video/img 模板原样抽到 <code>buildMediaSlide</code>，行为零变化。</li>
+          <li>视频控件保护、全屏、缩放、加载/错误/bot 检测、URL 解析、view timer、微信引导 —— 全部未动。</li>
+        </ul>
+
+        <p><strong>后续重新评估触发条件：</strong>除非数据证明 (a) 大量用户确实会回看相册（dashboard 或日志里能看到回到首张的行为）、且 (b) 末尾 promo 的停留时间和 CTA 转化数据很差，才考虑改回 loop。否则维持现状。</p>
+
+        <p><strong>相关 memory：</strong><code>feedback_adsense_no_fallback_swap.md</code>（不能用 fallback swap 否则 AdSense 压 fill rate）、<code>feedback_swiper_custom_handler_conflict.md</code>（自定义 + 内置 handler 共存的双触发原则）。</p>
       </section>
     </section>
 
