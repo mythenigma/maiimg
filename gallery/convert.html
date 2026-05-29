@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID Converter - Maiimg</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: #f3f4f6; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .card { 
+            background: white; 
+            padding: 2.5rem 2rem; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); 
+            width: 100%; 
+            max-width: 420px; 
+            text-align: center; 
+        }
+        h2 { 
+            margin-top: 0; 
+            color: #111827; 
+            font-size: 1.5rem;
+        }
+        input { 
+            width: 100%; 
+            padding: 0.875rem; 
+            margin: 0.5rem 0 1.25rem; 
+            border: 1px solid #d1d5db; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-size: 1rem; 
+            transition: border-color 0.2s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        button { 
+            width: 100%; 
+            padding: 0.875rem; 
+            background: #6366f1; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 1rem; 
+            font-weight: 600;
+            cursor: pointer; 
+            transition: background 0.2s; 
+        }
+        button:hover { 
+            background: #4f46e5; 
+        }
+        .hidden { 
+            display: none !important; 
+        }
+        .result { 
+            margin-top: 1rem; 
+            padding: 1rem; 
+            background: #f8fafc; 
+            border-radius: 8px; 
+            border: 1px dashed #e2e8f0;
+            word-break: break-all; 
+            color: #475569; 
+            font-size: 0.95rem;
+        }
+        .result span {
+            display: block;
+            margin-top: 8px;
+            color: #4f46e5;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            user-select: all;
+        }
+        .error { 
+            color: #ef4444; 
+            font-size: 0.875rem; 
+            margin-top: -0.75rem;
+            margin-bottom: 1rem; 
+            text-align: left;
+        }
+        .section { 
+            margin-top: 2rem; 
+            text-align: left; 
+            border-top: 1px solid #f3f4f6; 
+            padding-top: 1.5rem; 
+        }
+        .section label { 
+            font-size: 0.875rem; 
+            color: #374151; 
+            font-weight: 600; 
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 登录界面 -->
+<div class="card" id="login-section">
+    <h2>安全验证</h2>
+    <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 2rem;">请输入访问密码以使用转换工具</p>
+    <input type="password" id="password" placeholder="请输入密码" onkeypress="if(event.key === 'Enter') checkPassword()">
+    <div id="login-error" class="error hidden">密码错误，请重试</div>
+    <button onclick="checkPassword()">进入系统</button>
+</div>
+
+<!-- 转换器界面 -->
+<div class="card hidden" id="converter-section">
+    <h2>ID 转换工具</h2>
+    
+    <div class="section">
+        <label>字母 ➔ 数字 (解密)</label>
+        <input type="text" id="letters-input" placeholder="输入字母链接 (例如: AJBD)" oninput="this.value = this.value.toUpperCase().replace(/[^A-T]/g, '')">
+        <button onclick="decode()">转换为数字</button>
+        <div id="decode-result" class="result hidden"></div>
+    </div>
+
+    <div class="section">
+        <label>数字 ➔ 字母 (加密)</label>
+        <input type="number" id="numbers-input" placeholder="输入真实数字 ID (例如: 1024)">
+        <button onclick="encode()">转换为字母</button>
+        <div id="encode-result" class="result hidden"></div>
+    </div>
+</div>
+
+<script>
+    // 密码验证逻辑
+    function checkPassword() {
+        const pwd = document.getElementById('password').value;
+        if (pwd === 'wofocibei') {
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('converter-section').classList.remove('hidden');
+        } else {
+            document.getElementById('login-error').classList.remove('hidden');
+        }
+    }
+
+    // 字母转数字 (Decode)
+    function decode() {
+        const encodedId = document.getElementById('letters-input').value.trim();
+        const resultDiv = document.getElementById('decode-result');
+        
+        if (!encodedId) {
+            resultDiv.innerHTML = '请输入字母';
+            resultDiv.classList.remove('hidden');
+            return;
+        }
+
+        const upperId = encodedId.toUpperCase();
+        let decoded = '';
+        
+        for (let i = 0; i < upperId.length; i++) {
+            const charCode = upperId.charCodeAt(i);
+            let digit;
+            
+            // A-J 对应 1-9, 0
+            if (charCode >= 65 && charCode <= 74) {
+                digit = charCode - 64;
+            } 
+            // K-T 对应 1-9, 0
+            else if (charCode >= 75 && charCode <= 84) {
+                digit = charCode - 74;
+            } else {
+                resultDiv.innerHTML = '错误: 包含无效字符 (仅支持 A-T)';
+                resultDiv.classList.remove('hidden');
+                return;
+            }
+            
+            if (digit === 10) digit = 0;
+            decoded += digit;
+        }
+        
+        const finalNumber = parseInt(decoded, 10);
+        resultDiv.innerHTML = `真实数字 ID: <span>${finalNumber}</span>`;
+        resultDiv.classList.remove('hidden');
+    }
+
+    // 数字转字母 (Encode)
+    function encode() {
+        const numericId = document.getElementById('numbers-input').value.trim();
+        const resultDiv = document.getElementById('encode-result');
+        
+        if (!numericId || isNaN(numericId)) {
+            resultDiv.innerHTML = '请输入有效的数字';
+            resultDiv.classList.remove('hidden');
+            return;
+        }
+
+        const strId = String(parseInt(numericId, 10)); // 确保是纯数字字符串
+        let encoded = '';
+        
+        for (let i = 0; i < strId.length; i++) {
+            const digit = parseInt(strId[i], 10);
+            // 默认使用第一套字母表 (A-J) 进行加密
+            // 1->A, 2->B ... 9->I, 0->J
+            if (digit === 0) {
+                encoded += 'J';
+            } else {
+                encoded += String.fromCharCode(64 + digit);
+            }
+        }
+        
+        resultDiv.innerHTML = `分享字母链接: <span>${encoded}</span>`;
+        resultDiv.classList.remove('hidden');
+    }
+</script>
+</body>
+</html>
