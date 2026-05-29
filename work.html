@@ -882,6 +882,78 @@
 
         <p><strong>相关 memory：</strong><code>feedback_adsense_no_fallback_swap.md</code>（不能用 fallback swap 否则 AdSense 压 fill rate）、<code>feedback_swiper_custom_handler_conflict.md</code>（自定义 + 内置 handler 共存的双触发原则）。</p>
       </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-05-29：Gallery AdSense 投放优化（第 2 批）</h2><span class="tag ok">已执行</span></div>
+        <p><strong>对象文件：</strong><code>gallery/index.html</code>。</p>
+        <p><strong>背景：</strong>从 AdSense 投放视角对页面做了系统性盘点，识别出 7 个可能影响填充率/广告质量/收益的因素。前一批已经修了 #1（Googlebot/AdsBot 被 bot 拦截）与 #2（禁右键 + F12 屏蔽广告反馈）。这一批处理剩下的"低风险高收益"项，并明确记录哪些维持不动以及原因。</p>
+
+        <p><strong>本次已修（#4 / #5 / #7）：</strong></p>
+
+        <p><strong>#4 广告 push 时机移到 swiper 可见之后</strong></p>
+        <ul>
+          <li><strong>原状：</strong>Swiper 容器初始 <code>style="display: none"</code>（等媒体加载完才显示）；<code>appendSelfPromoSlide</code> 在创建 slide 时立即调用 <code>adsbygoogle.push({})</code>，此时 <code>&lt;ins&gt;</code> 还在 <code>display: none</code> 容器里。</li>
+          <li><strong>问题：</strong>AdSense 用 Intersection Observer 判定广告可见性，在 <code>display: none</code> 下 IO 不触发；首次进入到广告真正可见的延迟会被拉长，可能让一部分用户在广告加载前就关闭页面（损失 impression）。</li>
+          <li><strong>改法：</strong>把 <code>adsbygoogle.push({})</code> 从 <code>appendSelfPromoSlide</code> 里删掉，挪到 <code>showGallery</code> 里 <code>gallery.style.display = 'block'</code> 之后立即调用。slide 结构与广告位置完全不变。</li>
+          <li><strong>风险评估：</strong>接近 0。仅仅是 push 调用时机变了。</li>
+        </ul>
+
+        <p><strong>#5 promo+ad slide 内允许 user-select</strong></p>
+        <ul>
+          <li><strong>原状：</strong>全局 <code>body { user-select: none; -webkit-user-select: none }</code> —— 锁住整页文本选中（TikTok 风格）。</li>
+          <li><strong>问题：</strong>AdSense 的"页面是否真实内容站"启发式判断会将全局 user-select: none 视为"非交互内容"信号，间接影响广告质量。</li>
+          <li><strong>改法：</strong>在 <code>.promo-slide-inner</code> 上单独加 <code>user-select: text; -webkit-user-select: text</code>，仅恢复末尾 promo+ad 这一张的选中能力。媒体 slide（图片/视频）仍然 user-select: none。</li>
+          <li><strong>风险评估：</strong>0。只影响末尾这一张 slide。</li>
+        </ul>
+
+        <p><strong>#7 静态 title + meta description + 删除 md5 覆盖</strong></p>
+        <ul>
+          <li><strong>原状：</strong><code>&lt;title&gt;Media Gallery&lt;/title&gt;</code> 太通用；JS 进一步把 title 改成 <code>galleryData.md5</code>（一串 hash），对用户和爬虫都没有语义价值；没有 <code>&lt;meta name="description"&gt;</code>。</li>
+          <li><strong>问题：</strong>AdSense 读 <code>&lt;title&gt;</code> 和 <code>&lt;meta name="description"&gt;</code> 推断主题（影响广告类目匹配）。当前情况下 AdSense 只能投放最低质量的"无主题"广告。</li>
+          <li><strong>改法：</strong>
+            <ul>
+              <li>title 改成 <code>Photo &amp; Video Gallery — Maiimg</code>。</li>
+              <li>新增 <code>&lt;meta name="description" content="View a shared photo and video gallery on Maiimg."&gt;</code>。</li>
+              <li>删除 <code>loadMediaData</code> 里 <code>document.title = galleryData.md5 || 'Media Gallery'</code> 这行（hash 当 title 对人和 bot 都没用）。</li>
+            </ul>
+          </li>
+          <li><strong>风险评估：</strong>0。浏览器标签上 title 变得有意义；广告类目匹配从 broad targeting 转向 contextual targeting。</li>
+        </ul>
+
+        <p><strong>本次明确决定不改的项及原因：</strong></p>
+
+        <p><strong>#3 <code>html, body { overflow: hidden }</code> —— 不改</strong></p>
+        <ul>
+          <li><strong>为什么有：</strong>Swiper 是 100vh 全屏，必须靠 body 的 overflow: hidden 抑制页面级滚动，TikTok 式查看器的基础。</li>
+          <li><strong>改了会怎样：</strong>页面会出现额外滚动条，用户能滑到 Swiper 外的空白区，整体全屏体验崩掉。</li>
+          <li><strong>权衡结论：</strong>AdSense 这边的影响主要是 Auto Ads 的启发式（咱们没用 Auto Ads，只手动放 in-feed），收益很小；视觉破坏代价很大。<strong>不值得换。</strong></li>
+        </ul>
+
+        <p><strong>#6 强制不缓存 3 个 meta —— 不改</strong></p>
+        <ul>
+          <li><strong>为什么有：</strong><code>Cache-Control: no-store, no-cache, must-revalidate</code> + <code>Pragma: no-cache</code> + <code>Expires: 0</code>，保证每次推代码更新时回访用户立刻看到新版，不被浏览器缓存的旧 HTML 卡住。</li>
+          <li><strong>改了会怎样：</strong>下次改完 <code>gallery/index.html</code> 推上去，回访用户可能要等几小时到几天才能看到新版（取决于浏览器缓存策略）。</li>
+          <li><strong>权衡结论：</strong>AdSense 这边影响很小（脚本本身在 Google CDN 有自己的缓存头，浏览器仍会缓存），但失去"更新立即生效"的能力对一个活跃迭代的项目代价更大。<strong>留着更稳。</strong></li>
+        </ul>
+
+        <p><strong>未变动的部分（再次确认）：</strong></p>
+        <ul>
+          <li>媒体（图片/视频）展示逻辑 100% 未动 —— <code>buildMediaSlide</code>、Swiper 配置、缩放、全屏、视频控件保护、加载/错误屏、URL 解析、view timer、微信引导全部保持。</li>
+          <li>媒体 slide 上 <code>user-select: none</code> 仍然有效（仅末尾 promo+ad slide 例外）。</li>
+          <li>媒体 slide 上右键屏蔽仍然有效（仅末尾 promo+ad slide 例外，前一批已改）。</li>
+        </ul>
+
+        <p><strong>第 1 批已完成项的回顾：</strong></p>
+        <ul>
+          <li><strong>#1 isBot 加 Google 爬虫白名单</strong>：先白名单 <code>AdsBot-Google</code>、<code>Mediapartners-Google</code>、<code>Googlebot</code>、<code>Google-InspectionTool</code>、<code>Storebot-Google</code>、<code>Google-Site-Verification</code>，直接放行；其余 UA 走原 botPatterns。从 botPatterns 里移除冗余的 <code>/googlebot/i</code>。</li>
+          <li><strong>#2 右键 + F12 屏蔽</strong>：右键改成 <code>event.target.closest('.promo-slide')</code> 时放行，让 AdSense "Why this ad? / Stop seeing this ad" 反馈菜单能弹；F12 / Ctrl+Shift+I 屏蔽整段删除（security theater，对 AdSense 信号是负分）。</li>
+        </ul>
+
+        <p><strong>后续可能再做的：</strong></p>
+        <ul>
+          <li>Google bot 访问不消耗 view 配额、不写访问记录 —— 需要前后端联动：客户端在请求里加 <code>visitor=google_bot</code> 标志，服务端校验真实 UA 后跳过计数。客户端这半我可以单独做，但需要服务端 <code>fetch.maipdf.com</code> 配合才能真正生效。</li>
+        </ul>
+      </section>
     </section>
 
     <section class="tab-panel" id="latest-work">

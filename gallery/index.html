@@ -6,7 +6,8 @@
     <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Media Gallery</title>
+    <meta name="description" content="View a shared photo and video gallery on Maiimg.">
+    <title>Photo &amp; Video Gallery — Maiimg</title>
 
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="alternate icon" type="image/x-icon" href="../favicon.ico">
@@ -252,6 +253,8 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
             color: #1f2937;
             text-align: center;
+            user-select: text;
+            -webkit-user-select: text;
         }
 
         .ad-label {
@@ -267,6 +270,10 @@
             margin-top: 16px;
             padding-top: 14px;
             border-top: 1px solid #e5e7eb;
+        }
+
+        .promo-slide .ad-block .adsbygoogle {
+            min-height: 250px;
         }
 
         .self-promo {
@@ -706,7 +713,6 @@ class MediaGallery {
         }
 
         const galleryData = await this.fetchGalleryData(numericId);
-        document.title = galleryData.md5 || 'Media Gallery';
         if (galleryData.subject && galleryData.subject < 1999999927) {
             this.startViewTimer(galleryData.subject);
         }
@@ -794,12 +800,6 @@ class MediaGallery {
             </div>
         `;
         wrapper.appendChild(slide);
-
-        try {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (error) {
-            console.log('AdSense push failed:', error);
-        }
     }
 
     resolveMediaAssetUrl(assetPath, markPath = '') {
@@ -1132,6 +1132,11 @@ class MediaGallery {
         setTimeout(() => {
             loading.style.display = 'none';
             gallery.style.display = 'block';
+            try {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (error) {
+                console.log('AdSense push failed:', error);
+            }
         }, 450);
     }
 
