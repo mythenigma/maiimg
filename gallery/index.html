@@ -995,7 +995,6 @@ class MediaGallery {
     initializeSwiper() {
         this.swiper = new Swiper('.swiper', {
             direction: 'vertical',
-            rewind: this.totalItems > 1,
             speed: 600,
             effect: 'slide',
             navigation: {
@@ -1008,10 +1007,7 @@ class MediaGallery {
                 dynamicBullets: true
             },
             mousewheel: {
-                enabled: true,
-                thresholdDelta: 20,
-                sensitivity: 0.5,
-                forceToAxis: false
+                enabled: false
             },
             keyboard: {
                 enabled: true,
