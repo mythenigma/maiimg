@@ -282,39 +282,39 @@
 
         .self-promo-img {
             width: 100%;
-            max-width: 440px;
-            max-height: min(16vh, 140px);
+            max-width: 380px; /* 减小最大宽度 */
+            max-height: min(14vh, 120px); /* 减小最大高度，给广告留空间 */
             height: auto;
             object-fit: cover;
             border-radius: 8px;
-            margin: 0 auto 10px;
+            margin: 0 auto 8px;
             display: block;
         }
 
         .self-promo-title {
-            font-size: 16px;
+            font-size: 15px; /* 稍微调小字号 */
             font-weight: 700;
             color: #1f2937;
-            margin: 0 0 6px;
+            margin: 0 0 4px;
             line-height: 1.3;
         }
 
         .self-promo-text {
-            font-size: 13px;
+            font-size: 12px; /* 稍微调小字号 */
             color: #6b7280;
-            margin: 0 0 12px;
+            margin: 0 0 10px;
             line-height: 1.4;
         }
 
         .self-promo-cta {
             display: inline-block;
-            padding: 10px 24px;
+            padding: 8px 20px; /* 减小按钮内边距 */
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
             text-decoration: none;
             border-radius: 999px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px; /* 减小按钮字号 */
         }
 
         @media (max-width: 768px) {
@@ -333,15 +333,37 @@
                 right: 18px;
                 bottom: 20px;
             }
+            
+            .promo-slide-inner {
+                padding: 12px; /* 手机端减小卡片内边距 */
+            }
+            
+            .self-promo-img {
+                max-height: min(10vh, 90px); /* 手机端进一步压低图片高度 */
+            }
         }
 
         @media (max-width: 420px) {
             .promo-slide-inner {
-                padding: 14px;
+                padding: 10px;
             }
 
             .self-promo-img {
-                max-height: min(12vh, 110px);
+                max-height: min(9vh, 80px); /* 小屏手机极限压低 */
+            }
+            
+            .self-promo-title {
+                font-size: 14px;
+            }
+            
+            .self-promo-text {
+                font-size: 11px;
+                margin: 0 0 8px;
+            }
+            
+            .self-promo-cta {
+                padding: 6px 16px;
+                font-size: 12px;
             }
         }
 
