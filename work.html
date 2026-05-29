@@ -954,6 +954,29 @@
           <li>Google bot 访问不消耗 view 配额、不写访问记录 —— 需要前后端联动：客户端在请求里加 <code>visitor=google_bot</code> 标志，服务端校验真实 UA 后跳过计数。客户端这半我可以单独做，但需要服务端 <code>fetch.maipdf.com</code> 配合才能真正生效。</li>
         </ul>
       </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-05-29：Gallery 广告 min-height 来回调整复盘</h2><span class="tag info">原则记录</span></div>
+        <p><strong>对象样式：</strong><code>.promo-slide .ad-block .adsbygoogle { min-height: ... }</code>。</p>
+
+        <p><strong>变化轨迹：</strong></p>
+        <ul>
+          <li><strong>初版：</strong><code>min-height: 200px</code>（防止广告未填充时塌陷）。</li>
+          <li><strong>第二次：删除整条规则</strong>，因为当时讨论中混淆了"限制 max"和"预留 min"，把 min-height 误判为"限制 AdSense 撑大"。</li>
+          <li><strong>第三次（当前）：加回 <code>min-height: 250px</code></strong>，并明确它是占位保留、不是尺寸限制。</li>
+        </ul>
+
+        <p><strong>正确的原则：</strong></p>
+        <ul>
+          <li><strong>不要</strong>用 CSS 限制 max-height / fixed height —— 那会卡住 AdSense fluid 撑大。</li>
+          <li><strong>要</strong>用 <code>min-height</code> 预留占位 —— AdSense 实际渲染的广告比 min-height 大时会自然撑开，<code>min-height</code> 不构成上限。</li>
+          <li>min-height 的实际好处：(a) 广告未填充/加载中时，"Advertisement" 标签不会孤零零飘在卡片底；(b) 改善 CLS（Cumulative Layout Shift），Core Web Vitals 提分，AdSense 偏好低 CLS 页面，间接抬 fill rate 和 eCPM；(c) AdSense 知道至少有 N px 空间，能从更大的广告池里挑高质量广告。</li>
+        </ul>
+
+        <p><strong>选 250px 的理由：</strong>in-feed fluid 平均高度在 250-400px 之间，250px 是"既不浪费空间也不打折 AdSense 选广告池"的中间值。如果未来观察到广告普遍高于 250px，可以再上调到 300px；如果空间紧张可以降到 200px。</p>
+
+        <p><strong>这条复盘的更深教训：</strong>样式上的"约束"和"承诺"是两个相反方向的事 —— max-* / fixed 是约束（限制 AdSense），min-* 是承诺（保留空间）。这个区分以前没说清楚导致来回改了三次。<strong>下次面对任何"是否限制 AdSense"的判断时，先问：这条规则是限制广告能撑到的最大尺寸，还是保证容器至少有的最小尺寸？</strong></p>
+      </section>
     </section>
 
     <section class="tab-panel" id="latest-work">
