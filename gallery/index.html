@@ -239,11 +239,13 @@
             animation: fadeInOut 4s ease-in-out;
         }
 
-        .ad-slide {
+        .ad-slide,
+        .promo-slide {
             padding: calc(var(--safe-top) + 20px) var(--safe-right) calc(var(--safe-bottom) + 20px) var(--safe-left);
         }
 
-        .ad-slide-inner {
+        .ad-slide-inner,
+        .promo-slide-inner {
             width: 100%;
             max-width: 620px;
             background: #fff;
@@ -251,46 +253,26 @@
             padding: 18px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
             color: #1f2937;
+            text-align: center;
         }
 
         .ad-label {
-            display: none;
+            display: block;
             font-size: 11px;
             color: #888;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .ad-slide .adsbygoogle {
             display: block;
+            min-height: 200px;
         }
 
-        .ad-slot {
-            width: 336px;
-            max-width: 100%;
-            margin: 12px auto 14px;
-        }
-
-        .gallery-ad-unit {
-            display: inline-block;
-            width: 336px;
-            height: 280px;
-            max-width: 100%;
-        }
-
-        .ad-slot[data-ad-state="unfilled"],
-        .ad-slot[data-ad-state="unfill-optimized"] {
+        .ad-slide[data-ad-state="unfilled"],
+        .ad-slide[data-ad-state="unfill-optimized"] {
             display: none;
-        }
-
-        .ad-slot[data-ad-state="filled"] .ad-label {
-            display: block;
-        }
-
-        .ad-slot .adsbygoogle[data-ad-status="unfilled"],
-        .ad-slot .adsbygoogle[data-ad-status="unfill-optimized"] {
-            display: none !important;
         }
 
         .self-promo {
@@ -353,17 +335,9 @@
         }
 
         @media (max-width: 420px) {
-            .ad-slide-inner {
+            .ad-slide-inner,
+            .promo-slide-inner {
                 padding: 14px;
-            }
-
-            .ad-slot,
-            .gallery-ad-unit {
-                width: 300px;
-            }
-
-            .gallery-ad-unit {
-                height: 250px;
             }
 
             .self-promo-img {
@@ -742,51 +716,67 @@ class MediaGallery {
     async createSlides(items, markPath) {
         const wrapper = document.getElementById('swiper-wrapper');
         wrapper.innerHTML = '';
-        this.totalItems = items.length;
+
+        const adInsertAfterIndex = 2;
+        let adInserted = false;
 
         items.forEach((mediaInfo, index) => {
-            const fileName = mediaInfo.fileName || mediaInfo.filename || mediaInfo.originalName || mediaInfo;
-            const fullPath = mediaInfo.fullPath || mediaInfo.key || `${markPath}/${fileName}`;
-            const mediaUrl = this.resolveMediaAssetUrl(fullPath, markPath);
-            const kind = mediaInfo.kind || 'image';
-            const slide = document.createElement('div');
-            slide.className = 'swiper-slide';
-
-            if (kind === 'video') {
-                const posterUrl = this.resolveVideoPosterUrl(mediaInfo, markPath);
-                const posterAttr = posterUrl ? `poster="${posterUrl}"` : '';
-                const needsPreviewPrime = posterUrl ? '0' : '1';
-                slide.innerHTML = `
-                    <div class="swiper-zoom-container media-shell is-video">
-                        <video
-                            src="${mediaUrl}"
-                            ${posterAttr}
-                            preload="metadata"
-                            playsinline
-                            webkit-playsinline
-                            controls
-                            controlsList="nodownload"
-                            aria-label="Video ${index + 1}"
-                            data-needs-preview-prime="${needsPreviewPrime}">
-                            Your browser does not support video playback.
-                        </video>
-                    </div>
-                `;
-                const video = slide.querySelector('video');
-                this.attachVideoEvents(video);
-            } else {
-                slide.innerHTML = `
-                    <div class="swiper-zoom-container media-shell">
-                        <img src="${mediaUrl}" alt="Image ${index + 1}" loading="lazy">
-                    </div>
-                `;
-            }
-
+            const slide = this.buildMediaSlide(mediaInfo, markPath, index);
             wrapper.appendChild(slide);
+
+            if (index === adInsertAfterIndex && items.length > adInsertAfterIndex + 1) {
+                this.appendAdSlide(wrapper);
+                adInserted = true;
+            }
         });
 
-        this.appendAdSlide(wrapper);
-        this.totalItems = items.length + 1;
+        if (!adInserted) {
+            this.appendAdSlide(wrapper);
+        }
+
+        this.appendSelfPromoSlide(wrapper);
+        this.totalItems = wrapper.children.length;
+    }
+
+    buildMediaSlide(mediaInfo, markPath, index) {
+        const fileName = mediaInfo.fileName || mediaInfo.filename || mediaInfo.originalName || mediaInfo;
+        const fullPath = mediaInfo.fullPath || mediaInfo.key || `${markPath}/${fileName}`;
+        const mediaUrl = this.resolveMediaAssetUrl(fullPath, markPath);
+        const kind = mediaInfo.kind || 'image';
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+
+        if (kind === 'video') {
+            const posterUrl = this.resolveVideoPosterUrl(mediaInfo, markPath);
+            const posterAttr = posterUrl ? `poster="${posterUrl}"` : '';
+            const needsPreviewPrime = posterUrl ? '0' : '1';
+            slide.innerHTML = `
+                <div class="swiper-zoom-container media-shell is-video">
+                    <video
+                        src="${mediaUrl}"
+                        ${posterAttr}
+                        preload="metadata"
+                        playsinline
+                        webkit-playsinline
+                        controls
+                        controlsList="nodownload"
+                        aria-label="Video ${index + 1}"
+                        data-needs-preview-prime="${needsPreviewPrime}">
+                        Your browser does not support video playback.
+                    </video>
+                </div>
+            `;
+            const video = slide.querySelector('video');
+            this.attachVideoEvents(video);
+        } else {
+            slide.innerHTML = `
+                <div class="swiper-zoom-container media-shell">
+                    <img src="${mediaUrl}" alt="Image ${index + 1}" loading="lazy">
+                </div>
+            `;
+        }
+
+        return slide;
     }
 
     appendAdSlide(wrapper) {
@@ -794,32 +784,34 @@ class MediaGallery {
         slide.className = 'swiper-slide ad-slide';
         slide.innerHTML = `
             <div class="ad-slide-inner">
-                <div class="self-promo">
-                    <img class="self-promo-img" src="../blog/static-images/common/show/sharegallery.png" alt="Maiimg gallery preview" loading="lazy">
-                    <div class="ad-slot">
-                        <div class="ad-label">Sponsored</div>
-                        <ins class="adsbygoogle gallery-ad-unit"
-                             style="display:inline-block"
-                             data-ad-client="ca-pub-9224406325142860"
-                             data-ad-slot="6733998146"
-                             data-ad-format="rectangle"
-                             data-full-width-responsive="true"></ins>
-                    </div>
-                    <h3 class="self-promo-title">Convert images to shareable galleries</h3>
-                    <p class="self-promo-text">Free hosting with QR codes, view limits, and expiration controls.</p>
-                    <a class="self-promo-cta" href="https://maiimg.com" target="_blank" rel="noopener">Create your gallery →</a>
-                </div>
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-format="fluid"
+                     data-ad-layout-key="-6q+e9+15-2u+4y"
+                     data-ad-client="ca-pub-9224406325142860"
+                     data-ad-slot="2865284750"></ins>
             </div>
         `;
         wrapper.appendChild(slide);
 
-        const adSlot = slide.querySelector('.ad-slot');
         const ins = slide.querySelector('ins.adsbygoogle');
         const observer = new MutationObserver(() => {
             const adStatus = ins.dataset.adStatus;
-            if (adStatus === 'filled' || adStatus === 'unfilled' || adStatus === 'unfill-optimized') {
-                adSlot.dataset.adState = adStatus;
-                observer.disconnect();
+            if (!adStatus) return;
+            observer.disconnect();
+            if (adStatus === 'filled') {
+                slide.dataset.adState = 'filled';
+                return;
+            }
+            slide.dataset.adState = adStatus;
+            if (this.swiper) {
+                const idx = Array.prototype.indexOf.call(this.swiper.slides, slide);
+                if (idx >= 0) {
+                    this.swiper.removeSlide(idx);
+                    this.totalItems = this.swiper.slides.length;
+                    this.updateProgress();
+                }
             }
         });
         observer.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
@@ -829,6 +821,22 @@ class MediaGallery {
         } catch (error) {
             console.log('AdSense push failed:', error);
         }
+    }
+
+    appendSelfPromoSlide(wrapper) {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide promo-slide';
+        slide.innerHTML = `
+            <div class="promo-slide-inner">
+                <div class="self-promo">
+                    <img class="self-promo-img" src="/blog/static-images/common/show/sharegallery.png" alt="Maiimg gallery preview" loading="lazy">
+                    <h3 class="self-promo-title">Convert images to shareable galleries</h3>
+                    <p class="self-promo-text">Free hosting with QR codes, view limits, and expiration controls.</p>
+                    <a class="self-promo-cta" href="https://maiimg.com" target="_blank" rel="noopener">Create your gallery →</a>
+                </div>
+            </div>
+        `;
+        wrapper.appendChild(slide);
     }
 
     resolveMediaAssetUrl(assetPath, markPath = '') {
@@ -1030,7 +1038,7 @@ class MediaGallery {
     initializeSwiper() {
         this.swiper = new Swiper('.swiper', {
             direction: 'vertical',
-            loop: this.totalItems > 1,
+            rewind: this.totalItems > 1,
             speed: 600,
             effect: 'slide',
             navigation: {
@@ -1150,8 +1158,9 @@ class MediaGallery {
     }
 
     updateProgress() {
-        if (!this.totalItems) return;
-        const progress = ((this.currentIndex + 1) / this.totalItems) * 100;
+        const total = (this.swiper && this.swiper.slides) ? this.swiper.slides.length : this.totalItems;
+        if (!total) return;
+        const progress = ((this.currentIndex + 1) / total) * 100;
         const progressBar = document.getElementById('progress-bar');
         if (progressBar) progressBar.style.width = `${progress}%`;
     }
