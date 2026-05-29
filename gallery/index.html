@@ -1015,6 +1015,7 @@ class MediaGallery {
             },
             touchRatio: 1,
             touchAngle: 45,
+            allowTouchMove: false,
             grabCursor: true,
             resistanceRatio: 0.85,
             zoom: {
@@ -1074,7 +1075,7 @@ class MediaGallery {
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 isScrolling = false;
-            }, 150);
+            }, 700);
         }, { passive: false });
 
         document.addEventListener('touchstart', (event) => {
