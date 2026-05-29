@@ -479,15 +479,26 @@ class MediaGallery {
     }
 
     isBot(userAgent) {
+        const ua = userAgent || '';
+        const googleAllowlist = [
+            /AdsBot-Google/i,
+            /Mediapartners-Google/i,
+            /Googlebot/i,
+            /Google-InspectionTool/i,
+            /Storebot-Google/i,
+            /Google-Site-Verification/i
+        ];
+        if (googleAllowlist.some((pattern) => pattern.test(ua))) return false;
+
         const botPatterns = [
             /bot/i, /crawler/i, /spider/i, /scraper/i,
-            /googlebot/i, /bingbot/i, /slurp/i, /duckduckbot/i,
+            /bingbot/i, /slurp/i, /duckduckbot/i,
             /baiduspider/i, /yandexbot/i, /facebookexternalhit/i,
             /twitterbot/i, /linkedinbot/i, /telegrambot/i,
             /discordbot/i, /slackbot/i, /curl/i, /wget/i,
             /python-requests/i, /postman/i, /insomnia/i
         ];
-        return botPatterns.some((pattern) => pattern.test(userAgent || ''));
+        return botPatterns.some((pattern) => pattern.test(ua));
     }
 
     showBotMessage() {
@@ -1143,11 +1154,9 @@ document.getElementById('fullscreen-toggle').addEventListener('click', () => {
     }
 });
 
-document.addEventListener('contextmenu', (event) => event.preventDefault());
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
-        event.preventDefault();
-    }
+document.addEventListener('contextmenu', (event) => {
+    if (event.target.closest && event.target.closest('.promo-slide')) return;
+    event.preventDefault();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
