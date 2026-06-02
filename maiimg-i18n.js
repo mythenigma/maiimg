@@ -59,14 +59,14 @@ class I18n {
           // Features
           features: {
             viewLimit: {
-              title: "View Limit",
-              placeholder: "Max views (required)",
-              description: "Enter max number of views"
+              title: "Max views",
+              placeholder: "25",
+              description: "How many times this link can be opened"
             },
             timeControl: {
-              title: "Time Control",
-              placeholder: "Seconds per view (required)",
-              description: "Enter viewing duration in seconds"
+              title: "Time per view",
+              placeholder: "180",
+              description: "How long each visitor can browse (seconds)"
             },
             accessControl: {
               title: "Access Control",
@@ -329,14 +329,14 @@ class I18n {
           // Features
           features: {
             viewLimit: {
-              title: "查看限制",
-              placeholder: "最大查看次数（必填）",
-              description: "输入最大查看次数"
+              title: "查看次数",
+              placeholder: "25",
+              description: "这个链接最多能被打开多少次"
             },
             timeControl: {
-              title: "时间控制",
-              placeholder: "每次查看秒数（必填）",
-              description: "输入查看持续时间（秒）"
+              title: "单次浏览时长",
+              placeholder: "180",
+              description: "每位访客每次最多可浏览多少秒"
             },
             accessControl: {
               title: "访问控制",
@@ -598,14 +598,14 @@ class I18n {
           // Features
           features: {
             viewLimit: {
-              title: "檢視限制",
-              placeholder: "最大檢視次數（必填）",
-              description: "輸入最大檢視次數"
+              title: "查看次數",
+              placeholder: "25",
+              description: "這個連結最多能被開啟多少次"
             },
             timeControl: {
-              title: "時間控制",
-              placeholder: "每次檢視秒數（必填）",
-              description: "輸入檢視持續時間（秒）"
+              title: "單次瀏覽時長",
+              placeholder: "180",
+              description: "每位訪客每次最多可瀏覽多少秒"
             },
             accessControl: {
               title: "存取控制",
@@ -867,14 +867,14 @@ class I18n {
           // Features
           features: {
             viewLimit: {
-              title: "表示制限",
-              placeholder: "最大表示回数（必須）",
-              description: "最大表示回数を入力"
+              title: "最大表示回数",
+              placeholder: "25",
+              description: "リンクを開ける最大回数"
             },
             timeControl: {
-              title: "時間制御",
-              placeholder: "表示時間（秒）（必須）",
-              description: "表示継続時間（秒）を入力"
+              title: "1回あたりの閲覧時間",
+              placeholder: "180",
+              description: "訪問者が1回に閲覧できる秒数"
             },
             accessControl: {
               title: "アクセス制御",
@@ -1136,14 +1136,14 @@ class I18n {
           // Features
           features: {
             viewLimit: {
-              title: "Anzeige-Limit",
-              placeholder: "Max. Aufrufe (erforderlich)",
-              description: "Maximale Anzahl der Aufrufe eingeben"
+              title: "Max. Aufrufe",
+              placeholder: "25",
+              description: "Wie oft dieser Link geöffnet werden kann"
             },
             timeControl: {
-              title: "Zeitsteuerung",
-              placeholder: "Sekunden pro Aufruf (erforderlich)",
-              description: "Anzeigedauer in Sekunden eingeben"
+              title: "Zeit pro Aufruf",
+              placeholder: "180",
+              description: "Sekunden, die jeder Besucher pro Sitzung hat"
             },
             accessControl: {
               title: "Zugriffskontrolle",
@@ -1405,14 +1405,14 @@ class I18n {
           // Features
           features: {
             viewLimit: {
-              title: "조회 제한",
-              placeholder: "최대 조회수 (필수)",
-              description: "최대 조회수를 입력하세요"
+              title: "최대 조회수",
+              placeholder: "25",
+              description: "이 링크를 열 수 있는 최대 횟수"
             },
             timeControl: {
-              title: "시간 제어",
-              placeholder: "조회당 초 (필수)",
-              description: "조회 지속 시간(초)을 입력하세요"
+              title: "조회당 시간",
+              placeholder: "180",
+              description: "방문자가 한 번에 볼 수 있는 시간(초)"
             },
             accessControl: {
               title: "접근 제어",
@@ -1674,14 +1674,14 @@ class I18n {
           // Features
           features: {
             viewLimit: {
-              title: "Limite de Vues",
-              placeholder: "Nombre max de vues (requis)",
-              description: "Entrez le nombre maximum de vues"
+              title: "Vues max.",
+              placeholder: "25",
+              description: "Nombre d'ouvertures autorisées pour ce lien"
             },
             timeControl: {
-              title: "Contrôle du Temps",
-              placeholder: "Secondes par vue (requis)",
-              description: "Entrez la durée de visualisation en secondes"
+              title: "Durée par visite",
+              placeholder: "180",
+              description: "Temps de navigation par visiteur (secondes)"
             },
             accessControl: {
               title: "Contrôle d'accès",
@@ -1943,14 +1943,14 @@ class I18n {
           // Features
           features: {
             viewLimit: {
-              title: "Limite di Visualizzazioni",
-              placeholder: "Max visualizzazioni (richiesto)",
-              description: "Inserisci il numero massimo di visualizzazioni"
+              title: "Visualizzazioni max",
+              placeholder: "25",
+              description: "Quante volte questo link può essere aperto"
             },
             timeControl: {
-              title: "Controllo del Tempo",
-              placeholder: "Secondi per visualizzazione (richiesto)",
-              description: "Inserisci la durata di visualizzazione in secondi"
+              title: "Tempo per visita",
+              placeholder: "180",
+              description: "Secondi di navigazione per ogni visitatore"
             },
             accessControl: {
               title: "Controllo accesso",
@@ -2178,8 +2178,28 @@ class I18n {
   
     // Detect browser language
     detectBrowserLanguage() {
-      const browserLang = navigator.language || navigator.userLanguage;
-      return browserLang.startsWith('zh') ? 'zh' : 'en';
+      const browserLanguages = Array.isArray(navigator.languages) && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language || navigator.userLanguage || 'en'];
+
+      for (const rawLang of browserLanguages) {
+        const lang = String(rawLang || '').toLowerCase();
+        if (!lang) continue;
+
+        if (lang === 'zh-tw' || lang === 'zh-hk' || lang === 'zh-mo' || lang.startsWith('zh-hant')) {
+          return 'tw';
+        }
+        if (lang === 'zh' || lang === 'zh-cn' || lang === 'zh-sg' || lang.startsWith('zh-hans')) {
+          return 'zh';
+        }
+
+        const baseLang = lang.split('-')[0];
+        if (['en', 'ja', 'de', 'ko', 'fr', 'it'].includes(baseLang)) {
+          return baseLang;
+        }
+      }
+
+      return 'en';
     }
   
     // Get translation for a key
@@ -2344,6 +2364,87 @@ class I18n {
         title: "Upload Images & Short Videos",
         subtitle: "Turn your photos and short videos into shareable QR links with tracking and access controls"
       },
+      landing: {
+        hero: {
+          eyebrow: "Simple. Secure. Share Anywhere.",
+          titleLead: "Share Images & Short Videos with ",
+          titleAccent: "QR Codes",
+          subtitle: "Drop your files below — get a shareable link and QR code in seconds, with access control and scan analytics.",
+          startButton: "Start Uploading",
+          viewGalleries: "View Galleries",
+          tagFast: "Fast & Easy",
+          tagSecure: "Secure Sharing",
+          tagControl: "Access Control",
+          tagAnalytics: "Scan Analytics",
+          proofFiles: "files per gallery",
+          proofVideo: "short video support",
+          proofQr: "link + scan ready"
+        },
+        strip: {
+          title: "What can you share?",
+          imagesTitle: "Images",
+          imagesCopy: "JPG, PNG, WEBP...",
+          videosTitle: "Short Videos",
+          videosCopy: "MP4, MOV, WEBM...",
+          albumsTitle: "Albums",
+          albumsCopy: "Multiple files",
+          privateTitle: "Private Sharing",
+          privateCopy: "Secure & Controlled",
+          anywhereTitle: "Anywhere",
+          anywhereCopy: "One scan to access"
+        },
+        features: {
+          title: "Powerful Features for Easy Sharing",
+          subtitle: "Everything you need to share your media safely and efficiently",
+          accessTitle: "Access Control",
+          accessCopy: "Set expiration, view limits, password protection and download permissions.",
+          analyticsTitle: "Scan Analytics",
+          analyticsCopy: "Track scan data in real time. Know when, where and how your files are accessed.",
+          speedTitle: "High Speed & Stable",
+          speedCopy: "Global CDN acceleration ensures fast upload and smooth access.",
+          privateTitle: "Safe & Private",
+          privateCopy: "Your files are encrypted and stored securely. Privacy comes first.",
+          platformTitle: "Multi-platform",
+          platformCopy: "Access and manage your files on web, mobile and tablet.",
+          customTitle: "QR Code Customization",
+          customCopy: "Customize QR code style, color and logo to match your brand."
+        },
+        tools: {
+          title: "More than just image & video sharing",
+          subtitle: "Maiimg also supports more types of QR codes to meet your daily needs",
+          urlTitle: "URL QR Code",
+          urlCopy: "Website or any link",
+          smsTitle: "SMS QR Code",
+          smsCopy: "Send a text message",
+          wifiTitle: "WiFi QR Code",
+          wifiCopy: "Share WiFi in one scan",
+          phoneTitle: "Phone QR Code",
+          phoneCopy: "One tap to call",
+          mediaTitle: "Media Gallery",
+          mediaCopy: "Images & videos",
+          moreTitle: "More Tools",
+          moreCopy: "Browse all tools",
+          moreModalTitle: "More QR Tools",
+          moreModalCopy: "Choose a QR tool below. Each one opens in its own generator panel."
+        },
+        cta: {
+          title: "Ready to share your moments?",
+          subtitle: "Join millions of users who trust Maiimg for secure and easy sharing.",
+          button: "Get Started for Free"
+        },
+        footer: {
+          about: "Upload images and short videos, share them with a link and QR code, and stay in control with access limits and scan analytics.",
+          product: "Product",
+          upload: "Upload",
+          features: "Features",
+          qrTools: "QR Tools",
+          resources: "Resources",
+          maipdfHome: "MaiPDF Home",
+          devTools: "Developer Tools",
+          company: "Company",
+          contact: "Contact"
+        }
+      },
       upload: {
         title: "Media Upload Center",
         subtitle: "Drag & drop images or short videos, or click to browse",
@@ -2462,6 +2563,87 @@ class I18n {
         title: "上传和分享图片与小视频",
         subtitle: "将您的图片和小视频生成可分享的二维码链接，并支持访问控制与追踪"
       },
+      landing: {
+        hero: {
+          eyebrow: "简单、安全，随处分享。",
+          titleLead: "分享图片和小视频，用",
+          titleAccent: "二维码",
+          subtitle: "把文件拖到下方，几秒内获得可分享链接和二维码，并支持访问控制与扫码统计。",
+          startButton: "开始上传",
+          viewGalleries: "查看图集",
+          tagFast: "快速易用",
+          tagSecure: "安全分享",
+          tagControl: "访问控制",
+          tagAnalytics: "扫码统计",
+          proofFiles: "每个图集最多文件数",
+          proofVideo: "支持短视频",
+          proofQr: "链接和二维码"
+        },
+        strip: {
+          title: "可以分享什么？",
+          imagesTitle: "图片",
+          imagesCopy: "JPG、PNG、WEBP...",
+          videosTitle: "小视频",
+          videosCopy: "MP4、MOV、WEBM...",
+          albumsTitle: "图集",
+          albumsCopy: "多个文件",
+          privateTitle: "私密分享",
+          privateCopy: "安全、可控",
+          anywhereTitle: "随处访问",
+          anywhereCopy: "扫码即可打开"
+        },
+        features: {
+          title: "让分享更轻松的实用功能",
+          subtitle: "安全、高效地分享媒体所需的能力都在这里",
+          accessTitle: "访问控制",
+          accessCopy: "设置过期时间、查看次数、密码保护和下载权限。",
+          analyticsTitle: "扫码统计",
+          analyticsCopy: "实时追踪访问数据，了解文件在何时、何地、如何被打开。",
+          speedTitle: "高速稳定",
+          speedCopy: "全球 CDN 加速，上传更快，访问更流畅。",
+          privateTitle: "安全私密",
+          privateCopy: "文件安全存储，隐私优先。",
+          platformTitle: "多端可用",
+          platformCopy: "可在网页、手机和平板上访问和管理文件。",
+          customTitle: "二维码定制",
+          customCopy: "可按品牌需求定制二维码样式、颜色和标识。"
+        },
+        tools: {
+          title: "不只是图片和视频分享",
+          subtitle: "Maiimg 还支持更多类型的二维码，满足日常使用需求",
+          urlTitle: "网址二维码",
+          urlCopy: "网站或任意链接",
+          smsTitle: "短信二维码",
+          smsCopy: "一键发送短信",
+          wifiTitle: "WiFi 二维码",
+          wifiCopy: "扫码连接 WiFi",
+          phoneTitle: "电话二维码",
+          phoneCopy: "一键拨打电话",
+          mediaTitle: "媒体图集",
+          mediaCopy: "图片和视频",
+          moreTitle: "更多工具",
+          moreCopy: "浏览全部工具",
+          moreModalTitle: "更多二维码工具",
+          moreModalCopy: "从下方选择二维码工具，每个工具都会打开对应的生成面板。"
+        },
+        cta: {
+          title: "准备好分享你的精彩瞬间了吗？",
+          subtitle: "使用 Maiimg 安全、轻松地分享你的图片和小视频。",
+          button: "免费开始使用"
+        },
+        footer: {
+          about: "上传图片和小视频，通过链接和二维码分享，并用访问限制与扫码统计保持掌控。",
+          product: "产品",
+          upload: "上传",
+          features: "功能",
+          qrTools: "二维码工具",
+          resources: "资源",
+          maipdfHome: "MaiPDF 首页",
+          devTools: "开发者工具",
+          company: "公司",
+          contact: "联系"
+        }
+      },
       upload: {
         title: "媒体上传中心",
         subtitle: "拖放图片或小视频，或点击浏览",
@@ -2579,6 +2761,87 @@ class I18n {
       hero: {
         title: "上傳和分享圖片與短影片",
         subtitle: "將您的圖片和短影片轉成可分享的 QR 連結，並支援追蹤與存取控制"
+      },
+      landing: {
+        hero: {
+          eyebrow: "簡單、安全，隨處分享。",
+          titleLead: "分享圖片和短影片，用",
+          titleAccent: "QR Code",
+          subtitle: "把檔案拖到下方，幾秒內取得可分享連結和 QR Code，並支援存取控制與掃碼統計。",
+          startButton: "開始上傳",
+          viewGalleries: "查看圖集",
+          tagFast: "快速易用",
+          tagSecure: "安全分享",
+          tagControl: "存取控制",
+          tagAnalytics: "掃碼統計",
+          proofFiles: "每個圖集最多檔案數",
+          proofVideo: "支援短影片",
+          proofQr: "連結和 QR Code"
+        },
+        strip: {
+          title: "可以分享什麼？",
+          imagesTitle: "圖片",
+          imagesCopy: "JPG、PNG、WEBP...",
+          videosTitle: "短影片",
+          videosCopy: "MP4、MOV、WEBM...",
+          albumsTitle: "圖集",
+          albumsCopy: "多個檔案",
+          privateTitle: "私密分享",
+          privateCopy: "安全、可控",
+          anywhereTitle: "隨處存取",
+          anywhereCopy: "掃碼即可開啟"
+        },
+        features: {
+          title: "讓分享更輕鬆的實用功能",
+          subtitle: "安全、高效分享媒體所需的能力都在這裡",
+          accessTitle: "存取控制",
+          accessCopy: "設定到期時間、查看次數、密碼保護和下載權限。",
+          analyticsTitle: "掃碼統計",
+          analyticsCopy: "即時追蹤存取資料，了解檔案在何時、何地、如何被開啟。",
+          speedTitle: "高速穩定",
+          speedCopy: "全球 CDN 加速，上傳更快，存取更流暢。",
+          privateTitle: "安全私密",
+          privateCopy: "檔案安全儲存，隱私優先。",
+          platformTitle: "多端可用",
+          platformCopy: "可在網頁、手機和平板上存取和管理檔案。",
+          customTitle: "QR Code 自訂",
+          customCopy: "可依品牌需求自訂 QR Code 樣式、顏色和標誌。"
+        },
+        tools: {
+          title: "不只是圖片和影片分享",
+          subtitle: "Maiimg 還支援更多類型的 QR Code，滿足日常使用需求",
+          urlTitle: "網址 QR Code",
+          urlCopy: "網站或任意連結",
+          smsTitle: "簡訊 QR Code",
+          smsCopy: "一鍵發送簡訊",
+          wifiTitle: "WiFi QR Code",
+          wifiCopy: "掃碼連接 WiFi",
+          phoneTitle: "電話 QR Code",
+          phoneCopy: "一鍵撥打電話",
+          mediaTitle: "媒體圖集",
+          mediaCopy: "圖片和影片",
+          moreTitle: "更多工具",
+          moreCopy: "瀏覽全部工具",
+          moreModalTitle: "更多 QR 工具",
+          moreModalCopy: "從下方選擇 QR 工具，每個工具都會開啟對應的生成面板。"
+        },
+        cta: {
+          title: "準備好分享你的精彩瞬間了嗎？",
+          subtitle: "使用 Maiimg 安全、輕鬆地分享你的圖片和短影片。",
+          button: "免費開始使用"
+        },
+        footer: {
+          about: "上傳圖片和短影片，透過連結和 QR Code 分享，並用存取限制與掃碼統計保持掌控。",
+          product: "產品",
+          upload: "上傳",
+          features: "功能",
+          qrTools: "QR 工具",
+          resources: "資源",
+          maipdfHome: "MaiPDF 首頁",
+          devTools: "開發者工具",
+          company: "公司",
+          contact: "聯絡"
+        }
       },
       upload: {
         title: "媒體上傳中心",

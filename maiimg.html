@@ -760,7 +760,7 @@
     html[lang^="zh"] .lp-brand-sub{ display:block; }
 
     /* Nav */
-    .lp-nav{ position:sticky; top:0; z-index:1030; background:rgba(255,255,255,.82);
+    .lp-nav{ position:sticky; top:0; z-index:5000; overflow:visible; background:rgba(255,255,255,.82);
       backdrop-filter:saturate(180%) blur(14px); border-bottom:1px solid var(--lp-line); }
     .lp-nav-inner{ display:flex; align-items:center; justify-content:space-between; height:70px; gap:1rem; }
     .lp-links{ display:flex; align-items:center; gap:1.6rem; }
@@ -773,7 +773,9 @@
     .lp-actions .btn-outline-light.lp-lang-btn:hover{ border-color:var(--lp-indigo); color:var(--lp-indigo-d); }
     .lp-actions .lp-lang-btn #currentLanguageFlag{ display:inline-flex; justify-content:center; width:20px; font-size:1rem; }
     /* Polished language dropdown menu (override maiimg.css defaults) */
-    .lp-actions .language-selector .dropdown-menu{ min-width:176px !important; padding:6px !important; border-radius:14px !important; border:1px solid var(--lp-line) !important; box-shadow:0 18px 42px -18px rgba(15,23,42,.45) !important; margin-top:10px !important; }
+    .lp-actions .language-selector{ position:relative; z-index:5100; }
+    .lp-actions .language-selector .dropdown{ position:relative; }
+    .lp-actions .language-selector .dropdown-menu{ z-index:5200 !important; min-width:176px !important; padding:6px !important; border-radius:14px !important; border:1px solid var(--lp-line) !important; background:rgba(255,255,255,.98) !important; box-shadow:0 18px 42px -18px rgba(15,23,42,.45) !important; margin-top:10px !important; pointer-events:auto !important; }
     .lp-actions .language-selector .dropdown-item{ display:flex !important; align-items:center !important; gap:10px !important; padding:9px 12px !important; border-radius:10px !important; font-size:.9rem !important; font-weight:600 !important; color:var(--lp-slate) !important; }
     .lp-actions .language-selector .dropdown-item:hover{ background:#eef2ff !important; color:var(--lp-indigo-d) !important; }
     .lp-actions .language-selector .flag-icon{ width:22px !important; min-width:22px; flex:none; text-align:center; font-size:1.05rem !important; line-height:1 !important; }
@@ -869,6 +871,11 @@
     .lp-tool-ico{ width:50px; height:50px; border-radius:14px; background:var(--lp-grad); color:#fff; display:grid; place-items:center; font-size:1.2rem; margin:0 auto .8rem; }
     .lp-tool h4{ font-size:.95rem; font-weight:700; margin:0 0 .25rem; }
     .lp-tool p{ font-size:.78rem; color:var(--lp-muted); margin:0; }
+    .tool-modal-card{ width:100%; min-height:86px; display:flex; align-items:center; gap:14px; padding:16px; text-align:left; border:1px solid var(--lp-line); border-radius:16px; background:#fff; color:var(--lp-ink); transition:transform .16s ease, border-color .2s ease, box-shadow .2s ease; }
+    .tool-modal-card:hover{ transform:translateY(-2px); border-color:#c7d2fe; box-shadow:var(--lp-shadow); }
+    .tool-modal-icon{ width:46px; height:46px; border-radius:14px; background:var(--lp-grad); color:#fff; display:grid; place-items:center; flex:none; }
+    .tool-modal-card strong{ display:block; font-size:1rem; margin-bottom:2px; }
+    .tool-modal-card small{ display:block; color:var(--lp-muted); line-height:1.45; }
 
     /* CTA */
     .lp-cta-sec{ padding:30px 0 74px; }
@@ -1028,16 +1035,19 @@
 
     /* ── Compact setting rows (maipdf-style) ── */
     .lp-upload-card .cfg-list{ display:flex; flex-direction:column; gap:10px; }
-    .lp-upload-card .cfg-row{ display:flex; align-items:center; gap:14px; padding:12px 16px; border:1px solid var(--lp-line); border-radius:14px; background:#fff; transition:border-color .15s; }
+    .lp-upload-card .cfg-row{ display:flex; align-items:flex-start; gap:12px; padding:12px 16px; border:1px solid var(--lp-line); border-radius:14px; background:#fff; transition:border-color .15s; flex-wrap:nowrap; }
+    .lp-upload-card .cfg-row:not(.cfg-row--wrap) .cfg-ico{ margin-top:2px; }
     .lp-upload-card .cfg-row:hover{ border-color:#dfe5ef; }
     .lp-upload-card .cfg-row--wrap{ flex-wrap:wrap; }
-    .lp-upload-card .cfg-row-left{ display:inline-flex; align-items:center; gap:10px; flex:0 0 auto; }
+    .lp-upload-card .cfg-row-left{ display:inline-flex; align-items:center; gap:10px; flex:0 1 auto; min-width:0; }
     .lp-upload-card .cfg-ico{ width:34px; height:34px; border-radius:10px; background:#eef2ff; color:var(--lp-indigo-d); display:grid; place-items:center; font-size:.9rem; flex:none; }
-    .lp-upload-card .cfg-name{ font-weight:700; font-size:.95rem; color:var(--lp-ink); margin:0; }
-    .lp-upload-card .cfg-row-right{ display:inline-flex; align-items:center; gap:10px; margin-left:auto; flex:1 1 auto; min-width:0; flex-wrap:nowrap; justify-content:flex-end; }
-    .lp-upload-card .cfg-row-right--full{ flex:1 1 100%; margin-left:0; flex-wrap:wrap; justify-content:flex-start; }
-    .lp-upload-card .cfg-input-num{ flex:1 1 auto; width:auto; min-width:0; max-width:240px; }
-    .lp-upload-card .cfg-suffix{ font-size:.82rem; color:var(--lp-muted); font-weight:600; white-space:nowrap; flex:none; min-width:34px; }
+    .lp-upload-card .cfg-label-block{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+    .lp-upload-card .cfg-name{ font-weight:700; font-size:.95rem; color:var(--lp-ink); margin:0; line-height:1.25; }
+    .lp-upload-card .cfg-hint{ font-size:.78rem; font-weight:500; color:var(--lp-muted); line-height:1.35; }
+    .lp-upload-card .cfg-row-right{ display:inline-flex; align-items:center; gap:8px; margin-left:auto; flex:0 0 auto; flex-shrink:0; flex-wrap:nowrap; justify-content:flex-end; align-self:center; }
+    .lp-upload-card .cfg-row-right--full{ flex:1 1 100%; margin-left:0; flex-wrap:wrap; justify-content:flex-start; align-self:stretch; }
+    .lp-upload-card .cfg-input-num{ width:104px; max-width:104px; flex:0 0 104px; text-align:center; padding:.65rem .55rem; font-size:1rem; font-weight:600; }
+    .lp-upload-card .cfg-suffix{ font-size:.82rem; color:var(--lp-muted); font-weight:600; white-space:nowrap; flex:none; }
     .lp-upload-card .cfg-row-right--full > .form-control{ width:100%; }
 
     /* Expiration pills */
@@ -1051,9 +1061,13 @@
     .lp-upload-card .cfg-exp-note{ font-size:.78rem; }
 
     @media (max-width:600px){
-      .lp-upload-card .cfg-row{ flex-direction:column; align-items:stretch; gap:10px; }
-      .lp-upload-card .cfg-row-right{ margin-left:0; justify-content:flex-start; }
-      .lp-upload-card .cfg-input-num{ width:100%; max-width:none; }
+      .lp-upload-card .cfg-row--wrap{ flex-direction:column; align-items:stretch; gap:10px; }
+      .lp-upload-card .cfg-row--wrap .cfg-row-right--full{ margin-left:0; justify-content:flex-start; }
+      .lp-upload-card .cfg-row:not(.cfg-row--wrap){ padding:10px 12px; gap:8px; }
+      .lp-upload-card .cfg-row:not(.cfg-row--wrap) .cfg-ico{ width:30px; height:30px; font-size:.82rem; }
+      .lp-upload-card .cfg-row:not(.cfg-row--wrap) .cfg-name{ font-size:.9rem; }
+      .lp-upload-card .cfg-hint{ font-size:.74rem; }
+      .lp-upload-card .cfg-input-num{ width:88px; max-width:88px; flex:0 0 88px; font-size:.95rem; }
     }
 
     /* Buttons */
@@ -1084,6 +1098,369 @@
       .lp-upload-card .config-summary-grid{ grid-template-columns:1fr 1fr; }
       .lp-upload-card .generate-side-panel{ position:static; }
       .lp-upload-card .section-title{ font-size:1.25rem; }
+    }
+
+    /* ═══ Professional polish pass ═══ */
+    :root{
+      --lp-cyan:#0ea5e9;
+      --lp-emerald:#10b981;
+      --lp-amber:#f59e0b;
+      --lp-soft-shadow:0 18px 48px -30px rgba(15,23,42,.42);
+    }
+    body.lp-body{
+      background:
+        radial-gradient(920px 520px at 12% -10%, rgba(14,165,233,.12), transparent 62%),
+        radial-gradient(860px 540px at 88% 6%, rgba(99,102,241,.14), transparent 60%),
+        linear-gradient(180deg,#f8fafc 0%,#eef3fb 44%,#f8fafc 100%);
+    }
+    .lp-nav{
+      background:rgba(255,255,255,.9);
+      border-bottom:1px solid rgba(148,163,184,.22);
+      box-shadow:0 10px 34px -30px rgba(15,23,42,.45);
+      z-index:5000;
+      overflow:visible;
+    }
+    .lp-nav-inner{ height:74px; }
+    .lp-nav .lp-links{ display:none !important; }
+    .lp-actions{ margin-left:auto; }
+    .lp-actions .language-selector,
+    .lp-actions .language-selector .dropdown{
+      position:relative;
+      z-index:5100;
+    }
+    .lp-actions .language-selector .dropdown-menu{
+      z-index:5200 !important;
+      background:rgba(255,255,255,.98) !important;
+      opacity:1 !important;
+      pointer-events:auto !important;
+    }
+    .lp-language-floating-menu{
+      position:fixed !important;
+      z-index:2147483647 !important;
+      display:none;
+      min-width:176px !important;
+      padding:6px !important;
+      border-radius:14px !important;
+      border:1px solid rgba(226,232,240,.96) !important;
+      background:#fff !important;
+      box-shadow:0 22px 54px -18px rgba(15,23,42,.38) !important;
+      opacity:1 !important;
+      pointer-events:auto !important;
+      transform:none !important;
+    }
+    .lp-language-floating-menu.show{
+      display:block !important;
+    }
+    .lp-language-floating-menu .dropdown-item{
+      display:flex !important;
+      align-items:center !important;
+      gap:10px !important;
+      padding:9px 12px !important;
+      border-radius:10px !important;
+      font-size:.9rem !important;
+      font-weight:600 !important;
+      color:var(--lp-slate) !important;
+    }
+    .lp-language-floating-menu .dropdown-item:hover{
+      background:#eef2ff !important;
+      color:var(--lp-indigo-d) !important;
+    }
+    .lp-actions .btn-light,
+    .lp-actions .btn-outline-light.lp-lang-btn{
+      border:1px solid rgba(226,232,240,.92) !important;
+      background:#fff;
+      box-shadow:none;
+    }
+    .lp-hero{
+      isolation:isolate;
+      z-index:0;
+      padding:68px 0 34px;
+      background:
+        linear-gradient(115deg,rgba(255,255,255,.92),rgba(239,246,255,.7) 52%,rgba(245,243,255,.82)),
+        radial-gradient(700px 360px at 50% 0%, rgba(99,102,241,.14), transparent 70%);
+      border-bottom:1px solid rgba(226,232,240,.7);
+    }
+    body.lp-body:has(.language-selector .dropdown-menu.show) .lp-hero{
+      pointer-events:none;
+    }
+    .lp-hero::before,
+    .lp-hero::after{
+      content:"";
+      position:absolute;
+      z-index:-1;
+      pointer-events:none;
+    }
+    .lp-hero::before{
+      inset:18px 22px auto;
+      height:1px;
+      background:linear-gradient(90deg,transparent,rgba(99,102,241,.24),transparent);
+    }
+    .lp-hero::after{
+      width:520px;
+      height:520px;
+      right:4%;
+      top:-250px;
+      border-radius:999px;
+      background:radial-gradient(circle,rgba(14,165,233,.16),transparent 66%);
+    }
+    .lp-hero-center{ max-width:58rem; }
+    .lp-eyebrow{
+      margin-bottom:1.15rem;
+      background:#fff;
+      color:#4338ca;
+      border:1px solid rgba(99,102,241,.16);
+      box-shadow:0 12px 28px -24px rgba(79,70,229,.8);
+    }
+    .lp-hero-title{
+      max-width:16ch;
+      margin-left:auto;
+      margin-right:auto;
+      font-size:clamp(2.65rem,6.6vw,5.05rem);
+      line-height:.98;
+      letter-spacing:-.055em;
+    }
+    .lp-accent{
+      background:linear-gradient(135deg,#4f46e5 0%,#0ea5e9 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .lp-hero-sub{
+      max-width:42rem;
+      font-size:clamp(1.02rem,1.7vw,1.22rem);
+      color:#475569;
+    }
+    .lp-hero-actions-main{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:.85rem;
+      margin:1.55rem 0 1.2rem;
+    }
+    .lp-hero-actions-main .lp-btn{
+      min-height:46px;
+      border-radius:14px;
+      padding:.92rem 1.25rem;
+    }
+    .lp-hero-actions-main .lp-btn-ghost{
+      background:rgba(255,255,255,.86);
+      border-color:rgba(148,163,184,.28);
+    }
+    .lp-hero-tags{ justify-content:center; gap:.58rem .8rem; }
+    .lp-tag{
+      padding:.42rem .7rem;
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      border:1px solid rgba(226,232,240,.9);
+      color:#475569;
+      box-shadow:0 10px 24px -22px rgba(15,23,42,.5);
+    }
+    .lp-hero-proof{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:1px;
+      width:min(720px,100%);
+      margin:1.45rem auto 0;
+      overflow:hidden;
+      border:1px solid rgba(226,232,240,.9);
+      border-radius:18px;
+      background:rgba(226,232,240,.85);
+      box-shadow:var(--lp-soft-shadow);
+    }
+    .lp-hero-proof div{
+      padding:1rem .9rem;
+      background:rgba(255,255,255,.82);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:.15rem;
+    }
+    .lp-hero-proof strong{
+      color:#0f172a;
+      font-size:1.35rem;
+      line-height:1;
+      letter-spacing:-.03em;
+    }
+    .lp-hero-proof span{
+      color:#64748b;
+      font-size:.8rem;
+      font-weight:650;
+      text-align:center;
+    }
+    .lp-upload-band{
+      padding:26px 0 62px;
+    }
+    .lp-upload-card{
+      padding:14px;
+      border-color:rgba(148,163,184,.22);
+      background:
+        linear-gradient(180deg,rgba(255,255,255,.98),rgba(248,250,252,.96));
+      box-shadow:0 28px 80px -54px rgba(15,23,42,.6);
+    }
+    .lp-upload-card .flow-nav-inner{
+      padding:.45rem;
+      border:1px solid rgba(226,232,240,.9);
+      border-radius:999px;
+      background:rgba(248,250,252,.78);
+      box-shadow:none;
+    }
+    .lp-upload-card .flow-step{
+      min-height:42px;
+      border-color:transparent;
+      background:transparent;
+    }
+    .lp-upload-card .flow-step.is-current,
+    .lp-upload-card .flow-step.is-done{
+      background:#fff;
+      box-shadow:0 12px 24px -22px rgba(15,23,42,.5);
+    }
+    .lp-upload-card .main-upload-section,
+    .lp-upload-card .config-section{
+      padding:2px !important;
+    }
+    .lp-upload-card .upload-area{
+      position:relative;
+      min-height:292px;
+      border-color:rgba(99,102,241,.32) !important;
+      background:
+        radial-gradient(circle at 22% 18%, rgba(14,165,233,.12), transparent 36%),
+        radial-gradient(circle at 84% 12%, rgba(99,102,241,.13), transparent 38%),
+        linear-gradient(180deg,#f8fbff,#fff) !important;
+    }
+    .lp-upload-card .upload-area::before{
+      border-color:rgba(255,255,255,.92);
+      background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(255,255,255,.56));
+    }
+    .lp-upload-card .upload-area:hover{
+      transform:translateY(-2px);
+      box-shadow:0 20px 46px -38px rgba(79,70,229,.8) !important;
+    }
+    .lp-upload-card .upload-orb{
+      width:84px;
+      height:84px;
+      border-radius:24px;
+      background:linear-gradient(135deg,#4f46e5 0%,#0ea5e9 100%);
+      box-shadow:0 18px 42px -22px rgba(79,70,229,.9);
+    }
+    .lp-upload-card .upload-text{
+      font-size:clamp(1.18rem,2.3vw,1.55rem);
+      letter-spacing:-.025em;
+    }
+    .lp-upload-card #uploadStatus{
+      border:1px solid rgba(99,102,241,.12) !important;
+      background:linear-gradient(135deg,#eef2ff,#f0f9ff) !important;
+    }
+    .lp-upload-card .preset-panel,
+    .lp-upload-card .cfg-row,
+    .lp-upload-card .generate-side-panel,
+    .lp-upload-card .result-card,
+    .lp-feat,
+    .lp-tool{
+      border-color:rgba(148,163,184,.2);
+      box-shadow:0 14px 34px -30px rgba(15,23,42,.52);
+    }
+    .lp-upload-card .preset-card,
+    .lp-upload-card .config-summary-card{
+      border-color:rgba(148,163,184,.22);
+    }
+    .lp-upload-card .preset-card.is-active{
+      background:linear-gradient(180deg,#eef2ff,#fff);
+    }
+    .lp-upload-card .generate-side-panel{
+      background:
+        radial-gradient(circle at 90% 4%, rgba(14,165,233,.12), transparent 38%),
+        linear-gradient(180deg,#f5f7ff,#fff);
+      top:88px;
+    }
+    .lp-upload-card .btn-primary{
+      min-height:46px;
+      background:linear-gradient(135deg,#4f46e5,#0ea5e9) !important;
+    }
+    .lp-strip{
+      margin:0 auto;
+      border-color:rgba(148,163,184,.2);
+      box-shadow:0 18px 48px -34px rgba(15,23,42,.42);
+    }
+    .lp-section{ padding:80px 0; }
+    .lp-tools-sec{
+      background:linear-gradient(180deg,#fff,#f8fafc);
+      border-top:1px solid rgba(226,232,240,.72);
+      border-bottom:1px solid rgba(226,232,240,.72);
+    }
+    .lp-feat,
+    .lp-tool{
+      background:rgba(255,255,255,.92);
+    }
+    .lp-cta{
+      background:
+        radial-gradient(circle at 90% 18%, rgba(14,165,233,.42), transparent 34%),
+        linear-gradient(135deg,#4338ca,#0f7fd0);
+    }
+    @media (max-width:992px){
+      .lp-links{ display:none; }
+      .lp-toggle{ display:inline-grid; place-items:center; }
+      .lp-upload-card .flow-nav-inner{ border-radius:22px; }
+    }
+    @media (max-width:768px){
+      .lp-nav-inner{ height:66px; }
+      .lp-hero{ padding:42px 0 24px; }
+      .lp-hero-title{
+        max-width:12ch;
+        font-size:clamp(2.35rem,12vw,3.5rem);
+      }
+      .lp-hero-actions-main{
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .lp-hero-actions-main .lp-btn{
+        justify-content:center;
+        width:100%;
+      }
+      .lp-hero-tags{ gap:.48rem; }
+      .lp-tag{ font-size:.8rem; }
+      .lp-hero-proof{
+        grid-template-columns:1fr;
+        border-radius:16px;
+      }
+      .lp-upload-band{ padding:18px 0 44px; }
+      .lp-upload-card{ padding:8px; border-radius:18px; }
+      .lp-upload-card .flow-nav-inner{
+        display:grid;
+        grid-template-columns:1fr;
+        border-radius:16px;
+      }
+      .lp-upload-card .flow-step{
+        justify-content:flex-start;
+        border-radius:14px;
+      }
+      .lp-upload-card .upload-area{
+        min-height:246px;
+        padding:28px 14px !important;
+      }
+      .lp-upload-card .upload-subtext{
+        display:block;
+        max-width:100%;
+        overflow:visible;
+        -webkit-line-clamp:unset;
+      }
+      .lp-upload-card .cfg-row:not(.cfg-row--wrap){
+        display:grid;
+        grid-template-columns:1fr;
+      }
+      .lp-upload-card .cfg-row-right{
+        width:100%;
+        margin-left:0;
+        justify-content:flex-start;
+      }
+      .lp-upload-card .cfg-input-num{
+        width:min(140px,55vw);
+        max-width:140px;
+        flex-basis:140px;
+      }
+      .lp-strip{
+        grid-template-columns:1fr;
+        padding:18px;
+      }
     }
   </style>
 </head>
@@ -1189,14 +1566,27 @@
 <section class="lp-hero lp-hero-compact">
   <div class="lp-wrap">
     <div class="lp-hero-center">
-      <span class="lp-eyebrow"><i class="fas fa-bolt"></i> Simple. Secure. Share Anywhere.</span>
-      <h1 class="lp-hero-title">Share Images &amp; Short Videos with <span class="lp-accent">QR Codes</span></h1>
-      <p class="lp-hero-sub">Drop your files below — get a shareable link and QR code in seconds, with access control and scan analytics.</p>
+      <span class="lp-eyebrow"><i class="fas fa-bolt"></i> <span data-translate="landing.hero.eyebrow">Simple. Secure. Share Anywhere.</span></span>
+      <h1 class="lp-hero-title"><span data-translate="landing.hero.titleLead">Share Images &amp; Short Videos with </span><span class="lp-accent" data-translate="landing.hero.titleAccent">QR Codes</span></h1>
+      <p class="lp-hero-sub" data-translate="landing.hero.subtitle">Drop your files below — get a shareable link and QR code in seconds, with access control and scan analytics.</p>
+      <div class="lp-hero-actions-main">
+        <button type="button" class="lp-btn lp-btn-primary" onclick="document.getElementById('uploadBand').scrollIntoView({behavior:'smooth'})">
+          <i class="fas fa-cloud-arrow-up"></i> <span data-translate="landing.hero.startButton">Start Uploading</span>
+        </button>
+        <a class="lp-btn lp-btn-ghost" href="dashboard.html">
+          <i class="fas fa-table-cells-large"></i> <span data-translate="landing.hero.viewGalleries">View Galleries</span>
+        </a>
+      </div>
       <div class="lp-hero-tags">
-        <span class="lp-tag"><i class="fas fa-check-circle"></i> Fast &amp; Easy</span>
-        <span class="lp-tag"><i class="fas fa-check-circle"></i> Secure Sharing</span>
-        <span class="lp-tag"><i class="fas fa-check-circle"></i> Access Control</span>
-        <span class="lp-tag"><i class="fas fa-check-circle"></i> Scan Analytics</span>
+        <span class="lp-tag"><i class="fas fa-check-circle"></i> <span data-translate="landing.hero.tagFast">Fast &amp; Easy</span></span>
+        <span class="lp-tag"><i class="fas fa-check-circle"></i> <span data-translate="landing.hero.tagSecure">Secure Sharing</span></span>
+        <span class="lp-tag"><i class="fas fa-check-circle"></i> <span data-translate="landing.hero.tagControl">Access Control</span></span>
+        <span class="lp-tag"><i class="fas fa-check-circle"></i> <span data-translate="landing.hero.tagAnalytics">Scan Analytics</span></span>
+      </div>
+      <div class="lp-hero-proof" aria-label="Maiimg sharing highlights">
+        <div><strong>25</strong><span data-translate="landing.hero.proofFiles">files per gallery</span></div>
+        <div><strong>100MB</strong><span data-translate="landing.hero.proofVideo">short video support</span></div>
+        <div><strong>QR</strong><span data-translate="landing.hero.proofQr">link + scan ready</span></div>
       </div>
     </div>
   </div>
@@ -1309,22 +1699,28 @@
               <div class="cfg-row">
                 <div class="cfg-row-left">
                   <span class="cfg-ico"><i class="fas fa-eye"></i></span>
-                  <label class="cfg-name" for="limit" data-translate="features.viewLimit.title">View Limit</label>
+                  <div class="cfg-label-block">
+                    <label class="cfg-name" for="limit" data-translate="features.viewLimit.title">Max views</label>
+                    <span class="cfg-hint" data-translate="features.viewLimit.description">How many times this link can be opened</span>
+                  </div>
                 </div>
                 <div class="cfg-row-right">
-                  <input class="form-control cfg-input-num" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="Max views (required)" min="1" max="99999999" required>
+                  <input class="form-control cfg-input-num" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="25" min="1" max="99999999" required>
                   <span class="cfg-suffix" data-translate="features.viewLimit.unit">views</span>
                 </div>
               </div>
 
-              <!-- Time Control -->
+              <!-- Time per view -->
               <div class="cfg-row">
                 <div class="cfg-row-left">
                   <span class="cfg-ico"><i class="fas fa-stopwatch"></i></span>
-                  <label class="cfg-name" for="password" data-translate="features.timeControl.title">Time Control</label>
+                  <div class="cfg-label-block">
+                    <label class="cfg-name" for="password" data-translate="features.timeControl.title">Time per view</label>
+                    <span class="cfg-hint" data-translate="features.timeControl.description">How long each visitor can browse (seconds)</span>
+                  </div>
                 </div>
                 <div class="cfg-row-right">
-                  <input class="form-control cfg-input-num" type="number" id="password" data-translate-placeholder="features.timeControl.placeholder" placeholder="Seconds per view (required)" min="1" max="99999999" required>
+                  <input class="form-control cfg-input-num" type="number" id="password" data-translate-placeholder="features.timeControl.placeholder" placeholder="180" min="1" max="99999999" required>
                   <span class="cfg-suffix" data-translate="features.timeControl.unit">sec</span>
                 </div>
               </div>
@@ -1534,12 +1930,12 @@
 <!-- ════════════ SHARE STRIP ════════════ -->
 <section class="lp-wrap">
   <div class="lp-strip">
-    <div class="lp-strip-title">What can you share?</div>
-    <div class="lp-strip-item"><span class="lp-strip-ico ico-i1"><i class="fas fa-image"></i></span><div><h4>Images</h4><p>JPG, PNG, WEBP…</p></div></div>
-    <div class="lp-strip-item"><span class="lp-strip-ico ico-i2"><i class="fas fa-film"></i></span><div><h4>Short Videos</h4><p>MP4, MOV, WEBM…</p></div></div>
-    <div class="lp-strip-item"><span class="lp-strip-ico ico-i3"><i class="fas fa-images"></i></span><div><h4>Albums</h4><p>Multiple files</p></div></div>
-    <div class="lp-strip-item"><span class="lp-strip-ico ico-i4"><i class="fas fa-shield-halved"></i></span><div><h4>Private Sharing</h4><p>Secure &amp; Controlled</p></div></div>
-    <div class="lp-strip-item"><span class="lp-strip-ico ico-i5"><i class="fas fa-globe"></i></span><div><h4>Anywhere</h4><p>One scan to access</p></div></div>
+    <div class="lp-strip-title" data-translate="landing.strip.title">What can you share?</div>
+    <div class="lp-strip-item"><span class="lp-strip-ico ico-i1"><i class="fas fa-image"></i></span><div><h4 data-translate="landing.strip.imagesTitle">Images</h4><p data-translate="landing.strip.imagesCopy">JPG, PNG, WEBP...</p></div></div>
+    <div class="lp-strip-item"><span class="lp-strip-ico ico-i2"><i class="fas fa-film"></i></span><div><h4 data-translate="landing.strip.videosTitle">Short Videos</h4><p data-translate="landing.strip.videosCopy">MP4, MOV, WEBM...</p></div></div>
+    <div class="lp-strip-item"><span class="lp-strip-ico ico-i3"><i class="fas fa-images"></i></span><div><h4 data-translate="landing.strip.albumsTitle">Albums</h4><p data-translate="landing.strip.albumsCopy">Multiple files</p></div></div>
+    <div class="lp-strip-item"><span class="lp-strip-ico ico-i4"><i class="fas fa-shield-halved"></i></span><div><h4 data-translate="landing.strip.privateTitle">Private Sharing</h4><p data-translate="landing.strip.privateCopy">Secure &amp; Controlled</p></div></div>
+    <div class="lp-strip-item"><span class="lp-strip-ico ico-i5"><i class="fas fa-globe"></i></span><div><h4 data-translate="landing.strip.anywhereTitle">Anywhere</h4><p data-translate="landing.strip.anywhereCopy">One scan to access</p></div></div>
   </div>
 </section>
 
@@ -1547,16 +1943,16 @@
 <section class="lp-section" id="features">
   <div class="lp-wrap">
     <div class="lp-head-c">
-      <h2>Powerful Features for Easy Sharing</h2>
-      <p>Everything you need to share your media safely and efficiently</p>
+      <h2 data-translate="landing.features.title">Powerful Features for Easy Sharing</h2>
+      <p data-translate="landing.features.subtitle">Everything you need to share your media safely and efficiently</p>
     </div>
     <div class="lp-feat-grid">
-      <div class="lp-feat"><div class="lp-feat-ico fi-1"><i class="fas fa-shield-halved"></i></div><h3>Access Control</h3><p>Set expiration, view limits, password protection and download permissions.</p></div>
-      <div class="lp-feat"><div class="lp-feat-ico fi-2"><i class="fas fa-chart-column"></i></div><h3>Scan Analytics</h3><p>Track scan data in real time. Know when, where and how your files are accessed.</p></div>
-      <div class="lp-feat"><div class="lp-feat-ico fi-3"><i class="fas fa-bolt"></i></div><h3>High Speed &amp; Stable</h3><p>Global CDN acceleration ensures fast upload and smooth access.</p></div>
-      <div class="lp-feat"><div class="lp-feat-ico fi-4"><i class="fas fa-lock"></i></div><h3>Safe &amp; Private</h3><p>Your files are encrypted and stored securely. Privacy comes first.</p></div>
-      <div class="lp-feat"><div class="lp-feat-ico fi-5"><i class="fas fa-mobile-screen"></i></div><h3>Multi-platform</h3><p>Access and manage your files on web, mobile and tablet.</p></div>
-      <div class="lp-feat"><div class="lp-feat-ico fi-6"><i class="fas fa-palette"></i></div><h3>QR Code Customization</h3><p>Customize QR code style, color and logo to match your brand.</p></div>
+      <div class="lp-feat"><div class="lp-feat-ico fi-1"><i class="fas fa-shield-halved"></i></div><h3 data-translate="landing.features.accessTitle">Access Control</h3><p data-translate="landing.features.accessCopy">Set expiration, view limits, password protection and download permissions.</p></div>
+      <div class="lp-feat"><div class="lp-feat-ico fi-2"><i class="fas fa-chart-column"></i></div><h3 data-translate="landing.features.analyticsTitle">Scan Analytics</h3><p data-translate="landing.features.analyticsCopy">Track scan data in real time. Know when, where and how your files are accessed.</p></div>
+      <div class="lp-feat"><div class="lp-feat-ico fi-3"><i class="fas fa-bolt"></i></div><h3 data-translate="landing.features.speedTitle">High Speed &amp; Stable</h3><p data-translate="landing.features.speedCopy">Global CDN acceleration ensures fast upload and smooth access.</p></div>
+      <div class="lp-feat"><div class="lp-feat-ico fi-4"><i class="fas fa-lock"></i></div><h3 data-translate="landing.features.privateTitle">Safe &amp; Private</h3><p data-translate="landing.features.privateCopy">Your files are encrypted and stored securely. Privacy comes first.</p></div>
+      <div class="lp-feat"><div class="lp-feat-ico fi-5"><i class="fas fa-mobile-screen"></i></div><h3 data-translate="landing.features.platformTitle">Multi-platform</h3><p data-translate="landing.features.platformCopy">Access and manage your files on web, mobile and tablet.</p></div>
+      <div class="lp-feat"><div class="lp-feat-ico fi-6"><i class="fas fa-palette"></i></div><h3 data-translate="landing.features.customTitle">QR Code Customization</h3><p data-translate="landing.features.customCopy">Customize QR code style, color and logo to match your brand.</p></div>
     </div>
   </div>
 </section>
@@ -1565,16 +1961,16 @@
 <section class="lp-section lp-tools-sec" id="tools">
   <div class="lp-wrap">
     <div class="lp-head-c">
-      <h2>More than just image &amp; video sharing</h2>
-      <p>Maiimg also supports more types of QR codes to meet your daily needs</p>
+      <h2 data-translate="landing.tools.title">More than just image &amp; video sharing</h2>
+      <p data-translate="landing.tools.subtitle">Maiimg also supports more types of QR codes to meet your daily needs</p>
     </div>
     <div class="lp-tools-grid">
-      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#url-modal"><span class="lp-tool-ico"><i class="fas fa-link"></i></span><h4>URL QR Code</h4><p>Website or any link</p></div>
-      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#sms-modal"><span class="lp-tool-ico"><i class="fas fa-comment-sms"></i></span><h4>SMS QR Code</h4><p>Send a text message</p></div>
-      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#wifi-modal"><span class="lp-tool-ico"><i class="fas fa-wifi"></i></span><h4>WiFi QR Code</h4><p>Share WiFi in one scan</p></div>
-      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#phone-modal"><span class="lp-tool-ico"><i class="fas fa-phone"></i></span><h4>Phone QR Code</h4><p>One tap to call</p></div>
-      <div class="lp-tool" onclick="document.getElementById('uploadBand').scrollIntoView({behavior:'smooth'})"><span class="lp-tool-ico"><i class="fas fa-images"></i></span><h4>Media Gallery</h4><p>Images &amp; videos</p></div>
-      <div class="lp-tool" onclick="document.getElementById('uploadBand').scrollIntoView({behavior:'smooth'})"><span class="lp-tool-ico"><i class="fas fa-ellipsis"></i></span><h4>More Tools</h4><p>And more…</p></div>
+      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#url-modal"><span class="lp-tool-ico"><i class="fas fa-link"></i></span><h4 data-translate="landing.tools.urlTitle">URL QR Code</h4><p data-translate="landing.tools.urlCopy">Website or any link</p></div>
+      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#sms-modal"><span class="lp-tool-ico"><i class="fas fa-comment-sms"></i></span><h4 data-translate="landing.tools.smsTitle">SMS QR Code</h4><p data-translate="landing.tools.smsCopy">Send a text message</p></div>
+      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#wifi-modal"><span class="lp-tool-ico"><i class="fas fa-wifi"></i></span><h4 data-translate="landing.tools.wifiTitle">WiFi QR Code</h4><p data-translate="landing.tools.wifiCopy">Share WiFi in one scan</p></div>
+      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#phone-modal"><span class="lp-tool-ico"><i class="fas fa-phone"></i></span><h4 data-translate="landing.tools.phoneTitle">Phone QR Code</h4><p data-translate="landing.tools.phoneCopy">One tap to call</p></div>
+      <div class="lp-tool" onclick="document.getElementById('uploadBand').scrollIntoView({behavior:'smooth'})"><span class="lp-tool-ico"><i class="fas fa-images"></i></span><h4 data-translate="landing.tools.mediaTitle">Media Gallery</h4><p data-translate="landing.tools.mediaCopy">Images &amp; videos</p></div>
+      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#more-tools-modal"><span class="lp-tool-ico"><i class="fas fa-ellipsis"></i></span><h4 data-translate="landing.tools.moreTitle">More Tools</h4><p data-translate="landing.tools.moreCopy">Browse all tools</p></div>
     </div>
   </div>
 </section>
@@ -1586,11 +1982,11 @@
       <div class="lp-cta-left">
         <span class="lp-cta-ico"><i class="fas fa-qrcode"></i></span>
         <div>
-          <h3>Ready to share your moments?</h3>
-          <p>Join millions of users who trust Maiimg for secure and easy sharing.</p>
+          <h3 data-translate="landing.cta.title">Ready to share your moments?</h3>
+          <p data-translate="landing.cta.subtitle">Join millions of users who trust Maiimg for secure and easy sharing.</p>
         </div>
       </div>
-      <button type="button" class="lp-btn lp-btn-white" onclick="document.getElementById('uploadBand').scrollIntoView({behavior:'smooth'})"><i class="fas fa-arrow-right"></i> Get Started for Free</button>
+      <button type="button" class="lp-btn lp-btn-white" onclick="document.getElementById('uploadBand').scrollIntoView({behavior:'smooth'})"><i class="fas fa-arrow-right"></i> <span data-translate="landing.cta.button">Get Started for Free</span></button>
     </div>
   </div>
 </section>
@@ -1604,30 +2000,30 @@
           <span class="lp-logo"><i class="fas fa-qrcode"></i></span>
           <span class="lp-brand-text"><span class="lp-brand-name">Maiimg</span><span class="lp-brand-sub">麦瓜QR</span></span>
         </a>
-        <p class="lp-footer-about">Upload images and short videos, share them with a link and QR code, and stay in control with access limits and scan analytics.</p>
+        <p class="lp-footer-about" data-translate="landing.footer.about">Upload images and short videos, share them with a link and QR code, and stay in control with access limits and scan analytics.</p>
         <small class="text-muted" id="footerComplianceText">Thank you</small>
       </div>
       <div>
-        <h5>Product</h5>
+        <h5 data-translate="landing.footer.product">Product</h5>
         <ul>
-          <li><a href="#uploadBand">Upload</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#tools">QR Tools</a></li>
-          <li><a href="dashboard.html">My Galleries</a></li>
+          <li><a href="#uploadBand" data-translate="landing.footer.upload">Upload</a></li>
+          <li><a href="#features" data-translate="landing.footer.features">Features</a></li>
+          <li><a href="#tools" data-translate="landing.footer.qrTools">QR Tools</a></li>
+          <li><a href="dashboard.html" data-translate="dash.title">My Galleries</a></li>
         </ul>
       </div>
       <div>
-        <h5>Resources</h5>
+        <h5 data-translate="landing.footer.resources">Resources</h5>
         <ul>
           <li><a href="blog/">Blog</a></li>
-          <li><a href="https://www.maipdf.com">MaiPDF Home</a></li>
-          <li><a href="https://article.maipdf.com">Developer Tools</a></li>
+          <li><a href="https://www.maipdf.com" data-translate="landing.footer.maipdfHome">MaiPDF Home</a></li>
+          <li><a href="https://article.maipdf.com" data-translate="landing.footer.devTools">Developer Tools</a></li>
         </ul>
       </div>
       <div>
-        <h5>Company</h5>
+        <h5 data-translate="landing.footer.company">Company</h5>
         <ul>
-          <li><a href="mailto:joe@pdfhost.online">Contact</a></li>
+          <li><a href="mailto:joe@pdfhost.online" data-translate="landing.footer.contact">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -1641,6 +2037,55 @@
     </div>
   </div>
 </footer>
+  <!-- More Tools Modal -->
+  <div class="modal fade" id="more-tools-modal" tabindex="-1" aria-labelledby="moreToolsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="moreToolsModalLabel">
+            <i class="fas fa-toolbox me-2"></i><span data-translate="landing.tools.moreModalTitle">More QR Tools</span>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted mb-4" data-translate="landing.tools.moreModalCopy">Choose a QR tool below. Each one opens in its own generator panel.</p>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <button type="button" class="tool-modal-card" data-tool-modal-target="#url-modal">
+                <span class="tool-modal-icon"><i class="fas fa-link"></i></span>
+                <span><strong data-translate="landing.tools.urlTitle">URL QR Code</strong><small data-translate="landing.tools.urlCopy">Website or any link</small></span>
+              </button>
+            </div>
+            <div class="col-12 col-md-6">
+              <button type="button" class="tool-modal-card" data-tool-modal-target="#sms-modal">
+                <span class="tool-modal-icon"><i class="fas fa-comment-sms"></i></span>
+                <span><strong data-translate="landing.tools.smsTitle">SMS QR Code</strong><small data-translate="landing.tools.smsCopy">Send a text message</small></span>
+              </button>
+            </div>
+            <div class="col-12 col-md-6">
+              <button type="button" class="tool-modal-card" data-tool-modal-target="#wifi-modal">
+                <span class="tool-modal-icon"><i class="fas fa-wifi"></i></span>
+                <span><strong data-translate="landing.tools.wifiTitle">WiFi QR Code</strong><small data-translate="landing.tools.wifiCopy">Share WiFi in one scan</small></span>
+              </button>
+            </div>
+            <div class="col-12 col-md-6">
+              <button type="button" class="tool-modal-card" data-tool-modal-target="#phone-modal">
+                <span class="tool-modal-icon"><i class="fas fa-phone"></i></span>
+                <span><strong data-translate="landing.tools.phoneTitle">Phone QR Code</strong><small data-translate="landing.tools.phoneCopy">One tap to call</small></span>
+              </button>
+            </div>
+            <div class="col-12">
+              <button type="button" class="tool-modal-card" data-bs-dismiss="modal" onclick="document.getElementById('uploadBand').scrollIntoView({behavior:'smooth'})">
+                <span class="tool-modal-icon"><i class="fas fa-images"></i></span>
+                <span><strong data-translate="landing.tools.mediaTitle">Media Gallery</strong><small data-translate="landing.tools.mediaCopy">Images &amp; videos</small></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- WiFi QR Code Modal -->
   <div class="modal fade" id="wifi-modal" tabindex="-1" aria-labelledby="wifiModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -4204,6 +4649,92 @@
       });
       sel.addEventListener('change', syncPills);
       syncPills();
+    })();
+  </script>
+  <script>
+    (function () {
+      const button = document.getElementById('languageDropdown');
+      const menu = document.querySelector('.language-selector .dropdown-menu');
+      if (!button || !menu) return;
+
+      menu.classList.add('lp-language-floating-menu');
+      document.body.appendChild(menu);
+
+      function placeMenu() {
+        const rect = button.getBoundingClientRect();
+        const menuWidth = Math.max(menu.offsetWidth || 176, 176);
+        const left = Math.max(12, Math.min(window.innerWidth - menuWidth - 12, rect.right - menuWidth));
+        menu.style.setProperty('top', `${Math.round(rect.bottom + 10)}px`, 'important');
+        menu.style.setProperty('left', `${Math.round(left)}px`, 'important');
+        menu.style.setProperty('right', 'auto', 'important');
+        menu.style.setProperty('bottom', 'auto', 'important');
+      }
+
+      function hideMenu() {
+        menu.classList.remove('show');
+        button.setAttribute('aria-expanded', 'false');
+      }
+
+      function showMenu() {
+        placeMenu();
+        menu.classList.add('show');
+        button.setAttribute('aria-expanded', 'true');
+      }
+
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (menu.classList.contains('show')) {
+          hideMenu();
+        } else {
+          showMenu();
+        }
+      }, true);
+
+      menu.addEventListener('click', function (event) {
+        const item = event.target.closest('.dropdown-item');
+        if (!item) return;
+        event.preventDefault();
+        event.stopPropagation();
+        const match = (item.getAttribute('onclick') || '').match(/changeLanguage\('([^']+)'\)/);
+        if (match && typeof window.changeLanguage === 'function') {
+          window.changeLanguage(match[1]);
+        }
+        hideMenu();
+      }, true);
+
+      document.addEventListener('click', function (event) {
+        if (!menu.contains(event.target) && event.target !== button && !button.contains(event.target)) {
+          hideMenu();
+        }
+      });
+
+      window.addEventListener('resize', function () {
+        if (menu.classList.contains('show')) placeMenu();
+      });
+
+      window.addEventListener('scroll', function () {
+        if (menu.classList.contains('show')) placeMenu();
+      }, { passive: true });
+    })();
+  </script>
+  <script>
+    (function () {
+      document.querySelectorAll('[data-tool-modal-target]').forEach((trigger) => {
+        trigger.addEventListener('click', function () {
+          const targetSelector = this.getAttribute('data-tool-modal-target');
+          const currentModalEl = document.getElementById('more-tools-modal');
+          const targetModalEl = targetSelector ? document.querySelector(targetSelector) : null;
+          if (!currentModalEl || !targetModalEl || !window.bootstrap) return;
+
+          const currentModal = bootstrap.Modal.getOrCreateInstance(currentModalEl);
+          currentModal.hide();
+          currentModalEl.addEventListener('hidden.bs.modal', function openTargetOnce() {
+            currentModalEl.removeEventListener('hidden.bs.modal', openTargetOnce);
+            bootstrap.Modal.getOrCreateInstance(targetModalEl).show();
+          });
+        });
+      });
     })();
   </script>
 </body>
