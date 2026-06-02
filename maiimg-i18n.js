@@ -2421,11 +2421,7 @@ class I18n {
           phoneTitle: "Phone QR Code",
           phoneCopy: "One tap to call",
           mediaTitle: "Media Gallery",
-          mediaCopy: "Images & videos",
-          moreTitle: "More Tools",
-          moreCopy: "Browse all tools",
-          moreModalTitle: "More QR Tools",
-          moreModalCopy: "Choose a QR tool below. Each one opens in its own generator panel."
+          mediaCopy: "Images & videos"
         },
         cta: {
           title: "Ready to share your moments?",
@@ -2620,11 +2616,7 @@ class I18n {
           phoneTitle: "电话二维码",
           phoneCopy: "一键拨打电话",
           mediaTitle: "媒体图集",
-          mediaCopy: "图片和视频",
-          moreTitle: "更多工具",
-          moreCopy: "浏览全部工具",
-          moreModalTitle: "更多二维码工具",
-          moreModalCopy: "从下方选择二维码工具，每个工具都会打开对应的生成面板。"
+          mediaCopy: "图片和视频"
         },
         cta: {
           title: "准备好分享你的精彩瞬间了吗？",
@@ -2819,11 +2811,7 @@ class I18n {
           phoneTitle: "電話 QR Code",
           phoneCopy: "一鍵撥打電話",
           mediaTitle: "媒體圖集",
-          mediaCopy: "圖片和影片",
-          moreTitle: "更多工具",
-          moreCopy: "瀏覽全部工具",
-          moreModalTitle: "更多 QR 工具",
-          moreModalCopy: "從下方選擇 QR 工具，每個工具都會開啟對應的生成面板。"
+          mediaCopy: "圖片和影片"
         },
         cta: {
           title: "準備好分享你的精彩瞬間了嗎？",

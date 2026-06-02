@@ -865,18 +865,12 @@
 
     /* Tools */
     .lp-tools-sec{ background:#fff; }
-    .lp-tools-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:16px; }
+    .lp-tools-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
     .lp-tool{ background:var(--lp-bg); border:1px solid var(--lp-line); border-radius:16px; padding:22px 14px; text-align:center; cursor:pointer; transition:transform .16s ease, box-shadow .2s ease, border-color .2s; }
     .lp-tool:hover{ transform:translateY(-4px); box-shadow:var(--lp-shadow); border-color:#c7d2fe; }
     .lp-tool-ico{ width:50px; height:50px; border-radius:14px; background:var(--lp-grad); color:#fff; display:grid; place-items:center; font-size:1.2rem; margin:0 auto .8rem; }
     .lp-tool h4{ font-size:.95rem; font-weight:700; margin:0 0 .25rem; }
     .lp-tool p{ font-size:.78rem; color:var(--lp-muted); margin:0; }
-    .tool-modal-card{ width:100%; min-height:86px; display:flex; align-items:center; gap:14px; padding:16px; text-align:left; border:1px solid var(--lp-line); border-radius:16px; background:#fff; color:var(--lp-ink); transition:transform .16s ease, border-color .2s ease, box-shadow .2s ease; }
-    .tool-modal-card:hover{ transform:translateY(-2px); border-color:#c7d2fe; box-shadow:var(--lp-shadow); }
-    .tool-modal-icon{ width:46px; height:46px; border-radius:14px; background:var(--lp-grad); color:#fff; display:grid; place-items:center; flex:none; }
-    .tool-modal-card strong{ display:block; font-size:1rem; margin-bottom:2px; }
-    .tool-modal-card small{ display:block; color:var(--lp-muted); line-height:1.45; }
-
     /* CTA */
     .lp-cta-sec{ padding:30px 0 74px; }
     .lp-cta{ background:var(--lp-grad); border-radius:24px; padding:40px 44px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; box-shadow:var(--lp-shadow-lg); }
@@ -1980,7 +1974,6 @@
       <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#wifi-modal"><span class="lp-tool-ico"><i class="fas fa-wifi"></i></span><h4 data-translate="landing.tools.wifiTitle">WiFi QR Code</h4><p data-translate="landing.tools.wifiCopy">Share WiFi in one scan</p></div>
       <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#phone-modal"><span class="lp-tool-ico"><i class="fas fa-phone"></i></span><h4 data-translate="landing.tools.phoneTitle">Phone QR Code</h4><p data-translate="landing.tools.phoneCopy">One tap to call</p></div>
       <div class="lp-tool" onclick="document.getElementById('uploadBand').scrollIntoView({behavior:'smooth'})"><span class="lp-tool-ico"><i class="fas fa-images"></i></span><h4 data-translate="landing.tools.mediaTitle">Media Gallery</h4><p data-translate="landing.tools.mediaCopy">Images &amp; videos</p></div>
-      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#more-tools-modal"><span class="lp-tool-ico"><i class="fas fa-ellipsis"></i></span><h4 data-translate="landing.tools.moreTitle">More Tools</h4><p data-translate="landing.tools.moreCopy">Browse all tools</p></div>
     </div>
   </div>
 </section>
@@ -2031,55 +2024,6 @@
     </div>
   </div>
 </footer>
-  <!-- More Tools Modal -->
-  <div class="modal fade" id="more-tools-modal" tabindex="-1" aria-labelledby="moreToolsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="moreToolsModalLabel">
-            <i class="fas fa-toolbox me-2"></i><span data-translate="landing.tools.moreModalTitle">More QR Tools</span>
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p class="text-muted mb-4" data-translate="landing.tools.moreModalCopy">Choose a QR tool below. Each one opens in its own generator panel.</p>
-          <div class="row g-3">
-            <div class="col-12 col-md-6">
-              <button type="button" class="tool-modal-card" data-tool-modal-target="#url-modal">
-                <span class="tool-modal-icon"><i class="fas fa-link"></i></span>
-                <span><strong data-translate="landing.tools.urlTitle">URL QR Code</strong><small data-translate="landing.tools.urlCopy">Website or any link</small></span>
-              </button>
-            </div>
-            <div class="col-12 col-md-6">
-              <button type="button" class="tool-modal-card" data-tool-modal-target="#sms-modal">
-                <span class="tool-modal-icon"><i class="fas fa-comment-sms"></i></span>
-                <span><strong data-translate="landing.tools.smsTitle">SMS QR Code</strong><small data-translate="landing.tools.smsCopy">Send a text message</small></span>
-              </button>
-            </div>
-            <div class="col-12 col-md-6">
-              <button type="button" class="tool-modal-card" data-tool-modal-target="#wifi-modal">
-                <span class="tool-modal-icon"><i class="fas fa-wifi"></i></span>
-                <span><strong data-translate="landing.tools.wifiTitle">WiFi QR Code</strong><small data-translate="landing.tools.wifiCopy">Share WiFi in one scan</small></span>
-              </button>
-            </div>
-            <div class="col-12 col-md-6">
-              <button type="button" class="tool-modal-card" data-tool-modal-target="#phone-modal">
-                <span class="tool-modal-icon"><i class="fas fa-phone"></i></span>
-                <span><strong data-translate="landing.tools.phoneTitle">Phone QR Code</strong><small data-translate="landing.tools.phoneCopy">One tap to call</small></span>
-              </button>
-            </div>
-            <div class="col-12">
-              <button type="button" class="tool-modal-card" data-bs-dismiss="modal" onclick="document.getElementById('uploadBand').scrollIntoView({behavior:'smooth'})">
-                <span class="tool-modal-icon"><i class="fas fa-images"></i></span>
-                <span><strong data-translate="landing.tools.mediaTitle">Media Gallery</strong><small data-translate="landing.tools.mediaCopy">Images &amp; videos</small></span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- WiFi QR Code Modal -->
   <div class="modal fade" id="wifi-modal" tabindex="-1" aria-labelledby="wifiModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -4736,25 +4680,6 @@
       window.addEventListener('scroll', function () {
         if (menu.classList.contains('show')) placeMenu();
       }, { passive: true });
-    })();
-  </script>
-  <script>
-    (function () {
-      document.querySelectorAll('[data-tool-modal-target]').forEach((trigger) => {
-        trigger.addEventListener('click', function () {
-          const targetSelector = this.getAttribute('data-tool-modal-target');
-          const currentModalEl = document.getElementById('more-tools-modal');
-          const targetModalEl = targetSelector ? document.querySelector(targetSelector) : null;
-          if (!currentModalEl || !targetModalEl || !window.bootstrap) return;
-
-          const currentModal = bootstrap.Modal.getOrCreateInstance(currentModalEl);
-          currentModal.hide();
-          currentModalEl.addEventListener('hidden.bs.modal', function openTargetOnce() {
-            currentModalEl.removeEventListener('hidden.bs.modal', openTargetOnce);
-            bootstrap.Modal.getOrCreateInstance(targetModalEl).show();
-          });
-        });
-      });
     })();
   </script>
 </body>
