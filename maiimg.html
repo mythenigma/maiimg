@@ -26,6 +26,9 @@
   <meta name="robots" content="index, follow">
   <title>Maiimg Hosting - Upload Images & Short Videos with QR Share</title>
 
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9224406325142860" crossorigin="anonymous"></script>
+
   <!-- Cloudflare CDN Resources -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -1004,30 +1007,6 @@
     .lp-footer-social{ display:flex; gap:.6rem; }
     .lp-footer-social a{ width:36px; height:36px; border-radius:10px; background:rgba(255,255,255,.08); color:#cbd5e1; display:grid; place-items:center; }
     .lp-footer-social a:hover{ background:var(--lp-indigo); color:#fff; }
-    html,
-    body{
-      padding-bottom:0 !important;
-    }
-    .google-auto-placed,
-    [data-anchor-status],
-    [data-anchor-shown],
-    ins.adsbygoogle,
-    .adsbygoogle-noablate,
-    .adsbygoogle,
-    iframe[id^="aswift_"],
-    iframe[id^="google_ads_iframe"],
-    div[id^="google_ads_iframe"]{
-      display:none !important;
-      width:0 !important;
-      height:0 !important;
-      min-width:0 !important;
-      min-height:0 !important;
-      max-width:0 !important;
-      max-height:0 !important;
-      opacity:0 !important;
-      pointer-events:none !important;
-      overflow:hidden !important;
-    }
     /* Override maiimg.css's light "body.maiimg-workspace footer" so the dark footer stays dark and readable */
     body.maiimg-workspace footer.lp-footer{ background:var(--lp-ink); border-top:none; margin-top:0; }
     body.maiimg-workspace .lp-footer .lp-brand-name,
@@ -2436,30 +2415,6 @@
   <script src="maiimg-i18n.js?v=2026060101"></script>
   
   <script>
-    function removeInjectedAds() {
-      document.documentElement.style.paddingBottom = '0px';
-      document.body.style.paddingBottom = '0px';
-      [
-        '.google-auto-placed',
-        '[data-anchor-status]',
-        '[data-anchor-shown]',
-        'ins.adsbygoogle',
-        '.adsbygoogle',
-        '.adsbygoogle-noablate',
-        'iframe[id^="aswift_"]',
-        'iframe[id^="google_ads_iframe"]',
-        'div[id^="google_ads_iframe"]'
-      ].forEach((selector) => {
-        document.querySelectorAll(selector).forEach((node) => node.remove());
-      });
-    }
-
-    removeInjectedAds();
-    window.addEventListener('load', () => {
-      removeInjectedAds();
-      [250, 750, 1500, 3000].forEach((delay) => window.setTimeout(removeInjectedAds, delay));
-    });
-
     // Global variables for generated codes
     let generatedTypeA = 'Reader';
     let generatedTypeB = 'Tracker';
@@ -4859,6 +4814,15 @@
         if (menu.classList.contains('show')) placeMenu();
       }, { passive: true });
     })();
+  </script>
+  <!-- AdSense (Auto Relaxed) -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-format="autorelaxed"
+       data-ad-client="ca-pub-9224406325142860"
+       data-ad-slot="7885928791"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </body>
 </html>
