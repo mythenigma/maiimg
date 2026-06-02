@@ -897,6 +897,15 @@
     }
     .lp-qr-generator-modal .modal-dialog{ min-height:calc(100vh - 3.5rem); display:flex; align-items:center; margin:1.75rem auto; }
     .lp-qr-generator-modal .modal-content{ border:0; border-radius:18px; box-shadow:0 30px 80px -30px rgba(15,23,42,.55); }
+    .lp-auth-modal{
+      position:fixed !important;
+      inset:0 !important;
+      z-index:1055 !important;
+      width:100vw !important;
+      height:100vh !important;
+      overflow:hidden auto !important;
+      outline:0;
+    }
     /* CTA */
     .lp-cta-sec{ padding:30px 0 74px; }
     .lp-cta{ background:var(--lp-grad); border-radius:24px; padding:40px 44px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; box-shadow:var(--lp-shadow-lg); }
@@ -1525,7 +1534,7 @@
         <a href="dashboard.html" class="btn btn-light btn-sm d-none" id="dashboardBtn">
           <i class="fas fa-th-large me-1"></i><span data-translate="dash.title">My Galleries</span>
         </a>
-        <button type="button" class="btn btn-light btn-sm" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal">
+        <button type="button" class="btn btn-light btn-sm" id="loginBtn">
           <i class="fas fa-sign-in-alt me-1"></i><span data-translate="auth.login">Login</span>
         </button>
         <button type="button" class="btn btn-light btn-sm d-none" id="logoutBtn">
@@ -1551,7 +1560,6 @@
           </div>
         </div>
 
-        <button type="button" class="lp-btn lp-btn-primary lp-btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">Sign up Free</button>
       </div>
 
       <!-- Mobile User Menu (reused, all original IDs preserved) -->
@@ -1564,7 +1572,7 @@
         <ul class="dropdown-menu dropdown-menu-end mobile-user-menu" aria-labelledby="mobileUserMenuBtn">
           <li><h6 class="dropdown-header" id="mobileUserEmail">Guest</h6></li>
           <li><a href="dashboard.html" class="dropdown-item d-none" id="mobileDashboardBtn"><i class="fas fa-th-large me-2"></i><span data-translate="dash.title">My Galleries</span></a></li>
-          <li><button type="button" class="dropdown-item" id="mobileLoginBtn" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt me-2"></i><span data-translate="auth.login">Login</span></button></li>
+          <li><button type="button" class="dropdown-item" id="mobileLoginBtn"><i class="fas fa-sign-in-alt me-2"></i><span data-translate="auth.login">Login</span></button></li>
           <li><button type="button" class="dropdown-item d-none" id="mobileLogoutBtn"><i class="fas fa-sign-out-alt me-2"></i><span data-translate="auth.logout">Logout</span></button></li>
           <li><hr class="dropdown-divider"></li>
           <li><span class="dropdown-item-text mobile-lang-title">Language</span></li>
@@ -2035,7 +2043,7 @@
   </div>
 </footer>
   <!-- QR Tools Picker Modal -->
-  <div class="modal fade lp-tools-modal" id="qrToolsModal" tabindex="-1" aria-labelledby="qrToolsModalLabel" aria-hidden="true">
+  <div class="modal fade lp-tools-modal" id="qrToolsModal" tabindex="-1" aria-labelledby="qrToolsModalLabel" aria-hidden="true" data-bs-focus="false">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -2085,7 +2093,7 @@
   </div>
 
   <!-- WiFi QR Code Modal -->
-  <div class="modal fade lp-qr-generator-modal" id="wifi-modal" tabindex="-1" aria-labelledby="wifiModalLabel" aria-hidden="true">
+  <div class="modal fade lp-qr-generator-modal" id="wifi-modal" tabindex="-1" aria-labelledby="wifiModalLabel" aria-hidden="true" data-bs-focus="false">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -2130,7 +2138,7 @@
   </div>
 
   <!-- SMS QR Code Modal -->
-  <div class="modal fade lp-qr-generator-modal" id="sms-modal" tabindex="-1" aria-labelledby="smsModalLabel" aria-hidden="true">
+  <div class="modal fade lp-qr-generator-modal" id="sms-modal" tabindex="-1" aria-labelledby="smsModalLabel" aria-hidden="true" data-bs-focus="false">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -2166,7 +2174,7 @@
   </div>
   
   <!-- Phone QR Code Modal -->
-  <div class="modal fade lp-qr-generator-modal" id="phone-modal" tabindex="-1" aria-labelledby="phoneModalLabel" aria-hidden="true">
+  <div class="modal fade lp-qr-generator-modal" id="phone-modal" tabindex="-1" aria-labelledby="phoneModalLabel" aria-hidden="true" data-bs-focus="false">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -2197,7 +2205,7 @@
   </div>
 
   <!-- URL QR Code Modal -->
-  <div class="modal fade lp-qr-generator-modal" id="url-modal" tabindex="-1" aria-labelledby="urlModalLabel" aria-hidden="true">
+  <div class="modal fade lp-qr-generator-modal" id="url-modal" tabindex="-1" aria-labelledby="urlModalLabel" aria-hidden="true" data-bs-focus="false">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -2227,7 +2235,7 @@
     </div>
   </div>
   <!-- Auth Modal -->
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <div class="modal fade lp-auth-modal" id="loginModal" tabindex="-1" aria-hidden="true" data-bs-focus="false">
     <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
       <div class="modal-content" style="border-radius: 16px; border: none;">
         <div class="modal-header border-0 pb-0">
@@ -4352,21 +4360,42 @@
         });
       });
 
+      const qrToolsModalEl = document.getElementById('qrToolsModal');
+      let qrToolsScrollY = null;
+      if (qrToolsModalEl) {
+        qrToolsModalEl.addEventListener('shown.bs.modal', () => {
+          qrToolsScrollY = window.scrollY;
+        });
+        qrToolsModalEl.addEventListener('hidden.bs.modal', () => {
+          if (!document.querySelector('.lp-qr-generator-modal.show')) {
+            qrToolsScrollY = null;
+          }
+        });
+      }
+
       document.querySelectorAll('[data-qr-tool-target]').forEach((button) => {
+        button.addEventListener('mousedown', (event) => {
+          event.preventDefault();
+        });
         button.addEventListener('click', () => {
           const targetSelector = button.getAttribute('data-qr-tool-target');
           const targetEl = targetSelector ? document.querySelector(targetSelector) : null;
           const pickerEl = document.getElementById('qrToolsModal');
           if (!targetEl || !pickerEl) return;
-          const currentScrollY = window.scrollY;
+          const currentScrollY = Number.isFinite(qrToolsScrollY) ? qrToolsScrollY : window.scrollY;
 
+          const restoreScroll = () => {
+            window.scrollTo({ top: currentScrollY, left: 0, behavior: 'auto' });
+          };
           const openTarget = () => {
             targetEl.addEventListener('shown.bs.modal', () => {
-              window.scrollTo({ top: currentScrollY, left: 0, behavior: 'auto' });
+              restoreScroll();
+              window.requestAnimationFrame(restoreScroll);
+              [50, 150, 300].forEach((delay) => window.setTimeout(restoreScroll, delay));
             }, { once: true });
-            bootstrap.Modal.getOrCreateInstance(targetEl).show();
+            bootstrap.Modal.getOrCreateInstance(targetEl, { focus: false }).show();
           };
-          const pickerModal = bootstrap.Modal.getOrCreateInstance(pickerEl);
+          const pickerModal = bootstrap.Modal.getOrCreateInstance(pickerEl, { focus: false });
 
           if (pickerEl.classList.contains('show')) {
             pickerEl.addEventListener('hidden.bs.modal', openTarget, { once: true });
@@ -4377,16 +4406,34 @@
         });
       });
 
+      window.openAuthModal = function openAuthModal() {
+        const loginModalEl = document.getElementById('loginModal');
+        if (!loginModalEl) return;
+        const currentScrollY = window.scrollY;
+        const restoreScroll = () => {
+          window.scrollTo({ top: currentScrollY, left: 0, behavior: 'auto' });
+        };
+        loginModalEl.addEventListener('shown.bs.modal', () => {
+          restoreScroll();
+          window.requestAnimationFrame(restoreScroll);
+          [50, 150, 300].forEach((delay) => window.setTimeout(restoreScroll, delay));
+        }, { once: true });
+        bootstrap.Modal.getOrCreateInstance(loginModalEl, { focus: false }).show();
+      };
+
+      ['loginBtn', 'mobileLoginBtn'].forEach((id) => {
+        const button = document.getElementById(id);
+        if (!button) return;
+        button.addEventListener('mousedown', (event) => event.preventDefault());
+        button.addEventListener('click', window.openAuthModal);
+      });
+
       const nudgeSignInBtn = document.getElementById('loginNudgeSignInBtn');
       if (nudgeSignInBtn) {
         nudgeSignInBtn.addEventListener('click', () => {
           const nudge = bootstrap.Modal.getInstance(document.getElementById('loginNudgeModal'));
           if (nudge) nudge.hide();
-          const loginModalEl = document.getElementById('loginModal');
-          if (loginModalEl) {
-            const loginModal = bootstrap.Modal.getOrCreateInstance(loginModalEl);
-            loginModal.show();
-          }
+          window.openAuthModal();
         });
       }
 
