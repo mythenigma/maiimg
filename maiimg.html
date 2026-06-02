@@ -2375,6 +2375,8 @@
     const LOGIN_NUDGE_AUTO_CLOSE_SECONDS = 7;
     const FLOW_MANUAL_HOLD_MS = 3500;
     let loginNudgeTimer = null;
+    let loginNudgeScrollY = null;
+    let loginNudgeRestoreScroll = false;
     let flowManualStep = 0;
     let flowManualUntil = 0;
 
@@ -3108,15 +3110,25 @@
       if (!shouldShowLoginNudge()) return;
       const nudgeEl = document.getElementById('loginNudgeModal');
       if (!nudgeEl) return;
+      loginNudgeScrollY = window.scrollY;
+      loginNudgeRestoreScroll = false;
       markLoginNudgeShown();
       const modal = bootstrap.Modal.getOrCreateInstance(nudgeEl);
       modal.show();
     }
 
+    function getActiveLanguage() {
+      return (window.i18n && window.i18n.currentLanguage) || currentLanguage || 'en';
+    }
+
+    function getLoginNudgeLaterText() {
+      return getTranslation('auth.loginNudgeLater', getActiveLanguage()) || 'Maybe Later';
+    }
+
     function updateLoginNudgeLaterButton(secondsLeft) {
       const btn = document.getElementById('loginNudgeLaterBtn');
       if (!btn) return;
-      const base = getTranslation('auth.loginNudgeLater', currentLanguage) || 'Maybe Later';
+      const base = getLoginNudgeLaterText();
       btn.innerHTML = `<i class="far fa-clock me-1"></i>${base} (${secondsLeft}s)`;
     }
 
@@ -3127,7 +3139,7 @@
       }
       const btn = document.getElementById('loginNudgeLaterBtn');
       if (!btn) return;
-      const base = getTranslation('auth.loginNudgeLater', currentLanguage) || 'Maybe Later';
+      const base = getLoginNudgeLaterText();
       btn.innerHTML = `<i class="far fa-clock me-1"></i>${base}`;
     }
 
@@ -4354,10 +4366,24 @@
         });
       }
 
+      const nudgeLaterBtn = document.getElementById('loginNudgeLaterBtn');
+      if (nudgeLaterBtn) {
+        nudgeLaterBtn.addEventListener('click', () => {
+          loginNudgeRestoreScroll = true;
+        });
+      }
+
       const loginNudgeModalEl = document.getElementById('loginNudgeModal');
       if (loginNudgeModalEl) {
         loginNudgeModalEl.addEventListener('shown.bs.modal', startLoginNudgeCountdown);
-        loginNudgeModalEl.addEventListener('hidden.bs.modal', stopLoginNudgeCountdown);
+        loginNudgeModalEl.addEventListener('hidden.bs.modal', () => {
+          stopLoginNudgeCountdown();
+          if (loginNudgeRestoreScroll && Number.isFinite(loginNudgeScrollY)) {
+            window.scrollTo({ top: loginNudgeScrollY, left: 0, behavior: 'auto' });
+          }
+          loginNudgeRestoreScroll = false;
+          loginNudgeScrollY = null;
+        });
       }
     });
   </script>
