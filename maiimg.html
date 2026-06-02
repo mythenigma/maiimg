@@ -874,29 +874,41 @@
     .lp-tool-ico{ width:50px; height:50px; border-radius:14px; background:var(--lp-grad); color:#fff; display:grid; place-items:center; font-size:1.2rem; margin:0 auto .8rem; }
     .lp-tool h4{ font-size:.95rem; font-weight:700; margin:0 0 .25rem; }
     .lp-tool p{ font-size:.78rem; color:var(--lp-muted); margin:0; }
-    .lp-tools-modal .modal-dialog{ max-width:760px; }
-    .lp-tools-modal .modal-content{ border:0; border-radius:20px; box-shadow:0 30px 80px -30px rgba(15,23,42,.55); overflow:hidden; }
-    .lp-tools-modal .modal-header{ border-bottom:1px solid var(--lp-line); padding:20px 24px; }
-    .lp-tools-modal .modal-title{ font-weight:800; letter-spacing:-.01em; color:var(--lp-ink); }
-    .lp-tools-modal .modal-body{ padding:24px; background:#f8fafc; }
-    .lp-tools-modal-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
-    .lp-modal-tool{ width:100%; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:14px; text-align:left; border:1px solid var(--lp-line); background:#fff; border-radius:14px; padding:16px; cursor:pointer; transition:transform .16s ease, border-color .18s ease, box-shadow .2s ease; }
-    .lp-modal-tool:hover{ transform:translateY(-2px); border-color:#c7d2fe; box-shadow:var(--lp-shadow); }
-    .lp-modal-tool .lp-tool-ico{ margin:0; width:46px; height:46px; border-radius:13px; }
-    .lp-modal-tool h4{ margin:0 0 3px; font-size:1rem; font-weight:800; color:var(--lp-ink); }
-    .lp-modal-tool p{ margin:0; font-size:.86rem; color:var(--lp-muted); }
-    .lp-modal-tool-arrow{ color:var(--lp-indigo); font-size:.95rem; }
-    .lp-qr-generator-modal{
-      position:fixed !important;
-      inset:0 !important;
-      z-index:1055 !important;
-      width:100vw !important;
-      height:100vh !important;
-      overflow:hidden auto !important;
+    body.maiimg-workspace > .modal{
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:1055;
+      display:none;
+      width:100%;
+      height:100%;
+      overflow-x:hidden;
+      overflow-y:auto;
       outline:0;
     }
-    .lp-qr-generator-modal .modal-dialog{ min-height:calc(100vh - 3.5rem); display:flex; align-items:center; margin:1.75rem auto; }
-    .lp-qr-generator-modal .modal-content{ border:0; border-radius:18px; box-shadow:0 30px 80px -30px rgba(15,23,42,.55); }
+    .modal-dialog{
+      position:relative;
+      width:auto;
+      margin:1.75rem auto;
+      pointer-events:none;
+    }
+    .modal-dialog-centered{
+      display:flex;
+      align-items:center;
+      min-height:calc(100% - 3.5rem);
+    }
+    .modal-content{ position:relative; width:100%; pointer-events:auto; }
+    .modal-backdrop{
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:1050;
+      width:100vw;
+      height:100vh;
+      background-color:#000;
+    }
+    .modal-backdrop.show{ opacity:.5; }
+    body.modal-open{ overflow:hidden; }
     .lp-auth-modal{
       position:fixed !important;
       inset:0 !important;
@@ -992,7 +1004,6 @@
     @media (max-width:480px){
       .lp-preview{ grid-template-columns:1fr; }
       .lp-tools-grid{ grid-template-columns:1fr 1fr; }
-      .lp-tools-modal-grid{ grid-template-columns:1fr; }
       .lp-footer-grid{ grid-template-columns:1fr; }
     }
 
@@ -1523,7 +1534,7 @@
       <a href="#top" class="active">Home</a>
       <a href="#uploadBand">Upload</a>
       <a href="#features">Features</a>
-      <button type="button" data-bs-toggle="modal" data-bs-target="#qrToolsModal">QR Tools</button>
+      <a href="#tools">QR Tools</a>
       <a href="blog/">Blog</a>
     </nav>
 
@@ -1595,7 +1606,7 @@
     <a href="#top">Home</a>
     <a href="#uploadBand">Upload</a>
     <a href="#features">Features</a>
-    <button type="button" data-bs-toggle="modal" data-bs-target="#qrToolsModal">QR Tools</button>
+    <a href="#tools">QR Tools</a>
     <a href="blog/">Blog</a>
   </div>
 </header>
@@ -1996,6 +2007,54 @@
   </div>
 </section>
 
+<!-- ════════════ QR TOOLS ════════════ -->
+<section class="tools-section" id="tools">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title" data-translate="tools.title">Other QR Tools</h2>
+      <p class="section-subtitle" data-translate="tools.subtitle">Quick access to other QR code generators</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-3 col-sm-6">
+        <div class="tool-card" data-bs-toggle="modal" data-bs-target="#wifi-modal">
+          <div class="tool-icon">
+            <i class="fas fa-wifi"></i>
+          </div>
+          <h5 data-translate="tools.wifi">WiFi QR</h5>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="tool-card" data-bs-toggle="modal" data-bs-target="#sms-modal">
+          <div class="tool-icon">
+            <i class="fas fa-sms"></i>
+          </div>
+          <h5 data-translate="tools.sms">SMS QR</h5>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="tool-card" data-bs-toggle="modal" data-bs-target="#url-modal">
+          <div class="tool-icon">
+            <i class="fas fa-link"></i>
+          </div>
+          <h5 data-translate="tools.url">URL QR</h5>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-6">
+        <div class="tool-card" data-bs-toggle="modal" data-bs-target="#phone-modal">
+          <div class="tool-icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <h5 data-translate="tools.phone">Phone QR</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ════════════ CTA ════════════ -->
 <section class="lp-cta-sec">
   <div class="lp-wrap">
@@ -2026,7 +2085,7 @@
       </div>
       <div class="lp-footer-compact-actions" aria-label="Footer links">
         <a class="lp-footer-pill lp-footer-pill-primary" href="#uploadBand"><i class="fas fa-cloud-arrow-up"></i><span data-translate="landing.footer.upload">Upload</span></a>
-        <button type="button" class="lp-footer-pill" data-bs-toggle="modal" data-bs-target="#qrToolsModal"><i class="fas fa-qrcode"></i><span data-translate="landing.footer.qrTools">QR Tools</span></button>
+        <a class="lp-footer-pill" href="#tools"><i class="fas fa-qrcode"></i><span data-translate="landing.footer.qrTools">QR Tools</span></a>
         <a class="lp-footer-pill" href="dashboard.html"><i class="fas fa-table-cells-large"></i><span data-translate="dash.title">My Galleries</span></a>
         <a class="lp-footer-pill" href="blog/"><i class="fas fa-blog"></i><span>Blog</span></a>
         <a class="lp-footer-pill" href="mailto:joe@pdfhost.online"><i class="fas fa-envelope"></i><span data-translate="landing.footer.contact">Contact</span></a>
@@ -2042,58 +2101,8 @@
     </div>
   </div>
 </footer>
-  <!-- QR Tools Picker Modal -->
-  <div class="modal fade lp-tools-modal" id="qrToolsModal" tabindex="-1" aria-labelledby="qrToolsModalLabel" aria-hidden="true" data-bs-focus="false">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="qrToolsModalLabel">
-            <i class="fas fa-qrcode me-2"></i><span data-translate="landing.tools.title">Other QR Tools</span>
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="lp-tools-modal-grid">
-            <button type="button" class="lp-modal-tool" data-qr-tool-target="#url-modal">
-              <span class="lp-tool-ico"><i class="fas fa-link"></i></span>
-              <span>
-                <h4 data-translate="landing.tools.urlTitle">URL QR Code</h4>
-                <p data-translate="landing.tools.urlCopy">Website or any link</p>
-              </span>
-              <i class="fas fa-arrow-right lp-modal-tool-arrow"></i>
-            </button>
-            <button type="button" class="lp-modal-tool" data-qr-tool-target="#sms-modal">
-              <span class="lp-tool-ico"><i class="fas fa-comment-sms"></i></span>
-              <span>
-                <h4 data-translate="landing.tools.smsTitle">SMS QR Code</h4>
-                <p data-translate="landing.tools.smsCopy">Send a text message</p>
-              </span>
-              <i class="fas fa-arrow-right lp-modal-tool-arrow"></i>
-            </button>
-            <button type="button" class="lp-modal-tool" data-qr-tool-target="#wifi-modal">
-              <span class="lp-tool-ico"><i class="fas fa-wifi"></i></span>
-              <span>
-                <h4 data-translate="landing.tools.wifiTitle">WiFi QR Code</h4>
-                <p data-translate="landing.tools.wifiCopy">Share WiFi in one scan</p>
-              </span>
-              <i class="fas fa-arrow-right lp-modal-tool-arrow"></i>
-            </button>
-            <button type="button" class="lp-modal-tool" data-qr-tool-target="#phone-modal">
-              <span class="lp-tool-ico"><i class="fas fa-phone"></i></span>
-              <span>
-                <h4 data-translate="landing.tools.phoneTitle">Phone QR Code</h4>
-                <p data-translate="landing.tools.phoneCopy">One tap to call</p>
-              </span>
-              <i class="fas fa-arrow-right lp-modal-tool-arrow"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- WiFi QR Code Modal -->
-  <div class="modal fade lp-qr-generator-modal" id="wifi-modal" tabindex="-1" aria-labelledby="wifiModalLabel" aria-hidden="true" data-bs-focus="false">
+  <div class="modal fade" id="wifi-modal" tabindex="-1" aria-labelledby="wifiModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -2138,7 +2147,7 @@
   </div>
 
   <!-- SMS QR Code Modal -->
-  <div class="modal fade lp-qr-generator-modal" id="sms-modal" tabindex="-1" aria-labelledby="smsModalLabel" aria-hidden="true" data-bs-focus="false">
+  <div class="modal fade" id="sms-modal" tabindex="-1" aria-labelledby="smsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -2174,7 +2183,7 @@
   </div>
   
   <!-- Phone QR Code Modal -->
-  <div class="modal fade lp-qr-generator-modal" id="phone-modal" tabindex="-1" aria-labelledby="phoneModalLabel" aria-hidden="true" data-bs-focus="false">
+  <div class="modal fade" id="phone-modal" tabindex="-1" aria-labelledby="phoneModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -2205,7 +2214,7 @@
   </div>
 
   <!-- URL QR Code Modal -->
-  <div class="modal fade lp-qr-generator-modal" id="url-modal" tabindex="-1" aria-labelledby="urlModalLabel" aria-hidden="true" data-bs-focus="false">
+  <div class="modal fade" id="url-modal" tabindex="-1" aria-labelledby="urlModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -4356,52 +4365,6 @@
             if (target) {
               target.scrollIntoView({ behavior: 'smooth' });
             }
-          }
-        });
-      });
-
-      const qrToolsModalEl = document.getElementById('qrToolsModal');
-      let qrToolsScrollY = null;
-      if (qrToolsModalEl) {
-        qrToolsModalEl.addEventListener('shown.bs.modal', () => {
-          qrToolsScrollY = window.scrollY;
-        });
-        qrToolsModalEl.addEventListener('hidden.bs.modal', () => {
-          if (!document.querySelector('.lp-qr-generator-modal.show')) {
-            qrToolsScrollY = null;
-          }
-        });
-      }
-
-      document.querySelectorAll('[data-qr-tool-target]').forEach((button) => {
-        button.addEventListener('mousedown', (event) => {
-          event.preventDefault();
-        });
-        button.addEventListener('click', () => {
-          const targetSelector = button.getAttribute('data-qr-tool-target');
-          const targetEl = targetSelector ? document.querySelector(targetSelector) : null;
-          const pickerEl = document.getElementById('qrToolsModal');
-          if (!targetEl || !pickerEl) return;
-          const currentScrollY = Number.isFinite(qrToolsScrollY) ? qrToolsScrollY : window.scrollY;
-
-          const restoreScroll = () => {
-            window.scrollTo({ top: currentScrollY, left: 0, behavior: 'auto' });
-          };
-          const openTarget = () => {
-            targetEl.addEventListener('shown.bs.modal', () => {
-              restoreScroll();
-              window.requestAnimationFrame(restoreScroll);
-              [50, 150, 300].forEach((delay) => window.setTimeout(restoreScroll, delay));
-            }, { once: true });
-            bootstrap.Modal.getOrCreateInstance(targetEl, { focus: false }).show();
-          };
-          const pickerModal = bootstrap.Modal.getOrCreateInstance(pickerEl, { focus: false });
-
-          if (pickerEl.classList.contains('show')) {
-            pickerEl.addEventListener('hidden.bs.modal', openTarget, { once: true });
-            pickerModal.hide();
-          } else {
-            openTarget();
           }
         });
       });
