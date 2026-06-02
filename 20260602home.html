@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -33,12 +33,9 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Custom Styles -->
-  <link href="maiimg.css" rel="stylesheet">
+  <link href="qr-styles019.css" rel="stylesheet">
   <style>
     .flow-step.is-guided {
       animation: flowStepPulse 1.1s ease-in-out infinite;
@@ -300,1310 +297,128 @@
       body.index-refined .upload-orb .upload-icon {
         font-size: 2rem;
       }
-    }
 
-    /* ═══════════ How it Works Section ═══════════ */
-    .hiw-section {
-      padding: 5rem 0 4rem;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.12) 100%);
-    }
-    .hiw-header { margin-bottom: 3.5rem; }
-    .hiw-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.4rem 0.85rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.92);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .hiw-title {
-      font-family: 'Sora', sans-serif;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.6rem;
-    }
-    .hiw-subtitle {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.78);
-      max-width: 560px;
-      margin: 0 auto;
-    }
-
-    /* Timeline cards */
-    .hiw-timeline {
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-      margin-bottom: 3rem;
-    }
-    .hiw-card {
-      flex: 1;
-      background: rgba(255,255,255,0.1);
-      -webkit-backdrop-filter: blur(16px);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 24px;
-      padding: 2rem 1.6rem 1.8rem;
-      text-align: center;
-      position: relative;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .hiw-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    }
-    .hiw-card-num {
-      position: absolute;
-      top: -16px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #06b6d4);
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(99,102,241,0.4);
-    }
-    .hiw-card-icon {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, #a5b4fc, #67e8f9);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hiw-card-title {
-      font-family: 'Sora', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.6rem;
-    }
-    .hiw-card-desc {
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.72);
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-    .hiw-card-desc strong { color: rgba(255,255,255,0.95); }
-    .hiw-connector {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      min-width: 48px;
-      color: rgba(255,255,255,0.3);
-      font-size: 1.2rem;
-    }
-
-    /* Mini visuals inside cards */
-    .hiw-card-visual { margin-top: auto; }
-    .hiw-mini-dropzone {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      justify-content: center;
-      padding: 0.7rem;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.08);
-      border: 1px dashed rgba(255,255,255,0.2);
-    }
-    .hiw-mini-dropzone i {
-      font-size: 1rem;
-      color: rgba(255,255,255,0.5);
-      width: 100%;
-      margin-bottom: 4px;
-    }
-    .hiw-mini-dropzone span {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.6);
-      background: rgba(255,255,255,0.1);
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
-    .hiw-mini-presets {
-      display: flex;
-      gap: 6px;
-      justify-content: center;
-    }
-    .hiw-preset {
-      font-size: 0.72rem;
-      padding: 6px 10px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.6);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .hiw-preset.active {
-      background: rgba(99,102,241,0.3);
-      border-color: rgba(99,102,241,0.5);
-      color: #fff;
-      font-weight: 600;
-    }
-    .hiw-mini-result {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: center;
-    }
-    .hiw-mini-qr {
-      width: 46px;
-      height: 46px;
-      border-radius: 10px;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      color: #4f46e5;
-    }
-    .hiw-mini-link {
-      font-size: 0.78rem;
-      font-family: 'Space Grotesk', monospace;
-      color: rgba(255,255,255,0.8);
-      background: rgba(255,255,255,0.1);
-      padding: 6px 10px;
-      border-radius: 8px;
-    }
-
-    .hiw-cta { margin-top: 0.5rem; }
-    .hiw-cta .btn {
-      padding: 0.85rem 2.4rem;
-      font-size: 1.05rem;
-      font-weight: 700;
-      border-radius: 14px;
-      box-shadow: 0 8px 24px rgba(99,102,241,0.35);
-    }
-
-    /* ═══════════ Use Case Section ═══════════ */
-    .usecase-section {
-      padding: 4.5rem 0;
-      background: rgba(255,255,255,0.05);
-    }
-    .usecase-header { margin-bottom: 3rem; }
-    .usecase-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-    }
-    .usecase-card {
-      background: rgba(255,255,255,0.1);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 20px;
-      padding: 2rem 1.4rem;
-      text-align: center;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .usecase-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 36px rgba(0,0,0,0.12);
-    }
-    .usecase-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(99,102,241,0.25), rgba(6,182,212,0.25));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem;
-      font-size: 1.4rem;
-      color: #a5b4fc;
-    }
-    .usecase-card h4 {
-      font-family: 'Sora', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.55rem;
-    }
-    .usecase-card p {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.68);
-      line-height: 1.55;
-      margin: 0;
-    }
-
-    /* ═══════════ Preview / Mockup Section ═══════════ */
-    .preview-section {
-      padding: 4.5rem 0 5rem;
-    }
-    .preview-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-    .preview-copy .hiw-kicker { margin-bottom: 0.8rem; }
-    .preview-copy .hiw-title { text-align: left; }
-    .preview-desc {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.78);
-      margin-bottom: 1.5rem;
-    }
-    .preview-features {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 2rem;
-    }
-    .preview-features li {
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.82);
-      padding: 0.4rem 0;
-    }
-    .preview-features li i {
-      color: #34d399;
-      margin-right: 0.55rem;
-    }
-
-    /* Phone mockup */
-    .preview-mockup {
-      display: flex;
-      justify-content: center;
-    }
-    .mockup-phone {
-      width: 280px;
-      background: #1e1e2e;
-      border-radius: 36px;
-      padding: 12px;
-      box-shadow:
-        0 0 0 2px rgba(255,255,255,0.12),
-        0 40px 80px rgba(0,0,0,0.35);
-      position: relative;
-    }
-    .mockup-notch {
-      width: 100px;
-      height: 22px;
-      background: #1e1e2e;
-      border-radius: 0 0 14px 14px;
-      margin: 0 auto 8px;
-      position: relative;
-      z-index: 2;
-    }
-    .mockup-screen {
-      background: #fff;
-      border-radius: 24px;
-      overflow: hidden;
-      min-height: 380px;
-    }
-    .mockup-header {
-      background: linear-gradient(135deg, #6366f1, #06b6d4);
-      color: #fff;
-      font-size: 0.82rem;
-      font-weight: 700;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .mockup-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-      padding: 4px;
-    }
-    .mockup-thumb {
-      aspect-ratio: 1;
-      border-radius: 6px;
-    }
-    .mockup-thumb-video {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.8);
-      font-size: 1.2rem;
-    }
-    .mockup-footer {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 14px;
-      font-size: 0.68rem;
-      color: #94a3b8;
-    }
-    .mockup-footer i { margin-right: 3px; }
-
-    /* ═══════════ Clean Config Layout ═══════════ */
-    .config-clean .config-clean-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.85fr);
-      gap: 1.25rem;
-      align-items: start;
-    }
-    .config-clean .config-clean-fields {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .config-clean .config-clean-fields .feature-card {
-      margin: 0;
-    }
-    .config-clean .config-clean-row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-    .config-clean .config-clean-row .feature-card {
-      height: 100%;
-    }
-    /* Keep Generate side-panel sticky */
-    .config-clean .generate-side-panel {
-      position: sticky;
-      top: calc(var(--flow-top-offset, 90px) + 16px);
-    }
-    @media (max-width: 991px) {
-      .config-clean .config-clean-layout {
-        grid-template-columns: 1fr;
+      body.index-refined .config-variant-a .feature-cards {
+        margin: 1rem 0 1.15rem;
+        gap: 0.85rem;
       }
-      .config-clean .generate-side-panel {
-        position: static;
+
+      body.index-refined .config-variant-a .feature-card {
+        padding: 1.05rem 0.95rem;
+        border-radius: 20px;
+      }
+
+      body.index-refined .config-variant-a .feature-card-head {
+        gap: 0.72rem;
+        margin-bottom: 0.8rem;
+      }
+
+      body.index-refined .config-variant-a .feature-card-head > div {
+        min-width: 0;
+        flex: 1;
+      }
+
+      body.index-refined .config-variant-a .feature-icon-badge {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+      }
+
+      body.index-refined .config-variant-a .feature-card-head .feature-icon {
+        font-size: 1.12rem;
+      }
+
+      body.index-refined .config-variant-a .feature-title {
+        margin-bottom: 0.35rem;
+        font-size: 1.02rem;
+        line-height: 1.2;
+      }
+
+      body.index-refined .config-variant-a .feature-copy {
+        font-size: 0.86rem;
+        line-height: 1.42;
+      }
+
+      body.index-refined .config-variant-a .feature-field + .feature-field {
+        margin-top: 0.8rem;
+      }
+
+      body.index-refined .config-variant-a .config-label {
+        margin-bottom: 0.42rem;
+        font-size: 0.7rem;
+      }
+
+      body.index-refined .config-variant-a .form-control,
+      body.index-refined .config-variant-a .form-select {
+        padding: 11px 14px;
+        font-size: 0.96rem;
+      }
+
+      body.index-refined .config-variant-a .input-with-unit .form-control {
+        padding-right: 4.2rem;
+      }
+
+      body.index-refined .config-variant-a .input-unit {
+        right: 0.8rem;
+        font-size: 0.75rem;
+      }
+
+      body.index-refined .config-variant-a .generate-panel {
+        gap: 0.8rem;
+        padding: 1rem;
+        border-radius: 22px;
+      }
+
+      body.index-refined .config-variant-a .generate-panel .feature-title {
+        margin-bottom: 0.45rem;
+      }
+
+      body.index-refined .config-variant-a .generate-status {
+        margin-top: 0.5rem;
+        font-size: 0.84rem;
+        line-height: 1.45;
       }
     }
+
     @media (max-width: 576px) {
-      .config-clean .config-clean-row {
-        grid-template-columns: 1fr;
+      body.index-refined .config-variant-a .feature-card {
+        padding: 0.95rem 0.85rem;
       }
-    }
 
-    /* ═══════════ Responsive for new sections ═══════════ */
-    @media (max-width: 991px) {
-      .hiw-timeline {
-        flex-direction: column;
-        gap: 1.2rem;
+      body.index-refined .config-variant-a .feature-card-head {
+        gap: 0.65rem;
+        margin-bottom: 0.72rem;
       }
-      .hiw-connector {
-        width: auto;
-        min-width: auto;
-        transform: rotate(90deg);
-        height: 32px;
+
+      body.index-refined .config-variant-a .feature-copy {
+        font-size: 0.82rem;
       }
-      .usecase-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .preview-layout {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        text-align: center;
-      }
-      .preview-copy .hiw-title { text-align: center; }
-      .preview-features {
-        display: inline-block;
-        text-align: left;
-      }
-    }
-    @media (max-width: 576px) {
-      .hiw-section, .usecase-section, .preview-section {
-        padding: 3rem 0;
-      }
-      .usecase-grid {
-        grid-template-columns: 1fr;
-      }
-      .mockup-phone {
-        width: 240px;
-      }
-      .hiw-card {
-        padding: 1.6rem 1.2rem 1.4rem;
+
+      body.index-refined .config-variant-a .config-summary-grid {
+        gap: 0.55rem;
       }
     }
   </style>
-
-  <!-- ════════════ LANDING (lp-) THEME ════════════ -->
-  <style>
-    :root{
-      --lp-indigo:#6366f1; --lp-indigo-d:#4f46e5; --lp-violet:#8b5cf6;
-      --lp-ink:#0f172a; --lp-slate:#475569; --lp-muted:#64748b;
-      --lp-line:#e2e8f0; --lp-bg:#f8fafc; --lp-card:#ffffff;
-      --lp-grad:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);
-      --lp-shadow:0 10px 30px -12px rgba(15,23,42,.18);
-      --lp-shadow-lg:0 24px 60px -20px rgba(79,70,229,.45);
-    }
-    body.lp-body{ padding-top:0 !important; background:var(--lp-bg); color:var(--lp-ink);
-      font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif; }
-    .lp-wrap{ max-width:1180px; margin:0 auto; padding:0 22px; }
-    .lp-accent{ color:var(--lp-indigo); }
-
-    /* Buttons */
-    .lp-btn{ display:inline-flex; align-items:center; gap:.55rem; border:none; cursor:pointer;
-      font-weight:700; border-radius:12px; padding:.85rem 1.5rem; font-size:.98rem; text-decoration:none;
-      transition:transform .15s ease, box-shadow .2s ease, background .2s ease; line-height:1; }
-    .lp-btn-sm{ padding:.5rem .95rem; font-size:.85rem; border-radius:10px; }
-    .lp-btn-primary{ background:var(--lp-grad); color:#fff; box-shadow:0 10px 24px -10px rgba(99,102,241,.7); }
-    .lp-btn-primary:hover{ transform:translateY(-2px); box-shadow:0 16px 30px -10px rgba(99,102,241,.8); color:#fff; }
-    .lp-btn-ghost{ background:#fff; color:var(--lp-ink); border:1.5px solid var(--lp-line); }
-    .lp-btn-ghost:hover{ border-color:var(--lp-indigo); color:var(--lp-indigo-d); transform:translateY(-2px); }
-    .lp-btn-white{ background:#fff; color:var(--lp-indigo-d); }
-    .lp-btn-white:hover{ transform:translateY(-2px); box-shadow:0 16px 30px -12px rgba(0,0,0,.3); }
-
-    /* Brand */
-    .lp-brand{ display:inline-flex; align-items:center; gap:.65rem; text-decoration:none; }
-    .lp-logo{ width:40px; height:40px; border-radius:11px; background:var(--lp-grad); color:#fff;
-      display:grid; place-items:center; font-size:1.15rem; box-shadow:0 8px 18px -8px rgba(99,102,241,.8); }
-    .lp-brand-text{ display:flex; flex-direction:column; line-height:1.05; }
-    .lp-brand-name{ font-weight:800; font-size:1.18rem; color:var(--lp-ink); letter-spacing:-.02em; }
-    .lp-brand-sub{ font-size:.72rem; font-weight:700; color:var(--lp-indigo); display:none; }
-    html[lang^="zh"] .lp-brand-sub{ display:block; }
-
-    /* Nav */
-    .lp-nav{ position:sticky; top:0; z-index:5000; overflow:visible; background:rgba(255,255,255,.82);
-      backdrop-filter:saturate(180%) blur(14px); border-bottom:1px solid var(--lp-line); }
-    .lp-nav-inner{ display:flex; align-items:center; justify-content:space-between; height:70px; gap:1rem; }
-    .lp-links{ display:flex; align-items:center; gap:1.6rem; }
-    .lp-links a,
-    .lp-links button{ color:var(--lp-slate); text-decoration:none; font-weight:600; font-size:.95rem; transition:color .15s; background:none; border:0; padding:0; cursor:pointer; font:inherit; }
-    .lp-links a:hover, .lp-links a.active,
-    .lp-links button:hover, .lp-links button.active{ color:var(--lp-indigo-d); }
-    .lp-actions{ display:flex; align-items:center; gap:.6rem; }
-    .lp-actions .btn-light{ background:#eef2ff; color:var(--lp-indigo-d); border:none; font-weight:600; }
-    .lp-actions .btn-light:hover{ background:#e0e7ff; }
-    .lp-actions .btn-outline-light.lp-lang-btn{ background:#fff; color:var(--lp-slate); border:1.5px solid var(--lp-line); font-weight:600; display:inline-flex; align-items:center; gap:7px; }
-    .lp-actions .btn-outline-light.lp-lang-btn:hover{ border-color:var(--lp-indigo); color:var(--lp-indigo-d); }
-    .lp-actions .lp-lang-btn #currentLanguageFlag{ display:inline-flex; justify-content:center; width:20px; font-size:1rem; }
-    /* Polished language dropdown menu (override maiimg.css defaults) */
-    .lp-actions .language-selector{ position:relative; z-index:5100; }
-    .lp-actions .language-selector .dropdown{ position:relative; }
-    .lp-actions .language-selector .dropdown-menu{ z-index:5200 !important; min-width:176px !important; padding:6px !important; border-radius:14px !important; border:1px solid var(--lp-line) !important; background:rgba(255,255,255,.98) !important; box-shadow:0 18px 42px -18px rgba(15,23,42,.45) !important; margin-top:10px !important; pointer-events:auto !important; }
-    .lp-actions .language-selector .dropdown-item{ display:flex !important; align-items:center !important; gap:10px !important; padding:9px 12px !important; border-radius:10px !important; font-size:.9rem !important; font-weight:600 !important; color:var(--lp-slate) !important; }
-    .lp-actions .language-selector .dropdown-item:hover{ background:#eef2ff !important; color:var(--lp-indigo-d) !important; }
-    .lp-actions .language-selector .flag-icon{ width:22px !important; min-width:22px; flex:none; text-align:center; font-size:1.05rem !important; line-height:1 !important; }
-    .lp-toggle{ display:none; background:#eef2ff; color:var(--lp-indigo-d); border:none; width:40px; height:40px;
-      border-radius:10px; font-size:1.1rem; cursor:pointer; }
-    .lp-mobile{ display:none; flex-direction:column; padding:.4rem 22px 1rem; gap:.2rem; border-top:1px solid var(--lp-line); background:#fff; }
-    .lp-mobile.open{ display:flex; }
-    .lp-mobile a,
-    .lp-mobile button{ color:var(--lp-slate); text-decoration:none; font-weight:600; padding:.6rem .2rem; border:0; border-bottom:1px solid #f1f5f9; background:none; text-align:left; cursor:pointer; }
-
-    /* Hero */
-    .lp-hero{ position:relative; overflow:hidden; padding:64px 0 56px;
-      background:radial-gradient(1100px 460px at 78% -8%, rgba(139,92,246,.16), transparent 60%),
-                 radial-gradient(900px 420px at 8% 4%, rgba(99,102,241,.14), transparent 58%); }
-    .lp-hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center; }
-    .lp-eyebrow{ display:inline-flex; align-items:center; gap:.45rem; background:#eef2ff; color:var(--lp-indigo-d);
-      font-weight:700; font-size:.82rem; padding:.45rem .85rem; border-radius:999px; margin-bottom:1.1rem; }
-    .lp-hero-title{ font-size:clamp(2.1rem,4.6vw,3.4rem); font-weight:800; letter-spacing:-.025em; line-height:1.08; margin:0 0 1rem; }
-    .lp-hero-sub{ font-size:1.08rem; color:var(--lp-slate); max-width:33rem; margin:0 0 1.6rem; line-height:1.6; }
-    .lp-hero-cta{ display:flex; flex-wrap:wrap; gap:.8rem; margin-bottom:1.5rem; }
-    .lp-hero-tags{ display:flex; flex-wrap:wrap; gap:.5rem 1.1rem; }
-    .lp-tag{ display:inline-flex; align-items:center; gap:.4rem; color:var(--lp-muted); font-size:.88rem; font-weight:600; }
-    .lp-tag i{ color:#22c55e; }
-
-    /* Hero preview */
-    .lp-preview{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    .lp-panel{ background:var(--lp-card); border:1px solid var(--lp-line); border-radius:16px; padding:14px;
-      box-shadow:var(--lp-shadow); }
-    .lp-span-2{ grid-column:1 / -1; }
-    .lp-preview .lp-span-2{ grid-column:auto; }
-    .lp-panel-label{ display:flex; align-items:center; gap:.4rem; font-size:.78rem; font-weight:700; color:var(--lp-muted); text-transform:uppercase; letter-spacing:.03em; }
-    .lp-file-name{ display:flex; align-items:center; justify-content:space-between; gap:.5rem; font-size:.84rem; font-weight:600; margin:.5rem 0; color:var(--lp-ink); }
-    .lp-file-name i{ color:var(--lp-muted); }
-    .lp-media-thumb{ height:78px; border-radius:11px; background:linear-gradient(135deg,#c7d2fe,#a5b4fc 60%,#818cf8); display:grid; place-items:center; }
-    .lp-media-play{ width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.9); color:var(--lp-indigo-d); display:grid; place-items:center; }
-    .lp-thumb-row{ display:flex; gap:6px; margin-top:8px; }
-    .lp-thumb-row span{ width:30px; height:30px; border-radius:8px; background:#e0e7ff; display:inline-block; }
-    .lp-thumb-row span.more{ display:grid; place-items:center; font-size:.7rem; font-weight:700; color:var(--lp-indigo-d); }
-    .lp-share-link{ display:flex; gap:6px; margin-top:8px; }
-    .lp-share-link input{ flex:1; min-width:0; border:1px solid var(--lp-line); border-radius:9px; padding:.4rem .55rem; font-size:.74rem; color:var(--lp-slate); background:#f8fafc; }
-    .lp-copy-btn{ background:var(--lp-grad); color:#fff; border:none; border-radius:9px; padding:.4rem .7rem; font-size:.75rem; font-weight:700; }
-    .lp-qr-wrap{ display:flex; flex-direction:column; align-items:center; margin-top:8px; }
-    .lp-qr{ width:96px; height:96px; border-radius:10px; border:1px solid var(--lp-line); padding:5px; background:#fff; }
-    .lp-qr-dl{ font-size:.74rem; color:var(--lp-indigo-d); font-weight:700; margin-top:6px; }
-    .lp-set-row{ display:flex; align-items:center; justify-content:space-between; padding:.42rem 0; border-bottom:1px solid #f1f5f9; font-size:.82rem; }
-    .lp-set-row:last-child{ border-bottom:none; }
-    .lp-sr-left{ display:flex; align-items:center; gap:.45rem; color:var(--lp-slate); font-weight:600; }
-    .lp-sr-left i{ color:var(--lp-indigo); width:14px; }
-    .lp-sr-val{ color:var(--lp-ink); font-weight:700; }
-    .lp-toggle-ui{ width:34px; height:18px; border-radius:999px; background:var(--lp-indigo); position:relative; display:inline-block; }
-    .lp-toggle-ui::after{ content:""; position:absolute; top:2px; right:2px; width:14px; height:14px; border-radius:50%; background:#fff; }
-    .lp-stat-grid{ display:flex; gap:10px; margin:.6rem 0; }
-    .lp-stat{ flex:1; background:#f8fafc; border:1px solid var(--lp-line); border-radius:11px; padding:.55rem .6rem; }
-    .lp-stat .num{ font-size:1.25rem; font-weight:800; color:var(--lp-indigo-d); }
-    .lp-stat .lab{ font-size:.72rem; color:var(--lp-muted); font-weight:600; }
-    .lp-spark{ width:100%; height:42px; }
-
-    /* Strip */
-    .lp-strip{ margin:-30px auto 0; position:relative; z-index:2; background:#fff; border:1px solid var(--lp-line);
-      border-radius:18px; box-shadow:var(--lp-shadow); padding:20px 24px; display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); align-items:center; gap:18px 26px; }
-    .lp-strip-title{ grid-column:1 / -1; font-weight:800; color:var(--lp-ink); font-size:1rem; }
-    .lp-strip-item{ display:flex; align-items:center; gap:.7rem; }
-    .lp-strip-ico{ width:42px; height:42px; border-radius:12px; display:grid; place-items:center; color:#fff; font-size:1.05rem; }
-    .ico-i1{ background:linear-gradient(135deg,#6366f1,#818cf8);} .ico-i2{ background:linear-gradient(135deg,#ec4899,#f472b6);}
-    .ico-i3{ background:linear-gradient(135deg,#0ea5e9,#38bdf8);} .ico-i4{ background:linear-gradient(135deg,#10b981,#34d399);}
-    .ico-i5{ background:linear-gradient(135deg,#f59e0b,#fbbf24);}
-    .lp-strip-item h4{ font-size:.92rem; font-weight:700; margin:0; color:var(--lp-ink); }
-    .lp-strip-item p{ font-size:.78rem; color:var(--lp-muted); margin:0; }
-
-    /* Sections */
-    .lp-section{ padding:74px 0; }
-    .lp-head-c{ text-align:center; max-width:42rem; margin:0 auto 48px; }
-    .lp-head-c h2{ font-size:clamp(1.7rem,3.2vw,2.4rem); font-weight:800; letter-spacing:-.02em; margin:0 0 .7rem; }
-    .lp-head-c p{ color:var(--lp-slate); font-size:1.05rem; margin:0; }
-
-    /* Features */
-    .lp-feat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-    .lp-feat{ background:#fff; border:1px solid var(--lp-line); border-radius:18px; padding:24px; transition:transform .18s ease, box-shadow .2s ease, border-color .2s;
-      display:grid; grid-template-columns:auto 1fr; column-gap:14px; row-gap:.55rem; align-items:center; }
-    .lp-feat:hover{ transform:translateY(-4px); box-shadow:var(--lp-shadow); border-color:#c7d2fe; }
-    .lp-feat-ico{ width:48px; height:48px; border-radius:13px; display:grid; place-items:center; color:#fff; font-size:1.2rem; flex:none; }
-    .fi-1{ background:linear-gradient(135deg,#6366f1,#8b5cf6);} .fi-2{ background:linear-gradient(135deg,#0ea5e9,#22d3ee);}
-    .fi-3{ background:linear-gradient(135deg,#f59e0b,#f97316);} .fi-4{ background:linear-gradient(135deg,#10b981,#34d399);}
-    .fi-5{ background:linear-gradient(135deg,#ec4899,#f472b6);} .fi-6{ background:linear-gradient(135deg,#8b5cf6,#a78bfa);}
-    .lp-feat h3{ font-size:1.12rem; font-weight:700; margin:0; }
-    .lp-feat p{ grid-column:1 / -1; color:var(--lp-slate); font-size:.95rem; line-height:1.55; margin:0; }
-
-    /* Tools */
-    .lp-tools-sec{ background:#fff; }
-    .lp-tools-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
-    .lp-tool{ background:var(--lp-bg); border:1px solid var(--lp-line); border-radius:16px; padding:22px 14px; text-align:center; cursor:pointer; transition:transform .16s ease, box-shadow .2s ease, border-color .2s; }
-    .lp-tool:hover{ transform:translateY(-4px); box-shadow:var(--lp-shadow); border-color:#c7d2fe; }
-    .lp-tool-ico{ width:50px; height:50px; border-radius:14px; background:var(--lp-grad); color:#fff; display:grid; place-items:center; font-size:1.2rem; margin:0 auto .8rem; }
-    .lp-tool h4{ font-size:.95rem; font-weight:700; margin:0 0 .25rem; }
-    .lp-tool p{ font-size:.78rem; color:var(--lp-muted); margin:0; }
-    body.maiimg-workspace #tools.tools-section{
-      margin:0;
-      padding:34px 0 26px;
-      border:0;
-      border-radius:0;
-      background:#f8fafc;
-      box-shadow:none;
-    }
-    body.maiimg-workspace #tools.tools-section::before{ display:none; }
-    body.maiimg-workspace #tools .container{
-      max-width:1180px;
-      padding-left:22px;
-      padding-right:22px;
-    }
-    body.maiimg-workspace #tools .text-center{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap:18px;
-      text-align:left !important;
-      margin-bottom:18px !important;
-    }
-    body.maiimg-workspace #tools .section-title{
-      margin:0;
-      font-size:clamp(1.35rem,2.2vw,1.85rem);
-      letter-spacing:0;
-      line-height:1.18;
-    }
-    body.maiimg-workspace #tools .section-subtitle{
-      max-width:28rem;
-      margin:0;
-      text-align:right;
-      font-size:.9rem;
-      line-height:1.45;
-    }
-    body.maiimg-workspace #tools .row{
-      --bs-gutter-x:12px;
-      --bs-gutter-y:12px;
-    }
-    body.maiimg-workspace #tools .tool-card{
-      min-height:92px;
-      display:flex;
-      align-items:center;
-      gap:14px;
-      padding:16px;
-      border-radius:14px;
-      text-align:left;
-      background:#fff;
-      border:1px solid rgba(226,232,240,.95);
-      box-shadow:none;
-    }
-    body.maiimg-workspace #tools .tool-card:hover{
-      transform:translateY(-2px);
-      border-color:rgba(99,102,241,.3);
-      box-shadow:0 14px 28px rgba(15,23,42,.08);
-    }
-    body.maiimg-workspace #tools .tool-icon{
-      width:46px;
-      height:46px;
-      margin:0;
-      flex:none;
-      border-radius:12px;
-      color:#4f46e5;
-      background:#eef2ff;
-      font-size:1.15rem;
-    }
-    body.maiimg-workspace #tools .tool-card h5{
-      margin:0;
-      font-size:1rem;
-      font-weight:800;
-      color:var(--lp-ink);
-    }
-    body.maiimg-workspace > .modal{
-      position:fixed;
-      top:0;
-      left:0;
-      z-index:1055;
-      display:none;
-      width:100%;
-      height:100%;
-      overflow-x:hidden;
-      overflow-y:auto;
-      outline:0;
-    }
-    .modal-dialog{
-      position:relative;
-      width:auto;
-      margin:1.75rem auto;
-      pointer-events:none;
-    }
-    .modal-dialog-centered{
-      display:flex;
-      align-items:center;
-      min-height:calc(100% - 3.5rem);
-    }
-    .modal-content{ position:relative; width:100%; pointer-events:auto; }
-    .modal-backdrop{
-      position:fixed;
-      top:0;
-      left:0;
-      z-index:1050;
-      width:100vw;
-      height:100vh;
-      background-color:#000;
-    }
-    .modal-backdrop.show{ opacity:.5; }
-    body.modal-open{ overflow:hidden; }
-    .lp-auth-modal{
-      position:fixed !important;
-      inset:0 !important;
-      z-index:1055 !important;
-      width:100vw !important;
-      height:100vh !important;
-      overflow:hidden auto !important;
-      outline:0;
-    }
-    /* Footer */
-    .lp-footer{ background:var(--lp-ink); color:#cbd5e1; padding:34px 0 24px; }
-    .lp-footer .lp-brand-name{ color:#fff; } .lp-footer .lp-brand-sub{ color:#a5b4fc; }
-    .lp-footer-grid{ display:flex; align-items:center; justify-content:space-between; gap:28px; padding-bottom:22px; border-bottom:1px solid rgba(255,255,255,.1); }
-    .lp-footer-brandline{ display:flex; align-items:center; gap:18px; min-width:0; }
-    .lp-footer-about{ color:#94a3b8; font-size:.9rem; line-height:1.55; margin:0; max-width:34rem; }
-    .lp-footer-meta{ display:flex; align-items:center; justify-content:flex-end; gap:14px; flex-wrap:wrap; }
-    .lp-footer-email{ display:inline-flex; align-items:center; gap:8px; color:#e2e8f0; text-decoration:none; font-weight:700; white-space:nowrap; }
-    .lp-footer h5{ color:#fff; font-size:.95rem; font-weight:700; margin:0 0 1rem; }
-    .lp-footer ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.6rem; }
-    .lp-footer ul a{ color:#94a3b8; text-decoration:none; font-size:.92rem; }
-    .lp-footer ul a:hover{ color:#fff; }
-    .lp-footer-bottom{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; padding-top:18px; font-size:.86rem; color:#94a3b8; }
-    .lp-footer-bottom a{ color:#cbd5e1; text-decoration:none; }
-    .lp-footer-social{ display:flex; gap:.6rem; }
-    .lp-footer-social a{ width:36px; height:36px; border-radius:10px; background:rgba(255,255,255,.08); color:#cbd5e1; display:grid; place-items:center; }
-    .lp-footer-social a:hover{ background:var(--lp-indigo); color:#fff; }
-    /* Override maiimg.css's light "body.maiimg-workspace footer" so the dark footer stays dark and readable */
-    body.maiimg-workspace footer.lp-footer{ background:var(--lp-ink); border-top:none; margin-top:0; }
-    body.maiimg-workspace .lp-footer .lp-brand-name,
-    body.maiimg-workspace .lp-footer h5{ color:#fff; }
-    body.maiimg-workspace .lp-footer .lp-brand-sub{ color:#a5b4fc; }
-    body.maiimg-workspace .lp-footer .lp-footer-about,
-    body.maiimg-workspace .lp-footer p,
-    body.maiimg-workspace .lp-footer small,
-    body.maiimg-workspace .lp-footer ul a{ color:#94a3b8; }
-    body.maiimg-workspace .lp-footer ul a:hover,
-    body.maiimg-workspace .lp-footer a:hover{ color:#fff; }
-    body.maiimg-workspace .lp-footer-bottom a{ color:#cbd5e1; }
-    body.maiimg-workspace .lp-footer-bottom a:hover{ color:#fff; }
-
-    /* Upload modal */
-    /* Compact hero + on-page upload workspace */
-    .lp-hero-compact{ padding:52px 0 22px; }
-    .lp-hero-center{ text-align:center; max-width:52rem; margin:0 auto; }
-    .lp-hero-center .lp-hero-sub{ margin-left:auto; margin-right:auto; }
-    .lp-hero-compact .lp-hero-tags{ justify-content:center; }
-    .lp-upload-band{ padding:0 0 56px; }
-    .lp-upload-card{ background:#fff; border:1px solid var(--lp-line); border-radius:22px;
-      box-shadow:var(--lp-shadow-lg); padding:10px; }
-    .lp-upload-card .maiimg-shell{ max-width:100% !important; padding-left:0; padding-right:0; }
-    .lp-upload-card .flow-nav{ position:static !important; top:auto !important; }
-    @media (max-width:768px){
-      .lp-hero-compact{ padding:30px 0 16px; }
-      .lp-upload-card{ border-radius:16px; padding:4px; }
-    }
-
-    @media (max-width:992px){
-      .lp-hero-grid{ grid-template-columns:1fr; gap:36px; }
-      .lp-feat-grid{ grid-template-columns:repeat(2,1fr); }
-      .lp-tools-grid{ grid-template-columns:repeat(3,1fr); }
-      .lp-footer-grid{ flex-direction:column; align-items:flex-start; }
-      .lp-footer-meta{ justify-content:flex-start; }
-    }
-    @media (max-width:768px){
-      .lp-links{ display:none; }
-      .lp-toggle{ display:inline-grid; place-items:center; }
-      .lp-hero{ padding:42px 0 40px; }
-      .lp-strip{ grid-template-columns:repeat(2,1fr); align-items:start; }
-      .lp-feat-grid{ grid-template-columns:1fr; gap:14px; }
-      .lp-feat{ padding:18px 18px; column-gap:12px; }
-      .lp-feat-ico{ width:42px; height:42px; font-size:1.05rem; }
-      .lp-feat h3{ font-size:1.05rem; }
-      .lp-tools-grid{ grid-template-columns:repeat(2,1fr); }
-      body.maiimg-workspace #tools .text-center{ display:block; text-align:center !important; }
-      body.maiimg-workspace #tools .section-subtitle{ max-width:none; margin:.45rem auto 0; text-align:center; }
-      .lp-footer-grid{ align-items:center; gap:18px; }
-      .lp-footer-brandline{ flex-direction:column; text-align:center; }
-      .lp-footer .lp-brand,
-      .lp-footer-about,
-      .lp-footer small{ margin-left:auto; margin-right:auto; text-align:center; }
-      .lp-footer-meta{ justify-content:center; }
-      .lp-footer-bottom{ justify-content:center; text-align:center; }
-    }
-    @media (max-width:480px){
-      .lp-preview{ grid-template-columns:1fr; }
-      .lp-tools-grid{ grid-template-columns:1fr 1fr; }
-      .lp-footer-grid{ flex-direction:column; }
-    }
-
-    /* ═══ Upload workspace reskin (matches mockup) ═══ */
-    .lp-upload-card .container{ padding-left:0; padding-right:0; }
-
-    /* Stepper */
-    .lp-upload-card .flow-nav{ background:transparent !important; border:none !important; box-shadow:none !important; padding:6px 0 0 !important; margin:0 0 20px !important; position:static !important; }
-    .lp-upload-card .flow-nav-inner{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
-    .lp-upload-card .flow-step{ display:inline-flex; align-items:center; gap:.5rem; background:#fff; border:1.5px solid var(--lp-line); border-radius:999px; padding:.5rem 1.05rem; color:var(--lp-muted); font-weight:600; font-size:.9rem; cursor:pointer; transition:.18s; }
-    .lp-upload-card .flow-step:hover{ border-color:#c7d2fe; }
-    .lp-upload-card .flow-step .flow-step-num{ display:grid; place-items:center; width:24px; height:24px; border-radius:50%; background:#eef2ff; color:var(--lp-indigo-d); font-size:.78rem; font-weight:800; }
-    .lp-upload-card .flow-step.is-current{ border-color:var(--lp-indigo); color:var(--lp-indigo-d); background:#eef2ff; }
-    .lp-upload-card .flow-step.is-current .flow-step-num,
-    .lp-upload-card .flow-step.is-done .flow-step-num{ background:var(--lp-grad); color:#fff; }
-    .lp-upload-card .flow-step.is-done{ color:var(--lp-ink); border-color:#c7d2fe; }
-
-    /* Section head */
-    .lp-upload-card .main-upload-section, .lp-upload-card .config-section{ background:transparent !important; border:none !important; box-shadow:none !important; padding:0 !important; margin:0 0 8px !important; }
-    body.maiimg-workspace .lp-upload-card .upload-section-head.text-center{ text-align:center !important; max-width:680px; margin-left:auto !important; margin-right:auto !important; margin-bottom:18px !important; }
-    .lp-upload-card .upload-section-kicker{ display:inline-flex; align-items:center; gap:.4rem; background:#eef2ff; color:var(--lp-indigo-d); font-weight:700; font-size:.8rem; padding:.35rem .85rem; border-radius:999px; }
-    .lp-upload-card .section-title{ font-size:1.5rem; font-weight:800; color:var(--lp-ink); margin:.7rem 0 .3rem; }
-    .lp-upload-card .section-subtitle{ color:var(--lp-slate); margin:0; }
-
-    /* Dropzone */
-    .lp-upload-card .upload-area{ border:2px dashed #c7d2fe !important; border-radius:18px !important; background:linear-gradient(180deg,#f5f7ff,#ffffff) !important; padding:42px 20px !important; box-shadow:none !important; transition:border-color .2s, background .2s, transform .2s; }
-    .lp-upload-card .upload-area:hover, .lp-upload-card .upload-area.dz-drag-hover, .lp-upload-card .upload-area.dragover{ border-color:var(--lp-indigo) !important; background:#eef2ff !important; }
-    .lp-upload-card .upload-orb{ width:76px; height:76px; border-radius:20px; background:var(--lp-grad); display:grid; place-items:center; margin:0 auto 14px; box-shadow:0 14px 30px -12px rgba(99,102,241,.8); }
-    .lp-upload-card .upload-icon{ color:#fff; font-size:1.85rem; }
-    .lp-upload-card .upload-text{ font-size:1.1rem; font-weight:700; color:var(--lp-ink); }
-    .lp-upload-card .upload-subtext{ color:var(--lp-muted); font-size:.84rem; margin-top:.45rem; }
-    body.maiimg-workspace .lp-upload-card .dropzone-hero{ margin-left:auto !important; margin-right:auto !important; }
-    .lp-upload-card #uploadStatus{ background:#eef2ff !important; color:var(--lp-indigo-d) !important; border:none !important; border-radius:12px !important; }
-    .lp-upload-card .file-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(112px,1fr)); gap:10px; }
-
-    /* Preset panel */
-    .lp-upload-card .preset-panel{ background:#fff; border:1px solid var(--lp-line); border-radius:16px; padding:20px; }
-    .lp-upload-card .config-panel-eyebrow{ display:inline-flex; align-items:center; gap:.4rem; color:var(--lp-indigo-d); font-weight:700; font-size:.76rem; text-transform:uppercase; letter-spacing:.04em; }
-    .lp-upload-card .preset-panel-title{ font-size:1.18rem; font-weight:800; margin:.55rem 0 .25rem; }
-    .lp-upload-card .preset-panel-copy{ color:var(--lp-slate); font-size:.92rem; margin:0 0 1rem; }
-    .lp-upload-card .preset-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-    .lp-upload-card .preset-card{ text-align:left; background:#f8fafc; border:1.5px solid var(--lp-line); border-radius:14px; padding:14px; cursor:pointer; transition:.18s; display:flex; flex-direction:column; gap:.3rem; }
-    .lp-upload-card .preset-card:hover{ border-color:#c7d2fe; transform:translateY(-2px); }
-    .lp-upload-card .preset-card.is-active{ border-color:var(--lp-indigo); background:#eef2ff; box-shadow:0 10px 22px -12px rgba(99,102,241,.7); }
-    .lp-upload-card .preset-card-title{ font-weight:700; color:var(--lp-ink); font-size:.95rem; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-    .lp-upload-card .preset-card-badge{ font-size:.62rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:#fff; background:var(--lp-grad); padding:2px 8px; border-radius:999px; line-height:1.4; }
-    .lp-upload-card .preset-card-copy{ font-size:.8rem; color:var(--lp-muted); }
-
-    /* Settings layout */
-    .lp-upload-card .config-clean-layout{ display:grid; grid-template-columns:1.6fr .9fr; gap:18px; align-items:start; margin-top:16px; }
-    .lp-upload-card .config-clean-fields{ display:flex; flex-direction:column; gap:14px; }
-    .lp-upload-card .config-clean-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    .lp-upload-card .advanced-panel-title{ font-size:1.08rem; font-weight:800; margin:0; }
-    .lp-upload-card .advanced-panel-copy{ color:var(--lp-slate); font-size:.9rem; margin:.2rem 0 0; }
-
-    /* Feature cards / inputs */
-    .lp-upload-card .feature-card{ background:#fff !important; border:1px solid var(--lp-line) !important; border-radius:16px !important; padding:18px !important; box-shadow:none !important; }
-    .lp-upload-card .feature-card-head{ display:flex; align-items:flex-start; gap:.7rem; margin-bottom:1rem; }
-    .lp-upload-card .feature-icon-badge{ width:42px; height:42px; border-radius:12px; background:var(--lp-grad); display:grid; place-items:center; flex:none; }
-    .lp-upload-card .feature-icon{ color:#fff; }
-    .lp-upload-card .feature-title{ font-size:1rem; font-weight:700; margin:0; color:var(--lp-ink); }
-    .lp-upload-card .feature-copy{ font-size:.82rem; color:var(--lp-muted); margin:.15rem 0 0; }
-    .lp-upload-card .feature-field{ margin-bottom:.85rem; }
-    .lp-upload-card .feature-field:last-child{ margin-bottom:0; }
-    .lp-upload-card .security-control-grid{ display:grid; grid-template-columns:1fr; gap:14px; }
-    .lp-upload-card .config-label{ display:block; font-weight:600; font-size:.84rem; color:var(--lp-slate); margin-bottom:.35rem; }
-    .lp-upload-card .form-control, .lp-upload-card .form-select{ border:1.5px solid var(--lp-line); border-radius:11px; padding:.6rem .8rem; font-size:.92rem; }
-    .lp-upload-card .form-control:focus, .lp-upload-card .form-select:focus{ border-color:var(--lp-indigo); box-shadow:0 0 0 3px rgba(99,102,241,.18); }
-    .lp-upload-card .input-with-unit{ position:relative; display:block; }
-    .lp-upload-card .input-with-unit .form-control{ padding-right:3.4rem; }
-    .lp-upload-card .input-unit{ position:absolute; right:.9rem; top:50%; transform:translateY(-50%); color:var(--lp-muted); font-size:.74rem; font-weight:700; text-transform:uppercase; letter-spacing:.02em; white-space:nowrap; }
-
-    /* Generate panel */
-    .lp-upload-card .generate-side-panel{ background:linear-gradient(180deg,#eef2ff,#ffffff); border:1px solid #c7d2fe; border-radius:16px; padding:18px; position:sticky; top:14px; }
-    .lp-upload-card .config-summary-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    .lp-upload-card .config-summary-card{ background:#fff; border:1px solid var(--lp-line); border-radius:11px; padding:.55rem .7rem; display:flex; flex-direction:column; gap:.15rem; }
-    .lp-upload-card .summary-label{ font-size:.7rem; color:var(--lp-muted); font-weight:700; text-transform:uppercase; letter-spacing:.02em; }
-    .lp-upload-card .summary-value{ font-weight:700; color:var(--lp-ink); font-size:.95rem; }
-    .lp-upload-card .generate-status{ display:block; margin-top:.6rem; }
-
-    /* ── Compact setting rows (maipdf-style) ── */
-    .lp-upload-card .cfg-list{ display:flex; flex-direction:column; gap:10px; }
-    .lp-upload-card .cfg-row{ display:flex; align-items:flex-start; gap:12px; padding:12px 16px; border:1px solid var(--lp-line); border-radius:14px; background:#fff; transition:border-color .15s; flex-wrap:nowrap; }
-    .lp-upload-card .cfg-row:not(.cfg-row--wrap) .cfg-ico{ margin-top:2px; }
-    .lp-upload-card .cfg-row:hover{ border-color:#dfe5ef; }
-    .lp-upload-card .cfg-row--wrap{ flex-wrap:wrap; }
-    .lp-upload-card .cfg-row-left{ display:inline-flex; align-items:center; gap:10px; flex:0 1 auto; min-width:0; }
-    .lp-upload-card .cfg-ico{ width:34px; height:34px; border-radius:10px; background:#eef2ff; color:var(--lp-indigo-d); display:grid; place-items:center; font-size:.9rem; flex:none; }
-    .lp-upload-card .cfg-label-block{ display:flex; flex-direction:column; gap:2px; min-width:0; }
-    .lp-upload-card .cfg-name{ font-weight:700; font-size:.95rem; color:var(--lp-ink); margin:0; line-height:1.25; }
-    .lp-upload-card .cfg-hint{ font-size:.78rem; font-weight:500; color:var(--lp-muted); line-height:1.35; }
-    .lp-upload-card .cfg-row-right{ display:inline-flex; align-items:center; gap:8px; margin-left:auto; flex:0 0 auto; flex-shrink:0; flex-wrap:nowrap; justify-content:flex-end; align-self:center; }
-    .lp-upload-card .cfg-row-right--full{ flex:1 1 100%; margin-left:0; flex-wrap:wrap; justify-content:flex-start; align-self:stretch; }
-    .lp-upload-card .cfg-input-num{ width:104px; max-width:104px; flex:0 0 104px; text-align:center; padding:.65rem .55rem; font-size:1rem; font-weight:600; }
-    .lp-upload-card .cfg-suffix{ font-size:.82rem; color:var(--lp-muted); font-weight:600; white-space:nowrap; flex:none; }
-    .lp-upload-card .cfg-row-right--full > .form-control{ width:100%; }
-
-    /* Expiration pills */
-    .lp-upload-card .cfg-pills{ display:flex; flex-wrap:wrap; gap:8px; width:100%; }
-    .lp-upload-card .cfg-pill{ border:1.5px solid var(--lp-line); background:#fff; color:var(--lp-slate); padding:7px 15px; border-radius:999px; font-size:.85rem; font-weight:600; cursor:pointer; transition:.15s; }
-    .lp-upload-card .cfg-pill:hover{ border-color:#c7d2fe; color:var(--lp-indigo-d); }
-    .lp-upload-card .cfg-pill.is-active{ border-color:transparent; background:var(--lp-grad); color:#fff; box-shadow:0 8px 18px -10px rgba(99,102,241,.7); }
-    .lp-upload-card .cfg-hidden-control{ position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); border:0; }
-    .lp-upload-card .cfg-exp-extra{ width:100%; }
-    .lp-upload-card .cfg-exp-extra .form-control{ max-width:220px; }
-    .lp-upload-card .cfg-exp-note{ font-size:.78rem; }
-
-    @media (max-width:600px){
-      .lp-upload-card .cfg-row--wrap{ flex-direction:column; align-items:stretch; gap:10px; }
-      .lp-upload-card .cfg-row--wrap .cfg-row-right--full{ margin-left:0; justify-content:flex-start; }
-      .lp-upload-card .cfg-row:not(.cfg-row--wrap){ padding:10px 12px; gap:8px; }
-      .lp-upload-card .cfg-row:not(.cfg-row--wrap) .cfg-ico{ width:30px; height:30px; font-size:.82rem; }
-      .lp-upload-card .cfg-row:not(.cfg-row--wrap) .cfg-name{ font-size:.9rem; }
-      .lp-upload-card .cfg-hint{ font-size:.74rem; }
-      .lp-upload-card .cfg-input-num{ width:88px; max-width:88px; flex:0 0 88px; font-size:.95rem; }
-    }
-
-    /* Buttons */
-    .lp-upload-card .btn-primary{ background:var(--lp-grad) !important; border:none !important; border-radius:12px !important; font-weight:700; padding:.72rem 1rem; box-shadow:0 10px 24px -12px rgba(99,102,241,.8); }
-    .lp-upload-card .btn-primary:hover{ filter:brightness(1.05); }
-    .lp-upload-card .btn-primary:disabled{ background:#cbd5e1 !important; box-shadow:none; opacity:1; }
-    .lp-upload-card .btn-success{ background:#10b981 !important; border:none !important; border-radius:12px !important; font-weight:700; }
-    .lp-upload-card .btn-outline-secondary{ border-radius:12px !important; font-weight:600; }
-
-    /* Results */
-    .lp-upload-card .success-icon-container{ width:66px; height:66px; border-radius:50%; background:#dcfce7; display:grid; place-items:center; margin:0 auto 12px; }
-    .lp-upload-card .success-icon{ color:#16a34a; font-size:2rem; }
-    .lp-upload-card .success-title{ font-size:1.5rem; font-weight:800; }
-    .lp-upload-card .success-subtitle{ color:var(--lp-slate); }
-    .lp-upload-card .stat-card-enhanced{ background:#fff !important; border:1px solid var(--lp-line) !important; border-radius:14px !important; padding:14px !important; display:flex; align-items:center; gap:.7rem; box-shadow:none !important; }
-    .lp-upload-card .stat-icon{ width:42px; height:42px; border-radius:12px; background:#eef2ff; color:var(--lp-indigo-d); display:grid; place-items:center; flex:none; }
-    .lp-upload-card .stat-number{ font-size:1.4rem; font-weight:800; color:var(--lp-ink); line-height:1; }
-    .lp-upload-card .stat-label{ font-size:.78rem; color:var(--lp-muted); }
-    .lp-upload-card .result-card{ background:#fff !important; border:1px solid var(--lp-line) !important; border-radius:16px !important; box-shadow:none !important; }
-    .lp-upload-card .result-card-header{ border-bottom:1px solid var(--lp-line); padding:.9rem 1.1rem; }
-    .lp-upload-card .qr-container-enhanced{ background:#fff; border:1px solid var(--lp-line); border-radius:14px; padding:14px; display:inline-block; }
-
-    @media (max-width:768px){
-      .lp-upload-card .preset-grid{ grid-template-columns:1fr; }
-      .lp-upload-card .security-control-grid{ grid-template-columns:1fr; }
-      .lp-upload-card .config-clean-row{ grid-template-columns:1fr; }
-      .lp-upload-card .config-clean-layout{ grid-template-columns:1fr; }
-      .lp-upload-card .config-summary-grid{ grid-template-columns:1fr 1fr; }
-      .lp-upload-card .generate-side-panel{ position:static; }
-      .lp-upload-card .section-title{ font-size:1.25rem; }
-    }
-
-    /* ═══ Professional polish pass ═══ */
-    :root{
-      --lp-cyan:#0ea5e9;
-      --lp-emerald:#10b981;
-      --lp-amber:#f59e0b;
-      --lp-soft-shadow:0 18px 48px -30px rgba(15,23,42,.42);
-    }
-    body.lp-body{
-      background:
-        radial-gradient(920px 520px at 12% -10%, rgba(14,165,233,.12), transparent 62%),
-        radial-gradient(860px 540px at 88% 6%, rgba(99,102,241,.14), transparent 60%),
-        linear-gradient(180deg,#f8fafc 0%,#eef3fb 44%,#f8fafc 100%);
-    }
-    .lp-nav{
-      background:rgba(255,255,255,.9);
-      border-bottom:1px solid rgba(148,163,184,.22);
-      box-shadow:0 10px 34px -30px rgba(15,23,42,.45);
-      z-index:5000;
-      overflow:visible;
-    }
-    .lp-nav-inner{ height:74px; }
-    .lp-nav .lp-links{ display:none !important; }
-    .lp-actions{ margin-left:auto; }
-    .lp-actions .language-selector,
-    .lp-actions .language-selector .dropdown{
-      position:relative;
-      z-index:5100;
-    }
-    .lp-actions .language-selector .dropdown-menu{
-      z-index:5200 !important;
-      background:rgba(255,255,255,.98) !important;
-      opacity:1 !important;
-      pointer-events:auto !important;
-    }
-    .lp-language-floating-menu{
-      position:fixed !important;
-      z-index:2147483647 !important;
-      display:none;
-      min-width:176px !important;
-      padding:6px !important;
-      border-radius:14px !important;
-      border:1px solid rgba(226,232,240,.96) !important;
-      background:#fff !important;
-      box-shadow:0 22px 54px -18px rgba(15,23,42,.38) !important;
-      opacity:1 !important;
-      pointer-events:auto !important;
-      transform:none !important;
-    }
-    .lp-language-floating-menu.show{
-      display:block !important;
-    }
-    .lp-language-floating-menu .dropdown-item{
-      display:flex !important;
-      align-items:center !important;
-      gap:10px !important;
-      padding:9px 12px !important;
-      border-radius:10px !important;
-      font-size:.9rem !important;
-      font-weight:600 !important;
-      color:var(--lp-slate) !important;
-    }
-    .lp-language-floating-menu .dropdown-item:hover{
-      background:#eef2ff !important;
-      color:var(--lp-indigo-d) !important;
-    }
-    .lp-actions .btn-light,
-    .lp-actions .btn-outline-light.lp-lang-btn{
-      border:1px solid rgba(226,232,240,.92) !important;
-      background:#fff;
-      box-shadow:none;
-    }
-    .lp-hero{
-      isolation:isolate;
-      z-index:0;
-      padding:68px 0 34px;
-      background:
-        linear-gradient(115deg,rgba(255,255,255,.92),rgba(239,246,255,.7) 52%,rgba(245,243,255,.82)),
-        radial-gradient(700px 360px at 50% 0%, rgba(99,102,241,.14), transparent 70%);
-      border-bottom:1px solid rgba(226,232,240,.7);
-    }
-    body.lp-body:has(.language-selector .dropdown-menu.show) .lp-hero{
-      pointer-events:none;
-    }
-    .lp-hero::before,
-    .lp-hero::after{
-      content:"";
-      position:absolute;
-      z-index:-1;
-      pointer-events:none;
-    }
-    .lp-hero::before{
-      inset:18px 22px auto;
-      height:1px;
-      background:linear-gradient(90deg,transparent,rgba(99,102,241,.24),transparent);
-    }
-    .lp-hero::after{
-      width:520px;
-      height:520px;
-      right:4%;
-      top:-250px;
-      border-radius:999px;
-      background:radial-gradient(circle,rgba(14,165,233,.16),transparent 66%);
-    }
-    .lp-hero-center{ max-width:58rem; }
-    .lp-eyebrow{
-      margin-bottom:1.15rem;
-      background:#fff;
-      color:#4338ca;
-      border:1px solid rgba(99,102,241,.16);
-      box-shadow:0 12px 28px -24px rgba(79,70,229,.8);
-    }
-    .lp-hero-title{
-      max-width:16ch;
-      margin-left:auto;
-      margin-right:auto;
-      font-size:clamp(2.65rem,6.6vw,5.05rem);
-      line-height:.98;
-      letter-spacing:-.055em;
-    }
-    .lp-accent{
-      background:linear-gradient(135deg,#4f46e5 0%,#0ea5e9 100%);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-    .lp-hero-sub{
-      max-width:42rem;
-      font-size:clamp(1.02rem,1.7vw,1.22rem);
-      color:#475569;
-    }
-    .lp-hero-actions-main{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:.85rem;
-      margin:1.55rem 0 1.2rem;
-    }
-    .lp-hero-actions-main .lp-btn{
-      min-height:46px;
-      border-radius:14px;
-      padding:.92rem 1.25rem;
-    }
-    .lp-hero-actions-main .lp-btn-ghost{
-      background:rgba(255,255,255,.86);
-      border-color:rgba(148,163,184,.28);
-    }
-    .lp-hero-tags{ justify-content:center; gap:.58rem .8rem; }
-    .lp-tag{
-      padding:.42rem .7rem;
-      border-radius:999px;
-      background:rgba(255,255,255,.72);
-      border:1px solid rgba(226,232,240,.9);
-      color:#475569;
-      box-shadow:0 10px 24px -22px rgba(15,23,42,.5);
-    }
-    .lp-hero-proof{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:1px;
-      width:min(720px,100%);
-      margin:1.45rem auto 0;
-      overflow:hidden;
-      border:1px solid rgba(226,232,240,.9);
-      border-radius:18px;
-      background:rgba(226,232,240,.85);
-      box-shadow:var(--lp-soft-shadow);
-    }
-    .lp-hero-proof div{
-      padding:1rem .9rem;
-      background:rgba(255,255,255,.82);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:.15rem;
-    }
-    .lp-hero-proof strong{
-      color:#0f172a;
-      font-size:1.35rem;
-      line-height:1;
-      letter-spacing:-.03em;
-    }
-    .lp-hero-proof span{
-      color:#64748b;
-      font-size:.8rem;
-      font-weight:650;
-      text-align:center;
-    }
-    .lp-upload-band{
-      padding:26px 0 62px;
-    }
-    .lp-upload-card{
-      padding:14px;
-      border-color:rgba(148,163,184,.22);
-      background:
-        linear-gradient(180deg,rgba(255,255,255,.98),rgba(248,250,252,.96));
-      box-shadow:0 28px 80px -54px rgba(15,23,42,.6);
-    }
-    .lp-upload-card .flow-nav-inner{
-      padding:.45rem;
-      border:1px solid rgba(226,232,240,.9);
-      border-radius:999px;
-      background:rgba(248,250,252,.78);
-      box-shadow:none;
-    }
-    .lp-upload-card .flow-step{
-      min-height:42px;
-      border-color:transparent;
-      background:transparent;
-    }
-    .lp-upload-card .flow-step.is-current,
-    .lp-upload-card .flow-step.is-done{
-      background:#fff;
-      box-shadow:0 12px 24px -22px rgba(15,23,42,.5);
-    }
-    .lp-upload-card .main-upload-section,
-    .lp-upload-card .config-section{
-      padding:2px !important;
-    }
-    .lp-upload-card .upload-area{
-      position:relative;
-      min-height:292px;
-      border-color:rgba(99,102,241,.32) !important;
-      background:
-        radial-gradient(circle at 22% 18%, rgba(14,165,233,.12), transparent 36%),
-        radial-gradient(circle at 84% 12%, rgba(99,102,241,.13), transparent 38%),
-        linear-gradient(180deg,#f8fbff,#fff) !important;
-    }
-    .lp-upload-card .upload-area::before{
-      border-color:rgba(255,255,255,.92);
-      background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(255,255,255,.56));
-    }
-    .lp-upload-card .upload-area:hover{
-      transform:translateY(-2px);
-      box-shadow:0 20px 46px -38px rgba(79,70,229,.8) !important;
-    }
-    .lp-upload-card .upload-orb{
-      width:84px;
-      height:84px;
-      border-radius:24px;
-      background:linear-gradient(135deg,#4f46e5 0%,#0ea5e9 100%);
-      box-shadow:0 18px 42px -22px rgba(79,70,229,.9);
-    }
-    .lp-upload-card .upload-text{
-      font-size:clamp(1.18rem,2.3vw,1.55rem);
-      letter-spacing:-.025em;
-    }
-    .lp-upload-card #uploadStatus{
-      border:1px solid rgba(99,102,241,.12) !important;
-      background:linear-gradient(135deg,#eef2ff,#f0f9ff) !important;
-    }
-    .lp-upload-card .preset-panel,
-    .lp-upload-card .cfg-row,
-    .lp-upload-card .generate-side-panel,
-    .lp-upload-card .result-card,
-    .lp-feat,
-    .lp-tool{
-      border-color:rgba(148,163,184,.2);
-      box-shadow:0 14px 34px -30px rgba(15,23,42,.52);
-    }
-    .lp-upload-card .preset-card,
-    .lp-upload-card .config-summary-card{
-      border-color:rgba(148,163,184,.22);
-    }
-    .lp-upload-card .preset-card.is-active{
-      background:linear-gradient(180deg,#eef2ff,#fff);
-    }
-    .lp-upload-card .generate-side-panel{
-      background:
-        radial-gradient(circle at 90% 4%, rgba(14,165,233,.12), transparent 38%),
-        linear-gradient(180deg,#f5f7ff,#fff);
-      top:88px;
-    }
-    .lp-upload-card .btn-primary{
-      min-height:46px;
-      background:linear-gradient(135deg,#4f46e5,#0ea5e9) !important;
-    }
-    .lp-strip{
-      margin:0 auto;
-      border-color:rgba(148,163,184,.2);
-      box-shadow:0 18px 48px -34px rgba(15,23,42,.42);
-    }
-    .lp-section{ padding:80px 0; }
-    .lp-tools-sec{
-      background:linear-gradient(180deg,#fff,#f8fafc);
-      border-top:1px solid rgba(226,232,240,.72);
-      border-bottom:1px solid rgba(226,232,240,.72);
-    }
-    .lp-feat,
-    .lp-tool{
-      background:rgba(255,255,255,.92);
-    }
-    @media (max-width:992px){
-      .lp-links{ display:none; }
-      .lp-toggle{ display:inline-grid; place-items:center; }
-      .lp-upload-card .flow-nav-inner{ border-radius:22px; }
-    }
-    @media (max-width:768px){
-      .lp-nav-inner{ height:66px; }
-      .lp-hero{ padding:42px 0 24px; }
-      .lp-hero-title{
-        max-width:12ch;
-        font-size:clamp(2.35rem,12vw,3.5rem);
-      }
-      .lp-hero-actions-main{
-        flex-direction:column;
-        align-items:stretch;
-      }
-      .lp-hero-actions-main .lp-btn{
-        justify-content:center;
-        width:100%;
-      }
-      .lp-hero-tags{ gap:.48rem; }
-      .lp-tag{ font-size:.8rem; }
-      .lp-hero-proof{
-        grid-template-columns:1fr;
-        border-radius:16px;
-      }
-      .lp-upload-band{ padding:18px 0 44px; }
-      .lp-upload-card{ padding:8px; border-radius:18px; }
-      .lp-upload-card .flow-nav-inner{
-        display:grid;
-        grid-template-columns:1fr;
-        border-radius:16px;
-      }
-      .lp-upload-card .flow-step{
-        justify-content:flex-start;
-        border-radius:14px;
-      }
-      .lp-upload-card .upload-area{
-        min-height:246px;
-        padding:28px 14px !important;
-      }
-      .lp-upload-card .upload-subtext{
-        display:block;
-        max-width:100%;
-        overflow:visible;
-        -webkit-line-clamp:unset;
-      }
-      .lp-upload-card .cfg-row:not(.cfg-row--wrap){
-        display:grid;
-        grid-template-columns:1fr;
-      }
-      .lp-upload-card .cfg-row-right{
-        width:100%;
-        margin-left:0;
-        justify-content:flex-start;
-      }
-      .lp-upload-card .cfg-input-num{
-        width:min(140px,55vw);
-        max-width:140px;
-        flex-basis:140px;
-      }
-      .lp-strip{
-        grid-template-columns:1fr;
-        padding:18px;
-      }
-    }
-  </style>
+  
+  <!-- Internationalization -->
+  <script src="trans.js?v=2026031051"></script>
 </head>
 
-<body class="maiimg-workspace lp-body">
-<span id="top"></span>
-
-<!-- ════════════ LANDING NAV ════════════ -->
-<header class="lp-nav">
-  <div class="lp-wrap lp-nav-inner">
-    <a class="lp-brand" href="#top">
-      <span class="lp-logo"><i class="fas fa-qrcode"></i></span>
-      <span class="lp-brand-text">
-        <span class="lp-brand-name">Maiimg</span>
-        <span class="lp-brand-sub">麦瓜QR</span>
-      </span>
-    </a>
-
-    <nav class="lp-links">
-      <a href="#top" class="active">Home</a>
-      <a href="#uploadBand">Upload</a>
-      <a href="#features">Features</a>
-      <a href="#tools">QR Tools</a>
-      <a href="blog/">Blog</a>
-    </nav>
-
-    <div class="lp-actions">
-      <!-- Desktop User/Auth + Language (reused, all original IDs preserved) -->
+<body class="index-refined">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#hero">
+        <i class="fas fa-images me-2"></i><span data-translate="nav.title">Maiimg Hosting</span>
+      </a>
+      
+      <!-- Desktop User/Auth + Language -->
       <div class="nav-actions-desktop d-none d-md-flex align-items-center gap-2">
         <div id="userInfo" class="small d-none user-pill"></div>
         <a href="dashboard.html" class="btn btn-light btn-sm d-none" id="dashboardBtn">
           <i class="fas fa-th-large me-1"></i><span data-translate="dash.title">My Galleries</span>
         </a>
-        <button type="button" class="btn btn-light btn-sm" id="loginBtn">
+        <button type="button" class="btn btn-light btn-sm" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal">
           <i class="fas fa-sign-in-alt me-1"></i><span data-translate="auth.login">Login</span>
         </button>
         <button type="button" class="btn btn-light btn-sm d-none" id="logoutBtn">
@@ -1612,9 +427,9 @@
 
         <div class="language-selector">
           <div class="dropdown">
-            <button class="btn btn-outline-light btn-sm dropdown-toggle lp-lang-btn" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <span id="currentLanguageFlag">🇺🇸</span>
-              <span id="currentLanguageName">English</span>
+              <span id="currentLanguageName" data-translate="language.english">English</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
               <li><a class="dropdown-item" href="#" onclick="changeLanguage('en'); return false;"><span class="flag-icon">🇺🇸</span><span data-translate="language.english">English</span></a></li>
@@ -1628,10 +443,9 @@
             </ul>
           </div>
         </div>
-
       </div>
 
-      <!-- Mobile User Menu (reused, all original IDs preserved) -->
+      <!-- Mobile User Menu -->
       <div class="nav-actions-mobile dropdown d-md-none">
         <button class="btn btn-light mobile-user-trigger" type="button" id="mobileUserMenuBtn" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open user menu">
           <i class="fas fa-user-circle"></i>
@@ -1641,7 +455,7 @@
         <ul class="dropdown-menu dropdown-menu-end mobile-user-menu" aria-labelledby="mobileUserMenuBtn">
           <li><h6 class="dropdown-header" id="mobileUserEmail">Guest</h6></li>
           <li><a href="dashboard.html" class="dropdown-item d-none" id="mobileDashboardBtn"><i class="fas fa-th-large me-2"></i><span data-translate="dash.title">My Galleries</span></a></li>
-          <li><button type="button" class="dropdown-item" id="mobileLoginBtn"><i class="fas fa-sign-in-alt me-2"></i><span data-translate="auth.login">Login</span></button></li>
+          <li><button type="button" class="dropdown-item" id="mobileLoginBtn" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt me-2"></i><span data-translate="auth.login">Login</span></button></li>
           <li><button type="button" class="dropdown-item d-none" id="mobileLogoutBtn"><i class="fas fa-sign-out-alt me-2"></i><span data-translate="auth.logout">Logout</span></button></li>
           <li><hr class="dropdown-divider"></li>
           <li><span class="dropdown-item-text mobile-lang-title">Language</span></li>
@@ -1655,56 +469,23 @@
           <li><a class="dropdown-item" href="#" onclick="changeLanguage('it'); return false;">🇮🇹 Italiano</a></li>
         </ul>
       </div>
-
-      <button type="button" class="lp-toggle d-md-none" id="lpNavToggle" aria-label="Menu" onclick="document.getElementById('lpMobileMenu').classList.toggle('open')"><i class="fas fa-bars"></i></button>
     </div>
-  </div>
+  </nav>
 
-  <div class="lp-mobile" id="lpMobileMenu">
-    <a href="#top">Home</a>
-    <a href="#uploadBand">Upload</a>
-    <a href="#features">Features</a>
-    <a href="#tools">QR Tools</a>
-    <a href="blog/">Blog</a>
-  </div>
-</header>
-
-
-<!-- ════════════ HERO (compact) ════════════ -->
-<section class="lp-hero lp-hero-compact">
-  <div class="lp-wrap">
-    <div class="lp-hero-center">
-      <span class="lp-eyebrow"><i class="fas fa-bolt"></i> <span data-translate="landing.hero.eyebrow">Simple. Secure. Share Anywhere.</span></span>
-      <h1 class="lp-hero-title"><span data-translate="landing.hero.titleLead">Share Images &amp; Short Videos with </span><span class="lp-accent" data-translate="landing.hero.titleAccent">QR Codes</span></h1>
-      <p class="lp-hero-sub" data-translate="landing.hero.subtitle">Drop your files below — get a shareable link and QR code in seconds, with access control and scan analytics.</p>
-      <div class="lp-hero-actions-main">
-        <button type="button" class="lp-btn lp-btn-primary" onclick="document.getElementById('uploadBand').scrollIntoView({behavior:'smooth'})">
-          <i class="fas fa-cloud-arrow-up"></i> <span data-translate="landing.hero.startButton">Start Uploading</span>
-        </button>
-        <a class="lp-btn lp-btn-ghost" href="dashboard.html">
-          <i class="fas fa-table-cells-large"></i> <span data-translate="landing.hero.viewGalleries">View Galleries</span>
-        </a>
-      </div>
-      <div class="lp-hero-tags">
-        <span class="lp-tag"><i class="fas fa-check-circle"></i> <span data-translate="landing.hero.tagFast">Fast &amp; Easy</span></span>
-        <span class="lp-tag"><i class="fas fa-check-circle"></i> <span data-translate="landing.hero.tagSecure">Secure Sharing</span></span>
-        <span class="lp-tag"><i class="fas fa-check-circle"></i> <span data-translate="landing.hero.tagControl">Access Control</span></span>
-        <span class="lp-tag"><i class="fas fa-check-circle"></i> <span data-translate="landing.hero.tagAnalytics">Scan Analytics</span></span>
-      </div>
-      <div class="lp-hero-proof" aria-label="Maiimg sharing highlights">
-        <div><strong>25</strong><span data-translate="landing.hero.proofFiles">files per gallery</span></div>
-        <div><strong>100MB</strong><span data-translate="landing.hero.proofVideo">short video support</span></div>
-        <div><strong>QR</strong><span data-translate="landing.hero.proofQr">link + scan ready</span></div>
-      </div>
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="container">
+      <h1 class="hero-title">
+        <i class="fas fa-cloud-upload-alt"></i><br>
+        <span data-translate="hero.title">Upload Images & Short Videos</span>
+      </h1>
+      <p class="hero-subtitle" data-translate="hero.subtitle">
+        Turn your photos and short videos into shareable QR links with tracking and access controls
+      </p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ════════════ UPLOAD WORKSPACE (front & center) ════════════ -->
-<section class="lp-upload-band" id="uploadBand">
-  <div class="lp-wrap">
-    <div class="lp-upload-card">
-      <div class="container maiimg-shell">
+  <div class="container">
     <section class="flow-nav" id="flowNavigator" aria-label="Upload steps">
       <div class="flow-nav-inner">
         <button type="button" class="flow-step is-current" data-step="1">
@@ -1730,7 +511,22 @@
           <span data-translate="flow.step1">Upload Media</span>
         </div>
         <h2 class="section-title" data-translate="upload.title">Media Upload Center</h2>
-        <p class="section-subtitle" data-translate="upload.ready">Ready to upload images and short videos</p>
+        
+        <!-- Feature Badges -->
+        <div class="feature-badges">
+          <span class="badge badge-secure">
+            <i class="fas fa-shield-alt"></i>
+            <span data-translate="badges.secure">Secure</span>
+          </span>
+          <span class="badge badge-fast">
+            <i class="fas fa-bolt"></i>
+            <span data-translate="badges.fast">Fast</span>
+          </span>
+          <span class="badge badge-free">
+            <i class="fas fa-gift"></i>
+            <span data-translate="badges.free">Free</span>
+          </span>
+        </div>
       </div>
 
       <!-- Upload Zone -->
@@ -1763,160 +559,120 @@
     </section>
 
     <!-- Configuration Section -->
-    <section class="config-section config-variant-b config-clean" id="config">
-      <div id="adsense-exclude-config-b" class="adsense-excluded-zone">
-
-        <!-- Step 2a: Quick Presets -->
-        <div class="preset-panel mb-4">
-          <span class="config-panel-eyebrow">
-            <i class="fas fa-sliders-h"></i>
-            <span data-translate="features.presets.eyebrow">Quick presets</span>
-          </span>
-          <h3 class="preset-panel-title" data-translate="features.presets.title">Pick a sharing mode</h3>
-          <p class="preset-panel-copy" data-translate="features.presets.description">Start with a recommended setup, then fine-tune the limits below.</p>
-
-          <div class="preset-grid">
-            <button type="button" class="preset-card" data-preset="public">
-              <span class="preset-card-title" data-translate="features.presets.public.title">Open share</span>
-              <span class="preset-card-copy" data-translate="features.presets.public.copy">Almost unrestricted sharing for easy access.</span>
-            </button>
-            <button type="button" class="preset-card" data-preset="temporary">
-              <span class="preset-card-title">
-                <span data-translate="features.presets.temporary.title">Temporary</span>
-                <span class="preset-card-badge" data-translate="features.presets.recommended">Recommended</span>
+    <section class="config-section config-variant-a" id="config">
+      <div id="adsense-exclude-config-a" class="adsense-excluded-zone">
+        <div class="feature-cards">
+          <div class="feature-card">
+            <div class="feature-card-head">
+              <span class="feature-icon-badge">
+                <i class="fas fa-shield-alt feature-icon"></i>
               </span>
-              <span class="preset-card-copy" data-translate="features.presets.temporary.copy">Short-term sharing that expires automatically.</span>
-            </button>
-            <button type="button" class="preset-card" data-preset="strict">
-              <span class="preset-card-title" data-translate="features.presets.strict.title">Strict</span>
-              <span class="preset-card-copy" data-translate="features.presets.strict.copy">Few views, short sessions, and fast expiration.</span>
-            </button>
+              <div>
+                <h5 class="feature-title" data-translate="features.accessControl.title">Access Control</h5>
+                <p class="feature-copy" data-translate="features.accessControl.description">Set both view limit and per-view duration in one panel</p>
+              </div>
+            </div>
+
+            <div class="feature-field">
+              <label class="config-label" for="limit" data-translate="features.viewLimit.title">View Limit</label>
+              <div class="input-with-unit">
+                <input class="form-control" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="Max views (required)" min="1" max="99999999" required>
+                <span class="input-unit" data-translate="features.viewLimit.unit">views</span>
+              </div>
+            </div>
+
+            <div class="feature-field">
+              <label class="config-label" for="password" data-translate="features.timeControl.title">Time Control</label>
+              <div class="input-with-unit">
+                <input class="form-control" type="number" id="password" data-translate-placeholder="features.timeControl.placeholder" placeholder="Seconds per view (required)" min="1" max="99999999" required>
+                <span class="input-unit" data-translate="features.timeControl.unit">sec</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-head">
+              <span class="feature-icon-badge">
+                <i class="fas fa-hourglass-half feature-icon"></i>
+              </span>
+              <div>
+                <h5 class="feature-title" data-translate="features.expiration.title">Expiration</h5>
+                <p class="feature-copy" data-translate="features.expiration.description">Choose how long the gallery stays available.</p>
+              </div>
+            </div>
+
+            <div class="feature-field">
+              <label class="config-label" for="expiration_preset" data-translate="features.expiration.select">Select expiration</label>
+              <select class="form-select" id="expiration_preset" aria-label="Expiration preset">
+                <option value="" selected data-translate="features.expiration.select">Select expiration</option>
+                <option value="1h" data-translate="features.expiration.option1h">1 hour</option>
+                <option value="3h" data-translate="features.expiration.option3h">3 hours</option>
+                <option value="24h" data-translate="features.expiration.option24h">24 hours</option>
+                <option value="5d" data-translate="features.expiration.option5d">5 days</option>
+                <option value="custom" data-translate="features.expiration.custom">Custom days</option>
+                <option value="unlimited" data-translate="features.expiration.unlimited">Unlimited</option>
+              </select>
+            </div>
+
+            <div class="feature-field">
+              <input class="form-control" type="number" id="expiration_custom_days" min="1" step="1" data-translate-placeholder="features.expiration.customPlaceholder" placeholder="Custom days" style="display:none;">
+              <input type="hidden" id="expiration_day" value="">
+              <input type="hidden" id="expiration_ts" value="">
+              <small class="text-muted d-block mb-1" id="expiration_result" style="display:none;" data-translate="features.expiration.utcNone">UTC expiry time: -</small>
+              <div id="timezone_row" style="display:none;">
+                <select class="form-select form-select-sm mb-2" id="timezone_tz" aria-label="Time zone"></select>
+              </div>
+              <small class="text-muted d-block" id="expiration_local" style="display:none;" data-translate="features.expiration.localNone">Local time: -</small>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-card-head">
+              <span class="feature-icon-badge">
+                <i class="fas fa-tag feature-icon"></i>
+              </span>
+              <div>
+                <h5 class="feature-title" data-translate="features.description.title">Description</h5>
+                <p class="feature-copy" data-translate="features.description.description">Enter gallery description</p>
+              </div>
+            </div>
+
+            <div class="feature-field">
+              <label class="config-label" for="caption" data-translate="features.description.title">Description</label>
+              <input class="form-control" type="text" id="caption" data-translate-placeholder="features.description.placeholder" placeholder="Add a description (required)" maxlength="100" required>
+            </div>
+
+            <div class="feature-field">
+              <div class="config-summary-grid">
+                <div class="config-summary-card">
+                  <span class="summary-label" data-translate="features.viewLimit.title">View Limit</span>
+                  <span class="summary-value" id="summaryLimitValue">-</span>
+                </div>
+                <div class="config-summary-card">
+                  <span class="summary-label" data-translate="features.timeControl.title">Time Control</span>
+                  <span class="summary-value" id="summaryDurationValue">-</span>
+                </div>
+                <div class="config-summary-card">
+                  <span class="summary-label" data-translate="features.expiration.title">Expiration</span>
+                  <span class="summary-value" id="summaryExpiryValue">-</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Step 2b: All settings in a clean vertical stack -->
-        <div class="config-clean-layout">
-          <div class="config-clean-fields">
-            <div class="advanced-panel-head">
-              <h4 class="advanced-panel-title" data-translate="features.advanced.title">Advanced settings</h4>
-              <p class="advanced-panel-copy" data-translate="features.advanced.description">Adjust the details after choosing a preset.</p>
-            </div>
-
-            <div class="cfg-list">
-              <!-- View Limit -->
-              <div class="cfg-row">
-                <div class="cfg-row-left">
-                  <span class="cfg-ico"><i class="fas fa-eye"></i></span>
-                  <div class="cfg-label-block">
-                    <label class="cfg-name" for="limit" data-translate="features.viewLimit.title">Max views</label>
-                    <span class="cfg-hint" data-translate="features.viewLimit.description">How many times this link can be opened</span>
-                  </div>
-                </div>
-                <div class="cfg-row-right">
-                  <input class="form-control cfg-input-num" type="number" id="limit" data-translate-placeholder="features.viewLimit.placeholder" placeholder="25" min="1" max="99999999" required>
-                  <span class="cfg-suffix" data-translate="features.viewLimit.unit">views</span>
-                </div>
-              </div>
-
-              <!-- Time per view -->
-              <div class="cfg-row">
-                <div class="cfg-row-left">
-                  <span class="cfg-ico"><i class="fas fa-stopwatch"></i></span>
-                  <div class="cfg-label-block">
-                    <label class="cfg-name" for="password" data-translate="features.timeControl.title">Time per view</label>
-                    <span class="cfg-hint" data-translate="features.timeControl.description">How long each visitor can browse (seconds)</span>
-                  </div>
-                </div>
-                <div class="cfg-row-right">
-                  <input class="form-control cfg-input-num" type="number" id="password" data-translate-placeholder="features.timeControl.placeholder" placeholder="180" min="1" max="99999999" required>
-                  <span class="cfg-suffix" data-translate="features.timeControl.unit">sec</span>
-                </div>
-              </div>
-
-              <!-- Expiration (pill row + inline extras) -->
-              <div class="cfg-row cfg-row--wrap">
-                <div class="cfg-row-left">
-                  <span class="cfg-ico"><i class="fas fa-calendar-days"></i></span>
-                  <span class="cfg-name" data-translate="features.expiration.title">Expiration</span>
-                </div>
-                <div class="cfg-row-right cfg-row-right--full">
-                  <div class="cfg-pills" id="expirationPills">
-                    <button type="button" class="cfg-pill" data-exp="1h" data-translate="features.expiration.option1h">1 hour</button>
-                    <button type="button" class="cfg-pill" data-exp="3h" data-translate="features.expiration.option3h">3 hours</button>
-                    <button type="button" class="cfg-pill" data-exp="24h" data-translate="features.expiration.option24h">24 hours</button>
-                    <button type="button" class="cfg-pill" data-exp="5d" data-translate="features.expiration.option5d">5 days</button>
-                    <button type="button" class="cfg-pill" data-exp="custom" data-translate="features.expiration.custom">Custom days</button>
-                    <button type="button" class="cfg-pill" data-exp="unlimited" data-translate="features.expiration.unlimited">Unlimited</button>
-                  </div>
-
-                  <!-- Real control kept for existing JS (value get/set + change events) -->
-                  <select class="form-select cfg-hidden-control" id="expiration_preset" aria-label="Expiration preset" tabindex="-1" aria-hidden="true">
-                    <option value="" selected data-translate="features.expiration.select">Select expiration</option>
-                    <option value="1h" data-translate="features.expiration.option1h">1 hour</option>
-                    <option value="3h" data-translate="features.expiration.option3h">3 hours</option>
-                    <option value="24h" data-translate="features.expiration.option24h">24 hours</option>
-                    <option value="5d" data-translate="features.expiration.option5d">5 days</option>
-                    <option value="custom" data-translate="features.expiration.custom">Custom days</option>
-                    <option value="unlimited" data-translate="features.expiration.unlimited">Unlimited</option>
-                  </select>
-
-                  <div class="cfg-exp-extra">
-                    <input class="form-control" type="number" id="expiration_custom_days" min="1" step="1" data-translate-placeholder="features.expiration.customPlaceholder" placeholder="Custom days" style="display:none;">
-                    <input type="hidden" id="expiration_day" value="">
-                    <input type="hidden" id="expiration_ts" value="">
-                    <small class="text-muted cfg-exp-note" id="expiration_result" style="display:none;" data-translate="features.expiration.utcNone">UTC expiry time: -</small>
-                    <div id="timezone_row" style="display:none;">
-                      <select class="form-select form-select-sm mt-2 mb-1" id="timezone_tz" aria-label="Time zone"></select>
-                    </div>
-                    <small class="text-muted cfg-exp-note" id="expiration_local" style="display:none;" data-translate="features.expiration.localNone">Local time: -</small>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Description -->
-              <div class="cfg-row cfg-row--wrap">
-                <div class="cfg-row-left">
-                  <span class="cfg-ico"><i class="fas fa-tag"></i></span>
-                  <label class="cfg-name" for="caption" data-translate="features.description.title">Description</label>
-                </div>
-                <div class="cfg-row-right cfg-row-right--full">
-                  <input class="form-control" type="text" id="caption" data-translate-placeholder="features.description.placeholder" placeholder="Add a description (required)" maxlength="100" required>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 3: Generate panel (right side on desktop) -->
-          <aside class="generate-side-panel">
+        <div class="generate-panel">
+          <div class="generate-panel-copy">
             <h5 class="feature-title" data-translate="features.generate.title">Generate Link & QR</h5>
-            <p class="feature-copy mb-3" data-translate="features.generate.description">Create the gallery link once your media and access rules are ready.</p>
-
-            <div class="config-summary-grid mb-3">
-              <div class="config-summary-card">
-                <span class="summary-label" data-translate="features.presets.summaryLabel">Mode</span>
-                <span class="summary-value" id="summaryPresetValue">-</span>
-              </div>
-              <div class="config-summary-card">
-                <span class="summary-label" data-translate="features.viewLimit.title">View Limit</span>
-                <span class="summary-value" id="summaryLimitValue">-</span>
-              </div>
-              <div class="config-summary-card">
-                <span class="summary-label" data-translate="features.timeControl.title">Time Control</span>
-                <span class="summary-value" id="summaryDurationValue">-</span>
-              </div>
-              <div class="config-summary-card">
-                <span class="summary-label" data-translate="features.expiration.title">Expiration</span>
-                <span class="summary-value" id="summaryExpiryValue">-</span>
-              </div>
-            </div>
-
+            <p class="feature-copy" data-translate="features.generate.description">Create the gallery link once your media and access rules are ready.</p>
+          </div>
+          <div class="generate-panel-actions">
             <button type="button" class="btn btn-primary w-100" onclick="generateImageQR()" disabled id="generateBtn">
               <i class="fas fa-link me-2"></i><span data-translate="features.generate.button">Create Link & QR Code</span>
             </button>
             <small class="generate-status text-muted" id="generateBtnStatus" data-translate="features.generate.status">Fill all fields and upload media first</small>
-          </aside>
+          </div>
         </div>
-
       </div>
     </section>
 
@@ -2031,126 +787,56 @@
         </div>
       </div>
     </section>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- ════════════ SHARE STRIP ════════════ -->
-<section class="lp-wrap">
-  <div class="lp-strip">
-    <div class="lp-strip-title" data-translate="landing.strip.title">What can you share?</div>
-    <div class="lp-strip-item"><span class="lp-strip-ico ico-i1"><i class="fas fa-image"></i></span><div><h4 data-translate="landing.strip.imagesTitle">Images</h4><p data-translate="landing.strip.imagesCopy">JPG, PNG, WEBP...</p></div></div>
-    <div class="lp-strip-item"><span class="lp-strip-ico ico-i2"><i class="fas fa-film"></i></span><div><h4 data-translate="landing.strip.videosTitle">Short Videos</h4><p data-translate="landing.strip.videosCopy">MP4, MOV, WEBM...</p></div></div>
-    <div class="lp-strip-item"><span class="lp-strip-ico ico-i3"><i class="fas fa-images"></i></span><div><h4 data-translate="landing.strip.albumsTitle">Albums</h4><p data-translate="landing.strip.albumsCopy">Multiple files</p></div></div>
-    <div class="lp-strip-item"><span class="lp-strip-ico ico-i4"><i class="fas fa-shield-halved"></i></span><div><h4 data-translate="landing.strip.privateTitle">Private Sharing</h4><p data-translate="landing.strip.privateCopy">Secure &amp; Controlled</p></div></div>
-    <div class="lp-strip-item"><span class="lp-strip-ico ico-i5"><i class="fas fa-globe"></i></span><div><h4 data-translate="landing.strip.anywhereTitle">Anywhere</h4><p data-translate="landing.strip.anywhereCopy">One scan to access</p></div></div>
-  </div>
-</section>
 
-<!-- AdSense (In-page Auto) -->
-<section class="lp-wrap">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-9224406325142860"
-       data-ad-slot="7885928791"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</section>
-
-<!-- ════════════ FEATURES ════════════ -->
-<section class="lp-section" id="features">
-  <div class="lp-wrap">
-    <div class="lp-head-c">
-      <h2 data-translate="landing.features.title">Powerful Features for Easy Sharing</h2>
-      <p data-translate="landing.features.subtitle">Everything you need to share your media safely and efficiently</p>
-    </div>
-    <div class="lp-feat-grid">
-      <div class="lp-feat"><div class="lp-feat-ico fi-1"><i class="fas fa-shield-halved"></i></div><h3 data-translate="landing.features.accessTitle">Access Control</h3><p data-translate="landing.features.accessCopy">Set expiration, view limits, password protection and download permissions.</p></div>
-      <div class="lp-feat"><div class="lp-feat-ico fi-2"><i class="fas fa-chart-column"></i></div><h3 data-translate="landing.features.analyticsTitle">Scan Analytics</h3><p data-translate="landing.features.analyticsCopy">Track scan data in real time. Know when, where and how your files are accessed.</p></div>
-      <div class="lp-feat"><div class="lp-feat-ico fi-3"><i class="fas fa-bolt"></i></div><h3 data-translate="landing.features.speedTitle">High Speed &amp; Stable</h3><p data-translate="landing.features.speedCopy">Global CDN acceleration ensures fast upload and smooth access.</p></div>
-      <div class="lp-feat"><div class="lp-feat-ico fi-4"><i class="fas fa-lock"></i></div><h3 data-translate="landing.features.privateTitle">Safe &amp; Private</h3><p data-translate="landing.features.privateCopy">Your files are encrypted and stored securely. Privacy comes first.</p></div>
-      <div class="lp-feat"><div class="lp-feat-ico fi-5"><i class="fas fa-mobile-screen"></i></div><h3 data-translate="landing.features.platformTitle">Multi-platform</h3><p data-translate="landing.features.platformCopy">Access and manage your files on web, mobile and tablet.</p></div>
-      <div class="lp-feat"><div class="lp-feat-ico fi-6"><i class="fas fa-palette"></i></div><h3 data-translate="landing.features.customTitle">QR Code Customization</h3><p data-translate="landing.features.customCopy">Customize QR code style, color and logo to match your brand.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════ QR TOOLS ════════════ -->
-<section class="tools-section" id="tools">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="section-title" data-translate="tools.title">Other QR Tools</h2>
-    </div>
-
-    <div class="row g-4">
-      <div class="col-md-3 col-sm-6">
-        <div class="tool-card" data-bs-toggle="modal" data-bs-target="#wifi-modal">
-          <div class="tool-icon">
-            <i class="fas fa-wifi"></i>
+    <!-- Tools Section -->
+    <section class="tools-section" id="tools">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-title" data-translate="tools.title">Other QR Tools</h2>
+          <p class="section-subtitle" data-translate="tools.subtitle">Quick access to other QR code generators</p>
+        </div>
+        
+        <div class="row g-4">
+          <div class="col-md-3 col-sm-6">
+            <div class="tool-card" data-bs-toggle="modal" data-bs-target="#wifi-modal">
+              <div class="tool-icon">
+                <i class="fas fa-wifi"></i>
+              </div>
+              <h5 data-translate="tools.wifi">WiFi QR</h5>
+            </div>
           </div>
-          <h5 data-translate="tools.wifi">WiFi QR</h5>
+          
+          <div class="col-md-3 col-sm-6">
+            <div class="tool-card" data-bs-toggle="modal" data-bs-target="#sms-modal">
+              <div class="tool-icon">
+                <i class="fas fa-sms"></i>
+              </div>
+              <h5 data-translate="tools.sms">SMS QR</h5>
+            </div>
+          </div>
+          
+          <div class="col-md-3 col-sm-6">
+            <div class="tool-card" data-bs-toggle="modal" data-bs-target="#url-modal">
+              <div class="tool-icon">
+                <i class="fas fa-link"></i>
+              </div>
+              <h5 data-translate="tools.url">URL QR</h5>
+            </div>
+          </div>
+          
+          <div class="col-md-3 col-sm-6">
+            <div class="tool-card" data-bs-toggle="modal" data-bs-target="#phone-modal">
+              <div class="tool-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <h5 data-translate="tools.phone">Phone QR</h5>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="col-md-3 col-sm-6">
-        <div class="tool-card" data-bs-toggle="modal" data-bs-target="#sms-modal">
-          <div class="tool-icon">
-            <i class="fas fa-sms"></i>
-          </div>
-          <h5 data-translate="tools.sms">SMS QR</h5>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-sm-6">
-        <div class="tool-card" data-bs-toggle="modal" data-bs-target="#url-modal">
-          <div class="tool-icon">
-            <i class="fas fa-link"></i>
-          </div>
-          <h5 data-translate="tools.url">URL QR</h5>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-sm-6">
-        <div class="tool-card" data-bs-toggle="modal" data-bs-target="#phone-modal">
-          <div class="tool-icon">
-            <i class="fas fa-phone"></i>
-          </div>
-          <h5 data-translate="tools.phone">Phone QR</h5>
-        </div>
-      </div>
-    </div>
+    </section>
   </div>
-</section>
 
-<!-- ════════════ FOOTER ════════════ -->
-<footer class="lp-footer">
-  <div class="lp-wrap">
-    <div class="lp-footer-grid">
-      <div class="lp-footer-brandline">
-        <a class="lp-brand" href="#top">
-          <span class="lp-logo"><i class="fas fa-qrcode"></i></span>
-          <span class="lp-brand-text"><span class="lp-brand-name">Maiimg</span><span class="lp-brand-sub">麦瓜QR</span></span>
-        </a>
-        <p class="lp-footer-about" data-translate="landing.footer.about">Upload images and short videos, share them with a link and QR code, and stay in control with access limits and scan analytics.</p>
-      </div>
-      <div class="lp-footer-meta">
-        <small class="text-muted" id="footerComplianceText">Thank you</small>
-        <a class="lp-footer-email" href="mailto:joe@pdfhost.online"><i class="fas fa-envelope"></i>joe@pdfhost.online</a>
-      </div>
-    </div>
-    <div class="lp-footer-bottom">
-      <span><i class="fas fa-copyright me-1"></i>2026 MaiPDF</span>
-      <div class="lp-footer-social">
-        <a href="blog/" aria-label="Blog"><i class="fas fa-blog"></i></a>
-        <a href="https://www.maipdf.com" aria-label="Home"><i class="fas fa-home"></i></a>
-        <a href="mailto:joe@pdfhost.online" aria-label="Email"><i class="fas fa-envelope"></i></a>
-      </div>
-    </div>
-  </div>
-</footer>
   <!-- WiFi QR Code Modal -->
   <div class="modal fade" id="wifi-modal" tabindex="-1" aria-labelledby="wifiModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -2293,8 +979,9 @@
       </div>
     </div>
   </div>
+
   <!-- Auth Modal -->
-  <div class="modal fade lp-auth-modal" id="loginModal" tabindex="-1" aria-hidden="true" data-bs-focus="false">
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" style="max-width: 420px;">
       <div class="modal-content" style="border-radius: 16px; border: none;">
         <div class="modal-header border-0 pb-0">
@@ -2421,11 +1108,30 @@
       </div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-links mb-3">
+        <a href="blog/">
+          <i class="fas fa-blog me-1"></i>MaiIMG Blog
+        </a>
+        <a href="https://www.maipdf.com">
+          <i class="fas fa-home me-1"></i>MaiPDF Home
+        </a>
+      </div>
+      <p class="mb-0">
+        <i class="fas fa-copyright me-1"></i>2026 MaiPDF - 
+        <a href="mailto:joe@pdfhost.online">joe@pdfhost.online</a>
+      </p>
+      <small class="text-muted" id="footerComplianceText">Thank you</small>
+    </div>
+  </footer>
+
   <!-- Cloudflare CDN Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-  <script src="maiimg-i18n.js?v=2026060101"></script>
   
   <script>
     // Global variables for generated codes
@@ -2440,8 +1146,6 @@
     const LOGIN_NUDGE_AUTO_CLOSE_SECONDS = 7;
     const FLOW_MANUAL_HOLD_MS = 3500;
     let loginNudgeTimer = null;
-    let loginNudgeScrollY = null;
-    let loginNudgeRestoreScroll = false;
     let flowManualStep = 0;
     let flowManualUntil = 0;
 
@@ -3175,25 +1879,15 @@
       if (!shouldShowLoginNudge()) return;
       const nudgeEl = document.getElementById('loginNudgeModal');
       if (!nudgeEl) return;
-      loginNudgeScrollY = window.scrollY;
-      loginNudgeRestoreScroll = false;
       markLoginNudgeShown();
       const modal = bootstrap.Modal.getOrCreateInstance(nudgeEl);
       modal.show();
     }
 
-    function getActiveLanguage() {
-      return (window.i18n && window.i18n.currentLanguage) || currentLanguage || 'en';
-    }
-
-    function getLoginNudgeLaterText() {
-      return getTranslation('auth.loginNudgeLater', getActiveLanguage()) || 'Maybe Later';
-    }
-
     function updateLoginNudgeLaterButton(secondsLeft) {
       const btn = document.getElementById('loginNudgeLaterBtn');
       if (!btn) return;
-      const base = getLoginNudgeLaterText();
+      const base = getTranslation('auth.loginNudgeLater', currentLanguage) || 'Maybe Later';
       btn.innerHTML = `<i class="far fa-clock me-1"></i>${base} (${secondsLeft}s)`;
     }
 
@@ -3204,7 +1898,7 @@
       }
       const btn = document.getElementById('loginNudgeLaterBtn');
       if (!btn) return;
-      const base = getLoginNudgeLaterText();
+      const base = getTranslation('auth.loginNudgeLater', currentLanguage) || 'Maybe Later';
       btn.innerHTML = `<i class="far fa-clock me-1"></i>${base}`;
     }
 
@@ -3605,29 +2299,26 @@
     const SECURITY_PRESETS = {
       public: {
         limit: '99999999',
-        password: '600',
+        password: '300',
         expiration: 'unlimited',
         customDays: '',
         titleKey: 'features.presets.public.title'
       },
       temporary: {
         limit: '25',
-        password: '180',
+        password: '60',
         expiration: '24h',
         customDays: '',
         titleKey: 'features.presets.temporary.title'
       },
       strict: {
         limit: '3',
-        password: '60',
+        password: '15',
         expiration: '1h',
         customDays: '',
         titleKey: 'features.presets.strict.title'
       }
     };
-
-    // Default access settings applied on first load (balanced option).
-    const DEFAULT_SECURITY_PRESET = 'temporary';
 
     function applySecurityPreset(presetName) {
       const presetConfig = SECURITY_PRESETS[presetName];
@@ -3733,18 +2424,7 @@
         });
       });
 
-      // Start with a sensible default so the access settings are pre-filled
-      // (like maipdf), instead of an empty form. Only when nothing is set yet.
-      const hasExistingValues = !!(
-        (document.getElementById('limit')?.value || '').trim() ||
-        (document.getElementById('password')?.value || '').trim() ||
-        (document.getElementById('expiration_preset')?.value || '')
-      );
-      if (!hasExistingValues) {
-        applySecurityPreset(DEFAULT_SECURITY_PRESET);
-      } else {
-        updatePresetSelection();
-      }
+      updatePresetSelection();
     }
 
     // Update button state based on form validation and uploaded files
@@ -4407,7 +3087,6 @@
       // Smooth scrolling for navigation links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-          if (this.hasAttribute('data-bs-toggle')) return;
           e.preventDefault();
           const href = this.getAttribute('href');
           if (href && href !== '#') {
@@ -4419,55 +3098,23 @@
         });
       });
 
-      window.openAuthModal = function openAuthModal() {
-        const loginModalEl = document.getElementById('loginModal');
-        if (!loginModalEl) return;
-        const currentScrollY = window.scrollY;
-        const restoreScroll = () => {
-          window.scrollTo({ top: currentScrollY, left: 0, behavior: 'auto' });
-        };
-        loginModalEl.addEventListener('shown.bs.modal', () => {
-          restoreScroll();
-          window.requestAnimationFrame(restoreScroll);
-          [50, 150, 300].forEach((delay) => window.setTimeout(restoreScroll, delay));
-        }, { once: true });
-        bootstrap.Modal.getOrCreateInstance(loginModalEl, { focus: false }).show();
-      };
-
-      ['loginBtn', 'mobileLoginBtn'].forEach((id) => {
-        const button = document.getElementById(id);
-        if (!button) return;
-        button.addEventListener('mousedown', (event) => event.preventDefault());
-        button.addEventListener('click', window.openAuthModal);
-      });
-
       const nudgeSignInBtn = document.getElementById('loginNudgeSignInBtn');
       if (nudgeSignInBtn) {
         nudgeSignInBtn.addEventListener('click', () => {
           const nudge = bootstrap.Modal.getInstance(document.getElementById('loginNudgeModal'));
           if (nudge) nudge.hide();
-          window.openAuthModal();
-        });
-      }
-
-      const nudgeLaterBtn = document.getElementById('loginNudgeLaterBtn');
-      if (nudgeLaterBtn) {
-        nudgeLaterBtn.addEventListener('click', () => {
-          loginNudgeRestoreScroll = true;
+          const loginModalEl = document.getElementById('loginModal');
+          if (loginModalEl) {
+            const loginModal = bootstrap.Modal.getOrCreateInstance(loginModalEl);
+            loginModal.show();
+          }
         });
       }
 
       const loginNudgeModalEl = document.getElementById('loginNudgeModal');
       if (loginNudgeModalEl) {
         loginNudgeModalEl.addEventListener('shown.bs.modal', startLoginNudgeCountdown);
-        loginNudgeModalEl.addEventListener('hidden.bs.modal', () => {
-          stopLoginNudgeCountdown();
-          if (loginNudgeRestoreScroll && Number.isFinite(loginNudgeScrollY)) {
-            window.scrollTo({ top: loginNudgeScrollY, left: 0, behavior: 'auto' });
-          }
-          loginNudgeRestoreScroll = false;
-          loginNudgeScrollY = null;
-        });
+        loginNudgeModalEl.addEventListener('hidden.bs.modal', stopLoginNudgeCountdown);
       }
     });
   </script>
@@ -4740,94 +3387,14 @@
     });
   </script>
 
-  <!-- Expiration pill row <-> hidden <select> sync (keeps existing JS intact) -->
+  <!-- AdSense (Auto Relaxed) -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-format="autorelaxed"
+       data-ad-client="ca-pub-9224406325142860"
+       data-ad-slot="7885928791"></ins>
   <script>
-    (function () {
-      const sel = document.getElementById('expiration_preset');
-      const pills = Array.prototype.slice.call(document.querySelectorAll('#expirationPills .cfg-pill'));
-      if (!sel || !pills.length) return;
-      function syncPills() {
-        const v = sel.value;
-        pills.forEach((p) => p.classList.toggle('is-active', p.dataset.exp === v));
-      }
-      pills.forEach((p) => {
-        p.addEventListener('click', () => {
-          sel.value = p.dataset.exp;
-          sel.dispatchEvent(new Event('change', { bubbles: true }));
-          syncPills();
-        });
-      });
-      sel.addEventListener('change', syncPills);
-      syncPills();
-    })();
-  </script>
-  <script>
-    (function () {
-      const button = document.getElementById('languageDropdown');
-      const menu = document.querySelector('.language-selector .dropdown-menu');
-      if (!button || !menu) return;
-
-      menu.classList.add('lp-language-floating-menu');
-      document.body.appendChild(menu);
-
-      function placeMenu() {
-        const rect = button.getBoundingClientRect();
-        const menuWidth = Math.max(menu.offsetWidth || 176, 176);
-        const left = Math.max(12, Math.min(window.innerWidth - menuWidth - 12, rect.right - menuWidth));
-        menu.style.setProperty('top', `${Math.round(rect.bottom + 10)}px`, 'important');
-        menu.style.setProperty('left', `${Math.round(left)}px`, 'important');
-        menu.style.setProperty('right', 'auto', 'important');
-        menu.style.setProperty('bottom', 'auto', 'important');
-      }
-
-      function hideMenu() {
-        menu.classList.remove('show');
-        button.setAttribute('aria-expanded', 'false');
-      }
-
-      function showMenu() {
-        placeMenu();
-        menu.classList.add('show');
-        button.setAttribute('aria-expanded', 'true');
-      }
-
-      button.addEventListener('click', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        if (menu.classList.contains('show')) {
-          hideMenu();
-        } else {
-          showMenu();
-        }
-      }, true);
-
-      menu.addEventListener('click', function (event) {
-        const item = event.target.closest('.dropdown-item');
-        if (!item) return;
-        event.preventDefault();
-        event.stopPropagation();
-        const match = (item.getAttribute('onclick') || '').match(/changeLanguage\('([^']+)'\)/);
-        if (match && typeof window.changeLanguage === 'function') {
-          window.changeLanguage(match[1]);
-        }
-        hideMenu();
-      }, true);
-
-      document.addEventListener('click', function (event) {
-        if (!menu.contains(event.target) && event.target !== button && !button.contains(event.target)) {
-          hideMenu();
-        }
-      });
-
-      window.addEventListener('resize', function () {
-        if (menu.classList.contains('show')) placeMenu();
-      });
-
-      window.addEventListener('scroll', function () {
-        if (menu.classList.contains('show')) placeMenu();
-      }, { passive: true });
-    })();
+       (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </body>
 </html>
-
