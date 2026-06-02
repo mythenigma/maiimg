@@ -764,8 +764,10 @@
       backdrop-filter:saturate(180%) blur(14px); border-bottom:1px solid var(--lp-line); }
     .lp-nav-inner{ display:flex; align-items:center; justify-content:space-between; height:70px; gap:1rem; }
     .lp-links{ display:flex; align-items:center; gap:1.6rem; }
-    .lp-links a{ color:var(--lp-slate); text-decoration:none; font-weight:600; font-size:.95rem; transition:color .15s; }
-    .lp-links a:hover, .lp-links a.active{ color:var(--lp-indigo-d); }
+    .lp-links a,
+    .lp-links button{ color:var(--lp-slate); text-decoration:none; font-weight:600; font-size:.95rem; transition:color .15s; background:none; border:0; padding:0; cursor:pointer; font:inherit; }
+    .lp-links a:hover, .lp-links a.active,
+    .lp-links button:hover, .lp-links button.active{ color:var(--lp-indigo-d); }
     .lp-actions{ display:flex; align-items:center; gap:.6rem; }
     .lp-actions .btn-light{ background:#eef2ff; color:var(--lp-indigo-d); border:none; font-weight:600; }
     .lp-actions .btn-light:hover{ background:#e0e7ff; }
@@ -783,7 +785,8 @@
       border-radius:10px; font-size:1.1rem; cursor:pointer; }
     .lp-mobile{ display:none; flex-direction:column; padding:.4rem 22px 1rem; gap:.2rem; border-top:1px solid var(--lp-line); background:#fff; }
     .lp-mobile.open{ display:flex; }
-    .lp-mobile a{ color:var(--lp-slate); text-decoration:none; font-weight:600; padding:.6rem .2rem; border-bottom:1px solid #f1f5f9; }
+    .lp-mobile a,
+    .lp-mobile button{ color:var(--lp-slate); text-decoration:none; font-weight:600; padding:.6rem .2rem; border:0; border-bottom:1px solid #f1f5f9; background:none; text-align:left; cursor:pointer; }
 
     /* Hero */
     .lp-hero{ position:relative; overflow:hidden; padding:64px 0 56px;
@@ -865,12 +868,24 @@
 
     /* Tools */
     .lp-tools-sec{ background:#fff; }
-    .lp-tools-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+    .lp-tools-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
     .lp-tool{ background:var(--lp-bg); border:1px solid var(--lp-line); border-radius:16px; padding:22px 14px; text-align:center; cursor:pointer; transition:transform .16s ease, box-shadow .2s ease, border-color .2s; }
     .lp-tool:hover{ transform:translateY(-4px); box-shadow:var(--lp-shadow); border-color:#c7d2fe; }
     .lp-tool-ico{ width:50px; height:50px; border-radius:14px; background:var(--lp-grad); color:#fff; display:grid; place-items:center; font-size:1.2rem; margin:0 auto .8rem; }
     .lp-tool h4{ font-size:.95rem; font-weight:700; margin:0 0 .25rem; }
     .lp-tool p{ font-size:.78rem; color:var(--lp-muted); margin:0; }
+    .lp-tools-modal .modal-dialog{ max-width:760px; }
+    .lp-tools-modal .modal-content{ border:0; border-radius:20px; box-shadow:0 30px 80px -30px rgba(15,23,42,.55); overflow:hidden; }
+    .lp-tools-modal .modal-header{ border-bottom:1px solid var(--lp-line); padding:20px 24px; }
+    .lp-tools-modal .modal-title{ font-weight:800; letter-spacing:-.01em; color:var(--lp-ink); }
+    .lp-tools-modal .modal-body{ padding:24px; background:#f8fafc; }
+    .lp-tools-modal-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .lp-modal-tool{ width:100%; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:14px; text-align:left; border:1px solid var(--lp-line); background:#fff; border-radius:14px; padding:16px; cursor:pointer; transition:transform .16s ease, border-color .18s ease, box-shadow .2s ease; }
+    .lp-modal-tool:hover{ transform:translateY(-2px); border-color:#c7d2fe; box-shadow:var(--lp-shadow); }
+    .lp-modal-tool .lp-tool-ico{ margin:0; width:46px; height:46px; border-radius:13px; }
+    .lp-modal-tool h4{ margin:0 0 3px; font-size:1rem; font-weight:800; color:var(--lp-ink); }
+    .lp-modal-tool p{ margin:0; font-size:.86rem; color:var(--lp-muted); }
+    .lp-modal-tool-arrow{ color:var(--lp-indigo); font-size:.95rem; }
     /* CTA */
     .lp-cta-sec{ padding:30px 0 74px; }
     .lp-cta{ background:var(--lp-grad); border-radius:24px; padding:40px 44px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; box-shadow:var(--lp-shadow-lg); }
@@ -889,7 +904,7 @@
     .lp-footer ul a{ color:#94a3b8; text-decoration:none; font-size:.92rem; }
     .lp-footer ul a:hover{ color:#fff; }
     .lp-footer-compact-actions{ display:flex; justify-content:flex-end; align-items:center; flex-wrap:wrap; gap:10px; max-width:520px; margin-left:auto; }
-    .lp-footer-pill{ display:inline-flex; align-items:center; gap:8px; min-height:42px; padding:10px 14px; border-radius:999px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.09); color:#cbd5e1; text-decoration:none; font-weight:700; font-size:.9rem; transition:background .2s ease, color .2s ease, transform .16s ease; }
+    .lp-footer-pill{ display:inline-flex; align-items:center; gap:8px; min-height:42px; padding:10px 14px; border-radius:999px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.09); color:#cbd5e1; text-decoration:none; font-weight:700; font-size:.9rem; transition:background .2s ease, color .2s ease, transform .16s ease; cursor:pointer; font-family:inherit; }
     .lp-footer-pill:hover{ background:rgba(99,102,241,.24); color:#fff; transform:translateY(-1px); }
     .lp-footer-pill-primary{ background:#fff; color:var(--lp-indigo-d); }
     .lp-footer-pill-primary:hover{ background:#eef2ff; color:var(--lp-indigo-d); }
@@ -957,6 +972,7 @@
     @media (max-width:480px){
       .lp-preview{ grid-template-columns:1fr; }
       .lp-tools-grid{ grid-template-columns:1fr 1fr; }
+      .lp-tools-modal-grid{ grid-template-columns:1fr; }
       .lp-footer-grid{ grid-template-columns:1fr; }
     }
 
@@ -1487,7 +1503,7 @@
       <a href="#top" class="active">Home</a>
       <a href="#uploadBand">Upload</a>
       <a href="#features">Features</a>
-      <a href="#tools">QR Tools</a>
+      <button type="button" data-bs-toggle="modal" data-bs-target="#qrToolsModal">QR Tools</button>
       <a href="blog/">Blog</a>
     </nav>
 
@@ -1560,7 +1576,7 @@
     <a href="#top">Home</a>
     <a href="#uploadBand">Upload</a>
     <a href="#features">Features</a>
-    <a href="#tools">QR Tools</a>
+    <button type="button" data-bs-toggle="modal" data-bs-target="#qrToolsModal">QR Tools</button>
     <a href="blog/">Blog</a>
   </div>
 </header>
@@ -1961,23 +1977,6 @@
   </div>
 </section>
 
-<!-- ════════════ QR TOOLS ════════════ -->
-<section class="lp-section lp-tools-sec" id="tools">
-  <div class="lp-wrap">
-    <div class="lp-head-c">
-      <h2 data-translate="landing.tools.title">More than just image &amp; video sharing</h2>
-      <p data-translate="landing.tools.subtitle">Maiimg also supports more types of QR codes to meet your daily needs</p>
-    </div>
-    <div class="lp-tools-grid">
-      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#url-modal"><span class="lp-tool-ico"><i class="fas fa-link"></i></span><h4 data-translate="landing.tools.urlTitle">URL QR Code</h4><p data-translate="landing.tools.urlCopy">Website or any link</p></div>
-      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#sms-modal"><span class="lp-tool-ico"><i class="fas fa-comment-sms"></i></span><h4 data-translate="landing.tools.smsTitle">SMS QR Code</h4><p data-translate="landing.tools.smsCopy">Send a text message</p></div>
-      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#wifi-modal"><span class="lp-tool-ico"><i class="fas fa-wifi"></i></span><h4 data-translate="landing.tools.wifiTitle">WiFi QR Code</h4><p data-translate="landing.tools.wifiCopy">Share WiFi in one scan</p></div>
-      <div class="lp-tool" data-bs-toggle="modal" data-bs-target="#phone-modal"><span class="lp-tool-ico"><i class="fas fa-phone"></i></span><h4 data-translate="landing.tools.phoneTitle">Phone QR Code</h4><p data-translate="landing.tools.phoneCopy">One tap to call</p></div>
-      <div class="lp-tool" onclick="document.getElementById('uploadBand').scrollIntoView({behavior:'smooth'})"><span class="lp-tool-ico"><i class="fas fa-images"></i></span><h4 data-translate="landing.tools.mediaTitle">Media Gallery</h4><p data-translate="landing.tools.mediaCopy">Images &amp; videos</p></div>
-    </div>
-  </div>
-</section>
-
 <!-- ════════════ CTA ════════════ -->
 <section class="lp-cta-sec">
   <div class="lp-wrap">
@@ -2008,7 +2007,7 @@
       </div>
       <div class="lp-footer-compact-actions" aria-label="Footer links">
         <a class="lp-footer-pill lp-footer-pill-primary" href="#uploadBand"><i class="fas fa-cloud-arrow-up"></i><span data-translate="landing.footer.upload">Upload</span></a>
-        <a class="lp-footer-pill" href="#tools"><i class="fas fa-qrcode"></i><span data-translate="landing.footer.qrTools">QR Tools</span></a>
+        <button type="button" class="lp-footer-pill" data-bs-toggle="modal" data-bs-target="#qrToolsModal"><i class="fas fa-qrcode"></i><span data-translate="landing.footer.qrTools">QR Tools</span></button>
         <a class="lp-footer-pill" href="dashboard.html"><i class="fas fa-table-cells-large"></i><span data-translate="dash.title">My Galleries</span></a>
         <a class="lp-footer-pill" href="blog/"><i class="fas fa-blog"></i><span>Blog</span></a>
         <a class="lp-footer-pill" href="mailto:joe@pdfhost.online"><i class="fas fa-envelope"></i><span data-translate="landing.footer.contact">Contact</span></a>
@@ -2024,6 +2023,56 @@
     </div>
   </div>
 </footer>
+  <!-- QR Tools Picker Modal -->
+  <div class="modal fade lp-tools-modal" id="qrToolsModal" tabindex="-1" aria-labelledby="qrToolsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="qrToolsModalLabel">
+            <i class="fas fa-qrcode me-2"></i><span data-translate="landing.tools.title">Other QR Tools</span>
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="lp-tools-modal-grid">
+            <button type="button" class="lp-modal-tool" data-qr-tool-target="#url-modal">
+              <span class="lp-tool-ico"><i class="fas fa-link"></i></span>
+              <span>
+                <h4 data-translate="landing.tools.urlTitle">URL QR Code</h4>
+                <p data-translate="landing.tools.urlCopy">Website or any link</p>
+              </span>
+              <i class="fas fa-arrow-right lp-modal-tool-arrow"></i>
+            </button>
+            <button type="button" class="lp-modal-tool" data-qr-tool-target="#sms-modal">
+              <span class="lp-tool-ico"><i class="fas fa-comment-sms"></i></span>
+              <span>
+                <h4 data-translate="landing.tools.smsTitle">SMS QR Code</h4>
+                <p data-translate="landing.tools.smsCopy">Send a text message</p>
+              </span>
+              <i class="fas fa-arrow-right lp-modal-tool-arrow"></i>
+            </button>
+            <button type="button" class="lp-modal-tool" data-qr-tool-target="#wifi-modal">
+              <span class="lp-tool-ico"><i class="fas fa-wifi"></i></span>
+              <span>
+                <h4 data-translate="landing.tools.wifiTitle">WiFi QR Code</h4>
+                <p data-translate="landing.tools.wifiCopy">Share WiFi in one scan</p>
+              </span>
+              <i class="fas fa-arrow-right lp-modal-tool-arrow"></i>
+            </button>
+            <button type="button" class="lp-modal-tool" data-qr-tool-target="#phone-modal">
+              <span class="lp-tool-ico"><i class="fas fa-phone"></i></span>
+              <span>
+                <h4 data-translate="landing.tools.phoneTitle">Phone QR Code</h4>
+                <p data-translate="landing.tools.phoneCopy">One tap to call</p>
+              </span>
+              <i class="fas fa-arrow-right lp-modal-tool-arrow"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- WiFi QR Code Modal -->
   <div class="modal fade" id="wifi-modal" tabindex="-1" aria-labelledby="wifiModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">

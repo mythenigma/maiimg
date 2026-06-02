@@ -2410,8 +2410,8 @@ class I18n {
           customCopy: "Customize QR code style, color and logo to match your brand."
         },
         tools: {
-          title: "More than just image & video sharing",
-          subtitle: "Maiimg also supports more types of QR codes to meet your daily needs",
+          title: "Other QR Tools",
+          subtitle: "Quick access to other QR code generators",
           urlTitle: "URL QR Code",
           urlCopy: "Website or any link",
           smsTitle: "SMS QR Code",
@@ -2419,9 +2419,7 @@ class I18n {
           wifiTitle: "WiFi QR Code",
           wifiCopy: "Share WiFi in one scan",
           phoneTitle: "Phone QR Code",
-          phoneCopy: "One tap to call",
-          mediaTitle: "Media Gallery",
-          mediaCopy: "Images & videos"
+          phoneCopy: "One tap to call"
         },
         cta: {
           title: "Ready to share your moments?",
@@ -2605,8 +2603,8 @@ class I18n {
           customCopy: "可按品牌需求定制二维码样式、颜色和标识。"
         },
         tools: {
-          title: "不只是图片和视频分享",
-          subtitle: "Maiimg 还支持更多类型的二维码，满足日常使用需求",
+          title: "其他二维码工具",
+          subtitle: "快速访问其他二维码生成器",
           urlTitle: "网址二维码",
           urlCopy: "网站或任意链接",
           smsTitle: "短信二维码",
@@ -2614,9 +2612,7 @@ class I18n {
           wifiTitle: "WiFi 二维码",
           wifiCopy: "扫码连接 WiFi",
           phoneTitle: "电话二维码",
-          phoneCopy: "一键拨打电话",
-          mediaTitle: "媒体图集",
-          mediaCopy: "图片和视频"
+          phoneCopy: "一键拨打电话"
         },
         cta: {
           title: "准备好分享你的精彩瞬间了吗？",
@@ -2800,8 +2796,8 @@ class I18n {
           customCopy: "可依品牌需求自訂 QR Code 樣式、顏色和標誌。"
         },
         tools: {
-          title: "不只是圖片和影片分享",
-          subtitle: "Maiimg 還支援更多類型的 QR Code，滿足日常使用需求",
+          title: "其他 QR 工具",
+          subtitle: "快速存取其他 QR Code 生成器",
           urlTitle: "網址 QR Code",
           urlCopy: "網站或任意連結",
           smsTitle: "簡訊 QR Code",
@@ -2809,9 +2805,7 @@ class I18n {
           wifiTitle: "WiFi QR Code",
           wifiCopy: "掃碼連接 WiFi",
           phoneTitle: "電話 QR Code",
-          phoneCopy: "一鍵撥打電話",
-          mediaTitle: "媒體圖集",
-          mediaCopy: "圖片和影片"
+          phoneCopy: "一鍵撥打電話"
         },
         cta: {
           title: "準備好分享你的精彩瞬間了嗎？",
