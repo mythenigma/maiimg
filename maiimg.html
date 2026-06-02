@@ -886,6 +886,17 @@
     .lp-modal-tool h4{ margin:0 0 3px; font-size:1rem; font-weight:800; color:var(--lp-ink); }
     .lp-modal-tool p{ margin:0; font-size:.86rem; color:var(--lp-muted); }
     .lp-modal-tool-arrow{ color:var(--lp-indigo); font-size:.95rem; }
+    .lp-qr-generator-modal{
+      position:fixed !important;
+      inset:0 !important;
+      z-index:1055 !important;
+      width:100vw !important;
+      height:100vh !important;
+      overflow:hidden auto !important;
+      outline:0;
+    }
+    .lp-qr-generator-modal .modal-dialog{ min-height:calc(100vh - 3.5rem); display:flex; align-items:center; margin:1.75rem auto; }
+    .lp-qr-generator-modal .modal-content{ border:0; border-radius:18px; box-shadow:0 30px 80px -30px rgba(15,23,42,.55); }
     /* CTA */
     .lp-cta-sec{ padding:30px 0 74px; }
     .lp-cta{ background:var(--lp-grad); border-radius:24px; padding:40px 44px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; box-shadow:var(--lp-shadow-lg); }
@@ -2074,7 +2085,7 @@
   </div>
 
   <!-- WiFi QR Code Modal -->
-  <div class="modal fade" id="wifi-modal" tabindex="-1" aria-labelledby="wifiModalLabel" aria-hidden="true">
+  <div class="modal fade lp-qr-generator-modal" id="wifi-modal" tabindex="-1" aria-labelledby="wifiModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -2119,7 +2130,7 @@
   </div>
 
   <!-- SMS QR Code Modal -->
-  <div class="modal fade" id="sms-modal" tabindex="-1" aria-labelledby="smsModalLabel" aria-hidden="true">
+  <div class="modal fade lp-qr-generator-modal" id="sms-modal" tabindex="-1" aria-labelledby="smsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -2155,7 +2166,7 @@
   </div>
   
   <!-- Phone QR Code Modal -->
-  <div class="modal fade" id="phone-modal" tabindex="-1" aria-labelledby="phoneModalLabel" aria-hidden="true">
+  <div class="modal fade lp-qr-generator-modal" id="phone-modal" tabindex="-1" aria-labelledby="phoneModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -2186,7 +2197,7 @@
   </div>
 
   <!-- URL QR Code Modal -->
-  <div class="modal fade" id="url-modal" tabindex="-1" aria-labelledby="urlModalLabel" aria-hidden="true">
+  <div class="modal fade lp-qr-generator-modal" id="url-modal" tabindex="-1" aria-labelledby="urlModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -4329,6 +4340,7 @@
       // Smooth scrolling for navigation links
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+          if (this.hasAttribute('data-bs-toggle')) return;
           e.preventDefault();
           const href = this.getAttribute('href');
           if (href && href !== '#') {
@@ -4336,6 +4348,31 @@
             if (target) {
               target.scrollIntoView({ behavior: 'smooth' });
             }
+          }
+        });
+      });
+
+      document.querySelectorAll('[data-qr-tool-target]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const targetSelector = button.getAttribute('data-qr-tool-target');
+          const targetEl = targetSelector ? document.querySelector(targetSelector) : null;
+          const pickerEl = document.getElementById('qrToolsModal');
+          if (!targetEl || !pickerEl) return;
+          const currentScrollY = window.scrollY;
+
+          const openTarget = () => {
+            targetEl.addEventListener('shown.bs.modal', () => {
+              window.scrollTo({ top: currentScrollY, left: 0, behavior: 'auto' });
+            }, { once: true });
+            bootstrap.Modal.getOrCreateInstance(targetEl).show();
+          };
+          const pickerModal = bootstrap.Modal.getOrCreateInstance(pickerEl);
+
+          if (pickerEl.classList.contains('show')) {
+            pickerEl.addEventListener('hidden.bs.modal', openTarget, { once: true });
+            pickerModal.hide();
+          } else {
+            openTarget();
           }
         });
       });
