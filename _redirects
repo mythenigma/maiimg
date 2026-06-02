@@ -2,9 +2,8 @@
 # 支持 /gallery/ID 格式
 
 # Convert 工具页必须放在 gallery 动态规则前面，避免 convert.html 被当作 gallery id
-/convert /convert.html 200
-/gallery/convert.html /convert.html 301
-/gallery/convert /convert.html 301
+/gallery/convert.html /convert 301
+/gallery/convert /convert 301
 
 # 主要的画廊重写规则
 /gallery/:id /gallery/ 200
