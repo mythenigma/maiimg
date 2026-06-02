@@ -874,7 +874,78 @@
     .lp-tool-ico{ width:50px; height:50px; border-radius:14px; background:var(--lp-grad); color:#fff; display:grid; place-items:center; font-size:1.2rem; margin:0 auto .8rem; }
     .lp-tool h4{ font-size:.95rem; font-weight:700; margin:0 0 .25rem; }
     .lp-tool p{ font-size:.78rem; color:var(--lp-muted); margin:0; }
-    body.maiimg-workspace .tools-section{ padding-bottom:12px; }
+    body.maiimg-workspace #tools.tools-section{
+      margin:0;
+      padding:34px 0 26px;
+      border:0;
+      border-radius:0;
+      background:#f8fafc;
+      box-shadow:none;
+    }
+    body.maiimg-workspace #tools.tools-section::before{ display:none; }
+    body.maiimg-workspace #tools .container{
+      max-width:1180px;
+      padding-left:22px;
+      padding-right:22px;
+    }
+    body.maiimg-workspace #tools .text-center{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      text-align:left !important;
+      margin-bottom:18px !important;
+    }
+    body.maiimg-workspace #tools .section-title{
+      margin:0;
+      font-size:clamp(1.35rem,2.2vw,1.85rem);
+      letter-spacing:0;
+      line-height:1.18;
+    }
+    body.maiimg-workspace #tools .section-subtitle{
+      max-width:28rem;
+      margin:0;
+      text-align:right;
+      font-size:.9rem;
+      line-height:1.45;
+    }
+    body.maiimg-workspace #tools .row{
+      --bs-gutter-x:12px;
+      --bs-gutter-y:12px;
+    }
+    body.maiimg-workspace #tools .tool-card{
+      min-height:92px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:16px;
+      border-radius:14px;
+      text-align:left;
+      background:#fff;
+      border:1px solid rgba(226,232,240,.95);
+      box-shadow:none;
+    }
+    body.maiimg-workspace #tools .tool-card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(99,102,241,.3);
+      box-shadow:0 14px 28px rgba(15,23,42,.08);
+    }
+    body.maiimg-workspace #tools .tool-icon{
+      width:46px;
+      height:46px;
+      margin:0;
+      flex:none;
+      border-radius:12px;
+      color:#4f46e5;
+      background:#eef2ff;
+      font-size:1.15rem;
+    }
+    body.maiimg-workspace #tools .tool-card h5{
+      margin:0;
+      font-size:1rem;
+      font-weight:800;
+      color:var(--lp-ink);
+    }
     body.maiimg-workspace > .modal{
       position:fixed;
       top:0;
@@ -920,19 +991,32 @@
       outline:0;
     }
     /* Footer */
-    .lp-footer{ background:var(--lp-ink); color:#cbd5e1; padding:46px 0 28px; }
+    .lp-footer{ background:var(--lp-ink); color:#cbd5e1; padding:34px 0 24px; }
     .lp-footer .lp-brand-name{ color:#fff; } .lp-footer .lp-brand-sub{ color:#a5b4fc; }
-    .lp-footer-grid{ display:block; padding-bottom:28px; border-bottom:1px solid rgba(255,255,255,.1); }
-    .lp-footer-about{ color:#94a3b8; font-size:.92rem; line-height:1.6; margin:1rem 0 .8rem; max-width:24rem; }
+    .lp-footer-grid{ display:flex; align-items:center; justify-content:space-between; gap:28px; padding-bottom:22px; border-bottom:1px solid rgba(255,255,255,.1); }
+    .lp-footer-brandline{ display:flex; align-items:center; gap:18px; min-width:0; }
+    .lp-footer-about{ color:#94a3b8; font-size:.9rem; line-height:1.55; margin:0; max-width:34rem; }
+    .lp-footer-meta{ display:flex; align-items:center; justify-content:flex-end; gap:14px; flex-wrap:wrap; }
+    .lp-footer-email{ display:inline-flex; align-items:center; gap:8px; color:#e2e8f0; text-decoration:none; font-weight:700; white-space:nowrap; }
     .lp-footer h5{ color:#fff; font-size:.95rem; font-weight:700; margin:0 0 1rem; }
     .lp-footer ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.6rem; }
     .lp-footer ul a{ color:#94a3b8; text-decoration:none; font-size:.92rem; }
     .lp-footer ul a:hover{ color:#fff; }
-    .lp-footer-bottom{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; padding-top:24px; font-size:.88rem; color:#94a3b8; }
+    .lp-footer-bottom{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; padding-top:18px; font-size:.86rem; color:#94a3b8; }
     .lp-footer-bottom a{ color:#cbd5e1; text-decoration:none; }
     .lp-footer-social{ display:flex; gap:.6rem; }
     .lp-footer-social a{ width:36px; height:36px; border-radius:10px; background:rgba(255,255,255,.08); color:#cbd5e1; display:grid; place-items:center; }
     .lp-footer-social a:hover{ background:var(--lp-indigo); color:#fff; }
+    ins.adsbygoogle[data-anchor-status],
+    .adsbygoogle-noablate,
+    iframe[id^="aswift_"],
+    iframe[id^="google_ads_iframe"]{
+      display:none !important;
+      width:0 !important;
+      height:0 !important;
+      opacity:0 !important;
+      pointer-events:none !important;
+    }
     /* Override maiimg.css's light "body.maiimg-workspace footer" so the dark footer stays dark and readable */
     body.maiimg-workspace footer.lp-footer{ background:var(--lp-ink); border-top:none; margin-top:0; }
     body.maiimg-workspace .lp-footer .lp-brand-name,
@@ -967,7 +1051,8 @@
       .lp-hero-grid{ grid-template-columns:1fr; gap:36px; }
       .lp-feat-grid{ grid-template-columns:repeat(2,1fr); }
       .lp-tools-grid{ grid-template-columns:repeat(3,1fr); }
-      .lp-footer-grid{ grid-template-columns:1fr; }
+      .lp-footer-grid{ flex-direction:column; align-items:flex-start; }
+      .lp-footer-meta{ justify-content:flex-start; }
     }
     @media (max-width:768px){
       .lp-links{ display:none; }
@@ -979,16 +1064,20 @@
       .lp-feat-ico{ width:42px; height:42px; font-size:1.05rem; }
       .lp-feat h3{ font-size:1.05rem; }
       .lp-tools-grid{ grid-template-columns:repeat(2,1fr); }
-      .lp-footer-grid{ grid-template-columns:1fr; gap:22px; }
+      body.maiimg-workspace #tools .text-center{ display:block; text-align:center !important; }
+      body.maiimg-workspace #tools .section-subtitle{ max-width:none; margin:.45rem auto 0; text-align:center; }
+      .lp-footer-grid{ align-items:center; gap:18px; }
+      .lp-footer-brandline{ flex-direction:column; text-align:center; }
       .lp-footer .lp-brand,
       .lp-footer-about,
       .lp-footer small{ margin-left:auto; margin-right:auto; text-align:center; }
+      .lp-footer-meta{ justify-content:center; }
       .lp-footer-bottom{ justify-content:center; text-align:center; }
     }
     @media (max-width:480px){
       .lp-preview{ grid-template-columns:1fr; }
       .lp-tools-grid{ grid-template-columns:1fr 1fr; }
-      .lp-footer-grid{ grid-template-columns:1fr; }
+      .lp-footer-grid{ flex-direction:column; }
     }
 
     /* ═══ Upload workspace reskin (matches mockup) ═══ */
@@ -1991,7 +2080,6 @@
   <div class="container">
     <div class="text-center mb-5">
       <h2 class="section-title" data-translate="tools.title">Other QR Tools</h2>
-      <p class="section-subtitle" data-translate="tools.subtitle">Quick access to other QR code generators</p>
     </div>
 
     <div class="row g-4">
@@ -2038,17 +2126,20 @@
 <footer class="lp-footer">
   <div class="lp-wrap">
     <div class="lp-footer-grid">
-      <div>
+      <div class="lp-footer-brandline">
         <a class="lp-brand" href="#top">
           <span class="lp-logo"><i class="fas fa-qrcode"></i></span>
           <span class="lp-brand-text"><span class="lp-brand-name">Maiimg</span><span class="lp-brand-sub">麦瓜QR</span></span>
         </a>
         <p class="lp-footer-about" data-translate="landing.footer.about">Upload images and short videos, share them with a link and QR code, and stay in control with access limits and scan analytics.</p>
+      </div>
+      <div class="lp-footer-meta">
         <small class="text-muted" id="footerComplianceText">Thank you</small>
+        <a class="lp-footer-email" href="mailto:joe@pdfhost.online"><i class="fas fa-envelope"></i>joe@pdfhost.online</a>
       </div>
     </div>
     <div class="lp-footer-bottom">
-      <span><i class="fas fa-copyright me-1"></i>2026 MaiPDF — <a href="mailto:joe@pdfhost.online">joe@pdfhost.online</a></span>
+      <span><i class="fas fa-copyright me-1"></i>2026 MaiPDF</span>
       <div class="lp-footer-social">
         <a href="blog/" aria-label="Blog"><i class="fas fa-blog"></i></a>
         <a href="https://www.maipdf.com" aria-label="Home"><i class="fas fa-home"></i></a>

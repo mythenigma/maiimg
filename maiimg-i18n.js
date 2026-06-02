@@ -2427,7 +2427,7 @@ class I18n {
           button: "Get Started for Free"
         },
         footer: {
-          about: "Upload images and short videos, share them with a link and QR code, and stay in control with access limits and scan analytics.",
+          about: "Image and short video sharing with QR links, access limits, and scan stats.",
           product: "Product",
           upload: "Upload",
           features: "Features",
@@ -2620,7 +2620,7 @@ class I18n {
           button: "免费开始使用"
         },
         footer: {
-          about: "上传图片和小视频，通过链接和二维码分享，并用访问限制与扫码统计保持掌控。",
+          about: "图片和小视频二维码分享，支持访问限制和扫码统计。",
           product: "产品",
           upload: "上传",
           features: "功能",
@@ -2813,7 +2813,7 @@ class I18n {
           button: "免費開始使用"
         },
         footer: {
-          about: "上傳圖片和短影片，透過連結和 QR Code 分享，並用存取限制與掃碼統計保持掌控。",
+          about: "圖片和短影片 QR Code 分享，支援存取限制和掃碼統計。",
           product: "產品",
           upload: "上傳",
           features: "功能",
