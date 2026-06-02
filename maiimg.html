@@ -894,7 +894,7 @@
     .lp-footer ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.6rem; }
     .lp-footer ul a{ color:#94a3b8; text-decoration:none; font-size:.92rem; }
     .lp-footer ul a:hover{ color:#fff; }
-    .lp-footer-compact-actions{ display:flex; justify-content:flex-end; align-items:center; flex-wrap:wrap; gap:10px; }
+    .lp-footer-compact-actions{ display:flex; justify-content:flex-end; align-items:center; flex-wrap:wrap; gap:10px; max-width:520px; margin-left:auto; }
     .lp-footer-pill{ display:inline-flex; align-items:center; gap:8px; min-height:42px; padding:10px 14px; border-radius:999px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.09); color:#cbd5e1; text-decoration:none; font-weight:700; font-size:.9rem; transition:background .2s ease, color .2s ease, transform .16s ease; }
     .lp-footer-pill:hover{ background:rgba(99,102,241,.24); color:#fff; transform:translateY(-1px); }
     .lp-footer-pill-primary{ background:#fff; color:var(--lp-indigo-d); }
@@ -939,7 +939,7 @@
       .lp-feat-grid{ grid-template-columns:repeat(2,1fr); }
       .lp-tools-grid{ grid-template-columns:repeat(3,1fr); }
       .lp-footer-grid{ grid-template-columns:1fr; }
-      .lp-footer-compact-actions{ justify-content:flex-start; }
+      .lp-footer-compact-actions{ justify-content:flex-start; max-width:none; margin-left:0; }
     }
     @media (max-width:768px){
       .lp-links{ display:none; }
@@ -954,6 +954,10 @@
       .lp-cta{ padding:30px 26px; text-align:center; justify-content:center; }
       .lp-cta-left{ flex-direction:column; text-align:center; }
       .lp-footer-grid{ grid-template-columns:1fr; gap:22px; }
+      .lp-footer .lp-brand,
+      .lp-footer-about,
+      .lp-footer small{ margin-left:auto; margin-right:auto; text-align:center; }
+      .lp-footer-compact-actions{ justify-content:center; }
       .lp-footer-bottom{ justify-content:center; text-align:center; }
     }
     @media (max-width:480px){
@@ -1511,7 +1515,7 @@
           <div class="dropdown">
             <button class="btn btn-outline-light btn-sm dropdown-toggle lp-lang-btn" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <span id="currentLanguageFlag">🇺🇸</span>
-              <span id="currentLanguageName" data-translate="language.english">English</span>
+              <span id="currentLanguageName">English</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
               <li><a class="dropdown-item" href="#" onclick="changeLanguage('en'); return false;"><span class="flag-icon">🇺🇸</span><span data-translate="language.english">English</span></a></li>
@@ -2009,28 +2013,12 @@
         <p class="lp-footer-about" data-translate="landing.footer.about">Upload images and short videos, share them with a link and QR code, and stay in control with access limits and scan analytics.</p>
         <small class="text-muted" id="footerComplianceText">Thank you</small>
       </div>
-      <div>
-        <h5 data-translate="landing.footer.product">Product</h5>
-        <ul>
-          <li><a href="#uploadBand" data-translate="landing.footer.upload">Upload</a></li>
-          <li><a href="#features" data-translate="landing.footer.features">Features</a></li>
-          <li><a href="#tools" data-translate="landing.footer.qrTools">QR Tools</a></li>
-          <li><a href="dashboard.html" data-translate="dash.title">My Galleries</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5 data-translate="landing.footer.resources">Resources</h5>
-        <ul>
-          <li><a href="blog/">Blog</a></li>
-          <li><a href="https://www.maipdf.com" data-translate="landing.footer.maipdfHome">MaiPDF Home</a></li>
-          <li><a href="https://article.maipdf.com" data-translate="landing.footer.devTools">Developer Tools</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5 data-translate="landing.footer.company">Company</h5>
-        <ul>
-          <li><a href="mailto:joe@pdfhost.online" data-translate="landing.footer.contact">Contact</a></li>
-        </ul>
+      <div class="lp-footer-compact-actions" aria-label="Footer links">
+        <a class="lp-footer-pill lp-footer-pill-primary" href="#uploadBand"><i class="fas fa-cloud-arrow-up"></i><span data-translate="landing.footer.upload">Upload</span></a>
+        <a class="lp-footer-pill" href="#tools"><i class="fas fa-qrcode"></i><span data-translate="landing.footer.qrTools">QR Tools</span></a>
+        <a class="lp-footer-pill" href="dashboard.html"><i class="fas fa-table-cells-large"></i><span data-translate="dash.title">My Galleries</span></a>
+        <a class="lp-footer-pill" href="blog/"><i class="fas fa-blog"></i><span>Blog</span></a>
+        <a class="lp-footer-pill" href="mailto:joe@pdfhost.online"><i class="fas fa-envelope"></i><span data-translate="landing.footer.contact">Contact</span></a>
       </div>
     </div>
     <div class="lp-footer-bottom">

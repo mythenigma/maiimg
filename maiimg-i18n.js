@@ -2566,8 +2566,8 @@ class I18n {
       landing: {
         hero: {
           eyebrow: "简单、安全，随处分享。",
-          titleLead: "分享图片和小视频，用",
-          titleAccent: "二维码",
+          titleLead: "分享图片和小视频",
+          titleAccent: "用二维码",
           subtitle: "把文件拖到下方，几秒内获得可分享链接和二维码，并支持访问控制与扫码统计。",
           startButton: "开始上传",
           viewGalleries: "查看图集",
@@ -2765,8 +2765,8 @@ class I18n {
       landing: {
         hero: {
           eyebrow: "簡單、安全，隨處分享。",
-          titleLead: "分享圖片和短影片，用",
-          titleAccent: "QR Code",
+          titleLead: "分享圖片和短影片",
+          titleAccent: "用 QR Code",
           subtitle: "把檔案拖到下方，幾秒內取得可分享連結和 QR Code，並支援存取控制與掃碼統計。",
           startButton: "開始上傳",
           viewGalleries: "查看圖集",
