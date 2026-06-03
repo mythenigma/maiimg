@@ -781,6 +781,68 @@
     .lp-actions .language-selector .dropdown-item{ display:flex !important; align-items:center !important; gap:10px !important; padding:9px 12px !important; border-radius:10px !important; font-size:.9rem !important; font-weight:600 !important; color:var(--lp-slate) !important; }
     .lp-actions .language-selector .dropdown-item:hover{ background:#eef2ff !important; color:var(--lp-indigo-d) !important; }
     .lp-actions .language-selector .flag-icon{ width:22px !important; min-width:22px; flex:none; text-align:center; font-size:1.05rem !important; line-height:1 !important; }
+    .nav-actions-mobile,
+    .nav-language-mobile{ position:relative; z-index:5300; }
+    .mobile-user-trigger,
+    .mobile-language-trigger{
+      width:42px;
+      height:42px;
+      border-radius:12px !important;
+      display:inline-grid !important;
+      place-items:center;
+      padding:0 !important;
+      font-size:1.08rem;
+    }
+    .mobile-language-trigger .mobile-lang-flag{ line-height:1; font-size:1.12rem; }
+    .mobile-user-menu,
+    .mobile-language-menu{
+      z-index:5400 !important;
+      min-width:176px !important;
+      padding:6px !important;
+      border-radius:14px !important;
+      border:1px solid var(--lp-line) !important;
+      background:#fff !important;
+      box-shadow:0 18px 42px -18px rgba(15,23,42,.45) !important;
+      opacity:1 !important;
+      pointer-events:auto !important;
+      max-height:min(70vh,420px);
+      overflow-y:auto;
+    }
+    .mobile-language-floating-menu{
+      position:fixed !important;
+      z-index:2147483647 !important;
+      display:none;
+      min-width:176px !important;
+      padding:6px !important;
+      border-radius:14px !important;
+      border:1px solid var(--lp-line) !important;
+      background:#fff !important;
+      box-shadow:0 18px 42px -18px rgba(15,23,42,.45) !important;
+      opacity:1 !important;
+      pointer-events:auto !important;
+      max-height:min(70vh,420px);
+      overflow-y:auto;
+      transform:none !important;
+    }
+    .mobile-language-floating-menu.show{
+      display:block !important;
+    }
+    .mobile-user-menu .dropdown-item,
+    .mobile-language-menu .dropdown-item{
+      display:flex !important;
+      align-items:center !important;
+      gap:10px !important;
+      padding:10px 12px !important;
+      border-radius:10px !important;
+      font-size:.95rem !important;
+      font-weight:650 !important;
+      color:var(--lp-slate) !important;
+    }
+    .mobile-user-menu .dropdown-item:hover,
+    .mobile-language-menu .dropdown-item:hover{
+      background:#eef2ff !important;
+      color:var(--lp-indigo-d) !important;
+    }
     .lp-toggle{ display:none; background:#eef2ff; color:var(--lp-indigo-d); border:none; width:40px; height:40px;
       border-radius:10px; font-size:1.1rem; cursor:pointer; }
     .lp-mobile{ display:none; flex-direction:column; padding:.4rem 22px 1rem; gap:.2rem; border-top:1px solid var(--lp-line); background:#fff; }
@@ -1631,20 +1693,25 @@
 
       </div>
 
-      <!-- Mobile User Menu (reused, all original IDs preserved) -->
+      <!-- Mobile User Menu (reused, all original auth IDs preserved) -->
       <div class="nav-actions-mobile dropdown d-md-none">
         <button class="btn btn-light mobile-user-trigger" type="button" id="mobileUserMenuBtn" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Open user menu">
           <i class="fas fa-user-circle"></i>
-          <span class="mobile-user-sep">/</span>
-          <span id="mobileCurrentLanguageFlag" class="mobile-lang-flag" aria-hidden="true">🇺🇸</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end mobile-user-menu" aria-labelledby="mobileUserMenuBtn">
           <li><h6 class="dropdown-header" id="mobileUserEmail">Guest</h6></li>
           <li><a href="dashboard.html" class="dropdown-item d-none" id="mobileDashboardBtn"><i class="fas fa-th-large me-2"></i><span data-translate="dash.title">My Galleries</span></a></li>
           <li><button type="button" class="dropdown-item" id="mobileLoginBtn"><i class="fas fa-sign-in-alt me-2"></i><span data-translate="auth.login">Login</span></button></li>
           <li><button type="button" class="dropdown-item d-none" id="mobileLogoutBtn"><i class="fas fa-sign-out-alt me-2"></i><span data-translate="auth.logout">Logout</span></button></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><span class="dropdown-item-text mobile-lang-title">Language</span></li>
+        </ul>
+      </div>
+
+      <!-- Mobile Language Menu -->
+      <div class="nav-language-mobile dropdown d-md-none">
+        <button class="btn btn-light mobile-language-trigger" type="button" id="mobileLanguageMenuBtn" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Choose language">
+          <span id="mobileCurrentLanguageFlag" class="mobile-lang-flag" aria-hidden="true">🇺🇸</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end mobile-language-menu" aria-labelledby="mobileLanguageMenuBtn">
           <li><a class="dropdown-item" href="#" onclick="changeLanguage('en'); return false;">🇺🇸 English</a></li>
           <li><a class="dropdown-item" href="#" onclick="changeLanguage('zh'); return false;">🇨🇳 中文</a></li>
           <li><a class="dropdown-item" href="#" onclick="changeLanguage('tw'); return false;">🇹🇼 中華民國</a></li>
@@ -4768,6 +4835,73 @@
       if (!button || !menu) return;
 
       menu.classList.add('lp-language-floating-menu');
+      document.body.appendChild(menu);
+
+      function placeMenu() {
+        const rect = button.getBoundingClientRect();
+        const menuWidth = Math.max(menu.offsetWidth || 176, 176);
+        const left = Math.max(12, Math.min(window.innerWidth - menuWidth - 12, rect.right - menuWidth));
+        menu.style.setProperty('top', `${Math.round(rect.bottom + 10)}px`, 'important');
+        menu.style.setProperty('left', `${Math.round(left)}px`, 'important');
+        menu.style.setProperty('right', 'auto', 'important');
+        menu.style.setProperty('bottom', 'auto', 'important');
+      }
+
+      function hideMenu() {
+        menu.classList.remove('show');
+        button.setAttribute('aria-expanded', 'false');
+      }
+
+      function showMenu() {
+        placeMenu();
+        menu.classList.add('show');
+        button.setAttribute('aria-expanded', 'true');
+      }
+
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (menu.classList.contains('show')) {
+          hideMenu();
+        } else {
+          showMenu();
+        }
+      }, true);
+
+      menu.addEventListener('click', function (event) {
+        const item = event.target.closest('.dropdown-item');
+        if (!item) return;
+        event.preventDefault();
+        event.stopPropagation();
+        const match = (item.getAttribute('onclick') || '').match(/changeLanguage\('([^']+)'\)/);
+        if (match && typeof window.changeLanguage === 'function') {
+          window.changeLanguage(match[1]);
+        }
+        hideMenu();
+      }, true);
+
+      document.addEventListener('click', function (event) {
+        if (!menu.contains(event.target) && event.target !== button && !button.contains(event.target)) {
+          hideMenu();
+        }
+      });
+
+      window.addEventListener('resize', function () {
+        if (menu.classList.contains('show')) placeMenu();
+      });
+
+      window.addEventListener('scroll', function () {
+        if (menu.classList.contains('show')) placeMenu();
+      }, { passive: true });
+    })();
+  </script>
+  <script>
+    (function () {
+      const button = document.getElementById('mobileLanguageMenuBtn');
+      const menu = document.querySelector('.mobile-language-menu');
+      if (!button || !menu) return;
+
+      menu.classList.add('mobile-language-floating-menu');
       document.body.appendChild(menu);
 
       function placeMenu() {
