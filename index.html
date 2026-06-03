@@ -827,6 +827,12 @@
     .mobile-language-floating-menu.show{
       display:block !important;
     }
+    @media (max-width:767.98px){
+      .mobile-language-menu:not(.mobile-language-floating-menu),
+      .mobile-language-floating-menu:not(.show){
+        display:none !important;
+      }
+    }
     .mobile-user-menu .dropdown-item,
     .mobile-language-menu .dropdown-item{
       display:flex !important;
@@ -1708,7 +1714,7 @@
 
       <!-- Mobile Language Menu -->
       <div class="nav-language-mobile dropdown d-md-none">
-        <button class="btn btn-light mobile-language-trigger" type="button" id="mobileLanguageMenuBtn" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Choose language">
+        <button class="btn btn-light mobile-language-trigger" type="button" id="mobileLanguageMenuBtn" aria-expanded="false" aria-label="Choose language">
           <span id="mobileCurrentLanguageFlag" class="mobile-lang-flag" aria-hidden="true">🇺🇸</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end mobile-language-menu" aria-labelledby="mobileLanguageMenuBtn">
