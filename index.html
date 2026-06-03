@@ -1579,6 +1579,10 @@
       .lp-upload-card .flow-nav-inner{ border-radius:22px; }
     }
     @media (max-width:768px){
+      .lp-wrap{
+        padding-left:8px;
+        padding-right:8px;
+      }
       .lp-nav-inner{ height:66px; }
       .lp-hero{ padding:42px 0 24px; }
       .lp-hero-title{
@@ -1599,20 +1603,32 @@
         grid-template-columns:1fr;
         border-radius:16px;
       }
-      .lp-upload-band{ padding:18px 0 44px; }
-      .lp-upload-card{ padding:8px; border-radius:18px; }
+      .lp-upload-band{ padding:14px 0 36px; }
+      .lp-upload-card{ padding:5px; border-radius:16px; }
+      .lp-upload-card .container,
+      .lp-upload-card .maiimg-shell{
+        padding-left:0 !important;
+        padding-right:0 !important;
+      }
+      .lp-upload-card .flow-nav{
+        margin-bottom:14px !important;
+      }
       .lp-upload-card .flow-nav-inner{
         display:grid;
         grid-template-columns:1fr;
         border-radius:16px;
+        padding:4px;
       }
       .lp-upload-card .flow-step{
         justify-content:flex-start;
         border-radius:14px;
+        min-height:40px;
+        padding:.45rem .75rem;
       }
       .lp-upload-card .upload-area{
         min-height:246px;
-        padding:28px 14px !important;
+        padding:24px 10px !important;
+        border-radius:16px !important;
       }
       .lp-upload-card .upload-subtext{
         display:block;
@@ -1637,6 +1653,24 @@
       .lp-strip{
         grid-template-columns:1fr;
         padding:18px;
+      }
+    }
+    @media (max-width:480px){
+      .lp-wrap{
+        padding-left:6px;
+        padding-right:6px;
+      }
+      .lp-upload-card{
+        padding:4px;
+        border-radius:14px;
+      }
+      .lp-upload-card .upload-area{
+        padding:22px 8px !important;
+      }
+      .lp-upload-card .upload-orb{
+        width:72px;
+        height:72px;
+        border-radius:20px;
       }
     }
   </style>
