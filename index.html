@@ -1395,7 +1395,7 @@
         overflow:hidden;
       }
       .lp-upload-card .flow-nav{
-        margin-bottom:14px !important;
+        margin-bottom:18px !important;
         width:100%;
         max-width:100%;
         overflow:hidden;
@@ -1403,20 +1403,59 @@
       .lp-upload-card .flow-nav-inner{
         width:100%;
         max-width:100%;
-        display:grid;
-        grid-template-columns:1fr;
+        display:flex;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap:0;
         border-radius:16px;
-        padding:4px;
-        gap:6px;
+        padding:16px 6px 14px;
       }
       .lp-upload-card .flow-step{
-        width:100%;
-        max-width:100%;
+        flex:1 1 0;
+        min-width:0;
+        position:relative;
+        flex-direction:column;
+        align-items:center;
         justify-content:flex-start;
-        border-radius:14px;
-        min-height:40px;
-        padding:.45rem .75rem;
+        gap:.5rem;
+        text-align:center;
+        padding:0 2px;
+        min-height:0;
+        border:none !important;
+        background:transparent !important;
+        box-shadow:none !important;
+        font-size:.72rem;
+        line-height:1.25;
+        color:var(--lp-muted);
       }
+      /* connector line: right edge of this circle → left edge of next circle */
+      .lp-upload-card .flow-step:not(:last-child)::after{
+        content:"";
+        position:absolute;
+        top:14px;
+        left:calc(50% + 16px);
+        right:calc(-50% + 16px);
+        height:2px;
+        background:var(--lp-line);
+        z-index:0;
+      }
+      .lp-upload-card .flow-step.is-done::after{ background:var(--lp-grad); }
+      .lp-upload-card .flow-step .flow-step-num{
+        position:relative;
+        z-index:1;
+        width:30px;
+        height:30px;
+        font-size:.82rem;
+      }
+      .lp-upload-card .flow-step .flow-step-label{
+        position:relative;
+        z-index:1;
+        display:block;
+        white-space:normal;
+        word-break:break-word;
+      }
+      .lp-upload-card .flow-step.is-current{ color:var(--lp-indigo-d); }
+      .lp-upload-card .flow-step.is-current .flow-step-label{ font-weight:800; }
       .lp-upload-card .upload-area{
         width:100%;
         max-width:100%;
