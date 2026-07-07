@@ -134,7 +134,7 @@
   <main class="wrap">
     <section class="head">
       <h1>项目工作与日志记录</h1>
-      <p class="sub">更新时间：2026-05-29</p>
+      <p class="sub">更新时间：2026-07-07</p>
       <p class="sub">说明：保留“最新工作记录”，新增“项目总日志”与“Blog 合并与 SEO 计划”两个 tab，后续博客大修与关键词策略统一往计划 tab 里写，执行动作再回到总日志。</p>
     </section>
 
@@ -452,7 +452,7 @@
           </div>
           <div class="meta-item">
             <strong>素材目录</strong>
-            <code>blog/static-images</code> 现有 21 个素材文件。
+            <code>blog/static-images</code> 现有 32 个素材文件。
           </div>
         </div>
 
@@ -464,21 +464,21 @@
 
         <p><strong>语言目录现状：</strong></p>
         <ul>
-          <li><code>blog/en</code>：共 77 个 HTML 文件，含大量完整文章，是当前英文内容主阵地。</li>
-          <li><code>blog/zh-cn</code>：共 14 个 HTML 文件，是当前中文内容主阵地。</li>
+          <li><code>blog/en</code>：共 70 个 HTML 文件（含 index，正文 69 篇），是当前英文内容主阵地。</li>
+          <li><code>blog/zh-cn</code>：共 14 个 HTML 文件（含 index，正文 13 篇），是当前中文内容主阵地。</li>
           <li><code>blog/ar</code>、<code>de</code>、<code>es</code>、<code>fr</code>、<code>it</code>、<code>ja</code>、<code>ko</code>、<code>pt</code>、<code>ru</code>：目前都只有 1 个 <code>index.html</code> 入口页，尚未形成完整文章库。</li>
         </ul>
 
         <p><strong>diagram 目录现状：</strong></p>
         <ul>
-          <li><code>blog/en/diagram</code>：10 个 SVG，包括 <code>airdrop-alternative-reliable-photo-sharing.svg</code>、<code>client-gallery-delivery.svg</code>、<code>event-photo-runbook.svg</code>、<code>image-sharing-workflow-diagram.svg</code>、<code>security-control-flow.svg</code> 等。</li>
+          <li><code>blog/en/diagram</code>：12 个 SVG，包括 <code>client-gallery-delivery.svg</code>、<code>event-photo-runbook.svg</code>、<code>image-sharing-workflow-diagram.svg</code>、<code>security-control-flow.svg</code> 等。</li>
           <li><code>blog/zh-cn/diagram</code>：10 个 SVG，包括 <code>analytics-optimization-flow.svg</code>、<code>birthday-sharing-flow.svg</code>、<code>core-share-flow.svg</code>、<code>image-upload-flow.svg</code>、<code>permission-control-flow.svg</code> 等。</li>
           <li>当前并不是“每个语言目录下都有 diagram”，而是只有 <code>en</code> 和 <code>zh-cn</code> 这两个内容密度较高的目录具备独立图表文件夹。</li>
         </ul>
 
         <p><strong>static-images 目录现状：</strong></p>
         <ul>
-          <li>共 21 个文件，主要分布在 <code>blog/static-images/cn</code>、<code>blog/static-images/cn/宣传</code>、<code>blog/static-images/common</code>、<code>blog/static-images/common/show</code>。</li>
+          <li>共 32 个文件，主要分布在 <code>blog/static-images/cn</code>、<code>blog/static-images/cn/宣传</code>、<code>blog/static-images/common</code>、<code>blog/static-images/common/show</code>。</li>
           <li>中文素材偏截图与宣传图，例如 <code>麦瓜二维码首页.png</code>、<code>生成结果.png</code>、<code>微信发.jpg</code>、<code>扫码分享.jpg</code>。</li>
           <li>通用素材偏产品展示与结果页，例如 <code>maiimg-head.png</code>、<code>maiimg-setting.png</code>、<code>result_tracking.png</code>、<code>sharegallery.png</code>、<code>upload.jpg</code>。</li>
         </ul>
@@ -759,6 +759,55 @@
           <li><code>sitemap.xml</code> 中两篇 <code>lastmod</code> 已更新到 <code>2026-04-27</code>。</li>
         </ul>
         <p><strong>下一步建议：</strong>继续 Creators &amp; Small Sellers：处理 <code>real-estate-photo-sharing-guide.html</code> 与 <code>automotive-photo-sharing-guide.html</code>。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-07-07：英文首页外露旧模板 6 篇已迁到 cyber</h2><span class="tag ok">动作完成</span></div>
+        <p><strong>触发原因：</strong>复查 <code>work.html</code> 与 blog 目录后发现，英文 index 的本地链接全部存在，但仍有 6 个首页可见入口页使用旧浅色模板，缺少 <code>Last reviewed</code>、完整 OG/Twitter 图、Article JSON-LD、FAQ、Related reads 与统一 CTA。</p>
+        <p><strong>已迁移文件：</strong></p>
+        <ul>
+          <li><code>blog/en/real-estate-photo-sharing-guide.html</code>：改成普通 property/listing photo sharing 口径，去掉商业化/agency 味道。</li>
+          <li><code>blog/en/automotive-photo-sharing-guide.html</code>：改成 vehicle photo link 场景，聚焦买家问题、车辆细节与售后关闭链接。</li>
+          <li><code>blog/en/upload-images-online-best-practices.html</code>：改成 upload images online 的教学入口，强调先整理、再上传、再设置访问控制。</li>
+          <li><code>blog/en/image-sharing-best-practices.html</code>：改成轻量图片分享规则页，围绕 one purpose / one entry point / one ending。</li>
+          <li><code>blog/en/image-sharing-workflow-diagrams-guide.html</code>：改成图解工作流页，集中展示 upload、link/QR、limits、expiry、revoke。</li>
+          <li><code>blog/en/direct-file-viewing-no-redirects.html</code>：保留原路径，标题和正文改成 direct browser-friendly viewing，不写 CDN/header 等偏技术内容。</li>
+        </ul>
+        <p><strong>验证结果：</strong>6 篇均已接入 <code>blog/blog-cyber.css</code> 与 <code>blog/blog-common.js</code>；图片/SVG 引用已逐项检查，未发现缺失素材；英文 cyber 页数量从 22 增至 28，英文旧模板/其他页从 48 降至 42。</p>
+        <p><strong>当前入口状态：</strong><code>blog/en/index.html</code> 仍有 27 条本地文章入口且全部存在；其中首页可见旧模板入口已减少到 0。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-07-07：我对 MaiIMG 下一步和推广的判断</h2><span class="tag info">策略记录</span></div>
+        <p><strong>一句话定位：</strong>MaiIMG 不要往企业级 DAM、团队协作、API 平台方向讲。当前最有机会的定位是：<strong>给普通人和小卖家用的临时图片/短视频分享工具</strong>，核心差异是 <strong>一个链接 + 一个二维码 + 可过期/可限次/可撤回/可看访问记录</strong>。</p>
+
+        <p><strong>产品该怎么办：</strong></p>
+        <ul>
+          <li><strong>先把“游客上传 → 登录管理”的转化链路打磨透。</strong>用户第一次用时不一定想注册，所以游客上传要继续顺滑；生成成功后要清楚告诉他：登录后可以找回历史链接、关闭链接、替换内容、查看访问记录。</li>
+          <li><strong>把 dashboard 讲清楚。</strong>现在功能已经有，但心智还不够直观。首页、生成成功页、blog CTA 都应该反复讲同一句话：登录后管理你发出去的链接。</li>
+          <li><strong>移动端优先。</strong>这个产品大概率从聊天、朋友圈、微信群、短信、线下扫码进入，手机体验比桌面更重要。上传、登录、复制链接、保存二维码、查看记录都要在手机上少跳转、少遮挡、少解释。</li>
+          <li><strong>不要先做大而全。</strong>比起相册评论、团队权限、复杂文件夹，更应该先做：更清楚的结果页、更稳定的二维码保存、更好的访问记录解释、更强的分享后管理提示。</li>
+          <li><strong>信任页要补。</strong>需要一个简单的 Privacy / How it works / Limits 页面，说清楚文件上限、有效期、访问记录看到什么、游客和登录用户区别。用户愿不愿意上传照片，很多时候卡在“不知道安全吗”。</li>
+        </ul>
+
+        <p><strong>推广该怎么做：</strong></p>
+        <ul>
+          <li><strong>SEO 继续做，但别追泛词。</strong><code>free image hosting</code>、<code>best photo hosting</code> 太宽、太卷。更适合 MaiIMG 的词是场景词：<code>share photos with QR code</code>、<code>photo link with expiry</code>、<code>share photos without social media</code>、<code>send product photos to customer</code>、<code>share event photos with guests</code>。</li>
+          <li><strong>每篇 blog 都要导向一个真实动作。</strong>不要只写科普。文章结尾固定落到：上传一组图 → 得到链接和二维码 → 设置次数/时间 → 发给别人 → 之后关闭。</li>
+          <li><strong>做 10 个高意图落地页，而不是 100 篇薄文章。</strong>优先页：二维码分享照片、过期照片链接、查看谁打开了链接、WhatsApp/微信群发照片不刷屏、婚礼/活动照片分享、小卖家发产品图、房产/车辆照片链接、无需社交平台分享、跨设备分享、ImgBB 替代。</li>
+          <li><strong>利用产品自传播。</strong>每个 gallery 末尾的自家 promo、二维码下载页、访问记录页，都应该温和带一句“Create your own controlled photo link”。这比外部广告更贴近真实使用场景。</li>
+          <li><strong>先找小场景社区，不要上来买大广告。</strong>适合投放/发帖的地方是：婚礼/活动筹备、老师/家长群工具、小卖家论坛、二手车/房产从业者、摄影师交付、WhatsApp/微信照片分享痛点。文案要具体，不要说“下一代图片平台”。</li>
+          <li><strong>做可复用素材。</strong>短视频/GIF 演示最适合：上传 5 张图 → 出链接和二维码 → 设 24 小时过期 → 打开访问记录。这个流程比长文更容易在社交平台解释清楚。</li>
+        </ul>
+
+        <p><strong>30 / 60 / 90 天节奏：</strong></p>
+        <ul>
+          <li><strong>30 天：</strong>修移动端关键体验、补信任页、统一生成成功区文案、把英文首页外露文章全部保持 cyber 质量。</li>
+          <li><strong>60 天：</strong>围绕 10 个高意图场景完善英文 SEO landing/blog，中文保留精选高质量文章，不盲目复制 70 篇。</li>
+          <li><strong>90 天：</strong>看数据决定方向：上传转化、生成成功率、登录转化、dashboard 回访、gallery 末尾 CTA 点击、blog 到首页点击。如果没有数据，不要凭感觉扩功能。</li>
+        </ul>
+
+        <p><strong>不要做的事：</strong>不要把 MaiIMG 写成企业级协作平台；不要承诺端到端加密、无限容量、永久保存、AI 管理；不要继续堆大量相似英文薄页；不要让 blog 流量进来后找不到实际上传入口。</p>
       </section>
 
       <section class="card">
@@ -1080,7 +1129,7 @@ flowchart TB
       <section class="card">
         <div class="row"><h2>这份计划的目标</h2><span class="tag info">总纲</span></div>
         <ul>
-          <li>当前 <code>blog/en/</code> 下有 <strong>76 篇正文 + 1 个 index</strong>，多处主题严重重合，关键词互相内耗。</li>
+          <li>当前 <code>blog/en/</code> 下有 <strong>69 篇正文 + 1 个 index</strong>，多处主题仍然重合，关键词互相内耗。</li>
           <li><code>maiimg.com</code> 目前在 Google 基本搜不到，说明落地页少、关键词散、标题偏弱、内链没形成矩阵。</li>
           <li>产品定位必须回到“给普通人用的图片/短视频分享工具”：朋友、家人、群、活动、个人作品。<strong>不要写成企业级、团队协作、DAM、API 平台</strong>。</li>
           <li>产品<strong>没有 API、没有 SDK、没有私有化、没有端到端加密</strong>，这几类字眼一律从 blog 里剔除。</li>
@@ -1284,7 +1333,7 @@ flowchart TB
 
       <section class="card">
         <div class="row"><h2>合并后的英文 blog 目标结构</h2><span class="tag ok">目标</span></div>
-        <p>合并完成后，英文 blog 从 76 篇压到大约 <strong>22~25 篇主文</strong>，分 6 个大主题区，每篇只盯一个主关键词。目录结构建议：</p>
+        <p>合并完成后，英文 blog 目标压到大约 <strong>22~25 篇主文</strong>，分 6 个大主题区，每篇只盯一个主关键词。目录结构建议：</p>
         <ul>
           <li><strong>Getting started（3 篇）</strong>：how to generate image sharing links / how to create qr codes for images / easiest way to share photos with qr codes。</li>
           <li><strong>Privacy & control（3 篇）</strong>：private photo sharing guide / photo link expiration / access logs for shared links。</li>
