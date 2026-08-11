@@ -1,0 +1,2829 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>免费印章模板生成器 | PNG/JPG/SVG/PDF 本地生成 | MaiIMG Tools</title>
+  <meta name="description" content="完全免费、免登录、无付费墙的印章模板生成器。7 种形状、弧形文字角度可调、边框样式、做旧纹理、毫米+DPI 出图，支持 PNG / JPG / SVG / PDF 四种格式本地导出，适合学习与排版演示。" />
+  <link rel="canonical" href="https://maiimg.com/seal.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://maiimg.com/seal.html" />
+  <meta property="og:title" content="免费印章模板生成器 | PNG/JPG/SVG/PDF 本地生成" />
+  <meta property="og:description" content="完全免费、无付费墙。7 种形状、弧形文字角度可调、四种导出格式，全部在浏览器本地生成，不上传任何数据。" />
+  <meta property="og:site_name" content="MaiIMG Tools" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="免费印章模板生成器 | PNG/JPG/SVG/PDF" />
+  <meta name="twitter:description" content="完全免费、无付费墙的本地印章模板生成器。" />
+  <link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/seal.html" />
+  <link rel="alternate" hreflang="en" href="https://maiimg.com/seal.html" />
+  <link rel="alternate" hreflang="x-default" href="https://maiimg.com/seal.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" type="image/svg+xml" href="favicon.svg" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --ink: #101827;
+      --muted: #667085;
+      --line: #d9e2ef;
+      --brand: #b91c1c;
+      --brand-2: #0f766e;
+      --danger: #dc2626;
+      --shadow: 0 22px 60px rgba(15, 23, 42, 0.12);
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.86);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.24);
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar-inner {
+      width: min(1280px, calc(100% - 28px));
+      height: 66px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: 0 12px 24px rgba(185, 28, 28, 0.18);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-link,
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: #334155;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .ghost-btn:disabled {
+      opacity: 0.42;
+      cursor: not-allowed;
+    }
+
+    .ghost-btn.sm {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: 13px;
+    }
+
+    .wrap {
+      width: min(1280px, calc(100% - 28px));
+      margin: 22px auto 42px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(460px, 720px) minmax(320px, 1fr);
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding: 6px 10px;
+      border: 1px solid rgba(185, 28, 28, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.74);
+      color: #991b1b;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.04;
+    }
+
+    .lead {
+      max-width: 720px;
+      margin: 12px 0 0;
+      color: #475569;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .notice {
+      border: 1px solid #fecaca;
+      background: #fff7f7;
+      color: #991b1b;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.55;
+      max-width: 620px;
+      justify-self: end;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      min-width: 0;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .controls {
+      padding: 16px;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+      position: sticky;
+      top: 84px;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .panel-title h2 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.25;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    /* 只作用于直接子 label，避免污染 .check / .segmented 里的 label */
+    .field > label,
+    .field-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 7px;
+      color: #344054;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-width: 0;
+      min-height: 42px;
+      border: 1.5px solid var(--line);
+      border-radius: 11px;
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 12px;
+      font: inherit;
+      outline: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    textarea {
+      min-height: 96px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.12);
+    }
+
+    input[type="color"] {
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    input[type="range"] {
+      min-height: 34px;
+      padding: 0;
+      accent-color: var(--brand);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .template-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-width: 0;
+      min-height: 44px;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .template-btn i {
+      color: var(--brand);
+      flex: 0 0 auto;
+    }
+
+    .template-btn:hover,
+    .template-btn.is-active {
+      border-color: rgba(185, 28, 28, 0.36);
+      background: #fff7f7;
+      color: #991b1b;
+    }
+
+    details.group {
+      margin: 0 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #f8fafc;
+      overflow: hidden;
+    }
+
+    details.group > summary {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      color: #344054;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    details.group > summary::-webkit-details-marker { display: none; }
+
+    details.group > summary::after {
+      content: "\f078";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--muted);
+      transition: transform 0.18s ease;
+    }
+
+    details.group[open] > summary::after { transform: rotate(180deg); }
+
+    .group-body {
+      padding: 4px 12px 12px;
+      background: #fff;
+      border-top: 1px solid var(--line);
+    }
+
+    .segmented {
+      display: grid;
+      gap: 8px;
+    }
+
+    .segmented.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .segmented.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .segmented.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .segmented label {
+      display: block;
+      margin: 0;
+      min-width: 0;
+    }
+
+    .segmented input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      min-width: 0;
+      min-height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .segmented span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      min-height: 42px;
+      padding: 4px 6px;
+      border: 1.5px solid var(--line);
+      border-radius: 11px;
+      background: #fff;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .segmented input:focus-visible + span {
+      box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.18);
+    }
+
+    .segmented input:checked + span {
+      border-color: transparent;
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: 0 12px 24px rgba(185, 28, 28, 0.16);
+    }
+
+    .checks {
+      display: grid;
+      gap: 8px;
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      margin: 0;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: #f8fafc;
+      font-size: 13px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+    }
+
+    .check input {
+      flex: 0 0 auto;
+      width: 18px;
+      min-height: 18px;
+      accent-color: var(--brand);
+    }
+
+    .glyph-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .glyph-btn {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1;
+      padding: 5px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      cursor: pointer;
+      color: var(--brand);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .glyph-btn svg { width: 100%; height: 100%; display: block; }
+    .glyph-btn:hover { border-color: rgba(185, 28, 28, 0.4); }
+
+    .glyph-btn.is-active {
+      border-color: var(--brand);
+      background: #fff7f7;
+      box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.12);
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding-top: 4px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 0;
+      min-height: 44px;
+      border: 0;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .primary-btn {
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: 0 16px 28px rgba(185, 28, 28, 0.18);
+    }
+
+    .secondary-btn {
+      color: #334155;
+      background: #eef2ff;
+    }
+
+    .preview {
+      padding: 18px;
+    }
+
+    .preview-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .preview-head h2 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .preview-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .status-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .status-item {
+      min-width: 0;
+      padding: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 8px;
+      background: #f8fafc;
+    }
+
+    .status-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .status-item strong {
+      display: block;
+      margin-top: 3px;
+      color: var(--ink);
+      font-size: 13px;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .canvas-stage {
+      display: grid;
+      place-items: center;
+      min-height: min(64vh, 640px);
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background:
+        linear-gradient(45deg, #f1f5f9 25%, transparent 25%),
+        linear-gradient(-45deg, #f1f5f9 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f1f5f9 75%),
+        linear-gradient(-45deg, transparent 75%, #f1f5f9 75%),
+        #ffffff;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+      background-size: 20px 20px;
+      overflow: auto;
+    }
+
+    /* 纸面预览：白纸 + 淡横线，印章用正片叠底叠上去 */
+    .canvas-stage.paper {
+      background:
+        repeating-linear-gradient(180deg, rgba(148, 163, 184, 0.16) 0 1px, transparent 1px 34px),
+        linear-gradient(160deg, #ffffff 0%, #fbfaf7 60%, #f6f4ef 100%);
+      background-size: auto, auto;
+      box-shadow: inset 0 0 60px rgba(120, 113, 108, 0.12);
+    }
+
+    .canvas-stage.paper canvas { mix-blend-mode: multiply; filter: none; }
+
+    canvas#sealCanvas {
+      display: block;
+      width: var(--preview-size, 520px);
+      height: var(--preview-size, 520px);
+      max-width: none;
+      object-fit: contain;
+      filter: drop-shadow(0 16px 22px rgba(15, 23, 42, 0.12));
+    }
+
+    .export-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .export-btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      min-height: 56px;
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .export-btn small {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .export-btn:hover {
+      border-color: rgba(185, 28, 28, 0.4);
+      background: #fff7f7;
+      color: #991b1b;
+    }
+
+    .free-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      width: 100%;
+      justify-content: center;
+      border-radius: 10px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .history {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+      gap: 10px;
+    }
+
+    .history-cell { position: relative; }
+
+    .history-cell > button.load {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .history img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+    }
+
+    .history-cell > button.del {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--danger);
+      font-size: 11px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .help {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .help-card {
+      padding: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.76);
+      color: #475569;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .help-card strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%) translateY(20px);
+      z-index: 60;
+      padding: 11px 18px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.92);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    .font-warn {
+      display: none;
+      margin-top: 7px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .font-warn.show { display: block; }
+
+    @media (max-width: 1040px) {
+      .controls { position: static; max-height: none; overflow: visible; }
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .notice {
+        order: 2;
+        justify-self: stretch;
+        max-width: none;
+      }
+
+      .status-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .topbar-inner,
+      .wrap { width: calc(100% - 20px); }
+
+      .top-actions .nav-link { display: none; }
+
+      .grid-2,
+      .actions,
+      .help { grid-template-columns: 1fr; }
+
+      .template-grid { grid-template-columns: 1fr; }
+      .export-row { grid-template-columns: repeat(2, 1fr); }
+      .glyph-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .segmented.cols-4 { grid-template-columns: repeat(2, 1fr); }
+
+      .preview-head { align-items: flex-start; flex-direction: column; }
+      .preview-actions { width: 100%; justify-content: flex-start; }
+      .canvas-stage { min-height: 340px; padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"><i class="fas fa-stamp"></i></span>
+        <span>MaiIMG Tools</span>
+      </a>
+      <div class="top-actions">
+        <a class="nav-link" href="index.html"><i class="fas fa-images"></i><span data-i18n="nav.share">图片分享</span></a>
+        <a class="nav-link" href="blog/"><i class="fas fa-book-open"></i>Blog</a>
+        <button class="ghost-btn" type="button" id="langBtn"><i class="fas fa-language"></i><span id="langLabel">EN</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <span class="eyebrow"><i class="fas fa-wand-magic-sparkles"></i> <span data-i18n="hero.badge">完全免费 · 无付费墙 · 免登录 · 本地生成</span></span>
+        <h1 data-i18n="hero.title">免费印章模板生成器</h1>
+        <p class="lead" data-i18n="hero.lead">7 种形状、弧形文字角度自由调节、5 种边框样式、5 种做旧纹理、毫米 + DPI 出图，支持 PNG / JPG / SVG / PDF 四种格式导出。所有功能永久免费，没有任何付费项。</p>
+      </div>
+      <div class="notice" data-i18n="hero.notice">
+        特别声明：本页面仅供学习、排版练习、装饰图案参考。所有导出格式（含 SVG / PDF）都固定带 SAMPLE / 仅供学习参考水印且无法关闭，请勿用于合同、证照、票据、证明等任何真实法律或商业用途。
+      </div>
+    </section>
+
+    <section class="app">
+      <form class="panel controls" id="sealForm">
+        <div class="panel-title">
+          <h2><i class="fas fa-sliders"></i> <span data-i18n="panel.config">参数配置</span></h2>
+          <div style="display:flex;gap:6px;">
+            <button class="ghost-btn sm" type="button" id="randomBtn"><i class="fas fa-shuffle"></i><span data-i18n="btn.random">随机</span></button>
+            <button class="ghost-btn sm" type="button" id="resetBtn"><i class="fas fa-rotate-left"></i><span data-i18n="btn.reset">重置</span></button>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="field-title"><span data-i18n="tpl.title">免费模板库</span> <span class="hint" data-i18n="tpl.hint">一键套用</span></div>
+          <div class="template-grid" id="templateGrid"></div>
+        </div>
+
+        <details class="group" open>
+          <summary><i class="fas fa-shapes"></i> <span data-i18n="grp.shape">形状与排布</span></summary>
+          <div class="group-body">
+            <div class="field">
+              <div class="field-title" data-i18n="f.shape">印章形状</div>
+              <div class="segmented cols-4" id="shapeSeg"></div>
+            </div>
+            <div class="field">
+              <div class="field-title"><span data-i18n="f.layout">文字排布</span> <span class="hint" data-i18n="f.layout.hint">弧形/平排</span></div>
+              <div class="segmented cols-3" id="layoutSeg"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="group" open>
+          <summary><i class="fas fa-font"></i> <span data-i18n="grp.text">文字内容</span></summary>
+          <div class="group-body">
+            <div class="field">
+              <label for="outerText"><span data-i18n="f.outer">主体文字</span> <span class="hint">2~30</span></label>
+              <input id="outerText" maxlength="30" />
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="innerText" data-i18n="f.inner">内圈文字</label>
+                <input id="innerText" maxlength="24" />
+              </div>
+              <div class="field">
+                <label for="bottomText" data-i18n="f.bottom">底部文字</label>
+                <input id="bottomText" maxlength="20" />
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="centerText" data-i18n="f.center">中心文字</label>
+                <input id="centerText" maxlength="12" />
+              </div>
+              <div class="field">
+                <label for="captionText" data-i18n="f.caption">抬头文字</label>
+                <input id="captionText" maxlength="18" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="securityCode"><span data-i18n="f.code">编号/防伪码</span> <span class="hint" data-i18n="f.code.hint">可留空</span></label>
+              <input id="securityCode" maxlength="18" />
+            </div>
+          </div>
+        </details>
+
+        <details class="group">
+          <summary><i class="fas fa-star"></i> <span data-i18n="grp.glyph">中心图形</span></summary>
+          <div class="group-body">
+            <div class="field">
+              <div class="field-title"><span data-i18n="f.glyph">内置图形</span> <span class="hint" data-i18n="f.glyph.hint">不支持上传</span></div>
+              <div class="glyph-grid" id="glyphGrid"></div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="glyphScale"><span data-i18n="f.glyphScale">图形大小</span> <span class="hint" id="glyphScaleValue"></span></label>
+                <input id="glyphScale" type="range" min="0.3" max="1.6" step="0.02" />
+              </div>
+              <div class="field">
+                <label for="glyphOffsetY"><span data-i18n="f.glyphOffset">图形上下</span> <span class="hint" id="glyphOffsetValue"></span></label>
+                <input id="glyphOffsetY" type="range" min="-30" max="30" step="1" />
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="group">
+          <summary><i class="fas fa-ruler-combined"></i> <span data-i18n="grp.size">尺寸与分辨率</span></summary>
+          <div class="group-body">
+            <div class="field">
+              <div class="field-title" data-i18n="f.sizeMode">尺寸单位</div>
+              <div class="segmented cols-2" id="sizeModeSeg"></div>
+            </div>
+            <div class="field" id="pxField">
+              <label for="sizePx"><span data-i18n="f.sizePx">像素尺寸</span> <span class="hint" id="sizePxValue"></span></label>
+              <input id="sizePx" type="range" min="300" max="3000" step="20" />
+            </div>
+            <div class="grid-2" id="mmField" hidden>
+              <div class="field">
+                <label for="sizeMm"><span data-i18n="f.sizeMm">物理直径</span> <span class="hint">mm</span></label>
+                <input id="sizeMm" type="number" min="10" max="200" step="1" />
+              </div>
+              <div class="field">
+                <label for="dpi" data-i18n="f.dpi">输出分辨率</label>
+                <select id="dpi">
+                  <option value="150">150 DPI</option>
+                  <option value="300">300 DPI</option>
+                  <option value="600">600 DPI</option>
+                  <option value="1200">1200 DPI</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <div class="field-title" data-i18n="f.presets">常用规格</div>
+              <div class="grid-3" id="sizePresets"></div>
+            </div>
+          </div>
+        </details>
+
+        <details class="group">
+          <summary><i class="fas fa-palette"></i> <span data-i18n="grp.style">颜色与字体</span></summary>
+          <div class="group-body">
+            <div class="grid-2">
+              <div class="field">
+                <label for="stampColor" data-i18n="f.color">印章颜色</label>
+                <input id="stampColor" type="color" />
+              </div>
+              <div class="field">
+                <label for="stampOpacity"><span data-i18n="f.opacity">印泥浓度</span> <span class="hint" id="opacityValue"></span></label>
+                <input id="stampOpacity" type="range" min="0.45" max="1" step="0.01" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="fontFamily" data-i18n="f.font">字体样式</label>
+              <select id="fontFamily">
+                <optgroup label="中文常用" data-i18n-label="opt.cn">
+                  <option value="serif">宋体/衬线</option>
+                  <option value="'Songti SC', SimSun, STSong, serif">宋体细节</option>
+                  <option value="sans-serif">黑体/无衬线</option>
+                  <option value="'PingFang SC', 'Microsoft YaHei', sans-serif">现代黑体</option>
+                  <option value="KaiTi, STKaiti, serif">楷体风格</option>
+                  <option value="FangSong, STFangsong, serif">仿宋风格</option>
+                  <option value="'Yuanti SC', YouYuan, sans-serif">圆体风格</option>
+                  <option value="LiSu, STLiti, KaiTi, serif">隶书风格</option>
+                  <option value="'STXingkai', 'Xingkai SC', KaiTi, serif">行楷风格</option>
+                </optgroup>
+                <optgroup label="英文/编号" data-i18n-label="opt.en">
+                  <option value="'Times New Roman', Times, serif">Times Serif</option>
+                  <option value="Georgia, 'Times New Roman', serif">Georgia</option>
+                  <option value="Baskerville, 'Libre Baskerville', Georgia, serif">Baskerville</option>
+                  <option value="'Arial Black', Arial, sans-serif">Arial Black</option>
+                  <option value="Impact, Haettenschweiler, sans-serif">Impact</option>
+                  <option value="'Courier New', Courier, monospace">Courier Code</option>
+                </optgroup>
+              </select>
+              <div class="font-warn" id="fontWarn"></div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="fontWeight" data-i18n="f.weight">字体粗细</label>
+                <select id="fontWeight">
+                  <option value="900">900</option>
+                  <option value="800">800</option>
+                  <option value="700">700</option>
+                  <option value="600">600</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="letterSpacing"><span data-i18n="f.spacing">文字间距</span> <span class="hint" id="spacingValue"></span></label>
+                <input id="letterSpacing" type="range" min="0.55" max="1.9" step="0.05" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="textScale"><span data-i18n="f.scale">文字细宽</span> <span class="hint" id="scaleValue"></span></label>
+              <input id="textScale" type="range" min="0.55" max="1.35" step="0.01" />
+            </div>
+          </div>
+        </details>
+
+        <details class="group">
+          <summary><i class="fas fa-border-all"></i> <span data-i18n="grp.border">边框与线条</span></summary>
+          <div class="group-body">
+            <div class="field">
+              <div class="field-title" data-i18n="f.borderStyle">边框样式</div>
+              <div class="segmented cols-4" id="borderSeg"></div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="lineWidth"><span data-i18n="f.lineWidth">线条粗细</span> <span class="hint" id="lineValue"></span></label>
+                <input id="lineWidth" type="range" min="2" max="26" step="1" />
+              </div>
+              <div class="field">
+                <label for="ringGap"><span data-i18n="f.ringGap">双线间距</span> <span class="hint" id="ringGapValue"></span></label>
+                <input id="ringGap" type="range" min="1.2" max="5" step="0.1" />
+              </div>
+            </div>
+            <div class="field">
+              <div class="checks">
+                <label class="check"><input id="doubleRing" type="checkbox" /><span data-i18n="f.doubleRing">外圈双线</span></label>
+                <label class="check"><input id="innerRing" type="checkbox" /><span data-i18n="f.innerRing">内环线</span></label>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="group">
+          <summary><i class="fas fa-splotch"></i> <span data-i18n="grp.distress">做旧纹理</span></summary>
+          <div class="group-body">
+            <div class="field">
+              <div class="field-title" data-i18n="f.distressStyle">纹理类型</div>
+              <div class="segmented cols-3" id="distressSeg"></div>
+            </div>
+            <div class="field">
+              <label for="distressAmount"><span data-i18n="f.distressAmount">老化程度</span> <span class="hint" id="distressValue"></span></label>
+              <input id="distressAmount" type="range" min="0" max="90" step="1" />
+            </div>
+            <div class="actions" style="grid-template-columns:1fr;">
+              <button class="ghost-btn" type="button" id="reseedBtn"><i class="fas fa-dice"></i><span data-i18n="btn.reseed">换一张纹理</span></button>
+            </div>
+          </div>
+        </details>
+
+        <details class="group">
+          <summary><i class="fas fa-compass-drafting"></i> <span data-i18n="grp.advanced">高级细调（免费）</span></summary>
+          <div class="group-body">
+            <div class="field-title" data-i18n="adv.outer">主体文字弧线</div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="outerStartDeg"><span data-i18n="adv.start">起始角</span> <span class="hint" id="outerStartValue"></span></label>
+                <input id="outerStartDeg" type="range" min="-270" max="90" step="1" />
+              </div>
+              <div class="field">
+                <label for="outerSweepDeg"><span data-i18n="adv.sweep">张角</span> <span class="hint" id="outerSweepValue"></span></label>
+                <input id="outerSweepDeg" type="range" min="-330" max="330" step="1" />
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="outerTextSize"><span data-i18n="adv.size">字号</span> <span class="hint" id="outerSizeValue"></span></label>
+                <input id="outerTextSize" type="range" min="0.025" max="0.1" step="0.001" />
+              </div>
+              <div class="field">
+                <label for="outerTextRadius"><span data-i18n="adv.radius">半径</span> <span class="hint" id="outerRadiusValue"></span></label>
+                <input id="outerTextRadius" type="range" min="0.5" max="0.98" step="0.01" />
+              </div>
+            </div>
+            <div class="field">
+              <div class="checks"><label class="check"><input id="outerFaceIn" type="checkbox" /><span data-i18n="adv.faceIn">字头朝内（翻转）</span></label></div>
+            </div>
+
+            <div class="field-title" data-i18n="adv.bottom">底部文字弧线</div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="bottomStartDeg"><span data-i18n="adv.start">起始角</span> <span class="hint" id="bottomStartValue"></span></label>
+                <input id="bottomStartDeg" type="range" min="-90" max="270" step="1" />
+              </div>
+              <div class="field">
+                <label for="bottomSweepDeg"><span data-i18n="adv.sweep">张角</span> <span class="hint" id="bottomSweepValue"></span></label>
+                <input id="bottomSweepDeg" type="range" min="-330" max="330" step="1" />
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="bottomTextSize"><span data-i18n="adv.size">字号</span> <span class="hint" id="bottomSizeValue"></span></label>
+                <input id="bottomTextSize" type="range" min="0.02" max="0.08" step="0.001" />
+              </div>
+              <div class="field">
+                <label for="bottomTextRadius"><span data-i18n="adv.radius">半径</span> <span class="hint" id="bottomRadiusValue"></span></label>
+                <input id="bottomTextRadius" type="range" min="0.5" max="0.98" step="0.01" />
+              </div>
+            </div>
+            <div class="field">
+              <div class="checks"><label class="check"><input id="bottomFaceIn" type="checkbox" /><span data-i18n="adv.faceIn">字头朝内（翻转）</span></label></div>
+            </div>
+
+            <div class="field-title" data-i18n="adv.inner">内圈文字弧线</div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="innerStartDeg"><span data-i18n="adv.start">起始角</span> <span class="hint" id="innerStartValue"></span></label>
+                <input id="innerStartDeg" type="range" min="-270" max="90" step="1" />
+              </div>
+              <div class="field">
+                <label for="innerSweepDeg"><span data-i18n="adv.sweep">张角</span> <span class="hint" id="innerSweepValue"></span></label>
+                <input id="innerSweepDeg" type="range" min="-330" max="330" step="1" />
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="innerTextSize"><span data-i18n="adv.size">字号</span> <span class="hint" id="innerSizeValue"></span></label>
+                <input id="innerTextSize" type="range" min="0.015" max="0.06" step="0.001" />
+              </div>
+              <div class="field">
+                <label for="innerTextRadius"><span data-i18n="adv.radius">半径</span> <span class="hint" id="innerRadiusValue"></span></label>
+                <input id="innerTextRadius" type="range" min="0.25" max="0.9" step="0.01" />
+              </div>
+            </div>
+            <div class="field">
+              <div class="checks"><label class="check"><input id="innerFaceIn" type="checkbox" /><span data-i18n="adv.faceIn">字头朝内（翻转）</span></label></div>
+            </div>
+
+            <div class="field-title" data-i18n="adv.misc">中心与整体</div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="centerScale"><span data-i18n="adv.centerScale">中心字号</span> <span class="hint" id="centerScaleValue"></span></label>
+                <input id="centerScale" type="range" min="0.5" max="1.8" step="0.01" />
+              </div>
+              <div class="field">
+                <label for="centerOffsetY"><span data-i18n="adv.centerOffset">中心上下</span> <span class="hint" id="centerOffsetValue"></span></label>
+                <input id="centerOffsetY" type="range" min="-30" max="30" step="1" />
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="captionOffsetY"><span data-i18n="adv.captionOffset">抬头位置</span> <span class="hint" id="captionOffsetValue"></span></label>
+                <input id="captionOffsetY" type="range" min="-60" max="60" step="1" />
+              </div>
+              <div class="field">
+                <label for="codeOffsetY"><span data-i18n="adv.codeOffset">编号位置</span> <span class="hint" id="codeOffsetValue"></span></label>
+                <input id="codeOffsetY" type="range" min="-60" max="70" step="1" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="stampRotation"><span data-i18n="adv.rotation">整体旋转</span> <span class="hint" id="rotationValue"></span></label>
+              <input id="stampRotation" type="range" min="-45" max="45" step="1" />
+            </div>
+          </div>
+        </details>
+
+        <details class="group">
+          <summary><i class="fas fa-file-import"></i> <span data-i18n="grp.io">参数导入 / 导出</span></summary>
+          <div class="group-body">
+            <div class="field">
+              <label for="configBox" data-i18n="f.configBox">参数 JSON</label>
+              <textarea id="configBox" spellcheck="false" placeholder="{ ... }"></textarea>
+            </div>
+            <div class="actions">
+              <button class="ghost-btn" type="button" id="copyConfigBtn"><i class="fas fa-copy"></i><span data-i18n="btn.copyCfg">复制</span></button>
+              <button class="ghost-btn" type="button" id="applyConfigBtn"><i class="fas fa-check"></i><span data-i18n="btn.applyCfg">应用</span></button>
+            </div>
+            <div class="actions" style="margin-top:10px;">
+              <button class="ghost-btn" type="button" id="exportCfgBtn"><i class="fas fa-download"></i><span data-i18n="btn.exportCfg">导出 .json</span></button>
+              <button class="ghost-btn" type="button" id="importCfgBtn"><i class="fas fa-upload"></i><span data-i18n="btn.importCfg">导入 .json</span></button>
+            </div>
+            <input type="file" id="cfgFile" accept="application/json,.json" hidden />
+          </div>
+        </details>
+      </form>
+
+      <section class="panel preview">
+        <div class="preview-head">
+          <h2><i class="fas fa-eye"></i> <span data-i18n="panel.preview">实时预览</span></h2>
+          <div class="preview-actions">
+            <button class="ghost-btn sm" type="button" id="undoBtn" title="Ctrl+Z"><i class="fas fa-rotate-left"></i><span data-i18n="btn.undo">撤销</span></button>
+            <button class="ghost-btn sm" type="button" id="redoBtn" title="Ctrl+Shift+Z"><i class="fas fa-rotate-right"></i><span data-i18n="btn.redo">重做</span></button>
+            <button class="ghost-btn sm" type="button" id="paperBtn"><i class="fas fa-file-lines"></i><span data-i18n="btn.paper">纸面预览</span></button>
+            <button class="ghost-btn sm" type="button" id="saveBtn"><i class="fas fa-clock-rotate-left"></i><span data-i18n="btn.save">存入历史</span></button>
+          </div>
+        </div>
+        <div class="status-strip">
+          <div class="status-item"><span data-i18n="st.mode">生成方式</span><strong data-i18n="st.mode.v">本地 Canvas</strong></div>
+          <div class="status-item"><span data-i18n="st.size">输出尺寸</span><strong id="stSize">—</strong></div>
+          <div class="status-item"><span data-i18n="st.price">价格</span><strong id="stPrice">全部免费</strong></div>
+          <div class="status-item"><span data-i18n="st.privacy">隐私</span><strong data-i18n="st.privacy.v">不上传数据</strong></div>
+        </div>
+        <div class="canvas-stage" id="canvasStage">
+          <canvas id="sealCanvas" width="900" height="900" aria-label="印章预览"></canvas>
+        </div>
+
+        <div class="field" style="margin:12px 0 0;">
+          <label for="zoom"><span data-i18n="f.zoom">预览缩放</span> <span class="hint" id="zoomValue"></span></label>
+          <input id="zoom" type="range" min="0.25" max="4" step="0.05" value="1" />
+        </div>
+
+        <div class="export-row">
+          <button class="export-btn" type="button" data-fmt="png"><span>PNG</span><small data-i18n="ex.png">透明背景</small></button>
+          <button class="export-btn" type="button" data-fmt="jpg"><span>JPG</span><small data-i18n="ex.jpg">白底</small></button>
+          <button class="export-btn" type="button" data-fmt="svg"><span>SVG</span><small data-i18n="ex.svg">矢量</small></button>
+          <button class="export-btn" type="button" data-fmt="pdf"><span>PDF</span><small data-i18n="ex.pdf">可打印</small></button>
+        </div>
+        <div class="free-badge"><i class="fas fa-unlock"></i> <span data-i18n="free.badge">四种格式全部免费，无水印付费解锁、无导出次数限制、无需注册</span></div>
+
+        <div class="history" id="history"></div>
+      </section>
+    </section>
+
+    <section class="help">
+      <div class="help-card"><strong data-i18n="help.1.t">永久免费</strong><span data-i18n="help.1.b">模板、高级细调、撤销重做、历史记录和 PNG / JPG / SVG / PDF 四种导出全部免费，没有付费墙、没有次数限制、不需要注册。</span></div>
+      <div class="help-card"><strong data-i18n="help.2.t">本地隐私</strong><span data-i18n="help.2.b">全部绘制、做旧纹理和四种格式的编码都在你的浏览器里完成，不上传文字、图片或参数，断网也能用。</span></div>
+      <div class="help-card"><strong data-i18n="help.3.t">安全边界</strong><span data-i18n="help.3.b">所有导出格式都固定带 SAMPLE 水印且无法关闭，也不支持上传 logo。适合学习、演示和装饰，不适合真实凭证。</span></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* =======================================================================
+       0. i18n
+    ======================================================================= */
+    const I18N = {
+      zh: {
+        'nav.share': '图片分享',
+        'hero.badge': '完全免费 · 无付费墙 · 免登录 · 本地生成',
+        'hero.title': '免费印章模板生成器',
+        'hero.lead': '7 种形状、弧形文字角度自由调节、5 种边框样式、5 种做旧纹理、毫米 + DPI 出图，支持 PNG / JPG / SVG / PDF 四种格式导出。所有功能永久免费，没有任何付费项。',
+        'hero.notice': '特别声明：本页面仅供学习、排版练习、装饰图案参考。所有导出格式（含 SVG / PDF）都固定带 SAMPLE / 仅供学习参考水印且无法关闭，请勿用于合同、证照、票据、证明等任何真实法律或商业用途。',
+        'panel.config': '参数配置', 'panel.preview': '实时预览',
+        'btn.random': '随机', 'btn.reset': '重置', 'btn.undo': '撤销', 'btn.redo': '重做',
+        'btn.paper': '纸面预览', 'btn.save': '存入历史', 'btn.reseed': '换一张纹理',
+        'btn.copyCfg': '复制', 'btn.applyCfg': '应用', 'btn.exportCfg': '导出 .json', 'btn.importCfg': '导入 .json',
+        'tpl.title': '免费模板库', 'tpl.hint': '一键套用',
+        'grp.shape': '形状与排布', 'grp.text': '文字内容', 'grp.glyph': '中心图形',
+        'grp.size': '尺寸与分辨率', 'grp.style': '颜色与字体', 'grp.border': '边框与线条',
+        'grp.distress': '做旧纹理', 'grp.advanced': '高级细调（免费）', 'grp.io': '参数导入 / 导出',
+        'f.shape': '印章形状', 'f.layout': '文字排布', 'f.layout.hint': '弧形/平排',
+        'f.outer': '主体文字', 'f.inner': '内圈文字', 'f.bottom': '底部文字',
+        'f.center': '中心文字', 'f.caption': '抬头文字', 'f.code': '编号/防伪码', 'f.code.hint': '可留空',
+        'f.glyph': '内置图形', 'f.glyph.hint': '不支持上传', 'f.glyphScale': '图形大小', 'f.glyphOffset': '图形上下',
+        'f.sizeMode': '尺寸单位', 'f.sizePx': '像素尺寸', 'f.sizeMm': '物理直径', 'f.dpi': '输出分辨率', 'f.presets': '常用规格',
+        'f.color': '印章颜色', 'f.opacity': '印泥浓度', 'f.font': '字体样式', 'f.weight': '字体粗细',
+        'f.spacing': '文字间距', 'f.scale': '文字细宽',
+        'f.borderStyle': '边框样式', 'f.lineWidth': '线条粗细', 'f.ringGap': '双线间距',
+        'f.doubleRing': '外圈双线', 'f.innerRing': '内环线',
+        'f.distressStyle': '纹理类型', 'f.distressAmount': '老化程度',
+        'f.configBox': '参数 JSON', 'f.zoom': '预览缩放',
+        'adv.outer': '主体文字弧线', 'adv.bottom': '底部文字弧线', 'adv.inner': '内圈文字弧线', 'adv.misc': '中心与整体',
+        'adv.start': '起始角', 'adv.sweep': '张角', 'adv.size': '字号', 'adv.radius': '半径',
+        'adv.faceIn': '字头朝内（翻转）', 'adv.centerScale': '中心字号', 'adv.centerOffset': '中心上下',
+        'adv.captionOffset': '抬头位置', 'adv.codeOffset': '编号位置', 'adv.rotation': '整体旋转',
+        'st.mode': '生成方式', 'st.mode.v': '本地 Canvas', 'st.size': '输出尺寸',
+        'st.price': '价格', 'st.price.v': '全部免费', 'st.privacy': '隐私', 'st.privacy.v': '不上传数据',
+        'ex.png': '透明背景', 'ex.jpg': '白底', 'ex.svg': '矢量', 'ex.pdf': '可打印',
+        'free.badge': '四种格式全部免费，无水印付费解锁、无导出次数限制、无需注册',
+        'help.1.t': '永久免费', 'help.1.b': '模板、高级细调、撤销重做、历史记录和 PNG / JPG / SVG / PDF 四种导出全部免费，没有付费墙、没有次数限制、不需要注册。',
+        'help.2.t': '本地隐私', 'help.2.b': '全部绘制、做旧纹理和四种格式的编码都在你的浏览器里完成，不上传文字、图片或参数，断网也能用。',
+        'help.3.t': '安全边界', 'help.3.b': '所有导出格式都固定带 SAMPLE 水印且无法关闭，也不支持上传 logo。适合学习、演示和装饰，不适合真实凭证。',
+        'opt.cn': '中文常用', 'opt.en': '英文/编号',
+        'shape.circle': '正圆', 'shape.ellipse': '椭圆', 'shape.square': '方形', 'shape.rect': '长条',
+        'shape.triangle': '三角', 'shape.hexagon': '六边', 'shape.octagon': '八边', 'shape.ring': '圆环',
+        'layout.auto': '自动', 'layout.arc': '弧形', 'layout.flat': '平排',
+        'border.solid': '实线', 'border.dashed': '虚线', 'border.dotted': '点线', 'border.zigzag': '锯齿',
+        'ds.none': '无', 'ds.speckle': '整体飞白', 'ds.edge': '边缘磨损',
+        'ds.center': '中心缺墨', 'ds.double': '双次错位',
+        'unit.px': '按像素', 'unit.mm': '按毫米',
+        'toast.copied': '参数已复制到剪贴板', 'toast.copyFail': '复制失败，请手动选中文本框内容',
+        'toast.applied': '参数已应用', 'toast.badJson': 'JSON 解析失败，请检查格式',
+        'toast.saved': '已存入历史', 'toast.exported': '已导出',
+        'toast.undo': '已撤销', 'toast.redo': '已重做', 'toast.reset': '已重置为默认',
+        'toast.noHistory': '没有可撤销的步骤', 'toast.noRedo': '没有可重做的步骤',
+        'font.warn': '当前浏览器可能没有安装该字体，实际会回退到系统默认字体。导出结果在别人的设备上也可能不同。',
+        'tpl.sample': '学习参考章', 'tpl.reviewed': '已审核样式', 'tpl.void': '作废标记',
+        'tpl.received': '收讫装饰', 'tpl.name': '方形姓名章', 'tpl.english': '英文圆章',
+        'tpl.bar': '长条编号', 'tpl.badge': '六边徽章', 'tpl.warn': '三角提示', 'tpl.deco': '装饰花纹'
+      },
+      en: {
+        'nav.share': 'Image Share',
+        'hero.badge': '100% Free · No Paywall · No Login · Local',
+        'hero.title': 'Free Stamp & Seal Generator',
+        'hero.lead': '7 shapes, fully adjustable curved-text angles, 5 border styles, 5 distress textures, millimetre + DPI output, and export to PNG / JPG / SVG / PDF. Every feature is free forever — nothing is behind a paywall.',
+        'hero.notice': 'Notice: this page is for learning, layout practice and decorative reference only. Every export format (including SVG and PDF) carries a fixed SAMPLE watermark that cannot be turned off. Do not use it for contracts, licences, invoices, certificates or any real legal or commercial purpose.',
+        'panel.config': 'Settings', 'panel.preview': 'Live Preview',
+        'btn.random': 'Random', 'btn.reset': 'Reset', 'btn.undo': 'Undo', 'btn.redo': 'Redo',
+        'btn.paper': 'On Paper', 'btn.save': 'Save', 'btn.reseed': 'New texture',
+        'btn.copyCfg': 'Copy', 'btn.applyCfg': 'Apply', 'btn.exportCfg': 'Export .json', 'btn.importCfg': 'Import .json',
+        'tpl.title': 'Free Templates', 'tpl.hint': 'one click',
+        'grp.shape': 'Shape & Layout', 'grp.text': 'Text Content', 'grp.glyph': 'Center Graphic',
+        'grp.size': 'Size & Resolution', 'grp.style': 'Color & Font', 'grp.border': 'Border & Lines',
+        'grp.distress': 'Distress Texture', 'grp.advanced': 'Advanced (free)', 'grp.io': 'Import / Export Config',
+        'f.shape': 'Shape', 'f.layout': 'Text layout', 'f.layout.hint': 'curved/flat',
+        'f.outer': 'Main text', 'f.inner': 'Inner text', 'f.bottom': 'Bottom text',
+        'f.center': 'Center text', 'f.caption': 'Caption', 'f.code': 'Serial code', 'f.code.hint': 'optional',
+        'f.glyph': 'Built-in graphic', 'f.glyph.hint': 'no uploads', 'f.glyphScale': 'Graphic size', 'f.glyphOffset': 'Graphic Y',
+        'f.sizeMode': 'Size unit', 'f.sizePx': 'Pixel size', 'f.sizeMm': 'Diameter', 'f.dpi': 'Resolution', 'f.presets': 'Presets',
+        'f.color': 'Ink color', 'f.opacity': 'Ink density', 'f.font': 'Font', 'f.weight': 'Font weight',
+        'f.spacing': 'Letter spacing', 'f.scale': 'Text width',
+        'f.borderStyle': 'Border style', 'f.lineWidth': 'Line width', 'f.ringGap': 'Ring gap',
+        'f.doubleRing': 'Double outer ring', 'f.innerRing': 'Inner ring',
+        'f.distressStyle': 'Texture type', 'f.distressAmount': 'Aging amount',
+        'f.configBox': 'Config JSON', 'f.zoom': 'Preview zoom',
+        'adv.outer': 'Main text arc', 'adv.bottom': 'Bottom text arc', 'adv.inner': 'Inner text arc', 'adv.misc': 'Center & global',
+        'adv.start': 'Start angle', 'adv.sweep': 'Sweep', 'adv.size': 'Font size', 'adv.radius': 'Radius',
+        'adv.faceIn': 'Flip (face inward)', 'adv.centerScale': 'Center size', 'adv.centerOffset': 'Center Y',
+        'adv.captionOffset': 'Caption Y', 'adv.codeOffset': 'Serial Y', 'adv.rotation': 'Rotation',
+        'st.mode': 'Rendering', 'st.mode.v': 'Local Canvas', 'st.size': 'Output size',
+        'st.price': 'Price', 'st.price.v': 'All free', 'st.privacy': 'Privacy', 'st.privacy.v': 'No upload',
+        'ex.png': 'transparent', 'ex.jpg': 'white bg', 'ex.svg': 'vector', 'ex.pdf': 'printable',
+        'free.badge': 'All four formats free — no watermark unlock fee, no export limits, no sign-up',
+        'help.1.t': 'Free forever', 'help.1.b': 'Templates, advanced tuning, undo/redo, history and all four export formats are free. No paywall, no export limits, no account needed.',
+        'help.2.t': 'Local & private', 'help.2.b': 'Drawing, distress texture and all four file encoders run in your browser. Nothing is uploaded — it works offline.',
+        'help.3.t': 'Safety boundary', 'help.3.b': 'Every export carries a fixed SAMPLE watermark that cannot be disabled, and logo upload is not supported. For study, demos and decoration only.',
+        'opt.cn': 'Chinese fonts', 'opt.en': 'Latin / serial',
+        'shape.circle': 'Circle', 'shape.ellipse': 'Oval', 'shape.square': 'Square', 'shape.rect': 'Bar',
+        'shape.triangle': 'Triangle', 'shape.hexagon': 'Hexagon', 'shape.octagon': 'Octagon', 'shape.ring': 'Ring',
+        'layout.auto': 'Auto', 'layout.arc': 'Curved', 'layout.flat': 'Flat',
+        'border.solid': 'Solid', 'border.dashed': 'Dashed', 'border.dotted': 'Dotted', 'border.zigzag': 'Zigzag',
+        'ds.none': 'None', 'ds.speckle': 'Speckle', 'ds.edge': 'Edge wear',
+        'ds.center': 'Center gap', 'ds.double': 'Double hit',
+        'unit.px': 'Pixels', 'unit.mm': 'Millimetres',
+        'toast.copied': 'Config copied to clipboard', 'toast.copyFail': 'Copy failed — select the text manually',
+        'toast.applied': 'Config applied', 'toast.badJson': 'Invalid JSON',
+        'toast.saved': 'Saved to history', 'toast.exported': 'Exported',
+        'toast.undo': 'Undone', 'toast.redo': 'Redone', 'toast.reset': 'Reset to defaults',
+        'toast.noHistory': 'Nothing to undo', 'toast.noRedo': 'Nothing to redo',
+        'font.warn': 'This font may not be installed in your browser; it will fall back to a system default. The result may also look different on other devices.',
+        'tpl.sample': 'Study sample', 'tpl.reviewed': 'Reviewed style', 'tpl.void': 'Void mark',
+        'tpl.received': 'Received deco', 'tpl.name': 'Square name', 'tpl.english': 'Latin round',
+        'tpl.bar': 'Serial bar', 'tpl.badge': 'Hex badge', 'tpl.warn': 'Triangle note', 'tpl.deco': 'Ornament'
+      }
+    };
+
+    let lang = 'zh';
+    const t = (key) => (I18N[lang] && I18N[lang][key]) || I18N.zh[key] || key;
+
+    /* =======================================================================
+       1. 中心图形库（纯 path，不接受用户上传素材）
+    ======================================================================= */
+    function starPath(points, outer, inner, cx, cy) {
+      let d = '';
+      for (let i = 0; i < points * 2; i++) {
+        const r = i % 2 === 0 ? outer : inner;
+        const a = (Math.PI / points) * i - Math.PI / 2;
+        d += (i ? 'L' : 'M') + (cx + Math.cos(a) * r).toFixed(2) + ' ' + (cy + Math.sin(a) * r).toFixed(2);
+      }
+      return d + 'Z';
+    }
+
+    function gearPath(teeth, outer, inner, holeR, cx, cy) {
+      let d = '';
+      const step = (Math.PI * 2) / (teeth * 2);
+      for (let i = 0; i < teeth * 2; i++) {
+        const r = i % 2 === 0 ? outer : inner;
+        const a0 = step * i - Math.PI / 2;
+        const a1 = step * (i + 1) - Math.PI / 2;
+        d += (i ? 'L' : 'M') + (cx + Math.cos(a0) * r).toFixed(2) + ' ' + (cy + Math.sin(a0) * r).toFixed(2);
+        d += 'L' + (cx + Math.cos(a1) * r).toFixed(2) + ' ' + (cy + Math.sin(a1) * r).toFixed(2);
+      }
+      d += 'Z';
+      // 中心镂空（evenodd）
+      d += 'M' + (cx + holeR) + ' ' + cy;
+      d += 'A' + holeR + ' ' + holeR + ' 0 1 0 ' + (cx - holeR) + ' ' + cy;
+      d += 'A' + holeR + ' ' + holeR + ' 0 1 0 ' + (cx + holeR) + ' ' + cy + 'Z';
+      return d;
+    }
+
+    function flowerPath(petals, outer, inner, cx, cy) {
+      let d = 'M' + cx + ' ' + (cy - outer);
+      for (let i = 0; i < petals; i++) {
+        const a0 = (Math.PI * 2 / petals) * i - Math.PI / 2;
+        const a1 = (Math.PI * 2 / petals) * (i + 1) - Math.PI / 2;
+        const am = (a0 + a1) / 2;
+        const mx = cx + Math.cos(am) * inner;
+        const my = cy + Math.sin(am) * inner;
+        const ex = cx + Math.cos(a1) * outer;
+        const ey = cy + Math.sin(a1) * outer;
+        d += 'Q' + mx.toFixed(2) + ' ' + my.toFixed(2) + ' ' + ex.toFixed(2) + ' ' + ey.toFixed(2);
+      }
+      return d + 'Z';
+    }
+
+    // 全部定义在 100×100 的方框内，中心 (50,50)
+    const GLYPHS = [
+      { id: 'none', label: '—', d: '' },
+      { id: 'star5', d: starPath(5, 46, 19, 50, 50) },
+      { id: 'star6', d: starPath(6, 46, 24, 50, 50) },
+      { id: 'gear', d: gearPath(12, 46, 36, 15, 50, 50), evenodd: true },
+      { id: 'flower', d: flowerPath(8, 46, 16, 50, 50) },
+      { id: 'shield', d: 'M50 6 L88 20 L88 50 Q88 82 50 95 Q12 82 12 50 L12 20 Z' },
+      { id: 'leaf', d: 'M50 5 Q90 30 78 62 Q66 94 50 94 Q34 94 22 62 Q10 30 50 5 Z' },
+      { id: 'book', d: 'M10 24 Q30 14 50 24 Q70 14 90 24 L90 78 Q70 68 50 78 Q30 68 10 78 Z' },
+      { id: 'diamond', d: 'M50 5 L92 50 L50 95 L8 50 Z' },
+      { id: 'ring', d: 'M50 6 A44 44 0 1 0 50.01 6 Z M50 26 A24 24 0 1 1 49.99 26 Z', evenodd: true }
+    ];
+    const glyphById = Object.fromEntries(GLYPHS.map(g => [g.id, g]));
+
+    /* =======================================================================
+       2. 默认状态
+    ======================================================================= */
+    const SHAPES = ['circle', 'ellipse', 'square', 'rect', 'triangle', 'hexagon', 'octagon', 'ring'];
+    const BORDER_STYLES = ['solid', 'dashed', 'dotted', 'zigzag'];
+    const DISTRESS_STYLES = ['none', 'speckle', 'edge', 'center', 'double'];
+    const LAYOUTS = ['auto', 'arc', 'flat'];
+    // 默认走弧形排布的形状
+    const ARC_SHAPES = new Set(['circle', 'ellipse', 'hexagon', 'octagon', 'ring']);
+
+    const DEFAULTS = {
+      shape: 'circle',
+      textLayout: 'auto',
+      outerText: '麦瓜图片分享工具',
+      innerText: 'MAIIMG SAMPLE',
+      bottomText: '学习参考',
+      centerText: '',
+      captionText: 'SAMPLE',
+      securityCode: 'A20260805',
+
+      sizeMode: 'px',
+      sizePx: 900,
+      sizeMm: 40,
+      dpi: 600,
+
+      stampColor: '#d11f1f',
+      stampOpacity: 0.92,
+      fontFamily: 'serif',
+      fontWeight: 900,
+      letterSpacing: 1,
+      textScale: 0.92,
+
+      borderStyle: 'solid',
+      lineWidth: 10,
+      ringGap: 2.2,
+      doubleRing: true,
+      innerRing: false,
+
+      distressStyle: 'speckle',
+      distressAmount: 30,
+      distressSeed: 20260805,
+
+      // 弧线：起始角 + 张角（度，canvas 坐标系，0°=右，顺时针为正）
+      outerStartDeg: -162, outerSweepDeg: 144, outerFaceIn: false,
+      outerTextSize: 0.055, outerTextRadius: 0.78,
+      bottomStartDeg: 152, bottomSweepDeg: -124, bottomFaceIn: true,
+      bottomTextSize: 0.039, bottomTextRadius: 0.73,
+      innerStartDeg: -145, innerSweepDeg: 110, innerFaceIn: false,
+      innerTextSize: 0.031, innerTextRadius: 0.52,
+
+      centerGlyph: 'star5',
+      glyphScale: 0.72,
+      glyphOffsetY: -2,
+      centerScale: 1,
+      centerOffsetY: -2,
+      captionOffsetY: 34,
+      codeOffsetY: 52,
+      stampRotation: 0
+    };
+
+    const TEMPLATES = [
+      { id: 'sample', key: 'tpl.sample', icon: 'fa-graduation-cap', state: {} },
+      {
+        id: 'reviewed', key: 'tpl.reviewed', icon: 'fa-check-double',
+        state: {
+          shape: 'circle', outerText: '资料审核演示模板', innerText: 'REVIEW SAMPLE',
+          bottomText: '已审核', centerText: '审', centerGlyph: 'none', captionText: 'SAMPLE',
+          securityCode: 'CHK-2026-08', stampColor: '#b91c1c',
+          fontFamily: "'PingFang SC', 'Microsoft YaHei', sans-serif",
+          innerRing: true, distressAmount: 18, outerTextRadius: 0.8, centerScale: 1.1
+        }
+      },
+      {
+        id: 'void', key: 'tpl.void', icon: 'fa-ban',
+        state: {
+          shape: 'square', outerText: '作废文件演示', innerText: 'VOID SAMPLE',
+          bottomText: '仅作示例', centerText: '作废', centerGlyph: 'none', captionText: 'VOID',
+          securityCode: '', stampColor: '#334155', borderStyle: 'dashed',
+          fontFamily: "'Arial Black', Arial, sans-serif", letterSpacing: 0.95,
+          textScale: 0.82, distressAmount: 34, distressStyle: 'double',
+          centerScale: 1.08, stampRotation: -5
+        }
+      },
+      {
+        id: 'received', key: 'tpl.received', icon: 'fa-receipt',
+        state: {
+          shape: 'ellipse', outerText: '收讫模板参考', innerText: 'LOCAL ONLY',
+          bottomText: '演示用途', centerText: '收讫', centerGlyph: 'none', captionText: '',
+          securityCode: 'NO. 000001', stampColor: '#2563eb',
+          fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 800,
+          stampOpacity: 0.88, lineWidth: 9, letterSpacing: 1.12, textScale: 0.78,
+          distressAmount: 22, outerTextRadius: 0.78, bottomTextRadius: 0.74,
+          centerScale: 1.15, captionOffsetY: 0, codeOffsetY: 56
+        }
+      },
+      {
+        id: 'name', key: 'tpl.name', icon: 'fa-signature',
+        state: {
+          shape: 'square', outerText: '个人姓名', innerText: '', bottomText: '学习参考',
+          centerText: '麦瓜', centerGlyph: 'none', captionText: '', securityCode: '',
+          stampColor: '#7c2d12', fontFamily: 'KaiTi, STKaiti, serif', fontWeight: 800,
+          lineWidth: 12, letterSpacing: 0.9, textScale: 0.86,
+          distressAmount: 16, centerScale: 1.3
+        }
+      },
+      {
+        id: 'english', key: 'tpl.english', icon: 'fa-language',
+        state: {
+          shape: 'circle', outerText: 'MAIIMG DESIGN SAMPLE', innerText: 'FREE LOCAL TOOL',
+          bottomText: 'FOR DEMO ONLY', centerText: '', centerGlyph: 'star5',
+          captionText: 'SAMPLE', securityCode: 'DESIGN-ONLY', stampColor: '#0f766e',
+          fontFamily: "'Times New Roman', Times, serif", letterSpacing: 0.85, textScale: 0.82,
+          distressAmount: 26, outerTextSize: 0.046, outerTextRadius: 0.83, innerTextSize: 0.03
+        }
+      },
+      {
+        id: 'bar', key: 'tpl.bar', icon: 'fa-grip-lines',
+        state: {
+          shape: 'rect', textLayout: 'flat', outerText: '排版练习条形样式',
+          innerText: 'LAYOUT PRACTICE', bottomText: '', centerText: '', centerGlyph: 'none',
+          captionText: '', securityCode: 'SN-000000', stampColor: '#334155',
+          fontFamily: "'Courier New', Courier, monospace", fontWeight: 700,
+          lineWidth: 7, textScale: 0.95, distressAmount: 14, doubleRing: false
+        }
+      },
+      {
+        id: 'badge', key: 'tpl.badge', icon: 'fa-certificate',
+        state: {
+          shape: 'hexagon', outerText: '六边形徽章演示', innerText: 'BADGE SAMPLE',
+          bottomText: '装饰图案', centerText: '', centerGlyph: 'gear', captionText: '',
+          securityCode: '', stampColor: '#0f766e', lineWidth: 11,
+          outerTextRadius: 0.74, bottomTextRadius: 0.7, distressAmount: 20,
+          glyphScale: 0.9, codeOffsetY: 60
+        }
+      },
+      {
+        id: 'warn', key: 'tpl.warn', icon: 'fa-triangle-exclamation',
+        state: {
+          shape: 'triangle', textLayout: 'flat', outerText: '示例提示',
+          innerText: '', bottomText: 'DEMO', centerText: '!', centerGlyph: 'none',
+          captionText: '', securityCode: '', stampColor: '#b45309',
+          fontFamily: "'Arial Black', Arial, sans-serif", lineWidth: 13,
+          centerScale: 1.4, centerOffsetY: 6, distressAmount: 12, doubleRing: false
+        }
+      },
+      {
+        id: 'deco', key: 'tpl.deco', icon: 'fa-fan',
+        state: {
+          shape: 'ring', outerText: '装饰花纹图案参考', innerText: '',
+          bottomText: 'ORNAMENT', centerText: '', centerGlyph: 'flower',
+          captionText: '', securityCode: '', stampColor: '#7c2d12',
+          borderStyle: 'dotted', lineWidth: 8, distressStyle: 'edge', distressAmount: 24,
+          glyphScale: 1.15, outerTextRadius: 0.86
+        }
+      }
+    ];
+
+    const SIZE_PRESETS = [
+      { label: '38mm', mm: 38 }, { label: '40mm', mm: 40 }, { label: '42mm', mm: 42 },
+      { label: '45mm', mm: 45 }, { label: '4.5×3cm', mm: 45 }, { label: '50mm', mm: 50 }
+    ];
+
+    /* =======================================================================
+       3. DOM 引用
+    ======================================================================= */
+    const $ = (id) => document.getElementById(id);
+    const canvas = $('sealCanvas');
+    const ctx = canvas.getContext('2d');
+    const form = $('sealForm');
+    const stage = $('canvasStage');
+    const toastEl = $('toast');
+    const measureCtx = document.createElement('canvas').getContext('2d');
+
+    // 所有受控字段：id -> 类型
+    const FIELD_TYPES = {
+      outerText: 's', innerText: 's', bottomText: 's', centerText: 's',
+      captionText: 's', securityCode: 's',
+      sizePx: 'n', sizeMm: 'n', dpi: 'n',
+      stampColor: 's', stampOpacity: 'n', fontFamily: 's', fontWeight: 'n',
+      letterSpacing: 'n', textScale: 'n',
+      lineWidth: 'n', ringGap: 'n', doubleRing: 'b', innerRing: 'b',
+      distressAmount: 'n',
+      outerStartDeg: 'n', outerSweepDeg: 'n', outerFaceIn: 'b',
+      outerTextSize: 'n', outerTextRadius: 'n',
+      bottomStartDeg: 'n', bottomSweepDeg: 'n', bottomFaceIn: 'b',
+      bottomTextSize: 'n', bottomTextRadius: 'n',
+      innerStartDeg: 'n', innerSweepDeg: 'n', innerFaceIn: 'b',
+      innerTextSize: 'n', innerTextRadius: 'n',
+      glyphScale: 'n', glyphOffsetY: 'n',
+      centerScale: 'n', centerOffsetY: 'n',
+      captionOffsetY: 'n', codeOffsetY: 'n', stampRotation: 'n'
+    };
+
+    // shape / textLayout / sizeMode / borderStyle / distressStyle / centerGlyph / distressSeed
+    // 不由 input 承载，由分段按钮和图形网格直接写入 state
+
+    let state = { ...DEFAULTS };
+    let applying = false;          // 防止 setState 触发历史记录
+    let activeTemplateId = 'sample';
+    let paperMode = false;
+    let zoom = 1;
+
+    /* =======================================================================
+       4. 工具函数
+    ======================================================================= */
+    function toast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => toastEl.classList.remove('show'), 1900);
+    }
+
+    function safeGet(key, fallback) {
+      try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }
+      catch (e) { return fallback; }
+    }
+
+    function safeSet(key, value) {
+      try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+      catch (e) { return false; }
+    }
+
+    function mulberry32(seed) {
+      let a = seed >>> 0;
+      return function () {
+        a = (a + 0x6D2B79F5) >>> 0;
+        let t = a;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[c]));
+    }
+
+    // 计算最终输出像素
+    function outputPx(st) {
+      if (st.sizeMode === 'mm') return clamp(Math.round(st.sizeMm / 25.4 * st.dpi), 200, 4000);
+      return clamp(Math.round(st.sizePx), 200, 4000);
+    }
+
+    // 字号自适应：把 textScale 计入宽度，避免拉宽后溢出
+    function fitSize(text, baseSize, maxWidth, family, weight, scaleX) {
+      if (!text) return baseSize;
+      let size = baseSize;
+      const min = Math.max(6, baseSize * 0.28);
+      while (size > min) {
+        measureCtx.font = weight + ' ' + size + 'px ' + family;
+        if (measureCtx.measureText(text).width * scaleX <= maxWidth) return size;
+        size -= Math.max(0.5, baseSize * 0.02);
+      }
+      return size;
+    }
+
+    /* =======================================================================
+       5. 几何：形状定义 + 轮廓采样
+    ======================================================================= */
+    function geometry(shape, size) {
+      switch (shape) {
+        case 'ellipse': return { kind: 'ellipse', rx: size * 0.42, ry: size * 0.30 };
+        case 'square': return { kind: 'rect', w: size * 0.74, h: size * 0.74 };
+        case 'rect': return { kind: 'rect', w: size * 0.86, h: size * 0.40 };
+        case 'triangle': return { kind: 'poly', n: 3, r: size * 0.47, phase: -90 };
+        case 'hexagon': return { kind: 'poly', n: 6, r: size * 0.45, phase: -90 };
+        case 'octagon': return { kind: 'poly', n: 8, r: size * 0.45, phase: -112.5 };
+        case 'ring': return { kind: 'ellipse', rx: size * 0.44, ry: size * 0.44 };
+        case 'circle':
+        default: return { kind: 'ellipse', rx: size * 0.42, ry: size * 0.42 };
+      }
+    }
+
+    // 弧形文字用的参考半径
+    function arcRadii(geo) {
+      if (geo.kind === 'ellipse') return { rx: geo.rx, ry: geo.ry };
+      if (geo.kind === 'rect') return { rx: geo.w / 2, ry: geo.h / 2 };
+      return { rx: geo.r * 0.93, ry: geo.r * 0.93 };
+    }
+
+    function polyPoints(geo, scale) {
+      const pts = [];
+      const r = geo.r * scale;
+      for (let i = 0; i < geo.n; i++) {
+        const a = (geo.phase + (360 / geo.n) * i) * Math.PI / 180;
+        pts.push([Math.cos(a) * r, Math.sin(a) * r]);
+      }
+      return pts;
+    }
+
+    // 沿轮廓采样（用于锯齿边）
+    function outlineSamples(geo, scale, n) {
+      const out = [];
+      if (geo.kind === 'ellipse') {
+        const rx = geo.rx * scale, ry = geo.ry * scale;
+        for (let i = 0; i < n; i++) {
+          const a = (Math.PI * 2 * i) / n;
+          const x = Math.cos(a) * rx, y = Math.sin(a) * ry;
+          let nx = Math.cos(a) / rx, ny = Math.sin(a) / ry;
+          const len = Math.hypot(nx, ny) || 1;
+          out.push({ x, y, nx: nx / len, ny: ny / len });
+        }
+        return out;
+      }
+      const pts = geo.kind === 'rect'
+        ? [[-geo.w / 2 * scale, -geo.h / 2 * scale], [geo.w / 2 * scale, -geo.h / 2 * scale],
+           [geo.w / 2 * scale, geo.h / 2 * scale], [-geo.w / 2 * scale, geo.h / 2 * scale]]
+        : polyPoints(geo, scale);
+      // 按边长比例分配采样点
+      const segs = pts.map((p, i) => {
+        const q = pts[(i + 1) % pts.length];
+        return { p, q, len: Math.hypot(q[0] - p[0], q[1] - p[1]) };
+      });
+      const total = segs.reduce((s, x) => s + x.len, 0);
+      segs.forEach(seg => {
+        const cnt = Math.max(2, Math.round((seg.len / total) * n));
+        const dx = seg.q[0] - seg.p[0], dy = seg.q[1] - seg.p[1];
+        const L = Math.hypot(dx, dy) || 1;
+        for (let i = 0; i < cnt; i++) {
+          const k = i / cnt;
+          out.push({ x: seg.p[0] + dx * k, y: seg.p[1] + dy * k, nx: dy / L, ny: -dx / L });
+        }
+      });
+      return out;
+    }
+
+    function dashPattern(style, lw) {
+      if (style === 'dashed') return [lw * 3.2, lw * 2];
+      if (style === 'dotted') return [0.01, lw * 2.1];
+      return null;
+    }
+
+    /* =======================================================================
+       6. 绘制后端：Canvas 与 SVG 共用同一套高层指令
+    ======================================================================= */
+    function CanvasBackend(context, size) {
+      const c = context;
+      c.canvas.width = size;
+      c.canvas.height = size;
+      c.clearRect(0, 0, size, size);
+      const stack = [];
+      let maskDots = null;
+
+      function applyStroke(st) {
+        c.strokeStyle = st.color;
+        c.lineWidth = st.width;
+        c.globalAlpha = st.opacity;
+        c.lineCap = st.dash && st.dash[0] < 0.5 ? 'round' : 'butt';
+        c.lineJoin = 'round';
+        c.setLineDash(st.dash || []);
+      }
+
+      return {
+        kind: 'canvas',
+        size,
+        group(tf, fn) {
+          c.save();
+          if (tf.x || tf.y) c.translate(tf.x || 0, tf.y || 0);
+          if (tf.rotate) c.rotate(tf.rotate * Math.PI / 180);
+          if (tf.scaleX != null || tf.scaleY != null) c.scale(tf.scaleX == null ? 1 : tf.scaleX, tf.scaleY == null ? 1 : tf.scaleY);
+          fn();
+          c.restore();
+        },
+        ellipse(rx, ry, st) {
+          applyStroke(st);
+          c.beginPath();
+          c.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+          c.stroke();
+          c.setLineDash([]);
+        },
+        polyline(pts, close, st) {
+          applyStroke(st);
+          c.beginPath();
+          pts.forEach((p, i) => (i ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1])));
+          if (close) c.closePath();
+          c.stroke();
+          c.setLineDash([]);
+        },
+        pathFill(d, st) {
+          if (!d) return;
+          const p = new Path2D(d);
+          c.fillStyle = st.color;
+          c.globalAlpha = st.opacity;
+          c.fill(p, st.evenodd ? 'evenodd' : 'nonzero');
+        },
+        text(str, o) {
+          if (!str) return;
+          c.save();
+          c.translate(o.x || 0, o.y || 0);
+          if (o.rotate) c.rotate(o.rotate * Math.PI / 180);
+          if (o.scaleX && o.scaleX !== 1) c.scale(o.scaleX, 1);
+          c.fillStyle = o.color;
+          c.globalAlpha = o.opacity;
+          c.textAlign = 'center';
+          c.textBaseline = 'middle';
+          c.font = o.weight + ' ' + o.size + 'px ' + o.family;
+          c.fillText(str, 0, 0);
+          c.restore();
+        },
+        artworkStart() { /* canvas 直接画 */ },
+        artworkEnd(dots) {
+          if (!dots || !dots.length) return;
+          c.save();
+          c.globalCompositeOperation = 'destination-out';
+          dots.forEach(d => {
+            c.globalAlpha = d.a;
+            c.fillStyle = '#000';
+            if (d.type === 'rect') c.fillRect(d.x, d.y, d.w, d.h);
+            else { c.beginPath(); c.arc(d.x, d.y, d.r, 0, Math.PI * 2); c.fill(); }
+          });
+          c.restore();
+        },
+        finish() { c.globalAlpha = 1; c.setLineDash([]); }
+      };
+    }
+
+    function SvgBackend(size) {
+      const out = [];
+      const defs = [];
+      let depth = 0;
+      let artStart = -1;
+      const pad = () => '  '.repeat(depth + 1);
+
+      function tfStr(tf) {
+        const parts = [];
+        if (tf.x || tf.y) parts.push('translate(' + (tf.x || 0).toFixed(3) + ' ' + (tf.y || 0).toFixed(3) + ')');
+        if (tf.rotate) parts.push('rotate(' + tf.rotate.toFixed(3) + ')');
+        if ((tf.scaleX != null && tf.scaleX !== 1) || (tf.scaleY != null && tf.scaleY !== 1)) {
+          parts.push('scale(' + (tf.scaleX == null ? 1 : tf.scaleX) + ' ' + (tf.scaleY == null ? 1 : tf.scaleY) + ')');
+        }
+        return parts.join(' ');
+      }
+
+      function strokeAttrs(st) {
+        let s = ' fill="none" stroke="' + st.color + '" stroke-width="' + st.width.toFixed(3) +
+                '" stroke-opacity="' + st.opacity + '" stroke-linejoin="round"';
+        if (st.dash) {
+          s += ' stroke-dasharray="' + st.dash.map(v => v.toFixed(2)).join(' ') + '"';
+          if (st.dash[0] < 0.5) s += ' stroke-linecap="round"';
+        }
+        return s;
+      }
+
+      return {
+        kind: 'svg',
+        size,
+        group(tf, fn) {
+          const s = tfStr(tf);
+          out.push(pad() + '<g' + (s ? ' transform="' + s + '"' : '') + '>');
+          depth++;
+          fn();
+          depth--;
+          out.push(pad() + '</g>');
+        },
+        ellipse(rx, ry, st) {
+          out.push(pad() + '<ellipse cx="0" cy="0" rx="' + rx.toFixed(3) + '" ry="' + ry.toFixed(3) + '"' + strokeAttrs(st) + '/>');
+        },
+        polyline(pts, close, st) {
+          const d = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(2) + ' ' + p[1].toFixed(2)).join('') + (close ? 'Z' : '');
+          out.push(pad() + '<path d="' + d + '"' + strokeAttrs(st) + '/>');
+        },
+        pathFill(d, st) {
+          if (!d) return;
+          out.push(pad() + '<path d="' + d + '" fill="' + st.color + '" fill-opacity="' + st.opacity + '"' +
+                   (st.evenodd ? ' fill-rule="evenodd"' : '') + '/>');
+        },
+        text(str, o) {
+          if (!str) return;
+          const s = tfStr({ x: o.x, y: o.y, rotate: o.rotate, scaleX: o.scaleX, scaleY: 1 });
+          out.push(pad() + '<g' + (s ? ' transform="' + s + '"' : '') + '>' +
+            '<text x="0" y="0" text-anchor="middle" dominant-baseline="central"' +
+            ' font-family="' + esc(o.family) + '" font-size="' + o.size.toFixed(2) + '"' +
+            ' font-weight="' + o.weight + '" fill="' + o.color + '" fill-opacity="' + o.opacity + '"' +
+            ' xml:space="preserve">' + esc(str) + '</text></g>');
+        },
+        artworkStart() { artStart = out.length; },
+        artworkEnd(dots) {
+          if (!dots || !dots.length || artStart < 0) return;
+          // 做旧在 SVG 里用 mask 表达：白=保留，黑=擦除
+          const m = ['<mask id="distress" maskUnits="userSpaceOnUse" x="0" y="0" width="' + size + '" height="' + size + '">'];
+          m.push('<rect x="0" y="0" width="' + size + '" height="' + size + '" fill="#fff"/>');
+          dots.forEach(d => {
+            const g = Math.round(255 * (1 - d.a));
+            const col = 'rgb(' + g + ',' + g + ',' + g + ')';
+            if (d.type === 'rect') {
+              m.push('<rect x="' + d.x.toFixed(1) + '" y="' + d.y.toFixed(1) + '" width="' + d.w.toFixed(1) +
+                     '" height="' + d.h.toFixed(1) + '" fill="' + col + '"/>');
+            } else {
+              m.push('<circle cx="' + d.x.toFixed(1) + '" cy="' + d.y.toFixed(1) + '" r="' + d.r.toFixed(1) + '" fill="' + col + '"/>');
+            }
+          });
+          m.push('</mask>');
+          defs.push(m.join(''));
+          out.splice(artStart, 0, '  <g mask="url(#distress)">');
+          out.push('  </g>');
+        },
+        finish() {},
+        serialize() {
+          return '<?xml version="1.0" encoding="UTF-8"?>\n' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" ' +
+            'viewBox="0 0 ' + size + ' ' + size + '">\n' +
+            '<!-- Generated by MaiIMG free stamp generator (https://maiimg.com/seal.html).\n' +
+            '     This file is a SAMPLE for study and layout practice only.\n' +
+            '     The SAMPLE watermark is part of the artwork and must not be removed. -->\n' +
+            (defs.length ? '  <defs>' + defs.join('') + '</defs>\n' : '') +
+            out.join('\n') + '\n</svg>\n';
+        }
+      };
+    }
+
+    /* =======================================================================
+       7. 核心渲染：一份逻辑，两个后端
+    ======================================================================= */
+    function buildDistressDots(st, size) {
+      if (st.distressStyle === 'none' || st.distressAmount <= 0) return [];
+      const rand = mulberry32((st.distressSeed | 0) + st.distressAmount * 7717);
+      const dots = [];
+      const amt = st.distressAmount;
+      const count = Math.floor(amt * 9);
+      const cx = size / 2, cy = size / 2;
+      const style = st.distressStyle === 'double' ? 'speckle' : st.distressStyle;
+
+      for (let i = 0; i < count; i++) {
+        let x, y;
+        if (style === 'edge') {
+          const a = rand() * Math.PI * 2;
+          const rr = size * (0.30 + rand() * 0.16);
+          x = cx + Math.cos(a) * rr;
+          y = cy + Math.sin(a) * rr;
+        } else if (style === 'center') {
+          const a = rand() * Math.PI * 2;
+          const rr = size * rand() * 0.22;
+          x = cx + Math.cos(a) * rr;
+          y = cy + Math.sin(a) * rr;
+        } else {
+          x = rand() * size;
+          y = rand() * size;
+        }
+        dots.push({
+          type: 'dot', x, y,
+          r: size / 900 * (1 + rand() * (amt / 4.5)),
+          a: 0.16 + rand() * 0.36
+        });
+      }
+      const streaks = Math.floor(amt * 2);
+      for (let i = 0; i < streaks; i++) {
+        dots.push({
+          type: 'rect',
+          x: rand() * size, y: rand() * size,
+          w: size / 900 * (16 + rand() * 52),
+          h: size / 900 * (1 + rand() * 2.4),
+          a: 0.2
+        });
+      }
+      return dots;
+    }
+
+    // 弧形文字
+    function drawArc(be, text, o) {
+      if (!text) return;
+      const chars = [...text];
+      const sweep = o.sweepDeg * o.letterSpacing;
+      const center = o.startDeg + o.sweepDeg / 2;
+      const start = center - sweep / 2;
+      const step = chars.length > 1 ? sweep / (chars.length - 1) : 0;
+
+      chars.forEach((ch, i) => {
+        const deg = chars.length === 1 ? center : start + step * i;
+        const rad = deg * Math.PI / 180;
+        const x = Math.cos(rad) * o.rx;
+        const y = Math.sin(rad) * o.ry;
+        // 椭圆法线方向（正圆时退化为 rad）
+        const normal = Math.atan2(Math.sin(rad) / o.ry, Math.cos(rad) / o.rx);
+        // faceIn=false：字头朝外（上弧正读）；faceIn=true：字头朝内（下弧正读）
+        const rot = (normal + (o.faceIn ? -Math.PI / 2 : Math.PI / 2)) * 180 / Math.PI;
+        be.text(ch, {
+          x, y, rotate: rot, scaleX: o.scaleX, size: o.size,
+          weight: o.weight, family: o.family, color: o.color, opacity: o.opacity
+        });
+      });
+    }
+
+    function renderSeal(be, st) {
+      const size = be.size;
+      const geo = geometry(st.shape, size);
+      const rad = arcRadii(geo);
+      const lw = st.lineWidth * (size / 900);
+      const stroke = {
+        color: st.stampColor, width: lw, opacity: st.stampOpacity,
+        dash: dashPattern(st.borderStyle, lw)
+      };
+      const fillStyle = { color: st.stampColor, opacity: st.stampOpacity };
+      const useArc = st.textLayout === 'arc' || (st.textLayout === 'auto' && ARC_SHAPES.has(st.shape));
+
+      be.artworkStart();
+
+      const drawBody = () => {
+        // ---- 外框 ----
+        if (st.borderStyle === 'zigzag') {
+          const amp = lw * 0.9;
+          const n = st.shape === 'circle' || st.shape === 'ellipse' || st.shape === 'ring' ? 72 : 60;
+          const samples = outlineSamples(geo, 1, n);
+          const pts = samples.map((s, i) => {
+            const k = i % 2 === 0 ? amp : -amp;
+            return [s.x + s.nx * k, s.y + s.ny * k];
+          });
+          be.polyline(pts, true, { ...stroke, dash: null });
+        } else if (geo.kind === 'ellipse') {
+          be.ellipse(geo.rx, geo.ry, stroke);
+        } else if (geo.kind === 'rect') {
+          be.polyline([[-geo.w / 2, -geo.h / 2], [geo.w / 2, -geo.h / 2], [geo.w / 2, geo.h / 2], [-geo.w / 2, geo.h / 2]], true, stroke);
+        } else {
+          be.polyline(polyPoints(geo, 1), true, stroke);
+        }
+
+        // ---- 双线 ----
+        if (st.doubleRing) {
+          const thin = { ...stroke, width: Math.max(1, lw * 0.36), dash: dashPattern(st.borderStyle, Math.max(1, lw * 0.36)) };
+          const inset = lw * st.ringGap;
+          if (geo.kind === 'ellipse') {
+            be.ellipse(Math.max(2, geo.rx - inset), Math.max(2, geo.ry - inset), thin);
+          } else if (geo.kind === 'rect') {
+            const w = Math.max(4, geo.w - inset * 2), h = Math.max(4, geo.h - inset * 2);
+            be.polyline([[-w / 2, -h / 2], [w / 2, -h / 2], [w / 2, h / 2], [-w / 2, h / 2]], true, thin);
+          } else {
+            be.polyline(polyPoints(geo, Math.max(0.3, 1 - inset / geo.r)), true, thin);
+          }
+        }
+
+        // ---- 内环 ----
+        if (st.innerRing) {
+          const thin = { ...stroke, width: Math.max(1, lw * 0.45), dash: null };
+          if (geo.kind === 'rect') {
+            const w = geo.w * 0.62, h = geo.h * 0.62;
+            be.polyline([[-w / 2, -h / 2], [w / 2, -h / 2], [w / 2, h / 2], [-w / 2, h / 2]], true, thin);
+          } else {
+            be.ellipse(rad.rx * 0.58, rad.ry * 0.58, thin);
+          }
+        }
+
+        // ---- 圆环形状的内圈 ----
+        if (st.shape === 'ring') {
+          be.ellipse(rad.rx * 0.66, rad.ry * 0.66, { ...stroke, width: Math.max(1, lw * 0.7) });
+        }
+
+        // ---- 中心图形 ----
+        const glyph = glyphById[st.centerGlyph];
+        if (glyph && glyph.d) {
+          const target = size * 0.30 * st.glyphScale;
+          const s = target / 100;
+          be.group({ x: -target / 2, y: -target / 2 + size * st.glyphOffsetY / 100, scaleX: s, scaleY: s }, () => {
+            be.pathFill(glyph.d, { ...fillStyle, evenodd: !!glyph.evenodd });
+          });
+        }
+
+        const textBase = {
+          weight: st.fontWeight, family: st.fontFamily,
+          color: st.stampColor, opacity: st.stampOpacity, scaleX: st.textScale
+        };
+
+        if (useArc) {
+          drawArc(be, st.outerText, {
+            ...textBase, rx: rad.rx * st.outerTextRadius, ry: rad.ry * st.outerTextRadius,
+            startDeg: st.outerStartDeg, sweepDeg: st.outerSweepDeg, faceIn: st.outerFaceIn,
+            size: size * st.outerTextSize, letterSpacing: st.letterSpacing
+          });
+          drawArc(be, st.bottomText, {
+            ...textBase, rx: rad.rx * st.bottomTextRadius, ry: rad.ry * st.bottomTextRadius,
+            startDeg: st.bottomStartDeg, sweepDeg: st.bottomSweepDeg, faceIn: st.bottomFaceIn,
+            size: size * st.bottomTextSize, letterSpacing: st.letterSpacing
+          });
+          drawArc(be, st.innerText, {
+            ...textBase, rx: rad.rx * st.innerTextRadius, ry: rad.ry * st.innerTextRadius,
+            startDeg: st.innerStartDeg, sweepDeg: st.innerSweepDeg, faceIn: st.innerFaceIn,
+            size: size * st.innerTextSize, letterSpacing: st.letterSpacing
+          });
+        } else {
+          // 平排：主文字在上，内圈文字在下
+          const maxW = (geo.kind === 'rect' ? geo.w : rad.rx * 2) * 0.78;
+          if (st.outerText) {
+            const fs = fitSize(st.outerText, size * st.outerTextSize * 1.35, maxW, st.fontFamily, st.fontWeight, st.textScale);
+            be.text(st.outerText, { ...textBase, x: 0, y: -rad.ry * 0.55, size: fs });
+          }
+          if (st.innerText) {
+            const fs = fitSize(st.innerText, size * st.innerTextSize * 1.3, maxW, st.fontFamily, st.fontWeight, st.textScale);
+            be.text(st.innerText, { ...textBase, weight: Math.max(600, st.fontWeight - 100), x: 0, y: rad.ry * 0.38, size: fs });
+          }
+          if (st.bottomText) {
+            const fs = fitSize(st.bottomText, size * st.bottomTextSize * 1.3, maxW, st.fontFamily, st.fontWeight, st.textScale);
+            be.text(st.bottomText, { ...textBase, x: 0, y: rad.ry * 0.62, size: fs });
+          }
+        }
+
+        // ---- 中心文字 ----
+        if (st.centerText) {
+          const maxW = (geo.kind === 'rect' ? geo.w : rad.rx * 2) * 0.60;
+          const base = fitSize(st.centerText, size * 0.15, maxW, st.fontFamily, st.fontWeight, st.textScale);
+          be.text(st.centerText, {
+            ...textBase, x: 0, y: size * st.centerOffsetY / 100, size: base * st.centerScale
+          });
+        }
+
+        // ---- 抬头 ----
+        if (st.captionText) {
+          const maxW = rad.rx * 1.5;
+          const fs = fitSize(st.captionText, size * 0.045, maxW, st.fontFamily, st.fontWeight, st.textScale);
+          be.text(st.captionText, { ...textBase, x: 0, y: rad.ry * st.captionOffsetY / 100, size: fs });
+        }
+
+        // ---- 编号 ----
+        if (st.securityCode) {
+          const maxW = rad.rx * 1.5;
+          const fs = fitSize(st.securityCode, size * 0.028, maxW, st.fontFamily, st.fontWeight, st.textScale);
+          be.text(st.securityCode, {
+            ...textBase, weight: Math.max(600, st.fontWeight - 100),
+            x: 0, y: rad.ry * st.codeOffsetY / 100, size: fs
+          });
+        }
+      };
+
+      // 双次错位：先画一层错开的淡影，再画主体
+      if (st.distressStyle === 'double') {
+        const off = size * 0.006 * (1 + st.distressAmount / 60);
+        be.group({ x: size / 2 + off, y: size / 2 + off * 0.7, rotate: st.stampRotation + 1.2 }, () => {
+          const saved = st.stampOpacity;
+          st.stampOpacity = saved * 0.34;
+          stroke.opacity = st.stampOpacity;
+          fillStyle.opacity = st.stampOpacity;
+          drawBody();
+          st.stampOpacity = saved;
+          stroke.opacity = saved;
+          fillStyle.opacity = saved;
+        });
+      }
+
+      be.group({ x: size / 2, y: size / 2, rotate: st.stampRotation }, drawBody);
+
+      be.artworkEnd(buildDistressDots(st, size));
+
+      // ---- 强制水印（在做旧之后，不受遮罩影响，四种格式都带） ----
+      drawWatermark(be, size);
+      be.finish();
+    }
+
+    // 水印：所有导出格式共用，不提供关闭开关
+    function drawWatermark(be, size) {
+      be.group({ x: size / 2, y: size / 2, rotate: -34.6 }, () => {
+        be.text('SAMPLE', {
+          x: 0, y: -size * 0.02, size: size * 0.09, weight: 900,
+          family: 'Arial, Helvetica, sans-serif', color: '#0f172a', opacity: 0.16, scaleX: 1
+        });
+        be.text('仅供学习参考 / SAMPLE ONLY', {
+          x: 0, y: size * 0.075, size: size * 0.033, weight: 800,
+          family: 'Arial, Helvetica, sans-serif', color: '#0f172a', opacity: 0.16, scaleX: 1
+        });
+      });
+    }
+
+    /* =======================================================================
+       8. 状态 <-> 表单
+    ======================================================================= */
+    function readForm() {
+      const s = { ...state };
+      for (const [id, type] of Object.entries(FIELD_TYPES)) {
+        const el = $(id);
+        if (!el) continue;
+        if (type === 'b') s[id] = el.checked;
+        else if (type === 'n') s[id] = Number(el.value);
+        else s[id] = el.value;
+      }
+      // 文本字段裁掉首尾空格用于绘制，但保留用户输入
+      return s;
+    }
+
+    function writeForm(s) {
+      for (const [id, type] of Object.entries(FIELD_TYPES)) {
+        const el = $(id);
+        if (!el) continue;
+        if (type === 'b') el.checked = !!s[id];
+        else el.value = s[id];
+      }
+      renderSegmented();
+      renderGlyphs();
+      $('mmField').hidden = s.sizeMode !== 'mm';
+      $('pxField').hidden = s.sizeMode === 'mm';
+    }
+
+    function setState(next, opts) {
+      opts = opts || {};
+      applying = true;
+      state = { ...DEFAULTS, ...state, ...next };
+      // 数值兜底，防止导入的坏数据把画面搞崩
+      for (const [id, type] of Object.entries(FIELD_TYPES)) {
+        if (type === 'n' && !Number.isFinite(state[id])) state[id] = DEFAULTS[id];
+      }
+      if (!SHAPES.includes(state.shape)) state.shape = DEFAULTS.shape;
+      if (!LAYOUTS.includes(state.textLayout)) state.textLayout = DEFAULTS.textLayout;
+      if (!BORDER_STYLES.includes(state.borderStyle)) state.borderStyle = DEFAULTS.borderStyle;
+      if (!DISTRESS_STYLES.includes(state.distressStyle)) state.distressStyle = DEFAULTS.distressStyle;
+      if (!glyphById[state.centerGlyph]) state.centerGlyph = DEFAULTS.centerGlyph;
+      if (state.sizeMode !== 'mm') state.sizeMode = 'px';
+      writeForm(state);
+      applying = false;
+      render();
+      if (!opts.silent) pushHistory();
+    }
+
+    /* =======================================================================
+       9. 撤销 / 重做
+    ======================================================================= */
+    const undoStack = [];
+    let undoIndex = -1;
+    const UNDO_MAX = 60;
+
+    function pushHistory() {
+      const snap = JSON.stringify(state);
+      if (undoIndex >= 0 && undoStack[undoIndex] === snap) return;
+      undoStack.splice(undoIndex + 1);
+      undoStack.push(snap);
+      if (undoStack.length > UNDO_MAX) undoStack.shift();
+      undoIndex = undoStack.length - 1;
+      updateUndoButtons();
+    }
+
+    function updateUndoButtons() {
+      $('undoBtn').disabled = undoIndex <= 0;
+      $('redoBtn').disabled = undoIndex >= undoStack.length - 1;
+    }
+
+    function undo() {
+      if (undoIndex <= 0) { toast(t('toast.noHistory')); return; }
+      undoIndex--;
+      setState(JSON.parse(undoStack[undoIndex]), { silent: true });
+      updateUndoButtons();
+      toast(t('toast.undo'));
+    }
+
+    function redo() {
+      if (undoIndex >= undoStack.length - 1) { toast(t('toast.noRedo')); return; }
+      undoIndex++;
+      setState(JSON.parse(undoStack[undoIndex]), { silent: true });
+      updateUndoButtons();
+      toast(t('toast.redo'));
+    }
+
+    /* =======================================================================
+       10. 渲染入口 + 标签
+    ======================================================================= */
+    let saveTimer = null;
+
+    function render() {
+      const st = state;
+      const size = outputPx(st);
+      updateLabels(st, size);
+      const be = CanvasBackend(ctx, size);
+      renderSeal(be, st);
+      updatePreviewSize();
+      // localStorage 写入去抖，避免拖滑块时每帧同步写盘
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => safeSet('maiimg_seal_state_v2', state), 320);
+    }
+
+    function updatePreviewSize() {
+      const base = Math.min(520, stage.clientWidth - 40 || 520);
+      stage.style.setProperty('--preview-size', Math.round(base * zoom) + 'px');
+      $('zoomValue').textContent = Math.round(zoom * 100) + '%';
+    }
+
+    function updateLabels(st, size) {
+      const set = (id, v) => { const el = $(id); if (el) el.textContent = v; };
+      set('sizePxValue', st.sizePx + 'px');
+      set('lineValue', st.lineWidth);
+      set('ringGapValue', st.ringGap.toFixed(1) + 'x');
+      set('spacingValue', st.letterSpacing.toFixed(2));
+      set('scaleValue', st.textScale.toFixed(2));
+      set('opacityValue', Math.round(st.stampOpacity * 100) + '%');
+      set('distressValue', st.distressAmount);
+      set('outerStartValue', st.outerStartDeg + '°');
+      set('outerSweepValue', st.outerSweepDeg + '°');
+      set('outerSizeValue', (st.outerTextSize * 100).toFixed(1) + '%');
+      set('outerRadiusValue', Math.round(st.outerTextRadius * 100) + '%');
+      set('bottomStartValue', st.bottomStartDeg + '°');
+      set('bottomSweepValue', st.bottomSweepDeg + '°');
+      set('bottomSizeValue', (st.bottomTextSize * 100).toFixed(1) + '%');
+      set('bottomRadiusValue', Math.round(st.bottomTextRadius * 100) + '%');
+      set('innerStartValue', st.innerStartDeg + '°');
+      set('innerSweepValue', st.innerSweepDeg + '°');
+      set('innerSizeValue', (st.innerTextSize * 100).toFixed(1) + '%');
+      set('innerRadiusValue', Math.round(st.innerTextRadius * 100) + '%');
+      set('glyphScaleValue', Math.round(st.glyphScale * 100) + '%');
+      set('glyphOffsetValue', st.glyphOffsetY + '%');
+      set('centerScaleValue', Math.round(st.centerScale * 100) + '%');
+      set('centerOffsetValue', st.centerOffsetY + '%');
+      set('captionOffsetValue', st.captionOffsetY + '%');
+      set('codeOffsetValue', st.codeOffsetY + '%');
+      set('rotationValue', st.stampRotation + '°');
+
+      const mmTxt = st.sizeMode === 'mm'
+        ? size + 'px (' + st.sizeMm + 'mm @ ' + st.dpi + 'dpi)'
+        : size + ' × ' + size + 'px';
+      set('stSize', mmTxt);
+      set('stPrice', t('st.price.v'));
+      $('configBox').value = JSON.stringify(state, null, 2);
+      checkFont(st.fontFamily);
+    }
+
+    /* =======================================================================
+       11. 字体可用性提示
+    ======================================================================= */
+    const fontCache = {};
+    function fontLikelyAvailable(stack) {
+      const first = stack.split(',')[0].replace(/['"]/g, '').trim();
+      if (['serif', 'sans-serif', 'monospace'].includes(first)) return true;
+      if (fontCache[first] != null) return fontCache[first];
+      const c = document.createElement('canvas');
+      c.width = 90; c.height = 90;
+      const g = c.getContext('2d');
+      const shot = (family) => {
+        g.clearRect(0, 0, 90, 90);
+        g.fillStyle = '#000';
+        g.textBaseline = 'top';
+        g.font = '64px ' + family;
+        g.fillText('印A', 0, 0);
+        return c.toDataURL();
+      };
+      const ref = shot('"__maiimg_missing__", monospace');
+      const test = shot('"' + first + '", monospace');
+      const ok = test !== ref;
+      fontCache[first] = ok;
+      return ok;
+    }
+
+    function checkFont(stack) {
+      const warn = $('fontWarn');
+      if (fontLikelyAvailable(stack)) { warn.classList.remove('show'); }
+      else { warn.textContent = t('font.warn'); warn.classList.add('show'); }
+    }
+
+    /* =======================================================================
+       12. 分段控件 / 图形网格 / 模板
+    ======================================================================= */
+    const SEG_DEFS = [
+      { host: 'shapeSeg', key: 'shape', items: SHAPES, label: v => t('shape.' + v) },
+      { host: 'layoutSeg', key: 'textLayout', items: LAYOUTS, label: v => t('layout.' + v) },
+      { host: 'sizeModeSeg', key: 'sizeMode', items: ['px', 'mm'], label: v => t('unit.' + v) },
+      { host: 'borderSeg', key: 'borderStyle', items: BORDER_STYLES, label: v => t('border.' + v) },
+      { host: 'distressSeg', key: 'distressStyle', items: DISTRESS_STYLES, label: v => t('ds.' + v) }
+    ];
+
+    function renderSegmented() {
+      SEG_DEFS.forEach(def => {
+        const host = $(def.host);
+        if (!host) return;
+        host.innerHTML = '';
+        def.items.forEach(v => {
+          const label = document.createElement('label');
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = def.key;
+          input.value = v;
+          input.checked = state[def.key] === v;
+          const span = document.createElement('span');
+          span.textContent = def.label(v);
+          input.addEventListener('change', () => {
+            if (!input.checked) return;
+            setState({ [def.key]: v });
+          });
+          label.appendChild(input);
+          label.appendChild(span);
+          host.appendChild(label);
+        });
+      });
+    }
+
+    function renderGlyphs() {
+      const host = $('glyphGrid');
+      if (!host) return;
+      host.innerHTML = '';
+      GLYPHS.forEach(g => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'glyph-btn' + (state.centerGlyph === g.id ? ' is-active' : '');
+        btn.title = g.id;
+        btn.innerHTML = g.d
+          ? '<svg viewBox="0 0 100 100" aria-hidden="true"><path d="' + g.d + '" fill="currentColor"' +
+            (g.evenodd ? ' fill-rule="evenodd"' : '') + '/></svg>'
+          : '<span>' + g.label + '</span>';
+        btn.addEventListener('click', () => setState({ centerGlyph: g.id }));
+        host.appendChild(btn);
+      });
+    }
+
+    function renderTemplates() {
+      const host = $('templateGrid');
+      host.innerHTML = '';
+      TEMPLATES.forEach(tpl => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'template-btn' + (tpl.id === activeTemplateId ? ' is-active' : '');
+        const span = document.createElement('span');
+        span.textContent = t(tpl.key);
+        const icon = document.createElement('i');
+        icon.className = 'fas ' + tpl.icon;
+        btn.appendChild(span);
+        btn.appendChild(icon);
+        btn.addEventListener('click', () => {
+          activeTemplateId = tpl.id;
+          setState({ ...DEFAULTS, ...tpl.state, distressSeed: state.distressSeed });
+          renderTemplates();
+        });
+        host.appendChild(btn);
+      });
+    }
+
+    function renderSizePresets() {
+      const host = $('sizePresets');
+      host.innerHTML = '';
+      SIZE_PRESETS.forEach(p => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ghost-btn sm';
+        btn.textContent = p.label;
+        btn.addEventListener('click', () => setState({ sizeMode: 'mm', sizeMm: p.mm }));
+        host.appendChild(btn);
+      });
+    }
+
+    /* =======================================================================
+       13. 导出：PNG / JPG / SVG / PDF —— 全部免费，全部带水印
+    ======================================================================= */
+    function stamp() { return 'maiimg-sample-seal-' + new Date().toISOString().slice(0, 19).replace(/[:T]/g, ''); }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+    }
+
+    function dataUrlToBlob(dataUrl) {
+      const [head, b64] = dataUrl.split(',');
+      const mime = head.match(/:(.*?);/)[1];
+      const bin = atob(b64);
+      const arr = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+      return new Blob([arr], { type: mime });
+    }
+
+    function exportPNG() {
+      render();
+      downloadBlob(dataUrlToBlob(canvas.toDataURL('image/png')), stamp() + '.png');
+      toast(t('toast.exported') + ' PNG');
+    }
+
+    function exportJPG() {
+      render();
+      const size = canvas.width;
+      const flat = document.createElement('canvas');
+      flat.width = size; flat.height = size;
+      const g = flat.getContext('2d');
+      g.fillStyle = '#ffffff';
+      g.fillRect(0, 0, size, size);
+      g.drawImage(canvas, 0, 0);
+      downloadBlob(dataUrlToBlob(flat.toDataURL('image/jpeg', 0.94)), stamp() + '.jpg');
+      toast(t('toast.exported') + ' JPG');
+    }
+
+    function buildSVG() {
+      const size = outputPx(state);
+      const be = SvgBackend(size);
+      renderSeal(be, { ...state });
+      return be.serialize();
+    }
+
+    function exportSVG() {
+      const svg = buildSVG();
+      downloadBlob(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }), stamp() + '.svg');
+      toast(t('toast.exported') + ' SVG');
+    }
+
+    // 极简 PDF 写出器：单页 + 一张 DCTDecode(JPEG) 图片
+    function exportPDF() {
+      render();
+      const size = canvas.width;
+      const flat = document.createElement('canvas');
+      flat.width = size; flat.height = size;
+      const g = flat.getContext('2d');
+      g.fillStyle = '#ffffff';
+      g.fillRect(0, 0, size, size);
+      g.drawImage(canvas, 0, 0);
+      const jpegDataUrl = flat.toDataURL('image/jpeg', 0.95);
+      const bin = atob(jpegDataUrl.split(',')[1]);
+      const jpeg = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) jpeg[i] = bin.charCodeAt(i);
+
+      // 按物理尺寸排版：mm 模式用真实毫米，px 模式按 300dpi 折算
+      const mm = state.sizeMode === 'mm' ? state.sizeMm : (size / 300) * 25.4;
+      const pt = mm * 72 / 25.4;
+      const pageW = pt + 40, pageH = pt + 40;
+
+      const chunks = [];
+      const offsets = [];
+      let length = 0;
+      const enc = new TextEncoder();
+
+      function push(data) {
+        const bytes = typeof data === 'string' ? enc.encode(data) : data;
+        chunks.push(bytes);
+        length += bytes.length;
+      }
+      function obj(n, body) {
+        offsets[n] = length;
+        push(n + ' 0 obj\n' + body + '\nendobj\n');
+      }
+
+      push('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
+      obj(1, '<< /Type /Catalog /Pages 2 0 R >>');
+      obj(2, '<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+      obj(3, '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + pageW.toFixed(2) + ' ' + pageH.toFixed(2) +
+             '] /Resources << /XObject << /Im0 5 0 R >> >> /Contents 4 0 R >>');
+      const content = 'q\n' + pt.toFixed(2) + ' 0 0 ' + pt.toFixed(2) + ' 20 20 cm\n/Im0 Do\nQ\n';
+      obj(4, '<< /Length ' + enc.encode(content).length + ' >>\nstream\n' + content + 'endstream');
+
+      // 图片对象要拼二进制，单独处理
+      offsets[5] = length;
+      push('5 0 obj\n<< /Type /XObject /Subtype /Image /Width ' + size + ' /Height ' + size +
+           ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + jpeg.length + ' >>\nstream\n');
+      push(jpeg);
+      push('\nendstream\nendobj\n');
+
+      const xrefPos = length;
+      let xref = 'xref\n0 6\n0000000000 65535 f \n';
+      for (let i = 1; i <= 5; i++) xref += String(offsets[i]).padStart(10, '0') + ' 00000 n \n';
+      push(xref);
+      push('trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n' + xrefPos + '\n%%EOF\n');
+
+      const total = new Uint8Array(length);
+      let p = 0;
+      chunks.forEach(c => { total.set(c, p); p += c.length; });
+      downloadBlob(new Blob([total], { type: 'application/pdf' }), stamp() + '.pdf');
+      toast(t('toast.exported') + ' PDF');
+    }
+
+    /* =======================================================================
+       14. 历史缩略图
+    ======================================================================= */
+    function getHistory() { return safeGet('maiimg_seal_history_v2', []); }
+    function setHistory(items) { safeSet('maiimg_seal_history_v2', items.slice(0, 12)); renderHistory(); }
+
+    function thumb() {
+      const c = document.createElement('canvas');
+      c.width = 160; c.height = 160;
+      c.getContext('2d').drawImage(canvas, 0, 0, 160, 160);
+      return c.toDataURL('image/png');
+    }
+
+    function renderHistory() {
+      const host = $('history');
+      const items = getHistory();
+      host.innerHTML = '';
+      items.forEach((item, idx) => {
+        const cell = document.createElement('div');
+        cell.className = 'history-cell';
+        const load = document.createElement('button');
+        load.type = 'button';
+        load.className = 'load';
+        const img = document.createElement('img');
+        img.alt = 'seal preview';
+        img.src = item.preview;
+        load.appendChild(img);
+        load.addEventListener('click', () => setState(item.state));
+        const del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'del';
+        del.textContent = '×';
+        del.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const list = getHistory();
+          list.splice(idx, 1);
+          setHistory(list);
+        });
+        cell.appendChild(load);
+        cell.appendChild(del);
+        host.appendChild(cell);
+      });
+    }
+
+    /* =======================================================================
+       15. 随机
+    ======================================================================= */
+    function randomize() {
+      const samples = [
+        ['麦瓜图片分享工具', 'MAIIMG SAMPLE', '学习参考', ''],
+        ['在线工具模板演示', 'DESIGN ONLY', '排版练习', '印'],
+        ['图像分享参考章', 'LINK AND QR', '非正式用途', ''],
+        ['个人装饰图案', 'SAMPLE STAMP', '仅作示例', '示'],
+        ['MAIIMG LAYOUT DEMO', 'FREE LOCAL TOOL', 'PRACTICE ONLY', '']
+      ];
+      const colors = ['#d11f1f', '#b91c1c', '#2563eb', '#7c2d12', '#334155', '#0f766e', '#b45309'];
+      const fonts = [
+        'serif', "'Songti SC', SimSun, STSong, serif", "'PingFang SC', 'Microsoft YaHei', sans-serif",
+        'KaiTi, STKaiti, serif', 'FangSong, STFangsong, serif',
+        "'Times New Roman', Times, serif", "Georgia, 'Times New Roman', serif", "'Arial Black', Arial, sans-serif"
+      ];
+      const pick = samples[Math.floor(Math.random() * samples.length)];
+      const R = (a, b) => a + Math.random() * (b - a);
+      const P = (arr) => arr[Math.floor(Math.random() * arr.length)];
+      setState({
+        outerText: pick[0], innerText: pick[1], bottomText: pick[2], centerText: pick[3],
+        captionText: Math.random() < 0.5 ? 'SAMPLE' : '',
+        centerGlyph: pick[3] ? 'none' : P(GLYPHS).id,
+        shape: P(SHAPES),
+        textLayout: 'auto',
+        borderStyle: P(BORDER_STYLES),
+        stampColor: P(colors),
+        fontFamily: P(fonts),
+        fontWeight: P([700, 800, 900]),
+        stampOpacity: +R(0.82, 0.98).toFixed(2),
+        letterSpacing: +R(0.8, 1.35).toFixed(2),
+        textScale: +R(0.72, 1.06).toFixed(2),
+        lineWidth: Math.round(R(6, 16)),
+        ringGap: +R(1.6, 3).toFixed(1),
+        doubleRing: Math.random() < 0.72,
+        innerRing: Math.random() < 0.28,
+        distressStyle: P(DISTRESS_STYLES.filter(x => x !== 'none')),
+        distressAmount: Math.round(R(12, 52)),
+        distressSeed: Math.floor(Math.random() * 1e9),
+        outerTextSize: +R(0.044, 0.062).toFixed(3),
+        outerTextRadius: +R(0.72, 0.86).toFixed(2),
+        outerSweepDeg: Math.round(R(120, 168)),
+        outerStartDeg: -Math.round(R(150, 176)),
+        bottomTextRadius: +R(0.66, 0.8).toFixed(2),
+        bottomSweepDeg: -Math.round(R(90, 145)),
+        bottomStartDeg: Math.round(R(140, 168)),
+        glyphScale: +R(0.8, 1.25).toFixed(2),
+        centerScale: +R(0.9, 1.35).toFixed(2),
+        centerOffsetY: Math.round(R(-6, 4)),
+        stampRotation: Math.round(R(-9, 9))
+      });
+      activeTemplateId = '';
+      renderTemplates();
+    }
+
+    /* =======================================================================
+       16. 事件绑定
+    ======================================================================= */
+    let inputTimer = null;
+
+    form.addEventListener('input', (e) => {
+      if (applying) return;
+      if (e.target.type === 'radio') return;    // 分段控件自己处理
+      state = readForm();
+      render();
+      clearTimeout(inputTimer);
+      inputTimer = setTimeout(pushHistory, 420); // 连续拖动只记一步
+    });
+
+    form.addEventListener('change', (e) => {
+      if (applying) return;
+      if (e.target.type === 'radio') return;
+      state = readForm();
+      render();
+      clearTimeout(inputTimer);
+      pushHistory();
+    });
+
+    form.addEventListener('submit', (e) => e.preventDefault());
+
+    $('resetBtn').addEventListener('click', () => {
+      activeTemplateId = 'sample';
+      renderTemplates();
+      setState({ ...DEFAULTS });
+      toast(t('toast.reset'));
+    });
+
+    $('randomBtn').addEventListener('click', randomize);
+    $('reseedBtn').addEventListener('click', () => setState({ distressSeed: Math.floor(Math.random() * 1e9) }));
+    $('undoBtn').addEventListener('click', undo);
+    $('redoBtn').addEventListener('click', redo);
+
+    $('paperBtn').addEventListener('click', () => {
+      paperMode = !paperMode;
+      stage.classList.toggle('paper', paperMode);
+      $('paperBtn').style.borderColor = paperMode ? 'var(--brand)' : '';
+      $('paperBtn').style.color = paperMode ? '#991b1b' : '';
+    });
+
+    $('saveBtn').addEventListener('click', () => {
+      const items = getHistory();
+      items.unshift({ state: { ...state }, preview: thumb() });
+      setHistory(items);
+      toast(t('toast.saved'));
+    });
+
+    $('zoom').addEventListener('input', (e) => {
+      zoom = Number(e.target.value);
+      updatePreviewSize();
+    });
+
+    document.querySelectorAll('.export-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const fmt = btn.dataset.fmt;
+        try {
+          if (fmt === 'png') exportPNG();
+          else if (fmt === 'jpg') exportJPG();
+          else if (fmt === 'svg') exportSVG();
+          else if (fmt === 'pdf') exportPDF();
+        } catch (err) {
+          toast('Export failed: ' + err.message);
+        }
+      });
+    });
+
+    $('copyConfigBtn').addEventListener('click', async () => {
+      const payload = JSON.stringify(state, null, 2);
+      try {
+        await navigator.clipboard.writeText(payload);
+        toast(t('toast.copied'));
+      } catch (e) {
+        $('configBox').select();
+        toast(t('toast.copyFail'));
+      }
+    });
+
+    $('applyConfigBtn').addEventListener('click', () => {
+      try {
+        const parsed = JSON.parse($('configBox').value);
+        if (!parsed || typeof parsed !== 'object') throw new Error('bad');
+        setState(parsed);
+        activeTemplateId = '';
+        renderTemplates();
+        toast(t('toast.applied'));
+      } catch (e) {
+        toast(t('toast.badJson'));
+      }
+    });
+
+    $('exportCfgBtn').addEventListener('click', () => {
+      downloadBlob(new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' }), stamp() + '.json');
+      toast(t('toast.exported') + ' JSON');
+    });
+
+    $('importCfgBtn').addEventListener('click', () => $('cfgFile').click());
+
+    $('cfgFile').addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          setState(JSON.parse(String(reader.result)));
+          activeTemplateId = '';
+          renderTemplates();
+          toast(t('toast.applied'));
+        } catch (err) {
+          toast(t('toast.badJson'));
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const tag = (e.target.tagName || '').toLowerCase();
+      if (tag === 'input' && e.target.type === 'text') return;
+      if (tag === 'textarea') return;
+      const mod = e.metaKey || e.ctrlKey;
+      if (!mod) return;
+      const k = e.key.toLowerCase();
+      if (k === 'z' && !e.shiftKey) { e.preventDefault(); undo(); }
+      else if ((k === 'z' && e.shiftKey) || k === 'y') { e.preventDefault(); redo(); }
+      else if (k === 's') { e.preventDefault(); exportPNG(); }
+    });
+
+    window.addEventListener('resize', () => updatePreviewSize());
+
+    /* =======================================================================
+       17. 语言切换
+    ======================================================================= */
+    function applyLang() {
+      document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.textContent = t(el.dataset.i18n);
+      });
+      document.querySelectorAll('[data-i18n-label]').forEach(el => {
+        el.label = t(el.dataset.i18nLabel);
+      });
+      $('langLabel').textContent = lang === 'zh' ? 'EN' : '中文';
+      renderTemplates();
+      renderSegmented();
+      updateLabels(state, outputPx(state));
+      checkFont(state.fontFamily);
+    }
+
+    $('langBtn').addEventListener('click', () => {
+      lang = lang === 'zh' ? 'en' : 'zh';
+      safeSet('maiimg_seal_lang', lang);
+      applyLang();
+    });
+
+    /* =======================================================================
+       18. 启动
+    ======================================================================= */
+    lang = safeGet('maiimg_seal_lang', (navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en');
+    if (lang !== 'en' && lang !== 'zh') lang = 'zh';
+
+    const saved = safeGet('maiimg_seal_state_v2', null);
+    state = { ...DEFAULTS, ...(saved && typeof saved === 'object' ? saved : {}) };
+
+    renderTemplates();
+    renderSizePresets();
+    renderGlyphs();
+    renderSegmented();
+    writeForm(state);
+    applyLang();
+    render();
+    renderHistory();
+    pushHistory();
+    updateUndoButtons();
+  })();
+  </script>
+</body>
+</html>

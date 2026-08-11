@@ -21,6 +21,16 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://maiimg.com/seal.html</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://maiimg.com/seal.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://maiimg.com/seal.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://maiimg.com/seal.html" />
+  </url>
+
   <!-- Blog Main Pages -->
   <url>
     <loc>https://maiimg.com/blog/</loc>
