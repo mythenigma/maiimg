@@ -134,7 +134,7 @@
   <main class="wrap">
     <section class="head">
       <h1>项目工作与日志记录</h1>
-      <p class="sub">更新时间：2026-07-07</p>
+      <p class="sub">更新时间：2026-08-17</p>
       <p class="sub">说明：保留“最新工作记录”，新增“项目总日志”与“Blog 合并与 SEO 计划”两个 tab，后续博客大修与关键词策略统一往计划 tab 里写，执行动作再回到总日志。</p>
     </section>
 
@@ -565,7 +565,7 @@
         <p><strong>动作：</strong>按 Blog 计划 tab 的“执行前自检清单”把关键基础设施文件读了一遍，记录入此日志避免后续动作误伤。</p>
         <p><strong>Cloudflare Pages <code>_redirects</code>（25 行）：</strong></p>
         <ul>
-          <li>现有规则全部是 URL rewrite（<code>/gallery/:id</code>、<code>/g/:id</code>、<code>/media/:id</code>、<code>/m/:id</code>、<code>/</code> → <code>/index.html</code>，都是 <strong>200 rewrite</strong>）与 4 条 410 Gone（<code>/dec/*</code>、<code>/pdf/*</code>、<code>/free/*</code>、<code>/file/*</code>）。</li>
+          <li>现有规则全部是 URL rewrite（<code>/gallery/:id</code>、<code>/g/:id</code>、<code>/media/:id</code>、<code>/m/:id</code>、<code>/</code> → <code>/index.html</code>，都是 <strong>200 rewrite</strong>）与当时记录的 4 条下线意图（<code>/dec/*</code>、<code>/pdf/*</code>、<code>/free/*</code>、<code>/file/*</code>；2026-08-17 已确认 <code>_redirects</code> 不能真正处理 <code>410</code>，改由 <code>functions/[[path]].js</code> 接管）。</li>
           <li><strong>没有任何 blog 301 规则</strong>，空间干净。本次合并只追加 blog 相关行，不改任何已有规则。</li>
         </ul>
         <p><strong><code>robots.txt</code>：</strong></p>
@@ -595,7 +595,7 @@
         <ul>
           <li>删除 8 个文件（决策清单里已确认）。</li>
           <li>向 <code>_redirects</code> 追加 blog 合并的 301 规则（每个旧路径配无扩展名 + <code>.html</code> 两行）。</li>
-          <li>向 <code>_redirects</code> 追加 8 条 410 Gone（对应删除文件的无扩展名路径），走已有 <code>/dec/* 410</code> 同款语义，给 Google 更快的下线信号。</li>
+          <li>当时计划向 <code>_redirects</code> 追加 8 条 410 Gone（对应删除文件的无扩展名路径）；2026-08-17 已更正为由 <code>functions/[[path]].js</code> 输出真实 <code>410</code>。</li>
           <li>更新 <code>sitemap.xml</code>：移除 8 个删除项 + 移除所有 merge-source URL，留下 canonical 目标。</li>
           <li><strong>组 E 涉及改名的 2 条 301（<code>ip-tracking-secure-file-sharing</code>、<code>image-analytics-and-tracking-guide</code> → <code>access-logs-for-shared-photo-links</code>）暂缓</strong>，等目标新文件建好再加，避免 301 指向 404。</li>
         </ul>
@@ -827,7 +827,7 @@
             <code>image-link-expiry-rules-for-client-delivery.html</code> 与 <code>imgbb-alternative-for-controlled-image-sharing.html</code> 中对 <code>qr-image-sharing-for-events-practical-checklist</code> 的链接已直接改指 <code>event-photo-sharing-runbook</code>。</li>
           <li><strong>向 <code>_redirects</code> 追加 105 行 blog 合并规则</strong>（顶部 25 行 URL rewrite + 410 规则原样保留，未动一字）：
             <ul>
-              <li>8 篇删除页面 → <strong>410 Gone</strong>（无 301，直接让它们从搜索结果里出清，与站内已有 <code>/dec/* 410</code> 同款语义）。</li>
+              <li>8 篇删除页面 → <strong>410 Gone</strong>（无 301，直接让它们从搜索结果里出清；2026-08-17 已从 <code>_redirects</code> 迁到 <code>functions/[[path]].js</code>，避免 Cloudflare Pages 不支持 <code>410</code> 的问题）。</li>
               <li>组 A/B/C/D/E/F/G/H/I/J/K 的 merge-source 全部 → 301 到各自主文；每条旧路径同时匹配无扩展名 + <code>.html</code> 两种形式。</li>
               <li>组 E 的 <code>ip-tracking-secure-file-sharing</code> 和 <code>image-analytics-and-tracking-guide</code> 的 301 当时<strong>暂缓</strong>，避免指向 404；已在 2026-04-24 Phase 5-2 建立目标页后补齐。</li>
             </ul>
@@ -846,7 +846,7 @@
           <li>sitemap.xml XML 解析通过（<code>[xml]</code> PowerShell 校验）。</li>
           <li>sitemap 每条 <code>&lt;loc&gt;</code> 对应的物理文件都存在（逐条 Test-Path 校验通过）。</li>
           <li>已保留文件的 HTML lint 无错。</li>
-          <li><code>_redirects</code> 顶部 25 行（<code>/gallery/:id</code>、<code>/g/:id</code>、<code>/media/:id</code>、<code>/m/:id</code>、<code>/ /index.html</code>、<code>/dec/* 410</code> 等）一字未改。</li>
+          <li><code>_redirects</code> 顶部 rewrite 规则（<code>/gallery/:id</code>、<code>/g/:id</code>、<code>/media/:id</code>、<code>/m/:id</code>、<code>/ /index.html</code> 等）当时一字未改；2026-08-17 已把无效 <code>410</code> 规则移交给 <code>functions/[[path]].js</code>。</li>
         </ul>
         <p><strong>未触及的红线区域：</strong>
           <code>gallery/index.html</code>、<code>media/index.html</code>、短链/URL rewrite 规则、
@@ -1126,6 +1126,30 @@ flowchart TB
     </section>
 
     <section class="tab-panel active" id="blog-seo-plan">
+      <section class="card">
+        <div class="row"><h2>2026-08-17：GSC 未收录 URL 分类与处理</h2><span class="tag warn">SEO 清理</span></div>
+        <p><strong>背景：</strong>Google Search Console 的 <code>Crawled - currently not indexed</code> 里出现了两类 URL：一类是英文 blog 页面，另一类是历史分享/动态路径，例如 <code>/pdf/</code>、<code>/doc/</code>、<code>/dec/</code>、<code>/mai/</code>。</p>
+        <ul>
+          <li><strong>英文 blog 页面不是删除对象。</strong>它们需要继续提升内容质量、搜索意图匹配、标题/H1、内链与工具入口，尤其围绕 <code>image link generator</code>、<code>image to URL</code>、<code>create image link</code>、<code>photo sharing link</code> 这类英文关键词做强。</li>
+          <li><strong>动态/历史分享路径不是内容页。</strong><code>/pdf/</code>、<code>/doc/</code>、<code>/dec/</code>、<code>/mai/</code>、<code>/free/</code>、<code>/file/</code> 本地没有对应目录，不应该进入 Google 索引；这些 URL 应该返回真实 <code>410 Gone</code>。</li>
+          <li><strong>Cloudflare Pages 的 <code>_redirects</code> 不能承担 410。</strong><code>_redirects</code> 只保留 rewrite 与 3xx redirect；动态路径和永久下线旧文的 <code>410 Gone</code> 改由 <code>functions/[[path]].js</code> 统一处理。</li>
+          <li><strong><code>robots.txt</code> 不再阻挡这些 410 路径。</strong>原因是 Google 需要能重新抓取它们并看到 <code>410</code>，才会更快从索引候选里清理；真正需要禁止的是索引结果，不是阻止 Google 看见删除信号。</li>
+        </ul>
+        <p><strong>本次动作：</strong>新增 <code>functions/[[path]].js</code>，覆盖 <code>/dec</code>、<code>/doc</code>、<code>/file</code>、<code>/free</code>、<code>/mai</code>、<code>/pdf</code> 前缀，并继续对 8 篇永久下线英文旧文返回 <code>410</code> + <code>X-Robots-Tag: noindex, nofollow, noarchive</code>。</p>
+      </section>
+
+      <section class="card">
+        <div class="row"><h2>2026-08-17：5 篇英文 SEO 主文优先改造</h2><span class="tag ok">已执行</span></div>
+        <p><strong>目标：</strong>优先处理 GSC 中已抓取但不稳定收录、且和核心英文关键词最接近的 5 篇文章。改造方向不是堆长文，而是让页面更明确地回答 <code>image link generator</code>、<code>image to URL</code>、<code>upload image and get link</code>、<code>free image hosting</code>、<code>ImgBB alternative</code>、<code>QR code photo album</code> 这些真实搜索意图。</p>
+        <ul>
+          <li><strong>已改 5 篇：</strong><code>how-to-generate-image-sharing-links</code>、<code>best-free-image-hosting-sites-2025</code>、<code>imgbb-alternative-for-controlled-image-sharing</code>、<code>upload-images-online-best-practices</code>、<code>share-family-photos-with-a-qr-code</code>。</li>
+          <li><strong>结构修正：</strong>每篇首屏从拆开的两个 <code>&lt;h1&gt;</code> 改成单一 <code>&lt;h1&gt;</code>，避免标题语义分裂；同步更新 <code>&lt;title&gt;</code>、description、OG/Twitter、Article JSON-LD、<code>dateModified</code> 与 Last reviewed。</li>
+          <li><strong>工具入口：</strong>每篇在正文前加入一个明确的 <code>seo-tool-entry</code> 模块，把上传、生成图片链接、二维码、访问限制、过期、撤销这些真实能力直接露出，CTA 文案从泛泛的 <code>Try MaiIMG</code> 改成具体动作。</li>
+          <li><strong>内链与 FAQ：</strong>FAQ 增加更贴近搜索词的问题；Related reads 补强到相邻主文，尽量让 Google 看见一个围绕图片链接/二维码分享的内容簇。</li>
+        </ul>
+        <p><strong>验证：</strong>5 篇均为单一 <code>&lt;h1&gt;</code>；JSON-LD 解析通过；新增本地文章内链存在。</p>
+      </section>
+
       <section class="card">
         <div class="row"><h2>这份计划的目标</h2><span class="tag info">总纲</span></div>
         <ul>

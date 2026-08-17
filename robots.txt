@@ -9,11 +9,8 @@ Allow: /blog/*/
 Allow: /index.html
 Allow: /tracking.html
 
-# Disallow dynamic/temporary pages (they expire after use)
-Disallow: /dec/
-Disallow: /pdf/
-Disallow: /free/
-Disallow: /file/
+# Expired dynamic paths are returned as 410 Gone by functions/[[path]].js.
+# Keep them crawlable so Google can see the removal signal.
 Disallow: /view.html
 Disallow: /gallery/*
 

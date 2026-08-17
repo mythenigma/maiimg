@@ -21,11 +21,8 @@
 / /index.html 200
 
 
-# 临时/过期的动态页面返回 410 Gone
-/dec/* 410
-/pdf/* 410
-/free/* 410
-/file/* 410
+# 临时/过期动态页面与永久下线页面的 410 Gone 由 functions/[[path]].js 处理
+# Cloudflare Pages _redirects 只保留 rewrite 与 3xx redirect 规则
 
 # =====================================================================
 # Blog 合并规则（2026-04-22 追加，不影响上面的 gallery/media URL 重写）
@@ -33,23 +30,7 @@
 # 规则形式：每个旧路径同时匹配无扩展名 + .html 两种形式
 # =====================================================================
 
-# ---- 永久下线（410 Gone，不做 301，避免把无关流量汇入其它主题） ----
-/blog/en/professional-photo-sharing-for-businesses 410
-/blog/en/professional-photo-sharing-for-businesses.html 410
-/blog/en/photo-sharing-workflow-comparison-for-marketing-teams 410
-/blog/en/photo-sharing-workflow-comparison-for-marketing-teams.html 410
-/blog/en/why-your-business-needs-qr-code-image-strategy 410
-/blog/en/why-your-business-needs-qr-code-image-strategy.html 410
-/blog/en/image-optimization-techniques 410
-/blog/en/image-optimization-techniques.html 410
-/blog/en/photo-copyright-licensing-guide 410
-/blog/en/photo-copyright-licensing-guide.html 410
-/blog/en/photo-backup-strategies-guide 410
-/blog/en/photo-backup-strategies-guide.html 410
-/blog/en/mobile-photo-sharing-trends-2025 410
-/blog/en/mobile-photo-sharing-trends-2025.html 410
-/blog/en/secure-pdf-document-sharing-qr-codes 410
-/blog/en/secure-pdf-document-sharing-qr-codes.html 410
+# ---- 永久下线：由 functions/[[path]].js 返回 410 Gone，不做 301，避免把无关流量汇入其它主题 ----
 
 # ---- 组 A：免费图床 / 上传工具对比 → 主文 ----
 /blog/en/best-free-online-photo-storage-solutions-2025 /blog/en/best-free-image-hosting-sites-2025 301
