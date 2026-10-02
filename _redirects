@@ -21,7 +21,7 @@
 / /index.html 200
 
 
-# 临时/过期动态页面与永久下线页面的 410 Gone 由 functions/[[path]].js 处理
+# functions/[[path]].js 为动态路径添加 noindex，仅对确认下线的旧文返回 410
 # Cloudflare Pages _redirects 只保留 rewrite 与 3xx redirect 规则
 
 # =====================================================================

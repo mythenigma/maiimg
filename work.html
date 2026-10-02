@@ -1131,11 +1131,11 @@ flowchart TB
         <p><strong>背景：</strong>Google Search Console 的 <code>Crawled - currently not indexed</code> 里出现了两类 URL：一类是英文 blog 页面，另一类是历史分享/动态路径，例如 <code>/pdf/</code>、<code>/doc/</code>、<code>/dec/</code>、<code>/mai/</code>。</p>
         <ul>
           <li><strong>英文 blog 页面不是删除对象。</strong>它们需要继续提升内容质量、搜索意图匹配、标题/H1、内链与工具入口，尤其围绕 <code>image link generator</code>、<code>image to URL</code>、<code>create image link</code>、<code>photo sharing link</code> 这类英文关键词做强。</li>
-          <li><strong>动态/历史分享路径不是内容页。</strong><code>/pdf/</code>、<code>/doc/</code>、<code>/dec/</code>、<code>/mai/</code>、<code>/free/</code>、<code>/file/</code> 本地没有对应目录，不应该进入 Google 索引；这些 URL 应该返回真实 <code>410 Gone</code>。</li>
-          <li><strong>Cloudflare Pages 的 <code>_redirects</code> 不能承担 410。</strong><code>_redirects</code> 只保留 rewrite 与 3xx redirect；动态路径和永久下线旧文的 <code>410 Gone</code> 改由 <code>functions/[[path]].js</code> 统一处理。</li>
-          <li><strong><code>robots.txt</code> 不再阻挡这些 410 路径。</strong>原因是 Google 需要能重新抓取它们并看到 <code>410</code>，才会更快从索引候选里清理；真正需要禁止的是索引结果，不是阻止 Google 看见删除信号。</li>
+          <li><strong>2026-09-18 更正：不收录不等于停用。</strong><code>/pdf/</code>、<code>/doc/</code>、<code>/dec/</code>、<code>/mai/</code>、<code>/free/</code>、<code>/file/</code> 本地没有目录，不能据此认定线上功能已废弃。取消整目录 <code>410</code>，保留原响应，仅添加 <code>X-Robots-Tag: noindex, nofollow, noarchive</code>。</li>
+          <li><strong>永久下线旧文单独处理。</strong><code>functions/[[path]].js</code> 仅对已确认删除的 8 篇旧文精确路径返回 <code>410 Gone</code>。</li>
+          <li><strong><code>robots.txt</code> 保持这些路径可抓取。</strong>搜索引擎需要读取响应中的 <code>noindex</code> 指令。</li>
         </ul>
-        <p><strong>本次动作：</strong>新增 <code>functions/[[path]].js</code>，覆盖 <code>/dec</code>、<code>/doc</code>、<code>/file</code>、<code>/free</code>、<code>/mai</code>、<code>/pdf</code> 前缀，并继续对 8 篇永久下线英文旧文返回 <code>410</code> + <code>X-Robots-Tag: noindex, nofollow, noarchive</code>。</p>
+        <p><strong>更正后：</strong>上述动态目录透传原响应并添加不收录标记。<code>grabb.site/check</code> 用于审核每天上传的图片，应保留；此次仅修改 MaiIMG 本地规则，未修改或部署 grabb.site 后台。</p>
       </section>
 
       <section class="card">

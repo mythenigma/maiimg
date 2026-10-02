@@ -9,8 +9,8 @@ Allow: /blog/*/
 Allow: /index.html
 Allow: /tracking.html
 
-# Expired dynamic paths are returned as 410 Gone by functions/[[path]].js.
-# Keep them crawlable so Google can see the removal signal.
+# Dynamic paths retain their responses with X-Robots-Tag: noindex.
+# Keep them crawlable so search engines can read the noindex header.
 Disallow: /view.html
 Disallow: /gallery/*
 
